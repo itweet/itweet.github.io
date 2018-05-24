@@ -25,7 +25,7 @@ before_script:
 # Clone the repository
 - git clone --depth=1 git@github.com:realXuJiang/hexo-theme-replica.git themes/replica
 ##clone gh-pages branch only, into .deploy_git folder, so that commit history can be kept
-- git clone git@github.com:itweet/itweet.github.io.git -b master --single-branch .deploy_git
+- git clone git@github.com:itweet/itweet.github.io.git -b develop --single-branch .deploy_git
 script:
 - npm run build
 after_success:
