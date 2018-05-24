@@ -1,0 +1,36 @@
+{
+  "name": "tech-labs",
+  "version": "1.0.0",
+  "author": "Xu Jiang <realJiangXu@gmail.com>",
+  "homepage": "https://tech.jikelab.com/tech-labs",
+  "license": "CC-BY-NC-SA-3.0",
+  "repository": "jikelab/tech-lsbs",
+  "engines": {
+    "node": ">=5.4.0"
+  },
+  "hexo": {
+    "version": "3.7.1"
+  },
+  "scripts": {
+    "build": "hexo generate",
+    "serve": "hexo s",
+    "deploy": "hexo d"
+  },
+  "dependencies": {
+    "hexo": "^3.6.0",
+    "hexo-browsersync": "^0.2.0",
+    "hexo-deployer-git": "^0.1.0",
+    "hexo-generator-archive": "^0.1.5",
+    "hexo-generator-category": "^0.1.2",
+    "hexo-generator-feed": "^1.2.2",
+    "hexo-generator-index": "^0.1.2",
+    "hexo-generator-sitemap": "^1.0.1",
+    "hexo-generator-tag": "^0.1.1",
+    "hexo-renderer-ejs": "^0.1.0",
+    "hexo-renderer-jade": "^0.1.0",
+    "hexo-renderer-marked": "^0.2.6",
+    "hexo-renderer-sass": "^0.3.0",
+    "hexo-renderer-stylus": "^0.3.0",
+    "hexo-server": "^0.1.2"
+  }
+}

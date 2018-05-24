@@ -1,1 +1,101 @@
-theme: jekyll-theme-minimal
+# Hexo Configuration
+## Docs: http://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: WHOAMI
+subtitle: 技术人的日常.
+description: 技术人的日常.
+keywords: JDP for ClickHouse Ecosystem Management Platform, DataFlow Platform, NiFi, Clickhouse, Superset, Kafka, Zookeeper
+author: Xu Jiang
+language: zh-CN
+timezone: Asia/Shanghai
+favicon: https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: http://itweet.github.io
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :year:month:day-:title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link: true # Open external links in new tab
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace:
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 0
+pagination_dir: page
+
+# Extensions
+## Plugins: http://hexo.io/plugins/
+## Themes: http://hexo.io/themes/
+theme: replica
+
+# Deployment
+## Docs: http://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repo: git@github.com:itweet/itweet.github.io.git
+  branch: master
+
+# Google Analytics
+ga: UA-82629005-1
+
+#marked setting for markdown
+marked:
+  gfm: true
+  pedantic: false
+  sanitize: false
+  tables: true
+  breaks: true
+  smartLists: true
+  smartypants: true
+
+gcs: 
+baidutongji: a066b2b1ed2feea84da1243ba05f3278
+disqus: itweet-tech
+
+location: Bei Jing, China
+email: realJiangXu[at]gmail.com
+
+avatar: https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico
+social:
+  github: https://github.com/realXuJiang
+  weibo: http://weibo.com/sparkjvm
+  linkedin: http://wwww.itweet.cn
