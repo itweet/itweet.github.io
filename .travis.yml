@@ -6,8 +6,7 @@ branches:
   - develop
 before_install:
 - export TZ=Asia/Shanghai
-- openssl aes-256-cbc -K $encrypted_f1a73abf056e_key -iv $encrypted_f1a73abf056e_iv
-  -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
+
 - chmod 600 ~/.ssh/id_rsa
 - eval $(ssh-agent)
 - ssh-add ~/.ssh/id_rsa
@@ -22,3 +21,5 @@ script:
 after_success:
 - npm run deploy
 itweet/itweet.github.io:
+- openssl aes-256-cbc -K $encrypted_f1a73abf056e_key -iv $encrypted_f1a73abf056e_iv
+  -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
