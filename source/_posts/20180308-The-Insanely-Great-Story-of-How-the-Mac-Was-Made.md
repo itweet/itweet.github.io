@@ -1,7 +1,7 @@
 ---
 title: The-Insanely-Great-Story-of-How-the-Mac-Was-Made
 date: 2018-03-08 08:57:09
-category: Mac
+category: Books
 tags: mac
 ---
 去年底，在飞机上深度阅读了`《苹果往事：开发麦金托什的非凡岁月》`。国内重译名`《硅谷革命：成就苹果公司的疯狂往事》`，作者亲历了整个macintosh研发过程，他通过幽默风趣的一则则小的故事，记录了整个macintosh电脑的研发过程。

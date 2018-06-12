@@ -1,7 +1,7 @@
 ---
 title: just-for-fun
 date: 2017-12-24 13:35:37
-category: Default
+category: Books
 tags: Linus
 ---
 除了程序员、`黑客`，大概很少有人知道Linux操作系统。

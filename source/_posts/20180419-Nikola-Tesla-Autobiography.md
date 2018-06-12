@@ -1,8 +1,8 @@
 ---
 title: Nikola-Tesla-Autobiography
 date: 2018-04-19 09:00:57
-category: Default
-tags: book
+category: Books
+tags: books
 ---
 借着出差苏州，在来回来的路上看完《特斯拉自传》，原名：《Nikola Tesla’s Autobiography》
 

@@ -2,7 +2,7 @@
 title: How does the program run
 date: 2018-05-21 21:17:20
 tags: [program,2018]
-category: Default
+category: Books
 ---
 
 我曾计划通过阅读论文和经典计算机书籍，来深入理解计算机科学技术。我最近在看的一本《程序是如何跑起来的》，整本书对于刚入门计算机和有经验的工程师，都非常有帮助。

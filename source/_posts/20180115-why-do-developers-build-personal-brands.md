@@ -1,7 +1,7 @@
 ---
 title: why-do-developers-build-personal-brands
 date: 2018-01-15 22:35:35
-category: Default
+category: Books
 tags: bytalk
 ---
 作者丨 Neha Batra
