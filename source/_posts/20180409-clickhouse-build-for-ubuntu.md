@@ -145,6 +145,74 @@ $ docker images
 
 > 类似rm -f ../clickhouse*.deb && ./release && ls -l ../clickhouse*.deb命令，然后，愉快的部署和调试ClickHouse。
 
+```
+export CMAKE=cmake
+export PREFIX=/data
+
+DAEMONS="clickhouse clickhouse-test clickhouse-compressor clickhouse-client clickhouse-server"
+for daemon in $DAEMONS; do \
+        DESTDIR=$PREFIX $CMAKE -DCOMPONENT=$daemon -P cmake_install.cmake; \
+done
+```
+
+小试一下CK
+
+```
+clickhouse server --config=/data/usr/local/etc/clickhouse-server/config.xml
+```
+
+启动报错
+
+```
+Logging trace to console
+Poco::Exception. Code: 1000, e.code() = 0, e.displayText() = Exception: Could not determine local time zone: boost::filesystem::canonical: No such file or directory: "/usr/share/zoneinfo/", e.what() = Exception
+```
+
+解决
+
+```
+apt-get install --reinstall tzdata
+
+dpkg-reconfigure tzdata   //根据提示选择时区，因为我是在docker编译和运行测试
+```
+
+clickhouse CLI
+
+```
+clickhouse-client -h 127.0.0.1 -d default
+
+b5c8238c1618 :) select count(*) from system.clusters;
+
+SELECT count(*)
+FROM system.clusters
+
+┌─count()─┐
+│       2 │
+└─────────┘
+
+1 rows in set. Elapsed: 0.007 sec.
+
+
+b5c8238c1618 :) use default;
+
+```
+
+Table测试
+```
+CREATE TABLE ontime_local (FlightDate Date,Year UInt16) ENGINE = MergeTree(FlightDate, (Year, FlightDate), 8192);
+
+
+insert into ontime_local (FlightDate,Year)values('2001-10-12',2001);
+
+insert into ontime_local (FlightDate,Year)values('2002-10-12',2002);
+
+insert into ontime_local (FlightDate,Year)values('2003-10-12',2003);
+
+select count(*) from ontime_all;
+```
+
+接下来，就愉快的进行代码开发，debug吧。
+
 ## 小结
 
 介绍clickhouse在Ubuntu中进行源码编译和涉及到的Docker容器相关技术，对于想深入源码研究clickhouse的人来说，此步骤后就可以愉快的阅读代码，调试和改代码啦，简单看了一下clickhouse的代码量还是相当惊人的，相当于2个大型的C++项目，不得不佩服开发者，是在短短几年内完成的工作，而且还能保证测试覆盖率和高性能，那是相当厉害。
