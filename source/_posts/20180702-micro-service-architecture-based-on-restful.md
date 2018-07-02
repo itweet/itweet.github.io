@@ -1,8 +1,8 @@
 ---
 title: Micro-service architecture based on restful
 date: 2018-07-02 07:52:52
-tags: [Spark,2018]
-category: BigData
+tags: [Micro-service,2018]
+category: Developer
 ---
 
 经过2个多月的研发周期，上周六发布了关于AI赋能的数据平台的产品。
