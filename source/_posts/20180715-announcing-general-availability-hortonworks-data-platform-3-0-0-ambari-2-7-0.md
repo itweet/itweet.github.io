@@ -105,7 +105,10 @@ Apache Kafka和Apache Storm的突出特点包括：
 参考：
 
 [1] https://hortonworks.com/blog/announcing-general-availability-hortonworks-data-platform-3-0-0-ambari-2-7-0-smartsense-1-5-0/
+
 [2] http://www.itweet.cn/2018/07/02/micro-service-architecture-based-on-restful/
+
+欢迎关注微信公众号[Whoami]，阅读更多内容。
 
 ![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
 
