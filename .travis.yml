@@ -18,6 +18,7 @@ before_script:
 - git clone --depth=1 https://github.com/realXuJiang/hexo-theme-polarbear.git themes/polarbear
 - git clone git@github.com:itweet/itweet.github.io.git -b master --single-branch .deploy_git
 script:
+- npm install hexo-renderer-scss --save
 - npm run build
 after_success:
 - npm run deploy
