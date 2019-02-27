@@ -19,7 +19,7 @@ DIY个人工作站，终于开始投入使用了，在做虚拟化的时候遇�
   - 3、将disabled改为enabled
   - 4、保存设置，重启
 
-![](https://jikelab.github.io/tech-labs/screenshots/virtualization-configuartion.png)
+![](https://www.itweet.cn/screenshots/virtualization-configuartion.png)
 
 * 硬件
     - CPU E5-2683 V3 (new)

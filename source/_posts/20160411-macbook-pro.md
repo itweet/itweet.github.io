@@ -10,7 +10,7 @@ tags: macbook
 
  今天我就来捋一捋，我使用的常规软件在Mac上的基本配置。
 
-![](https://jikelab.github.io/tech-labs/screenshots/mac-pro.png)
+![](https://www.itweet.cn/screenshots/mac-pro.png)
 
 # Sublime Text 全程指南
   
@@ -254,7 +254,7 @@ tags: macbook
 # 快速开启应用
   Spotlight 搜索功能，可以搜索 Mac 电脑系统大部分资源。搜索功能快捷键command+空格；
   几乎没有任何等待时间，能非常快速检索到你想查找的软件/文件。
-![](https://jikelab.github.io/tech-labs/screenshots/Spotlight-pycharm.png)
+![](https://www.itweet.cn/screenshots/Spotlight-pycharm.png)
 
 # 办公软件
   Microsoft_Office_2016_Volume_Installer.pkg

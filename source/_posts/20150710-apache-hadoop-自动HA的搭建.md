@@ -426,7 +426,7 @@ $ hadoop/bin/hadoop fs -put zookeeper.out  /input
 参考：http://hadoop.apache.org/docs/r2.4.1/hadoop-yarn/hadoop-yarn-site/ResourceManagerHA.html
 
 #### Hadoop版本历史
-<div style="text-align:center;"><img src="https://jikelab.github.io/tech-labs/screenshots/version.png" style="vertical-align:middle;"/></div>
+<div style="text-align:center;"><img src="https://www.itweet.cn/screenshots/version.png" style="vertical-align:middle;"/></div>
 
 
 原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客

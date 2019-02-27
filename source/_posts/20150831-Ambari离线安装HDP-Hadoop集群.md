@@ -11,7 +11,7 @@ tags: hortonworks
 >tonworks数据平台选择管理组建的项目。Ambari向Hadoop MapReduce、HDFS、 
 > HBase、Pig, Hive、HCatalog以及Zookeeper提供服务。
 
-![](https://jikelab.github.io/tech-labs/screenshots/ambari-server.png)
+![](https://www.itweet.cn/screenshots/ambari-server.png)
 
 # Step0: 搭建本地yum源
 > 我选择的是hdp相关包放到了apache服务器上,yum源下载地址Setp1列出。

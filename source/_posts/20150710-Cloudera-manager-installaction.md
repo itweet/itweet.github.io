@@ -286,7 +286,7 @@ redhat/
 1 directory, 1 file
 ```
 
-![](https://jikelab.github.io/tech-labs/screenshots/yum-local.png)
+![](https://www.itweet.cn/screenshots/yum-local.png)
 
 	说明：要在生产系统部署CDH，先要实现Cloudera Manager的离线安装，安装好Cloudera Manager后，还要通过Cloudera Manager执行CDH的离线安装两个步骤。由于生产环境的封闭性以及国内网络环境，这些离线包很难从Cloudera的官方网站下载，所以需要将Cloudera的官方网站下载地址映射到本地IP。
 
@@ -440,10 +440,10 @@ flush privileges;
 
 	[root@server2 yum.repos.d]# yum install redhat-lsb cyrus-sasl-gssapi portmap fuse-libs fuse -y
 
-![last 3](https://jikelab.github.io/tech-labs/screenshots/cm1.png)
+![last 3](https://www.itweet.cn/screenshots/cm1.png)
 
-![last 2](https://jikelab.github.io/tech-labs/screenshots/cm2.png)
-![last 1](https://jikelab.github.io/tech-labs/screenshots/cm3.png)
+![last 2](https://www.itweet.cn/screenshots/cm2.png)
+![last 1](https://www.itweet.cn/screenshots/cm3.png)
 
 	至此，CM离线安装已完成！
 
@@ -453,10 +453,10 @@ flush privileges;
 - 通过http://server1:7180/地址登陆，用户名密码amdin/admin
 
 - Add hosts
-![](https://jikelab.github.io/tech-labs/screenshots/cm4.png)
+![](https://www.itweet.cn//screenshots/cm4.png)
 
 - Parcel install
-![](https://jikelab.github.io/tech-labs/screenshots/cm5.png)
+![](https://www.itweet.cn/screenshots/cm5.png)
 
 - install error
 ```
@@ -487,10 +487,10 @@ enable=1
 gpgcheck=0
 ```
 
-![](https://jikelab.github.io/tech-labs/screenshots/cm6.png)
+![](https://www.itweet.cn/screenshots/cm6.png)
 
 - 分发 Parcel package
-![](https://jikelab.github.io/tech-labs/screenshots/cm7.png)
+![](https://www.itweet.cn/screenshots/cm7.png)
 
 - install success
 

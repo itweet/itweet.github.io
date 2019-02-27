@@ -119,7 +119,7 @@ The default account's username is root. Provide the password you created earlier
 > If you are located in China, try using https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/
 
 访问地址http://gitlab.itweet.cn:80 (需要提前映射好域名和ip地址到hosts文件),第一次访问，提示’Change your password‘页面，你可以输入密码，此密码即为root密码；然后可用此密码登录root用户，比如我这里设置为root/admin123。
-![](https://jikelab.github.io/tech-labs/screenshots/Gitlab.png)
+![](https://www.itweet.cn/screenshots/Gitlab.png)
 
 ## 6、入门使用
 
@@ -286,7 +286,7 @@ For Mac:
 
 参考：https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/configuration.md#configuring-the-external-url-for-gitlab
     https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/smtp.md#smtp-on-localhost
-    https://jikelab.github.io/tech-labs/2015/07/12/git-manual/
+    https://www.itweet.cn/2015/07/12/git-manual/
     https://help.github.com/desktop/guides/getting-started/
 
 原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客

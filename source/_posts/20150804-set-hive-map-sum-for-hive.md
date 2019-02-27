@@ -119,9 +119,9 @@ create table default.tb_user_terminal_test as  select sum(mdn),usp,times,start_t
 `结论：提高了map ：7-->150 num，最后平均跑2h的任务，缩减平均10min!`
 
 每个任务执行执行效率都比较均衡：
-![](https://jikelab.github.io/tech-labs/screenshots/hive-map.png)
+![](https://www.itweet.cn/screenshots/hive-map.png)
 
-合理分配map,reduce个数,让某些大任务可以运行集群极限的map,reduce个数，这里怎么确定呢，需要参考[yarn的资源调优](https://jikelab.github.io/tech-labs/2015/07/24/yarn-resources-manager-allocation/),让任务没有Pending，一起Running，那样就不会有任务拖后腿！提高执行效率！当然这里的优化参数最好针对每个应用内部设置！
+合理分配map,reduce个数,让某些大任务可以运行集群极限的map,reduce个数，这里怎么确定呢，需要参考[yarn的资源调优](https://www.itweet.cn/2015/07/24/yarn-resources-manager-allocation/),让任务没有Pending，一起Running，那样就不会有任务拖后腿！提高执行效率！当然这里的优化参数最好针对每个应用内部设置！
 
 # 3、FileInputFormat中的getSplits-->plitSize由来
 ```
@@ -197,7 +197,7 @@ create table default.tb_user_terminal_test as  select sum(mdn),usp,times,start_t
   }
 ```
 
-参考：[yarn的资源调优](https://jikelab.github.io/tech-labs/2015/07/24/yarn-resources-manager-allocation/),配合此文完成合理资源分配! 
+参考：[yarn的资源调优](https://www.itweet.cn/2015/07/24/yarn-resources-manager-allocation/),配合此文完成合理资源分配! 
 
 
 原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客

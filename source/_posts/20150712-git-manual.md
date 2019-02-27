@@ -67,7 +67,7 @@ git使用有段时间了,个人博客也是托管到git上面,经常用到的命
 ## 工作流
 Git 最核心的一个概念就是工作流。工作区(Workspace)是电脑中实际的目录；暂存区(Index)像个缓存区域，临时保存你的改动；最后是版本库(Repository)，分为本地仓库和远程仓库。下图描述的很清楚
 
-![](https://jikelab.github.io/tech-labs/screenshots/git_workflow.jpg)
+![](https://www.itweet.cn/screenshots/git_workflow.jpg)
 
 ## 远程仓库
 

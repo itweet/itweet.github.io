@@ -23,23 +23,23 @@ Apache Parquet 最初的设计动机是存储嵌套式数据，比如Protocolbuf
 ORC（OptimizedRC File）存储源自于RC（RecordColumnar File）这种存储格式，RC是一种列式存储引擎，对schema演化（修改schema需要重新生成数据）支持较差，而ORC是对RC改进，但它仍对schema演化支持较差，主要是在压缩编码，查询性能方面做了优化。RC/ORC最初是在Hive中得到使用，最后发展势头不错，独立成一个单独的项目。Hive 1.x版本对事务和update操作的支持，便是基于ORC实现的（其他存储格式暂不支持）。ORC发展到今天，已经具备一些非常高级的feature，比如支持update操作，支持ACID，支持struct，array复杂类型。你可以使用复杂类型构建一个类似于parquet的嵌套式数据架构，但当层数非常多时，写起来非常麻烦和复杂，而parquet提供的schema表达方式更容易表示出多级嵌套的数据类型。
 
 ## Parquet与ORC
-![](https://jikelab.github.io/tech-labs/screenshots/vs-orc-parquet.png)
+![](https://www.itweet.cn/screenshots/vs-orc-parquet.png)
 
-![](https://jikelab.github.io/tech-labs/screenshots/file_format.png)
+![](https://www.itweet.cn/screenshots/file_format.png)
 
 `注意：如果用比较大量的数据转换列式存储格式，对服务器压力是非常大的，时间换空`
 `间，权衡之.不同的SQL-on-Hadoop框架生成的列式存储格式消耗时间也不一致，由于`
 `Spark底层是多线程，目前生成各种列式存储效率最高，其他框架Impala高于PrestoDB.`
 `看图`
 
-![](https://jikelab.github.io/tech-labs/screenshots/generate_file_format.png)
+![](https://www.itweet.cn/screenshots/generate_file_format.png)
 
 ## hbase && snappy
 hbase选择Snappy压缩，Hbase做为大数据数据库，兼顾列式存储的开源数据库，NoSQL典型
 代表，提供面向列式检索高效反应的场景，基于kv可高度压缩，为了提供CRUD操作，要求结果最终一致性，而update,delete操作需要在hbase存储数据region拆分过程来达到删除数据目的，也就是region：split &&compact；如果入hbase数据量太大，每天几个T数据，
 每个region超过100g会自动做region拆分，导致占用大量集群IO，使得集群其他框架比如spark,Impala,PrestoDB效率低下；这个时候为Hbase选择基于列族的高度压缩算法尤为重要，减少数据量大小，降低IO操作，通过预建立region，严格控制region大小=1g左右，关闭自动region split&&compact操作，在一个合理的时间手动做split && compact，降低集群
 IO压力，而snappy即是最佳选择，如图：
-![](https://jikelab.github.io/tech-labs/screenshots/hbase-snappy.png)
+![](https://www.itweet.cn/screenshots/hbase-snappy.png)
 
 - Hadoop压缩算法选择： 
     + mapreduce.map.output.compress.codec            

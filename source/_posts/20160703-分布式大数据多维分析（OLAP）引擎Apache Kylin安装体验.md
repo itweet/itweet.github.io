@@ -129,7 +129,7 @@ Time taken: 0.183 seconds, Fetched: 1 row(s)
 
 # Impala-Hive-Performance-tuning
   - 参考本博客另一片文章，自动生成测试数据，然后通过kylin分析
-    + https://jikelab.github.io/tech-labs/2016/03/20/Impala-Hive-performance-tuning/
+    + https://www.itweet.cn/2016/03/20/Impala-Hive-performance-tuning/
 
 # kylin by cube
   参考：http://kylin.apache.org/cn/docs/tutorial/web.html
@@ -199,7 +199,7 @@ snappy-devel-1.1.0-1.el6.x86_64
 
 编译Hadoop默认支撑所有native库
 
-> 请参考我的另外一篇文章：[Hadoop-Native-Libraries-Guide](https://jikelab.github.io/tech-labs/2016/07/02/Hadoop-Native-Libraries-Guide/)
+> 请参考我的另外一篇文章：[Hadoop-Native-Libraries-Guide](https://www.itweet.cn/2016/07/02/Hadoop-Native-Libraries-Guide/)
 
 参考：
 Apache Kylin™: http://kylin.apache.org/

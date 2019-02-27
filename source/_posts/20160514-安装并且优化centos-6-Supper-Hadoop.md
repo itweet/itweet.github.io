@@ -8,15 +8,15 @@ tags: centos
   进入如图 1-1 所示界面。 上半部分是系统定制的不同的系统安装类型选择项，默认是
 “ Desktop”，这里我们选择“ Minimal”，即最小化安装，下半部分是在上面系统安装类型确
 定后， 额外想添加的软件包组选择项，我们选择“ Customize now”即立即自定义。
-    ![](https://jikelab.github.io/tech-labs/screenshots/minimal.png)
+    ![](https://www.itweet.cn/screenshots/minimal.png)
     图 1-1 系统安装包类型选择及自定义额外包组
   在下图 1-2 的自定义额外的包组界面，我们首先需要选择左边的大的分类，然后在勾
 选右边对应的小的包组。注意：右边小包组里的内容默认即可。选择结果如图 1-2，图 1-3
 所示：
-![](https://jikelab.github.io/tech-labs/screenshots/base-system.png)
+![](https://www.itweet.cn/screenshots/base-system.png)
         图 1-2 自定义安装包组选择界面I
 
-![](https://jikelab.github.io/tech-labs/screenshots/base-developments.png)
+![](https://www.itweet.cn/screenshots/base-developments.png)
         图 1-3 自定义安装包组选择界面I
 
 1.1 根据经验，选择安装包时应该按最小化原则，即不需要的或者不确定是否需要的就
@@ -96,7 +96,7 @@ grep SELINUX=disabled /etc/selinux/config
 
 grep id:3:initdefault: /etc/inittab
 ```
-![](https://jikelab.github.io/tech-labs/screenshots/chkconfig-list.png)
+![](https://www.itweet.cn/screenshots/chkconfig-list.png)
 
 3.3 优化开机自动启动服务&&增大文件描述符(Hadoop并行读取数据文件)&&sudo权限管理
 ```
@@ -118,7 +118,7 @@ echo 'hadoop  ALL=(ALL)       NOPASSWD: ALL' >> /etc/sudoers
 echo '* - nofile 65535' >>  /etc/security/limits.conf
 tail -1  /etc/security/limits.conf
 ```
-![](https://jikelab.github.io/tech-labs/screenshots/chkconfig-list-2.png)
+![](https://www.itweet.cn/screenshots/chkconfig-list-2.png)
 
 3.4 配置ntp服务器，让所有服务器时间保持一致，如果是非内网服务器可以直接安装启动ntp：
 ```

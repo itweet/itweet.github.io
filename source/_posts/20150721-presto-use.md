@@ -9,7 +9,7 @@ Facebook的数据仓库存储在少量大型Hadoop/HDFS集群。Hive是Facebook�
 
 2012年开始试用的一些外部项目都不合适，他们决定自己开发，这就是Presto。2012年秋季开始开发，目前该项目已经在超过 1000名Facebook雇员中使用，运行超过30000个查询，每日数据在1PB级别。Facebook称Presto的性能比Hive要好上10倍多。2013年Facebook正式宣布开源Presto。
 
-![](https://jikelab.github.io/tech-labs/screenshots/presto.png)
+![](https://www.itweet.cn/screenshots/presto.png)
 
 Presto查询引擎是一个Master-Slave的架构，由一个Coordinator节点，一个Discovery Server节点，多个Worker节点组成，Discovery Server通常内嵌于Coordinator节点中。Coordinator负责解析SQL语句，生成执行计划，分发执行任务给Worker节点执行。Worker节点负责实际执行查询任务。Worker节点启动后向Discovery Server服务注册，Coordinator从Discovery Server获得可以正常工作的Worker节点。如果配置了Hive Connector，需要配置一个Hive MetaStore服务为Presto提供Hive元信息，Worker节点与HDFS交互读取数据。
 
@@ -25,7 +25,7 @@ Presto查询引擎是一个Master-Slave的架构，由一个Coordinator节点，
 *提交查询
 >用户使用Presto Cli提交一个查询语句后，Cli使用HTTP协议与Coordinator通信，Coordinator收到查询请求后调用SqlParser解析SQL语句得到Statement对象，并将Statement封装成一个QueryStarter对象放入线程池中等待执行。
 
-![](https://jikelab.github.io/tech-labs/screenshots/show-presto.png)
+![](https://www.itweet.cn/screenshots/show-presto.png)
 
 > http://showterm.io/
 
@@ -76,7 +76,7 @@ The TPC-H connector dynamically generates data that can be used for experiementi
 
 ### 2、presto架构
 
-![](https://jikelab.github.io/tech-labs/screenshots/presto.png)
+![](https://www.itweet.cn/screenshots/presto.png)
 
 上图可以看到，需要依赖hivemetastor服务，访问hive里面的表！所以一定需要安装hive并且启动hivemetasotre服务！
 
@@ -765,7 +765,7 @@ SET SESSION hive.optimized_reader_enabled = 'true';
 ## 五、WEBUI界面
 https://github.com/itweet/airpal  
 
-![](https://jikelab.github.io/tech-labs/screenshots/airpal-ui.png)
+![](https://www.itweet.cn/screenshots/airpal-ui.png)
 
 git clone https://github.com/itweet/airpal.git  
 ./gradlew clean shadowJar  
@@ -895,7 +895,7 @@ presto:sf1> show tables;
 ```
 
 ## 七、函数
-![](https://jikelab.github.io/tech-labs/screenshots/function-color.png)
+![](https://www.itweet.cn/screenshots/function-color.png)
 ```
 http://prestodb-china.com/docs/current/functions/color.html
 ```

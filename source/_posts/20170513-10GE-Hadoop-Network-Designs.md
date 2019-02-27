@@ -43,7 +43,7 @@ Hadoop是被一个网络公司设计的（雅虎）出于必要的有效存储�
 
 要超过两个机架以上， 你可以用一个性价比高的10GE 交换机提供机架间集群的互联(Spine).为此你不用买一个既昂贵， 又庞大，还需要充电的高阶的机架式交换机。其实低成本， 低能耗， 固定的交换机也可以很好的完成工作，再次推荐，我们可以用S4810来完成。如下图所示
 
-![160 nodes](https://jikelab.github.io/tech-labs/screenshots/new/160-nodes.png)
+![160 nodes](https://www.itweet.cn/screenshots/new/160-nodes.png)
 
 用一对1UR的交换机来互相连接10GE Hadoop集群 你可以结合实际规模连接160个节点，假设在机架之间的超额认购率为2.5:1（在机架内部的线率）考虑到你的2RU节点有24TB或者更多，可以用一个超过了1PB可用内存的集群（三倍复制之后）也挺好的。
 
@@ -53,7 +53,7 @@ Hadoop是被一个网络公司设计的（雅虎）出于必要的有效存储�
 
 像这种具有较大的Hadoop集群， 你可能要考虑到用单链接连接每个节点到单交换机上降低成本扩大集群大小，毕竟是用64个机架，即使全部机架崩溃了你也只损失了集群资源的一小部分，可能都不值得为了冗余加倍连接到主机上。
 
-![1280 nodes](https://jikelab.github.io/tech-labs/screenshots/new/1280-nodes.png)
+![1280 nodes](https://www.itweet.cn/screenshots/new/1280-nodes.png)
 
 如果你一开始想要创建一个150-300个节点 相当大的一个10GE Hadoop集群，你肯定会考虑一并创建一个40G互联集群，为什么呢？可以减少Spine交换机的个数， 减少从ToR到Spine的电缆，减少网络配置端口。另一大优势是40G的光纤比10G的贵1.8倍，所以即便你要扩展集群也可以省一大笔钱。
 
@@ -61,20 +61,20 @@ Hadoop是被一个网络公司设计的（雅虎）出于必要的有效存储�
 
 再次强调，你不需要一个庞大的电源和昂贵的40G线卡给高阶的机架式交换机充电， 取而代之可以采用相对成本低，功耗低的2RU固定交换机， 例如40G的32个端口的Dell Force10 Z9000，如下所示
 
-![320 nodes](https://jikelab.github.io/tech-labs/screenshots/new/320-nodes.png)
+![320 nodes](https://www.itweet.cn/screenshots/new/320-nodes.png)
 
 这儿也适用40G互联横向扩展到spine层同样的规则，利用S4810 ToR (Leaf)切换4 x 40G上行链路，你可以把40Gspine从2个交换机增加到4个交换机，把集群大小从320个节点加一倍到640个节点。
 
 如果你需要把你的集群连接到外面，最好的位置是在Leaf层ToR交换机。利用spine交换机上的端口连接就不会影响集群大小，因为每个端口都代表了机架上的节点。只需要少量的端口在ToR交换机上并且用3层链路连接交换机的核心就可以给你的集群提供很好的隔离和安全性了。你可以在这里使用BGP或者甚至是静态路由保证您的内部路由安全的和外部隔离。
  
-![640 nodes](https://jikelab.github.io/tech-labs/screenshots/new/640-nodes.png)
+![640 nodes](https://www.itweet.cn/screenshots/new/640-nodes.png)
 
 你可能觉得疯了吧，10G Hadoop和640个节点，一个集群完全不够用，没问题的，把这些Z9000交换机放在spine里面用作128x 10G的交换机取代32 x 40G。然后把S4810 ToR
 交换机上行链路到16 x 10G. 务必注意，使用越狱的10G链路可以减少电缆100米的距离
 
 你可以在spine里面横向扩展到（16）Z9000交换机，因为每个ToR有16个上行链路。而一个集群里面有128个ToR交换机-每个Z9000里面有128个端口。另外， 横向扩展是有可能的因为我们是用的优质经典的的3层交换机从ToR到集群交互连接，如果用2层交换机是不可能完成设置的，除非你有TRILL那也不可能真正的完全实现，反正都毫无意义，因为Hadoop节点根本不在乎是2层或者3层还是来自其它层。
 
-![2560 nodes](https://jikelab.github.io/tech-labs/screenshots/new/2560-nodes.png)
+![2560 nodes](https://www.itweet.cn/screenshots/new/2560-nodes.png)
 
 你甚至可以通过添加第三步到fabric中创建比这更大的集群，在第三步中ToR连接Leaf，Leaf再连接到spine。在这种情况下集群大小超过20，000 10GE 的主机也可以用相同的低成本， 低能耗， 1RU 和2RU 的固定交换机。
 

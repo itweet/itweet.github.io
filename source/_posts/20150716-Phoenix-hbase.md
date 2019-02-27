@@ -20,7 +20,7 @@ tags: hbase
 
 ## 1、安装好hbase，hbase正常使用！
 
->hbase安装参考我的另外一篇博文：https://jikelab.github.io/tech-labs/2015/07/15/Hbase-Distributed-install/
+>hbase安装参考我的另外一篇博文：https://www.itweet.cn/2015/07/15/Hbase-Distributed-install/
 
 ```
     [hsu@server1 ~]$ hbase shell

@@ -46,11 +46,11 @@ VMware Workstation 11 is a popular software which allows you to run multiple dif
 
 7. Once the script is running, you see the following window the screen.
 
-![](https://jikelab.github.io/tech-labs/screenshots/vm-install-1.png)
+![](https://www.itweet.cn/screenshots/vm-install-1.png)
 
 Just follow the one screen instructions until “Installation was successful” message appears.
 
-![](https://jikelab.github.io/tech-labs/screenshots/vm-install-2.png)
+![](https://www.itweet.cn/screenshots/vm-install-2.png)
 
 VMware Workstation 11 Serial：1F04Z-6D111-7Z029-AV0Q4-3AEH8
 
@@ -62,7 +62,7 @@ VMware Workstation 11 Serial：1F04Z-6D111-7Z029-AV0Q4-3AEH8
 [root@bigdata-server home]# vmware
 ```
 
-![](https://jikelab.github.io/tech-labs/screenshots/vm-start.png)
+![](https://www.itweet.cn/screenshots/vm-start.png)
 
 `After running above command, you will see this message which notify you to`
 `install gcc compiler and some components. Just press ‘Cancel’ to continue.`

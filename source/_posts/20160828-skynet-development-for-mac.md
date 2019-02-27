@@ -7,7 +7,7 @@ tags: skynet
 **大型分布式监控软件-skynet**
 
 # Python Dev
- 在Mac下面通过BrewHome来安装[Python Dev](http://pythonguidecn.readthedocs.io/zh/latest/starting/install/osx.html)环境，安装完成之后，调整系统环境变量，由于Mac Terminal我试用了(oh my zsh)[https://jikelab.github.io/tech-labs/2016/04/11/macbook-pro-conf/]所以用户环境变量修改`~/.zshrc`文件，在此文件末尾添加如下一行
+ 在Mac下面通过BrewHome来安装[Python Dev](http://pythonguidecn.readthedocs.io/zh/latest/starting/install/osx.html)环境，安装完成之后，调整系统环境变量，由于Mac Terminal我试用了(oh my zsh)[https://www.itweet.cn/2016/04/11/macbook-pro-conf/]所以用户环境变量修改`~/.zshrc`文件，在此文件末尾添加如下一行
 ```
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 ```

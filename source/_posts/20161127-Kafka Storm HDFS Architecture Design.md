@@ -28,7 +28,7 @@ Storm根据官网的图片理解，自来水厂送水到客户家；水的源头
 
 Storm中Spout对接源头数据(Kafka,HDFS,DB,MQ,Socket); Bolt(接收处理Spout/Bolt数据)具体的业务逻辑处理；Stream Grouping数据分发策略,以什么方式发送数据流到下一个Bolt。下面我们以一个具体的案例来说明Storm的实际生产应用。
 
-![Kafka Storm HDFS](https://jikelab.github.io/tech-labs/screenshots/kafka-storm-hdfs-design.png)
+![Kafka Storm HDFS](https://www.itweet.cn/screenshots/kafka-storm-hdfs-design.png)
 
 ```
  TopologyBuilder builder = new TopologyBuilder();
@@ -148,7 +148,7 @@ storm jar storm-kafka-examples-1.0-SNAPSHOT.jar cn.itweet.kafka_storm.topology.C
 Storm-External: https://github.com/apache/storm/tree/master/external
 
 如上，给出了简单Storm的示例代码，可以在这个基础上加入业务逻辑内容，就可以完成如下复杂的业务处理，基于非结构化数据(GPS位置应用)，实时流处理的架构。
-![流计算完整架构](https://jikelab.github.io/tech-labs/screenshots/kafka-storm-hdfs-design-1.png)
+![流计算完整架构](https://www.itweet.cn/screenshots/kafka-storm-hdfs-design-1.png)
 
 原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
 `本博客的文章集合:` http://www.itweet.cn/blog/archive/

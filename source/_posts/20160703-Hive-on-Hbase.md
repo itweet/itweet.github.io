@@ -96,7 +96,7 @@ ROW                                          COLUMN+CELL
 ```
 
 # Phoenix on Hbase
- Phoenix on Hbase整合文档，参考：https://jikelab.github.io/tech-labs/2015/07/16/Phoenix-hbase/
+ Phoenix on Hbase整合文档，参考：https://www.itweet.cn/2015/07/16/Phoenix-hbase/
 ```
 # cat shell/phoenix-cli.sh 
 sqlline.py bigdata-server-1:2181

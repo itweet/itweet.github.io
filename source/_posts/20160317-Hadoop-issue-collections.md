@@ -88,7 +88,7 @@ tags: hadoop
   ```
 
   - yarn资源管理&&优化参考如下文章
-    + [yarn-resources-manager-allocation](https://jikelab.github.io/tech-labs/2015/07/24/yarn-resources-manager-allocation/)
+    + [yarn-resources-manager-allocation](https://www.itweet.cn/2015/07/24/yarn-resources-manager-allocation/)
 
 # 问题4: llama on yarn使用问题
   - 日志

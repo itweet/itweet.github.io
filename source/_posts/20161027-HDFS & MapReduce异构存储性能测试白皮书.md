@@ -50,22 +50,22 @@ TestDFSIO 评估 HDFS 的性能，给网络和存储 IO 加压。读写文件的
 测试结果 
 我们的测试运行在 Namenode 上。测试总写入数据240GB,副本数3，文件数N为1, 3, 6, 12, 48文件大小为M,每个文件一个map。测试结果如图1所示，SATA HDFS测试1个map可以获得并发吞吐率685MB/s。 SSD HDFS测试1个map可以获得并发吞吐率830MB/s。
 
-![图1 TestDFSIO写吞吐量](https://jikelab.github.io/tech-labs/screenshots/TestDFSIO-write-1.png)
+![图1 TestDFSIO写吞吐量](https://www.itweet.cn/screenshots/TestDFSIO-write-1.png)
 
 
 测试总读取数据 240GB, 副本数3，文件数N为1,3,6,12,48文件大小为M,每个文件一个map。测试结果如图2所示，SATA HDFS测试1个map可以获得并发吞吐率501MB/s,SSD
 HDFS测试1个map可以获得的并发吞吐率3625MB/s。
 
-![图2 TestDFSIO读吞吐量](https://jikelab.github.io/tech-labs/screenshots/TestDFSIO-read-1.png)
+![图2 TestDFSIO读吞吐量](https://www.itweet.cn/screenshots/TestDFSIO-read-1.png)
     
 我们的测试运行在 Namenode 上。测试总写入数据240GB,副本数2，文件数N为1, 3, 6, 12, 48文件大小为M,每个文件一个map。测试结果如图3所示，SATA HDFS测试1个map可以获得并发吞吐率587MB/s。 SSD HDFS测试1个map可以获得并发吞吐率638MB/s。
 
-![图3 TestDFSIO写吞吐量](https://jikelab.github.io/tech-labs/screenshots/TestDFSIO-write-2.png)
+![图3 TestDFSIO写吞吐量](https://www.itweet.cn/screenshots/TestDFSIO-write-2.png)
 
 测试总读取数据 240GB, 副本数2，文件数N为1,3,6,12,48文件大小为M,每个文件一个map。测试结果如图4所示，SATA HDFS测试1个map可以获得并发吞吐率295MB/s,SSD
 HDFS测试1个map可以获得的并发吞吐率2379MB/s。
 
-![图4 TestDFSIO读吞吐量](https://jikelab.github.io/tech-labs/screenshots/TestDFSIO-read-2.png)
+![图4 TestDFSIO读吞吐量](https://www.itweet.cn/screenshots/TestDFSIO-read-2.png)
 
 * The Truth About MapReduce Performance on SSD、STAT
 
@@ -79,9 +79,9 @@ HDFS测试1个map可以获得的并发吞吐率2379MB/s。
     shuffle         hadoop-examples randomtextwriter shuffle-only工作修改
 
 
-![图5 (2备份 时间图表)](https://jikelab.github.io/tech-labs/screenshots/mapreduce-algorithm-1.png)
+![图5 (2备份 时间图表)](https://www.itweet.cn/screenshots/mapreduce-algorithm-1.png)
 
-![图6 (3备份 时间图表)](https://jikelab.github.io/tech-labs/screenshots/mapreduce-algorithm-2.png)
+![图6 (3备份 时间图表)](https://www.itweet.cn/screenshots/mapreduce-algorithm-2.png)
 
 * HDFS PUT vs HDFS FUSE vs HDFS NFSGateway
 
