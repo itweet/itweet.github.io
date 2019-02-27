@@ -1,6 +1,7 @@
 ---
 title: Micro-service architecture based on restful
 date: 2018-07-02 07:52:52
+description: 关于数据平台，基本都是私有化部署，容器化比较困难，而一些计算类的算子、AI算法或者Long service，完全容器化，便于管理和发布。
 tags: [Micro-service,2018]
 category: Developer
 ---

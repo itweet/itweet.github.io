@@ -1,6 +1,7 @@
 ---
 title: How does the program run
 date: 2018-05-21 21:17:20
+description: 我最近在看的一本《程序是如何跑起来的》，整本书对于刚入门计算机和有经验的工程师，都非常有帮助，推荐~
 tags: [program,2018]
 category: Books
 ---

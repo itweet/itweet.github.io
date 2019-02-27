@@ -38,8 +38,9 @@ def header(title, time):
     content = """---
 title: %s
 date: %s
-tags: [Spark,2018]
-category: BigData
+description: 主旨思想
+tags: [AI,2019]
+category: AI
 ---""" %(title, time)
     return content
 

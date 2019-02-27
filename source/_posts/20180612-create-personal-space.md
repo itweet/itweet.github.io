@@ -1,6 +1,7 @@
 ---
 title: Macbook打造舒适的个人工作空间？
 date: 2018-06-12 23:34:20
+description: 今天我们来谈谈，把MacBook Pro做为主力开发机器，需要做哪些工作。
 tags: [mac]
 category: workspace
 ---

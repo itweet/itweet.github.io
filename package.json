@@ -9,7 +9,7 @@
     "node": ">=5.4.0"
   },
   "hexo": {
-    "version": "3.7.1"
+    "version": "3.8.0"
   },
   "scripts": {
     "build": "hexo generate",
@@ -17,8 +17,8 @@
     "deploy": "hexo d"
   },
   "dependencies": {
-    "hexo": "^3.6.0",
-    "hexo-browsersync": "^0.2.0",
+    "hexo": "^3.8.0",
+    "hexo-browsersync": "^0.3.0",
     "hexo-deployer-git": "^0.1.0",
     "hexo-generator-archive": "^0.1.5",
     "hexo-generator-category": "^0.1.2",
@@ -27,9 +27,10 @@
     "hexo-generator-sitemap": "^1.0.1",
     "hexo-generator-tag": "^0.1.1",
     "hexo-renderer-ejs": "^0.1.0",
-    "hexo-renderer-jade": "^0.1.0",
+    "hexo-renderer-jade": "^0.4.1",
     "hexo-renderer-marked": "^0.2.6",
     "hexo-renderer-sass": "^0.3.0",
+    "hexo-renderer-scss": "^1.2.0",
     "hexo-renderer-stylus": "^0.3.0",
     "hexo-server": "^0.1.2"
   }

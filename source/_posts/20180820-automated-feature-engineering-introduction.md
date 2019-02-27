@@ -1,6 +1,7 @@
 ---
 title: Automated feature engineering introduction
 date: 2018-08-20 04:42:14
+description: 自动化特征提取研究，知识图谱。
 tags: [ML,2018]
 category: ML
 ---

@@ -1,13 +1,14 @@
 ---
 title: Homemade programming language
 date: 2018-08-19 04:39:12
+description: 我们看看通过站在巨人的的编程库上，我们如何制作一门编程语言，都需要那些工具。
 tags: [Programming,2018]
 category: programming,language
 ---
 
 很长一段时间没更新内容啦，并不是不想写，而是找不到灵感，不知道改写些什么？
 
-因为，我写了很多大数据相关的内容，很久已经没有玩Hadoop相关的东西啦。
+因为，我写了很多大数据相关的内容，已经很久没有玩Hadoop相关的东西啦。
 
 除最近，帮助公司搭建了一套CDH集群，基本也是大家在上面跑一些大数据量的AI算法。
 
