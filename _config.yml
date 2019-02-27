@@ -10,7 +10,7 @@ keywords: JDP for ClickHouse Ecosystem Management Platform, DataFlow Platform, N
 author: Xu Jiang
 language: zh-CN
 timezone: Asia/Shanghai
-favicon: https://raw.githubusercontent.com/itweet/itweet.github.io/develop/source/favicon.ico
+favicon: favicon.ico
 
 archive_generator:
     per_page: 0
