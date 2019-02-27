@@ -97,7 +97,7 @@ category: Books
 
 > 应用程序经过os间接地控制硬件。应用程序 => 利用os的功能 => 有操作系统的基本输入输出程序 => 控制硬件 => 1.实时时钟 2.显示器I/O
 
-![](https://jikelab.github.io/tech-labs/screenshots/run-progrom.png)
+![](https://www.itweet.cn/screenshots/run-progrom.png)
 
 关于，程序是怎么跑起来的涉及，操作系统、高级编程语言、汇编语言、本地代码(native code)、内存构造、磁盘构造、CPU硬件、数据压缩、编译器、解析器等概念。深入浅出的解释了计算机基本原理，通过对程序运行示例的剖析和验证，逐步说明计算机的基本原理。
 

@@ -13,13 +13,13 @@ category: Default
 
 ## First 
 
-![](https://jikelab.github.io/tech-labs/screenshots/first-REDOOP.png)
+![](https://www.itweet.cn/screenshots/first-REDOOP.png)
 
 一直做2B市场，因为有经验，整体项目的阶段、时机和推进拥有更好的判断。
 
 ## Two
 
-![](https://jikelab.github.io/tech-labs/screenshots/two_REDOOP.png)
+![](https://www.itweet.cn/screenshots/two_REDOOP.png)
 
 `mini company`缺资源，所以你需要是一个多面手，能处理各种问题和情况，救火队员。
 

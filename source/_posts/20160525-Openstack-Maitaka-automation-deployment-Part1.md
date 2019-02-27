@@ -17,7 +17,7 @@ OpenStack很可能在未来的基础设施即服务（IaaS）资源管理方面�
     3. 集成现有测试工具提供云端的测试服务。
     4. 通过openstack+docker+other实现软件系统自动化架构，
 
-参考: [企业级开发平台持续集成自动化架构](https://jikelab.github.io/tech-labs/2016/05/05/Enterprise-Application-Development-Platform-Automatic-System/)
+参考: [企业级开发平台持续集成自动化架构](https://www.itweet.cn/2016/05/05/Enterprise-Application-Development-Platform-Automatic-System/)
 
 我个人在家里也弄了一套基于openstack的环境，自己DIY服务器，配置还算强劲吧，主要用做自己的开源项目使用，说实话真的非常方便，从此再也不用折腾vmware workstation，在家的工作站也够用。后面我打算把openstack做成一个系列文章，从基础软件自动化部署，到各个openstack组件的使用，openstack生产环境架构设计，后端存储设计，网络规划，镜像，虚拟机等方面展开。因为我觉得openstack是一个值得我大写特写的开源软件，初次使用我就被他深深吸引住了。很多模块功能设计的非常有意思。
 
@@ -73,7 +73,7 @@ $ cat /etc/hosts|tail -2
 ```
   看到如下图信息，说明安装成功。这样所有的服务都安装到了一台机器上，controller和compute节点都在一台服务器上，当然compute是可以不断自动添加节点进来的。
  
- ![](https://jikelab.github.io/tech-labs/screenshots/openstack-success.png)
+ ![](https://www.itweet.cn/screenshots/openstack-success.png)
 
 ## For Redhat 7.x 
 ```
@@ -183,7 +183,7 @@ OVS_BRIDGE=br-ex
 
 ## Dashboard可视化创建虚拟机
 
-![](https://jikelab.github.io/tech-labs/screenshots/cloud_machine_list.png)
+![](https://www.itweet.cn/screenshots/cloud_machine_list.png)
 
 * 后端虚拟机运行状态查询
 ```

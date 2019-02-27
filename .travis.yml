@@ -15,7 +15,7 @@ before_install:
 before_script:
 - git config --global user.name 'realXuJiang'
 - git config --global user.email 'realJiangXu@gmail.com'
-- git clone --depth=1 git clone https://github.com/realXuJiang/hexo-theme-polarbear.git themes/polarbear
+- git clone --depth=1 https://github.com/realXuJiang/hexo-theme-polarbear.git themes/polarbear
 - git clone git@github.com:itweet/itweet.github.io.git -b master --single-branch .deploy_git
 script:
 - npm run build

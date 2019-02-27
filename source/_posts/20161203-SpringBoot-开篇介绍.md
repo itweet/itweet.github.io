@@ -28,7 +28,7 @@ SpringBoot官方集成的模块列表：
 SpringBoot官方模块使用案例：
     https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
 
-![](https://jikelab.github.io/tech-labs/screenshots/spring-init.png)
+![](https://www.itweet.cn/screenshots/spring-init.png)
 SpringBoot是一个系列，后续介绍springboot和bigdata实时流计算结合做可视化展现的案例和架构，我会在深入使用它之后写一篇使用体验，是否真的能帮你节省 60% 时间，并且专注你的业务开发。
 
 扯的可真的太远了，记录一下，我在Mac上安装SpringBoot需要使用的MySQL软件吧！
