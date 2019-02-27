@@ -10,7 +10,28 @@ keywords: JDP for ClickHouse Ecosystem Management Platform, DataFlow Platform, N
 author: Xu Jiang
 language: zh-CN
 timezone: Asia/Shanghai
-favicon: https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico
+favicon: https://raw.githubusercontent.com/itweet/itweet.github.io/develop/source/favicon.ico
+
+# Menu
+menu:
+  Archives: /archives
+  About: /about
+  RSS: /atom.xml
+
+widget:
+  Tags: true
+  Categories: true
+  Custom: true
+
+widget_custom:
+    title: 技术人的日常
+    content: <p> ID：Whoami </p>
+
+archive_generator:
+    per_page: 0
+    yearly: false
+    monthly: false
+    daily: false
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
