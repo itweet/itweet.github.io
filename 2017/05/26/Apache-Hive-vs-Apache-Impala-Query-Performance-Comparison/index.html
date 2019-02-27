@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Apache Hive vs Apache Impala Query Performance Comparison">
+
+
+
+
+  <meta name="keywords" content="Impala,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/05/26/Apache-Hive-vs-Apache-Impala-Query-Performance-Comparison/">
+
+
+<meta name="description" content="Apache Hive 2.0 是100%开源软件，而社区也在不断驱动Apache Hive 2.0的革新，LLAP更是真实地将快速分析提升到一个新的水平。它使得客户在不需要追加基于SQL的分析工具就可以执行次秒级的交互式查询，能够快速迭代分析，还提供了非常重要的价值转换。 今天尝试HIVE  LLAP 阅读关于具有LLAP功能的Hive 如何带来次秒级查询你的大数据湖，请转到此处：http:/">
+<meta name="keywords" content="Impala">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache Hive vs Apache Impala Query Performance Comparison">
+<meta property="og:url" content="http://itweet.github.io/2017/05/26/Apache-Hive-vs-Apache-Impala-Query-Performance-Comparison/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Apache Hive 2.0 是100%开源软件，而社区也在不断驱动Apache Hive 2.0的革新，LLAP更是真实地将快速分析提升到一个新的水平。它使得客户在不需要追加基于SQL的分析工具就可以执行次秒级的交互式查询，能够快速迭代分析，还提供了非常重要的价值转换。 今天尝试HIVE  LLAP 阅读关于具有LLAP功能的Hive 如何带来次秒级查询你的大数据湖，请转到此处：http:/">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2016-10-11-at-11.45.03-AM.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/llapblog-1.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/llapblog2-1.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.515Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Apache Hive vs Apache Impala Query Performance Comparison">
+<meta name="twitter:description" content="Apache Hive 2.0 是100%开源软件，而社区也在不断驱动Apache Hive 2.0的革新，LLAP更是真实地将快速分析提升到一个新的水平。它使得客户在不需要追加基于SQL的分析工具就可以执行次秒级的交互式查询，能够快速迭代分析，还提供了非常重要的价值转换。 今天尝试HIVE  LLAP 阅读关于具有LLAP功能的Hive 如何带来次秒级查询你的大数据湖，请转到此处：http:/">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2016-10-11-at-11.45.03-AM.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Apache Hive vs Apache Impala Query Performance Comparison - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Apache Hive vs Apache Impala Query Performance Comparison
+        
+      </h1>
+
+      <time class="post-time">
+          5月 26 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2016-10-11-at-11.45.03-AM.png" alt></p>
+<p>Apache Hive 2.0 是100%开源软件，而社区也在不断驱动Apache Hive 2.0的革新，LLAP更是真实地将快速分析提升到一个新的水平。它使得客户在不需要追加基于SQL的分析工具就可以执行次秒级的交互式查询，能够快速迭代分析，还提供了非常重要的价值转换。</p>
+<h3 id="今天尝试HIVE-LLAP"><a href="#今天尝试HIVE-LLAP" class="headerlink" title="今天尝试HIVE  LLAP"></a>今天尝试HIVE  LLAP</h3><ol>
+<li><p>阅读关于具有LLAP功能的Hive 如何带来次秒级查询你的大数据湖，请转到此处：<a href="http://hortonworks.com/apache/hive/" target="_blank" rel="noopener">http://hortonworks.com/apache/hive/</a></p>
+</li>
+<li><p>如果你想要在单个节点上进行快速测试，在Hortonworks Sandbox 2.5. 下载Sandbox和LLAP教程，几分钟之内就可以安装并运行。<br>请注意：这种方法，你需要一个RAM至少16GB的系统。</p>
+</li>
+</ol>
+<p>上星期，我们讨论了Apache Hive转换到内存中心的架构，展示了新的架构如何提供显著的性能改良，尤其是交互式SQL 工作负载。今天我们将对比同样的硬件和数据规模在Hadoop 引擎的其他SQL上和在Apache Impala（孵化中）上的结果。</p>
+<h3 id="对比Apache-Hive-LLAP和Apache-Impala-孵化"><a href="#对比Apache-Hive-LLAP和Apache-Impala-孵化" class="headerlink" title="对比Apache Hive LLAP和Apache Impala (孵化)"></a>对比Apache Hive LLAP和Apache Impala (孵化)</h3><p>在我们取得结果数据之前 ，测试环境概述表明查询设置和数据是符合规则的。Impala and Hive的数字是在同样的10个节点的d2.8xlarge EC2 VMs上产生的。为了准备Impala环境，节点是采用Cloudera Manager的Cloudera CDH 5.8版本备份系统后重新安装的。Cloudera Manager 以默认值进行安装/配置Impala 2.6.0. 值得指出的是在这次测试中Impala 的运行时间过滤功能可以使用在所有查询中。</p>
+<p>数据：Hive最适合在ORCFile中工作，  Impala最适合在Parquet文件中工作， 因此Impala测试的所有数据是以Parquet格式完成， 压缩成最精简的压缩文件。数据都是”沿date_sk列“同样的分区方式分布到两个系统中的。这样分区是为了有利于Impala的运行时间过滤和Hive的动态分区Pruning。</p>
+<p>查询：相关设置和数据加载完成之后，我们尝试运行同样的查询， (完全查询链接到下面的查询区) Impala被设计成高度兼容Hive，但由于完美的SQL对等是不可能的，有5个查询因为语法错误无法在Impala中运行。例如， 一个查询编译失败因为缺少 Impala的汇总支持。有可能它已经找到了Impala-specific 对这些问题的解决办法，但是因为这些结果无法直接比较所以也无从尝试。在这里，我们只画出了用完全相同的语法在两个引擎上运行查询的比较图。</p>
+<p>时间设定： 对于两个系统， 所有的计时测量时从查询提交到客户端最后一行的接收为止</p>
+<p>这个条形图展示了两个引擎运行时间的比较。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/llapblog-1.png" alt></p>
+<p>有一点， 一些 Impala 查询超时（30分钟）很快就突显了出来，其中还包括在Hive中低于1分钟的查询。这就使得直接比较有点挑战性。</p>
+<p>比较引擎更有效的方式是检测在指定时间内有多少个查询完成。下面图表中显示了在给定的时间内完成查询的累计次数。图标中的X轴有30秒的离散时间间隔。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/llapblog2-1.png" alt></p>
+<p>首先我们关注到的是Impala在30秒之内的查询优势。在Impala中30秒内完成22个查询对比Hive只完成了20个。而随着查询时间边长位置开始变化：当时间达到一分钟时， Hive已经完成了32个查询时Impala是26个而相对位置并没有再次切换。这就表明Impala在简单的查询中表现良好但是随着查询的复杂性增加查询就开始变得困难了。另一方面， Hive，引入了LLAP，不仅在低端表现良好而且在中高级复杂性的查询中仍然保持了良好的查询能力。</p>
+<p>从部分运行时间上很难判断， 一张完整的运行时间表包括时间结束的时候。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>随着更多的Hadoop工作负载移动到交互式和面向用户，工作组面临只有一个SQL引擎可用于交互式的不和谐的前景而Hive可以用于任何地方。这就增加了Hadoop的成本和复杂性，因为它意味着需要专门分离小组去调整，排除故障，运行两个不同的SQL系统。</p>
+<p>Hive LLAP通过引入符合Hive交互性能专门定制仅用于交互式的SQL引擎从根本上改变了这种格局。使用Hive LLAP你可以在同一个引擎解决SQL的速度和规模问题，极大地简化了Hadoop分析架构。</p>
+<h3 id="测试环境："><a href="#测试环境：" class="headerlink" title="测试环境："></a>测试环境：</h3><ul>
+<li><p>Hive (HDP 2.5)  </p>
+<ul>
+<li>Hive 2.1.0</li>
+<li>Tez 0.8.4</li>
+<li>Hadoop 2.7.3</li>
+<li>ORCFile format with zlib compression</li>
+<li>All queries run through LLAP</li>
+</ul>
+</li>
+<li><p>Impala (CDH 5.8)</p>
+<ul>
+<li>Impala 2.6</li>
+<li>Hadoop 2.6.0</li>
+<li>Runtime Filtering Optimization Enabled</li>
+<li>Parquet format with snappy compression</li>
+</ul>
+</li>
+</ul>
+<h3 id="其他设置："><a href="#其他设置：" class="headerlink" title="其他设置："></a>其他设置：</h3><ul>
+<li>所有的HDP软件都是利用Apache Ambari用HDP2.5 部署完成的。所有的安装都用默认值。</li>
+<li>利用Cloudera Manager部署所有的CDH</li>
+</ul>
+<h3 id="硬件："><a href="#硬件：" class="headerlink" title="硬件："></a>硬件：</h3><ul>
+<li>10x d2.8xlarge EC2节点都用于Hive和Impala 测试。使用独立，全新安装，并且数据生成在本地环境。</li>
+</ul>
+<h3 id="OS-配置："><a href="#OS-配置：" class="headerlink" title="OS 配置："></a>OS 配置：</h3><p>大部分情况下，OS默认设置有1个例外：</p>
+<ul>
+<li><p>/proc/sys/net/core/somaxconn = 4000</p>
+</li>
+<li><p>数据：</p>
+<ul>
+<li>TPC-DS 10000M（10TB）数据规模通过date_sk 列分区。</li>
+<li>Hive数据用Zlib压缩存储为ORC格式。</li>
+<li>Impala数据使用snappy压缩存储为Parquet格式。</li>
+</ul>
+</li>
+</ul>
+<h3 id="查询："><a href="#查询：" class="headerlink" title="查询："></a>查询：</h3><p>从Hive测试平台上查询 <a href="https://github.com/hortonworks/hive-testbench/tree/hive14" target="_blank" rel="noopener">https://github.com/hortonworks/hive-testbench/tree/hive14</a>  ，同样的查询文本文件都用于Hive 和Impala， 查询只有在两种环境都包括在内时工作。</p>
+<h3 id="参考：Hive-和Impala运行时间表"><a href="#参考：Hive-和Impala运行时间表" class="headerlink" title="参考：Hive 和Impala运行时间表"></a>参考：Hive 和Impala运行时间表</h3><p><a href="https://hortonworks.com/blog/apache-hive-vs-apache-impala-query-performance-comparison/" target="_blank" rel="noopener">APACHE HIVE VS APACHE IMPALA QUERY PERFORMANCE COMPARISON</a></p>
+<h3 id="试用Hive-LLAP："><a href="#试用Hive-LLAP：" class="headerlink" title="试用Hive LLAP："></a>试用Hive LLAP：</h3><p>在云或者你的电脑上试用Hive LLAP 都很简单。</p>
+<ol>
+<li>想要在云上快速启动？ <a href="http://hortonworks.github.io/hdp-aws/index.html" target="_blank" rel="noopener">Hortonworks Data Cloud</a>（在技术预览版）绝对能满足你的需求，以及便捷的<a href="https://community.hortonworks.com/content/kbentry/54226/how-to-use-hortonworks-cloud-to-provision-a-cluste.html" target="_blank" rel="noopener">教程</a>会指引你每一步操作。</li>
+<li>如果你想在单个节点上快速测试， 在Hortonworks Sandbox 2.5.下载<a href="https://hortonworks.com/products/sandbox/" target="_blank" rel="noopener">Sandbox</a>和<a href="https://hortonworks.com/hadoop-tutorial/interactive-sql-hadoop-hive-llap/" target="_blank" rel="noopener">LLAP教程</a>，几分钟之内就可以安装并运行。请注意：这种方法，你需要一个RAM至少16GB的系统。</li>
+<li>Hive LLAP还包含在<a href="https://hortonworks.com/downloads/" target="_blank" rel="noopener">HDP 2.5</a>的预置型安装，单击几下就可以启用。</li>
+</ol>
+<p>测试驱动很简单， 因此我们支持你从今天开始并且在<a href="https://community.hortonworks.com/spaces/66/data-processing-track_2.html?topics=Hive&amp;type=question" target="_blank" rel="noopener">Hortonworks Community Connection</a>和我们分享你的经验。</p>
+<p>译文原文: <a href="https://hortonworks.com/blog/apache-hive-vs-apache-impala-query-performance-comparison/" target="_blank" rel="noopener">https://hortonworks.com/blog/apache-hive-vs-apache-impala-query-performance-comparison/</a><br>译文发布：2016年10月11日</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Impala/">Impala</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/05/26/宣布Apache-Hive-2查询性能提升25倍以上/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">宣布Apache Hive 2查询性能提升25倍以上</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/05/24/openstack系列(8)-M版_扩容节点/">
+        <span class="next-text nav-default">openstack系列(8)-M版_扩容节点</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

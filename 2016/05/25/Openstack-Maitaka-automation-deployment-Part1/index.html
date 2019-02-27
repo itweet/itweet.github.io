@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Openstack Maitaka automation deployment Part1">
+
+
+
+
+  <meta name="keywords" content="openstack,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/05/25/Openstack-Maitaka-automation-deployment-Part1/">
+
+
+<meta name="description" content="OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建立和提供云端运算服务。此外，OpenStack也用作建立防火墙内的“私有云”（Private Cloud），提供机构或企业内各部门共享资源。 OpenStack很可能在未来的基础设施即服务（IaaS）资源管理方面占据领导位置，成为公有云、私有云及混合云管理的“云操作系统”标准。 Openstack在企业级私有云市场目前是比较有">
+<meta name="keywords" content="openstack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Openstack Maitaka automation deployment Part1">
+<meta property="og:url" content="http://itweet.github.io/2016/05/25/Openstack-Maitaka-automation-deployment-Part1/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建立和提供云端运算服务。此外，OpenStack也用作建立防火墙内的“私有云”（Private Cloud），提供机构或企业内各部门共享资源。 OpenStack很可能在未来的基础设施即服务（IaaS）资源管理方面占据领导位置，成为公有云、私有云及混合云管理的“云操作系统”标准。 Openstack在企业级私有云市场目前是比较有">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/openstack-success.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/cloud_machine_list.png">
+<meta property="og:updated_time" content="2019-02-27T17:53:59.869Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Openstack Maitaka automation deployment Part1">
+<meta name="twitter:description" content="OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建立和提供云端运算服务。此外，OpenStack也用作建立防火墙内的“私有云”（Private Cloud），提供机构或企业内各部门共享资源。 OpenStack很可能在未来的基础设施即服务（IaaS）资源管理方面占据领导位置，成为公有云、私有云及混合云管理的“云操作系统”标准。 Openstack在企业级私有云市场目前是比较有">
+<meta name="twitter:image" content="https://www.itweet.cn/screenshots/openstack-success.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Openstack Maitaka automation deployment Part1 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Openstack Maitaka automation deployment Part1
+        
+      </h1>
+
+      <time class="post-time">
+          5月 25 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>OpenStack是IaaS(基础设施即服务)组件，让任何人都可以自行建立和提供云端运算服务。<br>此外，OpenStack也用作建立防火墙内的“私有云”（Private Cloud），提供机构或企业内各部门共享资源。</p>
+<p>OpenStack很可能在未来的基础设施即服务（IaaS）资源管理方面占据领导位置，成为公有云、私有云及混合云管理的“云操作系统”标准。</p>
+<p><a href="http://docs.openstack.org/" target="_blank" rel="noopener">Openstack</a>在企业级私有云市场目前是比较有希望的，目前我们就在公司内部构建基于openstack企业级私有云平台，根据硬件区分为两套软件架构，一套x86私有云，一套power高性私有云。</p>
+<p>个人在使用和研究Openstack过程中，发现openstack目前虽然有很多不成熟的地方，但是企业级私有云架构的确非常合适，他有几个优点：</p>
+<pre><code>1. 降低使用虚拟化软件产品的成本，在易用性上面已经做的非常出色，相比早期的KVM。
+2. 为开发测试提供虚拟资源弹性管理。
+3. 集成现有测试工具提供云端的测试服务。
+4. 通过openstack+docker+other实现软件系统自动化架构，
+</code></pre><p>参考: <a href="https://www.itweet.cn/2016/05/05/Enterprise-Application-Development-Platform-Automatic-System/" target="_blank" rel="noopener">企业级开发平台持续集成自动化架构</a></p>
+<p>我个人在家里也弄了一套基于openstack的环境，自己DIY服务器，配置还算强劲吧，主要用做自己的开源项目使用，说实话真的非常方便，从此再也不用折腾vmware workstation，在家的工作站也够用。后面我打算把openstack做成一个系列文章，从基础软件自动化部署，到各个openstack组件的使用，openstack生产环境架构设计，后端存储设计，网络规划，镜像，虚拟机等方面展开。因为我觉得openstack是一个值得我大写特写的开源软件，初次使用我就被他深深吸引住了。很多模块功能设计的非常有意思。</p>
+<p>今天，开启<code>openstack系列</code>专题第一篇内容，怎么通过redhat提供的rdo自动化安装openstack Maitaka版本。</p>
+<h1 id="openstack-allinone"><a href="#openstack-allinone" class="headerlink" title="openstack allinone"></a>openstack allinone</h1><p>  通过allinone可以自动化安装openstack集群。</p>
+<h1 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h1><h2 id="必备条件"><a href="#必备条件" class="headerlink" title="必备条件"></a>必备条件</h2><ul>
+<li>Centos 7/Redhat7 最小化安装系统。</li>
+<li>openstack-mitaka 版本</li>
+<li>ssh免密码登录。</li>
+<li>Linux基础优化/selinux关闭/关闭防火墙。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/redhat-release </span><br><span class="line"> CentOS Linux release 7.2.1511 (Core)</span><br><span class="line"></span><br><span class="line">$ sestatus -v</span><br><span class="line">SELinux status:                 disabled  ＃关闭selinux</span><br><span class="line"></span><br><span class="line">$ systemctl stop firewalld.service #停止firewall</span><br><span class="line">$ systemctl disable firewalld.service #禁止firewall开机启动</span><br><span class="line"></span><br><span class="line">$ echo &apos;* - nofile 65535&apos; &gt;&gt;  /etc/security/limits.conf</span><br><span class="line">$ tail -1  /etc/security/limits.conf</span><br><span class="line"></span><br><span class="line">$ cat /etc/environment </span><br><span class="line">LANG=en_US.utf-8</span><br><span class="line">LC_ALL=en_US.utf-8</span><br><span class="line"></span><br><span class="line">$ cat /etc/hosts|tail -2</span><br><span class="line">172.16.0.210    openstack-controller        </span><br><span class="line">172.16.0.148    openstack-compute1</span><br></pre></td></tr></table></figure>
+<h1 id="Install-Openstack-Mitaka-For-allinone"><a href="#Install-Openstack-Mitaka-For-allinone" class="headerlink" title="Install Openstack Mitaka For allinone"></a>Install Openstack Mitaka For allinone</h1><h2 id="For-Centos-7-x"><a href="#For-Centos-7-x" class="headerlink" title="For Centos 7.x"></a>For Centos 7.x</h2><ul>
+<li>1、 install </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y centos-release-openstack-mitaka</span><br><span class="line">$ sudo yum update –y</span><br><span class="line">$ sudo yum install -y openstack-packstack</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>2、 auto configuation</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo packstack --allinone</span><br></pre></td></tr></table></figure>
+<p>看到如下图信息，说明安装成功。这样所有的服务都安装到了一台机器上，controller和compute节点都在一台服务器上，当然compute是可以不断自动添加节点进来的。</p>
+<p><img src="https://www.itweet.cn/screenshots/openstack-success.png" alt></p>
+</li>
+</ul>
+<h2 id="For-Redhat-7-x"><a href="#For-Redhat-7-x" class="headerlink" title="For Redhat 7.x"></a>For Redhat 7.x</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y https://www.rdoproject.org/repos/rdo-release.rpm</span><br><span class="line">$ sudo yum update -y</span><br><span class="line">$ sudo yum install -y openstack-packstack</span><br><span class="line">$ packstack --allinone</span><br></pre></td></tr></table></figure>
+<h2 id="Installation-Sucessfully"><a href="#Installation-Sucessfully" class="headerlink" title="Installation Sucessfully"></a>Installation Sucessfully</h2><ul>
+<li>安装成功后，在／root下面生成两个keystone权限验证文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller ~]# cat keystonerc_admin </span><br><span class="line">unset OS_SERVICE_TOKEN</span><br><span class="line">export OS_USERNAME=admin</span><br><span class="line">export OS_PASSWORD=06e9b0c19fa34890</span><br><span class="line">export OS_AUTH_URL=http://192.168.0.200:5000/v2.0</span><br><span class="line">export PS1=&apos;[\u@\h \W(keystone_admin)]\$ &apos;</span><br><span class="line"></span><br><span class="line">export OS_TENANT_NAME=admin</span><br><span class="line">export OS_REGION_NAME=RegionOne</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~]# cat keystonerc_demo </span><br><span class="line">unset OS_SERVICE_TOKEN</span><br><span class="line">export OS_USERNAME=demo</span><br><span class="line">export OS_PASSWORD=a3f02b1b68d444f0</span><br><span class="line">export PS1=&apos;[\u@\h \W(keystone_demo)]\$ &apos;</span><br><span class="line">export OS_AUTH_URL=http://192.168.0.200:5000/v2.0</span><br><span class="line"></span><br><span class="line">export OS_TENANT_NAME=demo</span><br><span class="line">export OS_IDENTITY_API_VERSION=2.0</span><br><span class="line"></span><br><span class="line">--source 才能有权限查询到相关的信息</span><br><span class="line">[root@openstack-controller ~]# source keystonerc_admin </span><br><span class="line">[root@openstack-controller ~(keystone_admin)]# nova list --all-tenants</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~(keystone_admin)]# keystone user-list</span><br><span class="line">[root@openstack-controller~(keystone_admin)]# keystone service-list</span><br><span class="line">[root@openstack-controller ~(keystone_admin)]# nova host-list</span><br><span class="line">+-----------------------+-------------+----------+</span><br><span class="line">| host_name             | service     | zone     |</span><br><span class="line">+-----------------------+-------------+----------+</span><br><span class="line">| openstack-controller  | cert        | internal |</span><br><span class="line">| openstack-controller  | consoleauth | internal |</span><br><span class="line">| openstack-controller  | scheduler   | internal |</span><br><span class="line">| openstack-controller  | conductor   | internal |</span><br><span class="line">| openstack-controller  | compute     | nova     |</span><br><span class="line">+-----------------------+-------------+----------+</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>通过dashboard访问openstack<br> Dashboard WebUI: <a href="http://openstack-controller/dashboard" target="_blank" rel="noopener">http://openstack-controller/dashboard</a><br> Dashboard Username/password: admin/your keystonerc_admin password</li>
+</ul>
+<h2 id="Allinone-Install-openstack-You-can-also-generate-an-answer-file-and-use-it-on-other-systems"><a href="#Allinone-Install-openstack-You-can-also-generate-an-answer-file-and-use-it-on-other-systems" class="headerlink" title="Allinone Install openstack , You can also generate an answer file and use it on other systems"></a>Allinone Install openstack , You can also generate an answer file and use it on other systems</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo packstack --gen-answer-file=answerfile.txt</span><br><span class="line">$ cat answerfile.txt |wc -l</span><br><span class="line"> 1297</span><br></pre></td></tr></table></figure>
+<h2 id="Openstack网络配置"><a href="#Openstack网络配置" class="headerlink" title="Openstack网络配置"></a>Openstack网络配置</h2><ul>
+<li><p>OpenStack提供多种网络架构:</p>
+<ul>
+<li>dhcp flat</li>
+<li>VLAN</li>
+<li>Vxlan</li>
+<li>Linux bridge</li>
+<li><p>GRE</p>
+<p>openstack网络类型包括flat、dhcp flat、vlan,vxlan,我这里选择vxlan方式;<br><code>ps: openstack专题系列后面会有专门写网络架构设计内容.</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller network-scripts]# cat ifcfg-br-ex </span><br><span class="line">NAME=&quot;br-ex&quot;</span><br><span class="line">DEVICE=&quot;br-ex&quot;</span><br><span class="line">DEVICETYPE=ovs</span><br><span class="line">TYPE=OVSBridge</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPV6INIT=no</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">DNS1=114.114.114.114</span><br><span class="line">DOMAIN=openstack-conntroller</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPADDR=172.16.0.210</span><br><span class="line">PREFIX=24</span><br><span class="line">GATEWAY=172.16.0.1</span><br><span class="line"></span><br><span class="line">[root@openstack-controller network-scripts]# cat ifcfg-eno16777736</span><br><span class="line">NAME=&quot;eno16777736&quot;</span><br><span class="line">DEVICE=&quot;eno16777736&quot;</span><br><span class="line">ONBOOT=&quot;yes&quot;</span><br><span class="line">IPV6INIT=no</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">DEVICETYPE=ovs</span><br><span class="line">TYPE=OVSPort</span><br><span class="line">OVS_BRIDGE=br-ex</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~(keystone_admin)]#  systemctl restart network.service</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~(keystone_admin)]#  systemctl status network.service</span><br></pre></td></tr></table></figure>
+<p>注意：这里的网络配置，在dashboard还需要做一些路由和private_sub,public_sub网络创建并且通过路由连接，才能正常使用，包括配置浮动IP，内网IP等。这里先略过，后续文章继续介绍。</p>
+<h2 id="Dashboard可视化创建虚拟机"><a href="#Dashboard可视化创建虚拟机" class="headerlink" title="Dashboard可视化创建虚拟机"></a>Dashboard可视化创建虚拟机</h2><p><img src="https://www.itweet.cn/screenshots/cloud_machine_list.png" alt></p>
+<ul>
+<li><p>后端虚拟机运行状态查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller ~(keystone_admin)]# virsh list --all</span><br><span class="line"> Id    Name                           State</span><br><span class="line">----------------------------------------------------</span><br><span class="line"> 11    instance-00000015              running</span><br><span class="line"> 12    instance-00000013              running</span><br><span class="line"></span><br><span class="line">[root@openstack-compute ~]# virsh list --all</span><br><span class="line"> Id    Name                           State</span><br><span class="line">----------------------------------------------------</span><br><span class="line"> 6     instance-00000014              running</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过秘钥登陆虚拟机,CentOS-7-x86_64-GenericCloud官方提供的虚拟机仅仅支持秘钥登录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[whoami@openstack-controller .ssh]$ ssh -i whoami.key centos@172.16.0.219</span><br><span class="line">[centos@test ~]$ sudo su - root</span><br><span class="line">[centos@test ~]$ sudo -s</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Centos官方镜像"><a href="#Centos官方镜像" class="headerlink" title="Centos官方镜像"></a>Centos官方镜像</h2><ul>
+<li><p>cirros镜像：<a href="http://download.cirros-cloud.net/0.3.4/" target="_blank" rel="noopener">http://download.cirros-cloud.net/0.3.4/</a></p>
+</li>
+<li><p>Images: <a href="http://cloud.centos.org/centos/7/images/" target="_blank" rel="noopener">http://cloud.centos.org/centos/7/images/</a></p>
+</li>
+<li><p>Dashboard页面上传镜像,通过本地文件，选择QCOW2类型，选择本地镜像源，取名后即可导入镜像:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-x86_64-disk.img</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~(keystone_admin)]# glance image-list</span><br><span class="line">+--------------------------------------+------------------------------+</span><br><span class="line">| ID                                   | Name                         |</span><br><span class="line">+--------------------------------------+------------------------------+</span><br><span class="line">| 112f10c4-af34-4fb5-bfea-af85d8652f8d | CentOS-7-x86_64-GenericCloud |</span><br><span class="line">| 27598aa1-9cb3-490f-a76e-963ec46392c1 | cirros-0.3.4-x86_64          |</span><br><span class="line">+--------------------------------------+------------------------------+</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Openstack-Cinder－块存储（Block-Storage）"><a href="#Openstack-Cinder－块存储（Block-Storage）" class="headerlink" title="Openstack Cinder－块存储（Block Storage）"></a>Openstack Cinder－块存储（Block Storage）</h2><p><a href="https://wiki.openstack.org/wiki/CinderSupportMatrix" target="_blank" rel="noopener">Cinder</a>默认是实用volume lvm的存储方式，生产中根据不同的业务，肯定需要设计不同的存储架构；而Cinder就给我们提供了后端多种主流存储类型，比如：Ceph，Glusterfs，nfs, lvm；Cinder更像是一个存储接口，可以适配各种后端存储类型。</p>
+<p>cinder与swift各自的用途是什么？</p>
+<p>cinder是块存储，用来给虚拟机挂扩展硬盘，就是将cinder创建出来的卷，挂到虚拟机里。cinder是OpenStack到F版，将之前在Nova中的部分持久性块存储功能（Nova-Volume）分离了出来，独立为新的组件Cinder。</p>
+<p>swift是一个系统，可以上传和下载，里面一般存储的是不经常修改的内容，比如用于存储 VM 镜像、备份和归档以及较小的文件，例如照片和电子邮件消息。更倾向于系统的管理。</p>
+<p>块存储具有安全可靠、高并发大吞吐量、低时延、规格丰富、简单易用的特点，适用于文件系统、数据库或者其他需要原始块设备的系统软件或应用。</p>
+<p>cinder理解为云硬盘，可以为任何虚拟机扩容存储，可以随意格式化，随时存取，并且支持多种后端存储类型，并且可以当做和Linux本地文件系统一样使用，没有任何成本，而他支持的各种后端存储类型，都有各自的特性比如集群可以冗余，副本防止数据丢失风险等优点; 对于swift可以作为网盘，用过云盘的应该不陌生，可以用来备份重要但是不常用的数据。</p>
+<p><code>Openstack专题系列后面会有专题写cinder后端存储架构设计内容。</code></p>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><ul>
+<li>看到后台都安装那些rpm包：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tailf /var/log/messages</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>yum安装信息<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /var/log/yum.log |wc -l</span><br><span class="line">392</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>服务异常排查<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查后台相关服务日志和进程状态</span><br><span class="line">   $ sudo openstack-status |grep neutron</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>参考：<ul>
+<li>networking：<a href="https://www.rdoproject.org/networking/neutron-with-existing-external-network/" target="_blank" rel="noopener">https://www.rdoproject.org/networking/neutron-with-existing-external-network/</a></li>
+<li>adding-a-compute-node: <a href="https://www.rdoproject.org/install/adding-a-compute-node/" target="_blank" rel="noopener">https://www.rdoproject.org/install/adding-a-compute-node/</a></li>
+<li>Highly Available Openstack Deployments：<a href="https://github.com/beekhof/osp-ha-deploy/blob/master/ha-openstack.md" target="_blank" rel="noopener">https://github.com/beekhof/osp-ha-deploy/blob/master/ha-openstack.md</a></li>
+<li><a href="http://www.opencontrail.org/rdo-openstack-opencontrail-integration/" target="_blank" rel="noopener">http://www.opencontrail.org/rdo-openstack-opencontrail-integration/</a></li>
+</ul>
+</li>
+</ul>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/openstack/">openstack</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/05/26/OpenStack-Storage-cinder-swift-glance-Part2/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">OpenStack Storage cinder-swift-glance Part2</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/05/16/学习新东西的唯一方法(Live)/">
+        <span class="next-text nav-default">学习新东西的唯一方法(Live)</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Openstack Instance Compute Node change resizeing">
+
+
+
+
+  <meta name="keywords" content="openstack,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/06/01/Openstack-Instance-Compute-Node-change-resizeing/">
+
+
+<meta name="description" content="Resize a Running Instance on a Single Compute NodeOne can resize a running instance in OpenStack by running the following nova command:nova resize –pollThe default behavior of this command is to invok">
+<meta name="keywords" content="openstack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Openstack Instance Compute Node change resizeing">
+<meta property="og:url" content="http://itweet.github.io/2016/06/01/Openstack-Instance-Compute-Node-change-resizeing/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Resize a Running Instance on a Single Compute NodeOne can resize a running instance in OpenStack by running the following nova command:nova resize –pollThe default behavior of this command is to invok">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.500Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Openstack Instance Compute Node change resizeing">
+<meta name="twitter:description" content="Resize a Running Instance on a Single Compute NodeOne can resize a running instance in OpenStack by running the following nova command:nova resize –pollThe default behavior of this command is to invok">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Openstack Instance Compute Node change resizeing - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Openstack Instance Compute Node change resizeing
+        
+      </h1>
+
+      <time class="post-time">
+          6月 01 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Resize a Running Instance on a Single Compute Node<br>One can resize a running instance in OpenStack by running the following nova command:<br>nova resize –poll<br>The default behavior of this command is to invoke the nova scheduler to determine the best compute node for the resized instance. If there is only one compute node in the environment, the resize will fail.<br>We need to tell nova to allow resizing on the same host by modifying /etc/nova/nova.conf .<br>Modify /etc/nova/nova.conf<br>allow_resize_to_same_host=True<br>scheduler_default_filters=AllHostsFilter<br>By changing the default nova scheduler filter to AllHostsFilter , all compute hosts will be available and unfiltered. It is not a good idea to keep this setting in a multi-compute environment.<br>Restart Services<br>After making the changes to nova.conf, restart scheduler and compute services:<br>service nova-scheduler restart<br>service nova-compute restart<br>Resize Confirm<br>After resizing the instance, the status will change to VERIFY_RESIZE . One will see two copies of the instance in /var/lib/nova/instances : the original and the resized. Run the following command to verify the resize and delete the original instance:<br>nova resize-confirm</p>
+<h1 id="Form-example"><a href="#Form-example" class="headerlink" title="Form example"></a>Form example</h1><h2 id="all-node"><a href="#all-node" class="headerlink" title="all node"></a>all node</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nova/nova.conf</span><br><span class="line"> allow_resize_to_same_host=True</span><br><span class="line"> scheduler_default_filters=RetryFilter,AvailabilityZoneFilter,RamFilter,DiskFilte</span><br><span class="line">r,ComputeFilter,ComputeCapabilitiesFilter,ImagePropertiesFilter,ServerGroupAntiA</span><br><span class="line">ffinityFilter,ServerGroupAffinityFilter</span><br></pre></td></tr></table></figure>
+<h2 id="contollor-node"><a href="#contollor-node" class="headerlink" title="contollor node"></a>contollor node</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart openstack-nova-api.service  </span><br><span class="line">systemctl restart openstack-nova-conductor.service    </span><br><span class="line">systemctl restart openstack-nova-scheduler.service </span><br><span class="line">systemctl restart openstack-nova-cert.service         </span><br><span class="line">systemctl restart openstack-nova-consoleauth.service  </span><br><span class="line">systemctl restart openstack-nova-compute.service      </span><br><span class="line">systemctl restart openstack-nova-novncproxy.service </span><br><span class="line"></span><br><span class="line">openstack-status</span><br></pre></td></tr></table></figure>
+<h2 id="compute-node"><a href="#compute-node" class="headerlink" title="compute node"></a>compute node</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart openstack-nova-compute.service</span><br><span class="line"></span><br><span class="line">openstack-status</span><br></pre></td></tr></table></figure>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/openstack/">openstack</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/06/03/中国的程序员培训是不是有问题/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Books</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/05/29/jenkins-install/">
+        <span class="next-text nav-default">jenkins-install</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

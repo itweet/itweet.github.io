@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="据其官方网站，ownCloud可以让你通过一个Web界面或者WebDAV访问你的文件。它还提供了一个平台，可以轻松地查看、编辑和同步您所有设备的通讯录、日历和书签。尽管ownCloud与广泛使用Dropbox非常相似，但主要区别在于ownCloud是免费的，开源的，从而可以自己的服务器上建立与Dropbox类似的云存储服务。使用ownCloud你可以完整地访问和控制您的私人数据，而对存储空间（除了">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.506Z">
+<meta property="og:updated_time" content="2019-02-27T17:43:20.116Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在CentOS上安装配置ownCloud">
 <meta name="twitter:description" content="据其官方网站，ownCloud可以让你通过一个Web界面或者WebDAV访问你的文件。它还提供了一个平台，可以轻松地查看、编辑和同步您所有设备的通讯录、日历和书签。尽管ownCloud与广泛使用Dropbox非常相似，但主要区别在于ownCloud是免费的，开源的，从而可以自己的服务器上建立与Dropbox类似的云存储服务。使用ownCloud你可以完整地访问和控制您的私人数据，而对存储空间（除了">
@@ -177,7 +177,7 @@
 </ul>
 <p>桌面同步客户端可以连续同步、选择文件夹同步、多文件夹同步。多文件夹同步是你可以同步对多个文件夹位置进行同步到多个ownCloud文件夹下。</p>
 <p>ownCloud的使用过程基本跟主流云存储服务商雷同，就不一一细述了。<br>这是一个面向企业或者个人的私有云存储系统，让用户在各大服务商提供的服务之外能有别的选择。至少，数据是真正掌握在自己手中的。</p>
-<p>把个人数据放家里的私有数据中心里面也是不错的选择。这里推荐一款不错的小型塔式服务器HP MicroServer Gen8 E3-1230V2 8G,特点就是容量够大，可以放入6块3T硬盘。个人完全够用啦。当然你也可以自己DIY一个服务器放家里，也是很好的选择，我自己就<a href="https://jikelab.github.io/tech-labs/2016/06/14/private-cloud/" target="_blank" rel="noopener">DIY</a>了一个32g，24虚拟机内核,1块ssd安装系统，2块sata做数据盘这样的配置放家里。当然我安装私有云在上面，可惜配置太低起不了几个云服务器。如果你家里有一个私有云，直接无需安装，下载ownload提供的ubuntu镜像即可自动生成带有owncloud功能的云主机，直接使用。最好把它数据存储目录，存储到私有云的云盘之中，好扩展。</p>
+<p>把个人数据放家里的私有数据中心里面也是不错的选择。这里推荐一款不错的小型塔式服务器HP MicroServer Gen8 E3-1230V2 8G,特点就是容量够大，可以放入6块3T硬盘。个人完全够用啦。当然你也可以自己DIY一个服务器放家里，也是很好的选择，我自己就<a href="https://www.itweet.cn/2016/06/14/private-cloud/" target="_blank" rel="noopener">DIY</a>了一个32g，24虚拟机内核,1块ssd安装系统，2块sata做数据盘这样的配置放家里。当然我安装私有云在上面，可惜配置太低起不了几个云服务器。如果你家里有一个私有云，直接无需安装，下载ownload提供的ubuntu镜像即可自动生成带有owncloud功能的云主机，直接使用。最好把它数据存储目录，存储到私有云的云盘之中，好扩展。</p>
 <ul>
 <li>为了保证，有足够的存储空间<br>底层可以修改为一个分布式文件系统架构，这样就可以变成一个分布式云盘，或者挂载一个大硬盘。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br><span class="line">cd /var/www/html/owncloud/</span><br><span class="line"></span><br><span class="line">mv data data_bak</span><br><span class="line">mkdir data</span><br><span class="line"></span><br><span class="line">mount /dev/vdb /var/www/html/owncloud/data</span><br><span class="line"></span><br><span class="line">chown apache:apache data</span><br><span class="line">chmod 774 data</span><br><span class="line">chmod o-r data</span><br><span class="line"></span><br><span class="line">mv data_bak/* data/</span><br><span class="line">mv data_bak/.ocdata  data/</span><br><span class="line">mv data_bak/.htaccess data/</span><br></pre></td></tr></table></figure>
 </li>

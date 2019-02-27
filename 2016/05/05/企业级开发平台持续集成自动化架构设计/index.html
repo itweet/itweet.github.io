@@ -43,12 +43,12 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp; 近期变动比较大，离职了，拒了几个大企业offer；选择加入了一家非常有前景的创业公司，很多人不理解，虽然入职时间不长，但是和大公司比较真的非常有意思，虽然辛苦一些，但是能学到不少东西，让我对大数据创业有了更多新的认识，甚至完全颠覆我曾经的一些想法，真的非常棒；好了，到此为止，等有时间专门写一篇文章介绍下我的思考吧，下面进入今天的正题。&amp;nbsp;&amp;nbsp; 在很多企业中">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/Automatic-System.png">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.497Z">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/Automatic-System.png">
+<meta property="og:updated_time" content="2019-02-27T17:45:54.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="企业级开发平台持续集成自动化架构设计">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp; 近期变动比较大，离职了，拒了几个大企业offer；选择加入了一家非常有前景的创业公司，很多人不理解，虽然入职时间不长，但是和大公司比较真的非常有意思，虽然辛苦一些，但是能学到不少东西，让我对大数据创业有了更多新的认识，甚至完全颠覆我曾经的一些想法，真的非常棒；好了，到此为止，等有时间专门写一篇文章介绍下我的思考吧，下面进入今天的正题。&amp;nbsp;&amp;nbsp; 在很多企业中">
-<meta name="twitter:image" content="https://jikelab.github.io/tech-labs/screenshots/Automatic-System.png">
+<meta name="twitter:image" content="https://www.itweet.cn/screenshots/Automatic-System.png">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -142,7 +142,7 @@
     
             <div class="post-content">
             <p>&nbsp;&nbsp; 近期变动比较大，离职了，拒了几个大企业offer；选择加入了一家非常有前景的创业公司，很多人不理解，虽然入职时间不长，但是和大公司比较真的非常有意思，虽然辛苦一些，但是能学到不少东西，让我对大数据创业有了更多新的认识，甚至完全颠覆我曾经的一些想法，真的非常棒；好了，到此为止，等有时间专门写一篇文章介绍下我的思考吧，下面进入今天的正题。<br>&nbsp;&nbsp; 在很多企业中，IT使用技术还比较落后，还没有自动化构建发布代码实现或者概念；如：多人协同开发管理,软件发布,测试都还没有形成一套自动化的解决方案，其实对于小儿精悍的团队来说，实现自动化意义非凡，可以减少工作量的同时，降低团队维护成本和事业成本，我自己就非常欣赏国外的<code>instagram</code>团队，下面我简单介绍一下，2012年4月10日，Facebook宣布以10亿美元收购在线照片共享服务商Instagram。你没有听错就是10亿美金，更加不可思议的是Instagram公司只有13名员工。被收购的时候真的只有13名员工并且截至2012年3月，Instragram用户已达到2700万，Facebook处于商业考虑收购了Instagram，现如今更是4亿多用户；13名员工创造的奇迹，是什么导致他们这么强大，下面是一则有关他们的小故事。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">                            Instagram严重故障——弗吉尼亚风暴</span><br><span class="line">2012年我正在波特兰享受我的三天短假，手机突然响了起来：Instagram.com崩溃了，我上网简单看了</span><br><span class="line">一下发现不仅是Instagram，Netflix和其他一些网站也出现了同样的问题。我飞奔回酒店，打开电脑，</span><br><span class="line">发现上面有一条来自亚马逊让人毛骨悚然的消息：一个巨大的风暴袭击了弗吉尼亚，几乎一半的服务器停</span><br><span class="line">电，接下来的36小时，我们几乎要重建整个基础设施。</span><br><span class="line"></span><br><span class="line">那时，我们整个后台团队由我、第一个工程师Shayne、刚加入Instagram一个月的Rick，用户数据没有</span><br><span class="line">丢失，但是这次中断暴露出我们基础设施的自动化的不足。</span><br><span class="line"></span><br><span class="line">这次故障纯属意外，但是为了稳定性，我们需要一个更稳定的系统提供服务。第二年，我们把所有不稳定</span><br><span class="line">的脚本转移到了全自动的系统上，事实上减少了基础设施的团队成员。</span><br><span class="line"></span><br><span class="line">产品经理心得：我很高兴我们有优秀、尽职的工程师，面对糟糕的现实，hayne 和 </span><br><span class="line">Rick迅速行动，堪比《火星救援》。</span><br><span class="line">                        by 原文来自网络 － </span><br><span class="line">                        http://www.tuicool.com/articles/fIzq6zR</span><br></pre></td></tr></table></figure></p>
-<p>&nbsp;&nbsp; 这个小故事中强调了全自动化系统的意义，我一直很钦佩这样的思想和理念，我最近刚好自己设计了一个持续集成自动化的架构，虽然离全自动化系统还很远，但是也是在打基础，什么东西都是一步步完善的，今天我打算介绍一下这套系统的一些实现细节和思考。<br><img src="https://jikelab.github.io/tech-labs/screenshots/Automatic-System.png" alt></p>
+<p>&nbsp;&nbsp; 这个小故事中强调了全自动化系统的意义，我一直很钦佩这样的思想和理念，我最近刚好自己设计了一个持续集成自动化的架构，虽然离全自动化系统还很远，但是也是在打基础，什么东西都是一步步完善的，今天我打算介绍一下这套系统的一些实现细节和思考。<br><img src="https://www.itweet.cn/screenshots/Automatic-System.png" alt></p>
 <p></p><h6 align="center">企业级开发平台持续集成自动化架构设计(图)</h6><br>&nbsp;&nbsp; 如上，我设计的这个流水线自动化系统架构图，下面我来逐一剖析各个组件的作用域。<p></p>
 <p>1、项目管理模块：包括redmine,wiki可以在gitlab发起一个新项目，并且建立wiki文档和版本功能。</p>
 <p>2、开发环境模块：开发库和公共服务，内部私服nexus实现mvn私有仓库建设和vpn突破外网功能。</p>
@@ -177,7 +177,7 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2016/05/09/Gitlab 安装配置/">
+      <a class="prev" href="/2016/05/09/Gitlab-install-config/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">Gitlab 安装配置</span>
         <span class="prev-text nav-mobile">Prev</span>

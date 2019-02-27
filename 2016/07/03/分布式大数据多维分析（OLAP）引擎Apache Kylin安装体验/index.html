@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="Apache Kylin旨在减少Hadoop在10亿及百亿规模以上数据级别的情况下的查询延迟，目前底层数据存储基于HBase，具有较强的可伸缩性。 环境依赖 hadoop-2.7.1 hbase-1.1.5 apache-hive-2.0.1-bin  配置环境变量下载kylin基于hbase1.x的部署包1wget https://dist.apache.org/repos/dist/relea">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.503Z">
+<meta property="og:updated_time" content="2019-02-27T17:36:17.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式大数据多维分析（OLAP）引擎Apache Kylin安装体验">
 <meta name="twitter:description" content="Apache Kylin旨在减少Hadoop在10亿及百亿规模以上数据级别的情况下的查询延迟，目前底层数据存储基于HBase，具有较强的可伸缩性。 环境依赖 hadoop-2.7.1 hbase-1.1.5 apache-hive-2.0.1-bin  配置环境变量下载kylin基于hbase1.x的部署包1wget https://dist.apache.org/repos/dist/relea">
@@ -161,7 +161,7 @@
 <p>后台建立好kylin数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">hive&gt; create database kylin;</span><br><span class="line">OK</span><br><span class="line">Time taken: 0.179 seconds</span><br><span class="line"></span><br><span class="line">hive&gt; use kylin;</span><br><span class="line">OK</span><br><span class="line">Time taken: 0.047 seconds</span><br><span class="line"></span><br><span class="line">hive&gt; create table test_kylin(id int,name string);</span><br><span class="line">OK</span><br><span class="line">Time taken: 0.207 seconds</span><br><span class="line"></span><br><span class="line">hive&gt; insert into test_kylin values(1,&quot;kylin&quot;);</span><br><span class="line"></span><br><span class="line">hive&gt; select * from test_kylin;</span><br><span class="line">OK</span><br><span class="line">1       kylin</span><br><span class="line">Time taken: 0.183 seconds, Fetched: 1 row(s)</span><br></pre></td></tr></table></figure></p>
 <h1 id="Impala-Hive-Performance-tuning"><a href="#Impala-Hive-Performance-tuning" class="headerlink" title="Impala-Hive-Performance-tuning"></a>Impala-Hive-Performance-tuning</h1><ul>
 <li>参考本博客另一片文章，自动生成测试数据，然后通过kylin分析<ul>
-<li><a href="https://jikelab.github.io/tech-labs/2016/03/20/Impala-Hive-performance-tuning/" target="_blank" rel="noopener">https://jikelab.github.io/tech-labs/2016/03/20/Impala-Hive-performance-tuning/</a></li>
+<li><a href="https://www.itweet.cn/2016/03/20/Impala-Hive-performance-tuning/" target="_blank" rel="noopener">https://www.itweet.cn/2016/03/20/Impala-Hive-performance-tuning/</a></li>
 </ul>
 </li>
 </ul>
@@ -176,7 +176,7 @@
 <p>snappy package<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ yum -y install snappy snappy-devel</span><br><span class="line"></span><br><span class="line">$ rpm -qa snappy*</span><br><span class="line">snappy-1.1.0-1.el6.x86_64</span><br><span class="line">snappy-devel-1.1.0-1.el6.x86_64</span><br></pre></td></tr></table></figure></p>
 <p>编译Hadoop默认支撑所有native库</p>
 <blockquote>
-<p>请参考我的另外一篇文章：<a href="https://jikelab.github.io/tech-labs/2016/07/02/Hadoop-Native-Libraries-Guide/" target="_blank" rel="noopener">Hadoop-Native-Libraries-Guide</a></p>
+<p>请参考我的另外一篇文章：<a href="https://www.itweet.cn/2016/07/02/Hadoop-Native-Libraries-Guide/" target="_blank" rel="noopener">Hadoop-Native-Libraries-Guide</a></p>
 </blockquote>
 <p>参考：<br>Apache Kylin™: <a href="http://kylin.apache.org/" target="_blank" rel="noopener">http://kylin.apache.org/</a><br>Extreme OLAP Engine for Big Data: <a href="http://kylin.apache.org/blog/" target="_blank" rel="noopener">http://kylin.apache.org/blog/</a><br>Apache Kylin的快速数据立方体算法——概述：<a href="http://www.infoq.com/cn/articles/apache-kylin-algorithm/" target="_blank" rel="noopener">http://www.infoq.com/cn/articles/apache-kylin-algorithm/</a></p>
 <p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
@@ -198,7 +198,7 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2016/07/03/Hive on Hbase 整合测试/">
+      <a class="prev" href="/2016/07/03/Hive-on-Hbase/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">Hive on Hbase 整合测试</span>
         <span class="prev-text nav-mobile">Prev</span>

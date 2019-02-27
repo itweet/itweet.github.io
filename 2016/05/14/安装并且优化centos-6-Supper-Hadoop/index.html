@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="安装并且优化centos 6 系统 Supper Hadoop">
+
+
+
+
+  <meta name="keywords" content="centos,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/05/14/安装并且优化centos-6-Supper-Hadoop/">
+
+
+<meta name="description" content="1、系统安装类型选择及自定义额外包组  进入如图 1-1 所示界面。 上半部分是系统定制的不同的系统安装类型选择项，默认是“ Desktop”，这里我们选择“ Minimal”，即最小化安装，下半部分是在上面系统安装类型确定后， 额外想添加的软件包组选择项，我们选择“ Customize now”即立即自定义。        图 1-1 系统安装包类型选择及自定义额外包组  在下图 1-2 的自定">
+<meta name="keywords" content="centos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装并且优化centos 6 系统 Supper Hadoop">
+<meta property="og:url" content="http://itweet.github.io/2016/05/14/安装并且优化centos-6-Supper-Hadoop/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="1、系统安装类型选择及自定义额外包组  进入如图 1-1 所示界面。 上半部分是系统定制的不同的系统安装类型选择项，默认是“ Desktop”，这里我们选择“ Minimal”，即最小化安装，下半部分是在上面系统安装类型确定后， 额外想添加的软件包组选择项，我们选择“ Customize now”即立即自定义。        图 1-1 系统安装包类型选择及自定义额外包组  在下图 1-2 的自定">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/minimal.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/base-system.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/base-developments.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/chkconfig-list.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/chkconfig-list-2.png">
+<meta property="og:updated_time" content="2019-02-27T17:46:23.786Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安装并且优化centos 6 系统 Supper Hadoop">
+<meta name="twitter:description" content="1、系统安装类型选择及自定义额外包组  进入如图 1-1 所示界面。 上半部分是系统定制的不同的系统安装类型选择项，默认是“ Desktop”，这里我们选择“ Minimal”，即最小化安装，下半部分是在上面系统安装类型确定后， 额外想添加的软件包组选择项，我们选择“ Customize now”即立即自定义。        图 1-1 系统安装包类型选择及自定义额外包组  在下图 1-2 的自定">
+<meta name="twitter:image" content="https://www.itweet.cn/screenshots/minimal.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 安装并且优化centos 6 系统 Supper Hadoop - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          安装并且优化centos 6 系统 Supper Hadoop
+        
+      </h1>
+
+      <time class="post-time">
+          5月 14 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="1、系统安装类型选择及自定义额外包组"><a href="#1、系统安装类型选择及自定义额外包组" class="headerlink" title="1、系统安装类型选择及自定义额外包组"></a>1、系统安装类型选择及自定义额外包组</h1><p>  进入如图 1-1 所示界面。 上半部分是系统定制的不同的系统安装类型选择项，默认是<br>“ Desktop”，这里我们选择“ Minimal”，即最小化安装，下半部分是在上面系统安装类型确<br>定后， 额外想添加的软件包组选择项，我们选择“ Customize now”即立即自定义。<br>    <img src="https://www.itweet.cn/screenshots/minimal.png" alt><br>    图 1-1 系统安装包类型选择及自定义额外包组<br>  在下图 1-2 的自定义额外的包组界面，我们首先需要选择左边的大的分类，然后在勾<br>选右边对应的小的包组。注意：右边小包组里的内容默认即可。选择结果如图 1-2，图 1-3<br>所示：<br><img src="https://www.itweet.cn/screenshots/base-system.png" alt><br>        图 1-2 自定义安装包组选择界面I</p>
+<p><img src="https://www.itweet.cn/screenshots/base-developments.png" alt><br>        图 1-3 自定义安装包组选择界面I</p>
+<p>1.1 根据经验，选择安装包时应该按最小化原则，即不需要的或者不确定是否需要的就<br>不安装，这样可以最大程度上确保系统安全。</p>
+<p>1.2 如果安装过程落了部分包组或者其他伙伴安装时没选，再安装后可以按如下方式补<br>上安装时未安装的包组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum groupinstall &quot;Compatibility libraries&quot; &quot;Base&quot; &quot;Development tools&quot;</span><br><span class="line">yum groupinstall &quot;debugging Tools&quot; &quot;Dial-up Networking Support&quot;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>可以通过 yum groupinfo 包组查看具体安装的组件。</li>
+</ul>
+<p>1.3 下面安装 6.7 后登陆系统的时候查看选包的情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">yum grouplist:</span><br><span class="line">Installed Groups:</span><br><span class="line">Base</span><br><span class="line">Compatibility libraries</span><br><span class="line">Debugging Tools</span><br><span class="line">Development tools</span><br><span class="line">E-mail server</span><br><span class="line">Graphical Administration Tools</span><br><span class="line">Hardware monitoring utilities</span><br><span class="line">Legacy UNIX compatibility</span><br><span class="line">Networking Tools</span><br><span class="line">Performance Tools</span><br><span class="line">Perl Support</span><br><span class="line">Scientific support</span><br><span class="line">Security Tools</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>可以看到除了我们选择的外，系统还是默认安装了一些必须的软件包组。</li>
+</ul>
+<h1 id="2、网络设置"><a href="#2、网络设置" class="headerlink" title="2、网络设置"></a>2、网络设置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@centos ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0 </span><br><span class="line">DEVICE=eth0</span><br><span class="line">HWADDR=00:0C:29:6D:58:E4</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">UUID=5236fdbb-76ee-4f98-90cf-6bed4fb62661</span><br><span class="line">ONBOOT=yes</span><br><span class="line">NM_CONTROLLED=yes</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">IPADDR=192.168.2.200</span><br><span class="line">GATEWAY=192.168.2.1</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure>
+<h1 id="3、Linux系统优化-Supper-Hadoop"><a href="#3、Linux系统优化-Supper-Hadoop" class="headerlink" title="3、Linux系统优化 Supper Hadoop"></a>3、Linux系统优化 Supper Hadoop</h1><p>3.1 环境检查</p>
+<p>3.1.1 操作系统<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># cat /etc/redhat-release </span><br><span class="line">CentOS release 6.6 (Final)</span><br></pre></td></tr></table></figure></p>
+<p>3.1.2 所有主机能够相互ping通</p>
+<p>3.1.3 linux内核版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># uname -r</span><br><span class="line">2.6.32-504.el6.x86_64</span><br></pre></td></tr></table></figure></p>
+<p>3.2 添加安装集群用户&amp;&amp;关闭selinux&amp;&amp;修改Linux启动级别为3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">useradd hadoop</span><br><span class="line">echo &quot;hadoop123&quot;|passwd --stdin hadoop</span><br><span class="line"></span><br><span class="line">yum grouplist</span><br><span class="line"></span><br><span class="line">sed -i &apos;s#SELINUX=enforcing#SELINUX=disabled#g&apos; /etc/selinux/config</span><br><span class="line">setenforce 0</span><br><span class="line"></span><br><span class="line">grep SELINUX=disabled /etc/selinux/config</span><br><span class="line"></span><br><span class="line">grep id:3:initdefault: /etc/inittab</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://www.itweet.cn/screenshots/chkconfig-list.png" alt></p>
+<p>3.3 优化开机自动启动服务&amp;&amp;增大文件描述符(Hadoop并行读取数据文件)&amp;&amp;sudo权限管理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --list|grep 3:on |wc –l</span><br><span class="line">chkconfig --list|grep 3:on | cut -d &quot; &quot; -f1  </span><br><span class="line">for name in `chkconfig --list|grep 3:on | cut -d &quot; &quot; -f1` ;do chkconfig $name off;done</span><br><span class="line">chkconfig --list|grep 3:on</span><br><span class="line"></span><br><span class="line">#如果系统基于lvm逻辑卷管理需要开启lvm2-monitor blk-availability两个服务</span><br><span class="line">for name in crond ntpd lvm2-monitor blk-availability network rsyslog sshd;do chkconfig $name on;done</span><br><span class="line"></span><br><span class="line">iptables -L -n</span><br><span class="line">/etc/init.d/iptables stop</span><br><span class="line">iptables -L -n</span><br><span class="line">chkconfig --list|grep iptables</span><br><span class="line"></span><br><span class="line">echo &apos;hadoop  ALL=(ALL)       NOPASSWD: ALL&apos; &gt;&gt; /etc/sudoers</span><br><span class="line"></span><br><span class="line">echo &apos;* - nofile 65535&apos; &gt;&gt;  /etc/security/limits.conf</span><br><span class="line">tail -1  /etc/security/limits.conf</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://www.itweet.cn/screenshots/chkconfig-list-2.png" alt></p>
+<p>3.4 配置ntp服务器，让所有服务器时间保持一致，如果是非内网服务器可以直接安装启动ntp：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install htpd -y</span><br><span class="line">/etc/init.d/ntpd start</span><br><span class="line">chkconfig ntpd on</span><br></pre></td></tr></table></figure></p>
+<p><strong> 公网自动时间同步 </strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ /etc/init.d/ntpd stop</span><br><span class="line">$ ntpdate asia.pool.ntp.org</span><br></pre></td></tr></table></figure></p>
+<p>如果是内网服务器，需要配置一台ntp服务器，所有服务器到ntp服务器定期同步时间。</p>
+<p><code>内网ntp服务器配置</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ntp.conf</span><br><span class="line">restrict default ignore   //默认不允许修改或者查询ntp,并且不接收特殊封包</span><br><span class="line">restrict 127.0.0.1        //给于本机所有权限</span><br><span class="line">restrict 192.168.2.0 mask 255.255.255.0 notrap nomodify  //给于局域网机的机器有同步时间的权限</span><br><span class="line">server  192.168.2.124   # local clock</span><br><span class="line">driftfile /var/lib/ntp/drift</span><br><span class="line">fudge   127.127.1.0 stratum 10</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ntpq -p 查询网络中的NTP服务器：</span><br><span class="line">$ ntpq –p</span><br><span class="line"></span><br><span class="line">所有机器服务器需要和ntp服务时间保持一致：</span><br><span class="line">$ ntpdate 192.168.1.124 #刚刚配置好ntp服务器,大概需要5min后才能正常提供服务;报错&quot;no server suitable for synchronization found&quot;</span><br><span class="line"></span><br><span class="line">所有大数据服务器设置cron同步ntp服务器时间：</span><br><span class="line">$ crontab -l</span><br><span class="line">00 1 * * * root /usr/sbin/ntpdate 192.168.1.124 &gt;&gt; /root/ntpdate.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p>3.5 关闭防火墙<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/iptables status</span><br><span class="line">/etc/init.d/iptables stop</span><br><span class="line">chkconfig iptables off</span><br></pre></td></tr></table></figure></p>
+<p>3.6 关闭Swap<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapoff -a</span><br></pre></td></tr></table></figure></p>
+<p>3.6 Linux overcommit-memory<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo 0 &gt; /proc/sys/vm/overcommit_memory</span><br></pre></td></tr></table></figure></p>
+<p>3.7 所有主机做好hosts ip映射&amp;&amp;repo文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># tail -6 /etc/hosts</span><br><span class="line">192.168.1.124 apache-server archive.cloudera.com archive-primary.cloudera.com</span><br><span class="line"></span><br><span class="line">192.168.1.201   server1</span><br><span class="line">192.168.1.202   server2</span><br><span class="line">192.168.1.203   server3</span><br><span class="line">192.168.1.204   server4</span><br><span class="line"></span><br><span class="line">所有主机同步hosts文件一致</span><br><span class="line"># scp -r /etc/hosts hostname:/etc/</span><br><span class="line"></span><br><span class="line">所有主机repo文件同步</span><br><span class="line"># scp -r CentOS-httpd.repo cloudera-cdh5.repo hostname:/etc/yum.repos.d/</span><br></pre></td></tr></table></figure></p>
+<p>3.8 swappiness &amp;&amp; transparent_hugepage<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#sudo echo &apos;0&apos; &gt; /proc/sys/vm/swappiness</span><br><span class="line">#sudo sysctl vm.swappiness=0</span><br><span class="line"></span><br><span class="line">#sudo echo &apos;#by whoami 2015-10-30&apos;&gt;&gt; /etc/sysctl.conf</span><br><span class="line">#sudo echo &apos;vm.swappiness=0&apos;&gt;&gt; /etc/sysctl.conf</span><br><span class="line"></span><br><span class="line"># cat /sys/kernel/mm/redhat_transparent_hugepage/defrag </span><br><span class="line">[always] never</span><br><span class="line"># echo never &gt; /sys/kernel/mm/redhat_transparent_hugepage/defrag</span><br><span class="line"># cat /sys/kernel/mm/redhat_transparent_hugepage/defrag</span><br><span class="line">always [never]</span><br><span class="line"></span><br><span class="line"># echo &apos;#by whoami 2015-10-30&apos;&gt;&gt; /etc/rc.local</span><br><span class="line"># echo &apos;echo never &gt; /sys/kernel/mm/redhat_transparent_hugepage/defrag &apos; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure></p>
+<h1 id="4、克隆虚拟机"><a href="#4、克隆虚拟机" class="headerlink" title="4、克隆虚拟机"></a>4、克隆虚拟机</h1><p>虚拟机eth0无法启动解决：<br>    其实是因为克隆后Mac地址一致，导致冲突，而无法启动。<br>    报错信息如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bring up interface eth0: Device eth0 does not seem to be present,delaying initialization.</span><br></pre></td></tr></table></figure></p>
+<p>删除两项ifcfg-eth0的配置，重启系统即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rm -f /etc/udev/rules.d/70-persistent-net.rules</span><br><span class="line"></span><br><span class="line">删除／etc/sysconfig/network-scripts/ifcfg-eth0中：</span><br><span class="line">    HWADDR,UUID两项内容，重启网卡即可解决。</span><br><span class="line"></span><br><span class="line">／etc/init.d/network restart</span><br></pre></td></tr></table></figure></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/centos/">centos</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/05/14/linux-for-Desktop/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">linux for Desktop</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/05/09/Gitlab-install-config/">
+        <span class="next-text nav-default">Gitlab 安装配置</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

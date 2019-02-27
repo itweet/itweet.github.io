@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="kafka use">
+
+
+
+
+  <meta name="keywords" content="kafka,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/07/27/kafka-use/">
+
+
+<meta name="description" content="kafka是一种高吞吐量的分布式发布订阅消息系统，它有如下特性：  通过O(1)的磁盘数据结构提供消息的持久化，这种结构对于即使数以TB的消息存储也能够保持长时间的稳定性能。 高吞吐量：即使是非常普通的硬件kafka也可以支持每秒数十万的消息。 支持通过kafka服务器和消费机集群来分区消息。 支持Hadoop并行数据加载。  卡夫卡的目的是提供一个发布订阅解决方案，它可以处理消费者规模的网站中的">
+<meta name="keywords" content="kafka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kafka use">
+<meta property="og:url" content="http://itweet.github.io/2015/07/27/kafka-use/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="kafka是一种高吞吐量的分布式发布订阅消息系统，它有如下特性：  通过O(1)的磁盘数据结构提供消息的持久化，这种结构对于即使数以TB的消息存储也能够保持长时间的稳定性能。 高吞吐量：即使是非常普通的硬件kafka也可以支持每秒数十万的消息。 支持通过kafka服务器和消费机集群来分区消息。 支持Hadoop并行数据加载。  卡夫卡的目的是提供一个发布订阅解决方案，它可以处理消费者规模的网站中的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://kafka.apache.org/images/producer_consumer.png">
+<meta property="og:image" content="https://kafka.apache.org/images/log_anatomy.png">
+<meta property="og:image" content="https://kafka.apache.org/images/consumer-groups.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/kafka-manager.png">
+<meta property="og:updated_time" content="2019-02-27T17:46:35.227Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kafka use">
+<meta name="twitter:description" content="kafka是一种高吞吐量的分布式发布订阅消息系统，它有如下特性：  通过O(1)的磁盘数据结构提供消息的持久化，这种结构对于即使数以TB的消息存储也能够保持长时间的稳定性能。 高吞吐量：即使是非常普通的硬件kafka也可以支持每秒数十万的消息。 支持通过kafka服务器和消费机集群来分区消息。 支持Hadoop并行数据加载。  卡夫卡的目的是提供一个发布订阅解决方案，它可以处理消费者规模的网站中的">
+<meta name="twitter:image" content="https://kafka.apache.org/images/producer_consumer.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> kafka use - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          kafka use
+        
+      </h1>
+
+      <time class="post-time">
+          7月 27 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>kafka是一种高吞吐量的分布式发布订阅消息系统，它有如下特性：</p>
+<ul>
+<li>通过O(1)的磁盘数据结构提供消息的持久化，这种结构对于即使数以TB的消息存储也能够保持长时间的稳定性能。</li>
+<li>高吞吐量：即使是非常普通的硬件kafka也可以支持每秒数十万的消息。</li>
+<li>支持通过kafka服务器和消费机集群来分区消息。</li>
+<li>支持Hadoop并行数据加载。</li>
+</ul>
+<p>卡夫卡的目的是提供一个发布订阅解决方案，它可以处理消费者规模的网站中的所有动作流数据。 这种动作（网页浏览，搜索和其他用户的行动）是在现代网络上的许多社会功能的一个关键因素。 这些数据通常是由于吞吐量的要求而通过处理日志和日志聚合来解决。 对于像Hadoop的一样的日志数据和离线分析系统，但又要求实时处理的限制，这是一个可行的解决方案。kafka的目的是通过Hadoop的并行加载机制来统一线上和离线的消息处理，也是为了通过集群机来提供实时的消费。</p>
+<p><img src="https://kafka.apache.org/images/producer_consumer.png" alt></p>
+<p><img src="https://kafka.apache.org/images/log_anatomy.png" alt></p>
+<p><img src="https://kafka.apache.org/images/consumer-groups.png" alt></p>
+<p>kafka是显式分布式架构，producer、broker（Kafka）和consumer都可以有多个。Kafka的作用类似于缓存，即活跃的数据和离线处理系统之间的缓存。几个基本概念：<br>（1）message（消息）是通信的基本单位，每个producer可以向一个topic（主题）发布一些消息。如果consumer订阅了这个主题，那么新发布的消息就会广播给这些consumer。<br>（2）Kafka是显式分布式的，多个producer、consumer和broker可以运行在一个大的集群上，作为一个逻辑整体对外提供服务。对于consumer，多个consumer可以组成一个group，这个message只能传输给某个group中的某一个consumer.</p>
+<h1 id="1、kafka安装"><a href="#1、kafka安装" class="headerlink" title="1、kafka安装"></a>1、kafka安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">http://kafka.apache.org/documentation.html#quickstart</span><br><span class="line"></span><br><span class="line">wget http://mirrors.cnnic.cn/apache/kafka/0.8.2.1/kafka_2.10-0.8.2.1.tgz</span><br><span class="line"></span><br><span class="line">[root@server1 local]# tar -zxvf software/kafka_2.10-0.8.2-beta.tgz</span><br><span class="line"></span><br><span class="line">#TCP TEST</span><br><span class="line">https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol</span><br><span class="line"></span><br><span class="line"># vim config/server.properties</span><br><span class="line">brokerid：这个每个server（broker）必须唯一，写数字</span><br><span class="line">host.name：这个也是唯一的，写ip或者hostname</span><br><span class="line">[root@server1 config]# egrep -v &quot;^$|#&quot; server.properties  </span><br><span class="line">broker.id=1</span><br><span class="line">port=9092</span><br><span class="line">host.name=server1  #所在节点的ip地址,如果不想配置全为localhost即可</span><br><span class="line"></span><br><span class="line">num.network.threads=3</span><br><span class="line"> </span><br><span class="line">num.io.threads=8</span><br><span class="line">socket.send.buffer.bytes=102400</span><br><span class="line">socket.receive.buffer.bytes=65536</span><br><span class="line">socket.request.max.bytes=104857600</span><br><span class="line">log.dirs=/tmp/kafka-logs</span><br><span class="line">num.partitions=1</span><br><span class="line">num.recovery.threads.per.data.dir=1</span><br><span class="line">log.retention.hours=168</span><br><span class="line">log.segment.bytes=1073741824</span><br><span class="line">log.retention.check.interval.ms=300000</span><br><span class="line">log.cleaner.enable=false</span><br><span class="line">zookeeper.connect=server1:2181,server2:2181,server3:2181</span><br><span class="line">zookeeper.connection.timeout.ms=2000</span><br><span class="line"></span><br><span class="line">[root@server1 config]# egrep -v &quot;^$|#&quot; zookeeper.properties </span><br><span class="line">dataDir=/tmp/zookeeper</span><br><span class="line">clientPort=2181</span><br><span class="line">maxClientCnxns=0</span><br><span class="line"></span><br><span class="line">[root@server1 local]# scp -rq kafka_2.10-0.8.2-beta server2:/usr/local/</span><br></pre></td></tr></table></figure>
+<h1 id="2、启动kafka"><a href="#2、启动kafka" class="headerlink" title="2、启动kafka"></a>2、启动kafka</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#启动之前zookeeper必须启动！zookeeper请参考[zookeeper cluster deploy](https://www.itweet.cn/2015/07/12/zk-cluster-deploy/)</span><br><span class="line">[root@server1 kafka_2.10-0.8.2-beta]# bin/kafka-server-start.sh config/server.properties &amp;</span><br><span class="line"></span><br><span class="line">--建议下面方式启动否则关闭终端kafka就挂了</span><br><span class="line"># nohup kafka/bin/kafka-server-start.sh kafka/config/server.properties &gt; kafka/kafka-logs/kafka-server.log &amp;</span><br><span class="line"></span><br><span class="line">[root@server2 kafka_2.10-0.8.2-beta]# bin/kafka-server-start.sh config/server.properties &amp;</span><br><span class="line"></span><br><span class="line">[root@server3 kafka_2.10-0.8.2-beta]# bin/kafka-server-start.sh config/server.properties &amp;</span><br><span class="line"></span><br><span class="line">[root@server4 kafka_2.10-0.8.2-beta]# bin/kafka-server-start.sh config/server.properties &amp;</span><br><span class="line"></span><br><span class="line">[zk: localhost:2181(CONNECTED) 3] get /brokers/ids   </span><br><span class="line">null</span><br><span class="line">cZxid = 0x1d00000939</span><br><span class="line">ctime = Tue May 12 23:52:57 CST 2015</span><br><span class="line">mZxid = 0x1d00000939</span><br><span class="line">mtime = Tue May 12 23:52:57 CST 2015</span><br><span class="line">pZxid = 0x1d00000ca7</span><br><span class="line">cversion = 4</span><br><span class="line">dataVersion = 0</span><br><span class="line">aclVersion = 0</span><br><span class="line">ephemeralOwner = 0x0</span><br><span class="line">dataLength = 0</span><br></pre></td></tr></table></figure>
+<h1 id="3、创建一个topic"><a href="#3、创建一个topic" class="headerlink" title="3、创建一个topic"></a>3、创建一个topic</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 kafka_2.10-0.8.2-beta]# bin/kafka-topics.sh --create --zookeeper server1:2181,server2:2181,server3:2181 --replication-factor 3 --partitions 1 --topic test</span><br></pre></td></tr></table></figure>
+<h1 id="4、命令行查看topic"><a href="#4、命令行查看topic" class="headerlink" title="4、命令行查看topic"></a>4、命令行查看topic</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@server2 kafka_2.10-0.8.2-beta]# bin/kafka-topics.sh --list --zookeeper server1:2181,server2:2181,server3:2181</span><br><span class="line">test</span><br></pre></td></tr></table></figure>
+<h1 id="5、发送一些消息"><a href="#5、发送一些消息" class="headerlink" title="5、发送一些消息"></a>5、发送一些消息</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 kafka_2.10-0.8.2-beta]# bin/kafka-console-producer.sh --broker-list server1:9092 --topic test         </span><br><span class="line">This is a message</span><br><span class="line">This is another message</span><br><span class="line"></span><br><span class="line">[zk: localhost:2181(CONNECTED) 7] get /brokers/topics/test/partitions/3/state</span><br><span class="line">&#123;&quot;controller_epoch&quot;:1,&quot;leader&quot;:3,&quot;version&quot;:1,&quot;leader_epoch&quot;:0,&quot;isr&quot;:[3,1]&#125;</span><br><span class="line">[zk: localhost:2181(CONNECTED) 12] get /brokers/ids/3</span><br><span class="line">&#123;&quot;jmx_port&quot;:-1,&quot;timestamp&quot;:&quot;1431447378690&quot;,&quot;host&quot;:&quot;server3&quot;,&quot;version&quot;:1,&quot;port&quot;:9092&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="6、开始消费信息"><a href="#6、开始消费信息" class="headerlink" title="6、开始消费信息"></a>6、开始消费信息</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@server2 kafka_2.10-0.8.2-beta]# bin/kafka-console-consumer.sh --zookeeper server1:2181,server2:2181,server3:2181 --topic test --from-beginning</span><br><span class="line">This is a message</span><br><span class="line">This is another message</span><br><span class="line"></span><br><span class="line">[root@server3 kafka_2.10-0.8.2-beta]#  bin/kafka-console-consumer.sh --zookeeper server1:2181,server2:2181,server3:2181 --topic test --from-beginning</span><br><span class="line">This is a message</span><br><span class="line">This is another message</span><br><span class="line">kafaka to slave msg...</span><br><span class="line"></span><br><span class="line">[root@server4 kafka_2.10-0.8.2-beta]# bin/kafka-console-consumer.sh --zookeeper server1:2181,server2:2181,server3:2181 --topic test --from-beginning</span><br><span class="line">This is a message</span><br><span class="line">This is another message</span><br><span class="line">kafaka to slave msg.</span><br></pre></td></tr></table></figure>
+<h1 id="8、查看集群topic详细信息"><a href="#8、查看集群topic详细信息" class="headerlink" title="8、查看集群topic详细信息"></a>8、查看集群topic详细信息</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@server2 kafka_2.10-0.8.2-beta]# bin/kafka-topics.sh --describe --zookeeper server1:2181,server2:2181,server3:2181 --topic test</span><br><span class="line">Topic:test      PartitionCount:4        ReplicationFactor:2     Configs:</span><br><span class="line">        Topic: test     Partition: 0    Leader: 4       Replicas: 4,2   Isr: 4,2</span><br><span class="line">        Topic: test     Partition: 1    Leader: 1       Replicas: 1,3   Isr: 1,3</span><br><span class="line">        Topic: test     Partition: 2    Leader: 2       Replicas: 2,4   Isr: 2,4</span><br><span class="line">        Topic: test     Partition: 3    Leader: 3       Replicas: 3,1   Isr: 3,1</span><br><span class="line"></span><br><span class="line">消息被写到目录：</span><br><span class="line">[root@server2 bin]# ls /tmp/kafka-logs/test-2</span><br><span class="line">00000000000000000000.index  00000000000000000000.log</span><br></pre></td></tr></table></figure>
+<h1 id="9、删除topic"><a href="#9、删除topic" class="headerlink" title="9、删除topic"></a>9、删除topic</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ kafka-topics.sh --zookeeper server1:2181,server2:2181,server3:2181 --delete --topic test</span><br><span class="line">Topic test is marked for deletion.</span><br><span class="line">Note: This will have no impact if delete.topic.enable is not set to true.</span><br><span class="line"></span><br><span class="line">配置server.config , delete.topic.enable=true即可删除</span><br></pre></td></tr></table></figure>
+<h1 id="10、kafka的webui"><a href="#10、kafka的webui" class="headerlink" title="10、kafka的webui"></a>10、kafka的webui</h1><ul>
+<li><p>Kafka监控工具一</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/quantifind/KafkaOffsetMonitor</span><br><span class="line"></span><br><span class="line">wget https://github.com/quantifind/KafkaOffsetMonitor/releases/download/v0.2.1/KafkaOffsetMonitor-assembly-0.2.1.jar</span><br><span class="line"></span><br><span class="line">Running It</span><br><span class="line">This is a small webapp, you can run it locally or on a server, as long as you have access to the ZooKeeper nodes controlling kafka.</span><br><span class="line">java -cp KafkaOffsetMonitor-assembly-0.2.1.jar \</span><br><span class="line">     com.quantifind.kafka.offsetapp.OffsetGetterWeb \</span><br><span class="line">     --zk zk-server1,zk-server2 \</span><br><span class="line">     --port 8080 \</span><br><span class="line">     --refresh 10.seconds \</span><br><span class="line">     --retain 2.days</span><br><span class="line">The arguments are:</span><br><span class="line">-   zk the ZooKeeper hosts</span><br><span class="line">-   port on what port will the app be available</span><br><span class="line">-   refresh how often should the app refresh and store a point in the DB</span><br><span class="line">-   retain how long should points be kept in the DB</span><br><span class="line">-   dbName where to store the history (default &apos;offsetapp&apos;)</span><br><span class="line"></span><br><span class="line">[root@server1 local]# mkdir kafka-offset-console</span><br><span class="line">[root@server1 local]# cd kafka-offset-console/</span><br><span class="line">[root@server1 kafka-offset-console]# cat mobile_start_en.sh </span><br><span class="line">#!/bin/bash </span><br><span class="line">cd /usr/local/kafka-offset-console</span><br><span class="line">java -Xms512M -Xmx512M -Xss1024K -XX:PermSize=256m -XX:MaxPermSize=512m -cp ./KafkaOffsetMonitor-assembly-0.2.1.jar com.quantifind.kafka.offsetapp.OffsetGetterWeb --zk server1,server2,server3/config/mobile/kafka-offset-console --port 9999 --refresh 10.seconds --retain 7.days 1&gt;./stdout.log 2&gt;./stderr.log &amp;</span><br><span class="line"></span><br><span class="line">[root@server1 kafka-offset-console]# chmod +x mobile_start_en.sh  </span><br><span class="line"></span><br><span class="line">[root@server1 kafka-offset-console]# sh mobile_start_en.sh</span><br><span class="line"></span><br><span class="line">[root@server1 kafka-offset-console]# tail -f stdout.log </span><br><span class="line">serving resources from: jar:file:/usr/local/kafka-offset-console/KafkaOffsetMonitor-assembly-0.2.1.jar!/offsetapp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Kafka监控工具二</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/yahoo/kafka-manager</span><br><span class="line">[root@server1 kafka-manager]# echo $JAVA_HOME</span><br><span class="line">/usr/local/jdk1.7.0_45</span><br><span class="line">[root@server1 sbt]# sbt -version</span><br><span class="line">Getting org.scala-sbt sbt 0.13.8 ...</span><br><span class="line"></span><br><span class="line">https://github.com/yahoo/kafka-manager</span><br><span class="line">[root@server1 hsu]# yum install git -y</span><br><span class="line">[root@server1 hsu]# git clone https://github.com/yahoo/kafka-manager.git</span><br><span class="line">[root@server1 hsu]# cd kafka-manager/</span><br><span class="line">[root@server1 kafka-manager]# sbt clean dist #这里生产zip包</span><br><span class="line"></span><br><span class="line">Configuration</span><br><span class="line">$ unzip kafka-manager-1.0-SNAPSHOT.zip</span><br><span class="line">在kafka-manager安装包的conf目录下面的application.conf文件中进行配置</span><br><span class="line">kafka-manager.zkhosts=&quot;server1:2181,server2:2181,server3:2181&quot;</span><br><span class="line"></span><br><span class="line">Starting the service</span><br><span class="line">$ bin/kafka-manager -Dconfig.file=./conf/application.conf -Dhttp.port=8081  &gt; manager-ui.log &amp;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://www.itweet.cn/screenshots/kafka-manager.png" alt></p>
+<p>这个工具需要自己编译，也可以直接找我获取编译包！</p>
+<ul>
+<li>Kafka监控工具三<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/shunfei/DCMonitor</span><br><span class="line"></span><br><span class="line">druid：</span><br><span class="line">https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatViewServlet%E9%85%8D%E7%BD%AE</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="11、kafka和MQ区别"><a href="#11、kafka和MQ区别" class="headerlink" title="11、kafka和MQ区别"></a>11、kafka和MQ区别</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/alibaba/RocketMQ/wiki/rmq_vs_kafka</span><br><span class="line"></span><br><span class="line">http://engineering.linkedin.com/kafka/benchmarking-apache-kafka-2-million-writes-second-three-cheap-machines</span><br></pre></td></tr></table></figure>
+<ul>
+<li>性能对比<br>•   <code>Kafka单机写入TPS约在百万条/秒，消息大小10个字节</code><br>•   RocketMQ单机写入TPS单实例约7万条/秒，单机部署3个Broker，可以跑到最高12万条/秒，消息大小10个字节<br>总结：Kafka的TPS跑到单机百万，主要是由于Producer端将多个小消息合并，批量发向Broker。</li>
+</ul>
+<h1 id="12、项目分析"><a href="#12、项目分析" class="headerlink" title="12、项目分析"></a>12、项目分析</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">数据源：</span><br><span class="line">Oracle订单表</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">写代码</span><br><span class="line">发送数据给kafka</span><br><span class="line"></span><br><span class="line">接收：</span><br><span class="line">[root@server1 kafka_2.10-0.8.2-beta]# bin/kafka-console-consumer.sh --zookeeper server1:2181,server2:2181,server3:2181 --topic order --from-beginning</span><br><span class="line">998801026       11118   731     44      0       2015-05-17 00:36:08</span><br><span class="line">46300226        68178   556     14      0       2015-05-17 00:36:08</span><br><span class="line">367575834       42812   820     21      0       2015-05-17 00:36:08</span><br><span class="line">97829386        96289   583     67      1       2015-05-17 00:36:08</span><br><span class="line"></span><br><span class="line">#需要拷贝kafka的包到storm相应的lib目录下</span><br><span class="line"></span><br><span class="line">#zk创建节点</span><br><span class="line">[zk: localhost:2181(CONNECTED) 11] create /order 1</span><br><span class="line">Created /order</span><br><span class="line">[zk: localhost:2181(CONNECTED) 12] create /order/id 1</span><br><span class="line">Created /order/id</span><br><span class="line">[zk: localhost:2181(CONNECTED) 13] ls /order</span><br><span class="line">[id]</span><br><span class="line"></span><br><span class="line">#创建topic</span><br><span class="line">kafka-topics.sh --zookeeper server1:2181,server2:2181,server3:2181 --delete --topic order</span><br><span class="line">bin/kafka-topics.sh --create --zookeeper server1:2181,server2:2181,server3:2181 --replication-factor 3 --partitions 4 --topic order</span><br><span class="line">bin/kafka-topics.sh --describe --zookeeper server1:2181,server2:2181,server3:2181 --topic order</span><br><span class="line"></span><br><span class="line">#打包测试1</span><br><span class="line">storm-0.9.2/bin/storm jar storm-code-1.0-SNAPSHOT-jar-with-dependencies.jar com.kafka_storm.topology.CounterTopology</span><br><span class="line"></span><br><span class="line">#打包测试2</span><br><span class="line">$ storm/bin/storm jar storm-test_fat.jar com.kafka_storm.topology.OrderTopology</span><br><span class="line"></span><br><span class="line">#优化数据结构保证数据不丢失！通过存储到第三方内存系统中如redis/memcached</span><br><span class="line"></span><br><span class="line">#zk分布式锁保证多线程处理数据，数据一致性，使用第三方封装zkcli包，保证每次只有一个线程去操作mysql，而不是多个线程导致数据混乱！保证同一条数据不会被多个线程同时处理！[这样就可以topology开启多线程处理数据！]</span><br><span class="line">http://repo1.maven.org/maven2/com/netflix/curator/</span><br><span class="line"></span><br><span class="line">#集群模式测试，多线程</span><br><span class="line"># storm/bin/storm jar storm-test_fat.jar com.kafka_storm.topology.OrderTopology  OrderTopology &gt; order.log</span><br></pre></td></tr></table></figure>
+<h1 id="ambari-自动安装Kafka启动报错"><a href="#ambari-自动安装Kafka启动报错" class="headerlink" title="ambari 自动安装Kafka启动报错"></a>ambari 自动安装Kafka启动报错</h1><p>1、由于log.dirs目录下的meta.properties中配置的broker.id和配置目录下的server.properties中的broker.id不一致了，解决问题的方法是将两者修改一致后再重启。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ cat /var/log/kafka/server.log</span><br><span class="line"></span><br><span class="line">[2016-06-02 05:08:59,151] FATAL Fatal error during KafkaServerStartable startup. Prepare to shutdown (kafka.server.KafkaServerStartable)</span><br><span class="line">kafka.common.InconsistentBrokerIdException: Configured brokerId 2 doesn&apos;t match stored brokerId 1 in meta.properties</span><br><span class="line">        at kafka.server.KafkaServer.getBrokerId(KafkaServer.scala:630)</span><br><span class="line">        at kafka.server.KafkaServer.startup(KafkaServer.scala:175)</span><br><span class="line">        at kafka.server.KafkaServerStartable.startup(KafkaServerStartable.scala:37)</span><br><span class="line">        at kafka.Kafka$.main(Kafka.scala:67)</span><br><span class="line">        at kafka.Kafka.main(Kafka.scala)</span><br><span class="line">[2016-06-02 05:08:59,152] INFO shutting down (kafka.server.KafkaServer)</span><br><span class="line"></span><br><span class="line">解决,如下可以看到broker.id不一致，修改后者重启即可：</span><br><span class="line">[root@bigdata-hadoop-3 kafka-logs]# cat /etc/kafka/conf/server.properties |grep broker.id</span><br><span class="line">broker.id=2</span><br><span class="line"></span><br><span class="line">[root@bigdata-hadoop-3 kafka-logs]# cat /kafka-logs/meta.properties |grep id</span><br><span class="line">broker.id=1</span><br></pre></td></tr></table></figure></p>
+<p>参考：</p>
+<ul>
+<li>【0】kafka：<a href="https://kafka.apache.org/documentation.html#gettingStarted" target="_blank" rel="noopener">https://kafka.apache.org/documentation.html#gettingStarted</a></li>
+<li>【1】Kafka主页：<a href="http://sna-projects.com/kafka/design.php" target="_blank" rel="noopener">http://sna-projects.com/kafka/design.php</a></li>
+<li>【3】Kafka与Hadoop：<a href="http://sna-projects.com/sna/media/kafka_hadoop.pdf" target="_blank" rel="noopener">http://sna-projects.com/sna/media/kafka_hadoop.pdf</a></li>
+</ul>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/kafka/">kafka</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/08/04/set-hive-map-sum-for-hive/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">set hive-map-sum for hive</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/07/27/building hadoop for centos/">
+        <span class="next-text nav-default">building hadoop for centos</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

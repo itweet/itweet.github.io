@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Kafka Storm HDFS Architecture Design">
+
+
+
+
+  <meta name="keywords" content="Stream,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/11/27/Kafka-Storm-HDFS-Architecture-Design/">
+
+
+<meta name="description" content="Storm是一个分布式是实时计算系统，它设计了一种对流和计算的抽象，概念比较简单，实际编程开发起来相对容易。下面，简单介绍编程实践过程中需要理解的Storm中的几个概念：  TopologyStorm中Topology的概念类似Hadoop中的MapReduce Job，是用来编排容纳一组计算逻辑组件(Spout,Bolt)的对象(Hadoop MapReduce中一个Job包含一组Map Tas">
+<meta name="keywords" content="Stream">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka Storm HDFS Architecture Design">
+<meta property="og:url" content="http://itweet.github.io/2016/11/27/Kafka-Storm-HDFS-Architecture-Design/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Storm是一个分布式是实时计算系统，它设计了一种对流和计算的抽象，概念比较简单，实际编程开发起来相对容易。下面，简单介绍编程实践过程中需要理解的Storm中的几个概念：  TopologyStorm中Topology的概念类似Hadoop中的MapReduce Job，是用来编排容纳一组计算逻辑组件(Spout,Bolt)的对象(Hadoop MapReduce中一个Job包含一组Map Tas">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://storm.apache.org/images/storm-flow.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/kafka-storm-hdfs-design.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/kafka-storm-hdfs-design-1.png">
+<meta property="og:updated_time" content="2019-02-27T17:36:57.028Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kafka Storm HDFS Architecture Design">
+<meta name="twitter:description" content="Storm是一个分布式是实时计算系统，它设计了一种对流和计算的抽象，概念比较简单，实际编程开发起来相对容易。下面，简单介绍编程实践过程中需要理解的Storm中的几个概念：  TopologyStorm中Topology的概念类似Hadoop中的MapReduce Job，是用来编排容纳一组计算逻辑组件(Spout,Bolt)的对象(Hadoop MapReduce中一个Job包含一组Map Tas">
+<meta name="twitter:image" content="http://storm.apache.org/images/storm-flow.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Kafka Storm HDFS Architecture Design - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Kafka Storm HDFS Architecture Design
+        
+      </h1>
+
+      <time class="post-time">
+          11月 27 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Storm是一个分布式是实时计算系统，它设计了一种对流和计算的抽象，概念比较简单，实际编程开发起来相对容易。下面，简单介绍编程实践过程中需要理解的Storm中的几个概念：</p>
+<ul>
+<li><p>Topology<br>Storm中Topology的概念类似Hadoop中的MapReduce Job，是用来编排容纳一组计算逻辑组件(Spout,Bolt)的对象(Hadoop MapReduce中一个Job包含一组Map Task、Reduce Task),这组计算组件可以按照DAG图的方式编排起来(通过选择Stream Groupings来控制数据流的分发流向),从而组成一个计算逻辑更加负责人的对象，那就是Topology。一个Topology运行以后就不能停止，它会无限地运行下去，除非手动干预(storm kill)或者意外故障(停机、集群故障)让他终止。</p>
+</li>
+<li><p>Spout<br>Storm中Spout是一个Topology的消息生产的源头，Spout应该是一个持续不断生产消息的组件，例如，它可以是一个Socket Server在监听外部Client连接并发送消息，可以是一个消息队列（MQ、Kafka）的消费者、可以是用来接收Flume Agent的Sink所发送消息的服务，等等。Spout生产的消息在Storm中被抽象为Tuple，在整个Topology的多个计算组件之间都是根据需要抽象构建的Tuple消息来进行连接，从而形成流。</p>
+</li>
+<li><p>Bolt<br>Storm中消息的处理逻辑被封装到Bolt组件中，任何处理逻辑都可以在Bolt里面执行，处理过程和普通计算应用程序没什么区别，只是需要根据Storm的计算语义来合理设置一下组件之间消息流的声明、分发、连接即可。Bolt可以接收来自一个或多个Spout的Tuple消息，也可以来自多个其它Bolt的Tuple消息，也可能是Spout和其它Bolt组合发送的Tuple消息。</p>
+</li>
+<li><p>Stream Grouping<br>Storm中用来定义各个计算组件（Spout、Bolt）之间流的连接、分组、分发关系。Storm定义了如下7种分发策略：Shuffle Grouping（随机分组）、Fields Grouping（按字段分组）、All Grouping（广播分组）、Global Grouping（全局分组）、Non Grouping（不分组）、Direct Grouping（直接分组）、Local or Shuffle Grouping（本地/随机分组），各种策略的具体含义可以参考Storm官方文档、比较容易理解。</p>
+</li>
+</ul>
+<p>Storm是由一个或者多个Spout和多个Bolt组成一个数据流向图，整个图就通过Topology来显示的声明，数据在流动的过程中，会经过各种数据处理逻辑单元；官网给的图片就能很好的说明Storm的设计原理;<br><img src="http://storm.apache.org/images/storm-flow.png" alt="Storm Flow"><br>我在很久以前就通过Storm来解决实际生产问题，发现他真的帅呆了，并且简单易用、灵活定制，如果你还没有开启Storm，那就通过本篇内容开始流计算之旅，帮助你在生产环境中不断取得成功；</p>
+<p>Storm在我看来就是一套数据循环系统，在数据的流动过程中，就处理了数据，数据最终流动到终点的时候，就可以对外提供决策支持或可视化。</p>
+<p>Storm根据官网的图片理解，自来水厂送水到客户家；水的源头到最终到达客户，会经过很多的自来水净化站，自来水消毒站点等各种站点。水源即为我们的Spout，净化自来水的站点即为Bolt，Bolt净化出不同程度的水继续往那个方向流动以什么方式流动到下一个站点即为Stream Grouping。</p>
+<p>Storm中Spout对接源头数据(Kafka,HDFS,DB,MQ,Socket); Bolt(接收处理Spout/Bolt数据)具体的业务逻辑处理；Stream Grouping数据分发策略,以什么方式发送数据流到下一个Bolt。下面我们以一个具体的案例来说明Storm的实际生产应用。</p>
+<p><img src="https://www.itweet.cn/screenshots/kafka-storm-hdfs-design.png" alt="Kafka Storm HDFS"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TopologyBuilder builder = new TopologyBuilder();</span><br><span class="line">           builder.setSpout(&quot;spout&quot;, kafkaSpout, spoutNum);</span><br><span class="line">           builder.setBolt(&quot;check&quot;, new CheckOrderBolt(), boltNum).shuffleGrouping(&quot;spout&quot;);</span><br><span class="line">           builder.setBolt(&quot;counter&quot;, new CounterBolt(),boltNum).shuffleGrouping(&quot;check&quot;);</span><br><span class="line">           builder.setBolt(&quot;hdfs&quot;, hdfsBolt,boltNum).fieldsGrouping(&quot;counter&quot;, new Fields(&quot;word&quot;));</span><br></pre></td></tr></table></figure>
+<p>如上代码所示，即为Topology，按照DAG图的方式编排计算组件的数据流向；Topology任务提交有两种LocalCluster和Cluster(StormSubmitter)</p>
+<ul>
+<li><p>KafkaSpout组件<br>  接收Kafka某一个topic中的数据，发送到下一个业务逻辑组件CheckOrderBolt</p>
+</li>
+<li><p>CheckOrderBolt组件<br>  接收KafkaSpout发送数据，检测数据为当天数据，否则不处理；处理后发送CountBolt组件</p>
+</li>
+<li><p>CountBolt组件<br>  接收CheckOrderBolt组件处理后发送过来的数据，发送给HdfsBolt组件</p>
+</li>
+<li><p>HdfsBolt组件<br>  接收CountBolt组件处理后发送过来的数据，以一定的规则(1分钟生成一个带时间戳的文件或者每5MB大小自动写下一个文件)写入HDFS，比如本文示例代码。</p>
+</li>
+</ul>
+<p>KafkaSoput代码示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String zkhost = &quot;wxb-1:2181,wxb-2:2181,wxb-3:2181&quot;;</span><br><span class="line">            String topic = &quot;order&quot;;</span><br><span class="line">            String groupId = &quot;id&quot;;</span><br><span class="line">            int spoutNum = 3;</span><br><span class="line">            int boltNum = 1;</span><br><span class="line">            ZkHosts zkHosts = new ZkHosts(zkhost);//kafaka所在的zookeeper</span><br><span class="line">            SpoutConfig spoutConfig = new SpoutConfig(zkHosts, topic, &quot;/order&quot;, groupId);  // create /order /id</span><br><span class="line">            spoutConfig.scheme = new SchemeAsMultiScheme(new StringScheme());</span><br><span class="line">            KafkaSpout kafkaSpout = new KafkaSpout(spoutConfig);</span><br></pre></td></tr></table></figure></p>
+<p>HDFS Bolt代码示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// use &quot;|&quot; instead of &quot;,&quot; for field delimiter</span><br><span class="line">            RecordFormat format = new DelimitedRecordFormat()</span><br><span class="line">                    .withFieldDelimiter(&quot;|&quot;);</span><br><span class="line"></span><br><span class="line">            // sync the filesystem after every 1k tuples</span><br><span class="line">            SyncPolicy syncPolicy = new CountSyncPolicy(1000);</span><br><span class="line"></span><br><span class="line">            // rotate files when they reach 5MB</span><br><span class="line">            FileRotationPolicy rotationPolicy = new FileSizeRotationPolicy(5.0f, FileSizeRotationPolicy.Units.MB);</span><br><span class="line">            // FileRotationPolicy rotationPolicy = new TimedRotationPolicy(1.0f, TimedRotationPolicy.TimeUnit.MINUTES);</span><br><span class="line"></span><br><span class="line">            FileNameFormat fileNameFormat = new DefaultFileNameFormat()</span><br><span class="line">                    .withPath(&quot;/tmp/&quot;).withPrefix(&quot;order_&quot;).withExtension(&quot;.log&quot;);</span><br><span class="line"></span><br><span class="line">            HdfsBolt hdfsBolt = new HdfsBolt()</span><br><span class="line">                    .withFsUrl(&quot;hdfs://wxb-1:8020&quot;)</span><br><span class="line">                    .withFileNameFormat(fileNameFormat)</span><br><span class="line">                    .withRecordFormat(format)</span><br><span class="line">                    .withRotationPolicy(rotationPolicy)</span><br><span class="line">                    .withSyncPolicy(syncPolicy);</span><br></pre></td></tr></table></figure></p>
+<p>CountBolt代码示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class CounterBolt extends BaseBasicBolt &#123;</span><br><span class="line">    private static final long serialVersionUID = -5508421065181891596L;</span><br><span class="line"></span><br><span class="line">    private static Logger logger = Logger.getLogger(CounterBolt.class);</span><br><span class="line"></span><br><span class="line">    private static long counter = 0;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void execute(Tuple tuple, BasicOutputCollector collector) &#123;</span><br><span class="line">        List&lt;Object&gt; data = tuple.getValues();</span><br><span class="line"></span><br><span class="line">        String id = (String) data.get(0);</span><br><span class="line">        String memberid = (String) data.get(1);</span><br><span class="line">        String totalprice = (String) data.get(2);</span><br><span class="line">        String preprice = (String) data.get(3);</span><br><span class="line">        String sendpay = (String) data.get(4);</span><br><span class="line">        String createdate = (String) data.get(5);</span><br><span class="line">        collector.emit(new Values(id,memberid,totalprice,preprice,sendpay,createdate));</span><br><span class="line">        logger.info(&quot;+++++++++++++++++++++++++++++++++Valid+++++++++++++++++++++++++++++++++&quot;);</span><br><span class="line">        logger.info(&quot;msg = &quot;+data+&quot; ----@-@-@-@-@--------counter = &quot;+(counter++));</span><br><span class="line">        logger.info(&quot;+++++++++++++++++++++++++++++++++Valid+++++++++++++++++++++++++++++++++&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void declareOutputFields(OutputFieldsDeclarer declarer) &#123;</span><br><span class="line">        declarer.declare(new Fields(&quot;id&quot;,&quot;memberid&quot;,&quot;totalprice&quot;,&quot;preprice&quot;,&quot;sendpay&quot;,&quot;createdate&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>本文代码完整示例：<a href="https://github.com/itweet/storm-kafka-examples" target="_blank" rel="noopener">https://github.com/itweet/storm-kafka-examples</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:itweet/storm-kafka-examples.git</span><br></pre></td></tr></table></figure></p>
+<p>通过IntelliJ IDEA导入已经存在的Maven等待依赖下载，通过运行maven package打包命令，在target目录jar文件上传集群运行。</p>
+<p>运行代码示例条件，具备Storm,Kafka,Hadoop,Zookeeper环境，在zk中首先创建好node，进入<code>zookeeper-cli</code>后执行<code>create /order /id</code>命令。</p>
+<p>测试</p>
+<ul>
+<li><p>send msg to kafka</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">storm jar storm-kafka-examples-1.0-SNAPSHOT.jar cn.itweet.sendmsg.SendMessageKafka</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>storm processing data</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">storm jar storm-kafka-examples-1.0-SNAPSHOT.jar cn.itweet.kafka_storm.topology.CounterTopology</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Processing data to HDFS,Running results <code>hadoop fs -ls /tmp/order_hdfs-xxx.log</code></p>
+</li>
+</ul>
+<p>实时处理，开发满足业务需要的Topology，通过代码大家可以看到，Storm大道至简的设计理念，通过实现不同的Bolt处理数据，让数据在流动的过程中完成数据处理；简洁、灵活、定制化，提供丰富的数据源，甚至StormSQL,更多内容请参考官方文档。</p>
+<p>Storm-External: <a href="https://github.com/apache/storm/tree/master/external" target="_blank" rel="noopener">https://github.com/apache/storm/tree/master/external</a></p>
+<p>如上，给出了简单Storm的示例代码，可以在这个基础上加入业务逻辑内容，就可以完成如下复杂的业务处理，基于非结构化数据(GPS位置应用)，实时流处理的架构。<br><img src="https://www.itweet.cn/screenshots/kafka-storm-hdfs-design-1.png" alt="流计算完整架构"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+<p>参考链接<br>  <a href="https://github.com/apache/storm/tree/master/external/storm-hdfs" target="_blank" rel="noopener">https://github.com/apache/storm/tree/master/external/storm-hdfs</a><br>  <a href="http://storm.apache.org/releases/current/Understanding-the-parallelism-of-a-Storm-topology.html" target="_blank" rel="noopener">http://storm.apache.org/releases/current/Understanding-the-parallelism-of-a-Storm-topology.html</a><br>  <a href="http://storm.apache.org/releases/current/Tutorial.html" target="_blank" rel="noopener">http://storm.apache.org/releases/current/Tutorial.html</a><br>  <a href="http://shiyanjun.cn/archives/977.html" target="_blank" rel="noopener">http://shiyanjun.cn/archives/977.html</a><br>  <a href="http://storm.apache.org/releases/current/Setting-up-development-environment.html" target="_blank" rel="noopener">http://storm.apache.org/releases/current/Setting-up-development-environment.html</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Stream/">Stream</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/12/03/SpringBoot-开篇介绍/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">SpringBoot 开篇介绍</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/11/22/论读书之艰/">
+        <span class="next-text nav-default">论读书之艰</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

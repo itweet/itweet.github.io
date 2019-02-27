@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Hbase Distibuted Install">
+
+
+
+
+  <meta name="keywords" content="hbase,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/07/16/Hbase-Distibuted-Install/">
+
+
+<meta name="description" content="HBase是一个分布式的、面向列的开源数据库，该技术来源于 Fay Chang 所撰写的Google论文“Bigtable：一个结构化数据的分布式存储系统”。就像Bigtable利用了Google文件系统（File System）所提供的分布式数据存储一样，HBase在Hadoop之上提供了类似于Bigtable的能力。HBase是Apache的Hadoop项目的子项目。HBase不同于一般的关">
+<meta name="keywords" content="hbase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hbase Distibuted Install">
+<meta property="og:url" content="http://itweet.github.io/2015/07/16/Hbase-Distibuted-Install/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="HBase是一个分布式的、面向列的开源数据库，该技术来源于 Fay Chang 所撰写的Google论文“Bigtable：一个结构化数据的分布式存储系统”。就像Bigtable利用了Google文件系统（File System）所提供的分布式数据存储一样，HBase在Hadoop之上提供了类似于Bigtable的能力。HBase是Apache的Hadoop项目的子项目。HBase不同于一般的关">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.483Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hbase Distibuted Install">
+<meta name="twitter:description" content="HBase是一个分布式的、面向列的开源数据库，该技术来源于 Fay Chang 所撰写的Google论文“Bigtable：一个结构化数据的分布式存储系统”。就像Bigtable利用了Google文件系统（File System）所提供的分布式数据存储一样，HBase在Hadoop之上提供了类似于Bigtable的能力。HBase是Apache的Hadoop项目的子项目。HBase不同于一般的关">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Hbase Distibuted Install - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Hbase Distibuted Install
+        
+      </h1>
+
+      <time class="post-time">
+          7月 16 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <blockquote>
+<p>HBase是一个分布式的、面向列的开源数据库，该技术来源于 Fay Chang 所撰写的Google论文“Bigtable：一个结构化数据的分布式存储系统”。就像Bigtable利用了Google文件系统（File System）所提供的分布式数据存储一样，HBase在Hadoop之上提供了类似于Bigtable的能力。HBase是Apache的Hadoop项目的子项目。HBase不同于一般的关系数据库，它是一个适合于非结构化数据存储的数据库。另一个不同的是HBase基于列的而不是基于行的模式。</p>
+</blockquote>
+<h1 id="1、hbase的分布模式"><a href="#1、hbase的分布模式" class="headerlink" title="1、hbase的分布模式"></a>1、hbase的分布模式</h1><h2 id="1-1-在server1上解压缩"><a href="#1-1-在server1上解压缩" class="headerlink" title="1.1 在server1上解压缩"></a>1.1 在server1上解压缩</h2><pre><code>[root@server1 installpackage]# tar -zxvf hbase-0.98.6.1-hadoop2-bin.tar.gz -C /usr/local/
+[root@server1 local]# mv hbase-0.98.6.1-hadoop2 hbase-0.98.6.1
+</code></pre><h2 id="1-2-编辑文件conf-hbase-env-sh-修改内容"><a href="#1-2-编辑文件conf-hbase-env-sh-修改内容" class="headerlink" title="1.2 编辑文件conf/hbase-env.sh 修改内容"></a>1.2 编辑文件conf/hbase-env.sh 修改内容</h2><pre><code>export JAVA_HOME=/usr/local/jdk1.7.0_45
+export HBASE_MANAGES_ZK=false    [不适用hbase自己带的zk]
+</code></pre><p>##1.3 编辑文件conf/hbase-site.xml<br>    [root@server1 conf]# vi hbase-site.xml<br>    <property><br>      <name>hbase.rootdir</name><br>      <value>hdfs://server1:9000/user/hbase</value><br>    </property><br>    <property><br>      <name>hbase.cluster.distributed</name><br>      <value>true</value><br>    </property><br>    <property><br>      <name>hbase.zookeeper.quorum</name><br>      <value>server1,server2,server3</value><br>    </property><br>    <property><br>     <name>hbase.zookeeper.property.clientPort</name><br>     <value>2181</value><br>     <description>Property fromZooKeeper’s config zoo.cfg.<br>     The port at which the clients willconnect.<br>     </description><br>    </property><br>    <property><br>     <name>dfs.support.append</name><br>     <value>true</value><br>    </property><br>    <property><br>     <name>hbase.tmp.dir</name><br>     <value>/tmp/hbase</value><br>     </property><br>    <property><br>      <name>hbase.master</name><br>      <value>server1:60010</value><br>    </property><br>    <property><br>     <name>hbase.regionserver.hlog.replication</name><br>     <value>2</value><br>    </property></p>
+<p>多master配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">单台master的配置</span><br><span class="line">hbase.master</span><br><span class="line">master:60000</span><br><span class="line">这是我们通常配置的，这样就定义了master是的ip和端口。</span><br><span class="line">但是当我们需要配置多台master进行，我们只需要提供端口，因为选择真正的master的事情会又zookeeper去处理。</span><br><span class="line">多台master的配置</span><br><span class="line">                hbase.master.port</span><br><span class="line">                60000</span><br></pre></td></tr></table></figure></p>
+<h2 id="1-4-编辑文件conf-regionservers"><a href="#1-4-编辑文件conf-regionservers" class="headerlink" title="1.4 编辑文件conf/regionservers"></a>1.4 编辑文件conf/regionservers</h2><pre><code>[root@server1 conf]# vi regionservers
+server3
+server4    
+</code></pre><h2 id="1-5-复制hbase到nodetest01、nodetest02节点"><a href="#1-5-复制hbase到nodetest01、nodetest02节点" class="headerlink" title="1.5 复制hbase到nodetest01、nodetest02节点"></a>1.5 复制hbase到nodetest01、nodetest02节点</h2><pre><code>[root@server1 local]# scp -rq hbase-0.98.6.1 server3:/usr/local/
+[root@server1 local]# scp -rq hbase-0.98.6.1 server4:/usr/local/
+</code></pre><h2 id="1-6-启动hbase之前，要检查hadoop的hdfs、zookeeper集群是否正常运行"><a href="#1-6-启动hbase之前，要检查hadoop的hdfs、zookeeper集群是否正常运行" class="headerlink" title="1.6 启动hbase之前，要检查hadoop的hdfs、zookeeper集群是否正常运行"></a>1.6 启动hbase之前，要检查hadoop的hdfs、zookeeper集群是否正常运行</h2><pre><code>[root@server1 local]# hbase-0.98.6.1/bin/start-hbase.sh
+</code></pre><h2 id="1-7-检查"><a href="#1-7-检查" class="headerlink" title="1.7 检查"></a>1.7 检查</h2><p>   执行jps命令，在server1上看到1个新的java进程，分别是HMaster<br>   查看<a href="http://server1:60010,hbase-1.1.2" target="_blank" rel="noopener">http://server1:60010,hbase-1.1.2</a> 版本修改默认端口16010<br>   地址：<a href="http://server1:16010/master-status" target="_blank" rel="noopener">http://server1:16010/master-status</a></p>
+<h2 id="1-7-Habse-CLI"><a href="#1-7-Habse-CLI" class="headerlink" title="1.7 Habse CLI"></a>1.7 Habse CLI</h2><ul>
+<li><p>创建一张最简单的表<br>hbase(main):004:0&gt; create ‘t1’,’fm1’【表名，列族名】</p>
+</li>
+<li><p>lise table<br>hbase(main):005:0&gt; list</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">$ hbase shell</span><br><span class="line">15/03/15 15:58:57 INFO Configuration.deprecation: hadoop.native.lib is deprecated. Instead, use io.native.lib.availablee</span><br><span class="line">HBase Shell; enter &apos;help&lt;RETURN&gt;&apos; for list of supported commands.</span><br><span class="line">Type &quot;exit&lt;RETURN&gt;&quot; to leave the HBase Shell</span><br><span class="line">Version 0.98.6-cdh5.2.0, rUnknown, Sat Oct 11 15:15:15 PDT 2014</span><br><span class="line"></span><br><span class="line">hbase(main):001:0&gt; list</span><br><span class="line">TABLE                                                                                                                                  </span><br><span class="line">aaa                                                                                                                                    </span><br><span class="line">test                                                                                                                                   </span><br><span class="line">2 row(s) in 3.2560 seconds</span><br><span class="line"></span><br><span class="line">=&gt; [&quot;aaa&quot;, &quot;test&quot;]</span><br><span class="line">hbase(main):002:0&gt; create &apos;test1&apos;, &apos;lf&apos;, &apos;sf&apos;</span><br><span class="line">0 row(s) in 1.0330 seconds</span><br><span class="line"></span><br><span class="line">=&gt; Hbase::Table - test1</span><br><span class="line">hbase(main):003:0&gt; put &apos;test1&apos;, &apos;user1|ts1&apos;, &apos;sf:c1&apos;, &apos;sku&apos;</span><br><span class="line">0 row(s) in 0.2010 seconds</span><br><span class="line"></span><br><span class="line">hbase(main):004:0&gt; put &apos;test1&apos;, &apos;user1|ts2&apos;, &apos;sf:c1&apos;, &apos;sku188&apos;</span><br><span class="line">0 row(s) in 0.0320 seconds</span><br><span class="line"></span><br><span class="line">hbase(main):005:0&gt; put &apos;test1&apos;, &apos;user1|ts3&apos;, &apos;sf:s1&apos;, &apos;sku123&apos;</span><br><span class="line">0 row(s) in 0.0290 seconds</span><br><span class="line"></span><br><span class="line">hbase(main):006:0&gt; scan &apos;test1&apos;</span><br><span class="line">ROW                                COLUMN+CELL                                                                                         </span><br><span class="line"> user1|ts1                         column=sf:c1, timestamp=1426406452681, value=sku                                                   </span><br><span class="line"> user1|ts2                         column=sf:c1, timestamp=1426406477190, value=sku188                                                </span><br><span class="line"> user1|ts3                         column=sf:s1, timestamp=1426406482547, value=sku123                                                </span><br><span class="line">3 row(s) in 0.0810 seconds</span><br><span class="line">hbase(main):006:0&gt;!q</span><br></pre></td></tr></table></figure>
+<p>参考资料：<a href="http://hbase.apache.org/" target="_blank" rel="noopener">http://hbase.apache.org/</a><br>          <a href="http://abloz.com/hbase/book.html" target="_blank" rel="noopener">http://abloz.com/hbase/book.html</a></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/hbase/">hbase</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/07/16/Phoenix-hbase/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Phoenix-hbase</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/07/13/ganglia-ubuntu/">
+        <span class="next-text nav-default">ganglia-ubuntu</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

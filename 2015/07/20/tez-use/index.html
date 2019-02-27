@@ -46,11 +46,11 @@
 <meta property="og:image" content="http://tez.apache.org/images/ApacheTezLogo_lowres.png">
 <meta property="og:image" content="http://tez.apache.org/images/PigHiveQueryOnMR.png">
 <meta property="og:image" content="http://tez.apache.org/images/PigHiveQueryOnTez.png">
-<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/tez-demo.png">
-<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/yarn-tez-hive.png">
-<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/tez-runting.png">
-<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/tez-runting_dag.png">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.486Z">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/tez-demo.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/yarn-tez-hive.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/tez-runting.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/tez-runting_dag.png">
+<meta property="og:updated_time" content="2019-02-27T17:45:36.476Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tez-use">
 <meta name="twitter:description" content="为了更高效地运行存在依赖关系的作业（比如Pig和Hive产生的MapReduce作业），减少磁盘和网络IO，Hortonworks开发了DAG计算框架Tez。Tez是从MapReduce计算框架演化而来的通用DAG计算框架，可作为MapReduceR/Pig/Hive等系统的底层数据处理引擎，它天生融入Hadoop 2.0中的资源管理平台YARN，且由Hadoop 2.0核心人员精心打造，势必">
@@ -205,7 +205,7 @@
 </ol>
 </li>
 </ul>
-<p><img src="https://jikelab.github.io/tech-labs/screenshots/tez-demo.png" alt></p>
+<p><img src="https://www.itweet.cn/screenshots/tez-demo.png" alt></p>
 <h2 id="8、排查问题"><a href="#8、排查问题" class="headerlink" title="8、排查问题"></a>8、排查问题</h2><ul>
 <li><p>1、取消所有tez依赖单独运行</p>
 <ul>
@@ -227,7 +227,7 @@
 </ul>
 <p><code>注意：yarn页面：app tyep 直接变成TEZ，但是如上执行还是mr执行程序日志~！这里比较难理解具体是mr执行的还是tez执行的！还得去底层跟踪确认！</code></p>
 <p> (1)、yarn mr替换为tez，hive不做任务配置，提交任务到yarn，效果如下图：</p>
-<p><img src="https://jikelab.github.io/tech-labs/screenshots/yarn-tez-hive.png" alt></p>
+<p><img src="https://www.itweet.cn/screenshots/yarn-tez-hive.png" alt></p>
 <p> (2)、不同tez版本支持的hadoop版本需要对应<br> (3)、编译时，我手动制定hadoop.version它有回出现yarn模块兼容性编译通不过。而默认的它指定的hadoop版本可以成功编译！<br> (4)、tez从另一个方面讲还不算成熟！~<br> (5)、支持ResourceManager HA</p>
 <ul>
 <li>3、目前xxx on yarn模式情况</li>
@@ -245,7 +245,7 @@
 <h2 id="4-tez-ui-war包解压放到tomcat的webapps下"><a href="#4-tez-ui-war包解压放到tomcat的webapps下" class="headerlink" title="(4) tez ui war包解压放到tomcat的webapps下"></a>(4) tez ui war包解压放到tomcat的webapps下</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">## 在server2上部署tomcat</span><br><span class="line"></span><br><span class="line">$ tar -zxvf apache-tomcat-8.0.24.tar.gz </span><br><span class="line">[hsu@server2 ~]$ ln -s apache-tomcat-8.0.24 tomcat</span><br><span class="line"></span><br><span class="line">[hsu@server2 ~]$ cp /usr/local/tez/tez-ui-0.7.0.war ./tomcat/webapps/</span><br><span class="line"></span><br><span class="line">[hsu@server2 webapps]$ mkdir tez-ui           </span><br><span class="line">[hsu@server2 webapps]$ mv tez-ui-0.7.0.war tez-ui/</span><br><span class="line"></span><br><span class="line">[hsu@server2 webapps]$ cd tez-ui/</span><br><span class="line">[hsu@server2 tez-ui]$ jar xvf tez-ui-0.7.0.war </span><br><span class="line"></span><br><span class="line">## 配置scripts/config.js文件</span><br><span class="line"></span><br><span class="line">--Configuring the Timeline Server URL and Resource Manager UI URL </span><br><span class="line"> </span><br><span class="line"> timelineBaseUrl: &apos;http://server1:8188&apos;,</span><br><span class="line"> RMWebUrl: &apos;http://server1:23188&apos;,</span><br></pre></td></tr></table></figure>
 <h2 id="5-启动tomcat"><a href="#5-启动tomcat" class="headerlink" title="(5) 启动tomcat"></a>(5) 启动tomcat</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[hsu@server2 ~]$ tomcat/bin/startup.sh </span><br><span class="line">Using CATALINA_BASE:   /home/hsu/tomcat</span><br><span class="line">Using CATALINA_HOME:   /home/hsu/tomcat</span><br><span class="line">Using CATALINA_TMPDIR: /home/hsu/tomcat/temp</span><br><span class="line">Using JRE_HOME:        /usr/local/jdk1.7.0_45</span><br><span class="line">Using CLASSPATH:       /home/hsu/tomcat/bin/bootstrap.jar:/home/hsu/tomcat/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br><span class="line"></span><br><span class="line">#修改端口为9999</span><br><span class="line">[hsu@server2 ~]$ tomcat/bin/shutdown.sh </span><br><span class="line">Using CATALINA_BASE:   /home/hsu/tomcat</span><br><span class="line">Using CATALINA_HOME:   /home/hsu/tomcat</span><br><span class="line">Using CATALINA_TMPDIR: /home/hsu/tomcat/temp</span><br><span class="line">Using JRE_HOME:        /usr/local/jdk1.7.0_45</span><br><span class="line">Using CLASSPATH:       /home/hsu/tomcat/bin/bootstrap.jar:/home/hsu/tomcat/bin/tomcat-juli.jar</span><br><span class="line"></span><br><span class="line">[hsu@server2 ~]$ tomcat/bin/startup.sh </span><br><span class="line">[hsu@server2 ~]$ lsof -i :9999          </span><br><span class="line">COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">java    7824  hsu   43u  IPv6  75557      0t0  TCP *:distinct (LISTEN)</span><br></pre></td></tr></table></figure>
 <h2 id="6-验证"><a href="#6-验证" class="headerlink" title="(6) 验证"></a>(6) 验证</h2><p>1、webui验证：<a href="http://server2:9999/tez-ui/" target="_blank" rel="noopener">http://server2:9999/tez-ui/</a> </p>
-<p><img src="https://jikelab.github.io/tech-labs/screenshots/tez-runting.png" alt="tez-runing"><br><img src="https://jikelab.github.io/tech-labs/screenshots/tez-runting_dag.png" alt="tez-runting_dag"></p>
+<p><img src="https://www.itweet.cn/screenshots/tez-runting.png" alt="tez-runing"><br><img src="https://www.itweet.cn/screenshots/tez-runting_dag.png" alt="tez-runting_dag"></p>
 <p>2、后台执行sql验证前台</p>
 <p><code>注意：resourcemanager节点必须为timelineserver配置的节点,如果RS配置HA的需要特别注意！</code></p>
 <h1 id="hive-2-0-1-and-tez-0-7-1-兼容性问题"><a href="#hive-2-0-1-and-tez-0-7-1-兼容性问题" class="headerlink" title="hive 2.0.1 and tez 0.7.1 兼容性问题"></a>hive 2.0.1 and tez 0.7.1 兼容性问题</h1><p> 1、整合hive 2.0.1 and tez 0.7.1发现一些class包没用被加载，提示是没用找到类。<br> 2、通过降低hive版本为 1.2.1发现没用任何问题，可以正常执行tez任务！<br> 3、社区查看hive2.0.1依赖的tez版本是0.8.3，打算重新手动编译在测试是否可行，待验证。<br> 4、这一点可以说明tez这个包各个版本直接接口的兼容性非常差，导致升级代价大，难以维护！</p>
