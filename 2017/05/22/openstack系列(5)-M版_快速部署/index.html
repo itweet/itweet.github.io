@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="openstack系列(5)-M版_快速部署">
+
+
+
+
+  <meta name="keywords" content="openstack,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/05/22/openstack系列(5)-M版_快速部署/">
+
+
+<meta name="description" content="我们通过Packstack来自动化安装openstack机器，Packstack主要是由Redhat推出的用于概念验证（PoC）环境快速部署的工具。Packstack是一个命令行工具，它使用Python封装了Puppet模块，通过SSH在服务器上部署OpenStack。 必备条件 Centos 7/Redhat7 最小化安装系统。 openstack-mitaka 版本 ssh 免密码登录。 Li">
+<meta name="keywords" content="openstack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openstack系列(5)-M版_快速部署">
+<meta property="og:url" content="http://itweet.github.io/2017/05/22/openstack系列(5)-M版_快速部署/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="我们通过Packstack来自动化安装openstack机器，Packstack主要是由Redhat推出的用于概念验证（PoC）环境快速部署的工具。Packstack是一个命令行工具，它使用Python封装了Puppet模块，通过SSH在服务器上部署OpenStack。 必备条件 Centos 7/Redhat7 最小化安装系统。 openstack-mitaka 版本 ssh 免密码登录。 Li">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/openstack-nova-hostlist.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/nova-lists.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openstack系列(5)-M版_快速部署">
+<meta name="twitter:description" content="我们通过Packstack来自动化安装openstack机器，Packstack主要是由Redhat推出的用于概念验证（PoC）环境快速部署的工具。Packstack是一个命令行工具，它使用Python封装了Puppet模块，通过SSH在服务器上部署OpenStack。 必备条件 Centos 7/Redhat7 最小化安装系统。 openstack-mitaka 版本 ssh 免密码登录。 Li">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/openstack-nova-hostlist.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> openstack系列(5)-M版_快速部署 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          openstack系列(5)-M版_快速部署
+        
+      </h1>
+
+      <time class="post-time">
+          5月 22 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>我们通过<code>Packstack</code>来自动化安装openstack机器，Packstack主要是由Redhat推出的用于概念验证（PoC）环境快速部署的工具。Packstack是一个命令行工具，它使用Python封装了Puppet模块，通过SSH在服务器上部署OpenStack。</p>
+<h3 id="必备条件"><a href="#必备条件" class="headerlink" title="必备条件"></a>必备条件</h3><ul>
+<li>Centos 7/Redhat7 最小化安装系统。</li>
+<li>openstack-mitaka 版本</li>
+<li>ssh 免密码登录。</li>
+<li>Linux基础优化/selinux关闭/关闭防火墙。</li>
+</ul>
+<h3 id="检测环境"><a href="#检测环境" class="headerlink" title="检测环境"></a>检测环境</h3><p>检测是否符合安装openstack的基础条件，其中包括字符集、selinux、操作系统版本。</p>
+<h4 id="Centos-Version"><a href="#Centos-Version" class="headerlink" title="Centos Version"></a>Centos Version</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/redhat-release </span><br><span class="line">  CentOS Linux release 7.2.1511 (Core)</span><br><span class="line"></span><br><span class="line">$ sestatus -v</span><br><span class="line">     SELinux status:                 disabled</span><br></pre></td></tr></table></figure>
+<p><code>CentOS-OpenStack-mitaka.repo</code>地址：<a href="http://mirror.centos.org/centos/7/cloud/$basearch/openstack-mitaka/" target="_blank" rel="noopener">http://mirror.centos.org/centos/7/cloud/$basearch/openstack-mitaka/</a></p>
+<h4 id="操作系统字符集"><a href="#操作系统字符集" class="headerlink" title="操作系统字符集"></a>操作系统字符集</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/environment </span><br><span class="line">LANG=en_US.utf-8</span><br><span class="line">LC_ALL=en_US.utf-8</span><br></pre></td></tr></table></figure>
+<h3 id="一键安装openstack集群"><a href="#一键安装openstack集群" class="headerlink" title="一键安装openstack集群"></a>一键安装openstack集群</h3><p><code>CentOS 7.2</code> 可以直接安装<code>centos-release-openstack-mitaka</code>文件，这个代表mitaka版本的openstack仓库，我们可以通过如下命令检测，可以看到多版本的openstack仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">yum search openstack</span><br><span class="line"></span><br><span class="line">centos-release-openstack.noarch : OpenStack from the CentOS Cloud SIG repo configs</span><br><span class="line">centos-release-openstack-kilo.noarch : OpenStack from the CentOS Cloud SIG repo</span><br><span class="line">                                     : configs</span><br><span class="line">centos-release-openstack-liberty.noarch : OpenStack from the CentOS Cloud SIG repo</span><br><span class="line">                                        : configs</span><br><span class="line">centos-release-openstack-mitaka.noarch : OpenStack from the CentOS Cloud SIG repo</span><br><span class="line">                                       : configs</span><br><span class="line">centos-release-openstack-newton.noarch : OpenStack from the CentOS Cloud SIG repo</span><br><span class="line">                                       : configs</span><br><span class="line">centos-release-openstack-ocata.noarch : OpenStack from the CentOS Cloud SIG repo</span><br><span class="line">                                      : config</span><br></pre></td></tr></table></figure>
+<h4 id="packstack介绍"><a href="#packstack介绍" class="headerlink" title="packstack介绍"></a>packstack介绍</h4><p>Packstack主要是由Redhat推出的用于概念验证（PoC）环境快速部署的工具。Packstack是一个命令行工具，它使用Python封装了Puppet模块，通过SSH在服务器上部署OpenStack。</p>
+<p>Packstack支持三种运行模式：</p>
+<ul>
+<li>快速运行</li>
+<li>交互式运行</li>
+<li>非交互式运行</li>
+</ul>
+<p>Packstack支持两种部署架构：</p>
+<ul>
+<li>All-in-One，即所有的服务部署到一台服务器上</li>
+<li>Multi-Node，即控制节点、网络节点和计算节点分开部署</li>
+</ul>
+<p><em><code>packstack-answers-20160928.txt</code>安装服务列表,可根据需要进行定制</em></p>
+<ul>
+<li>Should Packstack install OpenStack Image Service (Glance) </li>
+<li>Should Packstack install OpenStack Block Storage (Cinder) </li>
+<li>Should Packstack install OpenStack Shared File System (Manila) </li>
+<li>Should Packstack install OpenStack Compute (Nova) </li>
+<li>Should Packstack install OpenStack Networking (Neutron) </li>
+<li>Should Packstack install OpenStack Dashboard (Horizon) </li>
+<li>Should Packstack install OpenStack Object Storage (Swift) </li>
+<li>Should Packstack install OpenStack Metering (Ceilometer) </li>
+<li>Should Packstack install OpenStack Telemetry Alarming (Aodh) </li>
+<li>Should Packstack install OpenStack Resource Metering (Gnocchi) </li>
+<li>Should Packstack install OpenStack Clustering (Sahara). If yes it’ll also install Heat. </li>
+<li>Should Packstack install OpenStack Orchestration (Heat) </li>
+<li>Should Packstack install OpenStack Database (Trove) </li>
+<li>Should Packstack install OpenStack Bare Metal (Ironic) </li>
+<li>Should Packstack install OpenStack client tools </li>
+</ul>
+<p>Puppet是由Puppetlabs公司开发的系统管理框架和工具集，被用于IT服务的自动化管理。由于良好的声明式语言和易于扩展的框架设计以及可重用可共享的模块，使得Google、Cisco、Twitter、RedHat、New York Stock Exchange等众多公司和机构在其数据中心的自动化管理中用到了puppet。半年一度的PuppetConf大会也跻身于重要技术会议之列。而我们的<code>packstack</code>就是通过puppet自动化实现安装openstack的。</p>
+<p><a href="https://wiki.openstack.org/wiki/Puppet" target="_blank" rel="noopener">PuppetOpenstack</a>是Openstack社区推出的Puppet Modules项目，隶属于Openstack Goverance项目。</p>
+<p>社区还有更多能一键部署openstack的方法</p>
+<ul>
+<li><p>Packstack封装了PuppetOpenstack，使得用户在终端下可以通过交互式问答或者非交互式YAML格式文件的方式去部署Openstack集群，使得用户无需了解Puppet和PuppetOpenstack的细节。</p>
+</li>
+<li><p>Fuel更进一步，提供了友好的Web UI界面，使得用户对于技术细节如何实现上做到了非常好的隐藏，还提供了一些健康检查工具，确保部署符合预期。</p>
+</li>
+</ul>
+<p>当然还有更多其他工具，目前比较方便可靠的安装方式就两种常用的。</p>
+<h4 id="安装openstack"><a href="#安装openstack" class="headerlink" title="安装openstack"></a>安装openstack</h4><p>我们在上面search openstack的时候可以看到多个版本,目前支持自动化部署的最新版本为<code>ocata</code>,我们这里选择安装的版本<code>mitaka</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y centos-release-openstack-mitaka</span><br><span class="line">$ sudo yum update -y  </span><br><span class="line">$ sudo yum install -y openstack-packstack</span><br></pre></td></tr></table></figure>
+<p>如上我们执行的是，首先安装M版本的<code>yum</code>仓库源，然后升级操作系统包，最后安装<code>openstack-packstack</code>一键部署openstack集群工具。</p>
+<h4 id="auto-configuration-amp-amp-自定义配置文件安装"><a href="#auto-configuration-amp-amp-自定义配置文件安装" class="headerlink" title="auto configuration &amp;&amp; 自定义配置文件安装"></a>auto configuration &amp;&amp; 自定义配置文件安装</h4><p>生成默认配置文件,定制安装服务，下面我们选择的就是<code>packstack</code> - Multi-Node 模式进行集群安装，allinone相对来说适合测试环境部署。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo packstack --gen-answer-file=packstack-answers-20160928.txt</span><br><span class="line">  CONFIG_NAGIOS_INSTALL=n            ## 是否安装nagios ，修改为不安装</span><br><span class="line">  CONFIG_SAHARA_INSTALL=y            ## 是否安装 Bigdata plugins，修改为安装</span><br></pre></td></tr></table></figure></p>
+<p>指定自定义配置文件进行集群安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo packstack --answer-file=packstack-answers-20160613-231012.txt</span><br><span class="line"></span><br><span class="line">**** Installation completed successfully ******</span><br></pre></td></tr></table></figure></p>
+<p>如上，我们通过<code>packstack</code>自动化安装openstack工具命令，生成安装配置信息，由于<code>openstack</code>包括很多组件，所以有些组件是可选的，你可以定制化服务进行安装。</p>
+<ul>
+<li><code>packstack --gen-answer-file=xxx.txt</code> 生成默认的安装配置文件</li>
+<li><code>packstack --answer-file=xxx.txt</code> 指定配置文件安装openstack集群</li>
+</ul>
+<p>执行<code>packstack --answer-file=xxx.txt</code>命令后，等待<code>openstack</code>安装完成，这是一个漫长的过程，当你看到所有安装项都处于<code>[DONE]</code>后，显示一句话<code>**** Installation completed successfully ******</code>说明你已经成功安装好openstack一个节点的集群，此时<code>controller</code>、<code>compute</code>和<code>network</code>节点都在同一个节点上，在后续的章节中我们会继续教大家怎么扩容节点。</p>
+<p>安装成功之后，我们在执行命令的当前目录下面会生成两个文件，是属于<code>keystone</code>的验证文件，如果你需要执行相关管理员的命令，就需要使用它们的进行身份认证，也是访问Dashboard的登录用户。访问地址<code>http://openstack-controller/dashboard</code></p>
+<ul>
+<li>keystonerc_admin    超级管理员用户信息</li>
+<li>keystonerc_demo     demo测试用户信息，它属于一个租户</li>
+</ul>
+<p>后台使用你需要执行<code>source</code>命令，你就可以<code>admin</code>或者以其他租户的身份去做一些管理员操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source keystonerc_admin</span><br></pre></td></tr></table></figure></p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller ~(keystone_admin)]# keystone user-list</span><br><span class="line">[root@openstack-controller ~(keystone_admin)]# keystone service-list</span><br><span class="line">[root@openstack-controller ~(keystone_admin)]# nova host-list</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/openstack-nova-hostlist.png" alt></p>
+<p><strong><em>如果你想在第一次安装时就安装多个节点？</em></strong></p>
+<p>你需要修改配置文件<code>packstack-answers-20160613-231012.txt</code>, 修改<code>CONFIG_COMPUTE_HOSTS</code>配置项。</p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">egrep &quot;CONFIG_COMPUTE_HOSTS|CONFIG_NETWORK_HOSTS|EXCLUDE_SERVERS&quot; packstack-answers-20160613-231012.txt</span><br><span class="line">EXCLUDE_SERVERS=</span><br><span class="line">CONFIG_COMPUTE_HOSTS=192.168.2.110,192.168.2.111,192.168.2.112,192.168.2.113</span><br><span class="line">CONFIG_NETWORK_HOSTS=192.168.2.110</span><br></pre></td></tr></table></figure></p>
+<p>如上图所示，是集群安装比较关键的配置信息</p>
+<ul>
+<li>EXCLUDE_SERVERS   你是新添加节点,你需要把已经安装过的<code>COMPUTE</code>节点IP集合填入,<code>packastack</code>会排除不去安装这些节点。如果是<em>初次安装</em>,这里应该留空。</li>
+<li>CONFIG_COMPUTE_HOSTS  填写计算节点IP集合</li>
+<li>CONFIG_NETWORK_HOSTS  填写网络节点IP</li>
+</ul>
+<p>执行<code>sudo packstack --answer-file=packstack-answers-20160613-231012.txt</code>安装命令，然后就开始按照配置文件中的IP信息，并行的在多台服务器上安装<code>openstack</code>集群。</p>
+<p>安装成功之后，查看安装的主机列表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cinder list   # 查看云硬盘信息</span><br><span class="line"></span><br><span class="line">nova host-list # 查看节点角色信息</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/nova-lists.png" alt></p>
+<p>如上图所示，我们按照预期安装了4个节点的openstack集群，一个控制节点，一个网络节点，4个计算节点，这就是通过<code>packstack</code>一键自动化安装openstack集群。后续章节中，我们会进一步介绍通过这样的配置方式来添加一个新的节点到已存在的openstack集群。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><code>openstack系列(5)-M版_快速部署</code>，也同样适用于其他更高的版本安装，但是由于我在生产环境使用M版本1年多无重大故障，所以我比较推荐使用一个稳定的版本。所以继续用M版本安装方式来编写本系列教程。本系列内容希望搭建从第一篇开始看起，每一篇都是以前一篇我基础来一步步实现集群的安装的，所以这一篇也是建立在之前的内容之上的，本篇其实就手动实践了怎么通过<code>packstack</code>工具自动化部署openstack。下一小节我们进入<code>openstack</code>网络的配置，欢迎持续关注。</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+<p>参考：<a href="https://www.rdoproject.org/install/quickstart/" target="_blank" rel="noopener">https://www.rdoproject.org/install/quickstart/</a><br>    <a href="https://repos.fedorapeople.org/repos/openstack/" target="_blank" rel="noopener">https://repos.fedorapeople.org/repos/openstack/</a><br>    <a href="http://cloud.centos.org/centos/7/images/" target="_blank" rel="noopener">http://cloud.centos.org/centos/7/images/</a><br>    <a href="https://pom.nops.cloud/Introduction/read_guide.html" target="_blank" rel="noopener">https://pom.nops.cloud/Introduction/read_guide.html</a><br>    <a href="https://pom.nops.cloud/deployment_tool/packstack.html" target="_blank" rel="noopener">https://pom.nops.cloud/deployment_tool/packstack.html</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/openstack/">openstack</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/05/22/openstack系列(6)-M版_网络配置/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">openstack系列(6)-M版_网络配置</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/05/20/openstack系列(4)-基础环境/">
+        <span class="next-text nav-default">openstack系列(4)-基础环境</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

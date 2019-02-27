@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="spark-hbase-dataframe-based-hbase-connector">
+
+
+
+
+  <meta name="keywords" content="hbase,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/07/03/spark-hbase-dataframe-based-hbase-connector/">
+
+
+<meta name="description" content="我们非常高兴的宣告由Hortonworks和Bloomberg合作开发完成的Spark-HBase 连接器技术预览版的发行。 Spark-HBase连接器利用Spark-1.2.0引入Data Source API（SPARK-3247）。它弥合了简单的HBase Key Value和复杂关联SQL查询之间的差距，使得用户可以在HBase上使用Spark执行复杂的数据分析。HBase DataFr">
+<meta name="keywords" content="hbase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spark-hbase-dataframe-based-hbase-connector">
+<meta property="og:url" content="http://itweet.github.io/2017/07/03/spark-hbase-dataframe-based-hbase-connector/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="我们非常高兴的宣告由Hortonworks和Bloomberg合作开发完成的Spark-HBase 连接器技术预览版的发行。 Spark-HBase连接器利用Spark-1.2.0引入Data Source API（SPARK-3247）。它弥合了简单的HBase Key Value和复杂关联SQL查询之间的差距，使得用户可以在HBase上使用Spark执行复杂的数据分析。HBase DataFr">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/age.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spark-hbase-dataframe-based-hbase-connector">
+<meta name="twitter:description" content="我们非常高兴的宣告由Hortonworks和Bloomberg合作开发完成的Spark-HBase 连接器技术预览版的发行。 Spark-HBase连接器利用Spark-1.2.0引入Data Source API（SPARK-3247）。它弥合了简单的HBase Key Value和复杂关联SQL查询之间的差距，使得用户可以在HBase上使用Spark执行复杂的数据分析。HBase DataFr">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/BigData/img/age.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> spark-hbase-dataframe-based-hbase-connector - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          spark-hbase-dataframe-based-hbase-connector
+        
+      </h1>
+
+      <time class="post-time">
+          7月 03 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>我们非常高兴的宣告由Hortonworks和Bloomberg合作开发完成的<a href="https://github.com/hortonworks/shc.git" target="_blank" rel="noopener">Spark-HBase</a> 连接器技术预览版的发行。</p>
+<p>Spark-HBase连接器利用Spark-1.2.0引入<a href="https://databricks.com/blog/2015/01/09/spark-sql-data-sources-api-unified-data-access-for-the-spark-platform.html" target="_blank" rel="noopener">Data Source API</a>（<a href="https://issues.apache.org/jira/browse/SPARK-3247" target="_blank" rel="noopener">SPARK-3247</a>）。它弥合了简单的HBase Key Value和复杂关联SQL查询之间的差距，使得用户可以在HBase上使用Spark执行复杂的数据分析。HBase DataFrame是一个标准的Spark DataFrame，它可以和任何其他数据源（例如Hive，ORC，Parquet，JSON等）进行交互。</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>有些开源Spark HBase连接器可用作Spark软件包、独立项目包或HBaseTrunk。</p>
+<p>Spark已经转移到提供内置的查询计划优化Dataset / DataFrame APIs。 现在，终端用户更喜欢使用基于界面的DataFrames / Datasets。</p>
+<p>Hbase Trunk（端口汇聚）中的HBase连接器得到大量RDD支持。例如BulkPut等。但它的DataFrame支持就没那么多了。依靠标准HadoopRDD和内置TableInputFormat的HBaseTrunk连接器有一些性能限制。此外，在驱动程序中执行的BulkGet可能出现单点故障。</p>
+<p>还有一些其他可选的执行方法，以Spark-SQL-on-HBase为例。<a href="https://github.com/Huawei-Spark/Spark-SQL-on-HBase" target="_blank" rel="noopener">Spark-SQL-on-Hbase</a>通过在标准的Spark Catalyst引擎中内嵌查询优化计划，传送RDD到HBase使用高级自定义优化技术执行复杂的任务。例如在HBase协处理器内部的部分聚合。这种方法能够实现高性能，但由于其复杂性和Spark的快速发展难以维持高性能。这种方法还允许任意代码在协处理器内运行，但是可能会产生安全隐患。</p>
+<p>开发Spark-on-HBase连接器（SHC）是为了克服潜在的瓶颈和弱点。该连接器实现了标准的Spark Datasource API，并利用Spark Catalyst引擎进行查询优化。同时为了实现高性能，RDD是从头开始构建而不是使用TableInputFormat。通过这种定制的RDD，可以完全应用和实现所有关键技术，例如分区修剪，列修剪，谓词下推和数据局部性等技术。该设计不仅使维护变得简单，同时在性能和简单性之间达到了良好的平衡。</p>
+<h3 id="体系架构"><a href="#体系架构" class="headerlink" title="体系架构"></a>体系架构</h3><p>我们假设Spark和HBase都部署在同一个集群中，而Spark执行器与region server位于同一位置，如下图所示。<br><img src="https://github.com/itweet/labs/raw/master/BigData/img/age.png" alt><br><strong>图1. Spark-on-HBase连接器的体系架构</strong></p>
+<p>连接器以类似的方式对Scan和Get进行了高级别处理，这两种操作都在Executors中执行。Driver处理查询，并基于区域元数据聚合Scan/gets，然后为每个区域生成任务。这些任务被发送到与region server同一位置的首选执行器上，并且在执行器中并行执行实现更好的数据局部性和并发性。如果某个区域不存在所需的数据，则该region server将不分配任何任务。一个任务可能由多个扫描和BulkGets组成，并且一个任务的数据请求只能从一个region server检索，该region server将为了该项任务的局部性优先。请注意，除了调度任务之外，驱动程序不涉及任何真正的作业执行。 这样可以避免驱动程序发生瓶颈问题。</p>
+<h3 id="TABLE-CATALOG"><a href="#TABLE-CATALOG" class="headerlink" title="TABLE CATALOG"></a>TABLE CATALOG</h3><p>为了将HBase表作为关系表引入Spark，我们定义了HBase和Spark表之间的映射，称为Table Catalog。这个目录有两个关键部分。一个是行键定义，另一个是Spark中的表列与HBase中的列族和列限定符之间的映射。有关详细信息，请参阅使用部分。</p>
+<h3 id="本地支持AVRO"><a href="#本地支持AVRO" class="headerlink" title="本地支持AVRO"></a>本地支持AVRO</h3><p>连接器本身支持Avro格式，因此将结构化数据作为字节数组保存到HBase中是非常常见的做法。用户可以直接将Avro记录保存到HBase中。 并在Avro架构内部把Avro记录自动转换为本地Spark Catalyst数据类型。请注意，HBase表中的两个键值部分都可以定义为Avro格式。 请参阅repo中的示例/测试用例获得准确的用法。</p>
+<h3 id="谓词下推"><a href="#谓词下推" class="headerlink" title="谓词下推"></a>谓词下推</h3><p>为了减少网路负载连接器仅从region server检索所需的列，并避免Spark Catalyst引擎中的冗余处理。现有的标准HBase过滤器用于执行谓词下推，就无需使用协处理器功能。由于HBase不知道字节数组之外的数据类型，并且Java基本类型和字节数组之间的顺序不一致，所以在扫描操作中设置过滤器之前，必须对过滤条件进行预处理，以避免任何数据丢失。在region server中，不符合查询条件的记录都将被过滤掉。</p>
+<h3 id="分区修剪"><a href="#分区修剪" class="headerlink" title="分区修剪"></a>分区修剪</h3><p>通过从谓词提取行键，我们将Scan / BulkGet拆分成多个非重叠的范围，只有具有请求数据的region server才能执行Scan/ BulkGet。目前，分区修剪是在行键的第一维度上执行。例如，如果行键为“key1：key2：key3”，则分区修剪将仅基于“key1”。 请注意，WHERE条件需要仔细定义。 否则，分区修剪可能不会生效。例如，WHERE rowkey1&gt;“abc”OR column =“xyz”（其中rowkey1是rowkey的第一个维度，列是常规的HBase列）将发生在整个扫描过程中，，因为 OR逻辑规定我们必须涵盖所有的行列范围。</p>
+<h3 id="数据局部性"><a href="#数据局部性" class="headerlink" title="数据局部性"></a>数据局部性</h3><p>当Spark执行器与Hbase region server位于同一位置时，该执行器通过识别region server位置实现数据局部性、并尽可能与region server共同部署任,每个执行器对位于同一主机上的部分数据执行Scan/BulkGet 。</p>
+<h3 id="SCAN-AND-BULKGET"><a href="#SCAN-AND-BULKGET" class="headerlink" title="SCAN AND BULKGET"></a>SCAN AND BULKGET</h3><p>Scan和BulkGet这两个操作符通过指定WHERE CLAUSE接触用户，例如WHERE column &gt; x和column &lt; y 用于扫描，WHERE column = x 用于获取。这些指定操作在执行器中执行，驱动程序仅用于创建这些操作。这两种操作符在内部被转换为扫描和获取、扫描/或者获取，而Iterator [Row]返回到catalyst引擎用于上层处理。</p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p>以下是如何使用连接器基本步骤的说明。有关更多详细信息和高级用例，例如Avro和复合密钥支持，请参阅存储库中的<a href="https://hortonworks.com/hadoop-tutorial/spark-hbase-dataframe-based-hbase-connector/" target="_blank" rel="noopener">示例</a>。</p>
+<p>** 1）定义架构映射的目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def catalog = s&quot;&quot;&quot;&#123;</span><br><span class="line">         |&quot;table&quot;:&#123;&quot;namespace&quot;:&quot;default&quot;, &quot;name&quot;:&quot;table1&quot;&#125;,</span><br><span class="line">         |&quot;rowkey&quot;:&quot;key&quot;,</span><br><span class="line">         |&quot;columns&quot;:&#123;</span><br><span class="line">           |&quot;col0&quot;:&#123;&quot;cf&quot;:&quot;rowkey&quot;, &quot;col&quot;:&quot;key&quot;, &quot;type&quot;:&quot;string&quot;&#125;,</span><br><span class="line">           |&quot;col1&quot;:&#123;&quot;cf&quot;:&quot;cf1&quot;, &quot;col&quot;:&quot;col1&quot;, &quot;type&quot;:&quot;boolean&quot;&#125;,</span><br><span class="line">           |&quot;col2&quot;:&#123;&quot;cf&quot;:&quot;cf2&quot;, &quot;col&quot;:&quot;col2&quot;, &quot;type&quot;:&quot;double&quot;&#125;,</span><br><span class="line">           |&quot;col3&quot;:&#123;&quot;cf&quot;:&quot;cf3&quot;, &quot;col&quot;:&quot;col3&quot;, &quot;type&quot;:&quot;float&quot;&#125;,</span><br><span class="line">           |&quot;col4&quot;:&#123;&quot;cf&quot;:&quot;cf4&quot;, &quot;col&quot;:&quot;col4&quot;, &quot;type&quot;:&quot;int&quot;&#125;,</span><br><span class="line">           |&quot;col5&quot;:&#123;&quot;cf&quot;:&quot;cf5&quot;, &quot;col&quot;:&quot;col5&quot;, &quot;type&quot;:&quot;bigint&quot;&#125;,</span><br><span class="line">           |&quot;col6&quot;:&#123;&quot;cf&quot;:&quot;cf6&quot;, &quot;col&quot;:&quot;col6&quot;, &quot;type&quot;:&quot;smallint&quot;&#125;,</span><br><span class="line">           |&quot;col7&quot;:&#123;&quot;cf&quot;:&quot;cf7&quot;, &quot;col&quot;:&quot;col7&quot;, &quot;type&quot;:&quot;string&quot;&#125;,</span><br><span class="line">           |&quot;col8&quot;:&#123;&quot;cf&quot;:&quot;cf8&quot;, &quot;col&quot;:&quot;col8&quot;, &quot;type&quot;:&quot;tinyint&quot;&#125;</span><br><span class="line">         |&#125;</span><br><span class="line">       |&#125;&quot;&quot;&quot;.stripMargin</span><br></pre></td></tr></table></figure>
+<p>** 2）准备填入HBase表的数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">case class HBaseRecord(col0: String, col1: Boolean,col2: Double, col3: Float,col4: Int,       col5: Long, col6: Short, col7: String, col8: Byte)</span><br><span class="line"></span><br><span class="line">object HBaseRecord &#123;def apply(i: Int, t: String): HBaseRecord = &#123; val s = s”””row$&#123;“%03d”.format(i)&#125;”””       HBaseRecord(s, i % 2 == 0, i.toDouble, i.toFloat,  i, i.toLong, i.toShort,  s”String$i: $t”,      i.toByte) &#125;&#125;</span><br><span class="line"></span><br><span class="line">val data = (0 to 255).map &#123; i =&gt;  HBaseRecord(i, “extra”)&#125;</span><br><span class="line"></span><br><span class="line">sc.parallelize(data).toDF.write.options(</span><br><span class="line"> Map(HBaseTableCatalog.tableCatalog -&gt; catalog, HBaseTableCatalog.newTable -&gt; “5”))</span><br><span class="line"> .format(“org.apache.spark.sql.execution.datasources.hbase”)</span><br><span class="line"> .save()</span><br></pre></td></tr></table></figure>
+<p>** 3）加载DataFrame：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def withCatalog(cat: String): DataFrame = &#123;</span><br><span class="line"> sqlContext</span><br><span class="line"> .read</span><br><span class="line"> .options(Map(HBaseTableCatalog.tableCatalog-&gt;cat))</span><br><span class="line"> .format(“org.apache.spark.sql.execution.datasources.hbase”)</span><br><span class="line"> .load()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">val df = withCatalog(catalog)</span><br></pre></td></tr></table></figure>
+<p>** 4）语言集成查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">val s = df.filter((($”col0″ &lt;= “row050″ &amp;&amp; $”col0” &gt; “row040”) ||</span><br><span class="line"> $”col0″ === “row005” ||</span><br><span class="line"> $”col0″ === “row020” ||</span><br><span class="line"> $”col0″ ===  “r20” ||</span><br><span class="line"> $”col0″ &lt;= “row005”) &amp;&amp;</span><br><span class="line"> ($”col4″ === 1 ||</span><br><span class="line"> $”col4″ === 42))</span><br><span class="line"> .select(“col0”, “col1”, “col4”)</span><br><span class="line">s.show</span><br></pre></td></tr></table></figure>
+<p>** SQL查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.registerTempTable(“table”)</span><br><span class="line">sqlContext.sql(“select count(col1) from table”).show</span><br></pre></td></tr></table></figure>
+<h3 id="配置SPARK包"><a href="#配置SPARK包" class="headerlink" title="配置SPARK包"></a>配置SPARK包</h3><p>用户可以使用Spark-on-HBase连接器作为标准Spark软件包。 要在Spark应用程序中加入该包，请使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spark-shell, pyspark, or spark-submit</span><br><span class="line">&gt; $SPARK_HOME/bin/spark-shell –packages zhzhan:shc:0.0.11-1.6.1-s_2.10</span><br></pre></td></tr></table></figure>
+<p>用户还可以把Spark软件包附加在SBT文件中， 格式为： spark-package-name:version</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spDependencies += “zhzhan/shc:0.0.11-1.6.1-s_2.10”</span><br></pre></td></tr></table></figure>
+<h3 id="在安全的集群中的运行"><a href="#在安全的集群中的运行" class="headerlink" title="在安全的集群中的运行"></a>在安全的集群中的运行</h3><p>在运行Kerberos授权的集群时，用户必须将HBase相关的jar包含到类路径中，因为Spark不依靠连接器就可以完成HBase令牌检索和更新。换句话说，无论是通过kinit还是通过提供委托人/秘钥表，用户必需要以正常方式启动环境。以下示例显示了如何在安全的集群中运行 yarn-client和 yarn-cluster模式。请注意，必须为这两种模式设置SPARK_CLASSPATH，而示例jar只是Spark的占位符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export SPARK_CLASSPATH=/usr/hdp/current/hbase-client/lib/hbase-common.jar:/usr/hdp/current/hbase-client/lib/hbase-client.jar:/usr/hdp/current/hbase-client/lib/hbase-server.jar:/usr/hdp/current/hbase-client/lib/hbase-protocol.jar:/usr/hdp/current/hbase-client/lib/guava-12.0.1.jar</span><br></pre></td></tr></table></figure>
+<p>假设hrt_qa是一个无头帐号，用户可以使用以下命令进行kinit：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kinit -k -t /tmp/hrt_qa.headless.keytab hrt_qa</span><br><span class="line"></span><br><span class="line">/usr/hdp/current/spark-client/bin/spark-submit –class org.apache.spark.sql.execution.datasources.hbase.examples.HBaseSource –master yarn-client –packages zhzhan:shc:0.0.11-1.6.1-s_2.10 –num-executors 4 –driver-memory 512m –executor-memory 512m –executor-cores 1 /usr/hdp/current/spark-client/lib/spark-examples-1.6.1.2.4.2.0-106-hadoop2.7.1.2.4.2.0-106.jar</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/hdp/current/spark-client/bin/spark-submit –class org.apache.spark.sql.execution.datasources.hbase.examples.HBaseSource –master yarn-cluster –files /etc/hbase/conf/hbase-site.xml –packages zhzhan:shc:0.0.11-1.6.1-s_2.10 –num-executors 4 –driver-memory 512m –executor-memory 512m –executor-cores 1 /usr/hdp/current/spark-client/lib/spark-examples-1.6.1.2.4.2.0-106-hadoop2.7.1.2.4.2.0-106.jar</span><br></pre></td></tr></table></figure>
+<h3 id="PUTTING-IT-ALL-TOGETHER"><a href="#PUTTING-IT-ALL-TOGETHER" class="headerlink" title="PUTTING IT ALL TOGETHER"></a>PUTTING IT ALL TOGETHER</h3><p>我们刚刚简要介绍了HBase如何在DataFrame级上支持Spark。使用DataFrame API Spark应用程序在HBase表中处理存储数据和在其他数据源中存储数据一样简单。有了这个新功能，Spark应用程序和其他交互式工具可以轻松地使用HBase表中的数据。例如 用户可以在Spark中的HBase表之上运行复杂的SQL查询，对Dataframe执行表连接，或者与Spark Streaming集成执行更复杂的系统应用。</p>
+<h3 id="下一步是什么？"><a href="#下一步是什么？" class="headerlink" title="下一步是什么？"></a>下一步是什么？</h3><p>目前，连接器托管在Hortonworks repo中，并作为Spark软件包发行。该软件包正处于 Apache HBase Trunk正在迁移的流程中。在迁移期间，我们发现了HBaseTrunk中的一些关键bugs，它们可以合并修复。HBase JIRA HBASE-14789，包括HBASE-14795和HBASE-14796跟踪了整个社区的工作为了优化Scan和BulkGet的底层计算体系结构，HBASE-14801提供易于使用的JSON用户界面，HBASE-15336用于DataFrame写路径，HBASE-15334用于支持Avro，HBASE-15333支持Java原始类型，如short，int，long，float和double等等，HBASE-15335支持复合行密钥，HBASE-15572用于添加可选时间戳语义。我们期待将来更易于使用的连接器版本。</p>
+<p>参考网址：</p>
+<ul>
+<li>[1] SHC: <a href="https://github.com/hortonworks/shc" target="_blank" rel="noopener">https://github.com/hortonworks/shc</a></li>
+<li>[2] Spark-package: <a href="http://spark-packages.org/package/zhzhan/shc" target="_blank" rel="noopener">http://spark-packages.org/package/zhzhan/shc</a></li>
+<li>[3] Apache HBase:  <a href="https://hbase.apache.org/" target="_blank" rel="noopener">https://hbase.apache.org/</a></li>
+<li>[4] Apache Spark: <a href="http://spark.apache.org/" target="_blank" rel="noopener">http://spark.apache.org/</a></li>
+</ul>
+<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/hbase/">hbase</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/07/03/apache-hbase-medium-object-storage-mob-policies/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">apache-hbase-medium-object-storage-mob-policies</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/07/03/sparksql-ranger-column-level-security-masking/">
+        <span class="next-text nav-default">sparksql-ranger-column-level-security-masking</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

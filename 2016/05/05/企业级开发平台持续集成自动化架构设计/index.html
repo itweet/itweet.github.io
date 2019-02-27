@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="企业级开发平台持续集成自动化架构设计">
+
+
+
+
+  <meta name="keywords" content="tools,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/05/05/企业级开发平台持续集成自动化架构设计/">
+
+
+<meta name="description" content="&amp;nbsp;&amp;nbsp; 近期变动比较大，离职了，拒了几个大企业offer；选择加入了一家非常有前景的创业公司，很多人不理解，虽然入职时间不长，但是和大公司比较真的非常有意思，虽然辛苦一些，但是能学到不少东西，让我对大数据创业有了更多新的认识，甚至完全颠覆我曾经的一些想法，真的非常棒；好了，到此为止，等有时间专门写一篇文章介绍下我的思考吧，下面进入今天的正题。&amp;nbsp;&amp;nbsp; 在很多企业中">
+<meta name="keywords" content="tools">
+<meta property="og:type" content="article">
+<meta property="og:title" content="企业级开发平台持续集成自动化架构设计">
+<meta property="og:url" content="http://itweet.github.io/2016/05/05/企业级开发平台持续集成自动化架构设计/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp; 近期变动比较大，离职了，拒了几个大企业offer；选择加入了一家非常有前景的创业公司，很多人不理解，虽然入职时间不长，但是和大公司比较真的非常有意思，虽然辛苦一些，但是能学到不少东西，让我对大数据创业有了更多新的认识，甚至完全颠覆我曾经的一些想法，真的非常棒；好了，到此为止，等有时间专门写一篇文章介绍下我的思考吧，下面进入今天的正题。&amp;nbsp;&amp;nbsp; 在很多企业中">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/Automatic-System.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.497Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="企业级开发平台持续集成自动化架构设计">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp; 近期变动比较大，离职了，拒了几个大企业offer；选择加入了一家非常有前景的创业公司，很多人不理解，虽然入职时间不长，但是和大公司比较真的非常有意思，虽然辛苦一些，但是能学到不少东西，让我对大数据创业有了更多新的认识，甚至完全颠覆我曾经的一些想法，真的非常棒；好了，到此为止，等有时间专门写一篇文章介绍下我的思考吧，下面进入今天的正题。&amp;nbsp;&amp;nbsp; 在很多企业中">
+<meta name="twitter:image" content="https://jikelab.github.io/tech-labs/screenshots/Automatic-System.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 企业级开发平台持续集成自动化架构设计 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          企业级开发平台持续集成自动化架构设计
+        
+      </h1>
+
+      <time class="post-time">
+          5月 05 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>&nbsp;&nbsp; 近期变动比较大，离职了，拒了几个大企业offer；选择加入了一家非常有前景的创业公司，很多人不理解，虽然入职时间不长，但是和大公司比较真的非常有意思，虽然辛苦一些，但是能学到不少东西，让我对大数据创业有了更多新的认识，甚至完全颠覆我曾经的一些想法，真的非常棒；好了，到此为止，等有时间专门写一篇文章介绍下我的思考吧，下面进入今天的正题。<br>&nbsp;&nbsp; 在很多企业中，IT使用技术还比较落后，还没有自动化构建发布代码实现或者概念；如：多人协同开发管理,软件发布,测试都还没有形成一套自动化的解决方案，其实对于小儿精悍的团队来说，实现自动化意义非凡，可以减少工作量的同时，降低团队维护成本和事业成本，我自己就非常欣赏国外的<code>instagram</code>团队，下面我简单介绍一下，2012年4月10日，Facebook宣布以10亿美元收购在线照片共享服务商Instagram。你没有听错就是10亿美金，更加不可思议的是Instagram公司只有13名员工。被收购的时候真的只有13名员工并且截至2012年3月，Instragram用户已达到2700万，Facebook处于商业考虑收购了Instagram，现如今更是4亿多用户；13名员工创造的奇迹，是什么导致他们这么强大，下面是一则有关他们的小故事。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">                            Instagram严重故障——弗吉尼亚风暴</span><br><span class="line">2012年我正在波特兰享受我的三天短假，手机突然响了起来：Instagram.com崩溃了，我上网简单看了</span><br><span class="line">一下发现不仅是Instagram，Netflix和其他一些网站也出现了同样的问题。我飞奔回酒店，打开电脑，</span><br><span class="line">发现上面有一条来自亚马逊让人毛骨悚然的消息：一个巨大的风暴袭击了弗吉尼亚，几乎一半的服务器停</span><br><span class="line">电，接下来的36小时，我们几乎要重建整个基础设施。</span><br><span class="line"></span><br><span class="line">那时，我们整个后台团队由我、第一个工程师Shayne、刚加入Instagram一个月的Rick，用户数据没有</span><br><span class="line">丢失，但是这次中断暴露出我们基础设施的自动化的不足。</span><br><span class="line"></span><br><span class="line">这次故障纯属意外，但是为了稳定性，我们需要一个更稳定的系统提供服务。第二年，我们把所有不稳定</span><br><span class="line">的脚本转移到了全自动的系统上，事实上减少了基础设施的团队成员。</span><br><span class="line"></span><br><span class="line">产品经理心得：我很高兴我们有优秀、尽职的工程师，面对糟糕的现实，hayne 和 </span><br><span class="line">Rick迅速行动，堪比《火星救援》。</span><br><span class="line">                        by 原文来自网络 － </span><br><span class="line">                        http://www.tuicool.com/articles/fIzq6zR</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp; 这个小故事中强调了全自动化系统的意义，我一直很钦佩这样的思想和理念，我最近刚好自己设计了一个持续集成自动化的架构，虽然离全自动化系统还很远，但是也是在打基础，什么东西都是一步步完善的，今天我打算介绍一下这套系统的一些实现细节和思考。<br><img src="https://jikelab.github.io/tech-labs/screenshots/Automatic-System.png" alt></p>
+<p></p><h6 align="center">企业级开发平台持续集成自动化架构设计(图)</h6><br>&nbsp;&nbsp; 如上，我设计的这个流水线自动化系统架构图，下面我来逐一剖析各个组件的作用域。<p></p>
+<p>1、项目管理模块：包括redmine,wiki可以在gitlab发起一个新项目，并且建立wiki文档和版本功能。</p>
+<p>2、开发环境模块：开发库和公共服务，内部私服nexus实现mvn私有仓库建设和vpn突破外网功能。</p>
+<p>3、项目完全基于maven管理，项目管理人员发起一个项目，上传到gitlab服务器，其它开发人员通过SourceTree可视化软件拉取最新代码，按照项目分配功能完成开发，在提交到gitlab。</p>
+<p>4、持续集成模块：当一个软件版本已经完成基本功能，软件本身测试无bug，决定发布一个bate版本，<br>jenkins自动化打包软件可生成二进制gz/rpm/bin包。Sonar可以对java代码进行质量管理和集成不同测试。</p>
+<p>5、自动化部署：SaltStack自动化把rpm或者gz包发布到apache/nginx服务器，做为repo源；python脚本自动化配置所有服务器相关基础信息，包括Linux repo源。</p>
+<p>6、Ambari通过repo源，自动化在openstack云服务器安装Hadoop集群。</p>
+<p>7、自动化测试模块：功能测试，自动化进行相关软件功能性测试，出测试报告，自动化发出邮件。</p>
+<p>8、自动化测试模块：性能测试，自动化完成tpcds,ycsb等主流SQL on Hadoop/SQL on NOSQL/NOSQL/NewSQL/HDFS IO等性能测试，并且自动化生产性能测试结果报告，已邮件形式发出。</p>
+<p>9、最后经过OpenStack测试环境，预生产环境，生产环境(实体x86/PowerServer服务器)三道工序，没有任何问题，稳定性，功能测试结果都符合预期；对外发布稳定软件版本，在gitlab上面打一个tag，发布此软件的稳定版，编写release相关信息内容。</p>
+<p>&nbsp;&nbsp; 以上就是我对这个架构的一些流程说明，这套架构，可以把企业软件开发流程，像工厂一样各个环节都管理起来，方便流水线的迭代开发一个软件，并对外发布，而且所有版本，开发功能都可以追溯和还原，各个版本功能都通过可视化的软件管理，每个版本都可以查看详细内容，完成时间，一个软件的开发迭代周期。这个就是一个微缩版的Github吧，不过所有的后续流程包括测试，应用部署，生成容易管理的二进制包都是自动化完成，可以大大降低基础环境参与人员，通过OpenStack让操作系统／硬件服务器都更容易维护和使用，云端服务器的优势，随时创建销毁不需要的服务器，自动化安装各种软件和服务，都是可视化完成。</p>
+<blockquote>
+<p>全自动的系统，事实上减少了基础设施的团队成员，自动化减少了很多重复性工作，对企业和个人都是<br>有非常大的好处。OpenStack|Docker|SaltStack。</p>
+</blockquote>
+<p>今天，就写到这里，如果你想持续关注更新，自己想办法吧。。。</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/tools/">tools</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/05/09/Gitlab 安装配置/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Gitlab 安装配置</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/04/15/我的X档案 - 新的希望/">
+        <span class="next-text nav-default">我的X档案 - 新的希望</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

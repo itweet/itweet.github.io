@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="新一代Impala的优势你竟然还不知道">
+
+
+
+
+  <meta name="keywords" content="Impala,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/08/10/新一代Impala的优势你竟然还不知道/">
+
+
+<meta name="description" content="新一代Impala：更高的可靠性，易用性和更大规模的性能提升 原文链接http://blog.cloudera.com/blog/2015/07/whats-next-for-impala-more-reliability-usability-and-performance-at-even-greater-scale/ 今年即将会在以下方面推出新功能：可靠性、易用性和嵌套数据类型，在2016年，将">
+<meta name="keywords" content="Impala">
+<meta property="og:type" content="article">
+<meta property="og:title" content="新一代Impala的优势你竟然还不知道">
+<meta property="og:url" content="http://itweet.github.io/2015/08/10/新一代Impala的优势你竟然还不知道/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="新一代Impala：更高的可靠性，易用性和更大规模的性能提升 原文链接http://blog.cloudera.com/blog/2015/07/whats-next-for-impala-more-reliability-usability-and-performance-at-even-greater-scale/ 今年即将会在以下方面推出新功能：可靠性、易用性和嵌套数据类型，在2016年，将">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://blog.cloudera.com/wp-content/uploads/2015/07/impala-roadmap.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.488Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="新一代Impala的优势你竟然还不知道">
+<meta name="twitter:description" content="新一代Impala：更高的可靠性，易用性和更大规模的性能提升 原文链接http://blog.cloudera.com/blog/2015/07/whats-next-for-impala-more-reliability-usability-and-performance-at-even-greater-scale/ 今年即将会在以下方面推出新功能：可靠性、易用性和嵌套数据类型，在2016年，将">
+<meta name="twitter:image" content="http://blog.cloudera.com/wp-content/uploads/2015/07/impala-roadmap.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 新一代Impala的优势你竟然还不知道 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          新一代Impala的优势你竟然还不知道
+        
+      </h1>
+
+      <time class="post-time">
+          8月 10 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="新一代Impala："><a href="#新一代Impala：" class="headerlink" title="新一代Impala："></a>新一代Impala：</h1><p>更高的可靠性，<br>易用性和更大规模的性能提升</p>
+<p>原文链接<a href="http://blog.cloudera.com/blog/2015/07/whats-next-for-impala-more-reliability-usability-and-performance-at-even-greater-scale/" target="_blank" rel="noopener">http://blog.cloudera.com/blog/2015/07/whats-next-for-impala-more-reliability-usability-and-performance-at-even-greater-scale/</a></p>
+<p>今年即将会在以下方面推出新功能：可靠性、易用性和嵌套数据类型，在2016年，将保证有大于20倍的性能提升。</p>
+<p>自从我们提供更新版本的Impala路线图已将近一年。在这段时间内，我们创造了一个又一个里程碑：</p>
+<blockquote>
+<ul>
+<li>大多数Cloudera的客户将Impala部署在各行各业的生产环境，包括金融服务业、零售业、医疗健康业、游戏、政府、广告及电信行业。</li>
+<li>百万查询俱乐部（集群规模从几十个到几百个节点）的客户数量稳步增长。与此同时，很多客户都在推进并发处理——例如，一个大型广告公司每秒运行超过80个查询来支持1000个以上终端用户的仪表盘查看，而且做到亚秒级的响应速度。</li>
+<li>CDH4的standalone Impala下载量突破100万大关，数以百万计的二进制文件作为CDH5的一部分被下载。</li>
+<li>Impala成为一个开放的标准获得了来自Cloudera、Oracle、MapR、亚马逊在线等多个厂商的支持，同时，最近Impala移植到了IBM Big SQL中。</li>
+<li>作为Impala建立的基础，来自社区的对Impala的贡献变得越来越重要。</li>
+</ul>
+</blockquote>
+<p>在之前的路线图博文中，我们解释了路线图是如何被描述成为了补充 Impala的MPP般的性能将其它高级SQL功能——给用户提供SQL支持和商业MPP查询引擎的性能，运行于开源的Apache Hadoop之上。在这篇博文中，我们将会报告我们在交付这些新特性的时候的成功率并从这里开始为路线图指明前进的方向（正如所有有关路线图的前瞻性声明一样，请记住，计划总是赶不上变化的）。</p>
+<h2 id="2-0，2-1，2-2版本报告"><a href="#2-0，2-1，2-2版本报告" class="headerlink" title="2..0，2.1，2.2版本报告"></a>2..0，2.1，2.2版本报告</h2><p>自从2014年底推出Impala2.0版本以来，Cloudera的客户已经将Impala应用于更大的集群规模，用户扩展和复杂查询。基于这些客户的经验，对于2.1和2.2版本，Impala团队将新特性重点放在基于这些大规模应用的高可靠性和可用性上，因此：</p>
+<h3 id="2-0版本新特性"><a href="#2-0版本新特性" class="headerlink" title="2.0版本新特性"></a>2.0版本新特性</h3><ul>
+<li>SQL2003标准的分析窗函数支持</li>
+<li>使用磁盘做外部连接和聚合（即：溢出到磁盘）</li>
+<li>WHERE字句中支持子查询</li>
+<li>其他的数据类型支持（包括VARCHAR, CHAR）</li>
+<li>其他内置函数支持</li>
+</ul>
+<h3 id="2-1版本新特性"><a href="#2-1版本新特性" class="headerlink" title="2.1版本新特性:"></a>2.1版本新特性:</h3><ul>
+<li>增量统计</li>
+<li>元数据更新的增强扩展性</li>
+</ul>
+<h3 id="2-2版本新特性"><a href="#2-2版本新特性" class="headerlink" title="2.2版本新特性:"></a>2.2版本新特性:</h3><ul>
+<li>使用Cloudera Navigator的列式谱系追踪</li>
+<li>能够直接从Amazon S3中读取数据（测试版不支持）</li>
+</ul>
+<h2 id="2015年末及以后的规划"><a href="#2015年末及以后的规划" class="headerlink" title="2015年末及以后的规划"></a>2015年末及以后的规划</h2><p>在今年剩下的日子里，我们将继续将焦点放在实现更大规模集群的可靠性和可用性上。在2015年努力的基础上最高优先级的功能就是备受期待的对嵌套类型的支持。<br>从2016年开始，一些令人兴奋的功能增强将会大大扩展用于交互式BI和分析的工作负载类型及数据量。值得注意的例子包括对Hadoop中更新/插入的支持以及自从Impala 1.0以来显著的性能提升。</p>
+<h3 id="2015年计划"><a href="#2015年计划" class="headerlink" title="2015年计划"></a>2015年计划</h3><ul>
+<li>EMC Isilon 支持——针对 Isilon中的数据执行分布式查询</li>
+<li>嵌套类型——支持复杂数据结构的查询，像maps,structs, 和 arrays</li>
+<li>更大的可扩展性和可靠性——以较少的人工调优来运行更大的节点和用户可扩展性</li>
+<li>在并发情况下更好的可预测性——在资源有限的解决方案中处理更大的并发量</li>
+<li>新的Python数据分析框架——最大限度的提高用户的生产力并且在Impala的高性能扩展架构上执行（不久会有更多新功能）。<br>2015年末或2016年初计划</li>
+<li>跨CDH的细粒度授权——在所有CDH框架中扩大并全面整合Apache Sentry授权</li>
+<li>动态分区修改——执行数据排除的查询，其中分区筛选器是在维度表中，而不是事实表中。</li>
+<li>针对元数据传播的更大节点的可扩展性——细粒度的元数据更新以支持更加频繁的元数据更新和更大节点的可扩展性。<br>   通过Llama 提高与YARN的整合度——利用YARN动态调度资源来提高资源请求的可预测性</li>
+</ul>
+<h3 id="2016年计划"><a href="#2016年计划" class="headerlink" title="2016年计划"></a>2016年计划</h3><ul>
+<li>支持更新——直接更新或这插入数据到Hadoop中</li>
+<li>大于20倍的性能提升——通过多核连接或者聚合，甚至更多的运行时代码生成，和Intel合作获得更大的硬件效率提升或更多。</li>
+<li>基于内存的列存储格式——使得对嵌套数据类型的矢量操作更高效，更具扩展性，同时支持高性能的自定义逻辑（UDFs/UDAs）而没有序列化/反序列化的瓶颈。</li>
+<li>自动、增量的元数据刷新</li>
+<li>自动、增量的统计信息收集</li>
+<li>临时表——使用临时空间来存储中间结果</li>
+<li>附加语言扩展和数据类型——根据客户反馈，增加新的SQL和特定厂商的语言扩展以及数据类型</li>
+</ul>
+<p><img src="http://blog.cloudera.com/wp-content/uploads/2015/07/impala-roadmap.png" alt></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总之，通过对一系列分析的支持，2.0版本延长并加速了Impala被采用的进程。在2015年上半年，2.x版本反映了Impala在更大规模场景中对可靠性和可用性的深度投资，以此来满足日益增长的高并发和扩展性需求。并且在2015年下半年，嵌套类型，并发和可扩展性将会成为关注的焦点。<br>基于目前的计划，2016年将会Impala用例扩展最令人振奋的一年。主要新的增强功能将会打破以前在大规模数据中有些工作任务无法分析的局面：</p>
+<ul>
+<li>为BI用户打造一个低延迟的查询体验</li>
+<li>处理高并发工作任务的能力</li>
+<li>在一个共享的工作负载环境中有高效的资源利用率（通过YARN）</li>
+<li>致力于开放标准</li>
+<li>广泛的ISV支持</li>
+</ul>
+<hr>
+<p>sentry相关：<br><a href="http://blog.cloudera.com/blog/2014/10/new-in-cdh-5-2-apache-sentry-delegated-grant-and-revoke/" target="_blank" rel="noopener">http://blog.cloudera.com/blog/2014/10/new-in-cdh-5-2-apache-sentry-delegated-grant-and-revoke/</a></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Impala/">Impala</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/08/12/Apache kafka 工作原理介绍/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Apache kafka 工作原理介绍</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/08/04/set hive-map-sum for hive/">
+        <span class="next-text nav-default">set hive-map-sum for hive</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

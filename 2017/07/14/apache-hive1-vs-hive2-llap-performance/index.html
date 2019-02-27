@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="apache-hive1-vs-hive2-llap-performance">
+
+
+
+
+  <meta name="keywords" content="Hive,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/07/14/apache-hive1-vs-hive2-llap-performance/">
+
+
+<meta name="description" content="本测试硬件环境是在比较老旧的Dell R710机器上测试的，具体配置参考下面内容，我们在这里主要测试和探讨的是对Spark2、Hive2、Spark1、Hive1进行跑同样的TPCDS测试用例、比较它们的性能有多大差别，其中也会测一组最早期的Hive on MR的性能。 硬件 CPU ： 24  内存：128 G 磁盘：300g*5 块 / node  网络 千兆网络 1 Gbits/sec  系">
+<meta name="keywords" content="Hive">
+<meta property="og:type" content="article">
+<meta property="og:title" content="apache-hive1-vs-hive2-llap-performance">
+<meta property="og:url" content="http://itweet.github.io/2017/07/14/apache-hive1-vs-hive2-llap-performance/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="本测试硬件环境是在比较老旧的Dell R710机器上测试的，具体配置参考下面内容，我们在这里主要测试和探讨的是对Spark2、Hive2、Spark1、Hive1进行跑同样的TPCDS测试用例、比较它们的性能有多大差别，其中也会测一组最早期的Hive on MR的性能。 硬件 CPU ： 24  内存：128 G 磁盘：300g*5 块 / node  网络 千兆网络 1 Gbits/sec  系">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Hive-with-LLAP.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.521Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="apache-hive1-vs-hive2-llap-performance">
+<meta name="twitter:description" content="本测试硬件环境是在比较老旧的Dell R710机器上测试的，具体配置参考下面内容，我们在这里主要测试和探讨的是对Spark2、Hive2、Spark1、Hive1进行跑同样的TPCDS测试用例、比较它们的性能有多大差别，其中也会测一组最早期的Hive on MR的性能。 硬件 CPU ： 24  内存：128 G 磁盘：300g*5 块 / node  网络 千兆网络 1 Gbits/sec  系">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Hive-with-LLAP.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> apache-hive1-vs-hive2-llap-performance - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          apache-hive1-vs-hive2-llap-performance
+        
+      </h1>
+
+      <time class="post-time">
+          7月 14 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>本测试硬件环境是在比较老旧的<code>Dell R710</code>机器上测试的，具体配置参考下面内容，我们在这里主要测试和探讨的是对Spark2、Hive2、Spark1、Hive1进行跑同样的TPCDS测试用例、比较它们的性能有多大差别，其中也会测一组最早期的<code>Hive on MR</code>的性能。</p>
+<h4 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h4><ul>
+<li>CPU ： 24 </li>
+<li>内存：128 G</li>
+<li>磁盘：300g*5 块 / node</li>
+</ul>
+<h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><ul>
+<li>千兆网络 1 Gbits/sec</li>
+</ul>
+<h4 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h4><ul>
+<li>CentOS Linux release 7.2.1511 (Core) </li>
+</ul>
+<h4 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h4><ul>
+<li>CRH v5.0</li>
+<li>Hive 2.1 with LLAP</li>
+<li>Hive 1.2.1 with Tez 7.0</li>
+<li>Hadoop 2.7.3</li>
+<li>Tez 0.7.0</li>
+<li>Tez 0.8.3</li>
+<li>Spark1 1.6.3</li>
+<li>Saprk2 2.1.0  </li>
+</ul>
+<h4 id="数据量"><a href="#数据量" class="headerlink" title="数据量"></a>数据量</h4><ul>
+<li>266.7 G   ORCFile</li>
+<li>916.7 G   TextFile</li>
+<li>24 Table</li>
+</ul>
+<p>注：数据通过<code>TPC-DS</code>提供的数据生成程序生成1TB的TextFile，再通过这1TB文件生成ORC文件格式同样的表。</p>
+<h4 id="资源分配"><a href="#资源分配" class="headerlink" title="资源分配"></a>资源分配</h4><p>资源分配主要涉及Yarn和HDFS的资源分配，因为Hive1和Hive2、SparkSQL都是基于Yarn分配资源运行，本身并不占用资源、安装之后以<code>客户端</code>的形式存在集群中，只有在需要的时候才会启动运行任务。</p>
+<ul>
+<li><p>Yarn </p>
+<ul>
+<li>Memory Total：452.50 GB</li>
+<li>VCores Total：95 </li>
+<li>NodeManager：5 node  </li>
+<li>ResourceManager：1 node</li>
+</ul>
+</li>
+<li><p>HDFS</p>
+<ul>
+<li>NameNode Java heap size: 11GB</li>
+<li>DataNode maximum Java heap size: 6GB</li>
+<li>NameNode: 1 node</li>
+<li>DataNode: 5 node</li>
+</ul>
+</li>
+</ul>
+<h3 id="集群连接方式"><a href="#集群连接方式" class="headerlink" title="集群连接方式"></a>集群连接方式</h3><p>由于集群提供多种连接方式，不同的连接方式对集群性能会有所影响，所以统一使用一种方式连接集群也是所测试的框架都支持的方式<code>beeline</code>。</p>
+<p>SQL on Hadoop框架中，和这个生态融合度高的基本都有<code>beeline</code>方式，他其实就是JDBC的命令行版本。</p>
+<ul>
+<li>Hive JDBC </li>
+</ul>
+<p>平台提供Hive1和Hive2的访问接口，分别如下方式，通过<code>beeline</code>方式连接Hive集群。</p>
+<p>Hive1 Examples</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">beeline --hiveconf hive.execution.engine=tez -u &apos;jdbc:hive2://bigdata-server-3:2181,bigdata-server-1:2181,bigdata-server-2:2181/tpcds_bin_partitioned_orcfile_1000;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2&apos; -n hive</span><br></pre></td></tr></table></figure>
+<p>Hive2 Examples</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">beeline --hiveconf hive.execution.engine=tez -u &apos;jdbc:hive2://bigdata-server-3:2181,bigdata-server-1:2181,bigdata-server-2:2181/tpcds_bin_partitioned_orcfile_1000;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2-hive2&apos; -n hive</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Spark JDBC</li>
+</ul>
+<p>平台提供Spark 1.6.3和Spark 2.2的<code>beeline</code>访问接口，可以通过如下方式直接访问spark集群。</p>
+<p>由于默认启动的Jdbc Server没有提供动态资源分配的能力，如果通过<code>beeline</code>方式连接，不能完全把集群资源利用起来，导致查询性能还能有很大的优化空间。</p>
+<p>所以针对sparkSQL集群的测试，使用的是spark-sql加了动态资源分配之后执行测试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">beeline -u &apos;jdbc:hive2://bigdata-server-1:10016/tpcds_bin_partitioned_orcfile_1000&apos; -n spark</span><br></pre></td></tr></table></figure>
+<p>SparkSQL动态资源分配、预申请资源11个Executors、spark会在这个基础上在运行tpcds不同SQL的时候动态的去轮询申请资源，进行数据计算，具体参考如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/crh/current/spark2-client/bin/spark-sql --master yarn-client --conf spark.driver.memory=10G --conf spark.driver.cores=1 --conf spark.executor.memory=8G --conf spark.driver.cores=1 --conf spark.executor.cores=2  --conf spark.shuffle.service.enabled=true --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=114 --database tpcds_bin_partitioned_orcfile_1000 -f sample-queries-tpcds/query98.sql</span><br></pre></td></tr></table></figure>
+<h3 id="Comparing-Hive-with-LLAP-to-Hive-on-Tez"><a href="#Comparing-Hive-with-LLAP-to-Hive-on-Tez" class="headerlink" title="Comparing Hive with LLAP to Hive on Tez"></a>Comparing Hive with LLAP to Hive on Tez</h3><p>我自己通过<code>Python</code>封装了一下查询命令，可以通过直接通过变换命令行参数自动化测试整个tpcds过程，最后记录执行日志和时间到相应Log中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python Hadoopdb-tpcds-test.py Hive2 tpcds_bin_partitioned_orcfile_1000</span><br></pre></td></tr></table></figure>
+<p>执行的TPCDS相关Log日志，我已经上传到百度云：</p>
+<p><code>链接: https://pan.baidu.com/s/1nvE55fN 密码: 999r</code></p>
+<p>里面有几个压缩文件，解压后对应有执行SQL的时间情况、执行SQL过程记录情况。</p>
+<h3 id="HAWQ"><a href="#HAWQ" class="headerlink" title="HAWQ"></a>HAWQ</h3><p>有关HAWQ的测试，是有段时间接触了一些做HAWQ的人，所以我就深度研究了一下这个东西，相对来说性能还是不错的，不过就是有很多莫名其妙的错误，社区也很不活跃，简单我自己修复了几个小问题。不过改造难度挺大的，跟Hadoop生态融合得也比较差，可以当做一个MPP DB来看比较直观，使用方式完全于GPDB一致。不过需要考虑很多HDFS参数改动和Linux系统本身的内核参数调整，不然很容易崩，相对来说稳定性没那么高。</p>
+<p>我打算单独写一篇HAWQ相关的测试，这里就不多介绍了，下面是我遇到的几个莫名其妙的问题，Pivotal官方文档做的真心不错，使用之后，简单些几点感受，比较肤浅的看法，具体如下：</p>
+<p><strong>Hawq Load Data Error</strong></p>
+<p>这里使用到了PXF插件直接读取Hive 、Hbase、HDFS数据，发现通过他们提供的可视化工具部署安装，依然无法正常直接进入使用阶段，各种报错。</p>
+<p>通过HAWQ CLI登录之后， 能查询到元数据信息，无法查询到具体的数据是什么鬼。底层看了下PXF实现，跑在一个Tomcat里面的JAVA程序算是咋回事，这个性能不用想，也很低下。只能Load数据到HAWQ。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">drop external table pxf_sales_info;</span><br><span class="line"></span><br><span class="line">CREATE EXTERNAL TABLE pxf_sales_info(</span><br><span class="line">  location TEXT, </span><br><span class="line">  month TEXT, </span><br><span class="line">  number_of_orders INTEGER, </span><br><span class="line">  total_sales FLOAT8</span><br><span class="line">) </span><br><span class="line">LOCATION (&apos;pxf://bigdata-server-1:51200/sales_info?Profile=Hive&apos;) </span><br><span class="line">FORMAT &apos;custom&apos; (FORMATTER=&apos;pxfwritable_import&apos;);</span><br><span class="line"></span><br><span class="line">SELECT * FROM pxf_sales_info;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Q1. TPCDS load数据报错，看样子依赖很多c库，一个个装吧。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpfdist: error while loading shared libraries: libapr-1.so.0: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>解决：<code>yum install -y apr</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpfdist: error while loading shared libraries: libevent-1.4.so.2: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>解决：<code>yum install -y libevent</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpfdist: error while loading shared libraries: libyaml-0.so.2: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>解决：<code>yum install libyaml -y</code></p>
+<ul>
+<li>Q2. 安装成功启动<code>HAWQ Standby Master</code>初始化的时候报错，原因是系统缺少<code>net-tools</code>导致。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">20170721:12:58:38:029877 hawq_init:bigdata-server-2:gpadmin-[INFO]:-Check: hawq_segment_temp_directory is set</span><br><span class="line">20170721:12:58:39:029877 hawq_init:bigdata-server-2:gpadmin-[ERROR]:-bash: /sbin/ifconfig: No such file or directory</span><br><span class="line">20170721:12:58:39:029877 hawq_init:bigdata-server-2:gpadmin-[INFO]:-Start to init standby master: &apos;bigdata-server-2&apos;</span><br><span class="line">20170721:12:58:39:029877 hawq_init:bigdata-server-2:gpadmin-[INFO]:-This might take a couple of minutes, please wait...</span><br><span class="line">20170721:12:58:43:030205 hawqinit.sh:bigdata-server-2:gpadmin-[ERROR]:-Stop master failed</span><br></pre></td></tr></table></figure>
+<p>解决：<code>yum -y install net-tools</code></p>
+<ul>
+<li>Q3. 安装HAWQ Master节点的时候报错<code>Requires: libgsasl</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">resource_management.core.exceptions.ExecutionFailed: Execution of &apos;/usr/bin/yum -d 0 -e 0 -y install hawq&apos; returned 1. Error: Package: hawq_2_2_0_0-2.2.0.0-4141.el7.x86_64 (hdb-2.2.0.0)</span><br><span class="line">           Requires: thrift &gt;= 0.9.1</span><br><span class="line">Error: Package: hawq_2_2_0_0-2.2.0.0-4141.el7.x86_64 (hdb-2.2.0.0)</span><br><span class="line">           Requires: libgsasl</span><br></pre></td></tr></table></figure>
+<p>解决：<code>yum install epel-release</code>，<code>ambari-web</code>界面重试解决。</p>
+<ul>
+<li>Q4. 因为<code>HAWQ Standby Master</code>初始化失败，导致<code>HAWQ Standby Master</code>服务一直无法启动，查看日志也看不出所以然来。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">20170721:12:13:53:041104 hawq_stop:bigdata-server-3:gpadmin-[INFO]:-Stop hawq with args: [&apos;stop&apos;, &apos;master&apos;]</span><br><span class="line">20170721:12:13:54:041104 hawq_stop:bigdata-server-3:gpadmin-[ERROR]:-Failed to connect to the running database, please check master status</span><br><span class="line">20170721:12:13:54:041104 hawq_stop:bigdata-server-3:gpadmin-[ERROR]:-Or you can check hawq stop --help for other stop options</span><br><span class="line">20170721:13:13:51:039854 hawqinit.sh:bigdata-server-2:gpadmin-[ERROR]:-Stop master failed</span><br></pre></td></tr></table></figure>
+<p>环境是在<code>CentOS Linux release 7.2.1511 (Core)</code>最小化安装操作系统，依赖多个第三方包，标准操作系统中都木有。</p>
+<p>待我一一解决相关软件依赖后，再去重启集群，好桑心，集群再也无法启动了，我XXX。</p>
+<p>—- xxxxx - xxxxx </p>
+<ul>
+<li>Q5. 不能访问目录<code>/pivotalguru_{i}</code>，因为做测试前需要先创建这些目录。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error: cannot access directory &apos;/pivotalguru_6&apos;</span><br><span class="line">Please specify a valid directory for -d switch</span><br></pre></td></tr></table></figure>
+<p>这些目录会创建大量数据，所以建议这些目录放到比较大的盘，避免跑测试把根目录跑满，导致系统异常，无法正常运行。</p>
+<ul>
+<li>Q7.如果资源管理器确定未注册的或不可用的HAWQ物理段数量大于hawq_rm_rejectrequest_nseg_limit，那么资源管理器直接拒绝查询的资源请求。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">psql -v ON_ERROR_STOP=ON -f /pivotalguru/TPC-DS/04_load/051.insert.call_center.sql | grep INSERT | awk -F &apos; &apos; &apos;&#123;print $3&#125;&apos;</span><br><span class="line">psql:/pivotalguru/TPC-DS/04_load/051.insert.call_center.sql:1: ERROR:  failed to acquire resource from resource manager, 3 of 5 segments are unavailable, exceeds 25.0% defined in GUC hawq_rm_rejectrequest_nseg_limit. The allocation request is rejected. (pquery.c:804)</span><br></pre></td></tr></table></figure>
+<p>首先，排查集群状态是否可用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">postgres=# select * from gp_segment_configuration;</span><br><span class="line"> registration_order | role | status | port  |     hostname     |     address      |               description                </span><br><span class="line">--------------------+------+--------+-------+------------------+------------------+------------------------------------------</span><br><span class="line">                  0 | m    | u      |  5432 | bigdata-server-3 | bigdata-server-3 | </span><br><span class="line">                  2 | p    | u      | 40000 | bigdata-server-2 | 192.168.0.82     | </span><br><span class="line">                  3 | p    | u      | 40000 | bigdata-server-3 | 192.168.0.83     | </span><br><span class="line">                  1 | p    | d      | 40000 | bigdata-server-1 | 192.168.0.81     | heartbeat timeout;failed probing segment</span><br><span class="line">                  4 | p    | d      | 40000 | bigdata-server-4 | 192.168.0.84     | heartbeat timeout;failed probing segment</span><br><span class="line">                  5 | p    | d      | 40000 | bigdata-server-5 | 192.168.0.85     | heartbeat timeout;failed probing segment</span><br><span class="line">(6 rows)</span><br><span class="line"></span><br><span class="line">Time: 1.080 ms</span><br><span class="line"></span><br><span class="line">[gpadmin@bigdata-server-3 ~]$ hawq state   </span><br><span class="line">Failed to connect to database, this script can only be run when the database is up.</span><br></pre></td></tr></table></figure></p>
+<p><strong>简单测试</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[gpadmin@bigdata-server-3 ~]$ source /usr/local/hawq/greenplum_path.sh</span><br><span class="line">[gpadmin@bigdata-server-3 ~]$ psql -d postgres</span><br><span class="line">psql (8.2.15)</span><br><span class="line">Type &quot;help&quot; for help.</span><br><span class="line"></span><br><span class="line">postgres=# create database test;</span><br><span class="line">CREATE DATABASE</span><br><span class="line"></span><br><span class="line">postgres=# \c test</span><br><span class="line">You are now connected to database &quot;test&quot; as user &quot;gpadmin&quot;.</span><br><span class="line"></span><br><span class="line">test=# create table t (i int);</span><br><span class="line">CREATE TABLE</span><br><span class="line"></span><br><span class="line">test=# insert into t select generate_series(1,100);</span><br><span class="line">INSERT 0 100</span><br><span class="line"></span><br><span class="line">test=# \timing</span><br><span class="line">Timing is on.</span><br><span class="line"></span><br><span class="line">test=# select count(*) from t;</span><br><span class="line"> count </span><br><span class="line">-------</span><br><span class="line">   100</span><br><span class="line">(1 row)</span><br><span class="line"></span><br><span class="line">Time: 75.539 ms</span><br><span class="line"></span><br><span class="line">test-# \q</span><br></pre></td></tr></table></figure>
+<p>通过<code>Ambari</code>自动化安装HAWQ集群感受，这哪是安装啊，没有安，全程只有装，装完这个装那个，还报错~ 囧。</p>
+<p>待全方位测试之后，我在发一篇完整的吧，HAWQ论文我是读完了，个人没感到有什么创新点，感兴趣的可以看看。</p>
+<p><a href="https://github.com/changleicn/publications" target="_blank" rel="noopener">https://github.com/changleicn/publications</a></p>
+<h3 id="Impala-整合CRH报错"><a href="#Impala-整合CRH报错" class="headerlink" title="Impala 整合CRH报错"></a>Impala 整合CRH报错</h3><p>在测试跑全系CRH产品组件的时候，本想把Impala也放进来一起测试一下，没想到，依赖特定的Hive版本，有些兼容性问题，待解决。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NoSuchMethodError: org.apache.hadoop.hive.metastore.MetaStoreUtils.updatePartitionStatsFast(Lorg/apache/hadoop/hive/metastore/api/Partition;Lorg/apache/hadoop/hive/metastore/Warehouse;)Z</span><br></pre></td></tr></table></figure>
+<h3 id="TPCDS-性能"><a href="#TPCDS-性能" class="headerlink" title="TPCDS 性能"></a>TPCDS 性能</h3><p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Hive-with-LLAP.png" alt="Hive-with-LLAP"></p>
+<p>上图，可以看出，Hive2在性能上有了很大的提升，至于为什么，关注微信的可能又看到过有关Hive with LLAP优化的文章，剖析了很多篇，由于个人时间问题，导致博客和微信有些文章没时间同步。</p>
+<p>相对来说Hive,SparkSQL在跑TPCDS的时候，在稳定性上都有了长足的进步，不在会出现各种莫名其妙崩溃的问题，甚至查询几个小时都没结果的情况，但是易用性和细粒度资源控制上还有很长的路要走，要达到企业级产品级别，各种做大数据发现版的公司得花费大的精力去完善产品，达到企业级可用的程度。</p>
+<p>SQL on Hadoop产品五花八门，目前还没有一个相对完整和全面一点的软件产品，满足客户大部分需求，导致选择困难，POC的时间太长，都是成本。</p>
+<p>SQL on Hadoop的框架，目前Hive、Spark、Impala都是可选对象，其他框架社区不活跃，用户少很难继续走下去。一直在吃老本的Hive2也憋了个大招，Impala也在不断优化，都在性能这条路上越走越远，我们敬请期待吧。</p>
+<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Hive/">Hive</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/07/20/write-data-to-HDFS-via-NFS-gateway-failed/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">write-data-to-HDFS-via-NFS-gateway-failed</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/07/14/apache-solr-memory-tuning-for-production/">
+        <span class="next-text nav-default">apache-solr-memory-tuning-for-production</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

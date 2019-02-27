@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Hive on Hbase 整合测试">
+
+
+
+
+  <meta name="keywords" content="HbaseSQL,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/07/03/Hive on Hbase 整合测试/">
+
+
+<meta name="description" content="Hbase做为一个k-v查询系统，被使用在海量数据简单查询应用中。有时候会有一些复杂查询操作，需要写很多nosql的脚本或者程序！为了降低使用门槛，而sql的通用性，让大家都往sql on hbase方向发展：   1、支持友好的sql语法 2、通用型的odbcjdbc接口 3、对接主流bi可视化工具 4、开箱即用无缝兼容对接  基于上面的想法，很多公司脑洞大开，做了一些中间解决方案，比如：  1">
+<meta name="keywords" content="HbaseSQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hive on Hbase 整合测试">
+<meta property="og:url" content="http://itweet.github.io/2016/07/03/Hive on Hbase 整合测试/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Hbase做为一个k-v查询系统，被使用在海量数据简单查询应用中。有时候会有一些复杂查询操作，需要写很多nosql的脚本或者程序！为了降低使用门槛，而sql的通用性，让大家都往sql on hbase方向发展：   1、支持友好的sql语法 2、通用型的odbcjdbc接口 3、对接主流bi可视化工具 4、开箱即用无缝兼容对接  基于上面的想法，很多公司脑洞大开，做了一些中间解决方案，比如：  1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.503Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hive on Hbase 整合测试">
+<meta name="twitter:description" content="Hbase做为一个k-v查询系统，被使用在海量数据简单查询应用中。有时候会有一些复杂查询操作，需要写很多nosql的脚本或者程序！为了降低使用门槛，而sql的通用性，让大家都往sql on hbase方向发展：   1、支持友好的sql语法 2、通用型的odbcjdbc接口 3、对接主流bi可视化工具 4、开箱即用无缝兼容对接  基于上面的想法，很多公司脑洞大开，做了一些中间解决方案，比如：  1">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Hive on Hbase 整合测试 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Hive on Hbase 整合测试
+        
+      </h1>
+
+      <time class="post-time">
+          7月 03 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Hbase做为一个k-v查询系统，被使用在海量数据简单查询应用中。有时候会有一些复杂查询操作，需要写很多nosql的脚本或者程序！为了降低使用门槛，而sql的通用性，让大家都往sql on hbase方向发展： </p>
+<ul>
+<li>1、支持友好的sql语法</li>
+<li>2、通用型的odbcjdbc接口</li>
+<li>3、对接主流bi可视化工具</li>
+<li>4、开箱即用无缝兼容对接</li>
+</ul>
+<p>基于上面的想法，很多公司脑洞大开，做了一些中间解决方案，比如：</p>
+<ul>
+<li>1、hive on hbase </li>
+<li>2、phoenix on hbase </li>
+<li>3、spark on hbase  </li>
+<li>4、impala on hbase </li>
+<li>5、drill on hbase </li>
+<li>6、presto on hbase </li>
+<li>7、kylin on hbase </li>
+</ul>
+<p>可以看到hbase这个分布式nosql数据库是多么受人欢迎了吧！而hive整合hbase是其中最早的方案，hive查询hbase就是简单的把hbase作为一个hive数据源来使用，导致无法利用到hbase做为nosql数据库各方面的优势；虽然提供了便捷性，但没有特别大的优势，性能反而损失巨大！</p>
+<h1 id="Required"><a href="#Required" class="headerlink" title="Required"></a>Required</h1><p>  hive on hbase经过测试，有兼容性问题，整合如下：</p>
+<ul>
+<li>hive-2.0.1 connect hbase-1.1.5 兼容</li>
+<li>hive-1.2.1 connect hbase-1.1.5 不兼容</li>
+<li>hive-1.2.1 on tez 0.7.1 connect hbase-1.1.5 不可用</li>
+<li><p>hive-2.0.1 on tez 0.7.1 不兼容</p>
+<p>hbase和hive整合，只需要配置基础环境变量即可完成整合：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># cat /etc/profile.d/hbase.sh </span><br><span class="line">export HBASE_HOME=/opt/cloud/hbase/</span><br><span class="line">export PATH=$PATH:$HBASE_HOME/bin/:$HBASE_HOME/sbin/</span><br><span class="line"></span><br><span class="line"># cat /etc/profile.d/hive.sh </span><br><span class="line">export HIVE_HOME=/opt/cloud/hive</span><br><span class="line">export PATH=$PATH:$HIVE_HOME/bin:$HIVE_HOME/sbin</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="Hive-on-Hbase-Test"><a href="#Hive-on-Hbase-Test" class="headerlink" title="Hive on Hbase Test"></a>Hive on Hbase Test</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># hive</span><br><span class="line">Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. tez, spark) or using Hive 1.X releases.</span><br><span class="line"></span><br><span class="line">hive&gt; set hive.execution.engine;</span><br><span class="line">hive.execution.engine=mr</span><br><span class="line"></span><br><span class="line">hive&gt; CREATE TABLE itweet_cn (</span><br><span class="line">    &gt; rowkey string,</span><br><span class="line">    &gt; cf1 map&lt;STRING,STRING&gt;,</span><br><span class="line">    &gt; cf2 map&lt;STRING,STRING&gt;,</span><br><span class="line">    &gt; cf3 map&lt;STRING,STRING&gt;</span><br><span class="line">    &gt; ) STORED BY &apos;org.apache.hadoop.hive.hbase.HBaseStorageHandler&apos;</span><br><span class="line">    &gt; WITH SERDEPROPERTIES (&quot;hbase.columns.mapping&quot; = &quot;:key,cf1:,cf2:,cf3:&quot;)</span><br><span class="line">    &gt; TBLPROPERTIES (&quot;hbase.table.name&quot; = &quot;itweet_cn&quot;);</span><br><span class="line">OK</span><br><span class="line">Time taken: 1.855 seconds</span><br><span class="line"></span><br><span class="line">hive&gt; INSERT INTO TABLE itweet_cn</span><br><span class="line">    &gt; SELECT &apos;row1&apos; AS rowkey,</span><br><span class="line">    &gt; map(&apos;c1&apos;,&apos;hadoop.apcahe.org&apos;) AS cf1,</span><br><span class="line">    &gt; map(&apos;c2&apos;,&apos;itweet.cn&apos;) AS cf2,</span><br><span class="line">    &gt; map(&apos;c2&apos;,&apos;www.itweet.cn&apos;) AS cf3 </span><br><span class="line">    &gt; FROM DUAL </span><br><span class="line">    &gt; limit 1;</span><br><span class="line">Time taken: 47.35 seconds</span><br><span class="line"></span><br><span class="line">hive (default)&gt; set hive.cli.print.header=true;</span><br><span class="line">hive (default)&gt; set hive.cli.print.current.db=true;</span><br><span class="line"></span><br><span class="line">hive (default)&gt; select * from itweet_cn;</span><br><span class="line">OK</span><br><span class="line">itweet_cn.rowkey        itweet_cn.cf1   itweet_cn.cf2   itweet_cn.cf3</span><br><span class="line">row1    &#123;&quot;c1&quot;:&quot;hadoop.apcahe.org&quot;&#125;      &#123;&quot;c2&quot;:&quot;itweet.cn&quot;&#125;      &#123;&quot;c2&quot;:&quot;www.itweet.cn&quot;&#125;</span><br><span class="line">Time taken: 0.284 seconds, Fetched: 1 row(s)</span><br></pre></td></tr></table></figure>
+<h1 id="Hbase-Check"><a href="#Hbase-Check" class="headerlink" title="Hbase Check"></a>Hbase Check</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># hbase shell</span><br><span class="line"></span><br><span class="line">hbase(main):012:0&gt; list &apos;itweet.*&apos;</span><br><span class="line">itweet_cn                                                                 </span><br><span class="line">1 row(s) in 0.0110 seconds</span><br><span class="line"></span><br><span class="line">hbase(main):013:0&gt; scan &apos;itweet_cn&apos;</span><br><span class="line">ROW                                          COLUMN+CELL                                                                                                                      </span><br><span class="line"> row1                                        column=cf1:c1, timestamp=1467522163061, value=hadoop.apcahe.org                                                                  </span><br><span class="line"> row1                                        column=cf2:c2, timestamp=1467522163061, value=itweet.cn                                                                          </span><br><span class="line"> row1                                        column=cf3:c2, timestamp=1467522163061, value=www.itweet.cn                                                                      </span><br><span class="line">1 row(s) in 0.1160 seconds</span><br></pre></td></tr></table></figure>
+<h1 id="Phoenix-on-Hbase"><a href="#Phoenix-on-Hbase" class="headerlink" title="Phoenix on Hbase"></a>Phoenix on Hbase</h1><p> Phoenix on Hbase整合文档，参考：<a href="https://jikelab.github.io/tech-labs/2015/07/16/Phoenix-hbase/" target="_blank" rel="noopener">https://jikelab.github.io/tech-labs/2015/07/16/Phoenix-hbase/</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"># cat shell/phoenix-cli.sh </span><br><span class="line">sqlline.py bigdata-server-1:2181</span><br><span class="line"></span><br><span class="line"># sh shell/phoenix-cli.sh </span><br><span class="line">Building list of tables and columns for tab-completion (set fastconnect to true to skip)...</span><br><span class="line">85/85 (100%) Done</span><br><span class="line">Done</span><br><span class="line">sqlline version 1.1.8</span><br><span class="line">0: jdbc:phoenix:bigdata-server-1:2181&gt; !tables</span><br><span class="line">+------------+--------------+-------------+---------------+----------+------------+----------------------------+-----------------+--------------+-----------------+----------+</span><br><span class="line">| TABLE_CAT  | TABLE_SCHEM  | TABLE_NAME  |  TABLE_TYPE   | REMARKS  | TYPE_NAME  | SELF_REFERENCING_COL_NAME  | REF_GENERATION  | INDEX_STATE  | IMMUTABLE_ROWS  | SALT_BUC |</span><br><span class="line">+------------+--------------+-------------+---------------+----------+------------+----------------------------+-----------------+--------------+-----------------+----------+</span><br><span class="line">|            | SYSTEM       | CATALOG     | SYSTEM TABLE  |          |            |                            |                 |              | false           | null     |</span><br><span class="line">|            | SYSTEM       | FUNCTION    | SYSTEM TABLE  |          |            |                            |                 |              | false           | null     |</span><br><span class="line">|            | SYSTEM       | SEQUENCE    | SYSTEM TABLE  |          |            |                            |                 |              | false           | null     |</span><br><span class="line">|            | SYSTEM       | STATS       | SYSTEM TABLE  |          |            |                            |                 |              | false           | null     |</span><br><span class="line">|            |              | ABC         | TABLE         |          |            |                            |                 |              | false           | null     |</span><br><span class="line">+------------+--------------+-------------+---------------+----------+------------+----------------------------+-----------------+--------------+-----------------+----------+</span><br><span class="line"></span><br><span class="line">0: jdbc:phoenix:bigdata-server-1:2181&gt; create table abc(a integer primary key, b integer) ; </span><br><span class="line">No rows affected (1.395 seconds)</span><br><span class="line"></span><br><span class="line">0: jdbc:phoenix:bigdata-server-1:2181&gt; UPSERT INTO abc VALUES (1, 1); </span><br><span class="line">1 row affected (0.139 seconds)</span><br><span class="line">0: jdbc:phoenix:bigdata-server-1:2181&gt; UPSERT INTO abc VALUES (1, 2); </span><br><span class="line">1 row affected (0.013 seconds)</span><br><span class="line">0: jdbc:phoenix:bigdata-server-1:2181&gt; UPSERT INTO abc VALUES (2, 1); </span><br><span class="line">1 row affected (0.014 seconds)</span><br><span class="line">0: jdbc:phoenix:bigdata-server-1:2181&gt; UPSERT INTO abc VALUES (1, 1); </span><br><span class="line">1 row affected (0.016 seconds)</span><br><span class="line"></span><br><span class="line">0: jdbc:phoenix:bigdata-server-1:2181&gt; select * from abc;</span><br><span class="line">+----+----+</span><br><span class="line">| A  | B  |</span><br><span class="line">+----+----+</span><br><span class="line">| 1  | 1  |</span><br><span class="line">| 2  | 1  |</span><br><span class="line">+----+----+</span><br><span class="line">2 rows selected (0.065 seconds)</span><br></pre></td></tr></table></figure></p>
+<p>如下，看到phoenix不支持Hive的map数据类型。phoenix 支持<a href="http://phoenix.apache.org/language/datatypes.html" target="_blank" rel="noopener">datatype</a>列表<br>0: jdbc:phoenix:bigdata-server-1:2181&gt;  CREATE VIEW “itweet_cn” ( rowkey VARCHAR primary key, “cf1” map, “cf2” map,”cf3” map) default_column_family=’row1’;<br><code>Error: ERROR 201 (22000): Illegal data. Unsupported sql type: MAP (state=22000,code=201)</code><br><code>java.sql.SQLException: ERROR 201 (22000): Illegal data. Unsupported sql type: MAP</code></p>
+<p>phoenix－hbase文中版本集成，还遇到一个问题，hbase中存在的表，mapping时候报错，<code>ReadOnlyTableException: ERROR 505 (42000): Table is read only.</code>，而在很早以我集成的版本中没遇到过这样的问题！一摸一样的SQL!</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/HbaseSQL/">HbaseSQL</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/07/06/Running MapReduce Example Programs and Benchmarks/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Running MapReduce Example Programs and Benchmarks</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/07/03/分布式大数据多维分析（OLAP）引擎Apache Kylin安装体验/">
+        <span class="next-text nav-default">分布式大数据多维分析（OLAP）引擎Apache Kylin安装体验</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

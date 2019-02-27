@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="ganglia-centos">
+
+
+
+
+  <meta name="keywords" content="monitor,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/07/12/ganglia-centos/">
+
+
+<meta name="description" content="ganglia   Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。   Ganglia的核心包含gmond、gmetad以及一个Web前端。主要是用来监控系统性能，如：   cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，通过曲线很容易见到每个节点   的工作状态，对合理调整、分配系统资源，提高系统整体性能起到重要作用。    Cento">
+<meta name="keywords" content="monitor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ganglia-centos">
+<meta property="og:url" content="http://itweet.github.io/2015/07/12/ganglia-centos/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="ganglia   Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。   Ganglia的核心包含gmond、gmetad以及一个Web前端。主要是用来监控系统性能，如：   cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，通过曲线很容易见到每个节点   的工作状态，对合理调整、分配系统资源，提高系统整体性能起到重要作用。    Cento">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://g.hiphotos.baidu.com/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=565a7df0720e0cf3b4fa46a96b2f997a/d058ccbf6c81800adfd059ecb13533fa828b471f.jpg">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.482Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ganglia-centos">
+<meta name="twitter:description" content="ganglia   Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。   Ganglia的核心包含gmond、gmetad以及一个Web前端。主要是用来监控系统性能，如：   cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，通过曲线很容易见到每个节点   的工作状态，对合理调整、分配系统资源，提高系统整体性能起到重要作用。    Cento">
+<meta name="twitter:image" content="http://g.hiphotos.baidu.com/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=565a7df0720e0cf3b4fa46a96b2f997a/d058ccbf6c81800adfd059ecb13533fa828b471f.jpg">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> ganglia-centos - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          ganglia-centos
+        
+      </h1>
+
+      <time class="post-time">
+          7月 12 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="ganglia"><a href="#ganglia" class="headerlink" title="ganglia"></a>ganglia</h1><p>   Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。<br>   Ganglia的核心包含gmond、gmetad以及一个Web前端。主要是用来监控系统性能，如：<br>   cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，通过曲线很容易见到每个节点<br>   的工作状态，对合理调整、分配系统资源，提高系统整体性能起到重要作用。<br>   <img src="http://g.hiphotos.baidu.com/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=565a7df0720e0cf3b4fa46a96b2f997a/d058ccbf6c81800adfd059ecb13533fa828b471f.jpg" alt></p>
+<h1 id="Centos安装Ganglia"><a href="#Centos安装Ganglia" class="headerlink" title="Centos安装Ganglia"></a>Centos安装Ganglia</h1><h2 id="1、安装ganglia"><a href="#1、安装ganglia" class="headerlink" title="1、安装ganglia"></a>1、安装ganglia</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@itr-mastertest01 local]#  rpm -Uvh  http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</span><br><span class="line">[root@itr-mastertest02 local]#  rpm -Uvh  http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</span><br><span class="line">[root@itr-nodetest01 local]#  rpm -Uvh  http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</span><br><span class="line">[root@itr-nodetest02 local]#  rpm -Uvh  http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</span><br><span class="line">[root@itr-mastertest01 local]# yum install rrdtool ganglia-gmetad ganglia-gmond ganglia-web httpd php -y</span><br><span class="line">[root@itr-mastertest01 local]# rpm -e ganglia-web-3.1.7-6.el6.x86_64		这里卸载web我们下面自己安装一个版本</span><br><span class="line">[root@itr-mastertest01 ~]# rpm -qa | grep ganglia 		验证rmp安装</span><br><span class="line">	ganglia-3.1.7-6.el6.x86_64</span><br><span class="line">	ganglia-gmetad-3.1.7-6.el6.x86_64</span><br><span class="line">	ganglia-gmond-3.1.7-6.el6.x86_64</span><br><span class="line"></span><br><span class="line">[root@itr-mastertest02 local]# yum search ganglia-gmond</span><br><span class="line"> 	[root@itr-mastertest02 local]# yum install ganglia-gmond -y</span><br><span class="line"> 	[root@itr-mastertest02 ~]# rpm -qa | grep ganglia 		验证rmp安装</span><br><span class="line">	ganglia-gmond-3.1.7-6.el6.x86_64</span><br><span class="line">	ganglia-3.1.7-6.el6.x86_64</span><br><span class="line"></span><br><span class="line"> 	[root@itr-nodetest01 local]# yum install ganglia-gmond -y</span><br><span class="line"></span><br><span class="line"> 	[root@itr-nodetest02 local]# yum install ganglia-gmond -y</span><br></pre></td></tr></table></figure>
+<h2 id="2、编辑配置文件"><a href="#2、编辑配置文件" class="headerlink" title="2、编辑配置文件"></a>2、编辑配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@itr-mastertest01 ~]# vim /etc/ganglia/gmond.conf</span><br><span class="line">	cluster &#123;</span><br><span class="line">	  name = &quot;cluster1&quot;</span><br><span class="line">	  owner = &quot;unspecified&quot;</span><br><span class="line">	  latlong = &quot;unspecified&quot;</span><br><span class="line">	  url = &quot;unspecified&quot;</span><br><span class="line">	&#125;</span><br><span class="line">	/* Feel free to specify as many udp_send_channels as you like.  Gmond</span><br><span class="line">	   used to only support having a single channel */</span><br><span class="line">	udp_send_channel &#123;</span><br><span class="line">	 /* mcast_join = 239.2.11.71*/</span><br><span class="line">	  host = 192.168.2.200</span><br><span class="line">	  port = 8649</span><br><span class="line">	  ttl = 1</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* You can specify as many udp_recv_channels as you like as well. */</span><br><span class="line">	udp_recv_channel &#123;</span><br><span class="line">	 /*mcast_join = 239.2.11.71*/</span><br><span class="line">	  port = 8649</span><br><span class="line">	 /* bind = 239.2.11.71*/</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">[root@itr-mastertest01 ~]# vim /etc/ganglia/gmetad.conf</span><br><span class="line">	data_source &quot;cluster1&quot; 10 192.168.2.200 192.168.2.201 192.168.2.202 192.168.2.203</span><br><span class="line"></span><br><span class="line">[root@itr-mastertest01 ~]# scp /etc/ganglia/gmond.conf itr-mastertest02:/etc/ganglia/</span><br><span class="line"> 	[root@itr-mastertest01 ~]# scp /etc/ganglia/gmond.conf itr-nodetest01:/etc/ganglia/</span><br><span class="line"> 	[root@itr-mastertest01 ~]# scp /etc/ganglia/gmond.conf itr-nodetest02:/etc/ganglia/</span><br></pre></td></tr></table></figure>
+<h2 id="3、设置开机自动启动"><a href="#3、设置开机自动启动" class="headerlink" title="3、设置开机自动启动"></a>3、设置开机自动启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@itr-mastertest01 local]# chkconfig --levels 235 gmond on</span><br><span class="line"> 	[root@itr-mastertest01 local]# chkconfig --list gmond </span><br><span class="line"> 	[root@itr-mastertest01 local]# chkconfig --levels 235 gmetad on</span><br><span class="line"> 	[root@itr-mastertest01 local]# chkconfig --levels 235 httpd on</span><br><span class="line"></span><br><span class="line"> 	[root@itr-mastertest02 local]# chkconfig --levels 235 gmond on</span><br><span class="line"> 	[root@itr-nodetest01 local]# chkconfig --levels 235 gmond on</span><br><span class="line"> 	[root@itr-nodetest02 local]# chkconfig --levels 235 gmond on</span><br></pre></td></tr></table></figure>
+<h2 id="4、启动"><a href="#4、启动" class="headerlink" title="4、启动"></a>4、启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@itr-mastertest01 local]# service gmond start</span><br><span class="line">[root@itr-mastertest01 local]# service gmetad start</span><br><span class="line">[root@itr-mastertest01 local]# service httpd start</span><br><span class="line">[root@itr-mastertest01 local]# service httpd start    </span><br><span class="line"></span><br><span class="line">[root@itr-mastertest01 ~]# ps aux | grep apache*  		验证apache</span><br><span class="line">root      1736  0.0  0.1 105488   912 pts/0    S+   09:21   0:00 grep apache*</span><br><span class="line">[root@itr-mastertest01 ~]# ps aux | grep ganglia* 		验证ganglia</span><br><span class="line">ganglia   1191  0.1  0.2 228468  1932 ?        Sl   08:48   0:03 /usr/sbin/gmetad</span><br><span class="line">ganglia   1515  0.0  0.2 147736  2396 ?        Ss   08:48   0:00 /usr/sbin/gmond</span><br><span class="line">root      1741  0.0  0.1 105488   912 pts/0    S+   09:22   0:00 grep ganglia*</span><br><span class="line"></span><br><span class="line">[root@itr-mastertest02 ~]#  ps aux | grep ganglia* 		其他节点验证</span><br><span class="line">ganglia   1622  0.0  0.2 146792  1836 ?        Ss   08:49   0:00 /usr/sbin/gmond</span><br><span class="line">root      1825  0.0  0.1 105488   908 pts/0    S+   09:24   0:00 grep ganglia*</span><br></pre></td></tr></table></figure>
+<h2 id="5、安装ganglia-web界面"><a href="#5、安装ganglia-web界面" class="headerlink" title="5、安装ganglia-web界面"></a>5、安装ganglia-web界面</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[root@itr-mastertest01 local]# cd installpackage/</span><br><span class="line">[root@itr-mastertest01 installpackage]# tar -zxvf ganglia-web-3.5.12.tar.gz -C ../</span><br><span class="line">[root@itr-mastertest01 local]# cd ganglia-web-3.5.12/</span><br><span class="line">[root@itr-mastertest01 ganglia-web-3.5.12]# vim Makefile </span><br><span class="line">	GDESTDIR = /var/www/html/ganglia</span><br><span class="line">	APACHE_USER = apahce              </span><br><span class="line"></span><br><span class="line">[root@itr-mastertest01 ganglia-web-3.5.12]# vi /etc/httpd/conf/httpd.conf</span><br><span class="line">	User apache 							上面的用户和这样里对接</span><br><span class="line">	Group apache</span><br><span class="line"></span><br><span class="line">[root@itr-mastertest01 ganglia-web-3.5.12]# make install</span><br><span class="line">[root@itr-mastertest01 ganglia-web-3.5.12]# LANG=en</span><br><span class="line">[root@itr-mastertest01 ganglia-web-3.5.12]#  service httpd status</span><br><span class="line">httpd (pid  5810) 正在运行...</span><br><span class="line">[root@itr-mastertest01 ganglia-web-3.5.12]# service gmetad status</span><br><span class="line">gmetad (pid 5844) 正在运行...</span><br><span class="line">[root@itr-mastertest01 ganglia-web-3.5.12]# service gmond status</span><br><span class="line">gmond (pid 5874) 正在运行...</span><br><span class="line"></span><br><span class="line">[root@itr-mastertest01 html]# chmod -R 777 /var/www/html/ganglia 		有时候web页面访问apache目录权限不够</span><br><span class="line"></span><br><span class="line">[root@itr-mastertest01 ganglia]# setenforce 0 							必须关闭selinux，否则web页面访问提示权限不够</span><br><span class="line">[root@itr-mastertest01 ganglia]#  vi /etc/selinux/</span><br><span class="line">[root@itr-mastertest01 ganglia]#  vi /etc/selinux/config </span><br><span class="line">SELINUX=disabled</span><br><span class="line"></span><br><span class="line">[root@itr-mastertest01 ganglia]# scp /etc/selinux/config itr-mastertest02:/etc/selinux/</span><br><span class="line">[root@itr-mastertest01 ganglia]# scp /etc/selinux/config itr-nodetest02:/etc/selinux/  </span><br><span class="line">[root@itr-mastertest01 ganglia]# scp /etc/selinux/config itr-nodetest01:/etc/selinux/</span><br></pre></td></tr></table></figure>
+<h2 id="6、配置hadoop文件发送信息给ganglia"><a href="#6、配置hadoop文件发送信息给ganglia" class="headerlink" title="6、配置hadoop文件发送信息给ganglia"></a>6、配置hadoop文件发送信息给ganglia</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">[root@itr-mastertest01 hadoop]# vi /usr/local/hadoop-2.4.0/etc/hadoop/hadoop-metrics2.properties </span><br><span class="line">	#By AndrewHsu 2014-12-31</span><br><span class="line">	#NameNode</span><br><span class="line">	*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">	*.period=10</span><br><span class="line">	namenode.sink.ganglia.servers=192.168.2.200:8649</span><br><span class="line"></span><br><span class="line">	#DataNode</span><br><span class="line">	*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">	*.period=10</span><br><span class="line">	datanode.sink.ganglia.servers=192.168.2.200:8649</span><br><span class="line"></span><br><span class="line">	#SecondaryNameNode</span><br><span class="line">	*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">	*.period=10</span><br><span class="line">	secondarynamenode.sink.ganglia.servers=192.168.2.200:8649</span><br><span class="line"></span><br><span class="line">	#YARN</span><br><span class="line">	#ResourceManager</span><br><span class="line">	*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">	*.period=10</span><br><span class="line">	resourcemanager.sink.ganglia.servers=192.168.2.200:8649</span><br><span class="line">	maptask.sink.ganglia.servers=192.168.2.200:8649 </span><br><span class="line">	reducetask.sink.ganglia.servers=192.168.2.200:8649</span><br><span class="line"></span><br><span class="line">	#NodeManager</span><br><span class="line">	*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">	*.period=10</span><br><span class="line">	nodemanager.sink.ganglia.servers=192.168.2.200:8649</span><br><span class="line">	maptask.sink.ganglia.servers=192.168.2.200:8649 </span><br><span class="line">	reducetask.sink.ganglia.servers=192.168.2.200:8649</span><br><span class="line"></span><br><span class="line">	[root@itr-mastertest01 local]# groupadd supergroup 			为制作nfs3挂载hdfs目录到本地而增加的组</span><br><span class="line">	[root@itr-mastertest01 local]# cat /etc/group | grep supergroup</span><br><span class="line">	supergroup:x:501:</span><br><span class="line"></span><br><span class="line">	#scp conf to all node</span><br><span class="line">	[root@itr-mastertest01 ~]# scp /usr/local/hadoop-2.4.0/etc/hadoop/hadoop-metrics2.properties itr-mastertest02:/usr/local/hadoop-2.4.0/etc/hadoop/</span><br><span class="line"></span><br><span class="line">	[root@itr-mastertest01 ~]# scp /usr/local/hadoop-2.4.0/etc/hadoop/hadoop-metrics2.properties itr-nodetest01:/usr/local/hadoop-2.4.0/etc/hadoop/</span><br><span class="line"></span><br><span class="line">	[root@itr-mastertest01 ~]# scp /usr/local/hadoop-2.4.0/etc/hadoop/hadoop-metrics2.properties itr-nodetest02:/usr/local/hadoop-2.4.0/etc/hadoop/</span><br></pre></td></tr></table></figure>
+<h2 id="7、配置hbase发送信息给ganglia"><a href="#7、配置hbase发送信息给ganglia" class="headerlink" title="7、配置hbase发送信息给ganglia"></a>7、配置hbase发送信息给ganglia</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@itr-mastertest01 conf]# vi /usr/local/hbase-0.98.6.1/conf/hadoop-metrics2-hbase.properties </span><br><span class="line">#By AndrewHsu 2-14-12-31</span><br><span class="line">#HBase</span><br><span class="line">#Master Server</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.sink.ganglia.period=10</span><br><span class="line">hbase.sink.ganglia.period=10</span><br><span class="line">hbase.sink.ganglia.servers=192.168.2.200:8649</span><br><span class="line"></span><br><span class="line">#Region Server</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.sink.ganglia.period=10</span><br><span class="line">hbase.sink.ganglia.period=10</span><br><span class="line">hbase.sink.ganglia.servers=192.168.2.200:8649</span><br><span class="line"></span><br><span class="line">#scp conf to all node</span><br><span class="line">[root@itr-mastertest01 ~]# scp /usr/local/hbase-0.98.6.1/conf/hadoop-metrics2-hbase.properties itr-nodetest01:/usr/local/hbase-0.98.6.1/conf/</span><br><span class="line">[root@itr-mastertest01 ~]# scp /usr/local/hbase-0.98.6.1/conf/hadoop-metrics2-hbase.properties itr-nodetest02:/usr/local/hbase-0.98.6.1/conf/</span><br></pre></td></tr></table></figure>
+<h2 id="8、webui界面"><a href="#8、webui界面" class="headerlink" title="8、webui界面"></a>8、webui界面</h2><blockquote>
+<p><a href="http://itr-mastertest01/ganglia/" target="_blank" rel="noopener">http://itr-mastertest01/ganglia/</a></p>
+</blockquote>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/monitor/">monitor</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/07/12/git manual/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">git manual</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/07/10/hive install/">
+        <span class="next-text nav-default">hive install</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="如何在新版Apache Hadoop中使用HDFSIntra-DataNode磁盘均衡器">
+
+
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/05/26/如何在新版Apache Hadoop中使用HDFSIntra-DataNode磁盘均衡器/">
+
+
+<meta name="description" content="目前HDFS包含了(在CDH 5.8.2 及更高版本)一个综合的容量管理存储方法，该方法用于跨节点移动数据。 在HDFS内部，数据节点将数据块分布在本地文件系统目录中，该本地文件系统目录被指定用于dfs.datanode.data.dir in hdfs-site.xml. 在不同的设备中（例如，单独的HDD和SSD）用标准的方式安装，HDFS术语都将每个目录都称作是一个容量。 当给HDFS写入新">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在新版Apache Hadoop中使用HDFSIntra-DataNode磁盘均衡器">
+<meta property="og:url" content="http://itweet.github.io/2017/05/26/如何在新版Apache Hadoop中使用HDFSIntra-DataNode磁盘均衡器/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="目前HDFS包含了(在CDH 5.8.2 及更高版本)一个综合的容量管理存储方法，该方法用于跨节点移动数据。 在HDFS内部，数据节点将数据块分布在本地文件系统目录中，该本地文件系统目录被指定用于dfs.datanode.data.dir in hdfs-site.xml. 在不同的设备中（例如，单独的HDD和SSD）用标准的方式安装，HDFS术语都将每个目录都称作是一个容量。 当给HDFS写入新">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/balancer.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/balancer-f2.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.515Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何在新版Apache Hadoop中使用HDFSIntra-DataNode磁盘均衡器">
+<meta name="twitter:description" content="目前HDFS包含了(在CDH 5.8.2 及更高版本)一个综合的容量管理存储方法，该方法用于跨节点移动数据。 在HDFS内部，数据节点将数据块分布在本地文件系统目录中，该本地文件系统目录被指定用于dfs.datanode.data.dir in hdfs-site.xml. 在不同的设备中（例如，单独的HDD和SSD）用标准的方式安装，HDFS术语都将每个目录都称作是一个容量。 当给HDFS写入新">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/BigData/img/balancer.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 如何在新版Apache Hadoop中使用HDFSIntra-DataNode磁盘均衡器 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          如何在新版Apache Hadoop中使用HDFSIntra-DataNode磁盘均衡器
+        
+      </h1>
+
+      <time class="post-time">
+          5月 26 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p><strong><em>目前HDFS包含了(在CDH 5.8.2 及更高版本)一个综合的容量管理存储方法，该方法用于跨节点移动数据。</em></strong></p>
+<p>在HDFS内部，数据节点将数据块分布在本地文件系统目录中，该本地文件系统目录被指定用于dfs.datanode.data.dir in hdfs-site.xml. 在不同的设备中（例如，单独的HDD和SSD）用标准的方式安装，HDFS术语都将每个目录都称作是一个容量。</p>
+<p>当给HDFS写入新的块时，数据节点为块用volume-choosing 策略选择磁盘。目前这两种策略类型都支持：轮询方式或者可用空间方式 (HDFS-1804)。</p>
+<p>简单的说， 如图表1所示， 轮询策略跨越可用磁盘分布新的块， 而可用空间策略优先在空间更多的磁盘写入块。（根据百分比分配）</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/balancer.png" alt></p>
+<p>默认情况下， 数据节点使用轮询策略写入新的块。然而在一个长期运行的集群中，因为HDFS中大量的文件删除或者通过热插拔磁盘功能添加新的数据节点磁盘，还是有可能会造成明显的容量分布不平衡，。即使你选择用基于可用空间的策略代替轮询策略，容量不平衡仍然会导致磁盘I/O效率不高的发生：例如：将新块都写入到新加的空磁盘中而在这期间其他磁盘被闲置在一旁，就给新磁盘造成了一种瓶颈状态。</p>
+<p>最近，Apache Hadoop社区开发的服务器脱机脚本(如HDFS-1312，dev@邮件列表，和<a href="https://github.com/schmmd/hadoop-balancer" target="_blank" rel="noopener">GitHub</a>)用于减轻数据不平衡问题。然而，由于这些脚本处于HDFS代码库以外，这就需要在磁盘之间移动数据之前，让这些数据节点处于脱机状态。因此， HDFS-1312 还引入了一个在线磁盘平衡器，这种平衡器的设计基于不同的度量完成的，用于平衡Running中数据节点的容量。类似HDFS平衡器，HDFS磁盘平衡器作为一个线程在数据节点中运行，可以跨越相同存储容量类型移动块文件。</p>
+<p>在接下来的部分， 你将学会为什么和如何使用这种新功能。</p>
+<h3 id="磁盘平衡器101"><a href="#磁盘平衡器101" class="headerlink" title="磁盘平衡器101"></a>磁盘平衡器101</h3><p>让我们一起通过一个案例来逐步探索这项实用的功能。首先， 确认，<code>dfs.disk.balancer.enabled</code>在所有数据节点上设置为TRUE。从CDH5.8.2 开始， 在Cloudera Manager中，用户可以通过HDFS安全阀片段指定完成这项配置。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/balancer-f2.png" alt></p>
+<p>在这个例子中，我们将新磁盘添加到一个预装的HDFS数据节点(<code>mnt/disk1</code>)，并将挂载新磁盘添加到/mnt/disk2。在CDH中，每个HDFS数据目录都在一个单独的磁盘上，因此您可以使用df表示磁盘使用情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># df -h</span><br><span class="line">….</span><br><span class="line">/var/disk1      5.8G  3.6G  1.9G  66% /mnt/disk1</span><br><span class="line">/var/disk2      5.8G   13M  5.5G   1% /mnt/disk2</span><br></pre></td></tr></table></figure>
+<p>很明显， 是再次平衡磁盘的时候了！</p>
+<p>一个标准的磁盘平衡器的任务包括了三步：（通过hdfs <code>diskbalancer</code>执行命令）计划、执行和查询。第一步，HDFS客户将NameNode看作特定的数据节点，并从该数据节点节点上读取必不可少的信息生成执行计划。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># hdfs diskbalancer -plan lei-dn-3.example.org</span><br><span class="line">16/08/19 18:04:01 INFO planner.GreedyPlanner: Starting plan for Node : lei-dn-3.example.org:20001</span><br><span class="line">16/08/19 18:04:01 INFO planner.GreedyPlanner: Disk Volume set 03922eb1-63af-4a16-bafe-fde772aee2fa Type : DISK plan completed.Th</span><br><span class="line">16/08/19 18:04:01 INFO planner.GreedyPlanner: Compute Plan for Node : lei-dn-3.example.org:20001 took 5 ms</span><br><span class="line">16/08/19 18:04:01 INFO command.Command: Writing plan to : /system/diskbalancer/2016-Aug-19-18-04-01</span><br></pre></td></tr></table></figure>
+<p>正如你从输出中看到的一样，HDFS 磁盘平衡器通过数据节点将磁盘使用信息报告给NameNode，并在指定的数据节点上使用planner计算计划移动的数据步骤。每一步都明确了资源和目标移动数据量，以及预计移动的数据量。</p>
+<p>在撰写本文时，HDFS唯一的的planner是<code>GreedyPlanner</code>，GreedyPlan的作用是不断的从最常用的设备中移动数据到使用最少的设备中直到所有的数据均匀分布在所有的设备上。用户还可以利用<code>plan</code>中的命令指定空间阈值，这样， planner就认为磁盘是平衡的除非空间利用的差异低于阈值。（另一个值得注意的设置是在规划过程中通过指定<code>--bandwidth</code>调节<code>diskbalancer</code> I/O的任务，那样disk balancer I/O就不会影响前台工作了）</p>
+<p>在disk-balancer磁盘执行计划时被生成JSON文件存储在HDFS中，在默认情况下， 这个计划文件是存储在<code>/system/diskbalancer</code>目录中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># hdfs dfs -ls /system/diskbalancer/2016-Aug-19-18-04-01</span><br><span class="line">Found 2 items</span><br><span class="line">-rw-r--r--   3 hdfs supergroup       1955 2016-08-19 18:04 /system/diskbalancer/2016-Aug-19-18-04-01/lei-dn-3.example.org.before.json</span><br><span class="line">-rw-r--r--   3 hdfs supergroup        908 2016-08-19 18:04 /system/diskbalancer/2016-Aug-19-18-04-01/lei-dn-3.example.org.plan.json</span><br></pre></td></tr></table></figure>
+<p>为了执行数据节点上的计划，运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs diskbalancer -execute /system/diskbalancer/2016-Aug-17-17-03-56/172.26.10.16.plan.json</span><br><span class="line">16/08/17 17:22:08 INFO command.Command: Executing &quot;execute plan&quot; command</span><br></pre></td></tr></table></figure>
+<p>这个命令用于提交JSON计划文件到DataNode，并且是在<code>BlockMover</code>线程的后台执行。</p>
+<p>使用<code>query</code>命令检查<code>diskbalancer</code>在数据节点上的任务状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># hdfs diskbalancer -query lei-dn-3:20001</span><br><span class="line">16/08/19 21:08:04 INFO command.Command: Executing &quot;query plan&quot; command.</span><br><span class="line">Plan File: /system/diskbalancer/2016-Aug-19-18-04-01/lei-dn-3.example.org.plan.json</span><br><span class="line">Plan ID: ff735b410579b2bbe15352a14bf001396f22344f7ed5fe24481ac133ce6de65fe5d721e223b08a861245be033a82469d2ce943aac84d9a111b542e6c63b40e75</span><br><span class="line">Result: PLAN_DONE</span><br></pre></td></tr></table></figure>
+<p>输出(<code>PLAN_DONE</code>)表示磁盘平衡任务完成。若要验证磁盘平衡器的有效性， 可再次使用<code>df -h</code>查看数据在两个本地磁盘上的分布情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">….</span><br><span class="line">/var/disk1      5.8G  2.1G  3.5G  37% /mnt/disk1</span><br><span class="line">/var/disk2      5.8G  1.6G  4.0G  29% /mnt/disk2</span><br></pre></td></tr></table></figure>
+<p>只要输出确认磁盘平衡器成功降低了磁盘空间使用差异并且容量低于10%，就意味着任务完成了！</p>
+<p>若想阅读更多关于HDFS磁盘平衡器， 请阅读<a href="http://www.cloudera.com/documentation/enterprise/latest/topics/admin_hdfs_balancer.html" target="_blank" rel="noopener">Cloudera文档</a>和<a href="http://www.cloudera.com/documentation/enterprise/latest/topics/admin_hdfs_balancer.html" target="_blank" rel="noopener">upstream docs</a>。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>与期待已久一样，HDFS-1312引入了intra-DataNode磁盘平衡器功能， 在CDH5.8.2中HDFS的传输版本或者更高版本提供了综合的存储容量管理解决方案， 该解决方案能够跨越节点（balancer），存储类型（mover）， 在单个DataNode的磁盘(Disk Balancer)移动数据.</p>
+<p>译文原文：<a href="https://blog.cloudera.com/blog/2016/10/how-to-use-the-new-hdfs-intra-datanode-disk-balancer-in-apache-hadoop/" target="_blank" rel="noopener">https://blog.cloudera.com/blog/2016/10/how-to-use-the-new-hdfs-intra-datanode-disk-balancer-in-apache-hadoop/</a></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/hadoop/">hadoop</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/05/30/openstack系列(9)-M版_云硬盘1/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">openstack系列(9)-M版_云硬盘1</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/05/26/宣布Apache Hive 2查询性能提升25倍以上/">
+        <span class="next-text nav-default">宣布Apache Hive 2查询性能提升25倍以上</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

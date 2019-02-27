@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="openstack系列(3)-架构规划">
+
+
+
+
+  <meta name="keywords" content="openstack,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/05/19/openstack系列(3)-架构规划/">
+
+
+<meta name="description" content="随着虚拟机技术的发展，企业环境云化对于增强企业级应用开发，核心竞争力有非常大的好处。对于内部，每个人都有机会拥有独立的开发调试环境，整个公司开发应用，测试，上线等内容都云化，可以便利开发人员，运维人员，节省成本，长远发展来看，可以帮助企业自动化软件架构，实现自动化系统的构建。节省运营，开发，维护，调试，测试等过程费用，减少成本。 对外部，企业自己的产品，可以通过云app，云web，云主机等环境，网">
+<meta name="keywords" content="openstack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openstack系列(3)-架构规划">
+<meta property="og:url" content="http://itweet.github.io/2017/05/19/openstack系列(3)-架构规划/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="随着虚拟机技术的发展，企业环境云化对于增强企业级应用开发，核心竞争力有非常大的好处。对于内部，每个人都有机会拥有独立的开发调试环境，整个公司开发应用，测试，上线等内容都云化，可以便利开发人员，运维人员，节省成本，长远发展来看，可以帮助企业自动化软件架构，实现自动化系统的构建。节省运营，开发，维护，调试，测试等过程费用，减少成本。 对外部，企业自己的产品，可以通过云app，云web，云主机等环境，网">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/data-networks.jpg">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/Snap12_thumb.gif">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/openstack-deploy.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/openstack-feature-list.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.513Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openstack系列(3)-架构规划">
+<meta name="twitter:description" content="随着虚拟机技术的发展，企业环境云化对于增强企业级应用开发，核心竞争力有非常大的好处。对于内部，每个人都有机会拥有独立的开发调试环境，整个公司开发应用，测试，上线等内容都云化，可以便利开发人员，运维人员，节省成本，长远发展来看，可以帮助企业自动化软件架构，实现自动化系统的构建。节省运营，开发，维护，调试，测试等过程费用，减少成本。 对外部，企业自己的产品，可以通过云app，云web，云主机等环境，网">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/data-networks.jpg">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> openstack系列(3)-架构规划 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          openstack系列(3)-架构规划
+        
+      </h1>
+
+      <time class="post-time">
+          5月 19 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>随着虚拟机技术的发展，企业环境云化对于增强企业级应用开发，核心竞争力有非常大的好处。<br>对于内部，每个人都有机会拥有独立的开发调试环境，整个公司开发应用，测试，上线等内容都云化，可以便利开发人员，运维人员，节省成本，长远发展来看，可以帮助企业自动化软件架构，实现自动化系统的构建。节省运营，开发，维护，调试，测试等过程费用，减少成本。</p>
+<p>对外部，企业自己的产品，可以通过云app，云web，云主机等环境，网络大批开发者，来这个平台开发不同的行业应用，帮助企业级把大平台微应用实现。</p>
+<h3 id="规划硬件部署"><a href="#规划硬件部署" class="headerlink" title="规划硬件部署"></a>规划硬件部署</h3><p>硬件说明，本次为模拟生产环境而编写，所以是在虚拟化的环境下进行搭建，但是完全是按照企业级生产环境的方式进行的安装部署。</p>
+<ul>
+<li>操作系统信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CentOS Linux release 7.3.1611 (Core) </span><br><span class="line"></span><br><span class="line">Linux openstack-controller 3.10.0-514.10.2.el7.x86_64 x86_64 GNU/Linux</span><br></pre></td></tr></table></figure>
+<ul>
+<li>RAID划分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Linux OS</span><br><span class="line">    : Raid1     大小：250G     磁盘类型：SSD</span><br><span class="line"></span><br><span class="line">Nova-instances</span><br><span class="line">    : Raid5     大小：5.5TB    磁盘类型：SATA</span><br><span class="line"></span><br><span class="line">Glusterfs-data</span><br><span class="line">    : Raid0     大小：4T * 4块     磁盘类型：SATA</span><br><span class="line"></span><br><span class="line">Ceph-data</span><br><span class="line">    : JBDO      大小：4T * 4块     磁盘类型：SATA</span><br></pre></td></tr></table></figure>
+<p>Raid配置之后，在操作系统中会以<code>/dev/sd[x]</code>的方式呈现。如上有<code>Linux OS</code>的系统盘，<code>Noav-instances</code>盘用来存储<code>云主机</code>,因为云主机默认会自带一块盘进行操作系统的安装，会占用一定的空间，所以这里每个节点我配置为5.5T大小<code>RAID5</code>类型的磁盘。Glusterfs和Ceph则为分布式块存储和对象存储系统，用来给云主机提供<code>云硬盘</code>,提供大的存储资源池，可以申请后挂载到云主机中使用，它们本身自带着容错和分布式存储能力，所以只需要裸盘进行挂载，glusterfs和ceph就能把所有的磁盘管理起来，形成大的存储资源池。</p>
+<ul>
+<li>分区规划</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">LinuxOS</span><br><span class="line">    : /     100G</span><br><span class="line">    : /var  80G</span><br><span class="line">    : /boot 500MB</span><br><span class="line">    : swap  20G</span><br><span class="line"></span><br><span class="line">Nova-instances</span><br><span class="line">    :  /var/lib/nova/instances   5.5TB   # 所有nova所在节点都需要大空间,存储云主机</span><br><span class="line"></span><br><span class="line">Glance-images</span><br><span class="line">    :  /var/lib/glance/images/   4TB # glance所在的节点,需要让存储image需大空间,建议存在GlusterFS中</span><br><span class="line"></span><br><span class="line">Glusterfs-data</span><br><span class="line">    ： /data/glusterfs-data[1..4]     # 每台机器4块glusterfs存储</span><br><span class="line">    ： /data/ceph-data[1..4]          # 每台机器4块ceph存储</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>硬件配置</p>
+<ul>
+<li>CPU   24  Intel(R) Xeon(R) CPU E5-2620 v2 @ 2.10GHz</li>
+<li>Memory 128G</li>
+<li>硬盘   8块 <em> 4T 、2块 </em> 3T、2块 * 250G</li>
+<li>万兆网络</li>
+<li>节点数  10 Node</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络规划"><a href="#网络规划" class="headerlink" title="网络规划"></a>网络规划</h3><p>在使您能够评估 OpenStack 的单节点配置中，一个网络接口卡就足够了。但是，对多节点配置使用单个网络接口不足以提供带宽来服务于云的大量网络通信。如果在企业 OpenStack 设置中使用单个网络接口，性能很快就会成为严重问题。</p>
+<h4 id="隔离不同类型的网络通信"><a href="#隔离不同类型的网络通信" class="headerlink" title="隔离不同类型的网络通信"></a>隔离不同类型的网络通信</h4><p>不同类型的网络通信遍布整个云基础结构。您应该具有单独的网络或子网来托管每种类型的通信，例如：</p>
+<ul>
+<li><p>个人用户或租户网络－托管 OpenStack 云中虚拟机 (virtual machine, VM) 间的通信。</p>
+</li>
+<li><p>存储网络－托管 VM 及其位于外部存储系统上的应用程序数据集之间的通信。</p>
+</li>
+<li><p>管理或 API 网络－托管用于管理云基础结构的整个操作的 OpenStack 组件间的通信，包括管理员生成的通信。</p>
+</li>
+<li><p>外部网络－托管 VM 等虚拟实体及其在 OpenStack 云中的专用网络与更广泛的网络（包含公司网络和 Internet）之间的通信。</p>
+</li>
+</ul>
+<p>下图是多节点 OpenStack 配置中的多网络体系结构的示例。<br><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/data-networks.jpg" alt="图 1  多网络体系结构的示例"></p>
+<p>在此示例中，您可以根据需要进一步扩展体系结构。例如，如果决定使用冗余存储系统，则需要创建单独存储子网来管理到每个系统的通信。</p>
+<p>对特定通信使用不同网络，可以实现以下好处：</p>
+<ul>
+<li><p><em>网络的可靠性和可用性</em>－多个网络可以避免单网络配置固有的单点故障。</p>
+</li>
+<li><p><em>性能和可伸缩性</em>－与使用单个网络接口相比，具有多个接口用作不同的网络通信路径可以防止潜在的拥塞及其导致的性能下降。</p>
+</li>
+<li><p><em>安全性</em>－分隔网络可以确保控制对 OpenStack 框架的不同部分的访问。</p>
+</li>
+<li><p><em>可管理性</em>－对于云管理员，管理整个 OpenStack 框架更容易。</p>
+</li>
+</ul>
+<h4 id="分配逻辑主机名"><a href="#分配逻辑主机名" class="headerlink" title="分配逻辑主机名"></a>分配逻辑主机名</h4><p>使用逻辑主机名是适用于任何网络配置方案的良好实践。使用 DNS 或 /etc/hosts 文件进行名称解析。测试配置以确保其正常运行。</p>
+<h4 id="选择GRE-VXLAN网络"><a href="#选择GRE-VXLAN网络" class="headerlink" title="选择GRE/VXLAN网络"></a>选择GRE/VXLAN网络</h4><p><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/Snap12_thumb.gif" alt="vxlan"></p>
+<p>Compute 节点上由Neutron-OVS-Agent负责：</p>
+<ul>
+<li>br-int：每个虚机都通过一个Linux brige连到该OVS桥上</li>
+<li>br-tun：转化网络packet中的VLAN ID 和 Tunnel ID</li>
+<li>GRE tunnel：虚拟GRE通道</li>
+</ul>
+<p>Neutron节点上：</p>
+<ul>
+<li>br-tun/br-int：同Compute节点，由Neutron-OVS-Agent负责</li>
+<li>br-ex：连接物理网卡，用于和外网通信</li>
+<li>Network namespace：用于tenant 网络DHCP服务的qDHCP由Neutron-DHCP-Agent负责，和用于网络间routing的qRouter由Neutron-L3-Agent负责</li>
+</ul>
+<h3 id="部署拓扑"><a href="#部署拓扑" class="headerlink" title="部署拓扑"></a>部署拓扑</h3><p><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/openstack-deploy.png" alt="openstack topology"></p>
+<ul>
+<li>Controller 节点安装服务</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">== Nova services ==</span><br><span class="line">openstack-nova-api:                     active</span><br><span class="line">openstack-nova-compute:                 active</span><br><span class="line">openstack-nova-network:                 inactive  (disabled on boot)</span><br><span class="line">openstack-nova-scheduler:               active</span><br><span class="line">openstack-nova-cert:                    active</span><br><span class="line">openstack-nova-conductor:               active</span><br><span class="line">openstack-nova-console:                 inactive  (disabled on boot)</span><br><span class="line">openstack-nova-consoleauth:             active</span><br><span class="line">openstack-nova-xvpvncproxy:             inactive  (disabled on boot)</span><br><span class="line">== Glance services ==</span><br><span class="line">openstack-glance-api:                   active</span><br><span class="line">openstack-glance-registry:              active</span><br><span class="line">== Keystone service ==</span><br><span class="line">openstack-keystone:                     inactive  (disabled on boot)</span><br><span class="line">== Horizon service ==</span><br><span class="line">openstack-dashboard:                    active</span><br><span class="line">== neutron services ==</span><br><span class="line">neutron-server:                         active</span><br><span class="line">neutron-dhcp-agent:                     active</span><br><span class="line">neutron-l3-agent:                       active</span><br><span class="line">neutron-metadata-agent:                 active</span><br><span class="line">neutron-openvswitch-agent:              active</span><br><span class="line">neutron-metering-agent:                 active</span><br><span class="line">== Swift services ==</span><br><span class="line">openstack-swift-proxy:                  active</span><br><span class="line">openstack-swift-account:                active</span><br><span class="line">openstack-swift-container:              active</span><br><span class="line">openstack-swift-object:                 active</span><br><span class="line">== Cinder services ==</span><br><span class="line">openstack-cinder-api:                   active</span><br><span class="line">openstack-cinder-scheduler:             active</span><br><span class="line">openstack-cinder-volume:                active</span><br><span class="line">openstack-cinder-backup:                active</span><br><span class="line">== Ceilometer services ==</span><br><span class="line">openstack-ceilometer-api:               inactive  (disabled on boot)</span><br><span class="line">openstack-ceilometer-central:           active</span><br><span class="line">openstack-ceilometer-compute:           active</span><br><span class="line">openstack-ceilometer-collector:         active</span><br><span class="line">openstack-ceilometer-notification:      active</span><br><span class="line">== Heat services ==</span><br><span class="line">openstack-heat-api:                     active</span><br><span class="line">openstack-heat-api-cfn:                 inactive  (disabled on boot)</span><br><span class="line">openstack-heat-api-cloudwatch:          inactive  (disabled on boot)</span><br><span class="line">openstack-heat-engine:                  active</span><br><span class="line">== Support services ==</span><br><span class="line">mariadb:                                active</span><br><span class="line">openvswitch:                            active</span><br><span class="line">dbus:                                   active</span><br><span class="line">target:                                 active</span><br><span class="line">rabbitmq-server:                        active</span><br><span class="line">memcached:                              active</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Compute 节点安装服务<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">openstack-ceilometer-common-6.1.3-2.el7.noarch</span><br><span class="line">openstack-neutron-8.3.0-1.el7.noarch</span><br><span class="line">centos-release-openstack-mitaka-1-5.el7.noarch</span><br><span class="line">openstack-selinux-0.7.13-2.el7.noarch</span><br><span class="line">openstack-ceilometer-polling-6.1.3-2.el7.noarch</span><br><span class="line">openstack-nova-common-13.1.2-1.el7.noarch</span><br><span class="line">openstack-nova-compute-13.1.2-1.el7.noarch</span><br><span class="line">openstack-neutron-common-8.3.0-1.el7.noarch</span><br><span class="line">openstack-neutron-openvswitch-8.3.0-1.el7.noarch</span><br><span class="line">openstack-ceilometer-compute-6.1.3-2.el7.noarch</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="云平台功能"><a href="#云平台功能" class="headerlink" title="云平台功能"></a>云平台功能</h3><p><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/openstack-feature-list.png" alt="openstack-feature"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>由于OpenStack的灵活性，您可以使用多种方式在多个节点或系统中分布其组件。比如：系结构仅显示一种在三个节点上部署组件的方式：</p>
+<ul>
+<li><p>存储节点</p>
+</li>
+<li><p>计算节点</p>
+</li>
+<li><p>控制器节点</p>
+</li>
+</ul>
+<p>不过，还可以进一步细分组件。例如，您可以在五个节点中进行以下组件分布：</p>
+<ul>
+<li><p>节点 1：RabbitMQ</p>
+</li>
+<li><p>节点 2：MySQL 数据库</p>
+</li>
+<li><p>节点 3：OpenStack 控制器组件，例如 Keystone、Glance、Horizon 等</p>
+</li>
+<li><p>节点 4：弹性虚拟交换机</p>
+</li>
+<li><p>节点 5：L3 代理</p>
+</li>
+</ul>
+<p>此外，您还可以有多个存储和计算节点。其他非核心 OpenStack 组件（例如 Ironic）还可以位于其各自的节点中。</p>
+<p>由于此灵活性，您可以根据可用资源以及您希望在每个节点中对组件进行分组的方式来设计 OpenStack 基础结构。然后，您可以在每个系统上仅安装需要的 OpenStack 软件包，而不是在所有系统上安装整个 OpenStack 软件包。下一节将进入基础环境准备内容，欢迎关注。</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+<p>参考：<a href="http://www.infocool.net/OpenStack/index.htm" target="_blank" rel="noopener">http://www.infocool.net/OpenStack/index.htm</a><br>    <a href="http://www.cnblogs.com/sammyliu/p/4204190.html" target="_blank" rel="noopener">http://www.cnblogs.com/sammyliu/p/4204190.html</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/openstack/">openstack</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/05/20/openstack系列(4)-基础环境/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">openstack系列(4)-基础环境</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/05/18/openstack系列(2)-架构设计/">
+        <span class="next-text nav-default">openstack系列(2)-架构设计</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="connect-tableau-druid-hive">
+
+
+
+
+  <meta name="keywords" content="Druid,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/07/04/connect-tableau-druid-hive/">
+
+
+<meta name="description" content="HIVE / DRUID INTEGRATION MEANS DRUID IS BI-READY FROM YOUR TOOL OF CHOICE这是与Apache Hive和Druid进行超快速OLAP分析的三部分系列的第3部分。 将Tableau连接到Druid在这之前，我们讨论了如何集成Hive / Druid传送screaming-fast分析，其实还有另一个集成，一个更强大，更具优势的集">
+<meta name="keywords" content="Druid">
+<meta property="og:type" content="article">
+<meta property="og:title" content="connect-tableau-druid-hive">
+<meta property="og:url" content="http://itweet.github.io/2017/07/04/connect-tableau-druid-hive/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="HIVE / DRUID INTEGRATION MEANS DRUID IS BI-READY FROM YOUR TOOL OF CHOICE这是与Apache Hive和Druid进行超快速OLAP分析的三部分系列的第3部分。 将Tableau连接到Druid在这之前，我们讨论了如何集成Hive / Druid传送screaming-fast分析，其实还有另一个集成，一个更强大，更具优势的集">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Part3Image1.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Part3Image2-1024x622.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.521Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="connect-tableau-druid-hive">
+<meta name="twitter:description" content="HIVE / DRUID INTEGRATION MEANS DRUID IS BI-READY FROM YOUR TOOL OF CHOICE这是与Apache Hive和Druid进行超快速OLAP分析的三部分系列的第3部分。 将Tableau连接到Druid在这之前，我们讨论了如何集成Hive / Druid传送screaming-fast分析，其实还有另一个集成，一个更强大，更具优势的集">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Part3Image1.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> connect-tableau-druid-hive - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          connect-tableau-druid-hive
+        
+      </h1>
+
+      <time class="post-time">
+          7月 04 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h3 id="HIVE-DRUID-INTEGRATION-MEANS-DRUID-IS-BI-READY-FROM-YOUR-TOOL-OF-CHOICE"><a href="#HIVE-DRUID-INTEGRATION-MEANS-DRUID-IS-BI-READY-FROM-YOUR-TOOL-OF-CHOICE" class="headerlink" title="HIVE / DRUID INTEGRATION MEANS DRUID IS BI-READY FROM YOUR TOOL OF CHOICE"></a>HIVE / DRUID INTEGRATION MEANS DRUID IS BI-READY FROM YOUR TOOL OF CHOICE</h3><p>这是与Apache Hive和Druid进行超快速OLAP分析的三部分系列的第3部分。</p>
+<h3 id="将Tableau连接到Druid"><a href="#将Tableau连接到Druid" class="headerlink" title="将Tableau连接到Druid"></a>将Tableau连接到Druid</h3><p><a href="https://hortonworks.com/blog/sub-second-analytics-hive-druid/" target="_blank" rel="noopener">在这之前，我们讨论了如何集成Hive / Druid传送screaming-fast分析</a>，其实还有另一个集成，一个更强大，更具优势的集成。使用这种集成构建的任何Druid表其实就是Hive表，这意味着您可以使用任何BI工具中的普通SQL查询这些Druid表。在这篇文章中，我们将用非常简单的办法展示如何将Tableau与Druid挂钩，并且这种方法适用于任何BI工具，例如Qlik，Spotfire，Microstrategy和Excel。您可以利用Hortonworks提供的高品质ODBC和JDBC驱动程序使用普通的Hive连接这些工具中任何一个。</p>
+<p>我们一起来看看Tableau到Druid是如何工作的我们从连接普通对话框开始，就像你平时连接Hive一样，在Tableau中使用Hortonworks Hadoop Hive的连接类型。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Part3Image1.png" alt="Hortonworks Hadoop Hive"></p>
+<p>请注意，因为我们正在连接Hive LLAP，所以我们连接到的端口是10500而不是往常的端口10000。</p>
+<p>接下来，Druid cube就像普通Hive表一样可见，可以像其他表一样加载到Tableau中。我们持续使用SSB数据，因此我们将加载SSB  druid cube作为数据源。 就Tableau而言，它关心的只是一个常规的Hive表。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Part3Image2-1024x622.png" alt="Druid Table"></p>
+<p>结果是，Tableau发起的查询可以被推送到Druid，终端用户可以非常快速地访问他们的数据。</p>
+<p>此动画显示使用Hive LLAP访问Tableau中的Druid的实时视图。</p>
+<p>视频地址: <a href="https://youtu.be/2tCNAhAAtYs" target="_blank" rel="noopener">https://youtu.be/2tCNAhAAtYs</a></p>
+<p>正如您看到的那样，响应时间保持在交互式时间范围内。</p>
+<p>Druid可用作HDP 2.6技术预览。除了Hive / Druid集成之外，Hortonworks还可以使用Apache Ambari轻松完成部署、配置和监控Druid，从而使用Druid变得很容易。通过这些简化，在Hadoop方面很博学的用户应该可以在几小时内通过<a href="https://github.com/cartershanklin/hive-druid-ssb" target="_blank" rel="noopener">GitHub</a>上的资料重现本文档中的所有内容。我们非常支持您尝试使用Druid，<a href="https://hortonworks.com/downloads/" target="_blank" rel="noopener">HDP</a>或<a href="https://hortonworks.com/products/cloud/aws/" target="_blank" rel="noopener">Hortonworks数据云</a>，并向<a href="https://community.hortonworks.com/topics/druid.html" target="_blank" rel="noopener">Hortonworks社区</a>提供您的反馈意见。</p>
+<p>我们与<a href="http://blog.atscale.com/hortonworks-chooses-atscale" target="_blank" rel="noopener">AtScale</a>密切合作的一部分是定期讨论如何使BI-on-Hadoop为我们的共同客户提供更好的体验。请参阅<a href="http://blog.atscale.com/hive-druid-atscale" target="_blank" rel="noopener">AtScale博客</a>，了解更多有关AtScale + Hive / Druid的信息。</p>
+<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Druid/">Druid</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/07/14/apache-solr-memory-tuning-for-production/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">apache-solr-memory-tuning-for-production</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/07/03/apache-hbase-medium-object-storage-mob-policies/">
+        <span class="next-text nav-default">apache-hbase-medium-object-storage-mob-policies</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

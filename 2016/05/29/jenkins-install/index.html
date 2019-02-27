@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="jenkins-install">
+
+
+
+
+  <meta name="keywords" content="jenkins,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/05/29/jenkins-install/">
+
+
+<meta name="description" content="Jenkins是基于Java开发的一种持续集成工具，用于监控持续重复的工作，功能包括：  1、持续的软件版本发布/测试项目。 2、监控外部调用执行的工作。  Jenkins-installFor linux12345678910sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.re">
+<meta name="keywords" content="jenkins">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jenkins-install">
+<meta property="og:url" content="http://itweet.github.io/2016/05/29/jenkins-install/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Jenkins是基于Java开发的一种持续集成工具，用于监控持续重复的工作，功能包括：  1、持续的软件版本发布/测试项目。 2、监控外部调用执行的工作。  Jenkins-installFor linux12345678910sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.re">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.500Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jenkins-install">
+<meta name="twitter:description" content="Jenkins是基于Java开发的一种持续集成工具，用于监控持续重复的工作，功能包括：  1、持续的软件版本发布/测试项目。 2、监控外部调用执行的工作。  Jenkins-installFor linux12345678910sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.re">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> jenkins-install - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          jenkins-install
+        
+      </h1>
+
+      <time class="post-time">
+          5月 29 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Jenkins是基于Java开发的一种持续集成工具，用于监控持续重复的工作，功能包括：</p>
+<ul>
+<li>1、持续的软件版本发布/测试项目。</li>
+<li>2、监控外部调用执行的工作。</li>
+</ul>
+<h1 id="Jenkins-install"><a href="#Jenkins-install" class="headerlink" title="Jenkins-install"></a>Jenkins-install</h1><h2 id="For-linux"><a href="#For-linux" class="headerlink" title="For linux"></a>For linux</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo</span><br><span class="line">sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key</span><br><span class="line"></span><br><span class="line">yum search jenkins</span><br><span class="line">sudo yum install jenkins</span><br><span class="line"></span><br><span class="line">yum install java-1.7.0-openjdk</span><br><span class="line"></span><br><span class="line">sudo service jenkins start/stop/restart</span><br><span class="line">sudo chkconfig jenkins on</span><br></pre></td></tr></table></figure>
+<h1 id="Jenkins-info"><a href="#Jenkins-info" class="headerlink" title="Jenkins info"></a>Jenkins info</h1><ul>
+<li><p>Jenkins will be launched as a daemon on startup. See /etc/init.d/jenkins for more details.</p>
+</li>
+<li><p>The ‘jenkins’ user is created to run this service. If you change this to a different user via the config file, you must change the owner of /var/log/jenkins, /var/lib/jenkins, and /var/cache/jenkins.</p>
+</li>
+<li><p>Log file will be placed in /var/log/jenkins/jenkins.log. Check this file if you are troubleshooting Jenkins.</p>
+</li>
+<li><p>/etc/sysconfig/jenkins will capture configuration parameters for the launch.</p>
+</li>
+<li><p>By default, Jenkins listen on port 8080. Access this port with your browser to start configuration.  Note that the built-in firewall may have to be opened to access this port from other computers.  (See <a href="http://www.cyberciti.biz/faq/disable-linux-firewall-under-centos-rhel-fedora/" target="_blank" rel="noopener">http://www.cyberciti.biz/faq/disable-linux-firewall-under-centos-rhel-fedora/</a> for instructions how to disable the firewall permanently)</p>
+</li>
+<li><p>A Jenkins RPM repository is added in /etc/yum.repos.d/jenkins.repo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/jenkins </span><br><span class="line"></span><br><span class="line">    JENKINS_PORT=&quot;8080&quot;</span><br><span class="line">    JENKINS_USER=&quot;jenkins&quot;</span><br><span class="line"></span><br><span class="line">sudo service jenkins start</span><br><span class="line">sudo chkconfig jenkins on</span><br><span class="line"></span><br><span class="line"># lsof -i :8080|wc -l</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="Jenkins-WebUI"><a href="#Jenkins-WebUI" class="headerlink" title="Jenkins WebUI"></a>Jenkins WebUI</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/iptables stop</span><br></pre></td></tr></table></figure>
+<p>第一次访问需要输入初始密码,而密码被写入到日志文件中，日志在<code>/var/log/jenkins/jenkins.log</code>中，如下部分截取，包括初始密码。WebUI访问链接为：<a href="http://YOURHOST:8080" target="_blank" rel="noopener">http://YOURHOST:8080</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cat /var/log/jenkins/jenkins.log </span><br><span class="line"> Jenkins initial setup is required. An admin user has been created and a password generated.</span><br><span class="line">Please use the following password to proceed to installation:</span><br><span class="line"></span><br><span class="line">e34406819211493d9b415b085097ef77</span><br><span class="line"></span><br><span class="line">This may also be found at: /var/lib/jenkins/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
+<p>接下来进入<code>Customize Jenkins</code>页面，选择安装模式，使用Install suggested plugins安装,接下来<code>Getting Started</code>页面会自动安装很多常用插件到Jenkins服务器上；jenkins插件的默认安装位置为<code>/var/lib/jenkins/plugins/</code>;通过命令<code>tail -f /var/log/jenkins/jenkins.log</code>了解plugin安装进度。<code>Create First Admin User</code>页面创建你的第一个用户，至此Jenkins安装完成。</p>
+<h1 id="Disable-the-firewall"><a href="#Disable-the-firewall" class="headerlink" title="Disable the firewall"></a>Disable the firewall</h1><p>  如果Centso6.x访问页面失败需要关闭防火墙或者设置防火墙规则,也有可能是8080端口没有启动，可通过lsof -i :8080在后台判断，也可以通过crul YOURHOST:8080访问看是否是服务没有正常启动。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/iptables stop</span><br></pre></td></tr></table></figure></p>
+<h2 id="From-Centos-7-x"><a href="#From-Centos-7-x" class="headerlink" title="From Centos 7.x"></a>From Centos 7.x</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=8080/tcp --permanent</span><br><span class="line">firewall-cmd --zone=public --add-service=http --permanent</span><br><span class="line">firewall-cmd --reload</span><br><span class="line"></span><br><span class="line">firewall-cmd --list-all</span><br></pre></td></tr></table></figure>
+<h2 id="Linux-ps"><a href="#Linux-ps" class="headerlink" title="Linux | ps"></a>Linux | ps</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@docker-machine jenkins]# ps -ef|grep jenkins</span><br><span class="line">jenkins    6693      1  2 08:01 ?        00:00:39 /etc/alternatives/java -Dcom.sun.akuma.Daemon=daemonized -Djava.awt.headless=true -DJENKINS_HOME=/var/lib/jenkins -jar /usr/lib/jenkins/jenkins.war --logfile=/var/log/jenkins/jenkins.log --webroot=/var/cache/jenkins/war --daemon --httpPort=8080 --debug=5 --handlerCountMax=100 --handlerCountMaxIdle=20</span><br></pre></td></tr></table></figure>
+<p>通过命令我们其实可以知道，Jenkins.war路径，log,webroot,运行用户等路径,比如web应用发布路径为<code>/var/cache/jenkins/</code>。通过查询路径的权限信息了解，运行于那个用户下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@docker-machine jenkins]# ls -ld /var/log/jenkins/</span><br><span class="line">drwxr-x---. 2 jenkins jenkins 4096 5月  29 08:01 /var/log/jenkins/</span><br></pre></td></tr></table></figure>
+<h1 id="Jenkins-blueocean-plugin"><a href="#Jenkins-blueocean-plugin" class="headerlink" title="Jenkins blueocean-plugin"></a>Jenkins blueocean-plugin</h1><p>  <a href="https://github.com/jenkinsci/blueocean-plugin" target="_blank" rel="noopener">https://github.com/jenkinsci/blueocean-plugin</a></p>
+<h1 id="Install-Jenkins-with-Docker"><a href="#Install-Jenkins-with-Docker" class="headerlink" title="Install Jenkins with Docker"></a>Install Jenkins with Docker</h1><p>  <a href="https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+with+Docker" target="_blank" rel="noopener">https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+with+Docker</a></p>
+<p>参考：<a href="https://jenkins.io//blog/2016/05/26/introducing-blue-ocean/" target="_blank" rel="noopener">https://jenkins.io//blog/2016/05/26/introducing-blue-ocean/</a><br>    <a href="https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions" target="_blank" rel="noopener">https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions</a><br>    <a href="https://github.com/jenkinsci/blueocean-plugin" target="_blank" rel="noopener">https://github.com/jenkinsci/blueocean-plugin</a><br>    <a href="http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war/1.658/‘" target="_blank" rel="noopener">http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war/1.658/‘</a></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/jenkins/">jenkins</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/06/01/Openstack Instance Compute Node change resizeing/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Openstack Instance Compute Node change resizeing</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/05/26/OpenStack Storage cinder-swift-glance Part2/">
+        <span class="next-text nav-default">OpenStack Storage cinder-swift-glance Part2</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

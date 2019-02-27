@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="openstack image guide">
+
+
+
+
+  <meta name="keywords" content="openstack,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/08/09/openstack image guide /">
+
+
+<meta name="description" content="介绍在你拥有虚拟机镜像（也有人叫”虚拟器件”）之前，你的 OpenStack 计算云不太有用，这个指南描述了如何获取，创建以及修改 OpenStack 兼容的虚拟机镜像。 为了简化，有时文档使用 “镜像” 代替 “虚拟机镜像” 。 虚拟机镜像是什么？ 一个虚拟机镜像是一个文件，文件内包含了已经安装好可启动操作系统的虚拟磁盘。 虚拟机镜像有不同的格式，下面具体列出。  Raw“raw” 镜像格式是最">
+<meta name="keywords" content="openstack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openstack image guide">
+<meta property="og:url" content="http://itweet.github.io/2016/08/09/openstack image guide /index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="介绍在你拥有虚拟机镜像（也有人叫”虚拟器件”）之前，你的 OpenStack 计算云不太有用，这个指南描述了如何获取，创建以及修改 OpenStack 兼容的虚拟机镜像。 为了简化，有时文档使用 “镜像” 代替 “虚拟机镜像” 。 虚拟机镜像是什么？ 一个虚拟机镜像是一个文件，文件内包含了已经安装好可启动操作系统的虚拟磁盘。 虚拟机镜像有不同的格式，下面具体列出。  Raw“raw” 镜像格式是最">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.504Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openstack image guide">
+<meta name="twitter:description" content="介绍在你拥有虚拟机镜像（也有人叫”虚拟器件”）之前，你的 OpenStack 计算云不太有用，这个指南描述了如何获取，创建以及修改 OpenStack 兼容的虚拟机镜像。 为了简化，有时文档使用 “镜像” 代替 “虚拟机镜像” 。 虚拟机镜像是什么？ 一个虚拟机镜像是一个文件，文件内包含了已经安装好可启动操作系统的虚拟磁盘。 虚拟机镜像有不同的格式，下面具体列出。  Raw“raw” 镜像格式是最">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> openstack image guide - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          openstack image guide
+        
+      </h1>
+
+      <time class="post-time">
+          8月 09 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>在你拥有虚拟机镜像（也有人叫”虚拟器件”）之前，你的 OpenStack 计算云不太有用，这个指南描述了如何获取，创建以及修改 OpenStack 兼容的虚拟机镜像。</p>
+<p>为了简化，有时文档使用 “镜像” 代替 “虚拟机镜像” 。</p>
+<p>虚拟机镜像是什么？</p>
+<p>一个虚拟机镜像是一个文件，文件内包含了已经安装好可启动操作系统的虚拟磁盘。</p>
+<p>虚拟机镜像有不同的格式，下面具体列出。</p>
+<ul>
+<li><p>Raw<br>“raw” 镜像格式是最最简单的，并且是被 KVM 和 Xen 原生支持的格式，你可以想象裸格式镜像和块设备文件是二进制位相当的，就好像从块设备拷贝过来的，比方说，使用dd 命令将 /dev/sda 内容拷贝到一个文件。</p>
+</li>
+<li><p>qcow2<br>qcow2 （QEMU 写时复制版本2）格式通常是KVM使用，相比裸格式，它有额外的特性，例如：</p>
+</li>
+</ul>
+<p>使用稀疏文件呈现方式，因此镜像尺寸更小。</p>
+<p>支持快照。</p>
+<p>因为qcow2 镜像是稀疏的，因此，qcow2镜像通常比裸格式镜像小，更小的文件意味着上传更快，因此通常转换裸格式镜像到qcow2格式上传比直接上传裸格式镜像文件更快。</p>
+<p>注意：因为裸格式镜像不支持快照，OpenStack 计算节点在需要的时候将会自动转换裸格式镜像到qcow2格式。</p>
+<p>by 原文：<a href="http://docs.openstack.org/zh_CN/image-guide/content/ch_introduction.html" target="_blank" rel="noopener">http://docs.openstack.org/zh_CN/image-guide/content/ch_introduction.html</a></p>
+<h1 id="安装kvm"><a href="#安装kvm" class="headerlink" title="安装kvm"></a>安装kvm</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -ivh http://mirrors.ustc.edu.cn/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm</span><br><span class="line"></span><br><span class="line">yum install qemu-kvm qeum-kvm-tools virt-manager libvirt</span><br><span class="line"></span><br><span class="line">/etc/init.d/libvirtd start</span><br><span class="line"></span><br><span class="line">ifconfig virbr0</span><br><span class="line"></span><br><span class="line">brctl show</span><br></pre></td></tr></table></figure>
+<h1 id="centos-镜像制作参考"><a href="#centos-镜像制作参考" class="headerlink" title="centos 镜像制作参考"></a>centos 镜像制作参考</h1><ul>
+<li><a href="http://docs.openstack.org/zh_CN/image-guide/content/virt-install.html" target="_blank" rel="noopener">http://docs.openstack.org/zh_CN/image-guide/content/virt-install.html</a></li>
+<li><a href="http://docs.openstack.org/zh_CN/image-guide/content/centos-image.html#d6e859" target="_blank" rel="noopener">http://docs.openstack.org/zh_CN/image-guide/content/centos-image.html#d6e859</a></li>
+<li><a href="http://docs.openstack.org/image-guide/content/virt-install.html" target="_blank" rel="noopener">http://docs.openstack.org/image-guide/content/virt-install.html</a></li>
+<li><a href="http://docs.openstack.org/image-guide/content/centos-image.html#d6e859" target="_blank" rel="noopener">http://docs.openstack.org/image-guide/content/centos-image.html#d6e859</a></li>
+</ul>
+<h1 id="检测kvm是否安装，并且处于可用状态"><a href="#检测kvm是否安装，并且处于可用状态" class="headerlink" title="检测kvm是否安装，并且处于可用状态"></a>检测kvm是否安装，并且处于可用状态</h1><p>检查 libvirt 默认网络是否运行,vnc无法远程访问，请排查防火墙是否限制了访问。</p>
+<p>在使用 libvirt 启动虚拟机前，检查它的 “default” 默认网络是否启动。虚拟机要连接到外网，它的默认网络必须激活。启动 libvirt 默认网络将创建 linux 网桥( 通常名称是virbr0 )，iptables 规则，以及dhcp服务器进程 dnsmasq 。</p>
+<p>检查 “default” 默认网络是否激活，使用 virsh net-list 命令并查看 “default” 网络是否是启用状态。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh net-list</span><br></pre></td></tr></table></figure>
+<p>如果网络未激活，输入以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh net-start default</span><br></pre></td></tr></table></figure></p>
+<h1 id="开始制作centos镜像"><a href="#开始制作centos镜像" class="headerlink" title="开始制作centos镜像"></a>开始制作centos镜像</h1><p>1.创建一个50g大小容量的qcow2格式的镜像文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f qcow2 /data/CentOS-6.7-x86_64-RedCloud-160723.qcow2 50G</span><br></pre></td></tr></table></figure>
+<p>2.这里使用的是centos-6.7的版本，即操作系统未rhel6,其他版本请参考下一条命令查看支持的操作系统版本，如下创建一个kvm类型的虚拟机，指定ram为1024m，磁盘大小为第一步创建的镜像文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">virt-install --virt-type kvm --name CentOS-6.7-x86_64-RedCloud-160723 --ram 1024 \</span><br><span class="line">--cdrom=/data/CentOS-6.7-x86_64-bin-DVD1.iso \</span><br><span class="line">--disk path=/data/CentOS-6.7-x86_64-RedCloud-160723.qcow2,format=qcow2 \</span><br><span class="line">--network network=default \</span><br><span class="line">--graphics vnc,listen=0.0.0.0 --noautoconsole \</span><br><span class="line">--os-type=linux --os-variant=rhel6</span><br></pre></td></tr></table></figure>
+<p>3.查看kvm支持哪些操作系统版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virt-install --os-variant list</span><br></pre></td></tr></table></figure>
+<p>4.启动kvm虚拟机，开始安装系统</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh vncdisplay CentOS-6.7-x86_64-RedCloud-160723</span><br></pre></td></tr></table></figure>
+<p>5.查看虚拟机状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh list --all</span><br></pre></td></tr></table></figure>
+<p>6.使用 virsh 卸载磁盘，libvirt需要挂接一个空磁盘到之前挂接CDROM的地方，设备名应该是 hdc。可以使用 virsh dumpxml vm-image 命令来确认。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh dumpxml CentOS-6.7-x86_64-RedCloud-160723</span><br></pre></td></tr></table></figure>
+<p>7.以root用户使用virsh命令，执行下面的步骤完成挂载空磁盘并重启。如果你使用virt-manager安装,下面的命令也起相同作用，你也可以使用图形界面卸载磁盘并手工停止然后启动虚拟机。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">virsh attach-disk --type cdrom --mode readonly CentOS-6.7-x86_64-RedCloud-160723 &quot;&quot; hdc</span><br><span class="line"></span><br><span class="line">virsh destroy CentOS-6.7-x86_64-RedCloud-160723</span><br><span class="line"></span><br><span class="line">virsh start CentOS-6.7-x86_64-RedCloud-160723</span><br></pre></td></tr></table></figure>
+<p>8.登陆到新创建的镜像内,一般通过vnc客户端可以登录,或者宿主机ssd登录，新建的虚拟机内。</p>
+<ul>
+<li>8.1 登陆虚拟机执行安装ACPI server，为了让虚拟化层能重启和关闭虚拟机，必须在虚拟机内安装并运行 acpid 服务。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm -y</span><br><span class="line"></span><br><span class="line">yum install -y acpid &amp;&amp; chkconfig acpid on</span><br></pre></td></tr></table></figure>
+<ul>
+<li>8.2 在虚拟机操作内容,配置获取metadata,需要使用 cloud-init 获取公钥</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install cloud-init -y</span><br></pre></td></tr></table></figure>
+<p>修改虚拟机配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vi /boot/grub/menu.lst </span><br><span class="line">			default=0</span><br><span class="line">			timeout=5</span><br><span class="line">			serial --unit=0 --speed=115200</span><br><span class="line">			terminal --timeout=1 serial console</span><br><span class="line">			splashimage=(hd0,0)/grub/splash.xpm.gz</span><br><span class="line">			hiddenmenu</span><br><span class="line">			title CentOS 6 (2.6.32-573.el6.x86_64)</span><br><span class="line">			        root (hd0,0)</span><br><span class="line">			        kernel /vmlinuz-2.6.32-573.el6.x86_64 ro root=/dev/mapper/vg_os-lv_root rd_NO_LUKS LANG=en_US.UTF-8 rd_LVM_LV=vg_os/lv_root rd_NO_MD rd_LVM_LV=vg_os/lv_swap console=ttyS0,115200 SYSFONT=latarcyrheb-sun</span><br><span class="line">			16 crashkernel=auto  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM rhgb quiet</span><br><span class="line">			        initrd /initramfs-2.6.32-573.el6.x86_64.img</span><br></pre></td></tr></table></figure>
+<p>cloud-init默认阻止root远程登录并且禁止password认证，只能centos用户通过秘钥登录，通过修改cloud-init配置解决<br>参考：<a href="https://gist.github.com/11xor6/4737097" target="_blank" rel="noopener">https://gist.github.com/11xor6/4737097</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/cloud/cloud.cfg</span><br><span class="line">users：</span><br><span class="line">– defaults</span><br><span class="line">   disable_root：0  #default 1</span><br><span class="line">   ssh_pwauth： 1	#default 0</span><br><span class="line"></span><br><span class="line">...省略...</span><br></pre></td></tr></table></figure>
+<p>关闭虚拟机</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now</span><br></pre></td></tr></table></figure>
+<p>9.为最后使用virt-sysprep命令，先安装这个包，清除虚拟机启动生成的一些信息，此命了做虚拟机清理。</p>
+<p>清理（删除 MAC 地址相关信息）</p>
+<p>操作系统会在/etc/sysconfig/network-scripts/ifcfg-eth0 和 /etc/udev/rules.d/70-persistent-net.rules 这类文件记录下网卡MAC地址，但是，虚拟机的网卡MAC地址在每次虚拟机创建的时候都会不同，因此这些信息必须从配置文件删除掉。</p>
+<p>目前有 virt-sysprep 工具可以完成清理虚拟机镜像内的 MAC 地址相关的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install libguestfs-tools -y</span><br><span class="line"></span><br><span class="line">virt-sysprep -d CentOS-6.7-x86_64-RedCloud-160723</span><br></pre></td></tr></table></figure>
+<p>10.删除 libvirt 虚拟机域</p>
+<p>现在你可以上传虚拟机镜像到镜像服务了，不再需要 libvirt 来管理虚拟机镜像，使用 virsh undefine vm-image 命令完成。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh undefine CentOS-6.7-x86_64-RedCloud-160723</span><br></pre></td></tr></table></figure>
+<p>11.镜像准备完成</p>
+<p>前面你使用 qemu-img create 命令创建的镜像已经准备好可以上传了，例如，你可以上传 CentOS-6.7-x86_64-RedCloud-160723.qcow2 文件到镜像服务。</p>
+<p>12.qume import qcow2c<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> virt-install --connect qemu:///system --ram 1024 -n rhel_64 -r 1024 --os-type=linux --os-variant=rhel6 --disk path=/data/CentOS-6-x86_64-GenericCloud-1604.qcow2c,device=disk,format=qcow2 --vcpus=1 --graphics vnc,listen=0.0.0.0 --noautoconsole --import</span><br><span class="line"></span><br><span class="line">[root@bogon data]# virsh list --all</span><br><span class="line"> Id    Name                           State</span><br><span class="line">----------------------------------------------------</span><br><span class="line"> 1     rhel_64                        running</span><br></pre></td></tr></table></figure></p>
+<ol start="12">
+<li>command line by network install<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">＃ 创建虚拟机</span><br><span class="line">qemu-img create -f qcow2 /data/centos-6.8.qcow2 10G</span><br><span class="line"></span><br><span class="line"># 通过vnc登录,根据Linux向导完成系统安装,reboot</span><br><span class="line">virt-install --virt-type kvm --name centos-6.8 --ram 2024 \</span><br><span class="line">--cdrom=/data/CentOS-6.8-x86_64-minimal.iso \</span><br><span class="line">--disk path=/data/centos-6.8.qcow2,format=qcow2 \</span><br><span class="line">--network network=default \</span><br><span class="line">--graphics vnc,listen=0.0.0.0 --noautoconsole \</span><br><span class="line">--os-type=linux --os-variant=rhel6  </span><br><span class="line"></span><br><span class="line">virsh attach-disk --type cdrom --mode readonly centos-6.8 &quot;&quot; hdc</span><br><span class="line"></span><br><span class="line"># 启动虚拟机</span><br><span class="line">virsh start  centos-6.8 </span><br><span class="line"></span><br><span class="line"># kvm machine exec</span><br><span class="line"></span><br><span class="line"> echo &quot;NOZEROCONF=yes&quot; &gt;&gt; /etc/sysconfig/network</span><br><span class="line"></span><br><span class="line"> yum install http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm -y</span><br><span class="line"></span><br><span class="line"> yum install -y acpid &amp;&amp; chkconfig acpid on</span><br><span class="line"></span><br><span class="line"> yum install -y qemu-guest-agent &amp;&amp; chkconfig qemu-ga on</span><br><span class="line"> </span><br><span class="line"> yum install -y cloud-init</span><br><span class="line"></span><br><span class="line"> yum install -y cloud-utils-growpart</span><br><span class="line"> </span><br><span class="line"> /sbin/shutdown -h now</span><br><span class="line"></span><br><span class="line"> virt-sysprep -d centos-6.8 </span><br><span class="line"></span><br><span class="line"> virt-sparsify  --tmp /img/ --compress centos-6.8.qcow2  centos-6.8.qcow2c</span><br><span class="line"></span><br><span class="line"> virsh destroy  centos-6.8 </span><br><span class="line"> virsh undefine centos-6.8</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="13-guestfish-changed-image"><a href="#13-guestfish-changed-image" class="headerlink" title="13.guestfish changed image"></a>13.guestfish changed image</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- install kvm tools </span><br><span class="line"> sudo yum -y install libvirt qemu-kvm libguestfs-tools  # centos 6.x</span><br><span class="line"></span><br><span class="line">- centos 6.6</span><br><span class="line">wget http://cloud.centos.org/centos/6.6/images/CentOS-6-x86_64-GenericCloud-1607.qcow2c</span><br><span class="line"></span><br><span class="line">- changed image</span><br><span class="line"> guestfish --rw -a  CentOS-6-x86_64-GenericCloud-1607.qcow2c</span><br><span class="line"></span><br><span class="line"># set image root password</span><br><span class="line">virt-sysprep --root-password password:123456 -a CentOS-6-x86_64-GenericCloud-1607.qcow2c</span><br></pre></td></tr></table></figure>
+<h1 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h1><p> 最后提醒一下，我安装官网怎么也无法正确让虚拟机获取公钥，可以通过秘钥登录，聪明的你发现博客中细微的差别了吗？哈哈。。。</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/openstack/">openstack</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/08/12/Docker Install Guide/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Docker Install Guide</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/07/07/Configuring Heterogeneous Storage in HDFS/">
+        <span class="next-text nav-default">Configuring Heterogeneous Storage in HDFS</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

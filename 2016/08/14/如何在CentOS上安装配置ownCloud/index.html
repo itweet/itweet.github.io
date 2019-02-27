@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="如何在CentOS上安装配置ownCloud">
+
+
+
+
+  <meta name="keywords" content="owncloud,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/08/14/如何在CentOS上安装配置ownCloud/">
+
+
+<meta name="description" content="据其官方网站，ownCloud可以让你通过一个Web界面或者WebDAV访问你的文件。它还提供了一个平台，可以轻松地查看、编辑和同步您所有设备的通讯录、日历和书签。尽管ownCloud与广泛使用Dropbox非常相似，但主要区别在于ownCloud是免费的，开源的，从而可以自己的服务器上建立与Dropbox类似的云存储服务。使用ownCloud你可以完整地访问和控制您的私人数据，而对存储空间（除了">
+<meta name="keywords" content="owncloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在CentOS上安装配置ownCloud">
+<meta property="og:url" content="http://itweet.github.io/2016/08/14/如何在CentOS上安装配置ownCloud/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="据其官方网站，ownCloud可以让你通过一个Web界面或者WebDAV访问你的文件。它还提供了一个平台，可以轻松地查看、编辑和同步您所有设备的通讯录、日历和书签。尽管ownCloud与广泛使用Dropbox非常相似，但主要区别在于ownCloud是免费的，开源的，从而可以自己的服务器上建立与Dropbox类似的云存储服务。使用ownCloud你可以完整地访问和控制您的私人数据，而对存储空间（除了">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.506Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何在CentOS上安装配置ownCloud">
+<meta name="twitter:description" content="据其官方网站，ownCloud可以让你通过一个Web界面或者WebDAV访问你的文件。它还提供了一个平台，可以轻松地查看、编辑和同步您所有设备的通讯录、日历和书签。尽管ownCloud与广泛使用Dropbox非常相似，但主要区别在于ownCloud是免费的，开源的，从而可以自己的服务器上建立与Dropbox类似的云存储服务。使用ownCloud你可以完整地访问和控制您的私人数据，而对存储空间（除了">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 如何在CentOS上安装配置ownCloud - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          如何在CentOS上安装配置ownCloud
+        
+      </h1>
+
+      <time class="post-time">
+          8月 14 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>据其官方网站，ownCloud可以让你通过一个Web界面或者WebDAV访问你的文件。它还提供了一个平台，可以轻松地查看、编辑和同步您所有设备的通讯录、日历和书签。尽管ownCloud与广泛使用Dropbox非常相似，但主要区别在于ownCloud是免费的，开源的，从而可以自己的服务器上建立与Dropbox类似的云存储服务。使用ownCloud你可以完整地访问和控制您的私人数据，而对存储空间（除了硬盘容量）或客户端的连接数量没有限制。</p>
+<p>ownCloud提供了社区版（免费）和企业版（面向企业的有偿支持）。预编译的ownCloud社区版可以提供了CentOS、Debian、Fedora、openSUSE、，SLE和Ubuntu版本。本教程将演示如何在Debian Wheezy上安装和在配置ownCloud社区版。</p>
+<p>在CentOS上安装 ownCloud,进入官方网站：<a href="http://owncloud.org，并点击‘Download&#39;按钮。" target="_blank" rel="noopener">http://owncloud.org，并点击‘Download&#39;按钮。</a><br>在”Get Started!”页面选择， ”Get ownCloud Server“栏目的“Download”，进入下一个页面选择”packages for auto updates”按钮。左下方点击“continue”。可以进入一个支持多操作系统的选项，选择自己操作系统的图标，在下方即可下载对应操作系统的安装包。</p>
+<p>ownCloud还提供了几种选择，比如：<a href="https://owncloud.org/install/#instructions-server" target="_blank" rel="noopener">“appliances for easy deployment”</a>，提供多种系统版本的云镜像文件，可以通过镜像文件直接创建带有ownCloud的云主机。页面直接可以下载到，基于ubuntu 14制作的多种格式的镜像：</p>
+<ul>
+<li><a href="http://download.owncloud.org/community/production/vm/Ubuntu_14.04-owncloud-9.1.0-1.1-201607211103.ova.zip" target="_blank" rel="noopener">OVA</a></li>
+<li><a href="http://download.owncloud.org/community/production/vm/Ubuntu_14.04-owncloud-9.1.0-1.1-201607211103.qcow2.zip" target="_blank" rel="noopener">QCOW2</a></li>
+<li><a href="http://download.owncloud.org/community/production/vm/Ubuntu_14.04-owncloud-9.1.0-1.1-201607211103.raw.zip" target="_blank" rel="noopener">RAW</a></li>
+<li><a href="http://download.owncloud.org/community/production/vm/Ubuntu_14.04-owncloud-9.1.0-1.1-201607211103.vhdx.zip" target="_blank" rel="noopener">VHDX</a></li>
+<li><a href="http://download.owncloud.org/community/production/vm/Ubuntu_14.04-owncloud-9.1.0-1.1-201607211103.vmdk.zip" target="_blank" rel="noopener">VMDK</a></li>
+<li><a href="http://download.owncloud.org/community/production/vm/Ubuntu_14.04-owncloud-9.1.0-1.1-201607211103.vmx.zip" target="_blank" rel="noopener">VMX</a></li>
+</ul>
+<p>除官方提供的上面镜像之外，还有第三方提供的各种操作系统的云镜像供选择，页面直接可跳转到对应的系统下载地址。</p>
+<p>这里CentOS安装包下载地址为：<a href="https://download.owncloud.org/download/repositories/stable/owncloud/" target="_blank" rel="noopener">https://download.owncloud.org/download/repositories/stable/owncloud/</a></p>
+<p>选择对应的操作系统版本，选择centos，即可出来对应centos6.x , centos 7.x的安装方法，继续。。。</p>
+<ul>
+<li><p>关闭防火墙</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/iptables stop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Mysql Install</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">yum install mysql-server</span><br><span class="line"></span><br><span class="line">/etc/init.d/mysqld start</span><br><span class="line"></span><br><span class="line">chkconfig mysqld on</span><br><span class="line"></span><br><span class="line">mysql_secure_installation   # init ...</span><br><span class="line"></span><br><span class="line">mysql -uroot -padmin</span><br><span class="line"></span><br><span class="line">mysql&gt; create database owncloud;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加仓库地址到centos 6.x系统中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm --import https://download.owncloud.org/download/repositories/stable/CentOS_6/repodata/repomd.xml.key</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Install OwnCloud by CentOS 6.x</p>
+<p>参考：<code>https://download.owncloud.org/download/repositories/stable/owncloud/</code></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.owncloud.org/download/repositories/stable/CentOS_6/ce:stable.repo -O /etc/yum.repos.d/ce:stable.repo</span><br><span class="line"></span><br><span class="line">yum clean expire-cache</span><br><span class="line"></span><br><span class="line">yum search owncloud</span><br><span class="line"></span><br><span class="line">wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm</span><br><span class="line">wget https://rpms.remirepo.net/enterprise/remi-release-6.rpm</span><br><span class="line">rpm -Uvh epel-release-latest-6.noarch.rpm</span><br><span class="line">rpm -Uvh remi-release-6.rpm</span><br><span class="line"></span><br><span class="line">yum install owncloud    </span><br><span class="line"></span><br><span class="line">/etc/init.d/httpd start</span><br><span class="line"></span><br><span class="line">netstat -lntop |grep 80</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>打开你的浏览器并定位到你的ownCloud实例中，地址是 <a href="http://your_ip/owncloud/" target="_blank" rel="noopener">http://your_ip/owncloud/</a><br><code>访问请注意，性能告警，默认使用数据库SQLite，可以通过前段修改为mysql,设置管理员密码</code></p>
+</li>
+<li><p>安装桌面同步或移动客户端等<br>打开链接：<a href="http://owncloud.org/install/" target="_blank" rel="noopener">http://owncloud.org/install/</a> 有适用于Windows, Mac OS X， Linux， iOS， Android客户端。选择下载，安装即可。</p>
+</li>
+</ul>
+<p>桌面同步客户端可以连续同步、选择文件夹同步、多文件夹同步。多文件夹同步是你可以同步对多个文件夹位置进行同步到多个ownCloud文件夹下。</p>
+<p>ownCloud的使用过程基本跟主流云存储服务商雷同，就不一一细述了。<br>这是一个面向企业或者个人的私有云存储系统，让用户在各大服务商提供的服务之外能有别的选择。至少，数据是真正掌握在自己手中的。</p>
+<p>把个人数据放家里的私有数据中心里面也是不错的选择。这里推荐一款不错的小型塔式服务器HP MicroServer Gen8 E3-1230V2 8G,特点就是容量够大，可以放入6块3T硬盘。个人完全够用啦。当然你也可以自己DIY一个服务器放家里，也是很好的选择，我自己就<a href="https://jikelab.github.io/tech-labs/2016/06/14/private-cloud/" target="_blank" rel="noopener">DIY</a>了一个32g，24虚拟机内核,1块ssd安装系统，2块sata做数据盘这样的配置放家里。当然我安装私有云在上面，可惜配置太低起不了几个云服务器。如果你家里有一个私有云，直接无需安装，下载ownload提供的ubuntu镜像即可自动生成带有owncloud功能的云主机，直接使用。最好把它数据存储目录，存储到私有云的云盘之中，好扩展。</p>
+<ul>
+<li>为了保证，有足够的存储空间<br>底层可以修改为一个分布式文件系统架构，这样就可以变成一个分布式云盘，或者挂载一个大硬盘。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br><span class="line">cd /var/www/html/owncloud/</span><br><span class="line"></span><br><span class="line">mv data data_bak</span><br><span class="line">mkdir data</span><br><span class="line"></span><br><span class="line">mount /dev/vdb /var/www/html/owncloud/data</span><br><span class="line"></span><br><span class="line">chown apache:apache data</span><br><span class="line">chmod 774 data</span><br><span class="line">chmod o-r data</span><br><span class="line"></span><br><span class="line">mv data_bak/* data/</span><br><span class="line">mv data_bak/.ocdata  data/</span><br><span class="line">mv data_bak/.htaccess data/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@cockroach-test owncloud]# df -h</span><br><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/vda1        50G  1.7G   45G   4% /</span><br><span class="line">tmpfs           939M     0  939M   0% /dev/shm</span><br><span class="line">/dev/vdb        985G  461M  934G   1% /var/www/html/owncloud/data</span><br></pre></td></tr></table></figure></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/owncloud/">owncloud</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/08/14/kubernetes-cluster-install/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">kubernetes-cluster-install</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/08/13/ownCloud 基本介绍/">
+        <span class="next-text nav-default">ownCloud 基本介绍</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

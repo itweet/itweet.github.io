@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Enterprise-BigData-platform-deployment-guide-part-2">
+
+
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/07/28/Enterprise-BigData-platform-deployment-guide-part-2/">
+
+
+<meta name="description" content="各位，今天我们主要聊一下，集群安装前需要做的准备工作，内容会以HDP做为案例，进行相关的规划和设计工作，经验是通用了，适用于各种大数据发行版。 我的画风一直比较严肃，哈哈，其实我是一个很喜欢搞怪的，感觉写程序傻了。 今天这个内容啊，主要还是围绕集群实施安装过程，非常关键的环节环境准备阶段，通过我们前期收集的一些相关指标，对集群进行基础环境的准备工作。 我们以HDP集群部署来说明相关问题? 必备条件">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Enterprise-BigData-platform-deployment-guide-part-2">
+<meta property="og:url" content="http://itweet.github.io/2017/07/28/Enterprise-BigData-platform-deployment-guide-part-2/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="各位，今天我们主要聊一下，集群安装前需要做的准备工作，内容会以HDP做为案例，进行相关的规划和设计工作，经验是通用了，适用于各种大数据发行版。 我的画风一直比较严肃，哈哈，其实我是一个很喜欢搞怪的，感觉写程序傻了。 今天这个内容啊，主要还是围绕集群实施安装过程，非常关键的环节环境准备阶段，通过我们前期收集的一些相关指标，对集群进行基础环境的准备工作。 我们以HDP集群部署来说明相关问题? 必备条件">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/namenode_os_parted.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/datanode_disk_parted.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/ambari-server-parted.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/gateway-disk-parted.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/hdp-repo.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/linuxos_repo.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.522Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Enterprise-BigData-platform-deployment-guide-part-2">
+<meta name="twitter:description" content="各位，今天我们主要聊一下，集群安装前需要做的准备工作，内容会以HDP做为案例，进行相关的规划和设计工作，经验是通用了，适用于各种大数据发行版。 我的画风一直比较严肃，哈哈，其实我是一个很喜欢搞怪的，感觉写程序傻了。 今天这个内容啊，主要还是围绕集群实施安装过程，非常关键的环节环境准备阶段，通过我们前期收集的一些相关指标，对集群进行基础环境的准备工作。 我们以HDP集群部署来说明相关问题? 必备条件">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/BigData/img/namenode_os_parted.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Enterprise-BigData-platform-deployment-guide-part-2 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Enterprise-BigData-platform-deployment-guide-part-2
+        
+      </h1>
+
+      <time class="post-time">
+          7月 28 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>各位，今天我们主要聊一下，集群安装前需要做的准备工作，内容会以HDP做为案例，进行相关的规划和设计工作，经验是通用了，适用于各种大数据发行版。</p>
+<p>我的画风一直比较严肃，哈哈，其实我是一个很喜欢搞怪的，感觉写程序傻了。</p>
+<p>今天这个内容啊，主要还是围绕集群实施安装过程，非常关键的环节环境准备阶段，通过我们前期收集的一些相关指标，对集群进行基础环境的准备工作。</p>
+<p>我们以HDP集群部署来说明相关问题?</p>
+<h3 id="必备条件"><a href="#必备条件" class="headerlink" title="必备条件"></a>必备条件</h3><p>0、选择操作系统版本</p>
+<p>可选版本有centos/redhat 6.5,6.6,6.7,6.8和 centos/redhat 7.2</p>
+<p>1、Ambari-server所在的服务器能够ssh免密码登录到所有机器</p>
+<p>2、所有机器关闭selinux</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0  &amp;&amp; sed –i &apos;s#SELINUX=enforcing#SELINUX=disabled#g&apos; /etc/selinux/config</span><br></pre></td></tr></table></figure>
+<p>3、所有机器主机名统一格式</p>
+<p>例如： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- NameNode: namenode&#123;1..2&#125;.hadoop.org</span><br><span class="line">- DataNode: datanode&#123;1..3000&#125;.hadoop.org</span><br></pre></td></tr></table></figure>
+<p>4、所有主机名和IP地址进行映射hosts</p>
+<p>5、所有机器关闭iptables</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld.service &amp;&amp; systemctl disable firewalld.service</span><br></pre></td></tr></table></figure>
+<p>6、所有主机必须通过ntp服务使时间保持一致。</p>
+<p>公网NTP同步；如果是内网，需要自己做一个内网的NTP服务器；让服务器时间和硬件时钟同步，避免重启操作系统导致时间不同步，集群组件无法正常工作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate asia.pool.ntp.org &amp;&amp; hwclock -w</span><br></pre></td></tr></table></figure>
+<p>集群组件利用时间戳进行存储的，需要保障集群所有节点时间一致性，不然会导致集群异常，目前在分布式数据库领域，对于分布式集群时间一致性的误差不能超过秒级，在大数据中Hbase、Zookeeper组件，如果在集群安装之前你没有主动的去让所有节点时间一致，安装完成之后再去同步时间，会导致Hbase、Zookeeper服务无法正常工作。</p>
+<p>目前出现了NewSQL数据库系统也是严格要求必须保证同一数据中心时间一致，甚至通过硬件时钟来做时间同步。</p>
+<h3 id="系统分区"><a href="#系统分区" class="headerlink" title="系统分区"></a>系统分区</h3><p>Linux系统分区，在做Linux系统分区的时候， 决定了后续集群是否能够在底层提供合理的数据存储保障能力。比如：操作系统”os/log”需要安装在SSD，那么SSD需要2块做raid1,保障即使有一块盘损坏，保障集群操作系统正常运行。</p>
+<p><code>注意：系统安装的时候，请使用最小化安装方式，不安装图形化界面.</code></p>
+<ul>
+<li>NameNode节点分区方式：</li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/namenode_os_parted.png" alt></p>
+<p>这是一个例子，可根据实际情况调整，需要注意的第一点是/var目录单独分出来，避免日志太多导致根目录爆满，导致操作系统无法正常工作。第二点，namenode元数据存储目录，底层硬件上需要保证带有RAID1，一般原则4块盘，每两个做RAID1。第三点，namenode元数据信息存储不需要非常大的空间，它主要负责存储一些数据块切分后存储在那些datanode上这样的记录，你可以把他看做一本书的目录，不会特别大，但是章节过多(block过多)也会导致目录暴涨，建议4块1-2T的SAS/SATA盘，可以动态增加磁盘。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NameNode元数据信息案例：</span><br><span class="line">    - 文件个数 22328188 </span><br><span class="line">    - 文件夹个数 711845</span><br><span class="line">    - block个数 32774913</span><br><span class="line">    - 总容量 4.12 PB</span><br><span class="line">    - 容量使用 3.34 PB</span><br><span class="line">    - 元数据大小  5.4g</span><br></pre></td></tr></table></figure>
+<p>如上，元数据信息占用空间是非常小的，而且它常驻内存，如果集群大量小文件，会导致元数据暴增，大集群重启主节点会超级慢；如果重启后整个集群会导致block块信息汇报，导致主节点非常繁忙长时间处于安全模式。</p>
+<ul>
+<li>DataNode节点分区方式：</li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/datanode_disk_parted.png" alt></p>
+<p>这是一个例子，可根据实际情况调整，需要注意的第一点是/var目录单独分出来，避免日志太多导致根目录爆满，导致操作系统无法正常工作。第二点，datanode数据存储目录，底层硬盘为RAID0/JBOD，一般原则12块盘 。第三点，datanode存储一般需要非常大的空间，因为所有的集群数据都存储在datanode管理的磁盘上， 建议单块盘大小4-6T。</p>
+<ul>
+<li>Ambari-Server节点分区方式：</li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/ambari-server-parted.png" alt></p>
+<p>这是一个例子，对于集群监控主节点的部署，无论是你使用Ambari-Server、ClouderaManager监控集群或者其他工具监控集群，原则是操作系统建议使用lvm分区管理，方便动态扩展容量，避免出现某些目录占满的情况。监控相关的数据一定要放到大盘去存储，设置好数据清理周期，避免存储数据过大，导致查询时主节点压力过大。</p>
+<ul>
+<li>Gaeteway-Node节点分区方式：</li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/gateway-disk-parted.png" alt></p>
+<p>Gateway节点，没有任何集群服务和组件，通常是用来和集群沟通提交任务的节点，主要功能，在Hadoop集群中提供一个桥梁，可以对数据进行接入 。Gateway节点链接到主要局域网的入口， 有时也被称作网关节点。Gateway节点是可选或者不选择的，但常被强烈推荐，对集群瓶颈和性能均有很大的提升作用。</p>
+<p>Linux系统分区方案说明：</p>
+<p>在很多业务服务器数量多且复杂的运维场景，会有专门的系统安装工程师，由于这些基础系统安装工程师无法确定服务器的业务需求，因此，会根据公司的要求只分出：</p>
+<ul>
+<li>/boot   200M</li>
+<li>Swap    内存*2</li>
+<li>/   （列如： 100G）</li>
+</ul>
+<p>然后剩余的分区保留不分，fdisk(不适合大于2t的分区)，parted(适合大于2T的分区)<br>这样后续使用的服务器的不同业务产品的运维部门就可以根据具体的业务在规划后面的分区，这样的方法也是值得推荐的分区思路！</p>
+<p>上面的/data{1..12}目录，表示，如果有12块硬盘，挂载点为12个目录，取名/data1, /data2, /data3, /data..这些目录都用来存储hdfs数据的数据目录！</p>
+<p>有关根目录/ ，主要是存储/home，/tmp，/opt等！</p>
+<p>有关/var目录主要存储相关组件所有的日志记录信息，所以单独划分，避免根目录出现使用100%的情况，导致操作系统无法正常工作。</p>
+<h3 id="制作本地源"><a href="#制作本地源" class="headerlink" title="制作本地源"></a>制作本地源</h3><p>HDP本地源：</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/hdp-repo.png" alt></p>
+<p>LinuxOS本地源：</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/linuxos_repo.png" alt></p>
+<p>今天内容依然比较干，介绍了一下生产环境中，大数据集群底层系统分区划分，操作系统需要具备的环境，制作内网离线repo仓库。</p>
+<p>企业级大数据平台部署实施参考指南》分多节，有更多细节剖析，不妥之处欢迎指正！</p>
+<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/hadoop/">hadoop</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/07/30/Enterprise-BigData-platform-deployment-guide-part-3/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Enterprise-BigData-platform-deployment-guide-part-3</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/07/27/ Enterprise-BigData-platform-deployment-guide-part-1/">
+        <span class="next-text nav-default">Enterprise-BigData-platform-deployment-guide-part-1</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

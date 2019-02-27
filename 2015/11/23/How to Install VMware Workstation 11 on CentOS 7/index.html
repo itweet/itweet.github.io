@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="How to Install VMware Workstation 11 on CentOS 7">
+
+
+
+
+  <meta name="keywords" content="vmware,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/11/23/How to Install VMware Workstation 11 on CentOS 7/">
+
+
+<meta name="description" content="This tutorial will show you how to install VMware Workstation 11 on RHEL 7, CentOS 7, Fedora 21, Debian 7 and Ubuntu 14.10/14.04. VMware Workstation 11 is a popular software which allows you to run mu">
+<meta name="keywords" content="vmware">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Install VMware Workstation 11 on CentOS 7">
+<meta property="og:url" content="http://itweet.github.io/2015/11/23/How to Install VMware Workstation 11 on CentOS 7/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="This tutorial will show you how to install VMware Workstation 11 on RHEL 7, CentOS 7, Fedora 21, Debian 7 and Ubuntu 14.10/14.04. VMware Workstation 11 is a popular software which allows you to run mu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/vm-install-1.png">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/vm-install-2.png">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/vm-start.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.492Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to Install VMware Workstation 11 on CentOS 7">
+<meta name="twitter:description" content="This tutorial will show you how to install VMware Workstation 11 on RHEL 7, CentOS 7, Fedora 21, Debian 7 and Ubuntu 14.10/14.04. VMware Workstation 11 is a popular software which allows you to run mu">
+<meta name="twitter:image" content="https://jikelab.github.io/tech-labs/screenshots/vm-install-1.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> How to Install VMware Workstation 11 on CentOS 7 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          How to Install VMware Workstation 11 on CentOS 7
+        
+      </h1>
+
+      <time class="post-time">
+          11月 23 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>This tutorial will show you how to install VMware Workstation 11 on RHEL 7, CentOS 7, Fedora 21, Debian 7 and Ubuntu 14.10/14.04.</p>
+<p>VMware Workstation 11 is a popular software which allows you to run multiple different virtual machines on physical hosts using the concept of Type II of hypervisors (Hosted Hypervisors). This tutorial also discuss some common issues during the installation process.</p>
+<h1 id="Step-1-Downloading-VMWare-Workstation-11"><a href="#Step-1-Downloading-VMWare-Workstation-11" class="headerlink" title="Step 1: Downloading VMWare Workstation 11"></a>Step 1: Downloading VMWare Workstation 11</h1><ol>
+<li>First login into your server as root or non-root user with sudo permissions and run the following commnad to keep your system up-to-date.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@bigdata-server ~]#  yum update</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>Next, download the software from VMware official site. You will download script file like “VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle”, by default this script file downloaded without execute permission, so you will need to give it.</p>
+</li>
+<li><p>After downloading script file, go to the directory which contains the script file and make sure that script file is exist and have default permissions.</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@bigdata-server home]# ls -l VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle </span><br><span class="line">-rw-r--r--. 1 root root 438023042 Nov 23  2015 VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>Give permission eXecute for all “for security reasons you may need to give the permission for the owner user only NOT for all”.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@bigdata-server home]# chmod a+x VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>After setting permission, make sure to check the permissions again.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@bigdata-server home]# ls -l VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle </span><br><span class="line">-rwxr-xr-x. 1 root root 438023042 Nov 23  2015 VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle</span><br></pre></td></tr></table></figure>
+<h1 id="Step-2-Installing-VMWare-Workstation-11"><a href="#Step-2-Installing-VMWare-Workstation-11" class="headerlink" title="Step 2: Installing VMWare Workstation 11"></a>Step 2: Installing VMWare Workstation 11</h1><ol start="6">
+<li>The installation process follows a straight-forward steps, just issue following command to run the script file.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@bigdata-server home]# ./VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>Once the script is running, you see the following window the screen.</li>
+</ol>
+<p><img src="https://jikelab.github.io/tech-labs/screenshots/vm-install-1.png" alt></p>
+<p>Just follow the one screen instructions until “Installation was successful” message appears.</p>
+<p><img src="https://jikelab.github.io/tech-labs/screenshots/vm-install-2.png" alt></p>
+<p>VMware Workstation 11 Serial：1F04Z-6D111-7Z029-AV0Q4-3AEH8</p>
+<h1 id="Step-3-Running-VMWare-Workstation-11"><a href="#Step-3-Running-VMWare-Workstation-11" class="headerlink" title="Step 3: Running VMWare Workstation 11"></a>Step 3: Running VMWare Workstation 11</h1><ol start="8">
+<li>To start the software for fist time you will find some issues as discussed below with fixes. To start the software type vmware in the terminal.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@bigdata-server home]# vmware</span><br></pre></td></tr></table></figure>
+<p><img src="https://jikelab.github.io/tech-labs/screenshots/vm-start.png" alt></p>
+<p><code>After running above command, you will see this message which notify you to</code><br><code>install gcc compiler and some components. Just press ‘Cancel’ to continue.</code></p>
+<ol start="9">
+<li>Return to the terminal, then lets install “Development tools”.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@bigdata-server home]#    yum groupinstall &quot;Development tools&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="vmware-add-disk-2T-amp-amp-parted-partitions"><a href="#vmware-add-disk-2T-amp-amp-parted-partitions" class="headerlink" title="vmware add disk 2T &amp;&amp; parted partitions"></a>vmware add disk 2T &amp;&amp; parted partitions</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">parted /dev/sdb </span><br><span class="line">mklabel gpt</span><br><span class="line">q</span><br><span class="line"></span><br><span class="line">#parted sdb</span><br><span class="line">parted /dev/sdb mkpart primary   0      250000      I</span><br><span class="line">parted /dev/sdb mkpart primary   250001     500000  I</span><br><span class="line">parted /dev/sdb mkpart primary   500001     750000  I</span><br><span class="line">parted /dev/sdb mkpart primary   750001     1000000 I</span><br><span class="line">parted /dev/sdb mkpart primary   1000001    1250000 I</span><br><span class="line">parted /dev/sdb mkpart primary   1250001    1500000 I</span><br><span class="line">parted /dev/sdb mkpart primary   1500001    1750000 I</span><br><span class="line">parted /dev/sdb mkpart primary   1750001    2000000 I</span><br><span class="line">parted /dev/sdb mkpart primary   2000001    2199000 I</span><br><span class="line"></span><br><span class="line">#create vg</span><br><span class="line">pvcreate /dev/sdb1</span><br><span class="line">pvcreate /dev/sdb2</span><br><span class="line">pvcreate /dev/sdb3</span><br><span class="line">pvcreate /dev/sdb4</span><br><span class="line">pvcreate /dev/sdb5</span><br><span class="line">pvcreate /dev/sdb6</span><br><span class="line">pvcreate /dev/sdb7</span><br><span class="line">pvcreate /dev/sdb8</span><br><span class="line">pvcreate /dev/sdb9</span><br><span class="line"></span><br><span class="line">#check partition</span><br><span class="line">parted /dev/sdb</span><br><span class="line">GNU Parted 2.1</span><br><span class="line">Using /dev/sdb</span><br><span class="line">Welcome to GNU Parted! Type &apos;help&apos; to view a list of commands.</span><br><span class="line">(parted) p                                                                </span><br><span class="line">Model: VMware, VMware Virtual S (scsi)</span><br><span class="line">Disk /dev/sdb: 2199GB</span><br><span class="line">Sector size (logical/physical): 512B/512B</span><br><span class="line">Partition Table: gpt</span><br><span class="line"></span><br><span class="line">Number  Start   End     Size   File system  Name     Flags</span><br><span class="line"> 1      17.4kB  250GB   250GB               primary</span><br><span class="line"> 2      250GB   500GB   250GB               primary</span><br><span class="line"> 3      500GB   750GB   250GB               primary</span><br><span class="line"> 4      750GB   1000GB  250GB               primary</span><br><span class="line"> 5      1000GB  1250GB  250GB               primary</span><br><span class="line"> 6      1250GB  1500GB  250GB               primary</span><br><span class="line"> 7      1500GB  1750GB  250GB               primary</span><br><span class="line"> 8      1750GB  2000GB  250GB               primary</span><br><span class="line"> 9      2000GB  2199GB  199GB               primary</span><br><span class="line">(parted) q </span><br><span class="line"></span><br><span class="line">#create vg</span><br><span class="line">vgcreate vg_dfs01 /dev/sdb1 /dev/sdb2 /dev/sdb3 /dev/sdb4 /dev/sdb5 /dev/sdb6 /dev/sdb7 /dev/sdb8 /dev/sdb9</span><br><span class="line"></span><br><span class="line"># create lv</span><br><span class="line">lvcreate -n lv_data01 -L +2000G vg_dfs01</span><br><span class="line"></span><br><span class="line"># mkfs lv</span><br><span class="line">mkfs.ext4  /dev/vg_dfs01/lv_data01 -T largefile</span><br><span class="line"></span><br><span class="line"># create mount dir</span><br><span class="line">mkdir /data01</span><br><span class="line"></span><br><span class="line"># mount </span><br><span class="line">mount /dev/vg_dfs01/lv_data01/   /data01</span><br><span class="line"></span><br><span class="line"># check mount</span><br><span class="line">[root@server1 ~]# df -h</span><br><span class="line">Filesystem            Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/sda1              20G  6.3G   13G  34% /</span><br><span class="line">tmpfs                  16G  8.0K   16G   1% /dev/shm</span><br><span class="line">/dev/sda3              72G  509M   68G   1% /data</span><br><span class="line">/dev/mapper/vg_dfs01-lv_data01</span><br><span class="line">                      1.8T   68M  1.7T   1% /data01</span><br><span class="line"></span><br><span class="line"># Add a boot mounted automatically</span><br><span class="line">echo &quot;/dev/vg_dfs01/lv_data01/   /data01               ext4    defaults        1 2&quot; &gt;&gt; /etc/fstab</span><br><span class="line"></span><br><span class="line"># check fstab </span><br><span class="line">[root@server1 ~]# mount -a</span><br><span class="line">[root@server1 ~]# df -h</span><br><span class="line">Filesystem            Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/sda1              20G  6.3G   13G  34% /</span><br><span class="line">tmpfs                  16G  8.0K   16G   1% /dev/shm</span><br><span class="line">/dev/sda3              72G  509M   68G   1% /data</span><br><span class="line">/dev/mapper/vg_dfs01-lv_data01</span><br><span class="line">                      1.8T   68M  1.7T   1% /data01</span><br></pre></td></tr></table></figure>
+<h1 id="Delete-VG-amp-amp-LV"><a href="#Delete-VG-amp-amp-LV" class="headerlink" title="Delete VG &amp;&amp; LV"></a>Delete VG &amp;&amp; LV</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"># 查看卷组（VG）相关信息，如下所示</span><br><span class="line"># vgscan</span><br><span class="line">[root@server1 ~]# vgdisplay -v vg_dfs01</span><br><span class="line">    Using volume group(s) on command line.</span><br><span class="line">    Wiping cache of LVM-capable devices</span><br><span class="line">  Couldn&apos;t find device with uuid 8dJYyk-AXwi-scKb-11bs-ta5j-04gL-Njk7x8.</span><br><span class="line">    There are 1 physical volumes missing.</span><br><span class="line">    There are 1 physical volumes missing.</span><br><span class="line">  --- Volume group ---</span><br><span class="line">  VG Name               vg_dfs01</span><br><span class="line">  System ID             </span><br><span class="line">  Format                lvm2</span><br><span class="line">  Metadata Areas        8</span><br><span class="line">  Metadata Sequence No  2</span><br><span class="line">  VG Access             read/write</span><br><span class="line">  VG Status             resizable</span><br><span class="line">  MAX LV                0</span><br><span class="line">  Cur LV                1</span><br><span class="line">  Open LV               1</span><br><span class="line">  Max PV                0</span><br><span class="line">  Cur PV                9</span><br><span class="line">  Act PV                8</span><br><span class="line">  VG Size               2.00 TiB</span><br><span class="line">  PE Size               4.00 MiB</span><br><span class="line">  Total PE              524276</span><br><span class="line">  Alloc PE / Size       460800 / 1.76 TiB</span><br><span class="line">  Free  PE / Size       63476 / 247.95 GiB</span><br><span class="line">  VG UUID               LOhcmw-9t25-cMZZ-wXUp-IAGL-A6Eb-jowUP8</span><br><span class="line">   </span><br><span class="line">  --- Logical volume ---</span><br><span class="line">  LV Path                /dev/vg_dfs01/lv_data01</span><br><span class="line">  LV Name                lv_data01</span><br><span class="line">  VG Name                vg_dfs01</span><br><span class="line">  LV UUID                TY6HXy-o7bk-XuKK-J23O-BSK6-mZ6t-tbNIug</span><br><span class="line">  LV Write Access        read/write</span><br><span class="line">  LV Creation host, time server1, 2015-11-22 07:44:49 +0800</span><br><span class="line">  LV Status              available</span><br><span class="line">  # open                 1</span><br><span class="line">  LV Size                1.76 TiB</span><br><span class="line">  Current LE             460800</span><br><span class="line">  Segments               8</span><br><span class="line">  Allocation             inherit</span><br><span class="line">  Read ahead sectors     auto</span><br><span class="line">  - currently set to     256</span><br><span class="line">  Block device           253:0</span><br><span class="line"></span><br><span class="line">#卸载卷组的逻辑卷LV</span><br><span class="line"># umount /dev/vg_dfs01/lv_data01</span><br><span class="line"></span><br><span class="line">#删除卷组VG</span><br><span class="line"># vgchange -a n vg_dfs01</span><br><span class="line"># vgremove  vg_dfs01</span><br><span class="line"></span><br><span class="line">#删除物理卷PV</span><br><span class="line"># pvremove  /dev/sdb1</span><br></pre></td></tr></table></figure>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>Congratulations everything has done successfully, you should use in-deep the new features of the NEW edition of VMware Workstation, Do your labs and across Virtualization Ocean, GOod LuCk..</p>
+<h1 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h1><p>  1、VMware-Workstation-Full-12+以上的版本，在redhat6.7/centos6.7/Fedora23无法安装成功，报错信息为内核不支持，，在社区反馈过，至今没修复，在7版本未尝试，是否支持。</p>
+<blockquote>
+<p>报错信息类似：<br>          kernel-headers,Kernel-devel没有找到，特定去安装之后，依然无法解决。</p>
+</blockquote>
+<p>  2、VMware-Workstation-Full-11.0.0版本，可以正常在redhat6.7/centos6.7版本运行。</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+<p>参考：<br>    <a href="http://www.tecmint.com/install-vmware-workstation-11-in-linux/" target="_blank" rel="noopener">http://www.tecmint.com/install-vmware-workstation-11-in-linux/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/vmware/">vmware</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/11/26/redis use/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">redis use</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/10/21/snmp-doc/">
+        <span class="next-text nav-default">snmp-doc</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

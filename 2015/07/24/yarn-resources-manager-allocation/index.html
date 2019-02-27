@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="yarn-resources-manager-allocation">
+
+
+
+
+  <meta name="keywords" content="YARN,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/07/24/yarn-resources-manager-allocation/">
+
+
+<meta name="description" content="Hadoop YARN同时支持内存和CPU两种资源的调度（默认只支持内存，如果想进一步调度CPU，需要自己进行一些配置），本文将介绍YARN是如何对这些资源进行调度和隔离的。在YARN中，资源管理由ResourceManager和NodeManager共同完成，其中，ResourceManager中的调度器负责资源的分配，而NodeManager则负责资源的供给和隔离。ResourceManage">
+<meta name="keywords" content="YARN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yarn-resources-manager-allocation">
+<meta property="og:url" content="http://itweet.github.io/2015/07/24/yarn-resources-manager-allocation/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Hadoop YARN同时支持内存和CPU两种资源的调度（默认只支持内存，如果想进一步调度CPU，需要自己进行一些配置），本文将介绍YARN是如何对这些资源进行调度和隔离的。在YARN中，资源管理由ResourceManager和NodeManager共同完成，其中，ResourceManager中的调度器负责资源的分配，而NodeManager则负责资源的供给和隔离。ResourceManage">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.486Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="yarn-resources-manager-allocation">
+<meta name="twitter:description" content="Hadoop YARN同时支持内存和CPU两种资源的调度（默认只支持内存，如果想进一步调度CPU，需要自己进行一些配置），本文将介绍YARN是如何对这些资源进行调度和隔离的。在YARN中，资源管理由ResourceManager和NodeManager共同完成，其中，ResourceManager中的调度器负责资源的分配，而NodeManager则负责资源的供给和隔离。ResourceManage">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> yarn-resources-manager-allocation - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          yarn-resources-manager-allocation
+        
+      </h1>
+
+      <time class="post-time">
+          7月 24 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Hadoop YARN同时支持内存和CPU两种资源的调度（默认只支持内存，如果想进一步调度CPU，需要自己进行一些配置），本文将介绍YARN是如何对这些资源进行调度和隔离的。<br>在YARN中，资源管理由ResourceManager和NodeManager共同完成，其中，ResourceManager中的调度器负责资源的分配，而NodeManager则负责资源的供给和隔离。ResourceManager将某个NodeManager上资源分配给任务（这就是所谓的“资源调度”）后，NodeManager需按照要求为任务提供相应的资源，甚至保证这些资源应具有独占性，为任务运行提供基础的保证，这就是所谓的资源隔离。<br>  YARN会管理集群中所有机器的可用计算资源. 基于这些资源YARN会调度应用<br>(比如MapReduce)发来的资源请求,然后YARN会通过分配Container来给每个应用<br>提供处理能力, Container是YARN中处理能力的基本单元, 是对内存, CPU等的封装.</p>
+<p>日志：</p>
+<pre><code>Container [pid=134663,containerID=container_1430287094897_0049_02_067966] is running beyond physical memory limits. Current usage: 1.0 GB of 1 GB physical memory used; 1.5 GB of 10 GB virtual memory used. Killing container. Dump of the process-tree for
+
+
+Error: Java heap space
+</code></pre><p>问题1：Container  xxx is running beyond physical memory limits<br>问题2：java heap space</p>
+<h1 id="优化原则"><a href="#优化原则" class="headerlink" title="优化原则"></a>优化原则</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line">--调节参数列表</span><br><span class="line"> </span><br><span class="line"> • Yarn </span><br><span class="line">   - nodemanager:</span><br><span class="line">     &gt; CPU：yarn.nodemanager.resource.cpu-vcores = 8</span><br><span class="line">     &gt; 内存：yarn.nodemanager.resource.memory-mb = 8G</span><br><span class="line">   - resourcermanager</span><br><span class="line">     &gt; 资源分配尽量与NodeManager端保持一致</span><br><span class="line"></span><br><span class="line"> • Map Tasks:</span><br><span class="line">    &gt; mapreduce.map.memory.mb=2240   # Container size</span><br><span class="line">    &gt; mapreduce.map.java.opts=-Xmx2016m  # JVM arguments for a Map task;mapreduce.map.memory.mb*0.85</span><br><span class="line">    &gt; mapreduce.map.cpu.vcores=1</span><br><span class="line"> </span><br><span class="line"> • Reduce Tasks:</span><br><span class="line">    &gt; mapreduce.reduce.memory.mb=2240  # Container size</span><br><span class="line">    &gt; mapreduce.reduce.java.opts=-Xmx2016m  # JVM arguments for a Reduce task;mapreduce.map.memory.mb*0.85</span><br><span class="line">    &gt; mapreduce.reduce.cpu.vcores=1</span><br><span class="line"> </span><br><span class="line"> • MapReduce Application Master   </span><br><span class="line">    &gt; yarn.app.mapreduce.am.resource.mb=2240  # Container size</span><br><span class="line">    &gt; yarn.app.mapreduce.am.command-opts=-Xmx2016m  # JVM arguments for an Application Master</span><br><span class="line">    &gt; yarn.app.mapreduce.am.resource.cpu-vcores=1</span><br><span class="line"> </span><br><span class="line"> • Trouble Shooting</span><br><span class="line">    &gt; yarn.nodemanager.vmem-pmem-ratio</span><br><span class="line">    &gt; yarn.nodemanager.vmem-check-enabled</span><br><span class="line"></span><br><span class="line"> • Client </span><br><span class="line">    &gt; mapreduce.job.reduces = (节点数 * reduce slot数) 的倍数</span><br><span class="line">    </span><br><span class="line">    &gt; mapreduce.client.submit.file.replication</span><br><span class="line">    </span><br><span class="line">    &gt; 编码</span><br><span class="line">      -  mapreduce.output.fileoutputformat.compress.codec</span><br><span class="line">      -  mapreduce.map.output.compress.codec</span><br><span class="line">      -  mapreduce.output.fileoutputformat.compress.type</span><br><span class="line">        * org.apache.hadoop.io.compress.DefaultCodec</span><br><span class="line">        * org.apache.hadoop.io.compress.SnappyCodec  #最佳选择</span><br><span class="line">        * org.apache.hadoop.io.compress.BZip2Codec / GzipCodec #压缩比例最高，但是耗时</span><br><span class="line">        </span><br><span class="line">    &gt; io.sort</span><br><span class="line">      - mapreduce.task.io.sort.factor</span><br><span class="line">      - mapreduce.task.io.sort.mb </span><br><span class="line">    </span><br><span class="line">    &gt; mapreduce.map.sort.spill.percent </span><br><span class="line">    </span><br><span class="line">    &gt; mapreduce.reduce.shuffle.parallelcopies</span><br><span class="line">    </span><br><span class="line">    &gt; Other：io.file.buffer.szie SequenceFiles(目前比较少用，都用rcfile,parquet,orcfile)</span><br><span class="line"></span><br><span class="line">--Yarn参数调节,根据实际硬件环境分配,后面有案例</span><br><span class="line">[root@server1 ~]# python yarn-utils.py -c 32 -m 128 -d 11 -k False</span><br><span class="line"> Using cores=32 memory=128GB disks=11 hbase=False</span><br><span class="line"> Profile: cores=32 memory=106496MB reserved=24GB usableMem=104GB disks=11</span><br><span class="line"> Num Container=20</span><br><span class="line"> Container Ram=5120MB</span><br><span class="line"> Used Ram=100GB</span><br><span class="line"> Unused Ram=24GB</span><br><span class="line"> yarn.scheduler.minimum-allocation-mb=5120</span><br><span class="line"> yarn.scheduler.maximum-allocation-mb=102400</span><br><span class="line"> yarn.nodemanager.resource.memory-mb=102400</span><br><span class="line"> mapreduce.map.memory.mb=5120</span><br><span class="line"> mapreduce.map.java.opts=-Xmx4096m</span><br><span class="line"> mapreduce.reduce.memory.mb=5120</span><br><span class="line"> mapreduce.reduce.java.opts=-Xmx4096m</span><br><span class="line"> yarn.app.mapreduce.am.resource.mb=5120</span><br><span class="line"> yarn.app.mapreduce.am.command-opts=-Xmx4096m</span><br><span class="line"> mapreduce.task.io.sort.mb=2048</span><br><span class="line"></span><br><span class="line">[root@server1 ~]# python yarn-utils.py -c 32 -m 128 -d 11 -k False</span><br><span class="line"> Using cores=32 memory=128GB disks=11 hbase=False</span><br><span class="line"> Profile: cores=32 memory=106496MB reserved=24GB usableMem=104GB disks=11</span><br><span class="line"> Num Container=20</span><br><span class="line"> Container Ram=5120MB</span><br><span class="line"> Used Ram=100GB</span><br><span class="line"> Unused Ram=24GB</span><br><span class="line"> yarn.scheduler.minimum-allocation-mb=5120</span><br><span class="line"> yarn.scheduler.maximum-allocation-mb=102400</span><br><span class="line"> yarn.nodemanager.resource.memory-mb=102400</span><br><span class="line"> mapreduce.map.memory.mb=5120</span><br><span class="line"> mapreduce.map.java.opts=-Xmx4096m</span><br><span class="line"> mapreduce.reduce.memory.mb=5120</span><br><span class="line"> mapreduce.reduce.java.opts=-Xmx4096m</span><br><span class="line"> yarn.app.mapreduce.am.resource.mb=5120</span><br><span class="line"> yarn.app.mapreduce.am.command-opts=-Xmx4096m</span><br><span class="line"> mapreduce.task.io.sort.mb=2048</span><br><span class="line"></span><br><span class="line">--参数含义：</span><br><span class="line">Option            Description</span><br><span class="line">   -c CORES    The number of cores on each host.</span><br><span class="line">   -m MEMORY   The amount of memory on each host in GB.</span><br><span class="line">   -d DISKS    The number of disks on each host.</span><br><span class="line">   -k HBASE    &quot;True&quot; if HBase is installed, &quot;False&quot; if not.</span><br><span class="line"></span><br><span class="line">-- YARN以及MAPREDUCE所有可用的内存资源应该要除去系统运行需要的以及其他的hadoop的一些程序，总共保留的内存=系统内存+HBASE内存。</span><br><span class="line"></span><br><span class="line">服务器总内存    系统需要内存     HBase需要内存</span><br><span class="line">4GB               1GB             1GB</span><br><span class="line">8GB               2GB             1GB</span><br><span class="line">16GB              2GB             2GB</span><br><span class="line">24GB              4GB             4GB</span><br><span class="line">48GB              6GB             8GB</span><br><span class="line">64GB              8GB             8GB</span><br><span class="line">72GB              8GB             8GB</span><br><span class="line">96GB              12GB            16GB</span><br><span class="line">128GB             24GB            24GB</span><br><span class="line">255GB             32GB            32GB</span><br><span class="line">512GB             64GB            64GB</span><br></pre></td></tr></table></figure>
+<h1 id="优化前："><a href="#优化前：" class="headerlink" title="优化前："></a>优化前：</h1><p> yarn.nodemanager.resource.memory-mb<br>    8GB<br> yarn.nodemanager.resource.cpu-vcores<br>    32core</p>
+<pre><code>pre Mapper 
+CPU:1   [mapreduce.map.cpu.vcores ]
+MEM:1G  [mapreduce.map.memory.mb ]
+===&gt; 8 map slot / node
+
+pre Reducer
+CPU:1   [mapreduce.reduce.cpu.vcores]
+MEM:1G  [mapreduce.reduce.memory.mb]
+===&gt; 8 reduce slot / node 【有8G内存，实际有CPU 32个，所以只能启动8个reduce在每个node上】
+</code></pre><ul>
+<li>map slot / reduce slot 由nodemanager的内存/CPU core上限与客户<br>端设置的单mapper， reducer内存/CPU使用值决定</li>
+<li>heapsize（ java.opts中的-Xmx）应根据单mapper， reducer内存进<br>行调整，而与slot个数无关 =&gt; heapsize不能大于memory.mb值，一<br>般设置为memory.mb的85%左右</li>
+</ul>
+<h1 id="OOM"><a href="#OOM" class="headerlink" title="OOM"></a>OOM</h1><p>  •内存、Heap<br>    需要设置：<br>     -内存：mapreduce.map.memory.mb<br>     –Heap Size：-Xmx在mapreduce.map.java.opts做相同调整<br>     –内存：mapreduce.reduce.memory.mb<br>     –Heap Size：-Xmx在mapreduce.reduce.java.opts做相同调整</p>
+<h1 id="Container-超过了虚拟内存的使用限制"><a href="#Container-超过了虚拟内存的使用限制" class="headerlink" title="Container 超过了虚拟内存的使用限制"></a>Container 超过了虚拟内存的使用限制</h1><p>– Container XXX is running beyond virtual memory limits<br> • NodeManager端设置，类似系统层面的overcommit问题<br>    –yarn.nodemanager.vmem-pmem-ratio 【默认2.1，我们的做法呢【物理内存和虚拟内存比率】值为了15，yarn-site.xml中修改】</p>
+<pre><code>&lt;property&gt;
+    &lt;name&gt;yarn.nodemanager.vmem-pmem-ratio&lt;/name&gt;
+        &lt;value&gt;10&lt;/value&gt;
+    &lt;/property&gt;
+–或者yarn.nodemanager.vmem-check-enabled，false掉 
+    &lt;property&gt;
+        &lt;name&gt;yarn.nodemanager.vmem-check-enabled&lt;/name&gt;
+        &lt;value&gt;false&lt;/value&gt;
+    &lt;/property&gt;
+</code></pre><h1 id="调优后："><a href="#调优后：" class="headerlink" title="调优后："></a>调优后：</h1><p>mapreduce.map.java.opts, mapreduce.map.java.opts.max.heap=1.6G<br>mapreduce.reduce.java.opts,mapreduce.reduce.java.opts.max.heap=3.3G<br>注意上面两个参数和下面的mapper,reducer的内存有关系,是下面mem的0.85倍！</p>
+<p>yarn.nodemanager.resource.memory-mb=32GB<br>yarn.nodemanager.resource.cpu-vcores=32core</p>
+<pre><code>pre Mapper 
+CPU:2   [mapreduce.map.cpu.vcores ]
+MEM:2G  [mapreduce.map.memory.mb ]
+===&gt; 16 map slot / node
+
+pre Reducer
+CPU:4   [mapreduce.reduce.cpu.vcores]
+MEM:4G  [mapreduce.reduce.memory.mb]
+==&gt; 8 reduce slot / node
+</code></pre><h1 id="shuffle-parallelcopies如何计算"><a href="#shuffle-parallelcopies如何计算" class="headerlink" title="shuffle.parallelcopies如何计算?"></a>shuffle.parallelcopies如何计算?</h1><p>（reduce.shuffle并行执行的副本数,最大线程数–sqrt(节点数<em> map slot数) 与 (节点数 </em> map slot数)/2 之间 ==&gt;结果：{12-72}<br>mapreduce.reduce.shuffle.parallelcopies=68</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">`排序文件时要合并的流的数量。也就是说，在 reducer 端合并排序期间要使用的排序头</span><br><span class="line">数量。此设置决定打开文件句柄数。并行合并更多文件可减少合并排序迭代次数并通过消</span><br><span class="line">除磁盘 I/O 提高运行时间。注意：并行合并更多文件会使用更多的内存。如 &apos;io.sort.</span><br><span class="line">factor&apos; 设置太高或最大 JVM 堆栈设置太低，会产生过多地垃圾回收。Hadoop 默认值为 </span><br><span class="line">10，但 Cloudera 建议使用更高值。将是生成的客户端配置的一部分。`</span><br></pre></td></tr></table></figure>
+<p>mapreduce.task.io.sort.factor=64</p>
+<p>xml配置<br>yarn.nodemanager.vmem-pmem-ratio=10 # yarn-site.xml 的 YARN 客户端高级配置<br>mapreduce.task.timeout=1800000</p>
+<h1 id="impala调优"><a href="#impala调优" class="headerlink" title="impala调优"></a>impala调优</h1><p>Impala 暂存目录：需要注意此目录磁盘空间问题！最好在单独的一个挂载点！  </p>
+<h2 id="1、内存"><a href="#1、内存" class="headerlink" title="1、内存"></a>1、内存</h2><pre><code>-服务器端(impalad)
+Mem：default_query_options MEM_LIMIT=128g  
+</code></pre><h2 id="2、并发查询"><a href="#2、并发查询" class="headerlink" title="2、并发查询"></a>2、并发查询</h2><pre><code>queue
+    .queue_wait_timeout_ms默认只有60s
+       - queue_wait_timeout_ms=600000
+    .default pool设置
+</code></pre><h2 id="3、资源管理"><a href="#3、资源管理" class="headerlink" title="3、资源管理"></a>3、资源管理</h2><pre><code>-Dynamic Resource Pools
+    .并发控制：max running queries
+</code></pre><h2 id="4、yarn资源隔离"><a href="#4、yarn资源隔离" class="headerlink" title="4、yarn资源隔离"></a>4、yarn资源隔离</h2><p><a href="http://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/NodeManagerCgroups.html" target="_blank" rel="noopener">http://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/NodeManagerCgroups.html</a></p>
+<p>参考：<a href="http://www.itweet.cn" target="_blank" rel="noopener">http://www.itweet.cn</a></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/YARN/">YARN</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/07/27/building hadoop for centos/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">building hadoop for centos</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/07/21/presto-use/">
+        <span class="next-text nav-default">presto-use</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

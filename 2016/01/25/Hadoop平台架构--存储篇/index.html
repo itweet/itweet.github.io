@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Hadoop平台架构--存储篇">
+
+
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/01/25/Hadoop平台架构--存储篇/">
+
+
+<meta name="description" content="刚刚开始使用Hadoop集群的时候,目录没有有个规范,大家都根据自己的喜好创建各种不同的目录,权限控制也没有开启,随着应用越来越多，使用的人员也多了起来，导致目录混乱,终于在新规划集群的时候,对目录做了规范和权限控制.下面简单介绍一下我们HDFS目录规范和HDFS存储规划,写在Hadoop十周年纪念,希望对初建Hadoop集群的同学能有一些帮助。hadoop ecosystem table">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop平台架构--存储篇">
+<meta property="og:url" content="http://itweet.github.io/2016/01/25/Hadoop平台架构--存储篇/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="刚刚开始使用Hadoop集群的时候,目录没有有个规范,大家都根据自己的喜好创建各种不同的目录,权限控制也没有开启,随着应用越来越多，使用的人员也多了起来，导致目录混乱,终于在新规划集群的时候,对目录做了规范和权限控制.下面简单介绍一下我们HDFS目录规范和HDFS存储规划,写在Hadoop十周年纪念,希望对初建Hadoop集群的同学能有一些帮助。hadoop ecosystem table">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.493Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop平台架构--存储篇">
+<meta name="twitter:description" content="刚刚开始使用Hadoop集群的时候,目录没有有个规范,大家都根据自己的喜好创建各种不同的目录,权限控制也没有开启,随着应用越来越多，使用的人员也多了起来，导致目录混乱,终于在新规划集群的时候,对目录做了规范和权限控制.下面简单介绍一下我们HDFS目录规范和HDFS存储规划,写在Hadoop十周年纪念,希望对初建Hadoop集群的同学能有一些帮助。hadoop ecosystem table">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Hadoop平台架构--存储篇 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Hadoop平台架构--存储篇
+        
+      </h1>
+
+      <time class="post-time">
+          1月 25 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>   刚刚开始使用Hadoop集群的时候,目录没有有个规范,大家都根据自己的喜好<br>创建各种不同的目录,权限控制也没有开启,随着应用越来越多，使用的人员也<br>多了起来，导致目录混乱,终于在新规划集群的时候,对目录做了规范和权限控制.<br>下面简单介绍一下我们HDFS目录规范和HDFS存储规划,写在Hadoop十周年纪念,希望对初建Hadoop集群的<br>同学能有一些帮助。<a href="https://hadoopecosystemtable.github.io/" target="_blank" rel="noopener">hadoop ecosystem table</a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>  Hadoop的目的是基于一种新的方法来存储和处理复杂的数据。通过把数据均衡分布<br>到集群上,通过复制副本以确保数据的可靠性和容错。存储和计算都分布到多个机器,<br>充分体现数据的本地性,现在的很多数据库也都支持数据分片技术，通过把传统的个<br>人英雄主义转变为集团作战，英雄难觅，普通人确很容易寻找。<br>   就如超强一体机和普通PC Server对比，一个价格高昂甚至需要定制,价格高到连<br>淘宝这样的土豪公司都难以承受,提出去IOE的口号,Oracle一体机确实比较贵,而小型的Pc Server容易购买。由于是量产机型,成本低。而Hadoop就是可以运行在低配置的Pc Server服务器上面的分布式集群技术,通过把海量数据分布式存储后,通过分布式计算模型<br>来进行海量数据分析。通俗易懂点说，就是把一台超级服务器跑10天完成的任务,交给20台<br>小型机构建的集群20分钟完成！而且20小型Pc机是一台超级服务器价格的20%！相比较之下<br>优势明显：</p>
+<pre><code>- 效率提高
+- 弹性扩容
+- 价格优势
+- 弹性计算
+</code></pre><p>这就是分布式存储和计算的巨大好处！</p>
+<h1 id="走向分布式"><a href="#走向分布式" class="headerlink" title="走向分布式"></a>走向分布式</h1><blockquote>
+<p>一个系统走向分布式，一定有其不得不为的理由。<br>可扩展性是最常见的理由之一。        </p>
+</blockquote>
+<blockquote>
+<p>我先简单的将“可伸缩”的需求分成两种：</p>
+</blockquote>
+<pre><code>• Data Scalability: 单台机器的容量不足以 (经济的) 承载所有资料，所以需要
+           分散。如：NoSQL
+• Computing Scalability: 单台机器的运算能力不足以 (经济的) 及时完成运算所      
+             以需要分散。如：科学运算。不管是哪一种需求，在决定采用分布式架构时，
+             就几乎注定要接受一些牺牲：        
+</code></pre><ul>
+<li>1.牺牲效率：网路延迟与节点间的协调，都会降低执行效率。   </li>
+<li>2.牺牲 AP 弹性：有些在单机上能执行的运算，无法轻易在分布式环境中完成。</li>
+<li>3.牺牲维护维运能力：分散式架构的问题常常很难重现，也很难追踪.另外，跟单机系统一样，也有一些系统设计上的 tradeoffs(权衡)</li>
+<li>4.CPU 使用效率优化或是 IO 效率优化</li>
+<li>5.读取优化或是写入优化</li>
+<li>6.吞吐率优化或是 网络延迟优化</li>
+<li>7.资料一致性或是资料可得性,选择了不同的 tradeoff，就会有不同的系统架构。</li>
+</ul>
+<h1 id="存储规划"><a href="#存储规划" class="headerlink" title="存储规划"></a>存储规划</h1><p>  Hadoop资源包含：存储和计算。前期你对计算资源其实很难评估，建议初期可以忽略计算资源的评估，单纯从存储这个指标来规划。那么我们的存储应该怎么选择？这个需要根据平台数据增长率来计算，也因为Hadoop集群后期可以水平扩展。一般的公司很难遇到瓶颈。</p>
+<p>  一个真实的案例,我们平台新规划一个集群,某种数据来源,每天增长的数据为4T,我们3被冗余,以不同存储周期规划如下：</p>
+<table><br> <tr><br>   <th>数据源</th><th>数据格式</th><th>数据大小/天</th><th>数据3倍镜像冗余/天</th><th>数据条数/天</th><th>文件个数/天</th><th>存储周期(1个月)</th><th>存储周期(2个月)</th><th>存储周期(3个月)</th><th>硬件评估</th><br> </tr><br> <tr><br>   <td>XX-HTTP-Data</td><td>gz</td><td>4T</td><td>4T*3=12T</td><td>2302859808</td><td>43429</td><td>360T</td><td>720T</td><td>1080T</td><td>集群硬件规划</td><br> </tr><br></table>
+
+<blockquote>
+<p>评估硬件存储：</p>
+</blockquote>
+<table><br> <tr><br>   <th>总存储</th><th>HDFS总存储</th><th>数据存储</th><th>数据类型</th><th>存储周期</th><th>30%计算空间(预留来自HDFS)</th><th>linux os</th><th>存储评估</th><br> </tr><br> <tr><br>   <td>864 T</td><td>720 T</td><td>464T</td><td>XX-HTTP-Data+应用分析结果数据</td><td>1个月<br></td><td>216 T</td><td>40T</td><td>存储评估</td><br> </tr><br></table>
+
+<blockquote>
+<p>我们的业务是IO密集型+CPU密集型都有的业务,一个系统中既有离线任务(mr,hive),<br>也有基于内存计算(hbase,impala,spark),流计算(storm,sparkstreaming)等多种类型<br>的作业,长ETL任务,短SQL-on-Hadoop任务,SQL-on-Hbase的实时入库查询！对内存,<br>网络,CPU,磁盘IO都会在不同的时间段有瓶颈！目前我们计算资源是统一由Yarn来,<br>并且在同一个集群拥有不同的机器配置(最初我们只有mr,hive任务，随着内存技术<br>发展和成熟，引进了impala,spark等技术，刚开始20个节点,32G内存,3<em>2T磁盘,<br>引入内存技术后,新购10台服务器是128G内存,11</em>3T磁盘,主机资源不一致,<br>资源分配就遇到一个大问题？),刚开始我们是使用对集群角色分组,<br>比如Datanode分为3组,不同组机器配置不同,但是慢慢我们发现集群资源利用<br>率并不高,某些机器资源利用率很低,后期慢慢的引入了Yarn的资源池,Label<br>based scheduling基于标签的调度机制，并且升级了Hadoop版本,它可以跟其他调度<br>策略混合使用！基于标签的调度策略是hadoop yarn新引入的feature，它能让<br>YARN更好地运行在异构集群中，进而更好地管理和调度混合类型的应用程序。</p>
+</blockquote>
+<ul>
+<li>1、Linux系统所在磁盘制作Raid1,需要损失一块盘，比如：一台主机12块盘，2块盘做raid1安装linux os，则hdfs使用9块盘！</li>
+<li>2、Namenode配置,比如做了HA,就需要2台cpu,mem强大的机器,磁盘存储小的服务器！<br>   比如：XeonE7-4880v2(2.5GHz/15c)/8.0GT/37.5ML3 * 4 Member: 512G or 256G</li>
+<li>3、Datanode配置,XeonE5-2660v3(2.6GHz/10c)/9.6GT/25ML3 * 2 Member：128G</li>
+<li>4、根据存储周期划分,一台主机12<em>3T磁盘,Namenode不计入存储,Datanode节点linux os 使用2块3T盘raid1,10</em>3T=30T做为HDFS存储！</li>
+<li>5、比如存储周期是1个月,hdfs存储=4T<em>30</em>3=360T,考虑分析结果数据预估存储20%=72T,内存计算,磁盘计算需要计算空间=HDFS总存储<em>30%,考虑零时空间,测试数据等！HDFS总存储</em>5%</li>
+<li>6、综合上面几点,HDFS总存储=720T,Datanode数n=(720T+n<em>3T</em>2)/12<em>3=24台,2台Namenode,1台客户机,总共24+2+1=27台！<br>公式,N主机数：N=(720T+N</em>3T<em>2)/12</em>3T </li>
+</ul>
+<blockquote>
+<p>注意：这里的值都是预估值,刚开始可以这样规划,由于Hadoop可以弹性扩容,后期可以<br>可以增加主机,这里Datanode 主机采用CentOS-6.6_X86-64系统,并且系统做了radi1,<br>其实如果不甘心损失那么多存储,Datanode主机可以不用做raid,HDFS存储全都做成<br>JBOD安装，无RAID。我们自然有我们的考量,如果你有觉得不妥的欢迎指正.详细选型<br>主机配置请参考：《Hadoop平台架构–硬件篇》</p>
+</blockquote>
+<h1 id="HDFS目录规划"><a href="#HDFS目录规划" class="headerlink" title="HDFS目录规划"></a>HDFS目录规划</h1><p>  底层数据存储规划，这个模块比较重要，由于前期建设规划不合理，导致数据存储目录规划混乱，导致很多数据存储目录很深，在清理hdfs存储空间的时候，造成了不小的麻烦，所以重新规划了目录分布！底层操作系统默认raid5.戴尔服务器.后修改为系统盘raid1(两块盘做radi1),总共11块盘一台机器。其余盘做JBOD！</p>
+<h2 id="linux-os目录规划"><a href="#linux-os目录规划" class="headerlink" title="linux os目录规划"></a>linux os目录规划</h2><table><br><tr><br>   <th>目录</th> <th>大小</th> <th>Linux版本</th><br></tr><br><tr><br>   <td>/boot</td><td>1024M</td><td>CentOS 6.6</td><br></tr><br><tr><br>   <td>/boot</td><td>1024M</td><td>CentOS 6.6</td><br></tr><br><tr><br>   <td>/swap</td><td>内存大小*{1~2}</td><td>CentOS 6.6</td><br></tr><br><tr><br>   <td>/</td><td>60G</td><td>CentOS 6.6</td><br></tr><br><tr><br>   <td>/var</td><td>针对两个主节点100G,其余节点50G</td><td>CentOS 6.6</td><br></tr><br><tr><br>   <td>/data{1..10}</td><td>Hdfs数据</td><td>CentOS 6.6</td><br></tr><br><tr><br>   <td>/tmp</td><td>40G</td><td>CentOS 6.6</td><br></tr><br><tr><br>   <td>/home</td><td>80G</td><td>CentOS 6.6</td><br></tr><br></table>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Linux系统分区方案说明：</span><br><span class="line">在很多业务服务器数量多且复杂的运维场景，会有专门的系统安装工程师，由于这些基础系统安装工程师无法确定服务器的业务需求，因此，会根据公司的要求只分出：</span><br><span class="line">    /boot   200M</span><br><span class="line">    Swap    内存*2</span><br><span class="line">    /   （列如： 100G）</span><br><span class="line">然后剩余的分区保留不分，fdisk(不适合大于2t的分区)，parted(适合大于2T的分区)</span><br><span class="line">这样后续使用的服务器的不同业务产品的运维部门就可以根据具体的业务在规划后面的分区，这样的方法也是值得推荐的分区思路！</span><br><span class="line"></span><br><span class="line">上面的/data&#123;1..10&#125;目录，表示，如果有10块硬盘，挂载点为10个目录，取名/data1, /data2, /data3, / data..这些目录都用来存储hdfs数据的数据目录！</span><br><span class="line">有关根目录/ ，主要是存储/var，/home，/tmp，/opt等！</span><br></pre></td></tr></table></figure>
+<h2 id="linux主机名规划"><a href="#linux主机名规划" class="headerlink" title="linux主机名规划"></a>linux主机名规划</h2><table><br><tr><br>  <th>目录</th> <th>Linux版本</th><br></tr><br><tr><br>  <td>bigdata-server{01…100}</td> <td>CentOS 6.6</td><br></tr><br></table>
+
+<h2 id="hdfs目录规划"><a href="#hdfs目录规划" class="headerlink" title="hdfs目录规划"></a>hdfs目录规划</h2><table><br><tr><br>  <th>目录</th> <th>含义</th> <th>Linux版本</th><br></tr><br><tr><br>  <td>/data/external</td> <td>外部抽取数据源存储路径</td> <td>CentOS 6.6</td><br></tr><br><tr><br>  <td>/data/external/db</td> <td>表示oracle-数据</td> <td>CentOS 6.6</td><br></tr><br><tr><br>  <td>/data/external/ftp</td> <td>表示从ftp获取的数据</td> <td>CentOS 6.6</td><br></tr><br><tr><br>  <td>/user/hive/warehouse</td> <td>各种内部表库地址</td> <td>CentOS 6.6</td><br></tr><br><tr><br>  <td>/tmp</td> <td>用来存储一些临时数据文件，每周清理一遍</td> <td>CentOS 6.6</td><br></tr><br><tr><br>  <td>/xxx</td> <td>一些默认自动生成的目录</td> <td>CentOS 6.6</td><br></tr><br><tr><br>  <td>/apps</td> <td>App运行所需jar包</td> <td>CentOS 6.6</td><br></tr><br><tr><br>  <td>/scripts</td> <td>各种脚本备份路径</td> <td>CentOS 6.6</td><br></tr><br><tr><br>  <td>/user</td> <td>用户空间，存储用户私有数据，仅用户自己可以访问.</td> <td>CentOS 6.6</td><br></tr><br><tr><br>  <td>/hbase</td> <td>Hbase HDFS数据目录</td> <td>CentOS 6.6</td><br></tr><br></table>
+
+<h2 id="计算框架临时目录"><a href="#计算框架临时目录" class="headerlink" title="计算框架临时目录"></a>计算框架临时目录</h2><p>  由于数据量越来越大，检索数据太大，导致无法所有数据放入内存，很多中间结果数据会写到磁盘，目前规划总存储的20%做为计算磁盘空间！如果低于20%，计算的时候会导致磁盘空间不足的情况，或者很多任务出现警告和运行缓慢等情况！</p>
+<h2 id="存储格式选择和效率如何权衡？"><a href="#存储格式选择和效率如何权衡？" class="headerlink" title="存储格式选择和效率如何权衡？"></a>存储格式选择和效率如何权衡？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">  组件      格式     数据量     压缩大小   原始大小</span><br><span class="line"></span><br><span class="line">  Imapla    Parquet  ?           30.1 G     98.6 G</span><br><span class="line">  Sparksql  Parquet  ?           69.4 G     98.6 G</span><br><span class="line">  Hive      Rcfile   ?           93.4 G     98.6 G</span><br><span class="line">  Presto    Orcfile  ?           16.2 G     98.6 G</span><br><span class="line"></span><br><span class="line">  Hbase     Snappy   ?           0.35T      2.3T    # 每天入hbase数据量</span><br><span class="line">  </span><br><span class="line">  注意：考虑生成压缩文件的效率,时间换空间的操作！</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;Txt格式</span><br><span class="line">      组件                  耗时</span><br><span class="line">      Hive                  342.235s</span><br><span class="line">      Presto                73.4s</span><br><span class="line">      Impala                20.57s</span><br><span class="line">      Sparksql              169.465s</span><br><span class="line">      Sparksql[chache]      95.9s</span><br><span class="line">  </span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;Parquet格式</span><br><span class="line">       组件                  耗时</span><br><span class="line">       Hive                  322.201s</span><br><span class="line">       Presto                37.91s</span><br><span class="line">       Impala                17.57s</span><br><span class="line">       Sparksql              124.9s</span><br><span class="line">       Sparksql[chache]      108s</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;Orc格式</span><br><span class="line">       组件                  耗时</span><br><span class="line">       Hive                  276.179s</span><br><span class="line">       Presto                101.4s</span><br><span class="line">       Impala                0s  #不支持此格式</span><br><span class="line">       Sparksql              46s</span><br><span class="line">       Sparksql[chache]      35s</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;RcFile格式</span><br><span class="line">       组件                  耗时</span><br><span class="line">       Hive                  306.264s</span><br><span class="line">       Presto                36s</span><br><span class="line">       Impala                18.14s</span><br><span class="line">       Sparksql              177.799s</span><br><span class="line">       Sparksql[chache]      176.5s</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;2组join FcFile文件格式</span><br><span class="line">       组件             耗时         其它问题记录</span><br><span class="line">       Hive             1600s </span><br><span class="line">       Presto           700s </span><br><span class="line">       Impala           1175.29s   </span><br><span class="line">       Sparksql         689.047s</span><br><span class="line">       Sparksql[chache]              效率提升不明显,未测试</span><br><span class="line">       </span><br><span class="line">       组件              耗时        其它问题记录</span><br><span class="line">       Hive              300s  </span><br><span class="line">       Presto            60s </span><br><span class="line">       Impala            2.67s</span><br><span class="line">       Sparksql          40 s</span><br><span class="line">       Sparksql[chache]              效率提升不明显,未测试</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;大大表两两关联（亿级+百万级）测试</span><br><span class="line">==&gt;TextFile</span><br><span class="line">       组件         耗时       其它问题记录</span><br><span class="line">       Hive         641.937s     第一次执行</span><br><span class="line">       </span><br><span class="line">       Impala       267.526s     第一次执行</span><br><span class="line">       Impala       262.727s     第二次执行</span><br><span class="line">       Spark-sql    300.355s     第一次执行</span><br><span class="line">       Spark-sql    294.922s     第二次执行</span><br><span class="line"></span><br><span class="line">==&gt;Parquet</span><br><span class="line">       组件        耗时        其它问题记录</span><br><span class="line">       Hive        57.702s      第一次执行</span><br><span class="line">       </span><br><span class="line">       Impala      1.359s       第一次执行</span><br><span class="line">       Impala      1.232s       第二次执行</span><br><span class="line">       Spark-sql   2.977s       第一次执行</span><br><span class="line">       Spark-sql   2.857s       第二次执行</span><br><span class="line"></span><br><span class="line">Hadoop压缩算法选择：</span><br><span class="line">  •mapreduce.map.output.compress.codec </span><br><span class="line">  •mapreduce.output.fileoutputformat.compress.codec </span><br><span class="line">  •mapreduce.output.fileoutputformat.compress.type </span><br><span class="line">    – org.apache.hadoop.io.compress.DefaultCodec </span><br><span class="line">    – org.apache.hadoop.io.compress.SnappyCodec [最佳选择]</span><br><span class="line">    – org.apache.hadoop.io.compress.BZip2Codec /GzipCodec【GzipCodec压缩最高，但是时间上比较耗时】</span><br></pre></td></tr></table></figure>
+<h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><p>  这是我对于Hadoop存储硬件规划的一个小小总结，如有不妥之处欢迎指正,如果想了解非常详细的硬件参数,欢迎参考《Hadoop平台架构–硬件篇》</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/hadoop/">hadoop</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/01/26/Hadoop平台架构--硬件篇/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Hadoop平台架构--硬件篇</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/01/09/Hbase-Region-split-policy/">
+        <span class="next-text nav-default">Hbase-Region-split-policy</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

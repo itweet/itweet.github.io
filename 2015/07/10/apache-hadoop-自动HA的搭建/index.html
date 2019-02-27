@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="apache-hadoop-自动HA的搭建">
+
+
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/07/10/apache-hadoop-自动HA的搭建/">
+
+
+<meta name="description" content="1、 core-site.xml 1234567891011121314151617181920&amp;lt;configuration&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;fs.defaultFS&amp;lt;/name&amp;gt;&amp;lt;value&amp;gt;hdfs://mycluster&amp;lt;/value&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="apache-hadoop-自动HA的搭建">
+<meta property="og:url" content="http://itweet.github.io/2015/07/10/apache-hadoop-自动HA的搭建/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="1、 core-site.xml 1234567891011121314151617181920&amp;lt;configuration&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;fs.defaultFS&amp;lt;/name&amp;gt;&amp;lt;value&amp;gt;hdfs://mycluster&amp;lt;/value&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/version.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.481Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="apache-hadoop-自动HA的搭建">
+<meta name="twitter:description" content="1、 core-site.xml 1234567891011121314151617181920&amp;lt;configuration&amp;gt;&amp;lt;property&amp;gt;&amp;lt;name&amp;gt;fs.defaultFS&amp;lt;/name&amp;gt;&amp;lt;value&amp;gt;hdfs://mycluster&amp;lt;/value&amp;gt;&amp;lt;/property&amp;gt;&amp;lt;property&amp;gt;&amp;">
+<meta name="twitter:image" content="https://jikelab.github.io/tech-labs/screenshots/version.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> apache-hadoop-自动HA的搭建 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          apache-hadoop-自动HA的搭建
+        
+      </h1>
+
+      <time class="post-time">
+          7月 10 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <ul>
+<li><p>1、 core-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">&lt;value&gt;hdfs://mycluster&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">&lt;value&gt;/data/whoami/hadoop&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;ha.zookeeper.quorum&lt;/name&gt;</span><br><span class="line">&lt;value&gt;server1:2181,server2:2181,server3:2181&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;fs.trash.interval&lt;/name&gt;</span><br><span class="line">&lt;value&gt;2000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2、hdfs-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">&lt;value&gt;2&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.nameservices&lt;/name&gt;</span><br><span class="line">&lt;value&gt;mycluster&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.ha.namenodes.mycluster&lt;/name&gt;</span><br><span class="line">&lt;value&gt;nn1,nn2&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.namenode.rpc-address.mycluster.nn1&lt;/name&gt;</span><br><span class="line">&lt;value&gt;server1:9000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.namenode.http-address.mycluster.nn1&lt;/name&gt;</span><br><span class="line">&lt;value&gt;server1:50070&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.namenode.rpc-address.mycluster.nn2&lt;/name&gt;</span><br><span class="line">&lt;value&gt;server2:9000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.namenode.http-address.mycluster.nn2&lt;/name&gt;</span><br><span class="line">&lt;value&gt;server2:50070&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.ha.automatic-failover.enabled.mycluster&lt;/name&gt;</span><br><span class="line">&lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.namenode.shared.edits.dir&lt;/name&gt;</span><br><span class="line">&lt;value&gt;qjournal://server1:8485;server2:8485;server3:8485/mycluster&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.journalnode.edits.dir&lt;/name&gt;</span><br><span class="line">&lt;value&gt;/data/whoami/hadoop/journal&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.ha.fencing.methods&lt;/name&gt;</span><br><span class="line">&lt;value&gt;sshfence&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.ha.fencing.ssh.private-key-files&lt;/name&gt;</span><br><span class="line">&lt;value&gt;/home/whomai/.ssh/id_rsa&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;dfs.client.failover.proxy.provider.mycluster&lt;/name&gt;</span><br><span class="line">&lt;value&gt;org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>3、yarn-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.nodemanager.aux-services.mapreduce.shuffle.class&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.nodemanager.local-dirs&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/data/whoami/hadoop/nm&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.nodemanager.log-dirs&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/data/whoami/hadoop/logs&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.log-aggregation-enable&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt; </span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;description&gt;Where to aggregate logs&lt;/description&gt;</span><br><span class="line">  &lt;name&gt;yarn.nodemanager.remote-app-log-dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;hdfs://mycluster/var/log/hadoop-yarn/apps&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Resource Manager Configs --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.connect.retry-interval.ms&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;2000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.ha.enabled&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.ha.automatic-failover.enabled&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.ha.automatic-failover.embedded&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.cluster-id&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;yarn-cluster&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.ha.rm-ids&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;rm1,rm2&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.ha.id&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;rm1&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.scheduler.class&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.recovery.enabled&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.store.class&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.zk.state-store.address&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server1:2181,server2:2181,server3:2181&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.app.mapreduce.am.scheduler.connection.wait.interval-ms&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;5000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  &lt;!-- RM1 configs --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.address.rm1&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server1:23140&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.scheduler.address.rm1&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server1:23130&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.webapp.https.address.rm1&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server1:23189&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.webapp.address.rm1&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server1:23188&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.resource-tracker.address.rm1&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server1:23125&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.admin.address.rm1&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server1:23141&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- RM2 configs --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.address.rm2&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server2:23140&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.scheduler.address.rm2&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server2:23130&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.webapp.https.address.rm2&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server2:23189&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.webapp.address.rm2&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server2:23188&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.resource-tracker.address.rm2&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server2:23125&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.admin.address.rm2&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server2:23141&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- Node Manager Configs --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;description&gt;Address where the localizer IPC is.&lt;/description&gt;</span><br><span class="line">  &lt;name&gt;yarn.nodemanager.localizer.address&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;0.0.0.0:23344&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;description&gt;NM Webapp address.&lt;/description&gt;</span><br><span class="line">  &lt;name&gt;yarn.nodemanager.webapp.address&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;0.0.0.0:23999&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.nodemanager.local-dirs&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;/data/whoami/hadoop/nodemanager/yarn/local&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.nodemanager.log-dirs&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;/data/whoami/hadoop/nodemanager/yarn/log&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;mapreduce.shuffle.port&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;23080&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.zk-address&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;server1:2181,server2:2181,server3:2181&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>4、mapred-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">    &lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;mapreduce.jobhistory.address&lt;/name&gt;</span><br><span class="line">&lt;value&gt;server1:10020&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;mapreduce.jobhistory.webapp.address&lt;/name&gt;</span><br><span class="line">&lt;value&gt;server1:19888&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;mapreduce.jobhistory.webapp.https.address&lt;/name&gt;</span><br><span class="line">&lt;value&gt;server1:19890&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;mapreduce.jobhistory.admin.address&lt;/name&gt;</span><br><span class="line">&lt;value&gt;server1:10033&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">&lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;yarn.app.mapreduce.am.staging-dir&lt;/name&gt;</span><br><span class="line">&lt;value&gt;/user&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;mapreduce.task.timeout&lt;/name&gt;</span><br><span class="line">&lt;value&gt;1800000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">    &lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>修改server2上的yarn-site.xml<br>修改为下面的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.ha.id&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;rm2&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>5、slaves<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">server3</span><br><span class="line">server04</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>6、hadoop-env.sh修改<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME指定为jdk安装目录，JAVA_HOME=/usr/local/jdk1.7.0_45</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>7、scp hadoop-2.6.0<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 local]# scp -rq hadoop-2.6.0 server2:/usr/local/</span><br><span class="line">[root@server1 local]# scp -rq hadoop-2.6.0 server3:/usr/local/</span><br><span class="line">[root@server1 local]# scp -rq hadoop-2.6.0 server04:/usr/local/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>8、启动journalnode</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 local]# hadoop-daemon.sh start journalnode</span><br><span class="line">[root@server2 local]# hadoop-daemon.sh start journalnode</span><br><span class="line">[root@server3 local]# hadoop-daemon.sh start journalnode</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>9、格式化zkfc集群</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 local]# hadoop-2.6.0/bin/hdfs zkfc -formatZK</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>10、格式化hdfs文件系统[格式化namenode,接着启动namenode]<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 tmp]# hadoop-2.6.0/bin/hdfs namenode -format -clusterId mycluster</span><br><span class="line">[root@server1 tmp]# hadoop-2.6.0/sbin/hadoop-daemon.sh start namenode</span><br><span class="line">[root@server2 tmp]# hadoop-2.6.0/bin/hdfs namenode -bootstrapStandby</span><br><span class="line">[root@server2 tmp]# hadoop-2.6.0/sbin/hadoop-daemon.sh start namenode</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>11、启动datanode<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 local]# /hadoop-2.6.0/sbin/hadoop-daemons.sh start datanode</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>10、启动zkfc [DFSZKFailoverController]<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 local]# /hadoop-2.6.0/sbin/hadoop-daemon.sh start zkfc</span><br><span class="line">[root@server2 tmp]# /hadoop-2.6.0/sbin/hadoop-daemon.sh start zkfc</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>11、启动yarn<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 local]# $ start-yarn.sh</span><br><span class="line">[hsu@server2 hadoop]$ yarn-daemon.sh start resourcemanager</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>active node：<a href="http://server1:23188/cluster/apps" target="_blank" rel="noopener">http://server1:23188/cluster/apps</a><br>standby node: <a href="http://server2:23188/cluster/apps" target="_blank" rel="noopener">http://server2:23188/cluster/apps</a></p>
+<p><code>目前处于standby node是无法看到详细信息的，kill active状态节点验证.</code></p>
+<p><code>[hsu@server1 ~]$ kill 5709</code></p>
+<hr>
+<p><a href="http://server2:23188/cluster/cluster" target="_blank" rel="noopener">http://server2:23188/cluster/cluster</a> 地址看到信息：ResourceManager HA state: active</p>
+<p><a href="http://server1:23188/cluster/cluster" target="_blank" rel="noopener">http://server1:23188/cluster/cluster</a> 地址看到信息：ResourceManager HA state:  standby</p>
+<ul>
+<li>12、测试hdfs+Yarn+MR<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 local]# hadoop-2.6.0/bin/hadoop fs -put /hadoop-env.sh /testdata</span><br><span class="line">[root@server1 local]# hadoop-2.6.0/bin/hadoop jar hadoop-mapreduce-examples-2.6.0.jar wordcount /testdata /output</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>13、启动historyserver [查询作业执行的详细情况]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 local]# mr-jobhistory-daemon.sh start historyserver</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>14、native库问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hadoop/bin/hadoop fs -put zookeeper.out  /input</span><br><span class="line">15/07/20 13:19:30 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line"></span><br><span class="line">需要自己编译一个hadoop的包。在64位机器。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>参考：<a href="http://hadoop.apache.org/docs/r2.4.1/hadoop-yarn/hadoop-yarn-site/ResourceManagerHA.html" target="_blank" rel="noopener">http://hadoop.apache.org/docs/r2.4.1/hadoop-yarn/hadoop-yarn-site/ResourceManagerHA.html</a></p>
+<h4 id="Hadoop版本历史"><a href="#Hadoop版本历史" class="headerlink" title="Hadoop版本历史"></a>Hadoop版本历史</h4><div style="text-align:center;"><img src="https://jikelab.github.io/tech-labs/screenshots/version.png" style="vertical-align:middle;"></div>
+
+
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/hadoop/">hadoop</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/07/10/hive install/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">hive install</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/07/10/Cloudera-manager-installaction/">
+        <span class="next-text nav-default">Cloudera-manager-installaction</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

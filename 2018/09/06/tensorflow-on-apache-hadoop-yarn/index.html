@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Tensorflow-on-apache-hadoop-yarn">
+
+
+
+
+  <meta name="keywords" content="ML,2018,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2018/09/06/tensorflow-on-apache-hadoop-yarn/">
+
+
+<meta name="description" content="现在人工智能正处于风口浪尖，大数据和人工智能注定要融合，如何融合，以什么方式融合？ 如今大家都在探索阶段，每个技术型的公司，都有自己的人工智能与大数据融合的方案。 今天，我们就来介绍一下，大数据领域最核心的Apache Hadoop和人工智能技术融合进展。 今天我们介绍Apache Yarn是如何融合目前最热门的深度学习框架TensorFlow以及其他框架。 Tensorflow on Apach">
+<meta name="keywords" content="ML,2018">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tensorflow-on-apache-hadoop-yarn">
+<meta property="og:url" content="http://itweet.github.io/2018/09/06/tensorflow-on-apache-hadoop-yarn/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="现在人工智能正处于风口浪尖，大数据和人工智能注定要融合，如何融合，以什么方式融合？ 如今大家都在探索阶段，每个技术型的公司，都有自己的人工智能与大数据融合的方案。 今天，我们就来介绍一下，大数据领域最核心的Apache Hadoop和人工智能技术融合进展。 今天我们介绍Apache Yarn是如何融合目前最热门的深度学习框架TensorFlow以及其他框架。 Tensorflow on Apach">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-09-12T14:14:35.213Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tensorflow-on-apache-hadoop-yarn">
+<meta name="twitter:description" content="现在人工智能正处于风口浪尖，大数据和人工智能注定要融合，如何融合，以什么方式融合？ 如今大家都在探索阶段，每个技术型的公司，都有自己的人工智能与大数据融合的方案。 今天，我们就来介绍一下，大数据领域最核心的Apache Hadoop和人工智能技术融合进展。 今天我们介绍Apache Yarn是如何融合目前最热门的深度学习框架TensorFlow以及其他框架。 Tensorflow on Apach">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Tensorflow-on-apache-hadoop-yarn - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Tensorflow-on-apache-hadoop-yarn
+        
+      </h1>
+
+      <time class="post-time">
+          9月 06 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>现在人工智能正处于风口浪尖，大数据和人工智能注定要融合，如何融合，以什么方式融合？</p>
+<p>如今大家都在探索阶段，每个技术型的公司，都有自己的人工智能与大数据融合的方案。</p>
+<p>今天，我们就来介绍一下，大数据领域最核心的Apache Hadoop和人工智能技术融合进展。</p>
+<p>今天我们介绍Apache Yarn是如何融合目前最热门的深度学习框架TensorFlow以及其他框架。</p>
+<p>Tensorflow on Apache Hadoop YARN.pdf </p>
+<p>云盘：链接:<a href="https://pan.baidu.com/s/1v2loT8O30R4RyomM5wTt-A" target="_blank" rel="noopener">https://pan.baidu.com/s/1v2loT8O30R4RyomM5wTt-A</a>  密码:azc7</p>
+<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/ML/">ML</a>
+		  
+			<a href="/tags/2018/">2018</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/12/26/release-3.1.0/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">JDP Release 3.1.0</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/08/26/parquet-library-fatal-error/">
+        <span class="next-text nav-default">Parquet-library-fatal-error</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

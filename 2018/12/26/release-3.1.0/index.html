@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="JDP 3.1 是 3.x 系列中的第二个版本，经过一段长久时间的研发测试，今天决定发布正式版本。">
+
+
+
+
+  <meta name="keywords" content="JDP,3.1.0,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2018/12/26/release-3.1.0/">
+
+
+<meta name="description" content="JDP 3.1 是 3.x 系列中的第二个版本，经过一段长久时间的研发测试，今天决定发布正式版本。">
+<meta name="keywords" content="JDP,3.1.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDP Release 3.1.0">
+<meta property="og:url" content="http://itweet.github.io/2018/12/26/release-3.1.0/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="JDP 3.1 是 3.x 系列中的第二个版本，经过一段长久时间的研发测试，今天决定发布正式版本。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.fusionlab.cn/zh-cn/docs/intro/img/ambari%E2%80%93dashboard.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2019-02-27T16:43:58.488Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JDP Release 3.1.0">
+<meta name="twitter:description" content="JDP 3.1 是 3.x 系列中的第二个版本，经过一段长久时间的研发测试，今天决定发布正式版本。">
+<meta name="twitter:image" content="http://www.fusionlab.cn/zh-cn/docs/intro/img/ambari%E2%80%93dashboard.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> JDP Release 3.1.0 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          JDP Release 3.1.0
+        
+      </h1>
+
+      <time class="post-time">
+          12月 26 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="Release-Note"><a href="#Release-Note" class="headerlink" title="Release Note"></a>Release Note</h1><p>JDP 3.1 是 3.x 系列中的第二个版本，经过一段长久时间的研发测试，今天决定发布正式版本。此版本没有任何全新的features，立足于 3.1 版本，我们把 mpack 深度与 Ambari 融合，真正做到一体化的产品体验。Ambari 默认 Stack 是 JDP，支持的版本是3.0.0和3.1.0；Stack 中组件的全新升级，均使用最新的稳定版本。新版本对于资源的使用量进行了优化，目前一台4g、2c的虚拟机可安装和部署，实现在笔记本电脑也能体验 JDP 的完整功能。</p>
+<p>要下载 JDP 3.1，请访问<a href="http://www.fusionlab.cn/zh-cn/docs/intro/quickstart.html" target="_blank" rel="noopener">快速入门</a> 页面，提供云盘压缩包下载，您可以在私有网络的情况下安装使用 JDP。我们在此列出主要的版本变更，按组件进行分组：</p>
+<ul>
+<li>JDP 3.1 <ul>
+<li>ambari-2.7.0.0-0</li>
+<li>clickhouse 3.1.0.0-108-18.14.13</li>
+<li>jdp-select 3.1.0.0-108</li>
+<li>kafka 3.1.0.0-108-1.0.1</li>
+<li>nifi 3.1.0.0-108-1.7.0</li>
+<li>superset 3.1.0.0-108-0.26.3</li>
+<li>zookeeper 3.1.0.0-108-3.4.6</li>
+</ul>
+</li>
+</ul>
+<p>相关 JDP Roadmap 访问<a href="https://github.com/fusionlabcn/jdp" target="_blank" rel="noopener">Github</a></p>
+<p>JDP 核心  </p>
+<ul>
+<li>一体化的流分析平台，在未来 3.3 版本中。</li>
+<li>数据流 Kafka，实时处理引擎</li>
+<li>海量数据即席查询 ClickHouse</li>
+<li>数据可视化 Superset</li>
+<li>分布式协调服务 Zookeeper</li>
+<li>利用 JDP 实现一站式企业级数据仓库平台</li>
+</ul>
+<h1 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h1><p>JDP 未来计划新增一些简单、易用、强大的 Batch &amp; Stream 统一的一体化功能。全新的设计，在混口饭吃的工作中，抽出时间在设计与实现下一代数据流平台，而且 JDP 定位为一款真正企业级可用的一体化数据流平台，需要实现足够简单且强大的数据流处理和管理能力，这是我们设计 JDP 的初衷。</p>
+<p>JDP 设计的组件和相关技术非常驳杂，整个研发过程漫长且耗费硬件资源，开发维护不易，我们已经在尽力的努力克服外部困难，规范化整个 Devops 流程，希望能改善目前效率的问题。</p>
+<p>next JDP 版本中，会新增 Hadoop 3.2.x 版本以及 Spark、Flink 相关组件，一切的原因是为了更好；我们的流分析引擎核心 Runtime 支持 Spark 、Flink，用户无需感知这些 Runtime 技术，一体化的部署、运维、监控均有 JDP 实现，外部接口兼容标准的数据库协议，大大降低用户的成本，我们会有一层自己的数据库 DSL 设计，我们称为 FQL，其实是 SQL++，就这样。</p>
+<p>JDP 3.3 中计划，会启动另外一个 <code>stack</code> 孵化工作，探索 k8s + ai 技术，毕竟行行转 ai，容器我一直比较抵触，体积超大，带状态服务支持弱，但 ai 各种 py 库，真的很适合容器化，升级方便，维护性成本高，难以规模化部署运维，涉及网络、存储、计算、调度、容器、分布式等技术，显然是庞然大物，国内专业玩 k8s 的公司，貌似基本难有做大的，企业级市场，基础设施难挣钱，业务挣钱，难有企业重视，基本都是使用层面，扯远啦；回归正题，JDP 需要去很好的解决这些问题，一切是为了更好，实现一体化流分析平台的价值，容器化 JDP 某些模块，长期看是利好的，可以降低成本。。。</p>
+<p>未来的时间，我会逐渐披露更多细节，敬请期待。。。</p>
+<hr>
+<p>好久没更新啦，扯句闲话，我遇到我偶像 Linus Torvalds 年轻时刚去美国硅谷工作时一样的情况，境遇如此相似；以后尽量产出一些高质量的内容，在分享吧，码子不易，文末附 JDP 3.1 美图一张。</p>
+<p><img src="http://www.fusionlab.cn/zh-cn/docs/intro/img/ambari%E2%80%93dashboard.png" alt></p>
+<p>单机、分布式系统都能一体化的管理。。。</p>
+<p>[1] JDP 官网: <a href="http://www.fusionlab.cn/" target="_blank" rel="noopener">http://www.fusionlab.cn/</a></p>
+<p>[2] JDP 快速启动：<a href="http://www.fusionlab.cn/zh-cn/docs/intro/quickstart.html" target="_blank" rel="noopener">http://www.fusionlab.cn/zh-cn/docs/intro/quickstart.html</a></p>
+<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/JDP/">JDP</a>
+		  
+			<a href="/tags/3-1-0/">3.1.0</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/09/06/tensorflow-on-apache-hadoop-yarn/">
+        <span class="next-text nav-default">Tensorflow-on-apache-hadoop-yarn</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

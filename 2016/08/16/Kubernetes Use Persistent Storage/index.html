@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Kubernetes Use Persistent Storage">
+
+
+
+
+  <meta name="keywords" content="kubernates,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/08/16/Kubernetes Use Persistent Storage/">
+
+
+<meta name="description" content="It’s necessary to use external storage if you’d like to use Persistent Data. For exmaple, Create a Pod with mounting external storage which is mapped with a directory for saving data on the Node Pod r">
+<meta name="keywords" content="kubernates">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes Use Persistent Storage">
+<meta property="og:url" content="http://itweet.github.io/2016/08/16/Kubernetes Use Persistent Storage/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="It’s necessary to use external storage if you’d like to use Persistent Data. For exmaple, Create a Pod with mounting external storage which is mapped with a directory for saving data on the Node Pod r">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.507Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kubernetes Use Persistent Storage">
+<meta name="twitter:description" content="It’s necessary to use external storage if you’d like to use Persistent Data. For exmaple, Create a Pod with mounting external storage which is mapped with a directory for saving data on the Node Pod r">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Kubernetes Use Persistent Storage - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Kubernetes Use Persistent Storage
+        
+      </h1>
+
+      <time class="post-time">
+          8月 16 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>It’s necessary to use external storage if you’d like to use Persistent Data.</p>
+<p>For exmaple, Create a Pod with mounting external storage which is mapped with a directory for saving data on the Node Pod runs. The environment and Container image on this exmaple are the same with here.</p>
+<h1 id="Container-image-for-exmaples"><a href="#Container-image-for-exmaples" class="headerlink" title="Container image for exmaples"></a>Container image for exmaples</h1><p>For example, Create a Dockerfile to install httpd and add index.html, and also start httpd with 80 port.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"># create a Dockerfile</span><br><span class="line">[root@kubernetes-controller ~]# vi Dockerfile</span><br><span class="line">FROM centos</span><br><span class="line">MAINTAINER serverworld &lt;admin@itweet.cn&gt;</span><br><span class="line">RUN yum -y install httpd</span><br><span class="line">RUN echo &quot;Hello DockerFile by itweet.cn&quot; &gt; /var/www/html/index.html</span><br><span class="line">EXPOSE 80</span><br><span class="line">CMD [&quot;-D&quot;, &quot;FOREGROUND&quot;]</span><br><span class="line">ENTRYPOINT [&quot;/usr/sbin/httpd&quot;]</span><br><span class="line"></span><br><span class="line"># build image ⇒ docker build -t [image name]:[tag] . </span><br><span class="line">[root@kubernetes-controller ~]# docker build -t apache_server:latest ./Dockerfile </span><br><span class="line">unable to prepare context: context must be a directory: /root/Dockerfile</span><br><span class="line">[root@kubernetes-controller ~]# docker build -t apache_server:latest .</span><br><span class="line">Sending build context to Docker daemon 948.7 kB</span><br><span class="line">Step 1 : FROM centos</span><br><span class="line"> ---&gt; 970633036444</span><br><span class="line">Step 2 : MAINTAINER serverworld &lt;admin@itweet.cn&gt;</span><br><span class="line"> ---&gt; Running in 7f20b2eff551</span><br><span class="line"> ---&gt; 8041da7bcf1a</span><br><span class="line">Removing intermediate container 7f20b2eff551</span><br><span class="line">Step 3 : RUN yum -y install httpd</span><br><span class="line"> ---&gt; Running in 81073cca988b</span><br><span class="line">Loaded plugins: fastestmirror, ovl</span><br><span class="line">Determining fastest mirrors</span><br><span class="line"> * base: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line"> * extras: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line"> * updates: mirror.bit.edu.cn</span><br><span class="line">Resolving Dependencies</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">Step 7 : ENTRYPOINT /usr/sbin/httpd</span><br><span class="line"> ---&gt; Running in 16fa3fcd76dc</span><br><span class="line"> ---&gt; d165379a81f0</span><br><span class="line">Removing intermediate container 16fa3fcd76dc</span><br><span class="line">Successfully built d165379a81f0</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# docker images </span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">apache_server       latest              d165379a81f0        52 seconds ago      321.9 MB</span><br><span class="line">docker.io/centos    latest              970633036444        2 weeks ago         196.7 MB</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# docker run -d -p 80:80 apache_server </span><br><span class="line">505d10f894084e1ea417091f6adbe44a7d8df8c7518c5c5dd3ddce1c5f0ed05f</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# docker ps -a</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES</span><br><span class="line">505d10f89408        apache_server       &quot;/usr/sbin/httpd -D F&quot;   14 seconds ago      Up 13 seconds       0.0.0.0:80-&gt;80/tcp   pensive_bhaskara</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# curl http://localhost/</span><br><span class="line">Hello DockerFile by itweet.cn</span><br></pre></td></tr></table></figure></p>
+<h1 id="Container-image-loads-to-All-Nodes"><a href="#Container-image-loads-to-All-Nodes" class="headerlink" title="Container image loads to All Nodes"></a>Container image loads to All Nodes</h1><p>[1] Copy a container image just created above to all other Nodes like follows.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># output container image to a file</span><br><span class="line">[root@kubernetes-controller ~]# docker save apache_server &gt; apache_server.tar</span><br><span class="line"></span><br><span class="line"># copy the image to other Nodes</span><br><span class="line">[root@kubernetes-controller ~]# scp apache_server.tar kubernetes-node-1:/root/</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">[root@kubernetes-controller ~]# scp apache_server.tar kubernetes-node-3:/root/</span><br></pre></td></tr></table></figure></p>
+<p>[2] Load the comtainer image just copied.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-node-1 ~]# docker load &lt; apache_server.tar </span><br><span class="line">[root@kubernetes-node-1 ~]#  docker images apache_server</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">apache_server       latest              d165379a81f0        8 minutes ago       321.9 MB</span><br></pre></td></tr></table></figure></p>
+<p>关于kubernetes创建pod时，使用的镜像本地已经存在，但还一直在下载。如何create pod时可以跨过下载这一步，直接使用本地镜像？<br>    <a href="http://dockone.io/question/1075" target="_blank" rel="noopener">http://dockone.io/question/1075</a></p>
+<h1 id="Create-a-httpd-Pods"><a href="#Create-a-httpd-Pods" class="headerlink" title="Create a httpd Pods"></a>Create a httpd Pods</h1><p>[1] Admin Node.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-controller ~]# cat pod-httpd.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: apache-httpd</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: apache-httpd</span><br><span class="line">    image: httpd</span><br><span class="line">    ports:</span><br><span class="line">    - containerPort: 80</span><br><span class="line">    volumeMounts:</span><br><span class="line">    # the volume to use (it&apos;s the one defined in &quot;volumes&quot; section)</span><br><span class="line">    - name: httpd-storage</span><br><span class="line">      # mount point inside Container</span><br><span class="line">      mountPath: /var/www/html</span><br><span class="line">  volumes:</span><br><span class="line">  # any name you like</span><br><span class="line">  - name: httpd-storage</span><br><span class="line">    hostPath:</span><br><span class="line">      # the directory on Host Node for saving data</span><br><span class="line">      path: /tmp/httpd</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# kubectl create -f pod-httpd.yaml </span><br><span class="line">pod &quot;apache-httpd&quot; created</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]#  kubectl get pods -o wide |grep apache-httpd  </span><br><span class="line">apache-httpd                    0/1       ContainerCreating   0          27s       kubernetes-node-3</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# kubectl get pod apache-httpd -o yaml | grep &quot;podIP&quot;  </span><br><span class="line">  podIP: 172.16.45.5</span><br></pre></td></tr></table></figure></p>
+<p>[2] Move to a Node that Pod is running and make sure to work normally.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-node-3 ~]# curl http://172.16.45.5/</span><br><span class="line">&lt;html&gt;&lt;body&gt;&lt;h1&gt;It works!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">[root@kubernetes-node-3 ~]# echo &quot;Kubernetes Persistent Storage &amp;&amp; www.itweet.cn&quot; &gt; /tmp/httpd/index.html         </span><br><span class="line"></span><br><span class="line">-- enter to a running container,look at volume mapping bit sucess</span><br><span class="line"></span><br><span class="line">[root@kubernetes-node-3 ~]# nsenter --target 24207 --mount --uts --ipc --net --pid     </span><br><span class="line">root@apache-httpd:/# </span><br><span class="line"></span><br><span class="line">[root@kubernetes-node-3 ~]# docker inspect -f &apos;&#123;&#123;.State.Pid&#125;&#125;&apos; b92a2432f8d2</span><br><span class="line">24207</span><br><span class="line">[root@kubernetes-node-3 ~]# nsenter --target 24207 --mount --uts --ipc --net --pid     </span><br><span class="line">root@apache-httpd:/# ls /var/www/html/</span><br><span class="line">index.html</span><br><span class="line">root@apache-httpd:/# cat /var/www/html/index.html </span><br><span class="line">Kubernetes Persistent Storage &amp;&amp; www.itweet.cn</span><br><span class="line"></span><br><span class="line">-- not found , my self wirte content. because official httpd images &quot;DocumentRoot&quot; configuration is &quot;/usr/local/apache2/htdocs/index.html&quot;  </span><br><span class="line"></span><br><span class="line">root@apache-httpd:/usr/local/apache2/conf# cat /usr/local/apache2/htdocs/index.html   </span><br><span class="line">&lt;html&gt;&lt;body&gt;&lt;h1&gt;It works!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</span><br><span class="line">root@apache-httpd:/usr/local/apache2/conf# ls /usr/local/apache2/htdocs/index.html  -l</span><br><span class="line">-rw-r--r--. 1 501 staff 45 Jun 11  2007 /usr/local/apache2/htdocs/index.html</span><br></pre></td></tr></table></figure></p>
+<p>This is kubernetes persistent storage,Host Machine install Distributed ceph or glusterfs in back-end storage.</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/kubernates/">kubernates</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/08/24/Nexus Repository Manager /">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Nexus Repository Manager</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/08/15/kubernetes-create-pods/">
+        <span class="next-text nav-default">kubernetes-create-pods</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

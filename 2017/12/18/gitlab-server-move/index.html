@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="gitlab-server-move">
+
+
+
+
+  <meta name="keywords" content="gitlab,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/12/18/gitlab-server-move/">
+
+
+<meta name="description" content="由于资源紧张，为了完成CI/CD的自动化，所以打算把一台128g、24c、10T存储的一台独立GitLab服务器虚拟化为多台服务器。完成持续集成平台的迁移，减少资源浪费，现在记录一下操作过程。  备份原GIT服务器数据  1gitlab-rake gitlab:backup:create RAILS_ENV=production 注：默认备份后文件一般位于/var/opt/gitlab/backu">
+<meta name="keywords" content="gitlab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gitlab-server-move">
+<meta property="og:url" content="http://itweet.github.io/2017/12/18/gitlab-server-move/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="由于资源紧张，为了完成CI/CD的自动化，所以打算把一台128g、24c、10T存储的一台独立GitLab服务器虚拟化为多台服务器。完成持续集成平台的迁移，减少资源浪费，现在记录一下操作过程。  备份原GIT服务器数据  1gitlab-rake gitlab:backup:create RAILS_ENV=production 注：默认备份后文件一般位于/var/opt/gitlab/backu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.526Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gitlab-server-move">
+<meta name="twitter:description" content="由于资源紧张，为了完成CI/CD的自动化，所以打算把一台128g、24c、10T存储的一台独立GitLab服务器虚拟化为多台服务器。完成持续集成平台的迁移，减少资源浪费，现在记录一下操作过程。  备份原GIT服务器数据  1gitlab-rake gitlab:backup:create RAILS_ENV=production 注：默认备份后文件一般位于/var/opt/gitlab/backu">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> gitlab-server-move - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          gitlab-server-move
+        
+      </h1>
+
+      <time class="post-time">
+          12月 18 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>由于资源紧张，为了完成CI/CD的自动化，所以打算把一台128g、24c、10T存储的一台独立GitLab服务器虚拟化为多台服务器。完成持续集成平台的迁移，减少资源浪费，现在记录一下操作过程。</p>
+<ol>
+<li>备份原GIT服务器数据</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-rake gitlab:backup:create RAILS_ENV=production</span><br></pre></td></tr></table></figure>
+<p>注：默认备份后文件一般位于<code>/var/opt/gitlab/backups/</code>，文件名：<code>1513578325_2017_12_18_gitlab_backup.tar</code></p>
+<ol start="2">
+<li>新服务器上安装与原服务器一样版本的Gitlab.</li>
+</ol>
+<p>这里说明下为什么要一样，原因应该是由于Gitlab自身的兼容性问题，高版本的Gitlab无法恢复低版本备份的数据.</p>
+<p>原Gitlab安装版本: <code>gitlab-ce-8.7.0-ce.0.el6.x86_64</code>.</p>
+<ul>
+<li>下载对应的Gitlab版本</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://packages.gitlab.com/gitlab/gitlab-ce/packages/el/6/gitlab-ce-8.7.0-ce.0.el6.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装GitLab</li>
+</ul>
+<p>通过rpm命令安装GitLab服务，配置并启动GitLab</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -i gitlab-ce-8.7.0-ce.0.el6.x86_64.rpm</span><br><span class="line"></span><br><span class="line">sudo gitlab-ctl reconfigure</span><br></pre></td></tr></table></figure>
+<p>3.将步骤1生成的tar文件拷贝到新服务器上相应的backups目录下</p>
+<p>可以利用scp进行直接拷贝。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /var/opt/gitlab/backups/1513578325_2017_12_18_gitlab_backup.tar username@src_ip:/var/opt/gitlab/backups</span><br></pre></td></tr></table></figure>
+<p>注: username为新服务器的用户名，src_ip新服务器IP地址</p>
+<p>4.新GitLab服务数据恢复</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># This command will overwrite the contents of your GitLab database!</span><br><span class="line">gitlab-rake gitlab:backup:restore RAILS_ENV=production   BACKUP=1513578325_2017_12_18</span><br></pre></td></tr></table></figure>
+<p>注：BACKUP的时间点必须与原服务器备份后的文件名一致</p>
+<p>版本不匹配问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GitLab version mismatch:</span><br><span class="line">  Your current GitLab version (8.7.0) differs from the GitLab version in the backup!</span><br><span class="line">  Please switch to the following version and try again:</span><br><span class="line">  version: 9.0.5</span><br></pre></td></tr></table></figure>
+<p>5.重启GitLab服务并检测恢复数据情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-ctl restart</span><br><span class="line">sudo gitlab-rake gitlab:check SANITIZE=true</span><br></pre></td></tr></table></figure>
+<p>如果check命令出现错误，说明备份的GitLab服务和新的GitLab服务版本不匹配，请安装正确的版本。</p>
+<p>6.总结</p>
+<p>GitLab是一款企业级私有Git服务最佳选择。可以完成企业持续集成平台代码库管理的工作。也可以和很多持续集成工具进行无缝结合，让开发人员专注开发，部署、打包、测试、上线的工作自动化完成。关键是它免费的，<code>linus</code>真年神人也。<code>GIT</code>也是他的作品。</p>
+<p>膜拜大神，进一步了解，最近在看《只是为了好玩:Linux之父林纳斯自传》Linux之父<code>Linu</code>s`写的一本书，关于开源软件做了很好的阐述。</p>
+<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/gitlab/">gitlab</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/12/21/Why-do-abandon-OpenStack-to-VMware-vSphere/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Why-do-abandon-OpenStack-to-VMware-vSphere</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/12/14/hdfs-fuse-faild/">
+        <span class="next-text nav-default">hdfs-fuse-faild</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

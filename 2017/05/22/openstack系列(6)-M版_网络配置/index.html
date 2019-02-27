@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="openstack系列(6)-M版_网络配置">
+
+
+
+
+  <meta name="keywords" content="openstack,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/05/22/openstack系列(6)-M版_网络配置/">
+
+
+<meta name="description" content="OpenStack网络（neutron）管理您OpenStack环境中虚拟网络基础设施（VNI）所有网络方面和物理网络基础设施（PNI）的接入层方面。OpenStack网络允许租户创建包括像 firewall，load balancer和virtual private network (VPN)等这样服务的高级网络虚拟拓扑。 网络提供网络，子网和路由作为对象抽象的概念。每个概念都有自己的功能，可以">
+<meta name="keywords" content="openstack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openstack系列(6)-M版_网络配置">
+<meta property="og:url" content="http://itweet.github.io/2017/05/22/openstack系列(6)-M版_网络配置/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="OpenStack网络（neutron）管理您OpenStack环境中虚拟网络基础设施（VNI）所有网络方面和物理网络基础设施（PNI）的接入层方面。OpenStack网络允许租户创建包括像 firewall，load balancer和virtual private network (VPN)等这样服务的高级网络虚拟拓扑。 网络提供网络，子网和路由作为对象抽象的概念。每个概念都有自己的功能，可以">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/public-subnet.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/public-private-network-config.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/router.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/network-topology.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/network-rule.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openstack系列(6)-M版_网络配置">
+<meta name="twitter:description" content="OpenStack网络（neutron）管理您OpenStack环境中虚拟网络基础设施（VNI）所有网络方面和物理网络基础设施（PNI）的接入层方面。OpenStack网络允许租户创建包括像 firewall，load balancer和virtual private network (VPN)等这样服务的高级网络虚拟拓扑。 网络提供网络，子网和路由作为对象抽象的概念。每个概念都有自己的功能，可以">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/public-subnet.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> openstack系列(6)-M版_网络配置 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          openstack系列(6)-M版_网络配置
+        
+      </h1>
+
+      <time class="post-time">
+          5月 22 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>OpenStack网络（neutron）管理您OpenStack环境中虚拟网络基础设施（VNI）所有网络方面和物理网络基础设施（PNI）的接入层方面。OpenStack网络允许租户创建包括像 firewall，<code>load balancer</code>和<code>virtual private network (VPN)</code>等这样服务的高级网络虚拟拓扑。</p>
+<p>网络提供网络，子网和路由作为对象抽象的概念。每个概念都有自己的功能，可以模拟对应的物理对应设备：网络包括子网，路由在不同的子网和网络间进行路由转发。</p>
+<p>每个路由都有一个连接到网络的网关，并且很多接口都连接到子网中。子网可以访问其他连接到相同路由其他子网的机器。</p>
+<p>我们在使用openstack过程中，网络配置可选项很多，比如:[‘local’,’flat’, ‘vlan’, ‘gre’, ‘vxlan’]等。在上一篇&lt;openstack系列(5)-M版_快速部署&gt;中，我们自动化部署默认选择的网络就是vxlan模式，并且在更早的文章中介绍过几种网络模式的选择问题，下面我们将选择vxlan进行集群网络的设置，我们分后端网络和前端网络进行实践配置。</p>
+<h3 id="网络配置-后端"><a href="#网络配置-后端" class="headerlink" title="网络配置-后端"></a>网络配置-后端</h3><p>为了让我们的公共网络和物理环境在同一个网段，我们需要在网络节点把<code>br-ex</code>替代<code>ifcfg-eno16777736</code>的位置，然后把<code>ifcfg-eno16777736</code>通过<code>OVS_BRIDGE</code>接到<code>br-ex</code>上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller ~(keystone_admin)]# cat  /etc/sysconfig/network-scripts/ifcfg-br-ex</span><br><span class="line">NAME=&quot;br-ex&quot;</span><br><span class="line">DEVICE=&quot;br-ex&quot;</span><br><span class="line">DEVICETYPE=ovs</span><br><span class="line">TYPE=OVSBridge</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPV6INIT=no</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">DNS1=114.114.114.114</span><br><span class="line">DOMAIN=openstack-controller</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPADDR=192.168.2.110</span><br><span class="line">PREFIX=24</span><br><span class="line">GATEWAY=192.168.2.1</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~(keystone_admin)]# cat /etc/sysconfig/network-scripts/ifcfg-eno16777736</span><br><span class="line">NAME=&quot;eno16777736&quot;</span><br><span class="line">DEVICE=&quot;eno16777736&quot;</span><br><span class="line">ONBOOT=&quot;yes&quot;</span><br><span class="line">IPV6INIT=no</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">DEVICETYPE=ovs</span><br><span class="line">TYPE=OVSPort</span><br><span class="line">OVS_BRIDGE=br-ex</span><br></pre></td></tr></table></figure>
+<p>重启网卡，让修改生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller ~(keystone_admin)]# systemctl status network.service</span><br><span class="line">[root@openstack-controller ~(keystone_admin)]# systemctl restart network.service</span><br></pre></td></tr></table></figure></p>
+<p>查看ovs信息，这里网络为何这样配置，请参考之前的文章进行了解。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller ~(keystone_admin)]# ovs-vsctl show</span><br><span class="line">3969c3c6-a08f-4d69-a8f3-717a7551b13d</span><br><span class="line">    Bridge br-int</span><br><span class="line">        fail_mode: secure</span><br><span class="line">        Port &quot;tapf8c9d8d0-2a&quot;</span><br><span class="line">            tag: 1</span><br><span class="line">            Interface &quot;tapf8c9d8d0-2a&quot;</span><br><span class="line">                type: internal</span><br><span class="line">        Port patch-tun</span><br><span class="line">            Interface patch-tun</span><br><span class="line">                type: patch</span><br><span class="line">                options: &#123;peer=patch-int&#125;</span><br><span class="line">        Port br-int</span><br><span class="line">            Interface br-int</span><br><span class="line">                type: internal</span><br><span class="line">        Port &quot;qr-e28efd98-0f&quot;</span><br><span class="line">            tag: 1</span><br><span class="line">            Interface &quot;qr-e28efd98-0f&quot;</span><br><span class="line">                type: internal</span><br><span class="line">    Bridge br-tun</span><br><span class="line">        fail_mode: secure</span><br><span class="line">        Port br-tun</span><br><span class="line">            Interface br-tun</span><br><span class="line">                type: internal</span><br><span class="line">        Port patch-int</span><br><span class="line">            Interface patch-int</span><br><span class="line">                type: patch</span><br><span class="line">                options: &#123;peer=patch-tun&#125;</span><br><span class="line">    Bridge br-ex</span><br><span class="line">        Port &quot;eno16777736&quot;</span><br><span class="line">            Interface &quot;eno16777736&quot;</span><br><span class="line">        Port br-ex</span><br><span class="line">            Interface br-ex</span><br><span class="line">                type: internal</span><br><span class="line">    ovs_version: &quot;2.5.0&quot;</span><br></pre></td></tr></table></figure></p>
+<p>这里我们就完成的后端网络的配置，让宿主机网络和云主机浮动IP网络在同一个网段。</p>
+<h3 id="配置网络－前端"><a href="#配置网络－前端" class="headerlink" title="配置网络－前端"></a>配置网络－前端</h3><h4 id="admin用户登录操作"><a href="#admin用户登录操作" class="headerlink" title="admin用户登录操作"></a>admin用户登录操作</h4><p>1、首先通过admin登陆，首先建立一个openstack-cloud用户，做为另外一个租户创建一个单独私有网段。</p>
+<ul>
+<li><p><code>身份管理</code> &gt; <code>角色</code> &gt; <code>创建角色</code> &gt; 键入openstack-cloud，回车</p>
+</li>
+<li><p><code>身份管理</code> &gt; <code>组</code> &gt; <code>创建组</code> &gt; 键入openstack-cloud，回车</p>
+</li>
+<li><p><code>身份管理</code> &gt; <code>项目</code> &gt; 选择 “openstack-cloud” &gt; 点击 <code>管理成员</code> </p>
+<ul>
+<li>项目信息 &gt; 名称: openstack-cloud ; 描述：openstack-cloud project</li>
+<li>项目成员 &gt; 项目成员 &gt; 选择<code>openstack-cloud</code></li>
+<li>项目组 &gt; 项目组 &gt; 选择<code>openstack-cloud</code></li>
+<li>配额 &gt; 根据目前总的资源情况，配置<code>openstack-cloud</code>租户可以使用多少资源</li>
+<li>勾选 <code>激活</code></li>
+<li>保存</li>
+</ul>
+</li>
+<li><p><code>身份管理</code> &gt; <code>用户</code> &gt; <code>创建用户</code> </p>
+<ul>
+<li>用户名：openstack-cloud</li>
+<li>描述：openstack-cloud manager user</li>
+<li>密码：123456</li>
+<li>邮箱：<a href="mailto:openstack@itweet.cn" target="_blank" rel="noopener">openstack@itweet.cn</a></li>
+<li>主项目：openstack-cloud</li>
+<li>角色：openstack-cloud</li>
+<li>勾选 <code>激活</code></li>
+<li>创建用户</li>
+</ul>
+</li>
+</ul>
+<p>2、首先通过admin登陆，管理员 &gt; 系统 &gt; 删除“路由”，“网络”中的所有内容。(packstack默认创建,用不上)。</p>
+<ul>
+<li>管理员 &gt; 网络 &gt; 创建网络 <ul>
+<li>名称：public</li>
+<li>项目：admin</li>
+<li>供应商网络类型：VXLAN</li>
+<li>段ID：0</li>
+<li>管理状态：UP</li>
+<li>勾选 <code>共享的</code></li>
+<li>勾选 <code>外部网络</code></li>
+<li>提交</li>
+</ul>
+</li>
+</ul>
+<p><em>点击public网络,进去添加子网,点击下一步,最后点击创建。</em></p>
+<ul>
+<li><p>步骤1</p>
+<ul>
+<li>创建子网 &gt; 子网</li>
+<li>子网名称：public-subnet</li>
+<li>网络地址：192.168.2.0/24</li>
+<li>IP版本：IPv4</li>
+<li>网关IP：192.168.2.1</li>
+<li>下一步</li>
+</ul>
+</li>
+<li><p>步骤2</p>
+<ul>
+<li>创建子网 &gt; 子网详情</li>
+<li>勾选 <code>激活DHCP</code></li>
+<li>分配IP地址：192.168.2.120,192.168.2.199</li>
+<li>DNS服务器：219.141.140.10 219.141.136.10</li>
+<li>点击 <code>已创建</code></li>
+</ul>
+</li>
+</ul>
+<p>至此通过，超级管理员创建公共网络已经完成。稍后我们将针对不同的租户创建单独的网络，并且不同的租户共享同一个公共网络。如图：<br><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/public-subnet.png" alt></p>
+<h4 id="openstack-cloud用户登录操作"><a href="#openstack-cloud用户登录操作" class="headerlink" title="openstack-cloud用户登录操作"></a>openstack-cloud用户登录操作</h4><p>1、设置租户网络，项目 －&gt; 网络 －&gt;网络，创建私有网络</p>
+<ul>
+<li><p>步骤1</p>
+<ul>
+<li>项目 &gt; 网络 &gt; 网络 &gt; 创建网络 - 网络</li>
+<li>网络名称：private</li>
+<li>管理状态：UP</li>
+<li>勾选 <code>创建子网</code></li>
+<li>前近</li>
+</ul>
+</li>
+<li><p>步骤2</p>
+<ul>
+<li>项目 &gt; 网络 &gt; 网络 &gt; 创建网络 - 子网</li>
+<li>子网名称：private-subnet</li>
+<li>网络地址：172.16.12.0/24</li>
+<li>IP版本：IPv4</li>
+<li>网关IP: 172.16.12.1</li>
+<li>前进</li>
+</ul>
+</li>
+<li><p>步骤3</p>
+<ul>
+<li>项目 &gt; 网络 &gt; 网络 &gt; 创建网络 - 子网详情</li>
+<li>勾选 <code>激活DHCP</code></li>
+<li>分配地址池：172.16.12.2,172.16.12.100</li>
+<li>DNS服务器：192.168.2.1</li>
+<li>点击 <code>已创建</code></li>
+</ul>
+</li>
+</ul>
+<p>至此，完成租户<code>openstack-cloud</code>网络创建，每个租户可以拥有自己独立的网络，共享超级用户创建的公共网络资源，其实就是浮动IP，后续我们就会了解到这个公共网络的用处。如图：<br><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/public-private-network-config.png" alt></p>
+<p>2、设置租户路由，项目 －&gt; 网络 －&gt; 路由</p>
+<ul>
+<li><p>步骤1：</p>
+<ul>
+<li>项目 &gt; 网络 &gt; 路由 &gt; 新建路由</li>
+<li>路由名称：router</li>
+<li>管理状态：UP</li>
+<li>外部网络：public</li>
+<li>点击 <code>新建路由</code></li>
+</ul>
+</li>
+<li><p>步骤2：</p>
+<ul>
+<li>点击新建的路由router，设置公网＋私网路由通信, 点击 &gt; 接口 &gt; 增加接口</li>
+<li>子网：选择private-subnet</li>
+<li>IP地址：172.16.12.1</li>
+<li>路由名称：router</li>
+<li>点击 <code>提交</code></li>
+</ul>
+</li>
+</ul>
+<p>至此完成租户openstack-cloud的路由配置，成功让public和private网络连接起来。如下图：<br><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/router.png" alt></p>
+<p>3、网络拓扑检测，项目 &gt; 网络 &gt; 网络拓扑</p>
+<p><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/network-topology.png" alt></p>
+<p>openstack-cloud租户网络和公共网络打通之后，就如上图所示，网络拓扑图。</p>
+<p>4、访问规则设置,项目 &gt; 计算 &gt; 访问 &amp; 安全</p>
+<ul>
+<li><p>步骤1：</p>
+<ul>
+<li>项目 &gt; 计算 &gt; 访问 &amp; 安全 &gt; 安全组</li>
+<li>点击 <code>管理规则</code></li>
+<li>选中两个<code>入口</code>规则，删除</li>
+<li>点击 &gt; <code>添加规则</code></li>
+<li>规则：其他协议</li>
+<li>方向：入口</li>
+<li>远程：CIDR</li>
+<li>CIDR：0.0.0.0/0</li>
+</ul>
+</li>
+<li><p>步骤2：</p>
+<ul>
+<li>项目 &gt; 计算 &gt; 访问 &amp; 安全 &gt; 安全组</li>
+<li>点击 &gt; <code>添加规则</code></li>
+<li>规则：其他协议</li>
+<li>方向：入口</li>
+<li>远程：CIDR</li>
+<li>CIDR：::/0</li>
+</ul>
+</li>
+</ul>
+<p>完成，租户openstack-cloud的访问规则设置，效果如下，如果设置不正确，会导致无法连接云主机。<br><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/network-rule.png" alt></p>
+<p>5、访问安全设置,访问 &amp; 安全 - 密钥</p>
+<p><code>openstack</code>用户下，生成秘钥，让openstack用户秘钥，可以免密码登录到云主机中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[openstack@openstack-controller ~]$ ssh-keygen -t rsa -f cloud.key</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>步骤1：</p>
+<ul>
+<li>项目 &gt; 计算 &gt; 访问 &amp; 安全 &gt; 秘钥对</li>
+<li>导入秘钥，根据提示导入刚刚生成的秘钥信息</li>
+</ul>
+</li>
+<li><p>步骤2：</p>
+<ul>
+<li><code>ssh -i cloud.key &lt;username&gt;@&lt;instance_ip&gt;</code>可以免密码登录云主机</li>
+<li>需要使用在openstack用户下面的秘钥登录，可以免密码</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>openstack系列，网络配置，其实openstack网络是最复杂的模块，因为能把网络搞懂的人多，包括我自己对网络这块的认知还很肤浅，如果有问题，欢迎反馈。本小节带大家一步步实践了openstack网络相关的配置，下一节我们就可以开始云主机内容，欢迎关注。</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/openstack/">openstack</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/05/24/openstack系列(7)-M版_云主机/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">openstack系列(7)-M版_云主机</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/05/22/openstack系列(5)-M版_快速部署/">
+        <span class="next-text nav-default">openstack系列(5)-M版_快速部署</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

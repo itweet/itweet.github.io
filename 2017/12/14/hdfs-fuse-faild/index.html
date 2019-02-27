@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="hdfs-fuse-faild">
+
+
+
+
+  <meta name="keywords" content="fuse,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/12/14/hdfs-fuse-faild/">
+
+
+<meta name="description" content="集群规模几百台，每天有大量的MR任务在并行跑流程。主要业务做图片流数据解密计算生成高清图像。 随着集群使用的时间增长，发现集群越来越缓慢，甚至集群压力特别大的时候，导致操作系统莫名重启。 每天都会有6~8台无规律的操作系统压力过大重启。 排查时间和周期都非常的长，用了长达1个月的时间，各种检查，主要从两个方面着收：  我们提供的集群软件本身检查 客户开发的分布式应用程序检查 操作系统层面的资源监">
+<meta name="keywords" content="fuse">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hdfs-fuse-faild">
+<meta property="og:url" content="http://itweet.github.io/2017/12/14/hdfs-fuse-faild/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="集群规模几百台，每天有大量的MR任务在并行跑流程。主要业务做图片流数据解密计算生成高清图像。 随着集群使用的时间增长，发现集群越来越缓慢，甚至集群压力特别大的时候，导致操作系统莫名重启。 每天都会有6~8台无规律的操作系统压力过大重启。 排查时间和周期都非常的长，用了长达1个月的时间，各种检查，主要从两个方面着收：  我们提供的集群软件本身检查 客户开发的分布式应用程序检查 操作系统层面的资源监">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/pWalrus_HDFS.jpg">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/fuse-hdfs.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hdfs-fuse-faild">
+<meta name="twitter:description" content="集群规模几百台，每天有大量的MR任务在并行跑流程。主要业务做图片流数据解密计算生成高清图像。 随着集群使用的时间增长，发现集群越来越缓慢，甚至集群压力特别大的时候，导致操作系统莫名重启。 每天都会有6~8台无规律的操作系统压力过大重启。 排查时间和周期都非常的长，用了长达1个月的时间，各种检查，主要从两个方面着收：  我们提供的集群软件本身检查 客户开发的分布式应用程序检查 操作系统层面的资源监">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/BigData/img/pWalrus_HDFS.jpg">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> hdfs-fuse-faild - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          hdfs-fuse-faild
+        
+      </h1>
+
+      <time class="post-time">
+          12月 14 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p><img src="https://github.com/itweet/labs/raw/master/BigData/img/pWalrus_HDFS.jpg" alt="pWalrus_HDFS"></p>
+<p>集群规模几百台，每天有大量的MR任务在并行跑流程。主要业务做图片流数据解密计算生成高清图像。</p>
+<p>随着集群使用的时间增长，发现集群越来越缓慢，甚至集群压力特别大的时候，导致操作系统莫名重启。</p>
+<p>每天都会有6~8台无规律的操作系统压力过大重启。</p>
+<p>排查时间和周期都非常的长，用了长达1个月的时间，各种检查，主要从两个方面着收：</p>
+<ul>
+<li>我们提供的集群软件本身检查</li>
+<li>客户开发的分布式应用程序检查</li>
+<li>操作系统层面的资源监控和管理检查</li>
+</ul>
+<h3 id="集群自身的检查"><a href="#集群自身的检查" class="headerlink" title="集群自身的检查"></a>集群自身的检查</h3><p>主要针对资源管理入手，从集群资源的每个组件使用资源的分配和限制，利用cgroup隔离进程，针对集群YARN的资源管理调度的控制，基于标签的调度，基于cgroup隔离，资源队列控制，并发控制，最大限度的提高集群资源利用率，尽量使任务分配到更多的节点执行，增强集群安全管控。</p>
+<p>然而，并没有解决问题。</p>
+<h3 id="客户开发应用程序检查"><a href="#客户开发应用程序检查" class="headerlink" title="客户开发应用程序检查"></a>客户开发应用程序检查</h3><p>主要针对客户开发的c/c++程序代码优化数据处理流程，由于中间涉及到大量的私有算法和科学计算的算法，无法并行化，所以访问集群数据的方式是利用HDFS-FUSE的方式。</p>
+<table>
+<thead>
+<tr>
+<th>使用方式</th>
+<th>数据大小</th>
+<th>时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HDFS-PUT</td>
+<td>9.8G</td>
+<td>32.639s</td>
+</tr>
+<tr>
+<td>HDFS-PUSE</td>
+<td>9.8G</td>
+<td>1m17.294s</td>
+</tr>
+<tr>
+<td>NFSGateway</td>
+<td>9.8G</td>
+<td>1m58.294s</td>
+</tr>
+</tbody>
+</table>
+<p>测试发现，Hadoop提供的几种把HDFS变成挂载到某个服务器，提供本地化命令操作的方式，FUSE性能是最高的。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/fuse-hdfs.png" alt="FUSE数据流图"></p>
+<p>经过优化流程，客户开发的应用程序只从FUSE取数据，大量写数据的操作利用c++在本地先写成功，在移动到FUSE的目录中，减少很多不必要的小文件写入，通过合并文件，优化整体程序的处理效率。</p>
+<p>然而，并没有解决问题。</p>
+<h3 id="操作系统层面的资源监控和管理检查"><a href="#操作系统层面的资源监控和管理检查" class="headerlink" title="操作系统层面的资源监控和管理检查"></a>操作系统层面的资源监控和管理检查</h3><p>每次几个大的流程启动之后，操作系统CPU直接飘红，通过集群监控系统直接失去心跳。</p>
+<p>未来解决问题，我们从以下几个方面入手：</p>
+<ul>
+<li>集群监控工具<ul>
+<li>Ambari grafana 监控每一台服务器的集群CPU、内存、网络、磁盘IO等资源</li>
+<li>Ganglia 检测全局主机CPU、网络、内存、磁盘等资源变化</li>
+<li>Ambari Metrics 检测集群Hadoop生态用到的组件指标，JVM参数等</li>
+</ul>
+</li>
+</ul>
+<p>发现有局部集群会出现持续数分钟CPU洪峰，能挺过去的，一会心跳都恢复正常，而压力过大的直接操作系统重启。</p>
+<ul>
+<li>Debug工具<ul>
+<li>CGROUP CPU 资源隔离，限制FUSE进程，有明显改善，至少操作系统不崩溃了。</li>
+<li>GDB 调试 C 程序，跟踪Java调用Fuse C的library库情况，没有发现进一步信息。</li>
+<li>Jstack 分析线程状态，定位到cpu占用率较高的线程，分析定位问题。</li>
+<li>cpulimit限制CPU利用率，缓解系统压力。</li>
+</ul>
+</li>
+</ul>
+<p>经过资源隔离控制，明显改善，但是机器压力过大还是会失去联系，压力过后就会恢复，并未根本解决问题。</p>
+<p>通过监控某些流程，发现流程启动之后，有大量的文件访问，导致CPU洪峰，进一步追踪目录。</p>
+<p>发现竟然在某个目录下写了25万多个小文件，而且是存储在HDFS上的大量小文件。</p>
+<p>这是一个临时目录，数据量不是很大，经过统计数据量很小，但是文件个数多，<code>ls</code>一下就导致机器卡死。</p>
+<p>进一步跟踪发现，大量数据访问分布式文件系统FUSE挂载的数据，单个集群的inode有限，一个目录下有大量的小文件，大量的IO访问，直接导致系统被拖死，是Linux操作系统的限制。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>使用方式问题。分布式文件系统挂载到某个机器，一台普通的x86服务器容纳几十PB的数据挂载到某个目录，一台服务器根本无法承受这样的数据量。</p>
+<p>文件系统使用不合理。几十万文件放到一个目录下本身就是Linux系统的大忌，没有任何目录划分，list就可能导致系统被拖死，没用任何清理临时数据的程序逻辑，属于开发人员犯的常规错误。</p>
+<p>程序层面的优化。通过改造可以分布式化的程序，利用分布式这样的技术提升整体数据处理效率。</p>
+<p>业务流程优化。通过有效的数据处理流程优化，虽然没有解决根本问题，但提升了整体处理效率。</p>
+<p>资源管理和安全。通过多集群整体的资源分配、安全管控提高了集群的运营和整体资源利用率。</p>
+<p>统一资源管理。很多程序都是单机运行，没有利用YARN进行统一调度和资源分配，导致集群资源利用率不均衡，一些机器压力很大，一些机器长时间空闲，可以利用Docker，CGroup技术融合到YARN中进行资源隔离，统一集群资源管理，提升集群资源利用率，更快的完成计算任务。</p>
+<p>分布式系统复杂。分布式系统，应用程序很难追踪和重现，分布式在多台机器，调试复杂和耗时，一般技术人员很难掌握，无法用好这样的技术，需要企业级的分布式软件产品来保障，全新的集群开发和使用规范指导他们开发出健壮的分布式程序。</p>
+<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/fuse/">fuse</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/12/18/gitlab-server-move/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">gitlab-server-move</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/12/06/apache-impala-is-now-a-top-level-apache-project/">
+        <span class="next-text nav-default">apache-impala-is-now-a-top-level-apache-project</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

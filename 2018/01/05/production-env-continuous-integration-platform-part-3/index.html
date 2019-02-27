@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="production-env-continuous-integration-platform-part-3">
+
+
+
+
+  <meta name="keywords" content="ci,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2018/01/05/production-env-continuous-integration-platform-part-3/">
+
+
+<meta name="description" content="简介持续集成平台实践，接上如何为持续集成平台选型？。 我今天介绍软件资源的准备工作。根据选型的结果，我们接下来分步骤完成持续企业持续集成平台的实践。  Gitlab 企业级最佳代码仓库，OpenSource 。 Docker 企业级容器，高效集装箱技术。 Jforg 企业级私服仓库，Build过程加速。 OpenStack 或 Vmware Vsphere，虚拟化，让基础环境飞起，高效率。 Apa">
+<meta name="keywords" content="ci">
+<meta property="og:type" content="article">
+<meta property="og:title" content="production-env-continuous-integration-platform-part-3">
+<meta property="og:url" content="http://itweet.github.io/2018/01/05/production-env-continuous-integration-platform-part-3/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="简介持续集成平台实践，接上如何为持续集成平台选型？。 我今天介绍软件资源的准备工作。根据选型的结果，我们接下来分步骤完成持续企业持续集成平台的实践。  Gitlab 企业级最佳代码仓库，OpenSource 。 Docker 企业级容器，高效集装箱技术。 Jforg 企业级私服仓库，Build过程加速。 OpenStack 或 Vmware Vsphere，虚拟化，让基础环境飞起，高效率。 Apa">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.528Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="production-env-continuous-integration-platform-part-3">
+<meta name="twitter:description" content="简介持续集成平台实践，接上如何为持续集成平台选型？。 我今天介绍软件资源的准备工作。根据选型的结果，我们接下来分步骤完成持续企业持续集成平台的实践。  Gitlab 企业级最佳代码仓库，OpenSource 。 Docker 企业级容器，高效集装箱技术。 Jforg 企业级私服仓库，Build过程加速。 OpenStack 或 Vmware Vsphere，虚拟化，让基础环境飞起，高效率。 Apa">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> production-env-continuous-integration-platform-part-3 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          production-env-continuous-integration-platform-part-3
+        
+      </h1>
+
+      <time class="post-time">
+          1月 05 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>持续集成平台实践，接上<a href="http://itweet.cn/blog/2018/01/03/How-to-select-a-continuous-integration-platform-part-2" target="_blank" rel="noopener">如何为持续集成平台选型？</a>。</p>
+<p>我今天介绍软件资源的准备工作。根据选型的结果，我们接下来分步骤完成持续企业持续集成平台的实践。</p>
+<ul>
+<li>Gitlab 企业级最佳代码仓库，OpenSource 。</li>
+<li>Docker 企业级容器，高效集装箱技术。</li>
+<li>Jforg 企业级私服仓库，Build过程加速。</li>
+<li>OpenStack 或 Vmware Vsphere，虚拟化，让基础环境飞起，高效率。</li>
+<li>Apache 亲切的目录树，各种软件源码自由访问，Http(s)协议。</li>
+<li>Jira，开发任务追踪管理。</li>
+<li>Confluence是一个专业的企业知识管理与协同软件。</li>
+<li>SlatStack 或 Puppet，自动化运维利器。</li>
+</ul>
+<p>Atlassian公司产品Jira、Confluence强大项目协作工具，<code>Apache Foundation</code>影响全世界的顶级开源软件用它们来管理厉害。</p>
+<p>沟通协作工具，微信企业版、钉钉、Slack、Skype等，喜欢<code>Slack</code>。</p>
+<p>对中小团队而言，在选择工具时要秉承的原则是：简单易用，方便新成员学习，平台支持性好、性价比高、安全。</p>
+<ul>
+<li>邮件：Gmail</li>
+<li>待办清单：奇妙清单</li>
+<li>客户沟通：Skype</li>
+<li>团队沟通：Slack 超级强大，开发团队都在用的高效工具</li>
+<li>IM：微信</li>
+<li>CRM：自建</li>
+<li>协同办公和文件备份共享：坚果云，正在尝试体验</li>
+</ul>
+<p>如果还涉及开发的话：</p>
+<ul>
+<li>代码管理：Bitbucket</li>
+<li>开发任务分配：JIRA Software</li>
+</ul>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><h3 id="GitLab"><a href="#GitLab" class="headerlink" title="GitLab"></a>GitLab</h3><p>GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。</p>
+<p>GitLab是可视化的一个软件，让企业内部拥有类似GitHub一样的平台功能。又不失灵活性，当然最主要的还是学会<code>git</code>的使用，GitLab是一个很简单的东西，应用起来超级简单。</p>
+<ul>
+<li>Gitlab 实践参考: <a href="http://itweet.cn/blog/2016/05/09/Gitlab%20%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE" target="_blank" rel="noopener">http://itweet.cn/blog/2016/05/09/Gitlab%20%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE</a></li>
+</ul>
+<h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>Docker是一个开源工具，能将一个WEB应用封装在一个轻量级，便携且独立的容器里，然后可以运行在几乎任何服务环境下。 Docker的一般使用在以下几点： 自动化打包和部署应用。</p>
+<p>Docker基本入门参考：</p>
+<ul>
+<li><p>Docker Install Guide：<a href="http://itweet.cn/blog/2016/08/12/Docker%20Install%20Guide" target="_blank" rel="noopener">http://itweet.cn/blog/2016/08/12/Docker%20Install%20Guide</a></p>
+</li>
+<li><p>Docker Install for centos 7：<a href="http://itweet.cn/blog/2016/08/13/Docker%20Install%20for%20centos%207" target="_blank" rel="noopener">http://itweet.cn/blog/2016/08/13/Docker%20Install%20for%20centos%207</a></p>
+</li>
+</ul>
+<h3 id="Jfrog-Artifactory"><a href="#Jfrog-Artifactory" class="headerlink" title="Jfrog Artifactory"></a>Jfrog Artifactory</h3><p>作为市场上第一个、唯一的、统一的artifacts仓库管理平台， JFrog Artifactory 完全支持任何语言或技术创建的软件包。</p>
+<p>当前，Artifactory是唯一的一个 企业级的仓库管理平台，它支持安全的、集群的、高可用的Docker注册中心</p>
+<p>与所有主流的 CI/CD 和 DevOps 工具集成，Artifactory提供了端到端、自动化且无缝的追踪工件从开发环境到生产环境的解决方案。</p>
+<p>安装Easy，感受一下，如果你想体验，请通过Docker社区版镜像，否则如果你错误安装商业版，要求你注入授权码才能正常使用，我第一次安装的时候被坑惨。</p>
+<ul>
+<li><p>社区版安装：</p>
+<ul>
+<li>Running Artifactory OSS in a container</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull docker.bintray.io/jfrog/artifactory-oss:latest</span><br><span class="line"></span><br><span class="line">$ docker run --name artifactory -d -p 80:8081 docker.bintray.io/jfrog/artifactory-oss:latest</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>企业版安装：</p>
+<ul>
+<li>Running Artifactory Pro in a container</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull docker.bintray.io/jfrog/artifactory-pro:latest</span><br><span class="line"></span><br><span class="line">$ docker run --name artifactory -d -p 80:8081 docker.bintray.io/jfrog/artifactory-pro:latest</span><br></pre></td></tr></table></figure>
+<p>然后，访问<code>http://you_artifactory_ip:80/artifactory/webapp/#/home</code>，开始愉快的玩起来。 </p>
+<p>可以了各位，篇幅不易过长，持续集成系列会逐步展开实践。</p>
+<h3 id="OpenStack"><a href="#OpenStack" class="headerlink" title="OpenStack"></a>OpenStack</h3><p>OpenStack 是一个面向IaaS 层的开源项目，用于实现公有云和私有云的部署及管理。 拥有众多大公司的行业背书和数以千计的社区成员， OpenStack 被看作是云计算的未来。</p>
+<p>OpenStack复杂度挺高，我专门写了一个系列，具体实践参考：</p>
+<ul>
+<li><p>OpenStack系列：</p>
+<ul>
+<li><a href="http://itweet.cn/blog/select?title=openstack%E7%B3%BB%E5%88%97" target="_blank" rel="noopener">http://itweet.cn/blog/select?title=openstack%E7%B3%BB%E5%88%97</a></li>
+</ul>
+</li>
+<li><p>Openstack Series Course：</p>
+<ul>
+<li><a href="https://github.com/itweet/labs/blob/master/openstack-series/openstack%E7%B3%BB%E5%88%97(1" target="_blank" rel="noopener">openstack系列(1) - Kvm虚拟化技术</a>-Kvm%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF.md)</li>
+<li><a href="https://github.com/itweet/labs/blob/master/openstack-series/openstack%E7%B3%BB%E5%88%97(2" target="_blank" rel="noopener">openstack系列(2) - 架构设计</a>-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.md)</li>
+<li><a href="https://github.com/itweet/labs/blob/master/openstack-series/openstack%E7%B3%BB%E5%88%97(3" target="_blank" rel="noopener">openstack系列(3) - 架构规划</a>-%E6%9E%B6%E6%9E%84%E8%A7%84%E5%88%92.md)</li>
+<li><a href="https://github.com/itweet/labs/blob/master/openstack-series/openstack%E7%B3%BB%E5%88%97(4" target="_blank" rel="noopener">openstack系列(4) - 基础环境</a>-%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83.md)</li>
+<li><a href="https://github.com/itweet/labs/blob/master/openstack-series/openstack%E7%B3%BB%E5%88%97(5" target="_blank" rel="noopener">openstack系列(5) - M版 快速部署</a>-M%E7%89%88_%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2.md)</li>
+<li><a href="https://github.com/itweet/labs/blob/master/openstack-series/openstack%E7%B3%BB%E5%88%97(6" target="_blank" rel="noopener">openstack系列(6) - M版 网络配置</a>-M%E7%89%88_%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE.md)</li>
+<li><a href="https://github.com/itweet/labs/blob/master/openstack-series/openstack%E7%B3%BB%E5%88%97(7" target="_blank" rel="noopener">openstack系列(7) - M版 云主机</a>-M%E7%89%88_%E4%BA%91%E4%B8%BB%E6%9C%BA.md)</li>
+<li><a href="https://github.com/itweet/labs/blob/master/openstack-series/openstack%E7%B3%BB%E5%88%97(8" target="_blank" rel="noopener">openstack系列(8) - M版 扩容节点</a>-M%E7%89%88_%E6%89%A9%E5%AE%B9%E8%8A%82%E7%82%B9.md)</li>
+<li><a href="https://github.com/itweet/labs/blob/master/openstack-series/openstack%E7%B3%BB%E5%88%97(9" target="_blank" rel="noopener">openstack系列(9) - M版 云硬盘1</a>-M%E7%89%88_%E4%BA%91%E7%A1%AC%E7%9B%981.md)</li>
+<li><a href="https://github.com/itweet/labs/blob/master/openstack-series/openstack%E7%B3%BB%E5%88%97(9" target="_blank" rel="noopener">openstack系列(9) - M版 云硬盘2</a>-M%E7%89%88_%E4%BA%91%E7%A1%AC%E7%9B%982.md)</li>
+<li><a href="https://github.com/itweet/labs/blob/master/openstack-series/openstack%E7%B3%BB%E5%88%97(10" target="_blank" rel="noopener">openstack系列(10) - 平台使用</a>-%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8.md)</li>
+<li><a href="https://github.com/itweet/labs/blob/master/openstack-series/openstack%E7%B3%BB%E5%88%97(11" target="_blank" rel="noopener">openstack系列(11) - 平台运维</a>-%E5%B9%B3%E5%8F%B0%E8%BF%90%E7%BB%B4.md)</li>
+<li><a href="https://github.com/itweet/labs/blob/master/openstack-series/openstack%E7%B3%BB%E5%88%97(11" target="_blank" rel="noopener">openstack系列(11) - 后记</a>-%E5%90%8E%E8%AE%B0.md)</li>
+</ul>
+</li>
+<li><p>Labs</p>
+<ul>
+<li><a href="https://github.com/jikelab/labs/tree/master/openstack-series" target="_blank" rel="noopener">https://github.com/jikelab/labs/tree/master/openstack-series</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Vmware-Vsphere"><a href="#Vmware-Vsphere" class="headerlink" title="Vmware Vsphere"></a>Vmware Vsphere</h3><p>VMware vSphere® 是业界领先的虚拟化平台，使用户能够自信地虚拟化任何应用、重新定义可用性和简化虚拟数据中心。最终可实现高度可用、恢复能力强的按需基础架构，这对于任何云计算环境而言都是理想的基础平台。</p>
+<p>Vmware Vsphere小白式的产品，商业产品，高度产品化，成熟稳定，参考：</p>
+<ul>
+<li><p>VMW-vSPHR-Datasheet-6-0</p>
+<ul>
+<li><a href="https://www.vmware.com/files/cn/pdf/vsphere/VMW-vSPHR-Datasheet-6-0.pdf" target="_blank" rel="noopener">https://www.vmware.com/files/cn/pdf/vsphere/VMW-vSPHR-Datasheet-6-0.pdf</a></li>
+</ul>
+</li>
+<li><p>我为什么弃用OpenStack转向VMware Vsphere</p>
+<ul>
+<li><a href="http://itweet.cn/blog/2017/12/21/Why-do-abandon-OpenStack-to-VMware-vSphere" target="_blank" rel="noopener">http://itweet.cn/blog/2017/12/21/Why-do-abandon-OpenStack-to-VMware-vSphere</a></li>
+</ul>
+</li>
+<li><p>《VMware vSphere企业级实践》持续集成系列，待发布^_^。</p>
+</li>
+</ul>
+<p>一个高度产品化的东西，小白用户都能安装使用，找时间编写一篇实践内容吧。</p>
+<h3 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h3><p>今年是Apache软件基金会成立15周年纪念！Apache软件基金会成立于1999年，非盈利组织，英文名称 Apache Software Foundation，简称 ASF，最早源于开发Apache HTTP服务器的一个爱好者组织“Apache组织”。Apache软件基金会主要为开源项目提供组织、法务和其他形式的支持，它所支持的项目和软件产品都遵循Apache许可证（Apache License）。</p>
+<p>最好的Web资源访问服务器，没有之一。</p>
+<p>Apache服务器，我现在日常工作就是参与Apache社区软件的开发和维护，强大的组织。参考：</p>
+<ul>
+<li><p>一片羽毛的故事</p>
+<ul>
+<li><a href="https://linux.cn/article-4319-1.html" target="_blank" rel="noopener">https://linux.cn/article-4319-1.html</a></li>
+</ul>
+</li>
+<li><p>Docker Hub</p>
+<ul>
+<li><a href="https://hub.docker.com/_/httpd/" target="_blank" rel="noopener">https://hub.docker.com/_/httpd/</a></li>
+</ul>
+</li>
+</ul>
+<p><strong><em>安装Apache</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dit --name my-apache-app -p 8080:80 -v &quot;$PWD&quot;:/usr/local/apache2/htdocs/ httpd:2.4</span><br></pre></td></tr></table></figure>
+<p>访问地址：<code>http://you_ip:8080</code>，持续集成系列逐步发布使用过程。</p>
+<h3 id="Jira"><a href="#Jira" class="headerlink" title="Jira"></a>Jira</h3><p>JIRA 是一个缺陷跟踪管理系统，为针对缺陷管理、任务追踪和项目管理的商业性应用软件，开发者是澳大利亚的Atlassian。JIRA这个名字并不是一个缩写，而是截取自“Gojira”，日文的哥斯拉发音。</p>
+<p>参考：<a href="https://www.atlassian.com/software/jira" target="_blank" rel="noopener">https://www.atlassian.com/software/jira</a></p>
+<h3 id="SlatStack"><a href="#SlatStack" class="headerlink" title="SlatStack"></a>SlatStack</h3><p>SaltStack是一个服务器基础架构集中化管理平台，具备配置管理、远程执行、监控等功能，一般可以理解为简化版的puppet和加强版的func。SaltStack基于Python语言实现，结合轻量级消息队列（ZeroMQ）与Python第三方模块（Pyzmq、PyCrypto、Pyjinjia2、python-msgpack和PyYAML等）构建。<br>通过部署SaltStack环境，我们可以在成千上万台服务器上做到批量执行命令，根据不同业务特性进行配置集中化管理、分发文件、采集服务器数据、操作系统基础及软件包管理等，SaltStack是运维人员提高工作效率、规范业务配置与操作的利器。</p>
+<p>附上，多年前我亲自编写，尘土飞扬的SaltStack应用指南：</p>
+<ul>
+<li>SaltStack-应用指南<ul>
+<li><a href="https://github.com/itweet/labs/raw/master/devops/books" target="_blank" rel="noopener">https://github.com/itweet/labs/raw/master/devops/books</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Puppet"><a href="#Puppet" class="headerlink" title="Puppet"></a>Puppet</h3><p>puppet是一种Linux、Unix、windows平台的集中配置管理系统，使用自有的puppet描述语言，可管理配置文件、用户、cron任务、软件包、系统服务等。 puppet把这些系统实体称之为资源，puppet的设计目标是简化对这些资源的管理以及妥善处理资源间的依赖关系。</p>
+<p>我们内部的持续集成自动化框架底层就是用这种语言结合groovy编写，抽空会补全一下实践文档。</p>
+<ul>
+<li><p>Puppet官方博客</p>
+<ul>
+<li><a href="https://puppet.com/blog" target="_blank" rel="noopener">https://puppet.com/blog</a></li>
+</ul>
+</li>
+<li><p>Puppet官网文档</p>
+<ul>
+<li><a href="https://puppet.com/docs" target="_blank" rel="noopener">https://puppet.com/docs</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Confluence"><a href="#Confluence" class="headerlink" title="Confluence"></a>Confluence</h3><p>Confluence是一个专业的企业知识管理与协同软件，也可以用于构建企业wiki。使用简单，但它强大的编辑和站点管理特征能够帮助团队成员之间共享信息、文档协作、集体讨论，信息推送。</p>
+<ul>
+<li>Confluence中文演示站点<ul>
+<li><a href="http://www.confluence.cn/dashboard.action;jsessionid=F337804FB6B4511899CBB7F09B4666A2" target="_blank" rel="noopener">http://www.confluence.cn/dashboard.action;jsessionid=F337804FB6B4511899CBB7F09B4666A2</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Atlassian"><a href="#Atlassian" class="headerlink" title="Atlassian"></a>Atlassian</h3><p>一家SaaS公司，不雇佣一个销售人员，仅通过口碑获客，市值达10亿美金级别，极其罕见，纳斯达克上市公司Atlassian就是其中之一。Atlassian提供面向企业业务流程的协同办公产品，一般传统SaaS公司因销售成本高昂，很难跑出利润，如SaaS行业标杆Salesforce虽然接近盈利，但是在销售投入仍然占营收近50%，而Atlassian因为销售非常轻，销售成本占营收比重持续保持在20%左右。正是出于轻销售策略，Atlassian已经连续11年盈利，预期2017财年营收将达6亿美元。</p>
+<p>Atlassian的销售策略如此成功，与其优秀的产品能力密不可分。Atlassian主要有5款产品，分别面向不同的市场。JIRA（项目、认为管理软件，2002年上线）、Confluence（企业知识管理与协同软件，2004年上线）、BitBucket（代码库，2010年上线）、HipChat（内部聊天/协作软件，2012年上线）以及JIRA Service Desk（服务台软件，2013年上线）。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>我们罗列选型之后，软件产品的搭建和使用，做为持续集成系列实践部分，主要是把我多年来积累的经验和文档做一个列表。详细内容我会逐步发布和更新，我曾经总结超过<code>10G</code>的材料，基本都是原创，涉及百分之五十的都是学着玩，没机会实践，导致他们永远沉睡，我会逐步开放出来。</p>
+<p>持续集成平台做为企业开发、运维、产品交付非常强大的一个利器，用好甚至可以改变我们很多的坏毛病，降低企业成本，让开发、运维、产品达到统一，各自专注于自己喜欢的专业的领域，发挥更大的价值和效益。DevOps之路，我们会一步步实践，不断总结经验。</p>
+<p><strong><em>参考</em></strong></p>
+<p>[1]. <a href="https://www.jfrog.com/confluence/display/RTF/Installing+with+Docker" target="_blank" rel="noopener">https://www.jfrog.com/confluence/display/RTF/Installing+with+Docker</a><br>[2]. <a href="https://www.atlassian.com/software/jira" target="_blank" rel="noopener">https://www.atlassian.com/software/jira</a><br>[3]. <a href="https://bitbucket.org/product" target="_blank" rel="noopener">https://bitbucket.org/product</a><br>[4]. <a href="https://www.jfrog.com/confluence/display/RTF/Installing+with+Docker" target="_blank" rel="noopener">https://www.jfrog.com/confluence/display/RTF/Installing+with+Docker</a></p>
+<p>欢迎关注微信公众号[whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/ci/">ci</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/01/06/The-strongest-terminal-in-history/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">The-strongest-terminal-in-history</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/01/03/How-select-continuous-integration-platform-part-2/">
+        <span class="next-text nav-default">How-select-continuous-integration-platform-part-2</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

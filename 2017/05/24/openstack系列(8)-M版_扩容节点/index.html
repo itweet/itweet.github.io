@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="openstack系列(8)-M版_扩容节点">
+
+
+
+
+  <meta name="keywords" content="openstack,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/05/24/openstack系列(8)-M版_扩容节点/">
+
+
+<meta name="description" content="Adding a compute nodeExpanding your single-node OpenStack cloud to include a second compute node requires a second network adapter, if you want to separate the Neutron tenant network traffic. Edit the">
+<meta name="keywords" content="openstack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openstack系列(8)-M版_扩容节点">
+<meta property="og:url" content="http://itweet.github.io/2017/05/24/openstack系列(8)-M版_扩容节点/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Adding a compute nodeExpanding your single-node OpenStack cloud to include a second compute node requires a second network adapter, if you want to separate the Neutron tenant network traffic. Edit the">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/dilatation-node.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.515Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openstack系列(8)-M版_扩容节点">
+<meta name="twitter:description" content="Adding a compute nodeExpanding your single-node OpenStack cloud to include a second compute node requires a second network adapter, if you want to separate the Neutron tenant network traffic. Edit the">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/dilatation-node.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> openstack系列(8)-M版_扩容节点 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          openstack系列(8)-M版_扩容节点
+        
+      </h1>
+
+      <time class="post-time">
+          5月 24 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h3 id="Adding-a-compute-node"><a href="#Adding-a-compute-node" class="headerlink" title="Adding a compute node"></a>Adding a compute node</h3><p>Expanding your single-node OpenStack cloud to include a second compute node requires a second network adapter, if you want to separate the Neutron tenant network traffic.</p>
+<h3 id="Edit-the-answer-file"><a href="#Edit-the-answer-file" class="headerlink" title="Edit the answer file"></a>Edit the answer file</h3><p>First, edit the “answer file” generated during the initial Packstack setup. You’ll find the file in the directory from which you ran Packstack.</p>
+<p><code>NOTE:</code> by default, $youranswerfile is called packstack-answer-$date-$time.txt</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller ~]# ls packstack-answers-20160517-215941.txt</span><br><span class="line">packstack-answers-20160517-215941.txt</span><br></pre></td></tr></table></figure>
+<h3 id="Change-IP-addresses"><a href="#Change-IP-addresses" class="headerlink" title="Change IP addresses"></a>Change IP addresses</h3><p>Change the value for <code>CONFIG_COMPUTE_HOSTS</code> from the value of your first host IP address to the value of your second host IP address. Ensure that the key <code>CONFIG_NETWORK_HOSTS</code> exists and is set to the IP address of your first host.</p>
+<h3 id="Skip-installing-on-an-already-existing-servers"><a href="#Skip-installing-on-an-already-existing-servers" class="headerlink" title="Skip installing on an already existing servers"></a>Skip installing on an already existing servers</h3><p>In case you do not want to run the installation over again on the already configured servers, add the following parameter to the answerfile:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXCLUDE_SERVERS=&lt;serverIP&gt;,&lt;serverIP&gt;,...</span><br></pre></td></tr></table></figure></p>
+<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller ~]# egrep &quot;CONFIG_COMPUTE_HOSTS|CONFIG_NETWORK_HOSTS|EXCLUDE_SERVERS&quot; packstack-answers-20160613-231012.txt</span><br><span class="line">EXCLUDE_SERVERS=192.168.2.110</span><br><span class="line">CONFIG_COMPUTE_HOSTS=192.168.2.110,192.168.2.111,192.168.2.112,192.168.2.113</span><br><span class="line">CONFIG_NETWORK_HOSTS=192.168.2.110</span><br></pre></td></tr></table></figure></p>
+<h3 id="Re-run-packstack-with-the-new-values"><a href="#Re-run-packstack-with-the-new-values" class="headerlink" title="Re-run packstack with the new values"></a>Re-run packstack with the new values</h3><p>Run packstack again, specifying your modified answer file:</p>
+<p><code>NOTE:</code> by default $youranswerfile is called packstack-answer-$date-$time.txt</p>
+<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller ~]# cp packstack-answers-20160613-231012.txt packstack-answers-20160613-231012.txt.bak</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~]# vi packstack-answers-20160613-231012.txt </span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~]# egrep &quot;CONFIG_COMPUTE_HOSTS|CONFIG_NETWORK_HOSTS|EXCLUDE_SERVERS&quot; packstack-answers-20160613-231012.txt</span><br><span class="line">EXCLUDE_SERVERS=192.168.2.110</span><br><span class="line">CONFIG_COMPUTE_HOSTS=192.168.2.110,192.168.2.111,192.168.2.112,192.168.2.113</span><br><span class="line">CONFIG_NETWORK_HOSTS=192.168.2.110</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~]# sudo packstack --answer-file=packstack-answers-20160613-231012.txt</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/dilatation-node.png" alt="Dilatation Node"></p>
+<p>check new compute node <code>openstack-compute-5</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># nova host-list</span><br><span class="line">+----------------------+-------------+----------+</span><br><span class="line">| host_name            | service     | zone     |</span><br><span class="line">+----------------------+-------------+----------+</span><br><span class="line">| openstack-controller | cert        | internal |</span><br><span class="line">| openstack-controller | consoleauth | internal |</span><br><span class="line">| openstack-controller | scheduler   | internal |</span><br><span class="line">| openstack-controller | conductor   | internal |</span><br><span class="line">| openstack-controller | compute     | nova     |</span><br><span class="line">| openstack-compute-1  | compute     | nova     |</span><br><span class="line">| openstack-compute-2  | compute     | nova     |</span><br><span class="line">| openstack-compute-3  | compute     | nova     |</span><br><span class="line">| openstack-compute-4  | compute     | nova     |</span><br><span class="line">| openstack-compute-5  | compute     | nova     |</span><br><span class="line">+----------------------+-------------+----------+</span><br></pre></td></tr></table></figure>
+<p>check Cloud-Host State<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># virsh list --all</span><br><span class="line"> Id    Name                           State</span><br><span class="line">----------------------------------------------------</span><br><span class="line"> 1     instance-00000032              running</span><br><span class="line"> 2     instance-00000030              running</span><br><span class="line"> 3     instance-00000010              running</span><br><span class="line"> 4     instance-0000000e              running</span><br><span class="line"> 5     instance-00000034              running</span><br></pre></td></tr></table></figure></p>
+<p>adding a compute node done. check service normal.</p>
+<p>reference：<a href="https://www.rdoproject.org/install/adding-a-compute-node/" target="_blank" rel="noopener">https://www.rdoproject.org/install/adding-a-compute-node/</a></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/openstack/">openstack</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/05/26/Apache Hive vs Apache Impala Query Performance Comparison/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Apache Hive vs Apache Impala Query Performance Comparison</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/05/24/openstack系列(7)-M版_云主机/">
+        <span class="next-text nav-default">openstack系列(7)-M版_云主机</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

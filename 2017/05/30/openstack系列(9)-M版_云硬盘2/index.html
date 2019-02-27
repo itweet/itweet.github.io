@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="openstack系列(9)-M版_云硬盘2">
+
+
+
+
+  <meta name="keywords" content="openstack,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/05/30/openstack系列(9)-M版_云硬盘2/">
+
+
+<meta name="description" content="Openstack系列-自动化部署完成之后，此篇文章讲解企业级私有云后端云盘存储选型。按照之前系列文章中介绍的openstack集群安装之后，系统自带一个基于lvm vloume的cinder存储。 Dependencies1234[root@openstack-controller ~]# cat /etc/redhat-release CentOS Linux release 7.2.1511">
+<meta name="keywords" content="openstack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openstack系列(9)-M版_云硬盘2">
+<meta property="og:url" content="http://itweet.github.io/2017/05/30/openstack系列(9)-M版_云硬盘2/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Openstack系列-自动化部署完成之后，此篇文章讲解企业级私有云后端云盘存储选型。按照之前系列文章中介绍的openstack集群安装之后，系统自带一个基于lvm vloume的cinder存储。 Dependencies1234[root@openstack-controller ~]# cat /etc/redhat-release CentOS Linux release 7.2.1511">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/openstack-cinder-volume.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openstack系列(9)-M版_云硬盘2">
+<meta name="twitter:description" content="Openstack系列-自动化部署完成之后，此篇文章讲解企业级私有云后端云盘存储选型。按照之前系列文章中介绍的openstack集群安装之后，系统自带一个基于lvm vloume的cinder存储。 Dependencies1234[root@openstack-controller ~]# cat /etc/redhat-release CentOS Linux release 7.2.1511">
+<meta name="twitter:image" content="https://jikelab.github.io/tech-labs/screenshots/openstack-cinder-volume.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> openstack系列(9)-M版_云硬盘2 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          openstack系列(9)-M版_云硬盘2
+        
+      </h1>
+
+      <time class="post-time">
+          5月 30 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Openstack系列-自动化部署完成之后，此篇文章讲解企业级私有云后端云盘存储选型。按照之前系列文章中介绍的openstack集群安装之后，系统自带一个基于lvm vloume的cinder存储。</p>
+<h2 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller ~]# cat /etc/redhat-release </span><br><span class="line">CentOS Linux release 7.2.1511 (Core) </span><br><span class="line">[root@openstack-compute ~]# cat /etc/redhat-release </span><br><span class="line">CentOS Linux release 7.2.1511 (Core)</span><br></pre></td></tr></table></figure>
+<h2 id="使用Gluster-amp-amp-LVM-Vloume"><a href="#使用Gluster-amp-amp-LVM-Vloume" class="headerlink" title="使用Gluster &amp;&amp; LVM Vloume"></a>使用Gluster &amp;&amp; LVM Vloume</h2><h3 id="1-Install-glusterfs"><a href="#1-Install-glusterfs" class="headerlink" title="1. Install glusterfs"></a>1. Install glusterfs</h3><p><code>RDO</code>安装的时候，已经自动安装了部分glusterfs包,并且需要通过rdo提供的源来安装glusterfs,<br>否则会有一些依赖冲突问题,导致无法安装成功。</p>
+<p>以下命令在所有准备安装glusterfs集群的服务器都执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$ rpm -qa | grep gluster*     </span><br><span class="line"></span><br><span class="line">glusterfs-client-xlators-3.7.1-16.0.1.el7.centos.x86_64</span><br><span class="line">glusterfs-3.7.1-16.0.1.el7.centos.x86_64</span><br><span class="line">glusterfs-api-3.7.1-16.0.1.el7.centos.x86_64</span><br><span class="line">glusterfs-libs-3.7.1-16.0.1.el7.centos.x86_64</span><br><span class="line"></span><br><span class="line">$ yum install wget -y</span><br><span class="line"></span><br><span class="line">$ yum install centos-release-gluster37         # ==&gt; CentOS-Gluster-3.7.repo</span><br><span class="line"></span><br><span class="line">$ rpm -qa *gluster*</span><br><span class="line">glusterfs-client-xlators-3.7.1-16.0.1.el7.centos.x86_64</span><br><span class="line">centos-release-gluster37-1.0-4.el7.centos.noarch</span><br><span class="line">glusterfs-3.7.1-16.0.1.el7.centos.x86_64</span><br><span class="line">glusterfs-api-3.7.1-16.0.1.el7.centos.x86_64</span><br><span class="line">glusterfs-libs-3.7.1-16.0.1.el7.centos.x86_64</span><br><span class="line"></span><br><span class="line">$ yum clean all</span><br><span class="line"></span><br><span class="line">$ yum install glusterfs-server</span><br><span class="line"></span><br><span class="line">$ service glusterd start / systemctl start glusterd.service</span><br><span class="line">$ service glusterd status / systemctl status glusterd.service</span><br><span class="line"></span><br><span class="line">$ systemctl enable glusterd.service</span><br><span class="line">$ systemctl is-enabled glusterd.service</span><br><span class="line"></span><br><span class="line">$ ps aux|grep gluster|wc -l</span><br><span class="line">2</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-glusterfs-cluster-configuratioin"><a href="#2-glusterfs-cluster-configuratioin" class="headerlink" title="2. glusterfs cluster configuratioin"></a>2. glusterfs cluster configuratioin</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">From &quot;server1&quot;</span><br><span class="line">    gluster peer probe server2</span><br><span class="line"></span><br><span class="line">From &quot;server2&quot;</span><br><span class="line">    gluster peer probe server1</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~]# gluster peer probe openstack-compute-1</span><br><span class="line">peer probe: success. </span><br><span class="line">[root@openstack-controller ~]# gluster peer probe openstack-controller</span><br><span class="line">peer probe: success. Probe on localhost not needed</span><br></pre></td></tr></table></figure>
+<h3 id="3-glusterfs-volume-manager"><a href="#3-glusterfs-volume-manager" class="headerlink" title="3. glusterfs volume manager"></a>3. glusterfs volume manager</h3><p>你需要在两台主机执行如下命令，创建出glusterfs使用的本地磁盘目录地址。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /var/glusterfs/exp1 -p</span><br></pre></td></tr></table></figure></p>
+<p>你需要在glusterfs任意一台主机执行,如下命令,replica代表副本数量，可以理解为raid1,这个是glusterfs做为分布式文件系统，为cinder提供数据安全的有效保障：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller ~]# gluster volume create cinder-volome01 replica 2 openstack-centos:/var/glusterfs/exp1 openstack-compute:/var/glusterfs/exp1 </span><br><span class="line"></span><br><span class="line">＃创建带2份数据拷贝的卷</span><br><span class="line">volume create: cinder-volome01: success: please start the volume to access data</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~]# gluster volume start cinder-volome01 #启动卷</span><br><span class="line"></span><br><span class="line">volume start: cinder-volome01: success</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~]# gluster volume info</span><br><span class="line"></span><br><span class="line">Volume Name: cinder-volume01</span><br><span class="line">Type: Replicate</span><br><span class="line">Volume ID: efe3c9a1-4bf9-4e45-a136-00ce8cd05d9f</span><br><span class="line">Status: Started</span><br><span class="line">Number of Bricks: 1 x 2 = 2</span><br><span class="line">Transport-type: tcp</span><br><span class="line">Bricks:</span><br><span class="line">Brick1: openstack-centos:/var/glusterfs/exp1</span><br><span class="line">Brick2: openstack-compute:/var/glusterfs/exp1</span><br><span class="line">Options Reconfigured:</span><br><span class="line">performance.readdir-ahead: on</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~]# gluster</span><br><span class="line">gluster&gt; peer status</span><br><span class="line">Number of Peers: 1</span><br><span class="line"></span><br><span class="line">Hostname: openstack-compute</span><br><span class="line">Uuid: bbcc8087-a584-4b7d-9631-cbd1e2e7151b</span><br><span class="line">State: Peer in Cluster (Connected)</span><br><span class="line"></span><br><span class="line">gluster&gt; pool list</span><br><span class="line">UUID                                    Hostname                State</span><br><span class="line">bbcc8087-a584-4b7d-9631-cbd1e2e7151b    openstack-compute       Connected </span><br><span class="line">bc854ea5-8f67-4637-bf13-d2a46b109eb4    localhost               Connected </span><br><span class="line"></span><br><span class="line">gluster&gt; volume info </span><br><span class="line">Volume Name: cinder-volume01</span><br><span class="line">Type: Replicate</span><br><span class="line">Volume ID: efe3c9a1-4bf9-4e45-a136-00ce8cd05d9f</span><br><span class="line">Status: Started</span><br><span class="line">Number of Bricks: 1 x 2 = 2</span><br><span class="line">Transport-type: tcp</span><br><span class="line">Bricks:</span><br><span class="line">Brick1: openstack-controller:/var/glusterfs/exp1</span><br><span class="line">Brick2: openstack-compute:/var/glusterfs/exp1</span><br><span class="line">Options Reconfigured:</span><br><span class="line">performance.readdir-ahead: on</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-Cinder-plugin-glusterfs-and-lvm-volume"><a href="#4-Cinder-plugin-glusterfs-and-lvm-volume" class="headerlink" title="4. Cinder plugin glusterfs and lvm volume"></a>4. Cinder plugin glusterfs and lvm volume</h3><p>默认cinder自带lvm volume卷功能，其实cinder可以同时支持多种后端存储方式共存，下面介绍lvm,glusterfs共存的配置信息内容。</p>
+<p>以下内容请在cinder安装节点执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller ~]# vim /etc/cinder/glusterfs_shares</span><br><span class="line">  192.168.0.11:/cinder-volume01</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~]# vim /etc/cinder/cinder.conf</span><br><span class="line">  </span><br><span class="line">enabled_backends=lvm,GlusterFS_Driver</span><br><span class="line"></span><br><span class="line">[lvm]</span><br><span class="line">iscsi_helper=lioadm</span><br><span class="line">volume_group=cinder-volumes</span><br><span class="line">iscsi_ip_address=192.168.0.11</span><br><span class="line">volume_driver=cinder.volume.drivers.lvm.LVMVolumeDriver</span><br><span class="line">volumes_dir=/var/lib/cinder/volumes</span><br><span class="line">iscsi_protocol=iscsi</span><br><span class="line">volume_backend_name=lvm</span><br><span class="line"></span><br><span class="line">[GlusterFS_Driver]</span><br><span class="line">volume_group=GlusterFS_Driver</span><br><span class="line">volume_driver=cinder.volume.drivers.glusterfs.GlusterfsDriver</span><br><span class="line">volume_backend_name=GlusterFS-Storage</span><br><span class="line">glusterfs_shares_config = /etc/cinder/glusterfs_shares</span><br><span class="line">glusterfs_mount_point_base = /var/lib/cinder/glusterfs</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~]# mkdir /var/lib/cinder/glusterfs</span><br><span class="line">[root@openstack-controller ~]# chown cinder:cinder /var/lib/cinder/glusterfs/</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~]# systemctl restart openstack-cinder-volume.service</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~(keystone_admin)]# cinder type-create GlusterFS</span><br><span class="line">+--------------------------------------+-----------+-------------+-----------+</span><br><span class="line">|                  ID                  |    Name   | Description | Is_Public |</span><br><span class="line">+--------------------------------------+-----------+-------------+-----------+</span><br><span class="line">| 4e236e8f-6592-45fc-a25a-b2f189f90439 | GlusterFS |      -      |    True   |</span><br><span class="line">+--------------------------------------+-----------+-------------+-----------+</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~(keystone_admin)]# source keystonerc_admin </span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~(keystone_admin)]# cinder type-key GlusterFS set volume_backend_name=GlusterFS-Storage</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~]# mount|grep glusterfs   #验证完成，说明glusterfs挂载成功</span><br><span class="line">192.168.0.11:/cinder-volume01 on /var/lib/cinder/glusterfs/3e58f5c16b6f5406de3c8f9eb2623ad0 type fuse.glusterfs (rw,relatime,user_id=0,group_id=0,default_permissions,allow_other,max_read=131072)</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~]# cat /etc/cinder/cinder.conf |grep glusterfs_shares</span><br><span class="line">glusterfs_shares_config = /etc/cinder/glusterfs_shares</span><br></pre></td></tr></table></figure></p>
+<p>通过此命令可以查看openstack相关命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># systemctl |grep openstack|wc -l</span><br><span class="line">35</span><br></pre></td></tr></table></figure></p>
+<p>cinder相关命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller ~(keystone_admin)]# cinder type-list</span><br><span class="line">+--------------------------------------+-----------+-------------+-----------+</span><br><span class="line">|                  ID                  |    Name   | Description | Is_Public |</span><br><span class="line">+--------------------------------------+-----------+-------------+-----------+</span><br><span class="line">| 038cb62b-6905-43bd-a4b2-632d171c6d3d |   iscsi   |      -      |    True   |</span><br><span class="line">| 5e8fa387-cb4d-4dee-b0d2-9646f82c2008 | GlusterFS |      -      |    True   |</span><br><span class="line">+--------------------------------------+-----------+-------------+-----------+</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~(keystone_admin)]# cinder list</span><br><span class="line">+--------------------------------------+-----------+-------------------+------+-------------+----------+-------------+</span><br><span class="line">|                  ID                  |   Status  |        Name       | Size | Volume Type | Bootable | Attached to |</span><br><span class="line">+--------------------------------------+-----------+-------------------+------+-------------+----------+-------------+</span><br><span class="line">| 8d320989-f6f0-4c36-9ffc-9955e65d5390 | available | glusterfs-test-01 |  1   |  GlusterFS  |  false   |             |</span><br><span class="line">| af4777b6-7ab1-4b00-a4d6-757f6c03bb7c | available | glusterfs-test-02 |  1   |  GlusterFS  |  false   |             |</span><br><span class="line">| cd2b9a15-b3d8-4e4e-8fa0-9b27e6503144 | available |     test-iscsi    |  1   |    iscsi    |  false   |             |</span><br><span class="line">+--------------------------------------+-----------+-------------------+------+-------------+----------+-------------+</span><br><span class="line"></span><br><span class="line">[root@openstack-controller ~(keystone_admin)]# cinder service-list </span><br><span class="line">+------------------+-----------------------------------+------+---------+-------+----------------------------+-----------------+</span><br><span class="line">|      Binary      |                Host               | Zone |  Status | State |         Updated_at         | Disabled Reason |</span><br><span class="line">+------------------+-----------------------------------+------+---------+-------+----------------------------+-----------------+</span><br><span class="line">|  cinder-backup   |          openstack-controller         | nova | enabled |   up  | 2016-05-26T19:37:18.000000 |        -        |</span><br><span class="line">| cinder-scheduler |          openstack-controller         | nova | enabled |   up  | 2016-05-26T19:37:23.000000 |        -        |</span><br><span class="line">|  cinder-volume   | openstack-controller@GlusterFS_Driver | nova | enabled |   up  | 2016-05-26T19:37:22.000000 |        -        |</span><br><span class="line">|  cinder-volume   |        openstack-controller@lvm       | nova | enabled |   up  | 2016-05-26T19:37:16.000000 |        -        |</span><br><span class="line">+------------------+-----------------------------------+------+---------+-------+----------------------------+-----------------+</span><br><span class="line"></span><br><span class="line">-- volume - lvm</span><br><span class="line">$ systemctl status openstack-cinder-volume.service</span><br><span class="line"></span><br><span class="line">-- lvm 查看lv信息</span><br><span class="line">$ lvdisplay</span><br></pre></td></tr></table></figure></p>
+<h2 id="Dashboard"><a href="#Dashboard" class="headerlink" title="Dashboard"></a>Dashboard</h2><p> 登录到可视化页面，点击选择卷，创建云硬盘按钮，即可看到两种云硬盘类型，基于lvm创建iscsi类型和glusterfs的类型。最终效果如下图：<br><img src="https://jikelab.github.io/tech-labs/screenshots/openstack-cinder-volume.png" alt></p>
+<h2 id="NFS-and-Other-Storage-driver"><a href="#NFS-and-Other-Storage-driver" class="headerlink" title="NFS and Other Storage driver"></a>NFS and Other Storage driver</h2><p>  按照相关文档完成安装,最后修改cinder.conf文件，和cinder整合，举列如下:</p>
+<p>For NFS:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nfs-utils rpcbind</span><br><span class="line"></span><br><span class="line">mkdir /data/nfs -p</span><br><span class="line"></span><br><span class="line">cat /etc/exports</span><br><span class="line">/data/nfs 192.168.0.0/24(rw,sync,no_root_squash)</span><br><span class="line"></span><br><span class="line">/bin/systemctl start  rpcbind.service</span><br><span class="line">/bin/systemctl status  rpcbind.service  </span><br><span class="line">/bin/systemctl start nfs.service  </span><br><span class="line">/bin/systemctl status nfs.service  </span><br><span class="line">/bin/systemctl reload nfs.service </span><br><span class="line"></span><br><span class="line">$ sudo exportfs -rv </span><br><span class="line">exporting 192.168.0.0/24:/data/nfs</span><br><span class="line"></span><br><span class="line">$ showmount -e  192.168.0.11</span><br><span class="line">Export list for 192.168.0.11:</span><br><span class="line">/data/nfs 192.168.0.0/24</span><br><span class="line"></span><br><span class="line">cat /etc/cinder/nfs_shares</span><br><span class="line">192.168.0.11:/data/nfs</span><br></pre></td></tr></table></figure></p>
+<p>Cinder Multiple Storage configuartion:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/cinder/cinder.conf</span><br><span class="line">[DEFAULT]  </span><br><span class="line">enabled_backends = lvm,GlusterFS_Driver,ibm,NFS-Driver</span><br><span class="line">  </span><br><span class="line">[lvm]  </span><br><span class="line">volume_driver = cinder.volume.drivers.lvm.LVMVolumeDriver  </span><br><span class="line">volume_backend_name=LVM  </span><br><span class="line">volume_group = cinder-volumes  </span><br><span class="line">iscsi_protocol = iscsi  </span><br><span class="line">iscsi_helper = lioadm  </span><br><span class="line">  </span><br><span class="line">[GlusterFS_Driver]</span><br><span class="line">volume_group=GlusterFS_Driver</span><br><span class="line">volume_driver=cinder.volume.drivers.glusterfs.GlusterfsDriver</span><br><span class="line">volume_backend_name=GlusterFS-Storage</span><br><span class="line">glusterfs_shares_config = /etc/cinder/glusterfs_shares</span><br><span class="line">glusterfs_mount_point_base = /var/lib/cinder/glusterfs </span><br><span class="line"></span><br><span class="line">[NFS-Driver]</span><br><span class="line">volume_group=NFS-Driver</span><br><span class="line">volume_driver=cinder.volume.drivers.nfs.NfsDriver</span><br><span class="line">volume_backend_name=NFS-Storage</span><br><span class="line">nfs_shares_config=/etc/cinder/nfs_shares</span><br><span class="line">nfs_mount_point_base=$state_path/mnt</span><br><span class="line"></span><br><span class="line">[ibm]  </span><br><span class="line">volume_driver = cinder.volume.drivers.ibm.storwize_svc.StorwizeSVCDriver  </span><br><span class="line">san_ip = 192.168.0.11  </span><br><span class="line">san_login = www.itweet.cn  </span><br><span class="line">san_password = 123456  </span><br><span class="line">storwize_svc_volpool_name = vtt1  </span><br><span class="line">storwize_svc_connection_protocol = iSCSI  </span><br><span class="line">volume_backend_name=IBM  </span><br><span class="line"></span><br><span class="line">$ cinder type-create NFS</span><br><span class="line">$ cinder type-key NFS set volume_backend_name=NFS-Storage</span><br><span class="line"></span><br><span class="line">$ systemctl restart openstack-cinder-volume</span><br><span class="line"></span><br><span class="line">$ cinder service-list</span><br></pre></td></tr></table></figure></p>
+<h2 id="Openstack-Glance"><a href="#Openstack-Glance" class="headerlink" title="Openstack Glance"></a>Openstack Glance</h2><p> openstack image<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(openstack) help image </span><br><span class="line">Command &quot;image&quot; matches:</span><br><span class="line">  image add project</span><br><span class="line">  image create</span><br><span class="line">  image delete</span><br><span class="line">  image list</span><br><span class="line">  image remove project</span><br><span class="line">  image save</span><br><span class="line">  image set</span><br><span class="line">  image show</span><br><span class="line"></span><br><span class="line">openstack image create &quot;demo&quot; --file /tmp/demo.img --disk-format qcow2 --container-format bare --public</span><br></pre></td></tr></table></figure></p>
+<h2 id="openstack-ceph"><a href="#openstack-ceph" class="headerlink" title="openstack ceph"></a>openstack ceph</h2><p><a href="http://my.oschina.net/JerryBaby/blog/376858" target="_blank" rel="noopener">待续…</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p> openstack多种后端存储，也是由于商业案例越来越多，导致需要多种存储系统满足不同的业务需求，从这一点看前途光明的确解决很多现实问题。cinder发展为支持多后端存储方式是必然趋势，因为有很多企业级存储系统需要整合；而很多大厂对openstack不予余力的投入社区开发也促使他更快的成熟。swift，glance组件用来存储其他类型数据,解决块存储，对象存储,镜像存储问题，也是分而治之的道理。在玩openstack的时候就会发现，各种各样的组件，无意是增加了学习的复杂度，使用维护上面也非常复杂，进而导致安装非常复杂。安装根本就不是安，就只剩下装，装完这个装那个，这组件安装失败，另外组件起不来，说多了都是泪啊。不过redhat做了一个基于puppet自动化安装脚本，相对来说方便了不少；这样一键安装的缺点也显而易见，都不知道有多少组件，出问题怎么排查，所以还得对各个组件的功能和配置非常熟悉，才能对症下药解决问题。我写openstack实际使用系列文章，也是为了让想学习openstack的人更容易入门，后续openstack系列完结后，我会开源一个基于saltstack自动化部署openstack的软件开源到我的<a href="https://github.com/itweet" target="_blank" rel="noopener">Github</a>上面。欢迎关注。</p>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><p> Centos6.x –&gt; Centos7.x 多了些变化，慢慢熟悉<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">systemctl is-enabled iptables.service</span><br><span class="line">systemctl is-enabled servicename.service #查询服务是否开机启动</span><br><span class="line">systemctl enable *.service #开机运行服务</span><br><span class="line">systemctl disable *.service #取消开机运行</span><br><span class="line">systemctl start *.service #启动服务</span><br><span class="line">systemctl stop *.service #停止服务</span><br><span class="line">systemctl restart *.service #重启服务</span><br><span class="line">systemctl reload *.service #重新加载服务配置文件</span><br><span class="line">systemctl status *.service #查询服务运行状态</span><br><span class="line">systemctl --failed #显示启动失败的服务</span><br></pre></td></tr></table></figure></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+<p>参考：<a href="http://gluster.readthedocs.io/en/latest/Quick-Start-Guide/Quickstart/" target="_blank" rel="noopener">http://gluster.readthedocs.io/en/latest/Quick-Start-Guide/Quickstart/</a><br>     <a href="http://www.gluster.org/community/documentation/index.php/GlusterFS_Cinder" target="_blank" rel="noopener">http://www.gluster.org/community/documentation/index.php/GlusterFS_Cinder</a><br>     <a href="https://www.gluster.org/" target="_blank" rel="noopener">https://www.gluster.org/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/openstack/">openstack</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/06/02/比较Apache Hadoop 生态系统中不同的文件格式和存储引擎的性能/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">比较Apache Hadoop 生态系统中不同的文件格式和存储引擎的性能</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/05/30/openstack系列(9)-M版_云硬盘1/">
+        <span class="next-text nav-default">openstack系列(9)-M版_云硬盘1</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

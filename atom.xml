@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>WHOAMI</title>
+  <icon>https://www.gravatar.com/avatar/640acd48ce2a9ee0769faec6c0f33311</icon>
+  <subtitle>技术人的日常.</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://itweet.github.io/"/>
+  <updated>2019-02-27T16:43:58.488Z</updated>
+  <id>http://itweet.github.io/</id>
+  
+  <author>
+    <name>Xu Jiang</name>
+    <email>realJiangXu[at]gmail.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JDP Release 3.1.0</title>
+    <link href="http://itweet.github.io/2018/12/26/release-3.1.0/"/>
+    <id>http://itweet.github.io/2018/12/26/release-3.1.0/</id>
+    <published>2018-12-26T08:35:36.000Z</published>
+    <updated>2019-02-27T16:43:58.488Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Release-Note"><a href="#Release-Note" class="headerlink" title="Release Note"></a>Release Note</h1><p>JDP 3.1 是 3.x 系列中的第二个版本，经过一段长久时间的研发测试，今天决定发布正式版本。此版本没有任何全新的features，立足于 3.1 版本，我们把 mpack 深度与 Ambari 融合，真正做到一体化的产品体验。Ambari 默认 Stack 是 JDP，支持的版本是3.0.0和3.1.0；Stack 中组件的全新升级，均使用最新的稳定版本。新版本对于资源的使用量进行了优化，目前一台4g、2c的虚拟机可安装和部署，实现在笔记本电脑也能体验 JDP 的完整功能。</p><p>要下载 JDP 3.1，请访问<a href="http://www.fusionlab.cn/zh-cn/docs/intro/quickstart.html" target="_blank" rel="noopener">快速入门</a> 页面，提供云盘压缩包下载，您可以在私有网络的情况下安装使用 JDP。我们在此列出主要的版本变更，按组件进行分组：</p><ul><li>JDP 3.1 <ul><li>ambari-2.7.0.0-0</li><li>clickhouse 3.1.0.0-108-18.14.13</li><li>jdp-select 3.1.0.0-108</li><li>kafka 3.1.0.0-108-1.0.1</li><li>nifi 3.1.0.0-108-1.7.0</li><li>superset 3.1.0.0-108-0.26.3</li><li>zookeeper 3.1.0.0-108-3.4.6</li></ul></li></ul><p>相关 JDP Roadmap 访问<a href="https://github.com/fusionlabcn/jdp" target="_blank" rel="noopener">Github</a></p><p>JDP 核心  </p><ul><li>一体化的流分析平台，在未来 3.3 版本中。</li><li>数据流 Kafka，实时处理引擎</li><li>海量数据即席查询 ClickHouse</li><li>数据可视化 Superset</li><li>分布式协调服务 Zookeeper</li><li>利用 JDP 实现一站式企业级数据仓库平台</li></ul><h1 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h1><p>JDP 未来计划新增一些简单、易用、强大的 Batch &amp; Stream 统一的一体化功能。全新的设计，在混口饭吃的工作中，抽出时间在设计与实现下一代数据流平台，而且 JDP 定位为一款真正企业级可用的一体化数据流平台，需要实现足够简单且强大的数据流处理和管理能力，这是我们设计 JDP 的初衷。</p><p>JDP 设计的组件和相关技术非常驳杂，整个研发过程漫长且耗费硬件资源，开发维护不易，我们已经在尽力的努力克服外部困难，规范化整个 Devops 流程，希望能改善目前效率的问题。</p><p>next JDP 版本中，会新增 Hadoop 3.2.x 版本以及 Spark、Flink 相关组件，一切的原因是为了更好；我们的流分析引擎核心 Runtime 支持 Spark 、Flink，用户无需感知这些 Runtime 技术，一体化的部署、运维、监控均有 JDP 实现，外部接口兼容标准的数据库协议，大大降低用户的成本，我们会有一层自己的数据库 DSL 设计，我们称为 FQL，其实是 SQL++，就这样。</p><p>JDP 3.3 中计划，会启动另外一个 <code>stack</code> 孵化工作，探索 k8s + ai 技术，毕竟行行转 ai，容器我一直比较抵触，体积超大，带状态服务支持弱，但 ai 各种 py 库，真的很适合容器化，升级方便，维护性成本高，难以规模化部署运维，涉及网络、存储、计算、调度、容器、分布式等技术，显然是庞然大物，国内专业玩 k8s 的公司，貌似基本难有做大的，企业级市场，基础设施难挣钱，业务挣钱，难有企业重视，基本都是使用层面，扯远啦；回归正题，JDP 需要去很好的解决这些问题，一切是为了更好，实现一体化流分析平台的价值，容器化 JDP 某些模块，长期看是利好的，可以降低成本。。。</p><p>未来的时间，我会逐渐披露更多细节，敬请期待。。。</p><hr><p>好久没更新啦，扯句闲话，我遇到我偶像 Linus Torvalds 年轻时刚去美国硅谷工作时一样的情况，境遇如此相似；以后尽量产出一些高质量的内容，在分享吧，码子不易，文末附 JDP 3.1 美图一张。</p><p><img src="http://www.fusionlab.cn/zh-cn/docs/intro/img/ambari%E2%80%93dashboard.png" alt></p><p>单机、分布式系统都能一体化的管理。。。</p><p>[1] JDP 官网: <a href="http://www.fusionlab.cn/" target="_blank" rel="noopener">http://www.fusionlab.cn/</a></p><p>[2] JDP 快速启动：<a href="http://www.fusionlab.cn/zh-cn/docs/intro/quickstart.html" target="_blank" rel="noopener">http://www.fusionlab.cn/zh-cn/docs/intro/quickstart.html</a></p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      JDP 3.1 是 3.x 系列中的第二个版本，经过一段长久时间的研发测试，今天决定发布正式版本。
+    
+    </summary>
+    
+      <category term="JDP" scheme="http://itweet.github.io/categories/JDP/"/>
+    
+    
+      <category term="JDP" scheme="http://itweet.github.io/tags/JDP/"/>
+    
+      <category term="3.1.0" scheme="http://itweet.github.io/tags/3-1-0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tensorflow-on-apache-hadoop-yarn</title>
+    <link href="http://itweet.github.io/2018/09/06/tensorflow-on-apache-hadoop-yarn/"/>
+    <id>http://itweet.github.io/2018/09/06/tensorflow-on-apache-hadoop-yarn/</id>
+    <published>2018-09-05T22:15:23.000Z</published>
+    <updated>2018-09-12T14:14:35.213Z</updated>
+    
+    <content type="html"><![CDATA[<p>现在人工智能正处于风口浪尖，大数据和人工智能注定要融合，如何融合，以什么方式融合？</p><p>如今大家都在探索阶段，每个技术型的公司，都有自己的人工智能与大数据融合的方案。</p><p>今天，我们就来介绍一下，大数据领域最核心的Apache Hadoop和人工智能技术融合进展。</p><p>今天我们介绍Apache Yarn是如何融合目前最热门的深度学习框架TensorFlow以及其他框架。</p><p>Tensorflow on Apache Hadoop YARN.pdf </p><p>云盘：链接:<a href="https://pan.baidu.com/s/1v2loT8O30R4RyomM5wTt-A" target="_blank" rel="noopener">https://pan.baidu.com/s/1v2loT8O30R4RyomM5wTt-A</a>  密码:azc7</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;现在人工智能正处于风口浪尖，大数据和人工智能注定要融合，如何融合，以什么方式融合？&lt;/p&gt;
+&lt;p&gt;如今大家都在探索阶段，每个技术型的公司，都有自己的人工智能与大数据融合的方案。&lt;/p&gt;
+&lt;p&gt;今天，我们就来介绍一下，大数据领域最核心的Apache Hadoop和人工智能技术
+      
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://itweet.github.io/categories/Machine-Learning/"/>
+    
+    
+      <category term="ML" scheme="http://itweet.github.io/tags/ML/"/>
+    
+      <category term="2018" scheme="http://itweet.github.io/tags/2018/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Parquet-library-fatal-error</title>
+    <link href="http://itweet.github.io/2018/08/26/parquet-library-fatal-error/"/>
+    <id>http://itweet.github.io/2018/08/26/parquet-library-fatal-error/</id>
+    <published>2018-08-26T06:58:41.000Z</published>
+    <updated>2018-09-04T00:47:05.196Z</updated>
+    
+    <content type="html"><![CDATA[<p>parquet-Hadoop 1.9.0 大量close-wait问题。</p><p>一个开源基础库引发的严重产品事故，整个事件场内block超过4小时以上。</p><p>我们某服务部署上线，界面化的DAG任务，主要跑机器学习全流程作业，运行一段时间，发现后端数据平台查询、预览数据功能全部不可用，导致大量上游业务系统block住。</p><p>报错关键信息：</p><ol><li>UnknowHostException</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.net.UnknownHostException: node199mm1002</span><br></pre></td></tr></table></figure><p>排查Hadoop集群平台是否正常，如上主机是否可到达，发现均正常，集群无问题。</p><ol start="2"><li>Too many open files</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.net.SocketException: Too many open files; Host Details: local host is : &quot;java.net.UnknownHostException: tserver-98989-bmhtk: tserver-98989-bmhtk: System error&quot;: destination host is: &quot;node199mm1002&quot;:25000; </span><br><span class="line">  at org.apache.hadoop.net.NetUtils.wrapException(NetUtils.java:776)</span><br></pre></td></tr></table></figure><p>操作系统，根据ulimit -a查看系统fd配置，主机fd上限为640000，tserver容器的fd上限为65536。通过kubectl进入tserver容器，使用命令“watch ‘ss | grep CLOSE-WAIT | wc -l’”查看，发现65278个close-wait，快崩了。</p><p><img src="https://www.itweet.cn/screenshots/close-wait.png" alt="close wait"></p><p>基本可确定是大量，close-wait连接泄漏问题，对连接泄漏列表进一步分析：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ss | grep CLOSE-WAIT &gt; close_wait.txt</span><br><span class="line">cat close_wait.txt| grep CLOSE_WAIT | grep 50010|wc -l</span><br><span class="line">cat close_wait.txt| grep CLOSE_WAIT | grep http|wc -l</span><br></pre></td></tr></table></figure><p>发现两个特征，一个是属于http相关相关close-wait，占比2%，剩余的全是连接50010端口出现的close-wait，查询Hadoop相关端口，发现50010是DataNode的数据转发端口，初步怀疑是代码连接Hadoop DataNode查询数据没有关闭流导致。</p><ol start="3"><li>DataManager Service：listFiles error IOException  </li></ol><p>排查DataManager Service相关代码，发现listFiles函数，主要功能，读取HDFS获取某个目录下的parquet集合，然后进行读取parquet的meta信息，前端进行展示大小，行数，还会读取任意问题进行预览，或者随机预览数据。<br>并未发现有任何异常情况，系统每次调用此接方法导致阻塞，一步步跟进调试，发现已经进入parquet相关的代码。</p><p>经过认证检查每一行代码，发现流相关操作均进行了关闭，并没有任何问题。</p><p>验证思考：缩小问题范围，对listFiles函数，调用的全部方法进行最小化单元测试，最终在开发环境preview方法中，实现了连接HDFS读取parquet文件，使用rest接口，单独调用此方法，每次调用close-wait都会增加2，并且长期存在。</p><p>监控命令“watch ‘ss | grep CLOSE-WAIT | wc -l’”，疯狂访问，一直增加不曾下降。</p><p>猜测是Parquet依赖库，有连接泄漏问题，于是向社区求助，我们引入的parquet 1.9.0上下几个版本的commit以及bugfix全看了一遍，重点关注close stream相关。</p><p>PR <a href="https://github.com/apache/parquet-mr/pull/388" target="_blank" rel="noopener">PARQUET-783</a> 提到相关问题：</p><p>···<br>This PR addresses <a href="https://issues.apache.org/jira/browse/PARQUET-783" target="_blank" rel="noopener">https://issues.apache.org/jira/browse/PARQUET-783</a>.</p><p>ParquetFileReader opens a SeekableInputStream to read a footer. In the process, it opens a new FSDataInputStream and wraps it. However, H2SeekableInputStream does not override the close method. Therefore, when ParquetFileReader closes it, the underlying FSDataInputStream is not closed. As a result, these stale connections can exhaust a clusters’ data nodes’ connection resources and lead to mysterious HDFS read failures in HDFS clients, e.g.</p><p>org.apache.hadoop.hdfs.BlockMissingException: Could not obtain block: BP-905337612-172.16.70.103-1444328960665:blk_1720536852_646811517<br>···</p><p>根据社区，反馈：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">downgrade parquet to 1.8.2 to fix 1.9.0 connection leaks</span><br></pre></td></tr></table></figure><p>降级parquet库版本为1.8.2修复此问题，升级最新版本也是能解决问题，不过部分接口大动，导致不兼容，经过考虑决定降级库，而不该任何代码解决问题。</p><p>修复代码 by <a href="https://github.com/apache/parquet-mr/pull/388/files" target="_blank" rel="noopener">https://github.com/apache/parquet-mr/pull/388/files</a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void close() throws IOException &#123;</span><br><span class="line">  stream.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>整个过程，由于全部服务容器化部署，导致排查问题周期比较长，获取日志还是比较原始的命令行方式，门槛较高，由于在现场发现问题，不能及时进行问题的追溯，只能根据只言片语的反馈进行问题追踪。如果不是在开发环境，复现此问题，整个问题排查起来异常困难，开始思考是否有tracking工具，可以快速定位问题。代码的最小化单元测试，只能定位范围，最终一直无法确定是某个函数直接导致的问题，代码编写中函数功能单一性拆分是一门学问。</p><p>期间，重启大发又一次发挥了奇效。在开发环境复现问题，并修复bug，patch修复各个产品线的不同版本。</p><p>如果，你还在用有连接泄漏问题的Parque版本，快快升级吧。</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;parquet-Hadoop 1.9.0 大量close-wait问题。&lt;/p&gt;
+&lt;p&gt;一个开源基础库引发的严重产品事故，整个事件场内block超过4小时以上。&lt;/p&gt;
+&lt;p&gt;我们某服务部署上线，界面化的DAG任务，主要跑机器学习全流程作业，运行一段时间，发现后端数据平台查
+      
+    
+    </summary>
+    
+      <category term="BigData" scheme="http://itweet.github.io/categories/BigData/"/>
+    
+    
+      <category term="Parquet" scheme="http://itweet.github.io/tags/Parquet/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Automated feature engineering introduction</title>
+    <link href="http://itweet.github.io/2018/08/20/automated-feature-engineering-introduction/"/>
+    <id>http://itweet.github.io/2018/08/20/automated-feature-engineering-introduction/</id>
+    <published>2018-08-19T20:42:14.000Z</published>
+    <updated>2018-09-14T15:33:03.098Z</updated>
+    
+    <content type="html"><![CDATA[<p>自动化特征提取研究，知识图谱。</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;自动化特征提取研究，知识图谱。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif&quot; alt=&quot;Whoami公众号&quot;&gt;&lt;/p&gt;
+&lt;p&gt;原创文章，转载请
+      
+    
+    </summary>
+    
+      <category term="ML" scheme="http://itweet.github.io/categories/ML/"/>
+    
+    
+      <category term="ML" scheme="http://itweet.github.io/tags/ML/"/>
+    
+      <category term="2018" scheme="http://itweet.github.io/tags/2018/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Homemade programming language</title>
+    <link href="http://itweet.github.io/2018/08/19/homemade-programming-language/"/>
+    <id>http://itweet.github.io/2018/08/19/homemade-programming-language/</id>
+    <published>2018-08-18T20:39:12.000Z</published>
+    <updated>2018-08-26T14:49:20.010Z</updated>
+    
+    <content type="html"><![CDATA[<p>很长一段时间没更新内容啦，并不是不想写，而是找不到灵感，不知道改写些什么？</p><p>因为，我写了很多大数据相关的内容，很久已经没有玩Hadoop相关的东西啦。</p><p>除最近，帮助公司搭建了一套CDH集群，基本也是大家在上面跑一些大数据量的AI算法。</p><p>而我，最近在写一些Java后端以及需求整理的工作，没有特别值得和大家分享的，也就一些踩坑底层库踩坑的内容值得写一篇介绍一下。</p><p>我最近也进行一些深度思考，我依然关注大数据相关动态，包括一些<code>Hadoop 3.0</code>的东西。</p><p>很长一段时间，我写的都是一些零碎的东西，计划系统性的写一些深入的内容。</p><ul><li><a href="https://github.com/jikelab/paper" target="_blank" rel="noopener">Computer Foundations Practices</a></li></ul><p>看完《自制编程语言》一周有余，系统了解了自制一门类似Python、Ruby、Java编程语言都需要那些知识。</p><p>编程语言制作，博大精深，不太敢妄言，编程语言引起的腥风血雨已经太多了。有编程语言的地方就有江湖呀。</p><p>好啦，言归正传，我们看看通过站在巨人的的编程库上，我们如何制作一门编程语言，都需要那些工具。</p><p>一门编程分类：</p><ul><li>解释类</li><li>编译类</li></ul><p>解释类，比如Python就是解释类语言，Java则是编译类语言。解释类语言，在运行时即时翻译，解释型语言运行速度往往比编译的程序慢，但往往更具灵活性，因为它们能够与执行环境互相作用。</p><p>编译型语言，把高级定义的字符串代码整体翻译为机器可执行的代码的过程就称为编译。因此，一个编译型语言，是将人可阅读和编写高级语言作为输入数据，然后输出成目标可执行的文件或二进制代码，由CPU直接运行，效率自然会高很多。</p><p>而在自制编程语言一书中，介绍了两门编程语言，而且有代码实现，都是使用C编写的，基本编程语言基本构成可以了解一番，整本书觉写得一般，大段介绍代码逻辑，其实看书的人大多是想要看到思路以及为什么如此实现，有什么讲究，经验可以介绍，这部分内容很少，整体比较枯燥吧，我大概陆续总共10多个小时，看完此书，了解如何制作一门编程语言可以一看。</p><p>书中列举的，参考Java，Python，C++，Ruby等语言实现的一些功能探讨，值得一看。编程语言最核心的难点应该就是符号处理吧。</p><p>书中介绍的两门编程语言，Crowbar与Diksam都是简历在Lex、Yacc的基础上的，基本上核心的编程语言难题都交给它俩。</p><p>编程语言语法处理过程：</p><ul><li>[1] 词法分析: 将源代码分割为若干个记号（token）的处理。</li><li>[2] 语法分析: 即从记号构建分析树（parse tree）的处理。分析树也叫作语法树（syntax tree）或抽象语法树（abstract syntax tree，AST）。</li><li>[3] 语义分析: 经过语法分析生成的分析树，并不包含数据类型等语义信息。因此在语义分析阶段，会检查程序中是否含有语法正确但是存在逻辑问题的错误。</li><li>[4] 生成代码: 如果是C语言等生成机器码的编译器或Java这样生成字节码的编译器，在分析树构建完毕后会进入代码生成阶段。</li></ul><p>执行词法分析的程序称为词法分析器（lexical analyzer）。lex 的工作就是根据词法规则自动生成词法分析器。</p><p>执行语法分析的程序则称为解析器（parser）。yacc 就是能根据语法规则自动生成解析器的程序。</p><p>一个词法分析器加上一个语法解析器，我们就可以很快的制作一门属于自己的编程语言。</p><p>Yacc、Lex都是比较值得深入研究的，要学习的东西太多啦。</p><p>说实话，看完之后的我还有些懵，不合适进行评论或者写一些心的，编程语言技术有大量参考和先辈经验，借助一些工具，制作来看难度不大，但做出来和做好是两个概念，留待以后有机会去专门研究吧。</p><p>我目前阶段仅限了解，人的精力有限，未来很长一段时间，还会阅读更多经典计算机相关书籍。</p><p>欢迎关注，<a href="https://github.com/jikelab/paper" target="_blank" rel="noopener">Computer Foundations Practices</a></p><p>我会分享一些我自己的心得体会。</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;很长一段时间没更新内容啦，并不是不想写，而是找不到灵感，不知道改写些什么？&lt;/p&gt;
+&lt;p&gt;因为，我写了很多大数据相关的内容，很久已经没有玩Hadoop相关的东西啦。&lt;/p&gt;
+&lt;p&gt;除最近，帮助公司搭建了一套CDH集群，基本也是大家在上面跑一些大数据量的AI算法。&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="programming,language" scheme="http://itweet.github.io/categories/programming-language/"/>
+    
+    
+      <category term="2018" scheme="http://itweet.github.io/tags/2018/"/>
+    
+      <category term="Programming" scheme="http://itweet.github.io/tags/Programming/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Cloudera-Enterprise-6</title>
+    <link href="http://itweet.github.io/2018/08/05/cloudera-enterprise-6/"/>
+    <id>http://itweet.github.io/2018/08/05/cloudera-enterprise-6/</id>
+    <published>2018-08-05T04:17:34.000Z</published>
+    <updated>2018-08-05T14:31:42.167Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天，我们聊一聊在中国最受欢迎Cloudera CDH，CDH是世界级的大数据产品，同时也是一家伟大的开源软件公司。</p><p>接着上期的话题，聊一聊<code>Cloudera Enterprise 6.0</code>的新特性。</p><p>Cloudera CDH以下简称CDH，CDH做为企业级的大数据产品，一直以稳定可靠，小白式安装、升级、文档丰富著称，这也是最受欢迎的产品。</p><p>CDH多年来，一直提供社区版、试用版、商业版三个版本，但是社区版几乎没有任何限制，可以免费使用，并且功能越来越强大，所以大部分公司几乎都是用的社区版，商业版主要是提供技术支持和锦上添花的审计、lineage、告警等功能，如果企业有一定的技术能力，使用社区版几乎能解决企业数据分析的所有需求。</p><p>CDH一直保持稳定、可靠，并且自己维护分支，高昂的成本，CDH也是最保守的大数据发行版。从CDH一开始的发布到现在，几乎整个stack没有很多的变化，很早CDH就基本解决离线和即席查询的痛点，所以其他厂商一直在补功课，他却一直在优化和完善整个CDH的功能，最近的几个版本为了迎合时代发展，引入云和AI的支持，Cloudera Data Science Workbench(CDSW) 和 ALTUS。</p><p>CDH整个软件栈一直很保守，核心功能主要是：</p><ul><li>存储层：HDFS、Hbase、Kudu</li><li>资源调度、安全和管理员：YARN、Cloudera Manager、Cloudera Navigator</li><li>数据处理：分析性数据(Impala)、模型(SAS、R、Spark、CDSW)、流计算(SparkStreaming)、NoSQL数据库(Hbase)、数据转换和解析(SQOOP、Flume、MR、Spark、Hive)。</li></ul><p>CDH5版本以来，基本提供以上功能，整个产品的一体化程度以及数据产品提供哪些能力边界思考的非常清晰，造了很多轮子，基本都是符合业界发展的趋势，CDH很多功能领先业界，产品完备性以及研发方向的投入都是非常正确的，基本没有夭折的项目，可以说是非常成功的产品了。反观对手HDP，在堆砌功能的方向上越走越远，导致整个软件栈非常庞大，几乎不可控制，功能得优化、产品的一体化做得比较欠缺、虽然百分比开源，但是缺乏一个企业级产品的很多关键特性，这也是很多人选择CDH的原因吧。</p><p>都各有优缺点，CDH在技术力量的投入和研发上话费大量精力和金钱，产品比较成功，但是市场收益其实一般，大家都用社区版，这样的现象在中国很常见，你们都懂的。</p><p>CDH包含的软件，几乎都是出自自己公司只手，80%的软件都是自己公司研发出来开源到Apache社区，并且都是顶级项目，可想而知技术力量多强大，几乎是热衷开源事业，对底层软件感兴趣的人的天堂。</p><p>Hadoop为核心的CDH产品，主要的研发力量，放在提供很多企业级的产品特性：早期的即席查询引擎Impala，12年就启动研发的Kudu，为了弥补Hbase、HDFS的短板，让产品更加的完整，以及HDFS的内核级Balance，企业级的权限、审计、血缘、多租户: Sentry、Cloudera navigator等，产品一体化和功能的完备性思考的非常到位，覆盖了大多数数据分析场，经过这几年的发展已然非常的成熟，CDH做为一个半闭源的产品，企业级核心特性基本都可以免费使用，但是代码不开源，定制化和修改几乎不可能，但是对于大多数用户来说，基本不会有这样的需求，只要产品可靠稳定，易于使用就够了，这个是CDH产品化的过程中非常出彩的地方，开源软件产品化的过人之处。</p><p>HDP包含的软件，几乎都来自社区，他们主要的精力类似CDH，他们为了支持即席查询一直在优化Hive，弄出一个Tez，也是在最近几个HDP发行版中才渐渐可用。还有很多精力花费在Hadoop 3.0上，对Hadoop YARN开发了很多核心的特性，比如：支持长服务的运行，支持深度学习框架等，HDP 在YARN上的投入是非常巨大的，其它有安全、日志聚合、管理、审计、血缘：Ranger、LogSearch、Ambari、Atlas，还有几乎夭折的项目：Falcon、Knox活跃度很低，整个产品提供26+以上的组件，大部分都不是核心投入，导致整个软件栈异常庞大，不易维护，产品的一体化和整体控制力比较低，但是支持的组件多，灵活、可定制化组合强也是一些优势，至少比社区版本有了更多的可靠性和可维护性的便利，支持不够还可以修改，这也是HDP百分百开源的优势。然而，产品化方面就做的相对弱一些，堆砌组件始终不是长久之计，HDP3渐渐开始收敛，应该也是渐渐意识到这样的问题了吧。</p><p>两大Hadoop发行商，各有特点。</p><p>我们下面看看CDH 6有哪些过人之处：</p><p><img src="https://www.itweet.cn/screenshots/cloudera-enterprise-6.png" alt></p><p>基本上都是核心组件的版本大升级，比如：一直保持Hadoop 2.6升级为3.0，Hive升级2.1，Hbase升级2.0，Spark升级2.2，kafka升级1.0等。CDH 6是做为bate版本发布的，Cloudera公司对于CDH产品的稳定性和可靠性的重视，CDH 6可以算是CDH产品的重大版本升级，也支持了很多核心功能。</p><p>支持基于GPU进行深度学习，Hive 2矢量化执行，大幅度提升性能。Hbase 2.0提供多租户隔离能力，CM支持支持2,500多个节点。</p><p>AI深度学习的支持，Cloudera提供CDSW，面向开发人员的一个开发工具，提供一整套从开发到模型上线的整体解决方案，基于k8s提供动力。Hortonworks HDP产品，一直在优化和完善YARN支持GPU，提供的AI产品方案，完全基于YARN提供动力。</p><p>我们看到在AI产品方面，两大Hadoop发行商都交出的自己的答卷，在未来的一段时间，我会往这个方向写更多的实践内容。</p><p>参考：</p><p>[1] <a href="https://www.cloudera.com/documentation/enterprise/6/release-notes/topics/rg_cdh_600_new_features.html" target="_blank" rel="noopener">https://www.cloudera.com/documentation/enterprise/6/release-notes/topics/rg_cdh_600_new_features.html</a><br>[2] <a href="https://www.cloudera.com/products/cloudera-enterprise-6.html" target="_blank" rel="noopener">https://www.cloudera.com/products/cloudera-enterprise-6.html</a><br>[3] <a href="http://blog.cloudera.com/blog/2018/05/new-in-cloudera-enterprise-6-0-analytic-search/" target="_blank" rel="noopener">http://blog.cloudera.com/blog/2018/05/new-in-cloudera-enterprise-6-0-analytic-search/</a></p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天，我们聊一聊在中国最受欢迎Cloudera CDH，CDH是世界级的大数据产品，同时也是一家伟大的开源软件公司。&lt;/p&gt;
+&lt;p&gt;接着上期的话题，聊一聊&lt;code&gt;Cloudera Enterprise 6.0&lt;/code&gt;的新特性。&lt;/p&gt;
+&lt;p&gt;Cloudera CD
+      
+    
+    </summary>
+    
+      <category term="CDH" scheme="http://itweet.github.io/categories/CDH/"/>
+    
+    
+      <category term="2018" scheme="http://itweet.github.io/tags/2018/"/>
+    
+      <category term="cloudera" scheme="http://itweet.github.io/tags/cloudera/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hortonworks Data Platform 3.0.0平台宣布正式GA</title>
+    <link href="http://itweet.github.io/2018/07/15/announcing-general-availability-hortonworks-data-platform-3-0-0-ambari-2-7-0/"/>
+    <id>http://itweet.github.io/2018/07/15/announcing-general-availability-hortonworks-data-platform-3-0-0-ambari-2-7-0/</id>
+    <published>2018-07-15T08:14:23.000Z</published>
+    <updated>2018-08-05T14:25:37.333Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="HDP-3-0-0-GA"><a href="#HDP-3-0-0-GA" class="headerlink" title="HDP 3.0.0 GA"></a>HDP 3.0.0 GA</h2><p>Hortonworks Data Platform 3.0.0版本，基本上集成Hadoop社区生态最新版本的强大功能特性，实现真正混合型数据平台。</p><p>如图，HDP 3.0.0 版本核心功能特性。</p><p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2018/07/HDP-3.0-benefits.png" alt></p><p>我们上篇，其实就介绍了大数据数据平台发展的几个方向，而HDP做为一个资深玩家，当然引领了一个重要的发展方向，那就是完全基于HDFS和YARN发展整个发行版，我们知道Hortonworks公司一直是一个务实，并且很实在的团队，一直深耕Hive和Hadoop，贡献了很多代码，开发了很多新特性，在社区也有很大的影响力。</p><p>随着，近几年大数据平台发展日渐稳定，开始更多关注实用、应用层面，也淘汰很多行业内的企业。大多都开始寻求转型之路。IT行业基本每隔3年就是一个新的革新，新陈代谢超级快，而近两年比较火的是区块链、AI、Hadoop in Cloud、数据湖、容器等。</p><p>Hortonworks公司，做为一家开源软件公司，一直务实努力耕耘社区，积极贡献代码，一直是我等崇拜追赶的对象，趋势的把握和时机的掌握刚刚好；HDP 3.0.0 的发布，在强调高性能的同时，新增多个新特性：</p><ul><li>TensorFlow，Caffe等深度学习框架的支持，预览版。</li><li>企业Data Lake的支持。</li><li>一直在勤勤恳恳努力改良的Hive，支持Real-time，ACID。</li><li>混合型存储，融合云端，支持S3、ADLS、Hadoop纠删码等。</li><li>Yarn完美支持调度容器，实现长任务的运行和管理，K8S表示不服。</li><li>Ambari一直受人病诟的UI以及无法支撑大规模集群管理，支持5000个节点的管理，全新的UI。</li><li>基于容器化、GPU等的支持。</li></ul><p>这是大数据生态系统的一个巨大的飞跃。</p><p><img src="https://www.itweet.cn/screenshots/Hortonworks-HDP-3-0-GA.png" alt></p><h2 id="A-new-start"><a href="#A-new-start" class="headerlink" title="A new start"></a>A new start</h2><p>HDP 3.0是大数据生态系统的一次巨大飞跃，整个堆栈发生了重大变化，扩展了生态系统(支持深度学习和第三方Docker Application)。 HDP 3.0完全支持云端和本地化部署。HDP 3.0 很多新的功能都是基于Apache Hadoop 3.1，包括容器化、GPU支持、Erasure Coding和Namenode Federation。</p><p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2018/07/HDP-3.0-Marketecture.png" alt></p><p>因为Apache Hadoop 3.1的重大特性进化，让Hadoop生态更加开放包容容器、AI、Cloud。Yarn往更加通用的资源管理框架发展，挑战者K8s。HDFS则往更加实用，稳定的方面发展，目前还是一骑绝尘，私有化部署难逢对手，支持基于HDFS Core的数据Balance，免受新增节点数据不均衡，需要手动均衡的痛点，Erasure Coding降低存储成本，HDFS可对接多种云端存储产品也是一些新的探索方向，我们看到HDFS往更加稳定、实用的方面发展。</p><p>HDP 3.0还移除一些臃肿的系统，常年无人使用，社区并未发展。终于是意识到做为一家开源软件公司，封装了一堆零散的组件，形成了一个平台产品，但是做为一个技术型产品，门槛是很高的，这是一个商业险话题，我们不讨论。HDP很长一段时间，都会是技术人员才能使用的软件产品，而国人早就基于这样的基础数据平台，开发数据中间件，支撑更加上层的应用，离客户更近，赚的盆满钵满，而对自己坚实的基础支撑系统，并未有任何的正向反馈，国人开源软件只痛，唏嘘一下。还是那句话，只论技术，不讨论。</p><p>HDP 3.0 删除了Apache Falcon，Apache Mahout，Apache Flume和Apache Hue等组件，并将Apache Slider功能融合到Apache YARN中。</p><p>关于，平台组件选型、维护与控制方面CDH显然做得更加自然一些，而HDP很长一段时间一直基于社区最新的组件打包，全都整个到一个平台，基本上都在Ambari、以及社区几个重要的组件上开发核心特性。由于组件众多，维护显然成本巨大，对于一些边缘性组件投入明显不足，精力分散，产品考虑不够完备，甚至放弃自己辛辛苦苦设计的软件，开源之路未顺利进行下去。</p><p>HDP 3.0.0 我看到了一些全新的变化，这是很好的开始，HDP产品化工作一直不如CDH，还是一个非常技术性的产品，并且对自身组件没有很强的把控能力，导致产品表现一直弱于CDH，长时间都在堆叠组件的道路上越走越远，产品组件也越来越臃肿，最明显的是HDP数据产品，覆盖的分析场景不够全面，导致很多安装了HDP产品的用户，还要手动维护一个即席分析组件，比如：Presto、Impala、MPPDB、Drill等。</p><p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2018/07/asparagus.png" alt></p><p>如图，HDP产品路线图，希望HDP未来能更加焦距，做好产品，降低数据分析门槛，从一个技术性产品，变成更切合市场的数据平台产品。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>企业级大数据产品，日渐成熟，开始分出尽力追赶一些目前主流的技术趋势，通过平台融合、整合资源，通过强大的计算和存储数据能力，更好地服务于客户。HDP 3.0 完全依托Hadoop社区优势、新特性，发布了更加强大，跨时代的大数据产品。</p><p>数据存储</p><blockquote><p>1、Erasure Coding降低存储成本，将存储开销降低50％，保证3副本的数据可靠性。<br>2、Namenode Federation，支持多Namespace，同一个集群，逻辑上隔离使用。<br>3、云存储支持，Google、S3、ADLS等存储连接器。<br>4、DataNode，内置磁盘数据均衡器。</p></blockquote><p>数据操作系统</p><p>Apache Hadoop YARN的突出特点包括：</p><blockquote><p>1、Apache YARN容器化服务支持，运行Docker Spark Job，支持Slider功能<br>2、Apache YARN支持管理与调度GPU<br>3、支持队列内抢占，支持同一队列中不同应用程序（批量，实时）之间的负载均衡<br>4、增强的可靠性，可用性和可维护性，用户和开发人员友好的Apache YARN UI<br>5、Timeline server 2.0，基于流式的应用程序性能管理。</p></blockquote><p>实时数据库</p><p>基于Apache Hive最新的强大特性：</p><blockquote><p>1、LLAP融合Hive，提供强大工作负载，基于资源池，用户用户组分配资源。<br>2、默认情况下启用ACID功能，对数据更新的完全支持。<br>3、Hive Warehouse Connector，使得Spark更好的连接Hive。<br>4、物化视图，加快数据分析效率，提升查询速度。<br>5、JDBC存储连接器，Hive连接查询支持JDBC的数据源。</p></blockquote><p>机器学习和深度学习平台</p><p>Apache Spark，Apache Zeppelin，Livy等项目。</p><blockquote><p>1、支持Apache Spark 2.3.1 GA<br>2、支持在Docker容器中运行Spark作业<br>3、TensorFlow 1.8（仅限技术预览版）</p></blockquote><p>流处理引擎</p><p>Apache Kafka和Apache Storm的突出特点包括：</p><blockquote><p>1、支持Kafka 1.0.1 &amp; 支持Storm 1.2.1</p></blockquote><p>最终，所有做大数据产品的公司都会回归社区。<code>Cloudera CDH 6.0 Bate</code>版本的发布已然说明问题，全都回归<code>Hadoop 3.x</code>，发布全新升级的大数据产品。</p><p>更多新功能，可访问官网了解。</p><p>下一篇，我们聊一聊《Cloudera CDH 6.0》产品，有何特性？技术栈选型和发展方向和HDP有何异同？</p><p>参考：</p><p>[1] <a href="https://hortonworks.com/blog/announcing-general-availability-hortonworks-data-platform-3-0-0-ambari-2-7-0-smartsense-1-5-0/" target="_blank" rel="noopener">https://hortonworks.com/blog/announcing-general-availability-hortonworks-data-platform-3-0-0-ambari-2-7-0-smartsense-1-5-0/</a></p><p>[2] <a href="http://www.itweet.cn/2018/07/02/micro-service-architecture-based-on-restful/" target="_blank" rel="noopener">http://www.itweet.cn/2018/07/02/micro-service-architecture-based-on-restful/</a></p><p>欢迎关注微信公众号[Whoami]，阅读更多内容。</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;HDP-3-0-0-GA&quot;&gt;&lt;a href=&quot;#HDP-3-0-0-GA&quot; class=&quot;headerlink&quot; title=&quot;HDP 3.0.0 GA&quot;&gt;&lt;/a&gt;HDP 3.0.0 GA&lt;/h2&gt;&lt;p&gt;Hortonworks Data Platform 3.0.
+      
+    
+    </summary>
+    
+      <category term="BigData" scheme="http://itweet.github.io/categories/BigData/"/>
+    
+    
+      <category term="ambari" scheme="http://itweet.github.io/tags/ambari/"/>
+    
+      <category term="hortonworks" scheme="http://itweet.github.io/tags/hortonworks/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Micro-service architecture based on restful</title>
+    <link href="http://itweet.github.io/2018/07/02/micro-service-architecture-based-on-restful/"/>
+    <id>http://itweet.github.io/2018/07/02/micro-service-architecture-based-on-restful/</id>
+    <published>2018-07-01T23:52:52.000Z</published>
+    <updated>2018-07-15T18:05:17.900Z</updated>
+    
+    <content type="html"><![CDATA[<p>经过2个多月的研发周期，上周六发布了关于AI赋能的数据平台的产品。</p><p>最近码子频率低很多，天天码代码。衰~</p><p>今天，我们来谈谈微服务架构。</p><p>微服务架构，所有服务基于restful相互访问，部署模式全容器化，k8s进行调度。</p><p>从整体来看，这样的设计符合目前服务容器化的大趋势，我们一路采坑踩。</p><p>我曾经一直从事大数据平台产品的研发和设计工作，但是个人对于容器技术一直秉承谨慎的态度。</p><p>因为我做的是数据的持久化系统，而容器在我看来只能跑一些无状态的服务，有状态需要持久化的系统不应该放到容器中运行。</p><p>并非我以前没有使用过容器或者k8s系统，认知不够, 我们就此讨论一下。</p><h2 id="Why-Docker"><a href="#Why-Docker" class="headerlink" title="Why Docker"></a>Why Docker</h2><p>我曾经构建过基于docker实现的持续集成平台，效果非常显著，基于docker的application部署，简直是开发者的福音。<br>没有docker技术之前，一千个开发者有一千种部署application的方式，为了要部署上各种application，浪费大量时间调试。<br>也有一些其他解决方案，比如rpm/deb标准化的包，通过一些shell/python/ruby脚本控制，已经比较方便了，部署需要修改一堆参数，稍有不慎就是各种错误。</p><p>docker技术可以说给所有的application部署提供的一套标准方案，只需要安装dockerfile编写需要打包的内容、依赖、启动脚本，然后docker build就可以生成docker image.<br>由于docker做到了环境独立，通过docker image，到任何一台安装的docker的机器，直接docker pull &amp;&amp; docker run 就可以开始愉快的体验和使用application。</p><p>可以说docker为复杂的应用部署提供了一套标准化的解决方案，而且是比较一次性彻底的解决方案。</p><p>有些类似曾经的rpm/deb系统包，你现在只需要一个docker image，就可以把应用部署起来，并且保障可用性和容易维护，前提是你已经安装好docker服务。</p><p>我是一个分布式持久化数据存储系统的，对于容器化部署，探索一段时间，感觉多年研发的软件架构上需要重新调整适应容器化的特点。</p><p>近年来实现的新软件，基本都可以支持容器化部署，而对于Hadoop Ecosystem显然比较得不偿失。</p><p>并非无法实现，而是因为性能、稳定性、持久化存储、网络、DiskIO等多方因素，容器化后是否依然高效。</p><p>如果硬上也是可以的，前几年我们也见识过Mesosphere公司基于Mesos核心，提出过一个新的概念数据中心操作系统DC/OS，国内也有团队曾经出来分享基于DC/OS实现的全容器化的topic。</p><p>几年一晃而过，已经没啥声音，不知道用的怎样了，全容器化的数据服务，大家都比较谨慎吧。</p><h2 id="Why-k8s"><a href="#Why-k8s" class="headerlink" title="Why k8s"></a>Why k8s</h2><p>k8s 全称kubernetes，是Google开源的容器调度系统，功能很强大，涉及的知识也非常多，索性在1年多前研究过k8s，当时安装和使用成本还比较高，所以当时就没有上k8s，仅仅上了docker，<br>用来做公司内部的持续集成平台，帮助提缩短品研发周期，构建强大的自动化测试发布系统。</p><p>k8s给我的感受，实现的越来越复杂，功能也越来越强大，目前基本k8s已经是容器化调度的核心标准。容器集群都是基于k8s来做，我个人并没有很多k8s的使用经验，简单谈几点感受。</p><p>k8s真正解决了容器化后应用的管理和维护问题，可以基于 restful 传递 template 帮助管理容器，让大规模容器化的使用和维护成为可能。</p><p>k8s管理很多无状态服务，可以大大缩短application的发布和部署周期，让一天持续发版上线成为可能，并且容器中任务的运行情况监控变得容易。</p><p>k8s系统可视化界面还比较简单，主要是使用方式，基本要很好的使用符合自己公司业务，需要自己基于client封装一层，用起来更爽，不对业务造成负担。</p><p>k8s持久化存储，底层可选的方案：ceph、glusterfs、nfs、local storage等方案。</p><p>k8s容器化调度，如果不是大规模镜像创建和管理，建议轻易不要上k8s，维护不易，如果资源不足，使用起来很痛苦。</p><h2 id="restful-微服务"><a href="#restful-微服务" class="headerlink" title="restful 微服务"></a>restful 微服务</h2><p>终于进入正题，我们所有的服务都是容器化部署，基于k8s部署管理。</p><p>跑在容器内部的提供restful服务的全都采用SpringBoot实现，而且几十个微服务化的组件都是基于restful的接口进行沟通，导致整体项目复杂度<br>特别大，部署、restful接口之间调用成本大大增加, 接口变更，上下游的依赖服务比较痛苦，特别是如果没有及时通知变更，导致异常情况，而<br>整体又没有定义异常约束状态，让我意识到，HTTP statusCode的定义和规范异常重要，不然各个微服务系统自己独立一套异常处理逻辑，微服务之间<br>相互调用成本又进一步增加，每次测试上线，成本异常高昂。</p><p>微服务化，系统之间相互依赖，API层层转发，也是一个非常大的成本，只要一个服务不work，导致整个请求完全失败，如果测试的时候没有覆盖，各个服务down情况，上线是一个非常大的坑。</p><p>微服务化，系统之间调用的容错性处理，也是需要提前设计和规避的，或者说是一些约定和规范。</p><p>微服务化，服务之间约定的全局状态同步，是一些很小的数据，但是必须全局一致性，需要持久化，但是容器化之后，持久化变得有些不可靠。</p><p>微服务化，数据计算或数据同步类容器，基于Java开发，如果资源给得比较小，容易出现oomkilld的情况，需要动态控制容器资源，目前还不太容易控制，<br>因为，不同数据量的冲击和资源的配比不合理可能导致频繁的oomkilld，只能在创建容器的时候可以通过config配置cpu, memory的值，并且调节jvm的一些<br>参数进行优化和资源GC控制，但是如果容器内部有特别大的数据量，也不是很好控制，只能限流，降低数据拉取速度，数据计算和同步容器对系统的压力比较大，<br>虽然容器化，确实能做资源隔离，但是大量容器的创建和使用，经常导致容器limit，cpu达到百分之几百，而导致后续容器无法正常创建出来。</p><p>海量的容器创建和管理，虽然有k8s，但是也不是那么容易管理好，需要有充足的资源和使用规划，出现大量的野容器和野数据，是一种资源的浪费。</p><p>由于大量微服务相互依赖，需要相互获取一些全局信息，大家比较系统把它注入到全局的环境变量中，代码中获取环境变量即可拿到值，虽然很方便，但是<br>也让我踩到一个大坑，就是环境变量冲突，我在springboot的application-dev.yaml中配置的变量，springboot会在启动的时候注入到环境变量中，但是被<br>其他服务复写了，导致我获取到错误的值，服务发布上线后导致整个系统down掉，排查良久，坑…，也是一些规范和约束的问题吧。如果能引入一个全局<br>的配置中心，可以自动发现和管理所有服务的配置，并且配置变更能主动通知变化，无疑是更好地方案，但是使用成本不见得低，都是权衡的问题吧。</p><p>关于springboot环境变量和配置变量的关系，详见：<a href="https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html" target="_blank" rel="noopener">https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html</a></p><p>微服务化，统一权限控制服务，是一个极其重要和讲究的模块，主流的基于API的鉴权，主要是：JWT Token，Oauth 2.0 对数据加密传输，完成鉴权，实现起来可复杂可简单，<br>主要是支持跨域验证的问题，服务都是restful的设计，必然需要前后端分析，引入ng5/react前端框架，整体复杂度又上一个台阶。</p><p>微服务，依赖太多容器外部服务，数据相关依赖Hadoop Ecosystem，需要选定一个发行版进行兼容，通过一些强大的基础软件系统帮助更好地解决智能化数据分析过程。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>关于数据平台，基本都是私有化部署，容器化比较困难，而一些计算类的算子、AI算法或者Long service，完全容器化，便于管理和发布。</p><p>目前Hadoop Ecosystem + AI, 正如火如荼发展，也出现了一些不同的发展方向。</p><p>A类，公司让YARN调度Docker，实现AI算法和YARN融合和Hadoop融合，耦合紧密，改造时间和难度大，Hadoop 3.0已初步支持。</p><p>B类，公司让k8s调度Docker，实现AI算法和K8s融合，远程加载Hadoop ecosystem数据，耦合没那么紧密，可独立发展。</p><p>那么，我们今天引入一个新的话题，AI数据平台应该怎么做？主流的做法有哪些？有哪些讲究？</p><p>我上半年有做过一个开源数据平台，主打Core Data + Core AI设计: <a href="https://drive.google.com/file/d/17YU5rQUmbTp1DfX4K6T5pG6WIjfExBTR/view?usp=drive_web" target="_blank" rel="noopener">企业级 Core Data &amp; Core AI 流分析平台</a></p><p>其中，关于Yarn内容可忽略，主要是海量数据理想跑批、Core AI融合Yarn跑模型使用的，需依赖Hadoop Ecosystem，开源的版本中未提供。<br>开源主要提供Core Data，在未来的版本中会支持升级版混合数据存储加AI功能的版本, 希望有时间吧。</p><p>先上图，且听下回分解:</p><p><img src="https://www.itweet.cn/screenshots/Hortonworks-3.0-On-Premise-Architecture.png" alt></p><p>A方案: Hadoop+AI，在YARN改造支持容器调度，YARN往通用的资源管理调度框架发展，轻松移植各类AI框架和算法到分布式系统。</p><p><img src="https://www.itweet.cn/screenshots/cdh-architecture.png" alt><br>B方案: Hadoop+AI，data-platform和machine-learning分开调度，一个基于k8s容器化算法，提交任务到spark on yarn，或者ML/DL on Yarn上。</p><p><img src="https://www.itweet.cn/screenshots/mesosphere-product-markecture.jpg" alt><br>C方案: DC/OS，一套数据中心操作系统方案，也是基于容器化，比较彻底。</p><p>欢迎关注微信公众号[Whoami]，阅读更多内容。</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;经过2个多月的研发周期，上周六发布了关于AI赋能的数据平台的产品。&lt;/p&gt;
+&lt;p&gt;最近码子频率低很多，天天码代码。衰~&lt;/p&gt;
+&lt;p&gt;今天，我们来谈谈微服务架构。&lt;/p&gt;
+&lt;p&gt;微服务架构，所有服务基于restful相互访问，部署模式全容器化，k8s进行调度。&lt;/p&gt;
+&lt;p
+      
+    
+    </summary>
+    
+      <category term="Developer" scheme="http://itweet.github.io/categories/Developer/"/>
+    
+    
+      <category term="2018" scheme="http://itweet.github.io/tags/2018/"/>
+    
+      <category term="Micro-service" scheme="http://itweet.github.io/tags/Micro-service/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Why Spark RDD</title>
+    <link href="http://itweet.github.io/2018/06/23/why-spark-rdd/"/>
+    <id>http://itweet.github.io/2018/06/23/why-spark-rdd/</id>
+    <published>2018-06-23T04:45:20.000Z</published>
+    <updated>2018-07-02T13:09:15.539Z</updated>
+    
+    <content type="html"><![CDATA[<p>我提出的论文计划，一再被打乱，我也在找机会慢慢调整过来。</p><p>今天，我们聊一聊Spark，我第一次在工作中使使用spark是0.9版本，当时是试用Spark来做OLAP Cube模型，那个时候的SparkSQL称为<code>Shark</code>，历史原因，spark 1.0以后的版本被SparkSQL取代，shark可能很多人都没怎么听说过。</p><p>我去研究试用spark是被社区疯狂的宣传打动的，但是确实也能解决一些MapReduce、Hive小数据级响应慢的问题，而宣传一直以来都比较夸大，在很长一段时间里Spark都是极其不稳定的分布式系统，只能说Spark比较会做社区，技术上解决了部分实际问题。</p><p>今天，再回头看看《An Architecture for Fast and General Data Processing on Large Clusters》。</p><p>弹性分布式数据集(RDDs) 是 Spark 中的核心基础，它是MapReduce模型一种简单的扩展和延伸。</p><p>MapReduce模型缺陷：在并行计算阶段之间能够高效地数据共享。</p><p>Spark运用高效的数据共享概念和类似于 MapReduce 的操作方式，实现高性能的数据处理能力。</p><p><img src="https://www.itweet.cn/screenshots/mapreduce-vs-spark.png" alt></p><p>整个Spark作业每个作业都会生成DAG，对DAG进行优化，可以加快数据处理效率，在DAG中流转的数据就是RDDs，每一个数据变换的操作就是直接操作的RDDs。</p><p>通过将计算转换为一个有向无环图DAG，可以高效率的重复执行DAG里某些计算失效的任务达到容错。</p><p>RDDs 是一个可以避免复制的容错分布式存储数据集，每一个RDD 都会记住由构建它的那些操作所 构成的一个图，类似于批处理计算模型，可以有效地重新计算因故障丢失的数据。</p><p>当一个RDD的某个分区丢失的时候，RDD记录有足够的信息记录其如何通过其他的RDD进行计算，且只需重新计算该分区。因此，丢失的数据可以被很快的恢复，而不需要昂贵的复制代价。</p><p>Spark核心：</p><ul><li>计算阶段数据共享，DAG直接可通过RDD进行高效率的数据共享</li><li>极低的代价重算故障任务，不需要与任何外部存储交互</li><li>DAG Engine，高效率容错和优化计算</li><li>分布式系统忌讳大量网络IO，RDD高度压缩，部分任务失败容错回滚，不会导致重算，减少网络IO</li></ul><p>在实际工作中，MapReduce、spark相互配合完成工作，场景选型不同的技术。</p><p>今年我们Spark+AI，转型的Spark是否能追上如火如荼的AI领域呢？</p><p>我们，拭目以待吧。</p><p>欢迎关注微信公众号[Whoami]，阅读更多内容。</p><p>参考：</p><p>[1] <a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2014/EECS-2014-12.html" target="_blank" rel="noopener">http://www.eecs.berkeley.edu/Pubs/TechRpts/2014/EECS-2014-12.html</a></p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我提出的论文计划，一再被打乱，我也在找机会慢慢调整过来。&lt;/p&gt;
+&lt;p&gt;今天，我们聊一聊Spark，我第一次在工作中使使用spark是0.9版本，当时是试用Spark来做OLAP Cube模型，那个时候的SparkSQL称为&lt;code&gt;Shark&lt;/code&gt;，历史原因，s
+      
+    
+    </summary>
+    
+      <category term="BigData" scheme="http://itweet.github.io/categories/BigData/"/>
+    
+    
+      <category term="2018" scheme="http://itweet.github.io/tags/2018/"/>
+    
+      <category term="Spark" scheme="http://itweet.github.io/tags/Spark/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Macbook打造舒适的个人工作空间？</title>
+    <link href="http://itweet.github.io/2018/06/12/create-personal-space/"/>
+    <id>http://itweet.github.io/2018/06/12/create-personal-space/</id>
+    <published>2018-06-12T15:34:20.000Z</published>
+    <updated>2018-07-02T13:09:15.538Z</updated>
+    
+    <content type="html"><![CDATA[<p>我们以前有介绍过为新购MacBook Pro配置开发环境，通过软件提高工作效率。</p><p>今天我们来谈谈，把MacBook Pro做为主力开发机器，需要做哪些工作。</p><p>开发者，大多时间都是坐着，工作空间非常重要的一点是舒适度、个人健康。</p><p><code>一切都是为了更好。</code></p><p>作为一个天天盯着屏幕，敲击键盘的人，我对屏幕与键盘的选择都格外重视，因为关乎工作效率与个人健康。</p><p>Mac外接显示器，画面舒适度与大屏幕是我主要考虑的方面，因为不用费劲去看屏幕上的内容，对工作效率有显著提升。</p><p>因为MacBook Pro屏幕比较高清，一般的屏幕基本很难适配，画面渲染没有Mac显示的那么细腻，对于常年使用Mac的用户，屏幕适配成了一个比较大的问题。需要买比较高清的屏幕，推荐4k屏幕，双显屏幕，使用起来很方便，一个竖屏，一个横屏，程序员开发的时候随时需要阅读各种资料，所以横屏就派上用场啦，竖屏基本都是用来写代码。</p><p>那么程序员应该如何选择适合的4K显示屏呢，最好能高保真还原Mac的细腻画质。</p><p>少啰嗦，先看东西。</p><p><img src="https://www.itweet.cn/screenshots/BQ-BL2711U.png" alt></p><p>今天推荐，如图，明基（BenQ）BL2711U 27英寸IPS广视角4K分辨率100%sRGB 专业设计电脑显示器显示屏（HDMI/DP/USB3.0接口)。</p><p>Mac用户无需任何调试，自动适配，并且画面显示细腻，实乃编程看代码的最佳选择。</p><p>如上，是在家的个人工作空间。</p><h2 id="高清屏"><a href="#高清屏" class="headerlink" title="高清屏"></a>高清屏</h2><p>4K UHD高分辨率显示器，画质细腻，色彩还原度高，完全满足Mac用户需求。</p><p>用来写代码、视频剪辑、前端页面调试都是非常不错的选择。</p><p>图1</p><h2 id="可升降"><a href="#可升降" class="headerlink" title="可升降"></a>可升降</h2><p>对于大部分坐在电脑前的人来说，可升级是非常重要的，可以根据不同人的需要调整屏幕高度，主要是为了脊椎健康着想，保持一个好的坐姿在电脑前工作有为重要，健康一定是第一位的。</p><p>图2</p><h2 id="能横能竖"><a href="#能横能竖" class="headerlink" title="能横能竖"></a>能横能竖</h2><p>横竖屏幕，非常大的优势就是，可以显示的域的广度不一样，开发的时候一直坐在那，适应竖屏可以看到更多代码细节，让代码随着思绪动，早点下班，参与更多其他活动，不然生活那么单调。</p><p>图3</p><p>整体试用下来，这款4K屏幕，真的非常不错，值得推荐，最重要的是与Mac无缝适配，让我无需为画质的问题苦恼。</p><h2 id="推荐配件"><a href="#推荐配件" class="headerlink" title="推荐配件"></a>推荐配件</h2><p>机械键盘</p><ul><li>iQunix F60 无线机械键盘     青轴    噪音大</li><li>微软人体工程学键盘</li></ul><p>鼠标</p><ul><li>微软Designer无线鼠标</li><li>微软人体工程需鼠标</li></ul><p>LED灯</p><ul><li>米家  LED 写字灯</li></ul><p>健康之选</p><ul><li>网易严选   多功能人体工程学转椅  &lt;重要&gt;</li></ul><p>耳机</p><ul><li><p>AirPods</p></li><li><p>BOSE QC20</p></li></ul><p>欢迎关注微信公众号[Whoami]，阅读更多内容。</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我们以前有介绍过为新购MacBook Pro配置开发环境，通过软件提高工作效率。&lt;/p&gt;
+&lt;p&gt;今天我们来谈谈，把MacBook Pro做为主力开发机器，需要做哪些工作。&lt;/p&gt;
+&lt;p&gt;开发者，大多时间都是坐着，工作空间非常重要的一点是舒适度、个人健康。&lt;/p&gt;
+&lt;p&gt;&lt;c
+      
+    
+    </summary>
+    
+      <category term="workspace" scheme="http://itweet.github.io/categories/workspace/"/>
+    
+    
+      <category term="mac" scheme="http://itweet.github.io/tags/mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>How does the program run</title>
+    <link href="http://itweet.github.io/2018/05/21/How-does-the-program-run/"/>
+    <id>http://itweet.github.io/2018/05/21/How-does-the-program-run/</id>
+    <published>2018-05-21T13:17:20.000Z</published>
+    <updated>2018-07-02T13:09:15.538Z</updated>
+    
+    <content type="html"><![CDATA[<p>我曾计划通过阅读论文和经典计算机书籍，来深入理解计算机科学技术。我最近在看的一本《程序是如何跑起来的》，整本书对于刚入门计算机和有经验的工程师，都非常有帮助。</p><p>如果你想了解，计算机基本原理，操作系统、程序是如何与硬件结合运行起来，解决实际问题，那么这本书特别合适，而且整本书通俗易懂，作者意在通过最简单的描述，来向普通人描述计算机的本质。</p><p>因为，书中使用的很多示例代码是C语言，如果想要Run里面的示例代码，建议简单了解一下C语言。</p><p>整本书介绍CPU、二进制、内存构造、内存与磁盘、压缩数据、程序运行环境、磁盘构造、源文件、可执行文件、操作系统与应用、汇编语言、硬件控制等比较系统的介绍计算机程序的一生，大部分内容虽然属于科普，但是对于理解整个计算机脉络非常有帮助。</p><p>特别是想深入计算机某个领域的人，无疑提供一个全局视角。</p><p>我特别喜欢描述关于程序最终是如何跑在硬件服务器上相关本质的解释，使用了大量的图示接合实例深入的剖析了计算机的本质。细微到数据存储、内存、CPU、GPU如何相互配合工作，宏大到整体设计。</p><p>我认为这是一本很经典的计算机书籍，人类总是对于未知充满好奇和恐惧，很多把计算机某些细节的知识看的很神秘高深的人来说，这是了解全局计算机本质的机会。</p><p>今天推荐《程序是如何跑起来的》。</p><p>读书笔记来一波。</p><p>关于OS</p><blockquote><p>os是一个大型程序，在硬件启动的时候BIOS内置在硬件中的程序负责初始化OS。</p></blockquote><p>关于BIOS</p><blockquote><p>BIOS是英文Basic Input Output System的缩写，翻译过来就是“基本的输入输出系统”。它的作用就是对计算机硬件的设置和管理。BIOS是一个程序，固化于主板的ROM芯片。</p></blockquote><p>关于BIOS作用</p><blockquote><p>基本输入输出程序|系统信息设置、开机上电自检程序、系统启动自举程序。比如：加电自检及初始化、引导程序、程序服务处理、硬件中断处理。计算机的性能和BIOS息息相关。</p></blockquote><p>关于数据压缩</p><blockquote><p>其实就是数据存储的方式，默认存储模式不够满足各种显示需求，而发明出来新的压缩算法，帮助更好的管理和使用数据。比如：摩尔斯编码、哈夫曼算法、RLE压缩算法。(Tree算法)</p></blockquote><p>关于编译</p><blockquote><p>源代码是无法直接运行的，这是因为，CPU能直接解析并运行的不是源代码而是本地代码的程序。本地（native）代码，对于CPU来说，母语就是机器语言，而通过编译转换成机器语言的程序就是本地代码。用任何编程语言写的源代码，最后都要翻译成本地代码，否则CPU就无法理解。也就是说，即使使用不同编程语言编写的代码，转换成本地代码后，也都变成用同一种语言来表示了。</p></blockquote><p>关于编译器</p><blockquote><p>不同编程语言(高级语言) -&gt; 同样的编程语言(native代码) -&gt; CPU解析运行。<br>目前主流编译器：1. C/C++编译器 2. JAVA编译器。<br>C/C++编译器，源代码 -&gt; OS环境 -&gt; native代码 -&gt; CPU解析运行。<br>JAVA编译器，源代码 -&gt; OS环境 -&gt; 字节码 -&gt; 解析器 -&gt; native代码 -&gt; CPU解析运行。</p></blockquote><p>关于全栈程序员</p><blockquote><p>书中有提到全面程序员，1.掌握基本硬件知识 2.操作系统的基本原理 =&gt; 提高编程效率。</p></blockquote><p>关于加载到内存的程序</p><blockquote><p>加载到内存中的程序由4部分组成：内存（用于操作系统的内存、程序使用的内存），程序使用的内存：复制EXE文件[用于变量的空间、用于函数的空间] 程序运行时分配 [用于栈的空间、用于堆的空间]。</p></blockquote><p>关于操作系统</p><blockquote><p>操作系统也称为基础软件，操作系统是计算机运行时不可或缺的控制程序，以及在控制程序下运转的为其他软件运行提供操作系统环境的软件的统称。在操作系统上运行的应用称为“应用程序”<br>在计算机中尚不存在操作系统的年代，完全没有任何程序，因此程序员就需要编写出力相关的所有程序。用机器语言编写程序，然后在使用开关将程序输入，这一过程非常麻烦。于是，有人开发出了仅具有加载和运行功能的<code>监控程序</code>，这就是操作系统的原型。<br>通过事先启动监控程序，程序员就可以根据需要将各种程序加载到内存中运行。虽然依旧比较麻烦，但是比起在没有任何程序的状态下进行开发。工作量得到很大的缓解，用今天的话来说就是动态加载程序liberty，各种开发库可以帮助快速构建应用，解决实际问题。<br>随着liberty的丰富，开发门槛变得越来越低，促成了今天繁荣的程序员职业。</p></blockquote><blockquote><p>随着时代的发展，人们在利用监控程序编写程序的过程中，发现很多程序都有共同的部分。例如：通过键盘输入文字数据、往显示器输出文字数据等。这些处理，在任何程序下都是一样的。而如果每个编写的新程序都要记述相同的处理的话，那真是太浪费时间了。因此，基本的输入输出部分的程序就被追加到了监控程序中。初期的操作系统就这样诞生了。</p></blockquote><blockquote><p>初期的操作系统 = 监控程序 + 基本输入输出程序</p></blockquote><blockquote><p>之后，随着时代的进一步发展，开始有更多的功能被追加到监控程序中，比如，为了方便程序员控制硬件、编程语言处理器(汇编、编译、解析)以及各种实用程序等，结果就形成了和现在相差不大的操作系统。因此，操作系统本身并不是单独的程序，而是多个程序的集合体。</p></blockquote><blockquote><p>操作系统是多个程序的集合体：1.控制程序 (硬件控制、程序运行控制) 2.编程语言处理器 (汇编、编译、解析) 3. 实用程序 (文本编辑器、调试工具、Dump程序)</p></blockquote><p>关于监控程序</p><blockquote><p>早期操作系统的原型，主要由：1.监控程序 （加载程序、运行程序[程序1 -&gt; 加载 -&gt; 运行 &amp; 程序2 -&gt; 加载 -&gt; 运行]） 2.基本的输入输出程序 （通过键盘输入、输出到显示器等）</p></blockquote><p>关于操作系统学习</p><blockquote><p>程序员在开发应用程序的时候，需要意意识到你们是利用操作系统的功能的应用。虽然对于程序员来说，掌握硬件的基本知识是必须的，不过，在操作系统 诞生一回来，就没有必要在去编写直接的控制硬件的程序了。这样一来，制作应用程序的程序员就逐渐和硬件隔离开来，也就是说，程序员是很少关注现实世界（硬件）的。</p></blockquote><blockquote><p>因为操作系统的诞生，程序员无需考虑硬件问题。因此程序员的数量也增加了。哪怕是自称对硬件一窍不通的人，也可能会制作出一个有模有样的应用。不过，要想成为一个全面的程序员，有一点需要清楚的是，掌握基本的硬件知识，并借助操作系统进行抽象化，可以大大提高编程效率。<br>否则，遇到问题时，你就无法找到解决办法。操作系统确实为程序员提供了很多方便。不过享受方便是不行的，还需要了解为什么自己能够这么方便。了解了这一点，就可以尽情地享受方便了。</p></blockquote><blockquote><p>如果要深入理解计算机科学，那么就需要学习计算机历史，通过计算机历史，可以一窥各个技术变化的重大转折点，也能更好的理解一个事物发展的过程和完善的过程，为何这样设计，为了解决那些问题？带来那些新的问题？<br>只有了解前因后果才能更好的使用和掌握技术，帮助现实生活解决更多问题，无论是工作和学习都异常重要。</p></blockquote><p>关于反汇编</p><blockquote><p>用汇编语言编写的源代码，和本地代码是一一对应的。因而，本地代码也可以反过来转化成汇编语言的源代码。持有该功能的逆变换程序成为反汇编程序，逆变换这一处理本身成为反汇编。</p></blockquote><p>关于应用程序 </p><blockquote><p>应用程序经过os间接地控制硬件。应用程序 =&gt; 利用os的功能 =&gt; 有操作系统的基本输入输出程序 =&gt; 控制硬件 =&gt; 1.实时时钟 2.显示器I/O</p></blockquote><p><img src="https://jikelab.github.io/tech-labs/screenshots/run-progrom.png" alt></p><p>关于，程序是怎么跑起来的涉及，操作系统、高级编程语言、汇编语言、本地代码(native code)、内存构造、磁盘构造、CPU硬件、数据压缩、编译器、解析器等概念。深入浅出的解释了计算机基本原理，通过对程序运行示例的剖析和验证，逐步说明计算机的基本原理。</p><p>计算机科学：</p><ul><li><p>I/O端口的输入输出，中断处理 =&gt; 硬件控制方法。</p></li><li><p>用程序表示人类思考的方式 =&gt; AI</p></li></ul><p><img src="https://itweet.cn/screenshots/ai-application.png" alt="AI"></p><p>从全局的角度来看待问题，程序就是一系列的input -&gt; output过程，在整个过程中数据根据不同的策略而发生着改变，被应用于各种生产应用程序中，辅助人们更好的了解自己服务别人。我们都在探索的道路上。</p><p>而今天人工智能AI，就是利用程序表示人类思考的方式，即AI应用，通过AI应用，只需要既定的几个条件和因素，它可以自己学习，是一个auto的过程，特别是需要大量人力参与的工作，可以释放大量繁复的工作，让人们专注于创新和自己热爱的领域，比如：太空探索、星际移民，让普通人也能参与，而不是政府行为，目前人们太忙了，局限一个狭窄的领域，探索未来的人太少，我们需要通过AI赋予机器只能，帮助我们更好的服务我们，我们才有个更多精力探索未知世界。</p><p>欢迎关注微信公众号[Whoami]，阅读更多内容。</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我曾计划通过阅读论文和经典计算机书籍，来深入理解计算机科学技术。我最近在看的一本《程序是如何跑起来的》，整本书对于刚入门计算机和有经验的工程师，都非常有帮助。&lt;/p&gt;
+&lt;p&gt;如果你想了解，计算机基本原理，操作系统、程序是如何与硬件结合运行起来，解决实际问题，那么这本书特别合
+      
+    
+    </summary>
+    
+      <category term="Books" scheme="http://itweet.github.io/categories/Books/"/>
+    
+    
+      <category term="2018" scheme="http://itweet.github.io/tags/2018/"/>
+    
+      <category term="program" scheme="http://itweet.github.io/tags/program/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MacBook Pro开发环境配置指南</title>
+    <link href="http://itweet.github.io/2018/05/10/Macbook-Pro-Development-environment-preparation/"/>
+    <id>http://itweet.github.io/2018/05/10/Macbook-Pro-Development-environment-preparation/</id>
+    <published>2018-05-10T10:42:20.000Z</published>
+    <updated>2018-07-02T13:09:15.537Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文章主要记录新购Mac，需要安装的必备软件，由于有多台Mac，用途不一样。</p><ul><li>公司主力开发电脑</li><li>家中主力开发电脑</li></ul><p>公司主力开发电脑，主要功能是开发公司软件研发有关。而且有一些私有的东西，需要符合公司规范。</p><p>家中主力开发电脑，主要参与开源社区开发以及个人创作，涉及社区和个人创作内容，软件栈相对自由。</p><p>故此，记录一下Mac做为主力开发程序电脑，必备提升效率软件利器，工具选得好，下班下得早。</p><h2 id="安装Homebrew包管理工具"><a href="#安装Homebrew包管理工具" class="headerlink" title="安装Homebrew包管理工具"></a>安装Homebrew包管理工具</h2><p>Homebrew 是Mac OS 下的包管理工具，类似于Ubuntu下的apt-get命令，通过这个工具我们可以快速获取所需要的软件而不需要像在Windows系统中那样打开浏览器，找到需要下载的安装包，然后才能进行下载。Homebrew拥有安装、卸载、更新、查看、搜索等很多实用的功能。通过一条简单的指令，就可以实现包管理，而不用你关心各种依赖和文件路径的情况，十分方便快捷。</p><p>执行如命令安装：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure><p>稍等片刻，看到<code>successful</code>说明安装成功，具体根据所处网络速度而定。</p><p>利用brew安装软件试试：</p><p>[1]、安装wget工具</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install wget</span><br></pre></td></tr></table></figure><p>[2]、安装git工具</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install git</span><br></pre></td></tr></table></figure><p>通过brew把我们平时使用的命令行工具都安装上，喜欢Mac的原因就是可以提供类似Unix/Linux体验，并且有简洁美观的界面设计。</p><h2 id="工作空间"><a href="#工作空间" class="headerlink" title="工作空间"></a>工作空间</h2><p>此处基本都是个人喜好，我个人比较喜欢控制，所以对工作空间有一些自己的规范。</p><p>对于Mac系统，我通常会在根目录下建立<code>/data</code>用来做为创作空间。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /data</span><br><span class="line"></span><br><span class="line">sudo chown xujiang:staff /data</span><br></pre></td></tr></table></figure><p>如上，创建<code>/data</code>目录，并且授权给<code>xujiang</code>用户可以完全控制此目录，这里使用了<code>sudo</code>越权操作，熟悉Linux系统的同学应该都理解。</p><p>目录划分：</p><blockquote><p>mkdir /data/gitlab        主要存储利用私有GitLab托管的代码<br>mkdir /data/github        主要存放利用GitHub托管的代码<br>mkdir /data/[your company name]  主要存放公司项目代码或MarkDown文档</p></blockquote><h2 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h2><p>如下列出的都是提供dmg软件包或者AppStore直接安装，相对简单。</p><ul><li>ShadowsocksX-2.6.3</li><li>sogou_mac_47b</li><li>VSCode-darwin-stable</li><li>jdk-8u111-macosx-x64</li><li>WebStorm-2016.3.4</li><li>ideaIU-2017.2.6</li><li>OmniGraffle-7.4</li><li>OmniPlan-3.7.2</li><li>SourceTree_2.2.4</li><li>googlechrome</li><li>Evernote</li><li>Beyond Compare</li><li>Docker.dmg</li><li>DockerToolbox.pkg</li><li>goland-2018.1.dmg</li><li>HipChat-4.30.1-754.dmg</li><li>licecap125.dmg</li><li>sketch-49.3-51167.zip</li><li>SketchBook_v8.5.1_mac.dmg</li><li>Shimo_4.1.5.1_8837.zip</li><li>Sublime Text Build 3103.dmg</li><li>Tunnelblick_3.7.4b_build_4921.dmg</li></ul><h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>开发类的一些软件需要配置环境变量，以便更好地控制与切换版本。</p><h2 id="安装oh-my-zsh"><a href="#安装oh-my-zsh" class="headerlink" title="安装oh my zsh"></a>安装oh my zsh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;</span><br></pre></td></tr></table></figure><p>安装完成，默认主题是<code>robbyrussell</code>，你可以通过修改<code>~/.oh-my-zsh/themes/robbyrussell.zsh-theme</code>定制主题显示信息。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">local ret_status=&quot;%(?:%&#123;$fg_bold[green]%&#125;➜ :%&#123;$fg_bold[red]%&#125;➜ %s)%&#123;$fg_bold[red]%&#125;[%&#123;$fg_bold[blue]%&#125;xujiang%&#123;$fg_bold[yellow]%&#125;@%&#123;$fg_bold[cyan]%&#125;MacBook-Pro&quot;</span><br><span class="line">PROMPT=&apos;$&#123;ret_status&#125;%&#123;$fg_bold[green]%&#125;%p %&#123;$fg[green]%&#125;%c %&#123;$fg_bold[blue]%&#125;$(git_prompt_info)%&#123;$fg_bold[blue]%&#125;%&#123;$fg_bold[red]%&#125;]%&#123;$fg_bold[cyan]%&#125;$%&#123;$reset_color%&#125;%  &apos; </span><br><span class="line">ZSH_THEME_GIT_PROMPT_PREFIX=&quot;git:(%&#123;$fg[red]%&#125;&quot;</span><br><span class="line">ZSH_THEME_GIT_PROMPT_SUFFIX=&quot;%&#123;$reset_color%&#125;&quot;</span><br><span class="line">ZSH_THEME_GIT_PROMPT_DIRTY=&quot;%&#123;$fg[blue]%&#125;) %&#123;$fg[yellow]%&#125;✗%&#123;$reset_color%&#125;&quot;</span><br><span class="line">ZSH_THEME_GIT_PROMPT_CLEAN=&quot;%&#123;$fg[blue]%&#125;)&quot;</span><br></pre></td></tr></table></figure><p>编辑<code>~/.zshrc</code>增加一些自定义配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">alias cls=&apos;clear&apos;</span><br><span class="line">alias ll=&apos;ls -l&apos;</span><br><span class="line">alias la=&apos;ls -a&apos;</span><br><span class="line">alias vi=&apos;vim&apos;</span><br><span class="line">alias javac=&quot;javac -J-Dfile.encoding=utf8&quot;</span><br><span class="line">alias grep=&quot;grep --color=auto&quot;</span><br><span class="line">alias -s html=mate   # 在命令行直接输入后缀为 html 的文件名，会在 TextMate 中打开</span><br><span class="line">alias -s rb=mate     # 在命令行直接输入 ruby 文件，会在 TextMate 中打开</span><br><span class="line">alias -s py=vi       # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似</span><br><span class="line">alias -s js=vi</span><br><span class="line">alias -s c=vi</span><br><span class="line">alias -s java=vi</span><br><span class="line">alias -s txt=vi</span><br><span class="line">alias -s gz=&apos;tar -xzvf&apos;</span><br><span class="line">alias -s tgz=&apos;tar -xzvf&apos;</span><br><span class="line">alias -s zip=&apos;unzip&apos;</span><br><span class="line">alias -s bz2=&apos;tar -xjvf&apos;</span><br></pre></td></tr></table></figure><p>插件安装：</p><p>可以在<code>~/.oh-my-zsh/plugins</code>目录下看到相关插件,默认提供了100多种插件。</p><p>启用插件配置<code>~/.zshrc</code>文件中找到plugins:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins=(</span><br><span class="line">  git textmate ruby autojump osx mvn gradle</span><br><span class="line">)</span><br></pre></td></tr></table></figure><p>例如 git：当你处于一个 git 受控的目录下时，Shell 会明确显示 「git」和 branch，如上图所示，另外对 git 很多命令进行了简化，例如 gco=’git checkout’、gd=’git diff’、gst=’git status’、g=’git’等等，熟练使用可以大大减少 git 的命令长度，命令内容可以参考~/.oh-my-zsh/plugins/git/git.plugin.zsh</p><p>autojump：zsh 和 autojump 的组合形成了 zsh 下最强悍的插件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install autojump</span><br></pre></td></tr></table></figure><p>安装完成autojump，使用命令 <code>autojump --help</code>获取使用方法。</p><h2 id="安装Python通过brew"><a href="#安装Python通过brew" class="headerlink" title="安装Python通过brew"></a>安装Python通过brew</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python</span><br></pre></td></tr></table></figure><p>如上，安装完成之后的Python会自带pip，setuptools等软件，很好的管理Python包。</p><p>默认安装的Python是最新稳定的3.x版本。如果需要安装2.x，使用命令<code>brew install python@2</code>。</p><p>安装完成之后执行如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;export PATH=&quot;/usr/local/opt/sqlite/bin:$PATH&quot;&apos; &gt;&gt; ~/.zshrc</span><br></pre></td></tr></table></figure><p>我没执行这一句话，因为我默认使用Python 2.7。</p><p><code>注意：</code>如果你使用pyenv管理你的Python版本，那么其实不需要通过brew安装Python，就不用执行此内容。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew uninstall python</span><br></pre></td></tr></table></figure><p>如上卸载命令，可以方便的卸载通过brew安装的软件包。</p><h2 id="安装Python版本管理工具pyenv"><a href="#安装Python版本管理工具pyenv" class="headerlink" title="安装Python版本管理工具pyenv"></a>安装Python版本管理工具pyenv</h2><p>Simple Python Version Management: pyenv</p><p>You can also install pyenv using the Homebrew package manager for Mac OS X.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br><span class="line"></span><br><span class="line">brew install pyenv</span><br></pre></td></tr></table></figure><p>在zsh中启用pyenv需配置如下内容到<code>~/.zshrc</code>：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval &quot;$(pyenv init -)&quot;</span><br></pre></td></tr></table></figure><p>通过pyenv安装Python 2.7.15版本，通过命令<code>pyenv install --list</code>查看可支持安装的Python版本。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv install 2.7.15</span><br></pre></td></tr></table></figure><p>在安装一个<code>Python 3.4.0</code>版本，然后试试切换不同版本是否流畅。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv install 3.6.5</span><br></pre></td></tr></table></figure><p>查看安装的Python版本列表: </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv versions</span><br><span class="line">* system (set by /Users/xujiang/.pyenv/version)</span><br><span class="line">  2.7.15</span><br><span class="line">  3.6.5</span><br></pre></td></tr></table></figure><p>设置2.7.15为全局Python环境：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pyenv global 2.7.15  # 设置全局的 Python 版本，通过将版本号写入 ~/.pyenv/version 文件的方式。</span><br><span class="line"></span><br><span class="line">pyenv local 2.7.15 # 设置 Python 本地版本，通过将版本号写入当前目录下的 .python-version 文件的方式。通过这种方式设置的 Python 版本优先级较 global 高。</span><br></pre></td></tr></table></figure><p>会话级别Python环境变量。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pyenv shell 2.7.3 # 设置面向 shell 的 Python 版本，通过设置当前 shell 的 PYENV_VERSION 环境变量的方式。这个版本的优先级比 local 和 global 都要高。–unset 参数可以用于取消当前 shell 设定的版本。</span><br><span class="line"></span><br><span class="line">$ pyenv shell --unset</span><br><span class="line"></span><br><span class="line">$ pyenv rehash  # 创建垫片路径（为所有已安装的可执行文件创建 shims，如：~/.pyenv/versions/*/bin/*，因此，每当你增删了 Python 版本或带有可执行文件的包（如 pip）以后，都应该执行一次本命令）</span><br></pre></td></tr></table></figure><p>pyenv 全部命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv commands</span><br></pre></td></tr></table></figure><p>通过pyenv可以很好的解决Python多版本管理问题，并且在各个不同版本间方便的切换，在<code>VS code</code>中，我就可以为不同Python项目配置使用不同Python版本。</p><h2 id="Virtualenv"><a href="#Virtualenv" class="headerlink" title="Virtualenv"></a>Virtualenv</h2><p>前面，我们介绍了基于pyenv设置全局Python环境为<code>Python 2.7.15</code>。</p><p>现在我们在Python 2.7.15环境，安装<code>Virtualenv</code>支持基于此Python版本的多PY项目环境虚拟化。</p><p>安装 virtualenv</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install virtualenv</span><br></pre></td></tr></table></figure><p>提示升级<code>pip</code>：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade pip</span><br></pre></td></tr></table></figure><p>使用virtualenv：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">virtualenv env   # 创建一个env虚拟Python环境。</span><br><span class="line"></span><br><span class="line">source env/bin/activate  # 激活env虚拟Python环境。</span><br><span class="line"></span><br><span class="line">pip install pandas  # 在激活的env环境下安装pandas包。</span><br></pre></td></tr></table></figure><p>quickstart pandas测试：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import pandas as pd</span><br><span class="line">&gt;&gt;&gt; import numpy as np</span><br><span class="line">&gt;&gt;&gt; s = pd.Series([1,3,5,np.nan,6,8])</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">0    1.0</span><br><span class="line">1    3.0</span><br><span class="line">2    5.0</span><br><span class="line">3    NaN</span><br><span class="line">4    6.0</span><br><span class="line">5    8.0</span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure><p>如需退出<code>env</code>环境，可执行<code>deactivate</code>命令。</p><p>如果是Python 3.x环境，可以使用官方自带<code>venv</code>软件，达到同样的目的。</p><h2 id="安装maven"><a href="#安装maven" class="headerlink" title="安装maven"></a>安装maven</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install maven  # /usr/local/Cellar/maven/3.5.3</span><br></pre></td></tr></table></figure><p>配置环境变量：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.bash_profile </span><br><span class="line"># by xujiang 2018.05.11</span><br><span class="line">export M2_HOME=/usr/local/Cellar/maven/3.5.3</span><br><span class="line">export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home</span><br><span class="line">export PATH=.:$JAVA_HOME/bin:$M2_HOME/bin:$PATH</span><br></pre></td></tr></table></figure><p>参考地址：</p><pre><code>[1] ZSH shell http://macshuo.com/?p=676[2] http://einverne.github.io/post/2017/04/pyenv.html[3] https://docs.python.org/3/library/venv.html</code></pre><p>欢迎关注微信公众号[Whoami]，阅读更多内容。</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本文章主要记录新购Mac，需要安装的必备软件，由于有多台Mac，用途不一样。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公司主力开发电脑&lt;/li&gt;
+&lt;li&gt;家中主力开发电脑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;公司主力开发电脑，主要功能是开发公司软件研发有关。而且有一些私有的东西，需要符合公司规范
+      
+    
+    </summary>
+    
+      <category term="Mac" scheme="http://itweet.github.io/categories/Mac/"/>
+    
+    
+      <category term="Mac" scheme="http://itweet.github.io/tags/Mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Why REDOOP ?</title>
+    <link href="http://itweet.github.io/2018/05/10/why-redoop/"/>
+    <id>http://itweet.github.io/2018/05/10/why-redoop/</id>
+    <published>2018-05-10T01:17:20.000Z</published>
+    <updated>2018-07-02T13:09:15.538Z</updated>
+    
+    <content type="html"><![CDATA[<p>太多不舍，一切来不及道别。</p><p>千言万语，感恩。</p><p>我准备先整理一番，仪式感，做个笔记，绘制成图。</p><h2 id="First"><a href="#First" class="headerlink" title="First"></a>First</h2><p><img src="https://jikelab.github.io/tech-labs/screenshots/first-REDOOP.png" alt></p><p>一直做2B市场，因为有经验，整体项目的阶段、时机和推进拥有更好的判断。</p><h2 id="Two"><a href="#Two" class="headerlink" title="Two"></a>Two</h2><p><img src="https://jikelab.github.io/tech-labs/screenshots/two_REDOOP.png" alt></p><p><code>mini company</code>缺资源，所以你需要是一个多面手，能处理各种问题和情况，救火队员。</p><p>不论做什么，只要你用心，慢慢就会有好的反馈的。</p><h2 id="Three"><a href="#Three" class="headerlink" title="Three"></a>Three</h2><p>经历企业高速发展、低潮期、慢慢有起来，我有了很多想法与思考。</p><p>辛苦培养的团队成员，学有所成，离开了，学会平常心视之。</p><p>发展低潮期，整个团队成员离开，经历很久调整过来，在遇到类似的情况，能知道更好的处理方案。</p><p>学会如何与人沟通，这一项能力很重要。</p><p>千人会场，独立演讲，表达自己的技术心得。</p><p>独立设计与实现，技术型产品，推向市场。</p><p>人才，是一个企业立命之本，时刻体会人才兴邦含义。</p><p>客户，提供专业的产品与服务，一定能赢得客户。</p><p>做事，一定要认真，用心很重要。</p><p>人一辈子，能做几个精品 ？</p><p>作品意识，需要创新的东西，稀缺性，唯一性。</p><p>任何人的都需要有自己的作品，那是时间容器，承载你所有的工作与成就。</p><p>技术型产品，牛逼的技术不一定能在商业上取得成功。</p><p>实际能解决一个现实世界中的问题，才能是一个有意义的产品。</p><p>好产品，需要有一体化的体验，完善的文档、白皮书、案例、PPT、方案、测试。</p><p>品牌，需要一个标志做为载体，承载一切的骄傲、荣辱，它是一个综合性的东西。</p><p>产品输出到市场，获得市场反馈，赋能品牌。</p><p>公司产品、人、一举一动都会赋能company品牌。</p><p>技术研发小组，不要超过10人，6人组最佳。</p><p>品牌就是一切荣辱的承载体，时间容器，很多人青葱岁月凝结为作品，反馈品牌，完成传承。</p><p>一个让人尊敬的企业与品牌，凝结多少人的心血，岁月、得失与荣辱。</p><p>一辈子，有多少人能参与划时代的作品。 比如：Andy Hertzfeld.</p><p>产品故事、事件的重要性，不言而喻。</p><p>Global视角，让好的事情持续发生。</p><p>很多，好的故事、苦逼的遭遇，汇聚在一起，反馈自身。</p><p>欢迎与我交流，说出你的故事。</p><p>欢迎关注微信公众号[Whoami]，阅读更多内容。</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;太多不舍，一切来不及道别。&lt;/p&gt;
+&lt;p&gt;千言万语，感恩。&lt;/p&gt;
+&lt;p&gt;我准备先整理一番，仪式感，做个笔记，绘制成图。&lt;/p&gt;
+&lt;h2 id=&quot;First&quot;&gt;&lt;a href=&quot;#First&quot; class=&quot;headerlink&quot; title=&quot;First&quot;&gt;&lt;/a&gt;Fir
+      
+    
+    </summary>
+    
+      <category term="Default" scheme="http://itweet.github.io/categories/Default/"/>
+    
+    
+      <category term="2018" scheme="http://itweet.github.io/tags/2018/"/>
+    
+      <category term="life" scheme="http://itweet.github.io/tags/life/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>bigtable-osdi06</title>
+    <link href="http://itweet.github.io/2018/05/07/bigtable-osdi06/"/>
+    <id>http://itweet.github.io/2018/05/07/bigtable-osdi06/</id>
+    <published>2018-05-06T17:52:12.000Z</published>
+    <updated>2018-07-02T13:09:15.537Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>BigTable是Google提出的一个分布式的海量数据存储系统。Google将其运用在一些数据量较大的应用中。从分布式系统CAP角度理解，BigTable是牺牲高可用性，主要加强数据一致性和可扩展性。</p><p>早期BigTable设计主要解决，海量的网页数据存储。搜索引擎抓取的海量网页数据，需要做存储和分析，而且是大批量的数据写入，需要一个高可扩展和高速写入性能的一个数据库系统，同时能提供简单的快速过滤返回符合条件的数据。</p><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>设计简单</p><blockquote><p>基于分布式文件系统，把数据库和底层存储分离，让两者实现起来容易很多，各自实现好自己的领域。坏处是，任何一个tablet故障，恢复数据需要通过读取其他机器log恢复，造成可用性问题。 </p></blockquote><p>Row Key有序</p><blockquote><p>行键上顺序存储，因为有中心设计，很方便做split/move操作，让row key有序的前提下尽可能的balance数据，分布式查询利用多机资源，响应快，对于按顺序读取的应用来说是非常有好的。</p></blockquote><p>Data Mode</p><blockquote><p>多数据版本实现，timestamp对于很多数据应用非常方便。</p></blockquote><p>高压缩比</p><blockquote><p>典型的重复内容快速压缩， 以CPU带宽换硬盘带宽。属于同类型ROWS临近存储，高度压缩。</p></blockquote><p>数据模型</p><p><img src="https://github.com/jikelab/paper/raw/master/research/img/bigtable-data-model.png" alt></p><ul><li><p>row_key 反转的URL，为了是属于同一类型数据临近存储。</p></li><li><p>column_key 引用的row_key的网站URL，灵活变更column。</p></li><li><p>timestamp 一个单元格不同版本跟进时间戳降序顺序存储，灵活访问任意版本，无疑增加维护成本。</p></li></ul><p>API </p><blockquote><p>支持数据的增删改查，提供单行事物，不支持跨行事物，跨行事物代价高昂，不利于高并发写入。中高性能写入，快速过滤返回数据，一般只能支持简单数据分析，很难做复杂聚合与关联查询，也可配合MapReduce系统实现，需要忍受性能低下。</p></blockquote><h2 id="Tablet实现"><a href="#Tablet实现" class="headerlink" title="Tablet实现"></a>Tablet实现</h2><p>有一个Master Server，一个支持多语言客户端，多个Tablet Server。通过添加或删除支持集群的动态扩展。每个Tablet Server管理着一个tablet集合。在每个tablet server上，存放100-1000个tablet。当存储的tablet超过一个默认的大小就会自动进行拆分为多个tablet，尽可能负载到更多机器。每个tablet大小为100-200M。每个Tablet包含某个区域内所有的数据，如果没有尽可能拆分分散到多台机器，可能会导致查询特别缓慢，造成数据热点问题。</p><ul><li>Tablet位置信息</li></ul><p>存储tablet位置信息使用类似三层b+树架构。</p><p><img src="https://github.com/jikelab/paper/raw/master/research/img/three-bplus-design.png" alt></p><p>如上引入一个第三方系统，用来保障Root Table位置信息的一致性与可获得性。</p><ul><li>Tablet worker</li></ul><p>通过chubby锁，发现其他Table Server；记录redo，持久化存储于GFS，分组提交redo，提升性能。</p><p>存储使用SSTable与memtable，按照字典排序的数据结构，sstable与memtable合并视图执行非常高效。</p><ul><li>compactions</li></ul><p>是一个很大的坑，由于支持tablet拆分，并且基于sstable与memtable合并生成，支持数据多版本，数据变更清理，数据多版本对业务应用友好，带来如下两个印象系统性能的操作：</p><ul><li>minor compation</li><li>major compation</li></ul><p>随着写操作的执行，memtable 的尺寸逐渐增加。当 memtable 的尺寸到达一个门槛值的 时候，memtable 就被冻结，就创建一个新的 memtable，被冻结的 memtable 就转化成一个 SSTable，并被写入到 GFS。这个“次压缩”(minor compaction)过程有两个目标:(1)它 缩减了 tablet 服务器的内存使用率;(2)当发生服务器死亡需要恢复时，它减少了需要从重 做日志中读取的数据量。当压缩过程正在进行时，正在到达的读写操作仍然可以继续进行。</p><p>个合并压缩程序，把所有的 SSTable 的数据重写到一个 SSTable，这个合并压缩被称 为“主压缩”(major compaction)。主要作用是回收被删除数据占用的资源，数据合并压缩写新的SSTable意味着需要大量的磁盘IO和网络IO，如果大量Major Compaction，会对在线业务造成访问影响。</p><ul><li>实现细节</li></ul><p>locality group 的 SSTable 进行压缩算法可由客户端指定。压缩使用“两段自定义压缩模式”，第一遍使用 Bentley and McIlroy[模式，它对一个大窗口内的长公共字符串进行压缩。第二遍使用一个快速的压缩算法，这个 压缩算法在一个 16KB 数据量的窗口内寻找重复数据。</p><p>缓存读取性能，scan缓存和block缓存，对于连续读取同一批数据，连续执行同一scan将可快速从内存读取数据，避免磁盘IO，获得加大性能提升。</p><p>Bloom Filters，建立于tablet只是，可以快速跳过大量不符合数据区域的table，减少磁盘访问，提升性能。</p><h2 id="可扩展性"><a href="#可扩展性" class="headerlink" title="可扩展性"></a>可扩展性</h2><p>scaling，随着tablet server从几个扩展到几十个，每个服务器的吞吐量显著的降低了，这是由于多服务器负载不均衡引起的，常由于有其他进程争抢 CPU 资源和网络带宽。而忘了饱和也是重大影响因素之一。</p><h2 id="应用实践"><a href="#应用实践" class="headerlink" title="应用实践"></a>应用实践</h2><p>[1] google Analytics  网站流量分析应用，非结构化网页数据存储，全世界网站，数量庞大。</p><p>[2] Google Earth    位置数据存储+不同级别的高清图片街景。</p><p>[3] 个性化搜索      根据用户搜索历史记录，通过MapReduce来计算数据，给用户提供个性化推荐。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过系统的拆分，简化系统设计和实现的复杂度，这是工程级别的实践经验。系统设计有很多权衡，为了获得极大的吞吐量与可扩展性，就需要牺牲数据可靠性；分布式系统数据负载均衡，造成大量资源的占用，极大影响业务；SSTable + LSM Tree 开源实现LevenDB，就是BigTable核心功能。分布式系统的开发与测试是非常困难的，问题很难追踪与复现，所以如果没有足够的业务场景检验与实践，很难写出非常易用的分布式系统，需要足够强的驱动力来帮助塑造健壮的分布式系统。工业界经过BigTable的启发已经实现了很多类BigTable分布式系统，设计与实现大体类似，只有细微差别，主要在解决问题的方向权衡，导致了不同的实现。</p><p>今天大量互联网公司使用BigTable开源版实现Hbase，但是我们发现很多企业级用户很难把Hbase使用起来，究其原因，使用门槛与应用场景的局限。随着时间的发展Google内部也在不断迭代更新，因为BigTable未能实现跨行事物，仅支持单行事物，而业务需求肯定需要跨行事物的支持。于是新的系统诞生了，基于Spanner+F1的全球分布式一致性数据库，一大波工业界的极客们又开始无私的基于spanner+f1的论文写具体实现，并且完全开源，以此来解决分布式数据库跨行事物和横向扩展问题，解决困扰多年的单机数据库分库分表的痛苦。</p><p>在NoSQL之后，给它取了一个新名字叫NewSQL。</p><p>对于BigTable系统，实现起来应该相对复杂，论文很多地方也未详述，希望通过以上内容帮助了解一个分布式系统设计涉及的关键技术与权衡，而不是过多关注code细节，我也无实现经验，主要还是工作中很难有这样的机会吧。</p><p>关于NewSQL系统，我关注良久，有很多创新，在未来的文章中我们会更多谈论NewSQL。</p><p><strong>推荐阅读：</strong></p><p>[1] <a href="http://itweet.cn/blog/2018/04/20/distributed-file-system-design" target="_blank" rel="noopener">分布式文件系统设计与实现</a></p><p>[2] <a href="http://itweet.cn/blog/2018/04/23/mapreduce-osdi04" target="_blank" rel="noopener">MapReduce设计与实现</a></p><p>[3] <a href="http://itweet.cn/blog/2018/04/23/bigtable-osdi06" target="_blank" rel="noopener">BigTable设计与实现</a></p><p>欢迎关注微信公众号[Whoami]，阅读更多内容。</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;BigTable是Google提出的一个分布式的海量数据存储系统。Google将其运用在一些数据量较大的应用中。从分布式系统CAP角度理解，
+      
+    
+    </summary>
+    
+      <category term="BigData" scheme="http://itweet.github.io/categories/BigData/"/>
+    
+    
+      <category term="BigTable" scheme="http://itweet.github.io/tags/BigTable/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>A Distributed Storage System for Structured Data</title>
+    <link href="http://itweet.github.io/2018/05/06/bigtable-osdi06/"/>
+    <id>http://itweet.github.io/2018/05/06/bigtable-osdi06/</id>
+    <published>2018-05-06T08:49:20.000Z</published>
+    <updated>2018-07-02T13:09:15.537Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>BigTable是Google提出的一个分布式的海量数据存储系统。Google将其运用在一些数据量较大的应用中。从分布式系统CAP角度理解，BigTable是牺牲高可用性，主要加强数据一致性和可扩展性。</p><p>早期BigTable设计主要解决，海量的网页数据存储。搜索引擎抓取的海量网页数据，需要做存储和分析，而且是大批量的数据写入，需要一个高可扩展和高速写入性能的一个数据库系统，同时能提供简单的快速过滤返回符合条件的数据。</p><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>设计简单</p><blockquote><p>基于分布式文件系统，把数据库和底层存储分离，让两者实现起来容易很多，各自实现好自己的领域。坏处是，任何一个tablet故障，恢复数据需要通过读取其他机器log恢复，造成可用性问题。 </p></blockquote><p>Row Key有序</p><blockquote><p>行键上顺序存储，因为有中心设计，很方便做split/move操作，让row key有序的前提下尽可能的balance数据，分布式查询利用多机资源，响应快，对于按顺序读取的应用来说是非常有好的。</p></blockquote><p>Data Mode</p><blockquote><p>多数据版本实现，timestamp对于很多数据应用非常方便。</p></blockquote><p>高压缩比</p><blockquote><p>典型的重复内容快速压缩， 以CPU带宽换硬盘带宽。属于同类型ROWS临近存储，高度压缩。</p></blockquote><p>数据模型</p><p><img src="https://github.com/jikelab/paper/raw/master/research/img/bigtable-data-model.png" alt></p><ul><li><p>row_key 反转的URL，为了是属于同一类型数据临近存储。</p></li><li><p>column_key 引用的row_key的网站URL，灵活变更column。</p></li><li><p>timestamp 一个单元格不同版本跟进时间戳降序顺序存储，灵活访问任意版本，无疑增加维护成本。</p></li></ul><p>API </p><blockquote><p>支持数据的增删改查，提供单行事物，不支持跨行事物，跨行事物代价高昂，不利于高并发写入。中高性能写入，快速过滤返回数据，一般只能支持简单数据分析，很难做复杂聚合与关联查询，也可配合MapReduce系统实现，需要忍受性能低下。</p></blockquote><h2 id="Tablet实现"><a href="#Tablet实现" class="headerlink" title="Tablet实现"></a>Tablet实现</h2><p>有一个Master Server，一个支持多语言客户端，多个Tablet Server。通过添加或删除支持集群的动态扩展。每个Tablet Server管理着一个tablet集合。在每个tablet server上，存放100-1000个tablet。当存储的tablet超过一个默认的大小就会自动进行拆分为多个tablet，尽可能负载到更多机器。每个tablet大小为100-200M。每个Tablet包含某个区域内所有的数据，如果没有尽可能拆分分散到多台机器，可能会导致查询特别缓慢，造成数据热点问题。</p><ul><li>Tablet位置信息</li></ul><p>存储tablet位置信息使用类似三层b+树架构。</p><p><img src="https://github.com/jikelab/paper/raw/master/research/img/three-bplus-design.png" alt></p><p>如上引入一个第三方系统，用来保障Root Table位置信息的一致性与可获得性。</p><ul><li>Tablet worker</li></ul><p>通过chubby锁，发现其他Table Server；记录redo，持久化存储于GFS，分组提交redo，提升性能。</p><p>存储使用SSTable与memtable，按照字典排序的数据结构，sstable与memtable合并视图执行非常高效。</p><ul><li>compactions</li></ul><p>是一个很大的坑，由于支持tablet拆分，并且基于sstable与memtable合并生成，支持数据多版本，数据变更清理，数据多版本对业务应用友好，带来如下两个印象系统性能的操作：</p><ul><li>minor compation</li><li>major compation</li></ul><p>随着写操作的执行，memtable 的尺寸逐渐增加。当 memtable 的尺寸到达一个门槛值的 时候，memtable 就被冻结，就创建一个新的 memtable，被冻结的 memtable 就转化成一个 SSTable，并被写入到 GFS。这个“次压缩”(minor compaction)过程有两个目标:(1)它 缩减了 tablet 服务器的内存使用率;(2)当发生服务器死亡需要恢复时，它减少了需要从重 做日志中读取的数据量。当压缩过程正在进行时，正在到达的读写操作仍然可以继续进行。</p><p>个合并压缩程序，把所有的 SSTable 的数据重写到一个 SSTable，这个合并压缩被称 为“主压缩”(major compaction)。主要作用是回收被删除数据占用的资源，数据合并压缩写新的SSTable意味着需要大量的磁盘IO和网络IO，如果大量Major Compaction，会对在线业务造成访问影响。</p><ul><li>实现细节</li></ul><p>locality group 的 SSTable 进行压缩算法可由客户端指定。压缩使用“两段自定义压缩模式”，第一遍使用 Bentley and McIlroy[模式，它对一个大窗口内的长公共字符串进行压缩。第二遍使用一个快速的压缩算法，这个 压缩算法在一个 16KB 数据量的窗口内寻找重复数据。</p><p>缓存读取性能，scan缓存和block缓存，对于连续读取同一批数据，连续执行同一scan将可快速从内存读取数据，避免磁盘IO，获得加大性能提升。</p><p>Bloom Filters，建立于tablet只是，可以快速跳过大量不符合数据区域的table，减少磁盘访问，提升性能。</p><h2 id="可扩展性"><a href="#可扩展性" class="headerlink" title="可扩展性"></a>可扩展性</h2><p>scaling，随着tablet server从几个扩展到几十个，每个服务器的吞吐量显著的降低了，这是由于多服务器负载不均衡引起的，常由于有其他进程争抢 CPU 资源和网络带宽。而忘了饱和也是重大影响因素之一。</p><h2 id="应用实践"><a href="#应用实践" class="headerlink" title="应用实践"></a>应用实践</h2><p>[1] google Analytics  网站流量分析应用，非结构化网页数据存储，全世界网站，数量庞大。</p><p>[2] Google Earth    位置数据存储+不同级别的高清图片街景。</p><p>[3] 个性化搜索      根据用户搜索历史记录，通过MapReduce来计算数据，给用户提供个性化推荐。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过系统的拆分，简化系统设计和实现的复杂度，这是工程级别的实践经验。系统设计有很多权衡，为了获得极大的吞吐量与可扩展性，就需要牺牲数据可靠性；分布式系统数据负载均衡，造成大量资源的占用，极大影响业务；SSTable + LSM Tree 开源实现LevenDB，就是BigTable核心功能。分布式系统的开发与测试是非常困难的，问题很难追踪与复现，所以如果没有足够的业务场景检验与实践，很难写出非常易用的分布式系统，需要足够强的驱动力来帮助塑造健壮的分布式系统。工业界经过BigTable的启发已经实现了很多类BigTable分布式系统，设计与实现大体类似，只有细微差别，主要在解决问题的方向权衡，导致了不同的实现。</p><p>今天大量互联网公司使用BigTable开源版实现Hbase，但是我们发现很多企业级用户很难把Hbase使用起来，究其原因，使用门槛与应用场景的局限。随着时间的发展Google内部也在不断迭代更新，因为BigTable未能实现跨行事物，仅支持单行事物，而业务需求肯定需要跨行事物的支持。于是新的系统诞生了，基于Spanner+F1的全球分布式一致性数据库，一大波工业界的极客们又开始无私的基于spanner+f1的论文写具体实现，并且完全开源，以此来解决分布式数据库跨行事物和横向扩展问题，解决困扰多年的单机数据库分库分表的痛苦。</p><p>在NoSQL之后，给它取了一个新名字叫NewSQL。</p><p>对于BigTable系统，实现起来应该相对复杂，论文很多地方也未详述，希望通过以上内容帮助了解一个分布式系统设计涉及的关键技术与权衡，而不是过多关注code细节，我也无实现经验，主要还是工作中很难有这样的机会吧。</p><p>关于NewSQL系统，我关注良久，有很多创新，在未来的文章中我们会更多谈论NewSQL。</p><p><strong>推荐阅读：</strong></p><p>[1] <a href="http://itweet.cn/blog/2018/04/20/distributed-file-system-design" target="_blank" rel="noopener">分布式文件系统设计与实现</a></p><p>[2] <a href="http://itweet.cn/blog/2018/04/23/mapreduce-osdi04" target="_blank" rel="noopener">MapReduce设计与实现</a></p><p>[3] <a href="http://itweet.cn/blog/2018/04/23/bigtable-osdi06" target="_blank" rel="noopener">BigTable设计与实现</a></p><p>欢迎关注微信公众号[Whoami]，阅读更多内容。</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;BigTable是Google提出的一个分布式的海量数据存储系统。Google将其运用在一些数据量较大的应用中。从分布式系统CAP角度理解，
+      
+    
+    </summary>
+    
+      <category term="BigData" scheme="http://itweet.github.io/categories/BigData/"/>
+    
+    
+      <category term="bigtable" scheme="http://itweet.github.io/tags/bigtable/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mapreduce-osdi04</title>
+    <link href="http://itweet.github.io/2018/04/23/mapreduce-osdi04/"/>
+    <id>http://itweet.github.io/2018/04/23/mapreduce-osdi04/</id>
+    <published>2018-04-23T14:39:16.000Z</published>
+    <updated>2018-07-02T13:09:15.537Z</updated>
+    
+    <content type="html"><![CDATA[<p>我曾经多次提到过，我涉猎广泛，但是没有有个精通的技能，在大数据领域几年，也没什么成果。</p><blockquote><p>我开始尝试改变，未来很长一段时间注重修炼内功，是什么让我有这样的改变？<code>极客时间</code>购买《朱赟的技术管理课》，<code>安姐</code>聊到很多技术管理经验，介绍算法一节：<code>招式在花哨，敌不过内功深厚</code>。<code>安姐</code>重写了四遍《算法导论》中的习题，让她算法特别厉害，也介绍算法的实际意义和价值。</p></blockquote><p>我未来计划往分布式数据库相关领域研究，制定一系列计划，当然去年底就开始执行，通过相关项目、论文、书籍，深入理解计算机科学技术。</p><blockquote><p>欢迎star:  <a href="https://github.com/jikelab/paper" target="_blank" rel="noopener">https://github.com/jikelab/paper</a></p></blockquote><p>我的开源项目<code>企业级流分析平台</code>，即将上线，辛苦码文档中，已发布预览版，月底和大家见面，稍待。</p><p>废话已然太多，今天我们谈MapReduce的核心原理，我的阅读笔记。</p><p>MapReduce设计初衷:</p><p>[1] x86架构，Linux系统，2-4G内容</p><p>[2] 普通网络硬件设备，百兆/千兆带宽</p><p>[3] 集群规模成百上千台，机器故障是常态</p><p>[4] Schedule -&gt; Job -&gt; n Task</p><p>MapReduce为何如此简单，很快被大规模应用。MapReduce利用限制性编程模式实现了用户的自动并发处理，并且提供了透明的容错处理功能。</p><p><img src="https://github.com/jikelab/paper/raw/master/research/img/mapreduce_overview.png" alt="MapReduce执行流程"></p><center>MapReduce执行流程</center><p>Master数据结构，主要调度、监视、Job Metadata信息(存储中间临时数据存储区域、大小与位置)。</p><p>Worker执行任务，Master调度Job Worker执行任务，通过RPC远程过程调用，Worker周期性执行Job状态汇报，通过心跳机制，超时未汇报，标记为故障节点，Master会进行处理。</p><p>容错特性，设计初衷使成百上千台机器组成集群，从而处理大规模数据。</p><h2 id="Worker故障"><a href="#Worker故障" class="headerlink" title="Worker故障"></a>Worker故障</h2><p>情况一：</p><p>master周期性的ping worker节点，如果都能正常反馈，说明无故障。</p><p>情况二：</p><p>如果超时无反馈，master标记worker节点为失效节点。</p><p>故障情况下，master需要重置故障节点任务，重新分配相关worker重新执行一遍故障节点的任务。具体分配策略，根据ping反馈的节点负载情况调度。</p><h2 id="Master故障"><a href="#Master故障" class="headerlink" title="Master故障"></a>Master故障</h2><p>预防master故障，master需要周期性的写checkpoint，并且刷落磁盘。Master故障，可以从checkpoint恢复Job故障时的Job运行状态，继续执行任务。</p><h2 id="确定性函数"><a href="#确定性函数" class="headerlink" title="确定性函数"></a>确定性函数</h2><p>Map和Reduce操作是确定性函数，重复执行，保障顺序，执行输出的结果总是一样的。</p><p>input(确定输入) -&gt; Map(规则函数) -&gt; Reduce(规则函数) -&gt; output(必然确定输出)</p><h2 id="数据本地性"><a href="#数据本地性" class="headerlink" title="数据本地性"></a>数据本地性</h2><p>Master在调度worker执行tasks时，会充分考虑数据本地性，尽量本地读取数据，本地计算，这样可以大大节省网络带宽，Master在调度任务时会传输相关文件位置信息给worker，即使本地性失败，也会选择就近的机架服务器执行计算。</p><h2 id="任务粒度"><a href="#任务粒度" class="headerlink" title="任务粒度"></a>任务粒度</h2><p>MapReduce任务粒度：M=200000 ,R=5000, 使用2000台worker机器。</p><p>通常第一次批量加载数据进MapReduce程序，我们很难控制并行度，默认由文件个数决定。很多时候任务都是又多个MapReduce构成，所以Reduce常常是由用户自己控制，进而控制接下来Map的并行度。</p><h2 id="备用任务"><a href="#备用任务" class="headerlink" title="备用任务"></a>备用任务</h2><p>在一个大的Job中，有大量的任务，有些任务执行缓慢，我们称之为<code>落伍者</code>，它会拖慢整体进度。</p><p>造成<code>落伍者</code>情况有很多，网络问题、硬件故障、系统负载、资源抢占。当大多数任务均执行完毕，通过Worker任务周期性汇报Master，获知<code>落伍者</code>执行的任务情况，这个时候master会启用备用任务，执行相同的task，通常比正常多消耗百分之几的资源，加速任务执行时间。</p><h2 id="分区函数"><a href="#分区函数" class="headerlink" title="分区函数"></a>分区函数</h2><p>[1] 控制Reduce任务 -&gt; 控制任务输出文件数</p><p>[2] 缺省分区函数 -&gt; hash(key) mod R</p><p>[3] hash是平衡分区比较合理的方式</p><p>[4] 用户自定义分区 -&gt; 产生相同key数据输出到同一个文件的效果</p><p>分区中，中间key/value pari数据，保障key增量顺序处理。保障每个文件是有序的默认支持，对于基于key随机存取，排序数据友好，可加速处理。</p><h2 id="combiner函数"><a href="#combiner函数" class="headerlink" title="combiner函数"></a>combiner函数</h2><p>特殊应用场景需要使用combiner处理，比如：单词记数程序，Map出现大量的重复记数据，而在Reduce阶段需要合并，如果在map -&gt; reduce之间加一层combiner操作，无疑可加速reduce处理时间。</p><h2 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h2><p>通过统计task时间发生的次数，master周期性ping worker，在反馈数据包中传输任务执行详细情况。帮助记录和监控各个节点任务执行阶段和评估预计执行时间，通过详细的统计信息，帮助优化MapReduce程序。比如：跳过损坏记录，可把跳过文件路径，文件名，跳过的文件行详细信息反馈到计数器页面，帮助开发人员，定位数据质量或程序错误。</p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>MR封装，为何能在数据分析领域大规模应用。</p><p>[1] 并行处理 [2] 负载均衡 [3] 容错处理 [4] 易于使用 [5] 数据本地化优化</p><p>除以上MapReduce优势，还得益于一个强大的分布式文件系统GFS，提供超强的高可扩展的文件管理。</p><p>我们也从 MapReduce 开发过程中学到了不少东西。首先，约束编程模式使得并行和分布式计算非常容易，也易于构造容错的计算环境;其次，网络带宽是稀有资源。大量的系统优化是针对减少网络传输量为目的的: 数据本地化优化策略使大量的数据从本地磁盘读取，中间文件写入本地磁盘、并且只写一份中间文件也节约了网络 带宽;第三，多次执行相同的任务可以减少性能缓慢的机器带来的负面影响(alex 注: 即硬件配置不平衡)， 同时解决了由于机器失效导致的数据丢失问题。</p><p><strong>推荐阅读：</strong></p><p>[1] <a href="http://itweet.cn/blog/2018/04/20/distributed-file-system-design" target="_blank" rel="noopener">分布式文件系统设计与实现</a></p><p>[2] <a href="http://itweet.cn/blog/2018/04/23/mapreduce-osdi04" target="_blank" rel="noopener">MapReduce设计与实现</a></p><p>欢迎关注微信公众号[Whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我曾经多次提到过，我涉猎广泛，但是没有有个精通的技能，在大数据领域几年，也没什么成果。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我开始尝试改变，未来很长一段时间注重修炼内功，是什么让我有这样的改变？&lt;code&gt;极客时间&lt;/code&gt;购买《朱赟的技术管理课》，&lt;code&gt;安姐
+      
+    
+    </summary>
+    
+      <category term="BigData" scheme="http://itweet.github.io/categories/BigData/"/>
+    
+    
+      <category term="mapreduce" scheme="http://itweet.github.io/tags/mapreduce/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>distributed-file-system-design</title>
+    <link href="http://itweet.github.io/2018/04/20/distributed-file-system-design/"/>
+    <id>http://itweet.github.io/2018/04/20/distributed-file-system-design/</id>
+    <published>2018-04-19T17:29:03.000Z</published>
+    <updated>2018-07-02T13:09:15.536Z</updated>
+    
+    <content type="html"><![CDATA[<p>忙着开发软件，最近一直没什么时间写作。</p><p>今天我们谈一下关于分布式文件系统。</p><p>分布式文件系统在一直在存储领域拥有举足轻重的地位，涉及知识也比较多。</p><p>主流分布式系统设计，主要分为三个方向：</p><p>[1] 分布式存储系统 </p><p>[2] 分布式计算系统 </p><p>[3] 分布式管理系统</p><p>今天我们谈<code>分布式存储系统</code>中我们比较熟悉的<code>非结构化数据存储</code>设计与实现。</p><p>谈到分布式文件系统，目前大家比较熟悉的GFS(Google File System)或者GFS开源实现HDFS。</p><p>目前在国内已经家喻户晓，稍微大一点的公司都在使用HDFS，可以说HDFS是大数据系统的基石。</p><p>Hadoop 3.1版本发布，增加对各种云端存储系统的支持，设计很有意思，以后内容会介绍。</p><h2 id="非结构化数据存储"><a href="#非结构化数据存储" class="headerlink" title="非结构化数据存储"></a>非结构化数据存储</h2><p>GFS是开发出来存储Google海量的日志数据，网页，文档等文本信息，并且对其进行批处理，比如：配合 mapreduce 为文档建立倒排索引，计算网页 PageRank。</p><p>设计初衷，为了支持更大规模数据处理和很高的合计吞吐量，拥有很强的扩展性，可容纳那么大了的非结构化数据。</p><p>因为数据分布式存储，需要大量取数据计算，必须支持很强的容错性，设计之初贴近实际生产，组合一堆普通机器形成集群，提供强大的存储能力，大量机器配合工作，系统故障和硬件故障被认为是常态。</p><p>GFS很好地解决了，大文件，大规模顺序数据追加写，提供很高的合计吞吐量。</p><p>GFS，HDFS一类的分布式文件系统，非常适合数据一旦写入，文件很少修改的场景。这样的设计导致几乎无法支持随机访问（random access）操作，面对低延迟、实时性要求高的场景不适合。</p><p>GFS分布式文件系统，并非标准的Posix标准实现，GFS主要提供快照和记录追加操作，多路结果合并。</p><ul><li>GFS架构</li></ul><p>使用Master-&gt;Slave设计，元数据信息主要由Master管理，这样的设计大大降低系统的实现难度。</p><p><img src="https://github.com/itweet/labs/raw/master/JDP/dfs/img/gfs_architecture.jpg" alt></p><p>为防止Master压力过大，限制了数据存储大量，GFS中数据存储单元使用Chunk表示，Chunk支持64M。</p><p>Master节点掌握整个集群数据存储核心数据，集群扩展能力受限于master节点内存，比如：大量小文件导致元数据信息爆满。</p><p>分布式文件系统多副本，可支持容错的读取数据，根据负载情况，最近副本取数据。</p><p>因为集群支持容错，故障自动恢复，所以整个集群可以扩展到很大规模，在传统MPI、MPP中无法支持很大规模。</p><p>而今天我们也看到MPP和支持超大规模分布式文件系统融合的案例，使得MPP计算层可扩展到更大规模。</p><ul><li>热点数据</li></ul><p>分布式文件系统，热点数据，导致系统局部过载而出现严重故障？</p><p>在分布式非结构化数据存储中，是非常常见的，比如我们某个公共库文件或程序，为使用方便和容错，大家把它存储在HDFS，它被切块存储于100个节点的集群某3个机器中，由于大量业务系统或者程序随机加载引用，导致某3个机器压力特别大，看到监控系统飘红。</p><p>我们可以通过增加副本数量，来让更多副本能提供访问服务，解决问题。</p><p>早期使用MapReduce/Spark系统，为缩短计算时间，默认3副本，我们提高到6，9个，增加数据本地化计算的几率。</p><ul><li>元数据</li></ul><p>集群扩展Slave受限于Master节点内容，元数据信息都存在Master，并且常驻内存，大量小文件也会造成Master性能下降。</p><ul><li>操作日志</li></ul><p>操作日志的作用</p><p>[1] 持久化存储metadata</p><p>[2] 存储完整的操作命令，保障最终的操作顺序</p><p>元数据信息的变更，全都是通过日志记录来实现的，通过日志复制到多个节点，保障可靠性，即使主节点损坏，也可恢复其他节点为主节点，继续提供服务。日志可复现任何一个时间点的操作行为，保障系统数据。</p><ul><li>Check point</li></ul><p>当operation log达到一定大小时，GFS master会做checkpoint，相当于把内存的B-Tree格式的信息dump到磁盘中。当master需要重启时，可以读最近一次的checkpoint，然后replay它之后的operation log，加快恢复的时间。</p><p>做checkpoint的时候，GFS master会先切换到新的operation log，然后开新线程做checkpoint，所以，对新来的请求是基本是不会有影响的。</p><p>状态数据，底层主要使用高度压缩的B-Tree存储。</p><ul><li>快照</li></ul><p>使用copy-on-writer实现，基本上不会对现有数据读取有影响。</p><h2 id="只读数据存储"><a href="#只读数据存储" class="headerlink" title="只读数据存储"></a>只读数据存储</h2><p>[1] 适合追加方式的写入和读取操作</p><p>[2] 很少有随机写入操作</p><p>目前HDFS，GFS主要用来存储海量的离线数据，提供海量非结构化数据存储场景。</p><p>如果需要支持随机写、更新、删除数据，就选其他系统，比如：Kudu</p><h2 id="冗余解决方案"><a href="#冗余解决方案" class="headerlink" title="冗余解决方案"></a>冗余解决方案</h2><p>容错考虑需要，有三倍冗余，目前主要有Erasure Codes实现，奇偶校验方法，可以缩小大量存储占用。</p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>[1] 没有在文件系层面提供任何的Cache机制，访问顺序读取加载大量文件，Cache支持意义不大</p><p>[2] 单个应用执行时机会不会重复读取数据</p><p>[3] GFS/HDFS适合流式读取一个大型数据集</p><p>[4] 在大型数据集中随机seek到某个位置，之后每次读取少量数据，提升效率。</p><p>[5] GFS/HDFS设计预期是使用大量的不可靠节点组件集群，因此，灾难冗余是此类系统设计的核心。</p><p>[6] 存储固定大小的Chunk，容易重新均衡数据。</p><p>[7] 原子记录追加，保障系统数据一致性。</p><p>[8] 中心Master设计，让复杂的分布式系统实现简单化，不用考虑数据一致性，元数据同步问题。</p><p>GFS/HDFS设计初衷，保障有大量并发读写操作时，能够提供很高的合计吞吐量。</p><p>通过分离控制流(Master)和数据流(Chunk client)来实现，所以我们经常提起的Edge节点会对整个系统性能有很大的影响。</p><p>Master节点负载过高，通过Chunk租约将控制权交给主副本(主Chunk)，将Master压力降到最低。</p><p>目前类似GFS的开源实现，主流选择HDFS，而且HDFS在实现上，弥补很多GFS中的不足。我也没看到有可替代HDFS的系统，因为有HDFS造就今天繁荣的Hadoop生态系统，数据分析引擎、数据存储引擎百花齐放。</p><p>软件系统的设计与实现是为解决现实问题而出现，设计上会有很多权衡，不同的权衡造就不同的系统，各自有擅长的场景。</p><p>欢迎关注微信公众号[Whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;忙着开发软件，最近一直没什么时间写作。&lt;/p&gt;
+&lt;p&gt;今天我们谈一下关于分布式文件系统。&lt;/p&gt;
+&lt;p&gt;分布式文件系统在一直在存储领域拥有举足轻重的地位，涉及知识也比较多。&lt;/p&gt;
+&lt;p&gt;主流分布式系统设计，主要分为三个方向：&lt;/p&gt;
+&lt;p&gt;[1] 分布式存储系统 &lt;/p&gt;
+      
+    
+    </summary>
+    
+      <category term="BigData" scheme="http://itweet.github.io/categories/BigData/"/>
+    
+    
+      <category term="hdfs" scheme="http://itweet.github.io/tags/hdfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Minimalism-Live-a-Meaningful-Life</title>
+    <link href="http://itweet.github.io/2018/04/19/Minimalism-Live-a-Meaningful-Life/"/>
+    <id>http://itweet.github.io/2018/04/19/Minimalism-Live-a-Meaningful-Life/</id>
+    <published>2018-04-19T01:01:55.000Z</published>
+    <updated>2018-07-02T13:09:15.536Z</updated>
+    
+    <content type="html"><![CDATA[<p>2010年12月14日，乔舒亚和瑞安正式启动了自己的极简主义网站TheMinimalists.com，与此同时放弃了年薪六位数的工作。</p><p>为什么？</p><p>此书《Minimalism: Live a Meaningful Life》会提供答案。</p><p>看完以后依然记忆犹新，让生活在一线的我抓住了一丝若有若无的东西。</p><p>书中，作者通过大量的思考、讨论、研究和试验，提出了使人生有意义的五大价值：</p><p>（1）健康：开启更有意义生活的起点；</p><p>（2）人际关系：我们都想被爱，我们都想去爱；</p><p>（3）热情：缺乏热情是许多人产生空虚感的根源；</p><p>（4）成长：如果没有在成长，你就在走向死亡；</p><p>（5）奉献：人类的一种本能。</p><p>作者通过大量的亲身实践，告诉大家，帮助大家指定详细的计划，通过极简主义的生活，帮助更好地生活。</p><p>我相信极简主义是一种生活态度，帮助我们在繁杂的世界中找到自己内心的向往。如果你觉得现在的生活不快乐，生活太累，何不体验一下极简主义？</p><p>非常遗憾，没有读书笔记，因为从下一本书开始我才留有读书笔记。</p><p>曾经，我读书期读取的书籍都留有读书笔记，至今我到哪？它们就到哪？</p><p>最近，不经意翻看到，暗下决心以后读书学习都要开始记录读书笔记。</p><p>聊回《Minimalism: Live a Meaningful Life》：</p><p>一本生活指南，实践如何活得更好？</p><p>一种人生态度，积极，健康，自由，也是大部分追求而不可得的生活。</p><p>如何放下？才能过获得的生活？</p><h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><p>[1]《苹果往事：开发麦金托什的非凡岁月》</p><p>[2] Just for Fun: The Story of an Accidental Revolutionary</p><p>[3] 程序员必读的书(好书推荐)</p><p>[4] 人月神话</p><p>[5] 未来之路 - 比尔.盖茨</p><p>[6] 黑客与画家</p><p>[7] 霍华德.休斯</p><p>[8] 特斯拉自传</p><p>参考：</p><p>[1] <a href="https://www.theminimalists.com/" target="_blank" rel="noopener">https://www.theminimalists.com/</a></p><p>欢迎关注微信公众号[Whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;2010年12月14日，乔舒亚和瑞安正式启动了自己的极简主义网站TheMinimalists.com，与此同时放弃了年薪六位数的工作。&lt;/p&gt;
+&lt;p&gt;为什么？&lt;/p&gt;
+&lt;p&gt;此书《Minimalism: Live a Meaningful Life》会提供答案。&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="Books" scheme="http://itweet.github.io/categories/Books/"/>
+    
+    
+      <category term="books" scheme="http://itweet.github.io/tags/books/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nikola-Tesla-Autobiography</title>
+    <link href="http://itweet.github.io/2018/04/19/Nikola-Tesla-Autobiography/"/>
+    <id>http://itweet.github.io/2018/04/19/Nikola-Tesla-Autobiography/</id>
+    <published>2018-04-19T01:00:57.000Z</published>
+    <updated>2018-07-02T13:09:15.536Z</updated>
+    
+    <content type="html"><![CDATA[<p>借着出差苏州，在来回来的路上看完《特斯拉自传》，原名：《Nikola Tesla’s Autobiography》</p><p>特斯拉，不只是电动车；特斯拉，更是人类历史上最传奇的科学家之一。</p><p>作为电气时代最主要的奠基者之一，特斯拉创造了我们的现在（交流电、雷达等等）；作为一个天才的发明家和科学家，特斯拉预言了我们的未来（空中交通、星际通讯等等）。</p><p>特斯拉何以取得如此令人惊叹的成就？特斯拉对未来还有着怎样惊人的预言？</p><p>书中包括两个部分，第一部分是特斯拉撰写的回忆录，第二部分是特斯拉的文章、演讲及他人对他的报道，诸多内容都是首次在中文世界披露。通过这些文字，我们不仅能了解特斯拉的生平经历，还能读到他对未来世界的设想，思考科技的真谛。</p><p>读书笔记：</p><p>通过关键词体现，整本书的关键内容。</p><p>关于精神幻象</p><blockquote><p>首先，特斯拉在文中最先提出他异于常人之处，他有<code>精神幻象</code>。</p><p>何为<code>精神幻象</code>，可以让他在大脑中勾勒出任何事物的轮廓和场景，他可以想电影一样回放他看到过的<br>场景或者靠想象力想象出来的任何事物的详细轮廓和细节，有非常敏锐的嗅觉和听觉，早期对他造成非<br>常大的困扰，他亲自在自传中表达他易于常人的能力。<code>精神幻象</code><br>让他能够在大脑反复试验和推演他的发明，从而让交流电发明成为可能。</p></blockquote><p>关于自我控制力</p><blockquote><p>还是孩子的时候，父母就教育他学会自省，在未来发现是无价之宝。我们绝大多数人，都忽略了内心世<br>界，过分关注外部世界。59岁的特斯拉，身体依然矫健敏捷，视力好，35年身材和体重没有任何变化，<br>得益于强大的自我控制力？特斯拉写了很多小故事说明自我控制力对他个人的影响。</p></blockquote><p>关于自律</p><blockquote><p>理工学院，3点起床，一直学习到晚上11点，周末和节假日也不例外。- 特斯拉</p></blockquote><p>关于激情</p><blockquote><p>由于热爱发明创造，曾经到爱迪生工作室工作。</p></blockquote><p>关于驱动力</p><blockquote><p>生活-&gt; 事件 -&gt; 驱动 -&gt; 创造、发明.</p></blockquote><p>关于未来</p><blockquote><p>有一天，图书馆到了基本新书，与我以前读过的书不一样，书的内容非常有吸引力，我被彻底迷住了，<br>完全忘记了自己身患重症。这几本书都是马克.吐温的早期作品。我觉得是这些书给我带来的愉悦感，<br>让我的身体神奇地复原了。25年之后，我在美国遇到了马克.吐温，并与他成为好朋友。当我告诉了他<br>我的这段经历时，这位伟大的幽默大师竟然眼泪盈眶.</p></blockquote><p>关于读书</p><blockquote><p>特斯拉是超级天才，依然非常努力，中国人的话来说，从小就博览群书，把他周边所有图书馆的书都看<br>完。他自己亲自表述，各式各样的书籍知识汇集在他的大脑中，对他未来产生很大的影响。一般有重大<br>成就的人才，从小都阅读了大量的书籍有没有？Elon Musk和他同年惊人的相似.</p></blockquote><p>关于愿景</p><blockquote><p>一个人的愿景 -&gt; 影响 -&gt; 未来.</p></blockquote><p>关于专业领域</p><blockquote><p>特斯拉拥有超凡的想象力，但是当他深入某个交流电/涡轮机领域的时候，<br>他拥有很强的动手能力，能发明和修理各种各样电器设备，但是依然发现<br>自己欠缺对实时原理的掌握.</p></blockquote><p>关于交流</p><blockquote><p>一个怪咖科学家，对于大量、同行业、知名人物、各界人士的人交流之后，表示对他发明创造产生了很<br>大的影响.</p></blockquote><p>关于迪科儿</p><blockquote><p>迪科儿早期对特斯拉有很大影响的一位数学家。</p></blockquote><p>关于阿基米德</p><blockquote><p>阿基米德 - 特斯拉发明创造之路上，他非常推崇和喜欢的一位数学家。</p></blockquote><p>关于勇气</p><blockquote><p>怀揣他人无法理解的思想，就如同在高处登山：刚开始你感到很不舒服，希望马上下山，你不相信<br>自己的能力；但很快你就会感受到远离了尘嚣的寂静，高海拔也会让你安静下来；你的脚步变得更<br>坚实，然后你会开始享受这让人眩晕的高度。</p></blockquote><p>关于阿奥菲</p><blockquote><p>我当时只有七八岁是，我读过一本小说—-匈牙利作家约西卡的《阿奥菲》的塞尔维亚语译本。读完本<br>书之后，我的脑海里萌生了控制自我欲望的想法，我开始严格自律。起初我感受到了个人欲望的强烈抵<br>触，随着时间的流逝，我的欲望和我的意愿已经完全一致了。这单可以说是我取得成功的密码所在，也<br>是我能发现旋转磁场的关键原因之一。如果我们没有如此自律，也不可能发明感应电机。</p></blockquote><p>关于生死</p><blockquote><p>特斯拉，在童年和成年整个过程中，特斯拉都在生死线徘徊多此，童年四次差点死去，疾病和意外事故<br>让人面临很多次死亡威胁。他在回忆录中，写得都非常惊心动魄，特斯拉是一位超级天才，相信他也是<br>一位作家，非常独特的见解，句句话都是直指本质。</p></blockquote><p>在这个时代，决定人们进步程度的已不是工作的数量，而是工作的质量。 - 特斯拉。</p><p>生命就是一个持续调整以适应环境的过程 - 赫伯特.斯宾塞。</p><p>从那以后，我专攻物理学、力学和数学，还利用空闲时间在图书馆学习。无论我做什么事情，我总强迫自己坚持到底。 - 特斯拉。</p><p>“实践系统” - 我看到报纸上刊载的雪崩图片，忍不住思考那么小的雪球是如何变得如此巨大的！从那以后，我开始着迷于如何将微弱力量放大的这一问题。- 特斯拉。</p><p>为而言之，一种发明的诞生不可能满足人类的所有正向需求。这就是科技的本质。 - 特斯拉。</p><p>在回忆录中，特斯拉有一段非常前沿的论述，我想应该也是Elon Musk想要实现的，不难猜测<code>Tesla</code>创立也是为了纪念和践行<code>尼古拉·特斯拉</code>的伟大思想。</p><p>原文：</p><blockquote><p>一座城市的发展和财富，一个国家的兴盛，整个人类物种的进步，都受制于所能获取的能源。</p><p>我们每个人都应该明白，必须镜框开发新的能源供应，或者对现有的方式进行重大改进。</p><p>我们不应该简单的满足于改进蒸汽和爆破发动机或者发明新型电池；我们应该为更好的前景而努力，趋<br>势线更伟大的任务。我们必须革新获取能源的方式，要完善方法，要使用能够用之不尽，取之不竭的可<br>再生能源，而不会造成消耗和浪费的能源。</p><p>无论最终人们使用哪种输送电能方式，靠近能源的生产地仍将是一个重要的优势。</p></blockquote><p>是这样的愿景一直驱动特斯拉，终生奋斗在可再生能源改变世界能源的获取方式，并且通过交流电的发明，帮助电站直接输送电能，几乎不会有能源损耗，让今天的一切成为可能。当然，特斯拉一生还有很多伟大的发明。</p><p>读完《Nikola Tesla’s Autobiography》，我最大的感悟：</p><p>我的结论是实干家首先是思想家，改变行业的人，往往集两者于一身，很难想象有人帮助达芬奇构思五年以后画什么，用什么作画，达芬奇既是艺术家又精通化学和配色，还懂人体解剖，他将艺术和科学，思考与实践结合，才创作出杰出的画作。我们的行业也一样,杰出的人既是思想家又是实干家。很多人把一切归功于思考，其实行动更困难，常有人说这点子我三年前就想到了，但稍加分析你会发现，有实际行动的人必定努力思考过。</p><h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><p>[1]《苹果往事：开发麦金托什的非凡岁月》</p><p>[2] Just for Fun: The Story of an Accidental Revolutionary</p><p>[3] 程序员必读的书(好书推荐)</p><p>[4] 人月神话</p><p>[5] 未来之路 - 比尔.盖茨</p><p>[6] 黑客与画家</p><p>[7] 霍华德.休斯</p><p>[8] 特斯拉自传</p><p>欢迎关注微信公众号[Whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;借着出差苏州，在来回来的路上看完《特斯拉自传》，原名：《Nikola Tesla’s Autobiography》&lt;/p&gt;
+&lt;p&gt;特斯拉，不只是电动车；特斯拉，更是人类历史上最传奇的科学家之一。&lt;/p&gt;
+&lt;p&gt;作为电气时代最主要的奠基者之一，特斯拉创造了我们的现在（交流电、
+      
+    
+    </summary>
+    
+      <category term="Books" scheme="http://itweet.github.io/categories/Books/"/>
+    
+    
+      <category term="books" scheme="http://itweet.github.io/tags/books/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>clickhouse-build-for-centos</title>
+    <link href="http://itweet.github.io/2018/04/10/clickhouse-build-for-centos/"/>
+    <id>http://itweet.github.io/2018/04/10/clickhouse-build-for-centos/</id>
+    <published>2018-04-10T15:24:49.000Z</published>
+    <updated>2018-07-02T13:09:15.535Z</updated>
+    
+    <content type="html"><![CDATA[<p>ClickHouse源码阅读环境之Centos编译，主要介绍如何在Centos7.x版本成功构建ClickHouse，生成可部署的二进制文件。</p><h2 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h2><p>我已经做好可以直接编译的镜像，直接pull获取镜像即可开始愉快的编译。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker pull jikelab/centos-7-clickhouse:v1.1.54370-stable</span><br><span class="line"></span><br><span class="line">docker run -itd -v /data/gitlab/jdp:/opt --workdir /opt jikelab/centos-7-clickhouse:v1.1.54370-stable /bin/bash</span><br><span class="line"></span><br><span class="line">docker exec -it 容器ID /bin/bash      # 进入容器后，clone源码，即可开始building...</span><br></pre></td></tr></table></figure><p>获取Clickhouse源码，进去源码目录。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /opt</span><br><span class="line"></span><br><span class="line">git clone -b stable --recursive https://github.com/yandex/ClickHouse.git</span><br><span class="line"></span><br><span class="line">cd ClickHouse</span><br></pre></td></tr></table></figure><h2 id="编译clickhouse"><a href="#编译clickhouse" class="headerlink" title="编译clickhouse"></a>编译clickhouse</h2><p>Basic environment</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export CMAKE=cmake3</span><br><span class="line">export CC=/opt/rh/devtoolset-7/root/usr/bin/gcc</span><br><span class="line">export CXX=/opt/rh/devtoolset-7/root/usr/bin/g++</span><br></pre></td></tr></table></figure><p>Detect number of threads to run ‘make’ command</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export THREADS=$(grep -c ^processor /proc/cpuinfo)</span><br><span class="line"></span><br><span class="line">echo &quot;CMAKE=$CMAKE&quot;</span><br><span class="line">echo &quot;CC=$CC&quot;</span><br><span class="line">echo &quot;CXX=$CXX&quot;</span><br><span class="line">echo &quot;THREADS=$THREADS&quot;</span><br></pre></td></tr></table></figure><p>Build clickhouse RDBMS</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rm -rf build</span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">$CMAKE .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE:STRING=Release  -DHAVE_THREE_PARAM_SCHED_SETAFFINITY=1 -DOPENSSL_SSL_LIBRARY=/usr/lib64/libssl.so -DOPENSSL_CRYPTO_LIBRARY=/usr/lib64/libcrypto.so -DOPENSSL_INCLUDE_DIR=/usr/include/openssl</span><br><span class="line">make -j $THREADS</span><br><span class="line">cd ..</span><br></pre></td></tr></table></figure><p>build successful</p><p><img src="https://github.com/itweet/labs/raw/master/JDP/ClickHouse/img/build-clickhouse.png" alt="clickhouse-build-sucessful"></p><p>安装clickhouse，注意需要依赖如下两个包，一般打包为RPM的时候依赖上即可。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y unixODBC libicu</span><br></pre></td></tr></table></figure><p>如上就是clickhouse在centos下的编译过程，由于提前准备好了编译环境，跳过了很多坑，这样比较顺利。</p><p>至于构建出RPM，则需要自己定制自己的spec文件，学习通过spec文件，通过rpmbuild构建rpm包。</p><p>我们在单独内容，来介绍一个通用的构建RPM包的方法和示例，包括我们是有自动化流水线的从源码拉取到生成RPM的系统。</p><p><img src="https://github.com/itweet/labs/raw/master/JDP/ClickHouse/img/auto-to-rpm.png" alt="auto-to-rpm"></p><h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><p>[1] 初识ClickHouse《First Time ClickHouse》</p><p>[2] 大规模数据处理的演变(2003-2017)</p><p>[3] Clickhouse快速上手</p><p>[4] 数据仓库：过去、现在和未来</p><p>[5] ClickHouse相关配置剖析</p><p>[6] ClickHouse源码阅读环境之ubuntu编译</p><p>欢迎关注微信公众号[Whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;ClickHouse源码阅读环境之Centos编译，主要介绍如何在Centos7.x版本成功构建ClickHouse，生成可部署的二进制文件。&lt;/p&gt;
+&lt;h2 id=&quot;基础环境&quot;&gt;&lt;a href=&quot;#基础环境&quot; class=&quot;headerlink&quot; title=&quot;基础环境&quot;
+      
+    
+    </summary>
+    
+      <category term="Database" scheme="http://itweet.github.io/categories/Database/"/>
+    
+    
+      <category term="Clickhouse" scheme="http://itweet.github.io/tags/Clickhouse/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="clickhouse-quick-start">
+
+
+
+
+  <meta name="keywords" content="Clickhouse,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2018/03/17/clickhouse-quick-start/">
+
+
+<meta name="description" content="Clickhouse优雅的设计，超高的性能，让我忍不住想深入研究。边研究边总结，今天，我们介绍一下clickhouse快速上手，全文涉及一些具体配置，内容略多，主要介绍几种主要的安装方式。  单机安装 容器安装 集群安装  由于目前官方没有提供RPM，默认只提供Deb包。当然也有第三方机构提供RPM包，国内主要使用CentOS/RedHat系，所以方便了很多。  ClickHouse is an">
+<meta name="keywords" content="Clickhouse">
+<meta property="og:type" content="article">
+<meta property="og:title" content="clickhouse-quick-start">
+<meta property="og:url" content="http://itweet.github.io/2018/03/17/clickhouse-quick-start/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Clickhouse优雅的设计，超高的性能，让我忍不住想深入研究。边研究边总结，今天，我们介绍一下clickhouse快速上手，全文涉及一些具体配置，内容略多，主要介绍几种主要的安装方式。  单机安装 容器安装 集群安装  由于目前官方没有提供RPM，默认只提供Deb包。当然也有第三方机构提供RPM包，国内主要使用CentOS/RedHat系，所以方便了很多。  ClickHouse is an">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.533Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="clickhouse-quick-start">
+<meta name="twitter:description" content="Clickhouse优雅的设计，超高的性能，让我忍不住想深入研究。边研究边总结，今天，我们介绍一下clickhouse快速上手，全文涉及一些具体配置，内容略多，主要介绍几种主要的安装方式。  单机安装 容器安装 集群安装  由于目前官方没有提供RPM，默认只提供Deb包。当然也有第三方机构提供RPM包，国内主要使用CentOS/RedHat系，所以方便了很多。  ClickHouse is an">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> clickhouse-quick-start - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          clickhouse-quick-start
+        
+      </h1>
+
+      <time class="post-time">
+          3月 17 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Clickhouse优雅的设计，超高的性能，让我忍不住想深入研究。边研究边总结，今天，我们介绍一下clickhouse快速上手，全文涉及一些具体配置，内容略多，主要介绍几种主要的安装方式。</p>
+<ul>
+<li>单机安装</li>
+<li>容器安装</li>
+<li>集群安装</li>
+</ul>
+<p>由于目前官方没有提供RPM，默认只提供Deb包。当然也有第三方机构提供RPM包，国内主要使用CentOS/RedHat系，所以方便了很多。</p>
+<blockquote>
+<p>ClickHouse is an open-source column-oriented database management system.</p>
+</blockquote>
+<h2 id="ClickHouse快速启动"><a href="#ClickHouse快速启动" class="headerlink" title="ClickHouse快速启动"></a>ClickHouse快速启动</h2><h3 id="Ubuntu-Debian安装"><a href="#Ubuntu-Debian安装" class="headerlink" title="Ubuntu/Debian安装"></a>Ubuntu/Debian安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4    # optional</span><br><span class="line"></span><br><span class="line">sudo apt-add-repository &quot;deb http://repo.yandex.ru/clickhouse/deb/stable/ main/&quot;</span><br><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install clickhouse-server-common clickhouse-client -y</span><br><span class="line"></span><br><span class="line">sudo service clickhouse-server start</span><br><span class="line">clickhouse-client</span><br></pre></td></tr></table></figure>
+<p>单机的安装部署，很简单，安装上基本就可以启动体验它的强大功能，你会发现clickhouse单机性能也很强。对于其他操作系统，最简单的使用方式是官方提供的<a href="https://hub.docker.com/r/yandex/clickhouse-server/" target="_blank" rel="noopener">Clickhouse Docker images</a>。或者通过官方文档源码构建Clickhouse。</p>
+<h3 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h3><p>官方Docker镜像提供也是基于Ubuntu之上的，Docker提供强大的底层系统兼容性，所以基本在任何能安装启动Docker系统之上都可以运行clickhouse，官方提供的docker镜像，也提供<code>docker file</code>，可以根据自己的需要进行定制化，由于官方镜像默认监听得是IPV6地址，可能启动无法正常使用，可以进入容器修改相关配置项，方可正常使用。</p>
+<h4 id="启动clickhouse-server实例"><a href="#启动clickhouse-server实例" class="headerlink" title="启动clickhouse-server实例"></a>启动clickhouse-server实例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d --name some-clickhouse-server --ulimit nofile=262144:262144 yandex/clickhouse-server</span><br></pre></td></tr></table></figure>
+<h4 id="clickhouse-client连接"><a href="#clickhouse-client连接" class="headerlink" title="clickhouse-client连接"></a>clickhouse-client连接</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -it --rm --link some-clickhouse-server:clickhouse-server yandex/clickhouse-client --host clickhouse-server</span><br></pre></td></tr></table></figure>
+<p>关于<a href="https://clickhouse.yandex/docs/en/interfaces/cli/" target="_blank" rel="noopener">ClickHouse client</a></p>
+<h4 id="快速体验"><a href="#快速体验" class="headerlink" title="快速体验"></a>快速体验</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE ontime_local (FlightDate Date,Year UInt16) ENGINE = MergeTree(FlightDate, (Year, FlightDate), 8192);</span><br><span class="line"></span><br><span class="line">insert into ontime_local (FlightDate,Year) values(&apos;2001-10-12&apos;,2001);</span><br><span class="line"></span><br><span class="line">select count(*) from ontime_local;</span><br></pre></td></tr></table></figure>
+<p>如何？是否感觉怪怪的，ENGINE是啥？我们慢慢理解，它的语法如此。</p>
+<h4 id="ClickHouse容器配置"><a href="#ClickHouse容器配置" class="headerlink" title="ClickHouse容器配置"></a>ClickHouse容器配置</h4><p>容器需要公开用于HTTP通信的<code>8123</code>端口和用于主机间通信的<code>9000</code>端口。</p>
+<p>ClickHouse的配置文件”config.xml”(<a href="https://clickhouse.yandex/docs/en/operations/configuration_files/" target="_blank" rel="noopener">documentation</a>)</p>
+<p>使用自定义配置启动clickhouse-server实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d --name some-clickhouse-server --ulimit nofile=262144:262144 -v /path/to/your/config.xml:/etc/clickhouse-server/config.xml yandex/clickhouse-server</span><br></pre></td></tr></table></figure>
+<p>注意：<code>这里有docker的知识，挂载了一个宿主机的配置文件替代容器中的默认配置，实现自定义配置</code></p>
+<h3 id="Clickhouse-Dockerfile"><a href="#Clickhouse-Dockerfile" class="headerlink" title="Clickhouse Dockerfile"></a>Clickhouse Dockerfile</h3><p>通过自定义Dockerfile制作基于其他系统的Docker Imange，可以自学docker的知识。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:16.04</span><br><span class="line"></span><br><span class="line">ARG repository=&quot;deb http://repo.yandex.ru/clickhouse/deb/stable/ main/&quot;</span><br><span class="line">ARG version=\*</span><br><span class="line"></span><br><span class="line">RUN apt-get update &amp;&amp; \</span><br><span class="line">    apt-get install -y apt-transport-https &amp;&amp; \</span><br><span class="line">    mkdir -p /etc/apt/sources.list.d &amp;&amp; \</span><br><span class="line">    echo $repository | tee /etc/apt/sources.list.d/clickhouse.list &amp;&amp; \</span><br><span class="line">    apt-get update &amp;&amp; \</span><br><span class="line">    apt-get install --allow-unauthenticated -y clickhouse-server-common=$version clickhouse-server-base=$version &amp;&amp; \</span><br><span class="line">    rm -rf /var/lib/apt/lists/* /var/cache/debconf &amp;&amp; \</span><br><span class="line">    apt-get clean</span><br><span class="line"></span><br><span class="line">COPY docker_related_config.xml /etc/clickhouse-server/config.d/</span><br><span class="line">RUN chown -R clickhouse /etc/clickhouse-server/</span><br><span class="line"></span><br><span class="line">USER clickhouse</span><br><span class="line">EXPOSE 9000 8123 9009</span><br><span class="line">VOLUME /var/lib/clickhouse</span><br><span class="line"></span><br><span class="line">ENV CLICKHOUSE_CONFIG /etc/clickhouse-server/config.xml</span><br><span class="line"></span><br><span class="line">ENTRYPOINT exec /usr/bin/clickhouse-server --config=$&#123;CLICKHOUSE_CONFIG&#125;</span><br></pre></td></tr></table></figure>
+<p>快速启动介绍了基于deb的安装方式以及容器化的安装方式，单机的话足够使用和体验clickhouse功能，基于rpm安装方式类似，集群版安装会介绍RPM安装。</p>
+<p>如果在生产使用，都是冲着集群功能来的，接下来介绍一下集群的安装。</p>
+<h2 id="ClickHouse集群安装"><a href="#ClickHouse集群安装" class="headerlink" title="ClickHouse集群安装"></a>ClickHouse集群安装</h2><p>既然，都是冲着集群来的，我们就介绍一下集群的安装，其实也很简单。</p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>我使用VMware虚拟3台服务器，配置如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">CPU</th>
+<th style="text-align:center">Memory</th>
+<th style="text-align:right">Storage</th>
+<th style="text-align:right">Cluster</th>
+<th style="text-align:right">操作系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">2c</td>
+<td style="text-align:center">15g</td>
+<td style="text-align:right">180g</td>
+<td style="text-align:right">3 node</td>
+<td style="text-align:right">7.2.1511 (core)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h3><p>通过官方提供的Testing data，我们使用<a href="https://clickhouse.yandex/docs/en/getting_started/example_datasets/ontime/" target="_blank" rel="noopener"><code>OnTime</code></a>数据进行测试。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">原始数据</th>
+<th style="text-align:center">入库数据</th>
+<th style="text-align:right">字段</th>
+<th style="text-align:right">数据量</th>
+<th style="text-align:right">表引擎</th>
+<th style="text-align:right">默认压缩</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">6.3g</td>
+<td style="text-align:center">15g</td>
+<td style="text-align:right">100</td>
+<td style="text-align:right">177033339</td>
+<td style="text-align:right">MergeTree</td>
+<td style="text-align:right">lz4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="安装集群"><a href="#安装集群" class="headerlink" title="安装集群"></a>安装集群</h3><p>集群安装之前，必须先准备好一个正常可用的zookeeper集群，因为在使用集群和复制表的时候会用到。</p>
+<p>接下来，假设已经具备zookeeper集群环境。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">IP</th>
+<th style="text-align:center">用户</th>
+<th style="text-align:right">密码</th>
+<th style="text-align:right">主机名</th>
+<th style="text-align:right">操作系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">192.168.0.113-115</td>
+<td style="text-align:center">root</td>
+<td style="text-align:right">node{1..3}</td>
+<td style="text-align:right">具备</td>
+<td style="text-align:right">7.2.1511 (core)</td>
+</tr>
+</tbody>
+</table>
+<p>操作系统`7.2.1511 (core)以上，安装顺利。</p>
+<h4 id="基础环境准备"><a href="#基础环境准备" class="headerlink" title="基础环境准备"></a>基础环境准备</h4><p>[1] 修改hostname和hosts &amp;&amp; 关闭selinux &amp;&amp; 关闭firewalld</p>
+<p>所有主机，修改hosts</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ tail -3 /etc/hosts</span><br><span class="line"></span><br><span class="line">192.168.0.113   node1.jikelab.com   node1</span><br><span class="line">192.168.0.114   node2.jikelab.com   node2</span><br><span class="line">192.168.0.115   node3.jikelab.com   node3</span><br></pre></td></tr></table></figure>
+<p>所有主机，关闭Selinux</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sed -i &apos;s#SELINUX=enforcing#SELINUX=disabled#g&apos; /etc/selinux/config</span><br><span class="line">setenforce 0</span><br><span class="line"></span><br><span class="line">$ sudo grep SELINUX=disabled /etc/selinux/config</span><br></pre></td></tr></table></figure>
+<p>所有主机，关闭firewalld</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl stop firewalld</span><br><span class="line">$ sudo systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+<p>[2] 打开最大文件数</p>
+<p>所有主机操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/security/limits.d/clickhouse.conf</span><br><span class="line"></span><br><span class="line">clickhouse      soft    nofile  262144</span><br><span class="line">clickhouse      hard    nofile  262144</span><br></pre></td></tr></table></figure>
+<h3 id="安装clickhouse"><a href="#安装clickhouse" class="headerlink" title="安装clickhouse"></a>安装clickhouse</h3><p>[1] 准备YUM源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils</span><br><span class="line"></span><br><span class="line">yum-config-manager --add-repo http://repo.red-soft.biz/repos/clickhouse/repo/clickhouse-el7.repo</span><br><span class="line"></span><br><span class="line">yum install -y clickhouse-server clickhouse-client clickhouse-server-common clickhouse-compressor</span><br></pre></td></tr></table></figure>
+<p>使用第三方提供的clickhouse的yum源仓库，相比之前要在RedHat/CentOS系统安装都需要自己源码构建安装方便很多。</p>
+<p>[2] 安装clickhouse</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">yum install -y clickhouse-server clickhouse-client clickhouse-server-common clickhouse-compressor</span><br><span class="line"></span><br><span class="line">Installed:</span><br><span class="line">  clickhouse-client.x86_64 0:1.1.54236-4.el7</span><br><span class="line">  clickhouse-compressor.x86_64 0:1.1.54236-4.el7</span><br><span class="line">  clickhouse-server.x86_64 0:1.1.54236-4.el7</span><br><span class="line">  clickhouse-server-common.x86_64 0:1.1.54236-4.el7</span><br><span class="line"></span><br><span class="line">Dependency Installed:</span><br><span class="line">  libicu.x86_64 0:50.1.2-15.el7          libtool-ltdl.x86_64 0:2.4.2-22.el7_3</span><br><span class="line">  unixODBC.x86_64 0:2.3.1-11.el7</span><br></pre></td></tr></table></figure>
+<p>如上，clickhous几乎没有什么依赖，系统非常干净。</p>
+<p>[3] 修改配置文件</p>
+<p>方便管理，我们把日志、配置文件都存储到一个统一的根路径。</p>
+<p>首先修改<code>/etc/rc.d/init.d/clickhouse-server</code>文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CLICKHOUSE_LOGDIR=/data/clickhouse/log</span><br><span class="line">CLICKHOUSE_DATADIR_OLD=/data/clickhouse/data_old</span><br><span class="line">CLICKHOUSE_CONFIG=/data/clickhouse/config.xml</span><br></pre></td></tr></table></figure>
+<p><code>CLICKHOUSE_DATADIR_OLD</code>为兼容老版本，新版本已经弃用。</p>
+<blockquote>
+<p>修改最核心配置文件<code>config.xml</code>。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">$ vi /data/clickhouse/config.xml</span><br><span class="line"></span><br><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;yandex&gt;</span><br><span class="line">    &lt;logger&gt;</span><br><span class="line">        &lt;level&gt;trace&lt;/level&gt;</span><br><span class="line">        &lt;log&gt;/data/clickhouse/log/server.log&lt;/log&gt;</span><br><span class="line">        &lt;errorlog&gt;/data/clickhouse/log/error.log&lt;/errorlog&gt;</span><br><span class="line">        &lt;size&gt;1000M&lt;/size&gt;</span><br><span class="line">        &lt;count&gt;10&lt;/count&gt;</span><br><span class="line">    &lt;/logger&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- For HTTPS over native protocol. --&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    &lt;https_port&gt;8443&lt;/https_port&gt;</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;http_port&gt;8123&lt;/http_port&gt;</span><br><span class="line">    &lt;tcp_port&gt;9000&lt;/tcp_port&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- Port for communication between replicas. Used for data exchange. --&gt;</span><br><span class="line">    &lt;interserver_http_port&gt;9009&lt;/interserver_http_port&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 本机域名 --&gt;</span><br><span class="line">    &lt;interserver_http_host&gt;node1.jikelab.com&lt;/interserver_http_host&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 监听IP --&gt;</span><br><span class="line">    &lt;listen_host&gt;0.0.0.0&lt;/listen_host&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 最大连接数 --&gt;</span><br><span class="line">    &lt;max_connections&gt;64&lt;/max_connections&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 没搞懂的参数 --&gt;</span><br><span class="line">    &lt;keep_alive_timeout&gt;3&lt;/keep_alive_timeout&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 最大并发查询数 --&gt;</span><br><span class="line">    &lt;max_concurrent_queries&gt;16&lt;/max_concurrent_queries&gt;</span><br><span class="line">   </span><br><span class="line">    &lt;!-- 单位是B --&gt;</span><br><span class="line">    &lt;uncompressed_cache_size&gt;8589934592&lt;/uncompressed_cache_size&gt;</span><br><span class="line">    &lt;mark_cache_size&gt;10737418240&lt;/mark_cache_size&gt;</span><br><span class="line">   </span><br><span class="line">    &lt;!-- 存储路径 --&gt;</span><br><span class="line">    &lt;path&gt;/data/clickhouse/&lt;/path&gt;</span><br><span class="line">    &lt;tmp_path&gt;/data/clickhouse/tmp/&lt;/tmp_path&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- user配置 --&gt;</span><br><span class="line">    &lt;users_config&gt;users.xml&lt;/users_config&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;default_profile&gt;default&lt;/default_profile&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;log_queries&gt;1&lt;/log_queries&gt;</span><br><span class="line"></span><br><span class="line">    &lt;default_database&gt;default&lt;/default_database&gt;</span><br><span class="line"></span><br><span class="line">     &lt;!-- Configuration of clusters that could be used in Distributed tables.</span><br><span class="line">         https://clickhouse.yandex/docs/en/table_engines/distributed/</span><br><span class="line">      --&gt;</span><br><span class="line">    &lt;remote_servers incl=&quot;clickhouse_remote_servers&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;zookeeper incl=&quot;zookeeper-servers&quot; optional=&quot;true&quot; /&gt;</span><br><span class="line"></span><br><span class="line">     &lt;!-- Substitutions for parameters of replicated tables.</span><br><span class="line">          Optional. If you don&apos;t use replicated tables, you could omit that.</span><br><span class="line">         See https://clickhouse.yandex/docs/en/table_engines/replication/#creating-replicated-tables</span><br><span class="line">      --&gt;</span><br><span class="line">    &lt;macros incl=&quot;macros&quot; optional=&quot;true&quot; /&gt;</span><br><span class="line">     </span><br><span class="line">     &lt;!-- Reloading interval for embedded dictionaries, in seconds. Default: 3600. --&gt;</span><br><span class="line">    &lt;builtin_dictionaries_reload_interval&gt;3600&lt;/builtin_dictionaries_reload_interval&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 控制大表的删除 --&gt;</span><br><span class="line">    &lt;max_table_size_to_drop&gt;0&lt;/max_table_size_to_drop&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 集群配置文件 --&gt;</span><br><span class="line">    &lt;include_from&gt;/data/clickhouse/metrika.xml&lt;/include_from&gt;</span><br><span class="line">&lt;/yandex&gt;</span><br></pre></td></tr></table></figure>
+<p>需要注意<code>interserver_http_host</code>配置每个主机都不同，，其他配置保持一致，建议使用域名映射，方便数据入库的时候轮训写入各节点均衡数据。</p>
+<blockquote>
+<p>修改集群的配置文件<code>metrika.xml</code>。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">$ vi /data/clickhouse/metrika.xml</span><br><span class="line"></span><br><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;yandex&gt;</span><br><span class="line">&lt;!-- 集群配置 --&gt;</span><br><span class="line">&lt;clickhouse_remote_servers&gt;</span><br><span class="line">    &lt;bip_ck_cluster&gt;</span><br><span class="line">        &lt;!-- 数据分片1  --&gt;</span><br><span class="line">        &lt;shard&gt;</span><br><span class="line">            &lt;internal_replication&gt;false&lt;/internal_replication&gt;</span><br><span class="line">            &lt;replica&gt;</span><br><span class="line">                &lt;host&gt;node1.jikelab.com&lt;/host&gt;</span><br><span class="line">                &lt;port&gt;9000&lt;/port&gt;</span><br><span class="line">                &lt;user&gt;default&lt;/user&gt;</span><br><span class="line">                &lt;password&gt;6lYaUiFi&lt;/password&gt;</span><br><span class="line">            &lt;/replica&gt;</span><br><span class="line">        &lt;/shard&gt;</span><br><span class="line">        &lt;!-- 数据分片2  --&gt;</span><br><span class="line">        &lt;shard&gt;</span><br><span class="line">            &lt;internal_replication&gt;false&lt;/internal_replication&gt;</span><br><span class="line">            &lt;replica&gt;</span><br><span class="line">                &lt;host&gt;node2.jikelab.com&lt;/host&gt;</span><br><span class="line">                &lt;port&gt;9000&lt;/port&gt;</span><br><span class="line">                &lt;user&gt;default&lt;/user&gt;</span><br><span class="line">                &lt;password&gt;6lYaUiFi&lt;/password&gt;</span><br><span class="line">            &lt;/replica&gt;</span><br><span class="line">        &lt;/shard&gt;</span><br><span class="line">        &lt;!-- 数据分片3  --&gt;</span><br><span class="line">        &lt;shard&gt;</span><br><span class="line">            &lt;internal_replication&gt;false&lt;/internal_replication&gt;</span><br><span class="line">            &lt;replica&gt;</span><br><span class="line">                &lt;host&gt;node3.jikelab.com&lt;/host&gt;</span><br><span class="line">                &lt;port&gt;9000&lt;/port&gt;</span><br><span class="line">                &lt;user&gt;default&lt;/user&gt;</span><br><span class="line">                &lt;password&gt;6lYaUiFi&lt;/password&gt;</span><br><span class="line">            &lt;/replica&gt;</span><br><span class="line">        &lt;/shard&gt;</span><br><span class="line">    &lt;/bip_ck_cluster&gt;</span><br><span class="line">&lt;/clickhouse_remote_servers&gt;</span><br><span class="line">&lt;!-- 本节点副本名称，创建复制表时有用，每个节点不同，整个集群唯一，建议使用主机名） --&gt;</span><br><span class="line">&lt;macros&gt;</span><br><span class="line">    &lt;replica&gt;node1&lt;/replica&gt;</span><br><span class="line">&lt;/macros&gt;</span><br><span class="line">&lt;!-- 监听网络 --&gt;</span><br><span class="line">&lt;networks&gt;</span><br><span class="line">   &lt;ip&gt;::/0&lt;/ip&gt;</span><br><span class="line">&lt;/networks&gt;</span><br><span class="line">&lt;!-- ZK集群  --&gt;</span><br><span class="line">&lt;zookeeper-servers&gt;</span><br><span class="line">  &lt;node index=&quot;1&quot;&gt;</span><br><span class="line">    &lt;host&gt;192.168.0.245&lt;/host&gt;</span><br><span class="line">    &lt;port&gt;2181&lt;/port&gt;</span><br><span class="line">  &lt;/node&gt;</span><br><span class="line">  &lt;node index=&quot;2&quot;&gt;</span><br><span class="line">    &lt;host&gt;192.168.0.246&lt;/host&gt;</span><br><span class="line">    &lt;port&gt;2181&lt;/port&gt;</span><br><span class="line">  &lt;/node&gt;</span><br><span class="line">  &lt;node index=&quot;3&quot;&gt;</span><br><span class="line">    &lt;host&gt;192.168.0.247&lt;/host&gt;</span><br><span class="line">    &lt;port&gt;2181&lt;/port&gt;</span><br><span class="line">  &lt;/node&gt;</span><br><span class="line">&lt;/zookeeper-servers&gt;</span><br><span class="line">&lt;!-- 数据压缩算法  --&gt;</span><br><span class="line">&lt;clickhouse_compression&gt;</span><br><span class="line">&lt;case&gt;</span><br><span class="line">  &lt;min_part_size&gt;10000000000&lt;/min_part_size&gt;</span><br><span class="line">  &lt;min_part_size_ratio&gt;0.01&lt;/min_part_size_ratio&gt;</span><br><span class="line">  &lt;method&gt;lz4&lt;/method&gt;</span><br><span class="line">&lt;/case&gt;</span><br><span class="line">&lt;/clickhouse_compression&gt;</span><br><span class="line">&lt;/yandex&gt;</span><br></pre></td></tr></table></figure>
+<p>如上集群配置，所有节点配置一致，比较关键的是zookeeper和<code>macros(此配置，每个节点必须不一致，在集群需保持唯一性，建议使用主机名或递增字符串)</code>配置，集群中clickhouse_remote_servers配置涉及数据分片,如果使用了分布式表，需要在集群的配置文件里，增加分片的用户名密码，关于配置文件我们需要单独一节介绍剖析配置。</p>
+<blockquote>
+<p>修改users.xml配置，设置权限、负载和配额。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">$ vi /data/clickhouse/users.xml </span><br><span class="line"></span><br><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;yandex&gt;</span><br><span class="line">    &lt;profiles&gt;</span><br><span class="line">        &lt;!-- 读写用户设置  --&gt;</span><br><span class="line">        &lt;default&gt;</span><br><span class="line">            &lt;max_memory_usage&gt;10000000000&lt;/max_memory_usage&gt;</span><br><span class="line">            &lt;use_uncompressed_cache&gt;0&lt;/use_uncompressed_cache&gt;</span><br><span class="line">            &lt;load_balancing&gt;random&lt;/load_balancing&gt;</span><br><span class="line">        &lt;/default&gt;</span><br><span class="line">        &lt;!-- 只写用户设置  --&gt;</span><br><span class="line">        &lt;readonly&gt;</span><br><span class="line">            &lt;max_memory_usage&gt;10000000000&lt;/max_memory_usage&gt;</span><br><span class="line">            &lt;use_uncompressed_cache&gt;0&lt;/use_uncompressed_cache&gt;</span><br><span class="line">            &lt;load_balancing&gt;random&lt;/load_balancing&gt;</span><br><span class="line">            &lt;readonly&gt;1&lt;/readonly&gt;</span><br><span class="line">        &lt;/readonly&gt;</span><br><span class="line">    &lt;/profiles&gt;</span><br><span class="line">    &lt;!-- 配额  --&gt;</span><br><span class="line">    &lt;quotas&gt;</span><br><span class="line">        &lt;!-- Name of quota. --&gt;</span><br><span class="line">        &lt;default&gt;</span><br><span class="line">            &lt;interval&gt;</span><br><span class="line">                &lt;duration&gt;3600&lt;/duration&gt;</span><br><span class="line">                &lt;queries&gt;0&lt;/queries&gt;</span><br><span class="line">                &lt;errors&gt;0&lt;/errors&gt;</span><br><span class="line">                &lt;result_rows&gt;0&lt;/result_rows&gt;</span><br><span class="line">                &lt;read_rows&gt;0&lt;/read_rows&gt;</span><br><span class="line">                &lt;execution_time&gt;0&lt;/execution_time&gt;</span><br><span class="line">            &lt;/interval&gt;</span><br><span class="line">        &lt;/default&gt;</span><br><span class="line">    &lt;/quotas&gt;</span><br><span class="line">    &lt;users&gt;</span><br><span class="line">        &lt;!-- 读写用户  --&gt;</span><br><span class="line">        &lt;default&gt;</span><br><span class="line">            &lt;password_sha256_hex&gt;967f3bf355dddfabfca1c9f5cab39352b2ec1cd0b05f9e1e6b8f629705fe7d6e&lt;/password_sha256_hex&gt;</span><br><span class="line">            &lt;networks incl=&quot;networks&quot; replace=&quot;replace&quot;&gt;</span><br><span class="line">                &lt;ip&gt;::/0&lt;/ip&gt;</span><br><span class="line">            &lt;/networks&gt;</span><br><span class="line">            &lt;profile&gt;default&lt;/profile&gt;</span><br><span class="line">            &lt;quota&gt;default&lt;/quota&gt;</span><br><span class="line">        &lt;/default&gt;</span><br><span class="line">        &lt;!-- 只读用户  --&gt;</span><br><span class="line">        &lt;ck&gt;</span><br><span class="line">            &lt;password_sha256_hex&gt;967f3bf355dddfabfca1c9f5cab39352b2ec1cd0b05f9e1e6b8f629705fe7d6e&lt;/password_sha256_hex&gt;</span><br><span class="line">            &lt;networks incl=&quot;networks&quot; replace=&quot;replace&quot;&gt;</span><br><span class="line">                &lt;ip&gt;::/0&lt;/ip&gt;</span><br><span class="line">            &lt;/networks&gt;</span><br><span class="line">            &lt;profile&gt;readonly&lt;/profile&gt;</span><br><span class="line">            &lt;quota&gt;default&lt;/quota&gt;</span><br><span class="line">        &lt;/ck&gt;</span><br><span class="line">    &lt;/users&gt;</span><br><span class="line">&lt;/yandex&gt;</span><br></pre></td></tr></table></figure>
+<p>有关配置文件，我们专门用一节介绍，这里就不过多叙述，不然篇幅太长。</p>
+<p>[4] 创建相关目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/clickhouse/log</span><br><span class="line">mkdir -p /data/clickhouse</span><br><span class="line">chown -R clickhouse:clickhouse /data/clickhouse</span><br></pre></td></tr></table></figure></p>
+<p>[5] 启动集群</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service clickhouse-server start</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 clickhouse]# lsof -i :8123</span><br><span class="line">COMMAND     PID       USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">clickhous 13180 clickhouse   12u  IPv4  54805      0t0  TCP *:8123 (LISTEN)</span><br><span class="line">[root@node1 clickhouse]# lsof -i :9000</span><br><span class="line">COMMAND     PID       USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">clickhous 13180 clickhouse   13u  IPv4  54806      0t0  TCP *:cslistener (LISTEN)</span><br></pre></td></tr></table></figure>
+<p>[6] clickhouse client</p>
+<p>使用clickhouse client连接集群某节点，开启clickhouse之旅。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">clickhouse-client -h 127.0.0.1 -d default -m -u default --password 6lYaUiFi</span><br><span class="line"></span><br><span class="line">:) use system;</span><br><span class="line"></span><br><span class="line">:) select * from clusters;</span><br><span class="line"></span><br><span class="line">SELECT *</span><br><span class="line">FROM clusters</span><br><span class="line"></span><br><span class="line">┌─cluster────────┬─shard_num─┬─shard_weight─┬─replica_num─┬─host_name─────────┬─host_address──┬─port─┬─is_local─┬─user────┬─default_database─┐</span><br><span class="line">│ bip_ck_cluster │         1 │            1 │           1 │ node1.jikelab.com │ 192.168.0.113 │ 9000 │        1 │ default │                  │</span><br><span class="line">│ bip_ck_cluster │         2 │            1 │           1 │ node2.jikelab.com │ 192.168.0.114 │ 9000 │        0 │ default │                  │</span><br><span class="line">│ bip_ck_cluster │         3 │            1 │           1 │ node3.jikelab.com │ 192.168.0.115 │ 9000 │        0 │ default │                  │</span><br><span class="line">└────────────────┴───────────┴──────────────┴─────────────┴───────────────────┴───────────────┴──────┴──────────┴─────────┴──────────────────┘</span><br><span class="line"></span><br><span class="line">3 rows in set. Elapsed: 0.003 sec.</span><br></pre></td></tr></table></figure>
+<p>如上，进入系统system库，查看集群状态。</p>
+<p>[7] 创建clickhouse表和库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE ontime_local (FlightDate Date,Year UInt16) ENGINE = MergeTree(FlightDate, (Year, FlightDate), 8192);</span><br><span class="line"></span><br><span class="line">CREATE TABLE ontime_all AS ontime_local ENGINE = Distributed(bip_ck_cluster, default, ontime_local, rand());</span><br><span class="line"></span><br><span class="line">insert into ontime_local (FlightDate,Year)values(&apos;2001-10-12&apos;,2001);</span><br><span class="line"></span><br><span class="line">insert into ontime_local (FlightDate,Year)values(&apos;2002-10-12&apos;,2002);</span><br><span class="line"></span><br><span class="line">insert into ontime_local (FlightDate,Year)values(&apos;2003-10-12&apos;,2003);</span><br><span class="line"></span><br><span class="line">insert into ontime_all (FlightDate,Year)values(&apos;2003-10-12&apos;,2008);</span><br><span class="line"></span><br><span class="line">select count(*) from ontime_all;</span><br></pre></td></tr></table></figure>
+<p>如上创建了一张本地表，创建一张分布式表去关联本地表，这样就可以在全局查询到数据。</p>
+<ul>
+<li>因为clickhouse数据都存储在本地表或者复制表，分布式表仅仅是请求转发，执行是在各节点的本地表执行，所以并不是真正的分布式。</li>
+<li>建议所有数据写入本地表，轮训写各个节点本地表，通过查询分布式表来在全局进行查询汇总数据。</li>
+<li>由于clickhouse元数据信息不同步，其实也不应该同步，因为clickhouse本来就不是真正意义上的分布式，全都是用户控制，如果你要查询使用分布式表，必须在所有节点或部分节点创建<code>local</code>表，在每个节点创建一张<code>Distributed</code>表关联，只要查询分布式表即可查询所有节点数据。</li>
+<li>复制表，解决单副本故障问题，通过复制表可以保障节点损坏也不丢数据。</li>
+<li>由于分布式表只是简单解析SQL下发到具体节点去执行，最后汇总，避免写<code>Distributed</code>表造成数据不均衡，所以用户自己控制轮训写本地表控制数据均衡。</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>[1] 目前遇到的一个问题，数据目录不能写多快盘，只能写一块，让我有点怀疑官网宣传，单节点几十TB数据，按照目前情况只能做raid5，所有数据盘融在一起，IO无法隔离，多查询并发是否会有问题？</p>
+<p>[2] 好消息是，只能读写一个数据目录，官方打算今年<code>2018 Q2</code>解决。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Store data at multiple disk volumes of a single server.</span><br><span class="line"></span><br><span class="line">That will make it easier to extend disk system as well as use different disk systems for different DBs or tables. Currently, users have to use symlinks if DB/table needs to be stored in another volume.</span><br></pre></td></tr></table></figure>
+<p>[3] 复制表一直没搞明白，如果复制表+分布式表解决数据高可靠问题，但是操作过程会出现重复数据，比较奇怪。</p>
+<p>[4] 由于不是真正的分布式，各节点元数据独立，通过分布式表关联在一起，clickhouse把个节点当做一个个单独的库和表，通过不携带任何数据的分布式表把他们联系一起工作，提供单机的条件下推执行，在汇总。</p>
+<p>[5] 由于提供了一个http端口，刚开始安装成功，我单独去访问了一下，显示<code>ok</code>，我以为我安装问题，多方打探，原来没问题，囧.</p>
+<p>[6] Q1 2018将支持Update/Delete功能。</p>
+<p>[7] 为何如此高效率？确实测试结果非常快，上一篇我们有介绍并且百度云盘放了测试结果文件，仅仅从目前了解的来看，实现上面分布式还有很多工作要完成，比较简陋，有点难以置信为何如此快，作者的设计哲学和核心理念一直没公布，很神秘。</p>
+<p>[8] 各种不同的引擎，对表的创建和使用有比较大影响，建议熟读文档，多动手实践，了解清楚在使用。</p>
+<p>关于第一次使用clickhouse</p>
+<blockquote>
+<p>我创建了一个库和表，发现其他节点无法查询到，让我非常困惑，各种咨询打探，怀疑集群模式没安装成功，之后发现根本就没有元数据同步功能，每个节点维护自己的元数据，分布式数据库目前都没这么玩的吧。没有全局元数据概念，这设计，这脑洞。</p>
+</blockquote>
+<p>关于元数据</p>
+<blockquote>
+<p>目前MPP架构集群，无法超过50个节点，因为元数据信息同步和磁盘，限制集群扩展和性能。Impala分布式SQL on Hadoop架构，通过pub/sub方式同步元数据，如果在某个机器创建表，如果在其他机器需要查询到，必须先执行刷新元数据信息的。也比较坑，频繁刷新还会导致系统性能急剧下降，这是impala系统实现问题，点到为止。所以分布式元数据一致性、每个节点保留一份元数据，需同步。或者统一集中某个节点，跨网络，加载延迟，单点都是问题，所以每个系统都是设计来解决某方面问题，不存在完美的系统。不同的系统设计，有不同的权衡，也会有各种优劣。</p>
+</blockquote>
+<p>关于clickhouse专题</p>
+<blockquote>
+<p>我会慢慢完善我对clickhouse的理解，写一些更深入和具体的内容，今年计划，死磕分布式数据库技术。</p>
+</blockquote>
+<p>未来，一篇介绍Clickhouse基本使用、性能。</p>
+<h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><p>[1] 初识ClickHouse《First Time ClickHouse》</p>
+<p>[2] 大规模数据处理的演变(2003-2017)</p>
+<p>[3] Apache Impala 性能优化</p>
+<p>[4] 数据仓库：过去、现在和未来</p>
+<p><strong><em>参考：</em></strong></p>
+<p>[1] <a href="https://clickhouse.yandex/#quick-start" target="_blank" rel="noopener">https://clickhouse.yandex/#quick-start</a><br>[2] <a href="https://hub.docker.com/r/yandex/clickhouse-server" target="_blank" rel="noopener">https://hub.docker.com/r/yandex/clickhouse-server</a><br>[3] <a href="https://clickhouse.yandex/docs/en/development/build.html" target="_blank" rel="noopener">https://clickhouse.yandex/docs/en/development/build.html</a><br>[4] <a href="https://github.com/red-soft-ru/clickhouse-rpm" target="_blank" rel="noopener">https://github.com/red-soft-ru/clickhouse-rpm</a><br>[5] <a href="http://jackpgao.github.io/2017/12/13/ClickHouse-Cluster-Beginning-to-End/" target="_blank" rel="noopener">http://jackpgao.github.io/2017/12/13/ClickHouse-Cluster-Beginning-to-End/</a><br>[6] <a href="https://clickhouse.yandex/docs/en/roadmap/" target="_blank" rel="noopener">https://clickhouse.yandex/docs/en/roadmap/</a></p>
+<p>欢迎关注微信公众号[Whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Clickhouse/">Clickhouse</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/03/20/Explore-the-MPP-architecture-through-hawq/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Explore-the-MPP-architecture-through-hawq</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/03/15/first-time-clickhosue/">
+        <span class="next-text nav-default">first-time-clickhosue</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

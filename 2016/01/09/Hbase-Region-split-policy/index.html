@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Hbase-Region-split-policy">
+
+
+
+
+  <meta name="keywords" content="hbase,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/01/09/Hbase-Region-split-policy/">
+
+
+<meta name="description" content="hbase-1.0简介在 HBase 中，Table 被横向划分为 Region，它是一段数据的管理者，Region 被分发到RegionServer 上进行管理，一个 Region 只被一个 RegionServer管理，它的数据存储在 HDFS 上，是可以有多个副本的。 也就是说：管理者 (Region) 只有一个，数据有多个副本。 HBase 的以前实现中，当一台 RegionServer不">
+<meta name="keywords" content="hbase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hbase-Region-split-policy">
+<meta property="og:url" content="http://itweet.github.io/2016/01/09/Hbase-Region-split-policy/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="hbase-1.0简介在 HBase 中，Table 被横向划分为 Region，它是一段数据的管理者，Region 被分发到RegionServer 上进行管理，一个 Region 只被一个 RegionServer管理，它的数据存储在 HDFS 上，是可以有多个副本的。 也就是说：管理者 (Region) 只有一个，数据有多个副本。 HBase 的以前实现中，当一台 RegionServer不">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.493Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hbase-Region-split-policy">
+<meta name="twitter:description" content="hbase-1.0简介在 HBase 中，Table 被横向划分为 Region，它是一段数据的管理者，Region 被分发到RegionServer 上进行管理，一个 Region 只被一个 RegionServer管理，它的数据存储在 HDFS 上，是可以有多个副本的。 也就是说：管理者 (Region) 只有一个，数据有多个副本。 HBase 的以前实现中，当一台 RegionServer不">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Hbase-Region-split-policy - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Hbase-Region-split-policy
+        
+      </h1>
+
+      <time class="post-time">
+          1月 09 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="hbase-1-0简介"><a href="#hbase-1-0简介" class="headerlink" title="hbase-1.0简介"></a>hbase-1.0简介</h1><p>在 HBase 中，Table 被横向划分为 Region，它是一段数据的管理者，Region 被分发到<br>RegionServer 上进行管理，一个 Region 只被一个 RegionServer<br>管理，它的数据存储在 HDFS 上，是可以有多个副本的。</p>
+<p>也就是说：管理者 (Region) 只有一个，数据有多个副本。</p>
+<p>HBase 的以前实现中，当一台 RegionServer<br>不可用时，需要数十秒甚至数分钟才可以完成发现和恢复工作，在这段时间内，这台<br>RegionServer 上的 Region 是不可用的。当一个 Region<br>不可用时，它需要一段时间才可以被其他 RegionServer 接管。</p>
+<p>在最新的实现中，一个 Region 可以有多个副本（Region<br>是数据的管理者，是实际数据的抽象），分布在多个 RegionServer 上。</p>
+<blockquote>
+<p>特点：</p>
+</blockquote>
+<ul>
+<li>1.有一个主 Region，多个从 Region。</li>
+<li>2.只有主 Region 接收写请求，并把数据持久化到 HDFS 上。</li>
+<li>3.从 Region 从 HDFS 中读取数据并服务读请求。</li>
+<li>4.从 Region 可能会读到脏数据（主 Region 内存中的数据）。</li>
+<li>5.读操作可以只读主，或者既可以读主又可读从（可配置）。</li>
+</ul>
+<p>这样在主 Region 不可用时，用户仍可以读从 Region<br>的数据。目前社区在进行的开发：主 Region 异步同步数据到从 Region，从而减少从<br>Region 缺少的数据量。</p>
+<p>Family 粒度的 Flush（减少小文件，优化磁盘 IO，提高读性能 HBASE-10201）</p>
+<h1 id="split-compact"><a href="#split-compact" class="headerlink" title="split-compact"></a>split-compact</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">hbase.hregion.max.filesize ：配置region大小，0.94.12版本默认是10G，region的大小</span><br><span class="line">与集群支持的总数据量有关系，如果总数据量小，则单个region太大，不利于并行的数据</span><br><span class="line">处理，如果集群需支持的总数据量比较大，region太小，则会导致region的个数过多，导</span><br><span class="line">致region的管理等成本过高，如果一个RS配置的磁盘总量为3T*12=36T数据量，数据复制3</span><br><span class="line">份，则一台RS服务器可以存储10T的数据，如果每个region最大为10G，则最多1000个regio</span><br><span class="line">n，如此看，94.12的这个默认配置还是比较合适的，不过如果要自己管理split，则应该调</span><br><span class="line">大该值，并且在建表时规划好region数量和rowkey设计，进行region预建，做到一定时间</span><br><span class="line">内，每个region的数据大小在一定的数据量之下，当发现有大的region，或者需要对整个</span><br><span class="line">表进行region扩充时再进行split操作，一般提供在线服务的hbase集群均会弃用hbase的自</span><br><span class="line">动split，转而自己管理split。</span><br><span class="line"></span><br><span class="line">hbase.hregion.majorcompaction：配置major合并的间隔时间，默认为1天，可设置为0，</span><br><span class="line">禁止自动的major合并，可手动或者通过脚本定期进行major合并，有两种compact：minor</span><br><span class="line">和major，minor通常会把数个小的相邻的storeFile合并成一个大的storeFile，minor不会</span><br><span class="line">删除标示为删除的数据和过期的数据，major会删除需删除的数据，major合并之后，一个s</span><br><span class="line">tore只有一个storeFile文件，会对store的所有数据进行重写，有较大的性能消耗。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>####hbase region####</p>
+</blockquote>
+<ul>
+<li><p>Compact,Split</p>
+<ul>
+<li>hbase.hregion.memstore.flush.size  default:128M</li>
+<li>hbase.hregion.max.filesize (table_att==&gt;MAX_FILESIZE) default:10G</li>
+<li>hbase.hstore.compactionThreshold default:3</li>
+<li>hbase.hregion.majorcompaction default:7day</li>
+</ul>
+</li>
+<li><p>Merge</p>
+<ul>
+<li>多个region合并,需要top cluster<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hbase  org.apache.hadoop.hbase.util.Merge  &lt;table_name&gt; &lt;region1&gt; &lt;region2&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Scan cache</p>
+</li>
+<li>block cache  default：hfile.block.cache.size=0.4</li>
+<li>bloom filter</li>
+</ul>
+<blockquote>
+<p>Hbase访问数据时Compact,Split带来的问题</p>
+</blockquote>
+<ul>
+<li>region offline,mapper访问region识别</li>
+<li><p>调整参数控制Compact,Split</p>
+<ul>
+<li>hbase.hregion.majorcompaction<ul>
+<li>真的设置为0就行了？</li>
+</ul>
+</li>
+<li>hbase.hstore.compactionThreshold<ul>
+<li>Region中文件个数多于此值,开始compact</li>
+<li>可能进入minor,合并较小StoreFile</li>
+</ul>
+</li>
+<li>hbase.hregion.memstore.flush.size<ul>
+<li>memstore何时写入HStore</li>
+</ul>
+</li>
+<li>hbase.hregion.max.filesize (table_att==&gt;MAX_FILESIZE)<ul>
+<li>Region何时开始split</li>
+</ul>
+</li>
+<li><p>hbase.hstore.blockingStoreFiles</p>
+<ul>
+<li>max.filesize &lt; flush.size*blockingStoreFiles以保证region不会被block</li>
+</ul>
+<p>有两种类型的紧缩：次紧缩和主紧缩。minor紧缩通常会将数个小的相邻的文件合并成一个大的。Minor不会删除打上删除标记的数据，也不会删除过期的数据，Major紧缩会删除过期的数据。有些时候minor紧缩就会将一个store中的全部文件紧缩，实际上这个时候他本身就是一个major压缩。对于一个minor紧缩是如何紧缩的，可以参见ascii diagram in the Store source code.</p>
+<p>在执行一个major紧缩之后，一个store只会有一个sotrefile,通常情况下这样可以提供性能。注意：major紧缩将会将store中的数据全部重写，在一个负载很大的系统中，这个操作是很伤的。所以在大型系统中，通常会自己Section 2.8.2.8, “管理 Splitting”。</p>
+<p>紧缩 不会 进行分区合并。参考 Section 14.2.2, “Merge” 获取更多合并的信息。</p>
+</li>
+</ul>
+<ul>
+<li><p>offpeak hour<br>规定在集群不繁忙的时候hbase做自动split,Compact,比如凌晨</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">配置项     默认值     含义</span><br><span class="line">hbase.hstore.compaction.ratio   1.2F    </span><br><span class="line">hbase.hstore.compaction.ratio.offpeak   5.0F    与下面两个参数联用</span><br><span class="line">hbase.offpeak.start.hour    -1  设置hbase offpeak开始时间[0,23]</span><br><span class="line">hbase.offpeak.end.hour  -1  设置hbase offpeak结束时间 [0,23]</span><br><span class="line"></span><br><span class="line">http://www.binospace.com/index.php/in-depth-understanding-of-the-hbase-compaction/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>merge</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hbase org.apache.hadoop.hbase.util.Merge &lt;tablename&gt; &lt;region1&gt; &lt;region2&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>案例</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hbase.hregion.majorcompaction default：7  ==&gt; </span><br><span class="line">hbase.hstore.compactionThreshold default: 3  ==&gt; 8,如果集群中storefile超过8个,和flush.size相关,region超过4G,才开始split</span><br><span class="line"></span><br><span class="line">hbase.hregion.memstore.flush.size default: 128M ==&gt; 512M 防止storefile过多,过多storefile导致region compaction</span><br><span class="line">hbase.hregion.max.filesize default: 10G   ==&gt; 32G,评估一天写入数据量,分配到不同region最大大小.</span><br><span class="line">hbase.hstore.blockingStoreFiles default: 10 ==&gt;  16,避免一个region产生过多storefile,storefile就被block了。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>获取region详细信息</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">scan &apos;hbase:meta&apos;, &#123;COLUMNS =&gt; &apos;info:regioninfo&apos;&#125;</span><br><span class="line">     </span><br><span class="line">hbase(main):017:0&gt; scan &apos;hbase:meta&apos;, &#123;COLUMNS =&gt; &apos;info:regioninfo&apos;, LIMIT =&gt; 1&#125;</span><br><span class="line">ROW                                    COLUMN+CELL                                                                                                     </span><br><span class="line"> cust_info,,1450145518714.ddefa1ac4420 column=info:regioninfo, timestamp=1450145519580, value=&#123;ENCODED =&gt; ddefa1ac442063171ca6ef9f9f0e9e2f, NAME =&gt; &apos;cu</span><br><span class="line"> 63171ca6ef9f9f0e9e2f.                 st_info,,1450145518714.ddefa1ac442063171ca6ef9f9f0e9e2f.&apos;, STARTKEY =&gt; &apos;&apos;, ENDKEY =&gt; &apos;&apos;&#125;&apos;&#125; </span><br><span class="line"></span><br><span class="line">hbase(main):008:0&gt; scan &apos;hbase:namespace&apos;, &#123;COLUMNS =&gt; &apos;info:d&apos;&#125;</span><br><span class="line">ROW                                    COLUMN+CELL                                                                                                     </span><br><span class="line"> default                               column=info:d, timestamp=1446179703117, value=\x0A\x07default                                                   </span><br><span class="line"> hbase                                 column=info:d, timestamp=1446179703143, value=\x0A\x05hbase                                                     </span><br><span class="line">2 row(s) in 0.0150 seconds</span><br></pre></td></tr></table></figure>
+<h1 id="hbase-snappy"><a href="#hbase-snappy" class="headerlink" title="hbase snappy"></a>hbase snappy</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">snappy hbase 结果&gt;&gt;</span><br><span class="line"></span><br><span class="line">表名                    未压缩大小   压缩后大小   压缩比例%</span><br><span class="line">user_last_live20151230   2.3 T        0.35T         85</span><br></pre></td></tr></table></figure>
+<p>参考：<a href="http://hbase.apache.org" target="_blank" rel="noopener">http://hbase.apache.org</a></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/hbase/">hbase</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/01/25/Hadoop平台架构--存储篇/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Hadoop平台架构--存储篇</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/01/02/Zabbix Use/">
+        <span class="next-text nav-default">Zabbix Use</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

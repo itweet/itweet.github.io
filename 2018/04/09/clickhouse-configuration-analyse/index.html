@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="clickhouse-configuration-analyse">
+
+
+
+
+  <meta name="keywords" content="Clickhouse,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2018/04/09/clickhouse-configuration-analyse/">
+
+
+<meta name="description" content="ClickHouse是一个分布式面向列的RDBMS系统，可以单机部署也可支持集群。目前支持Centos和Ubuntu系统的部署，并且有方和第三方都发布有RPM/DEB包，可直接安装使用。 ClickHouse仓库和包下载 Github:  https://github.com/Yandex/ClickHouse https://github.com/Yandex/clickhouse-jdbc h">
+<meta name="keywords" content="Clickhouse">
+<meta property="og:type" content="article">
+<meta property="og:title" content="clickhouse-configuration-analyse">
+<meta property="og:url" content="http://itweet.github.io/2018/04/09/clickhouse-configuration-analyse/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="ClickHouse是一个分布式面向列的RDBMS系统，可以单机部署也可支持集群。目前支持Centos和Ubuntu系统的部署，并且有方和第三方都发布有RPM/DEB包，可直接安装使用。 ClickHouse仓库和包下载 Github:  https://github.com/Yandex/ClickHouse https://github.com/Yandex/clickhouse-jdbc h">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.535Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="clickhouse-configuration-analyse">
+<meta name="twitter:description" content="ClickHouse是一个分布式面向列的RDBMS系统，可以单机部署也可支持集群。目前支持Centos和Ubuntu系统的部署，并且有方和第三方都发布有RPM/DEB包，可直接安装使用。 ClickHouse仓库和包下载 Github:  https://github.com/Yandex/ClickHouse https://github.com/Yandex/clickhouse-jdbc h">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> clickhouse-configuration-analyse - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          clickhouse-configuration-analyse
+        
+      </h1>
+
+      <time class="post-time">
+          4月 09 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>ClickHouse是一个分布式面向列的RDBMS系统，可以单机部署也可支持集群。目前支持Centos和Ubuntu系统的部署，并且有方和第三方都发布有RPM/DEB包，可直接安装使用。</p>
+<p><strong>ClickHouse仓库和包下载</strong></p>
+<p>Github:</p>
+<ul>
+<li><a href="https://github.com/Yandex/ClickHouse" target="_blank" rel="noopener">https://github.com/Yandex/ClickHouse</a></li>
+<li><a href="https://github.com/Yandex/clickhouse-jdbc" target="_blank" rel="noopener">https://github.com/Yandex/clickhouse-jdbc</a></li>
+<li><a href="https://github.com/Yandex/clickhouse-odbc" target="_blank" rel="noopener">https://github.com/Yandex/clickhouse-odbc</a></li>
+</ul>
+<p>Server Packages:</p>
+<ul>
+<li>Debian/Ubuntu: <a href="http://repo.yandex.ru/clickhouse/" target="_blank" rel="noopener">http://repo.yandex.ru/clickhouse/</a></li>
+<li>RPMs: <a href="https://packagecloud.io/altinity/clickhouse" target="_blank" rel="noopener">https://packagecloud.io/altinity/clickhouse</a><ul>
+<li>Source: <a href="https://github.com/Altinity/clickhouse-rpm" target="_blank" rel="noopener">https://github.com/Altinity/clickhouse-rpm</a></li>
+</ul>
+</li>
+<li>Docker: <a href="https://hub.docker.com/r/yandex/clickhouse-server/" target="_blank" rel="noopener">https://hub.docker.com/r/yandex/clickhouse-server/</a></li>
+</ul>
+<p>Client Packages:</p>
+<ul>
+<li><a href="https://hub.docker.com/r/yandex/clickhouse-client/" target="_blank" rel="noopener">https://hub.docker.com/r/yandex/clickhouse-client/</a></li>
+<li>JDBC: <a href="https://mvnrepository.com/artifact/ru.yandex.clickhouse/clickhouse-jdbc" target="_blank" rel="noopener">https://mvnrepository.com/artifact/ru.yandex.clickhouse/clickhouse-jdbc</a></li>
+<li>ODBC: <a href="https://github.com/yandex/clickhouse-odbc/releases" target="_blank" rel="noopener">https://github.com/yandex/clickhouse-odbc/releases</a></li>
+</ul>
+<p>我们主要讨论ClickHouse相关配置文件，主要涉及三个：</p>
+<ul>
+<li><code>config.xml</code> - 核心配置文件，记录节点信息和相关访问端口。</li>
+<li><code>users.xml</code> - 针对client和server交互的用户权限、负载和配额信息。</li>
+<li><code>metrika.xml</code> - 集群配置，主要记录集群数据分片和zookeeper信息。</li>
+</ul>
+<p><code>config.xml</code>涉及的几个核心配置信息，<code>logger</code>,各种<code>Port</code>，连接数，并发查询，数据存储路径，用户配置，集群配置文件，时区配置等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;yandex&gt;</span><br><span class="line">    &lt;logger&gt;</span><br><span class="line">        &lt;level&gt;trace&lt;/level&gt;</span><br><span class="line">        &lt;log&gt;/data/clickhouse/log/server.log&lt;/log&gt;</span><br><span class="line">        &lt;errorlog&gt;/data/clickhouse/log/error.log&lt;/errorlog&gt;</span><br><span class="line">        &lt;size&gt;1000M&lt;/size&gt;</span><br><span class="line">        &lt;count&gt;10&lt;/count&gt;</span><br><span class="line">    &lt;/logger&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- For HTTPS over native protocol. --&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    &lt;https_port&gt;8443&lt;/https_port&gt;</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;http_port&gt;8123&lt;/http_port&gt;</span><br><span class="line">    &lt;tcp_port&gt;9000&lt;/tcp_port&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- Port for communication between replicas. Used for data exchange. --&gt;</span><br><span class="line">    &lt;interserver_http_port&gt;9009&lt;/interserver_http_port&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 本机域名 --&gt;</span><br><span class="line">    &lt;interserver_http_host&gt;node1.jikelab.com&lt;/interserver_http_host&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 监听IP --&gt;</span><br><span class="line">    &lt;listen_host&gt;0.0.0.0&lt;/listen_host&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 最大连接数 --&gt;</span><br><span class="line">    &lt;max_connections&gt;64&lt;/max_connections&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 没搞懂的参数 --&gt;</span><br><span class="line">    &lt;keep_alive_timeout&gt;3&lt;/keep_alive_timeout&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 最大并发查询数 --&gt;</span><br><span class="line">    &lt;max_concurrent_queries&gt;16&lt;/max_concurrent_queries&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 单位是B --&gt;</span><br><span class="line">    &lt;uncompressed_cache_size&gt;8589934592&lt;/uncompressed_cache_size&gt;</span><br><span class="line">    &lt;mark_cache_size&gt;10737418240&lt;/mark_cache_size&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 存储路径 --&gt;</span><br><span class="line">    &lt;path&gt;/data/clickhouse/&lt;/path&gt;</span><br><span class="line">    &lt;tmp_path&gt;/data/clickhouse/tmp/&lt;/tmp_path&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- user配置 --&gt;</span><br><span class="line">    &lt;users_config&gt;users.xml&lt;/users_config&gt;</span><br><span class="line"></span><br><span class="line">    &lt;default_profile&gt;default&lt;/default_profile&gt;</span><br><span class="line"></span><br><span class="line">    &lt;log_queries&gt;1&lt;/log_queries&gt;</span><br><span class="line"></span><br><span class="line">    &lt;default_database&gt;default&lt;/default_database&gt;</span><br><span class="line"></span><br><span class="line">     &lt;!-- Configuration of clusters that could be used in Distributed tables.</span><br><span class="line">         https://clickhouse.yandex/docs/en/table_engines/distributed/</span><br><span class="line">      --&gt;</span><br><span class="line">    &lt;remote_servers incl=&quot;clickhouse_remote_servers&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;zookeeper incl=&quot;zookeeper-servers&quot; optional=&quot;true&quot; /&gt;</span><br><span class="line"></span><br><span class="line">     &lt;!-- Substitutions for parameters of replicated tables.</span><br><span class="line">          Optional. If you don&apos;t use replicated tables, you could omit that.</span><br><span class="line">         See https://clickhouse.yandex/docs/en/table_engines/replication/#creating-replicated-tables</span><br><span class="line">      --&gt;</span><br><span class="line">    &lt;macros incl=&quot;macros&quot; optional=&quot;true&quot; /&gt;</span><br><span class="line"></span><br><span class="line">     &lt;!-- Reloading interval for embedded dictionaries, in seconds. Default: 3600. --&gt;</span><br><span class="line">    &lt;builtin_dictionaries_reload_interval&gt;3600&lt;/builtin_dictionaries_reload_interval&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 控制大表的删除 --&gt;</span><br><span class="line">    &lt;max_table_size_to_drop&gt;0&lt;/max_table_size_to_drop&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 集群配置文件 --&gt;</span><br><span class="line">    &lt;include_from&gt;/data/clickhouse/metrika.xml&lt;/include_from&gt;</span><br><span class="line">&lt;/yandex&gt;</span><br></pre></td></tr></table></figure>
+<p><code>users.xml</code>设置权限、负载和配额，目前支持只读和读写控制，密码建议使用sha256加密，不建议使用明文。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;yandex&gt;</span><br><span class="line">    &lt;profiles&gt;</span><br><span class="line">        &lt;!-- 读写用户设置  --&gt;</span><br><span class="line">        &lt;default&gt;</span><br><span class="line">            &lt;max_memory_usage&gt;10000000000&lt;/max_memory_usage&gt;</span><br><span class="line">            &lt;use_uncompressed_cache&gt;0&lt;/use_uncompressed_cache&gt;</span><br><span class="line">            &lt;load_balancing&gt;random&lt;/load_balancing&gt;</span><br><span class="line">        &lt;/default&gt;</span><br><span class="line">        &lt;!-- 只写用户设置  --&gt;</span><br><span class="line">        &lt;readonly&gt;</span><br><span class="line">            &lt;max_memory_usage&gt;10000000000&lt;/max_memory_usage&gt;</span><br><span class="line">            &lt;use_uncompressed_cache&gt;0&lt;/use_uncompressed_cache&gt;</span><br><span class="line">            &lt;load_balancing&gt;random&lt;/load_balancing&gt;</span><br><span class="line">            &lt;readonly&gt;1&lt;/readonly&gt;</span><br><span class="line">        &lt;/readonly&gt;</span><br><span class="line">    &lt;/profiles&gt;</span><br><span class="line">    &lt;!-- 配额  --&gt;</span><br><span class="line">    &lt;quotas&gt;</span><br><span class="line">        &lt;!-- Name of quota. --&gt;</span><br><span class="line">        &lt;default&gt;</span><br><span class="line">            &lt;interval&gt;</span><br><span class="line">                &lt;duration&gt;3600&lt;/duration&gt;</span><br><span class="line">                &lt;queries&gt;0&lt;/queries&gt;</span><br><span class="line">                &lt;errors&gt;0&lt;/errors&gt;</span><br><span class="line">                &lt;result_rows&gt;0&lt;/result_rows&gt;</span><br><span class="line">                &lt;read_rows&gt;0&lt;/read_rows&gt;</span><br><span class="line">                &lt;execution_time&gt;0&lt;/execution_time&gt;</span><br><span class="line">            &lt;/interval&gt;</span><br><span class="line">        &lt;/default&gt;</span><br><span class="line">    &lt;/quotas&gt;</span><br><span class="line">    &lt;users&gt;</span><br><span class="line">        &lt;!-- 读写用户  --&gt;</span><br><span class="line">        &lt;default&gt;</span><br><span class="line">            &lt;password_sha256_hex&gt;967f3bf355dddfabfca1c9f5cab39352b2ec1cd0b05f9e1e6b8f629705fe7d6e&lt;/password_sha256_hex&gt;</span><br><span class="line">            &lt;networks incl=&quot;networks&quot; replace=&quot;replace&quot;&gt;</span><br><span class="line">                &lt;ip&gt;::/0&lt;/ip&gt;</span><br><span class="line">            &lt;/networks&gt;</span><br><span class="line">            &lt;profile&gt;default&lt;/profile&gt;</span><br><span class="line">            &lt;quota&gt;default&lt;/quota&gt;</span><br><span class="line">        &lt;/default&gt;</span><br><span class="line">        &lt;!-- 只读用户  --&gt;</span><br><span class="line">        &lt;ck&gt;</span><br><span class="line">            &lt;password_sha256_hex&gt;967f3bf355dddfabfca1c9f5cab39352b2ec1cd0b05f9e1e6b8f629705fe7d6e&lt;/password_sha256_hex&gt;</span><br><span class="line">            &lt;networks incl=&quot;networks&quot; replace=&quot;replace&quot;&gt;</span><br><span class="line">                &lt;ip&gt;::/0&lt;/ip&gt;</span><br><span class="line">            &lt;/networks&gt;</span><br><span class="line">            &lt;profile&gt;readonly&lt;/profile&gt;</span><br><span class="line">            &lt;quota&gt;default&lt;/quota&gt;</span><br><span class="line">        &lt;/ck&gt;</span><br><span class="line">    &lt;/users&gt;</span><br><span class="line">&lt;/yandex&gt;</span><br></pre></td></tr></table></figure>
+<p><code>metrika.xml</code>集群配置，主要记录集群数据分片和zookeeper信息,分片和副本决定了集群的容错和高可靠。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;yandex&gt;</span><br><span class="line">&lt;!-- 集群配置 --&gt;</span><br><span class="line">&lt;clickhouse_remote_servers&gt;</span><br><span class="line">    &lt;bip_ck_cluster&gt;</span><br><span class="line">        &lt;!-- 数据分片1  --&gt;</span><br><span class="line">        &lt;shard&gt;</span><br><span class="line">            &lt;internal_replication&gt;false&lt;/internal_replication&gt;</span><br><span class="line">            &lt;replica&gt;</span><br><span class="line">                &lt;host&gt;node1.jikelab.com&lt;/host&gt;</span><br><span class="line">                &lt;port&gt;9000&lt;/port&gt;</span><br><span class="line">                &lt;user&gt;default&lt;/user&gt;</span><br><span class="line">                &lt;password&gt;6lYaUiFi&lt;/password&gt;</span><br><span class="line">            &lt;/replica&gt;</span><br><span class="line">        &lt;/shard&gt;</span><br><span class="line">        &lt;!-- 数据分片2  --&gt;</span><br><span class="line">        &lt;shard&gt;</span><br><span class="line">            &lt;internal_replication&gt;false&lt;/internal_replication&gt;</span><br><span class="line">            &lt;replica&gt;</span><br><span class="line">                &lt;host&gt;node2.jikelab.com&lt;/host&gt;</span><br><span class="line">                &lt;port&gt;9000&lt;/port&gt;</span><br><span class="line">                &lt;user&gt;default&lt;/user&gt;</span><br><span class="line">                &lt;password&gt;6lYaUiFi&lt;/password&gt;</span><br><span class="line">            &lt;/replica&gt;</span><br><span class="line">        &lt;/shard&gt;</span><br><span class="line">        &lt;!-- 数据分片3  --&gt;</span><br><span class="line">        &lt;shard&gt;</span><br><span class="line">            &lt;internal_replication&gt;false&lt;/internal_replication&gt;</span><br><span class="line">            &lt;replica&gt;</span><br><span class="line">                &lt;host&gt;node3.jikelab.com&lt;/host&gt;</span><br><span class="line">                &lt;port&gt;9000&lt;/port&gt;</span><br><span class="line">                &lt;user&gt;default&lt;/user&gt;</span><br><span class="line">                &lt;password&gt;6lYaUiFi&lt;/password&gt;</span><br><span class="line">            &lt;/replica&gt;</span><br><span class="line">        &lt;/shard&gt;</span><br><span class="line">    &lt;/bip_ck_cluster&gt;</span><br><span class="line">&lt;/clickhouse_remote_servers&gt;</span><br><span class="line">&lt;!-- 本节点副本名称，创建复制表时有用，每个节点不同，整个集群唯一，建议使用主机名） --&gt;</span><br><span class="line">&lt;macros&gt;</span><br><span class="line">    &lt;replica&gt;node1&lt;/replica&gt;</span><br><span class="line">&lt;/macros&gt;</span><br><span class="line">&lt;!-- 监听网络 --&gt;</span><br><span class="line">&lt;networks&gt;</span><br><span class="line">   &lt;ip&gt;::/0&lt;/ip&gt;</span><br><span class="line">&lt;/networks&gt;</span><br><span class="line">&lt;!-- ZK集群  --&gt;</span><br><span class="line">&lt;zookeeper-servers&gt;</span><br><span class="line">  &lt;node index=&quot;1&quot;&gt;</span><br><span class="line">    &lt;host&gt;192.168.0.245&lt;/host&gt;</span><br><span class="line">    &lt;port&gt;2181&lt;/port&gt;</span><br><span class="line">  &lt;/node&gt;</span><br><span class="line">  &lt;node index=&quot;2&quot;&gt;</span><br><span class="line">    &lt;host&gt;192.168.0.246&lt;/host&gt;</span><br><span class="line">    &lt;port&gt;2181&lt;/port&gt;</span><br><span class="line">  &lt;/node&gt;</span><br><span class="line">  &lt;node index=&quot;3&quot;&gt;</span><br><span class="line">    &lt;host&gt;192.168.0.247&lt;/host&gt;</span><br><span class="line">    &lt;port&gt;2181&lt;/port&gt;</span><br><span class="line">  &lt;/node&gt;</span><br><span class="line">&lt;/zookeeper-servers&gt;</span><br><span class="line">&lt;!-- 数据压缩算法  --&gt;</span><br><span class="line">&lt;clickhouse_compression&gt;</span><br><span class="line">&lt;case&gt;</span><br><span class="line">  &lt;min_part_size&gt;10000000000&lt;/min_part_size&gt;</span><br><span class="line">  &lt;min_part_size_ratio&gt;0.01&lt;/min_part_size_ratio&gt;</span><br><span class="line">  &lt;method&gt;lz4&lt;/method&gt;</span><br><span class="line">&lt;/case&gt;</span><br><span class="line">&lt;/clickhouse_compression&gt;</span><br><span class="line">&lt;/yandex&gt;</span><br></pre></td></tr></table></figure>
+<p>集群中clickhouse_remote_servers配置涉及数据分片,如果使用了分布式表，需要在集群的配置文件里，增加分片的用户名密码。</p>
+<p>涉及完整的配置信息：</p>
+<ul>
+<li>config.xml - <a href="https://github.com/jikelab/ClickHouse/blob/master/dbms/src/Server/config.xml" target="_blank" rel="noopener">https://github.com/jikelab/ClickHouse/blob/master/dbms/src/Server/config.xml</a></li>
+<li>users.xml - <a href="https://github.com/jikelab/ClickHouse/blob/master/dbms/src/Server/users.xml" target="_blank" rel="noopener">https://github.com/jikelab/ClickHouse/blob/master/dbms/src/Server/users.xml</a></li>
+</ul>
+<p>有关集群配置，在config.xml中有相关说明，这里就不单独列出来了。</p>
+<p>为了更加简化管理集群和配置，降低成本，我开发了一个针对ClickHouse相关的自动化运维可扩展的工具，可视化的完成集群运维和配置管理。</p>
+<p>正在进行Clickhouse的所有配置指标梳理，在可视化界面进行配置管理和安装，配置版本回滚。</p>
+<p>关于安装包</p>
+<blockquote>
+<p>介绍了clickhouse支持的相关系统包，还有周边配套的软件和资源列表。</p>
+</blockquote>
+<p>关于配置文件</p>
+<blockquote>
+<p>未来会推出一个完全自动化管理和安装的可视化工具，是一套针对ClickHouse生态的一揽子方案，正在努力调试中，so，导致没时间更新文章。</p>
+</blockquote>
+<p>关于数据产品</p>
+<blockquote>
+<p>完全OpenSource的方式发布,是一个综合性的产品，定位解决企业核心的OLAP和OLTP大多数场景。</p>
+</blockquote>
+<p>关于ClickHouse数据产品，我会慢慢更新，尽请期待…</p>
+<p>欢迎关注微信公众号[Whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Clickhouse/">Clickhouse</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/04/09/clickhouse-build-for-ubuntu/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">clickhouse-build-for-ubuntu</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/03/27/global-gitignore/">
+        <span class="next-text nav-default">global .gitignore</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="ganglia-ubuntu">
+
+
+
+
+  <meta name="keywords" content="monitor,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/07/13/ganglia-ubuntu/">
+
+
+<meta name="description" content="ganglia   Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。   Ganglia的核心包含gmond、gmetad以及一个Web前端。主要是用来监控系统性能，如：   cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，通过曲线很容易见到每个节点   的工作状态，对合理调整、分配系统资源，提高系统整体性能起到重要作用。 Install">
+<meta name="keywords" content="monitor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ganglia-ubuntu">
+<meta property="og:url" content="http://itweet.github.io/2015/07/13/ganglia-ubuntu/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="ganglia   Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。   Ganglia的核心包含gmond、gmetad以及一个Web前端。主要是用来监控系统性能，如：   cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，通过曲线很容易见到每个节点   的工作状态，对合理调整、分配系统资源，提高系统整体性能起到重要作用。 Install">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.483Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ganglia-ubuntu">
+<meta name="twitter:description" content="ganglia   Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。   Ganglia的核心包含gmond、gmetad以及一个Web前端。主要是用来监控系统性能，如：   cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，通过曲线很容易见到每个节点   的工作状态，对合理调整、分配系统资源，提高系统整体性能起到重要作用。 Install">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> ganglia-ubuntu - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          ganglia-ubuntu
+        
+      </h1>
+
+      <time class="post-time">
+          7月 13 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="ganglia"><a href="#ganglia" class="headerlink" title="ganglia"></a>ganglia</h1><p>   Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。<br>   Ganglia的核心包含gmond、gmetad以及一个Web前端。主要是用来监控系统性能，如：<br>   cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，通过曲线很容易见到每个节点<br>   的工作状态，对合理调整、分配系统资源，提高系统整体性能起到重要作用。</p>
+<h1 id="Install-and-config-Ganglia-on-CDH5"><a href="#Install-and-config-Ganglia-on-CDH5" class="headerlink" title="Install and config Ganglia on CDH5"></a>Install and config Ganglia on CDH5</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><h3 id="Server-node"><a href="#Server-node" class="headerlink" title="Server node"></a>Server node</h3><p>####　1. install packages<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ganglia-monitor ganglia-webfrontend gmetad</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-edit-etc-ganglia-gmond-conf"><a href="#2-edit-etc-ganglia-gmond-conf" class="headerlink" title="2. edit /etc/ganglia/gmond.conf"></a>2. edit /etc/ganglia/gmond.conf</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">sample gmond.conf setting:</span><br><span class="line">cluster &#123;</span><br><span class="line">  name = &quot;CDH5&quot;</span><br><span class="line">  owner = &quot;unspecified&quot;</span><br><span class="line">  latlong = &quot;unspecified&quot;</span><br><span class="line">  url = &quot;unspecified&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">udp_send_channel &#123;</span><br><span class="line">/*  mcast_join = xxx */</span><br><span class="line">  host = xxx.xxx.xxx.1 /* your ganglia server ip */</span><br><span class="line">  port = 8649</span><br><span class="line">  ttl = 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">udp_recv_channel &#123;</span><br><span class="line">/*  mcast_join = xxx */</span><br><span class="line">  port = 8649</span><br><span class="line">/*  bind = xxx */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-scp-etc-ganglia-gmond-conf-to-all-the-other-nodes"><a href="#3-scp-etc-ganglia-gmond-conf-to-all-the-other-nodes" class="headerlink" title="3. scp /etc/ganglia/gmond.conf to all the other nodes"></a>3. scp /etc/ganglia/gmond.conf to all the other nodes</h4><h4 id="4-edit-etc-ganglia-gmetad-conf"><a href="#4-edit-etc-ganglia-gmetad-conf" class="headerlink" title="4. edit /etc/ganglia/gmetad.conf"></a>4. edit /etc/ganglia/gmetad.conf</h4><pre><code>sample gmond.conf setting:
+data_source &quot;CDH5&quot; xxx.xxx.xxx.1 xxx.xxx.xxx.2 xxx.xxx.xxx.3 ...
+</code></pre><h3 id="Other-nodes"><a href="#Other-nodes" class="headerlink" title="Other nodes"></a>Other nodes</h3><h3 id="1-install-ganglia-monitor"><a href="#1-install-ganglia-monitor" class="headerlink" title="1. install ganglia monitor"></a>1. install ganglia monitor</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ganglia-monitor</span><br></pre></td></tr></table></figure>
+<h3 id="2-copy-gmond-conf-from-server-node-to-etc-ganglia"><a href="#2-copy-gmond-conf-from-server-node-to-etc-ganglia" class="headerlink" title="2. copy gmond.conf from server node to /etc/ganglia"></a>2. copy gmond.conf from server node to /etc/ganglia</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv gmond.conf /etc/ganglia/</span><br></pre></td></tr></table></figure>
+<h3 id="3-restart-ganglia-monitor-service"><a href="#3-restart-ganglia-monitor-service" class="headerlink" title="3. restart ganglia monitor service"></a>3. restart ganglia monitor service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">sudo service ganglia-monitor restart</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Config: CDH5 components Hadoop Metrics2 setting</span><br><span class="line">hadoop-metrics2.properties</span><br><span class="line"></span><br><span class="line">HDFS</span><br><span class="line">NameNode</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.period=10</span><br><span class="line">namenode.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">DataNode</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.period=10</span><br><span class="line">datanode.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">SecondaryNameNode</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.period=10</span><br><span class="line">secondarynamenode.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">YARN</span><br><span class="line">ResourceManager</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.period=10</span><br><span class="line">resourcemanager.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line">maptask.sink.ganglia.servers=10.10.114.120:8649 </span><br><span class="line">reducetask.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">NodeManager</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.period=10</span><br><span class="line">nodemanager.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line">maptask.sink.ganglia.servers=10.10.114.120:8649 </span><br><span class="line">reducetask.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">HBase</span><br><span class="line">Master Server</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.sink.ganglia.period=10</span><br><span class="line">hbase.sink.ganglia.period=10</span><br><span class="line">hbase.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">Region Server</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.sink.ganglia.period=10</span><br><span class="line">hbase.sink.ganglia.period=10</span><br><span class="line">hbase.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">*(there are too many metrics generated from RegionServer, each region of all of tables generates some metrics... be careful if you turn on the ganglia hadoop metrics2 sink on HBase RegionServer)</span><br></pre></td></tr></table></figure>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/monitor/">monitor</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/07/16/Hbase Distibuted Install/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Hbase Distibuted Install</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/07/12/sqoop 常用脚本整理/">
+        <span class="next-text nav-default">sqoop 常用脚本整理</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

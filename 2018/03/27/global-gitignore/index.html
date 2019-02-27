@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="global .gitignore">
+
+
+
+
+  <meta name="keywords" content="Git,gitignore,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2018/03/27/global-gitignore/">
+
+
+<meta name="description" content="为什么需要全局 .gitignore通常来说，在repo中提交跟IDE相关的文件并非最佳实践，所以大多数时候会在.gitignore中加入IDE相关的文件pattern，然而市面上的IDE很多，不同程序员对IDE也有着自己的偏好，似乎不太可能把市面上所有的IDE都列出来。 除此之外，可能还有一些其他情况下，希望在本地ignore某些文件，但却不希望提交到远程的.gitignore中。 这种时候就该">
+<meta name="keywords" content="Git,gitignore">
+<meta property="og:type" content="article">
+<meta property="og:title" content="global .gitignore">
+<meta property="og:url" content="http://itweet.github.io/2018/03/27/global-gitignore/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="为什么需要全局 .gitignore通常来说，在repo中提交跟IDE相关的文件并非最佳实践，所以大多数时候会在.gitignore中加入IDE相关的文件pattern，然而市面上的IDE很多，不同程序员对IDE也有着自己的偏好，似乎不太可能把市面上所有的IDE都列出来。 除此之外，可能还有一些其他情况下，希望在本地ignore某些文件，但却不希望提交到远程的.gitignore中。 这种时候就该">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.534Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="global .gitignore">
+<meta name="twitter:description" content="为什么需要全局 .gitignore通常来说，在repo中提交跟IDE相关的文件并非最佳实践，所以大多数时候会在.gitignore中加入IDE相关的文件pattern，然而市面上的IDE很多，不同程序员对IDE也有着自己的偏好，似乎不太可能把市面上所有的IDE都列出来。 除此之外，可能还有一些其他情况下，希望在本地ignore某些文件，但却不希望提交到远程的.gitignore中。 这种时候就该">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> global .gitignore - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          global .gitignore
+        
+      </h1>
+
+      <time class="post-time">
+          3月 27 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h3 id="为什么需要全局-gitignore"><a href="#为什么需要全局-gitignore" class="headerlink" title="为什么需要全局 .gitignore"></a>为什么需要全局 <code>.gitignore</code></h3><p>通常来说，在repo中提交跟IDE相关的文件并非最佳实践，所以大多数时候会在<code>.gitignore</code>中加入IDE相关的文件pattern，然而市面上的IDE很多，不同程序员对IDE也有着自己的偏好，似乎不太可能把市面上所有的IDE都列出来。</p>
+<p>除此之外，可能还有一些其他情况下，希望在本地ignore某些文件，但却不希望提交到远程的<code>.gitignore</code>中。</p>
+<p>这种时候就该Git的 <strong>global ignore</strong> 上场啦！</p>
+<p>添加全局<code>gitignore</code>之后会在本地所有的repo中都ignore在其中列出的文件，以达到本地忽略特定文件的效果，通常都是IDE啦…例如，本地ignore 与 <code>.idea</code> 相关的所有文件，但我们并不需要修改repo中的<code>.gitignore</code>文件。</p>
+<h3 id="如何设置全局-gitignore"><a href="#如何设置全局-gitignore" class="headerlink" title="如何设置全局 .gitignore"></a>如何设置全局 <code>.gitignore</code></h3><p>首先在根文件夹<code>~</code>下创建一个<code>.gitignore_global</code>文件，（也可以在其他文件夹创建，但通常习惯于根文件夹下），然后运行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.excludesfile ~/.gitignore_global</span><br></pre></td></tr></table></figure></p>
+<p>如果使用sourcetree就更简单了：<br><strong>menu &gt; sourcetree &gt; preference &gt; git</strong><br>将会看到 <strong>global ignore list:</strong> 字样，添加刚刚创建的<code>.gitignore_global</code>文件即可</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://help.github.com/articles/ignoring-files/" target="_blank" rel="noopener">https://help.github.com/articles/ignoring-files/</a><br><a href="https://stackoverflow.com/questions/30907829/sourcetree-adding-files-in-global-gitignore-not-in-repository-gitignore" target="_blank" rel="noopener">https://stackoverflow.com/questions/30907829/sourcetree-adding-files-in-global-gitignore-not-in-repository-gitignore</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Git/">Git</a>
+		  
+			<a href="/tags/gitignore/">gitignore</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/04/09/clickhouse-configuration-analyse/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">clickhouse-configuration-analyse</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/03/26/clickhouse-usage-guide/">
+        <span class="next-text nav-default">clickhouse-usage-guide</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

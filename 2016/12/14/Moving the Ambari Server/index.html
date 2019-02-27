@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Moving the Ambari Server">
+
+
+
+
+  <meta name="keywords" content="ambari,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/12/14/Moving the Ambari Server/">
+
+
+<meta name="description" content="Moving the Ambari Server  To transfer an Ambari Server that uses the default, embedded, PostgreSQL database from one host to a new host, use the following instructions:  Back up current data - from th">
+<meta name="keywords" content="ambari">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Moving the Ambari Server">
+<meta property="og:url" content="http://itweet.github.io/2016/12/14/Moving the Ambari Server/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Moving the Ambari Server  To transfer an Ambari Server that uses the default, embedded, PostgreSQL database from one host to a new host, use the following instructions:  Back up current data - from th">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/Ambari-Server-Move.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.510Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Moving the Ambari Server">
+<meta name="twitter:description" content="Moving the Ambari Server  To transfer an Ambari Server that uses the default, embedded, PostgreSQL database from one host to a new host, use the following instructions:  Back up current data - from th">
+<meta name="twitter:image" content="https://jikelab.github.io/tech-labs/screenshots/Ambari-Server-Move.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Moving the Ambari Server - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Moving the Ambari Server
+        
+      </h1>
+
+      <time class="post-time">
+          12月 14 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p><em>Moving the Ambari Server</em></p>
+<p><img src="https://jikelab.github.io/tech-labs/screenshots/Ambari-Server-Move.png" alt></p>
+<p>To transfer an Ambari Server that uses the default, embedded, PostgreSQL database from one host to a new host, use the following instructions:</p>
+<ol>
+<li><p>Back up current data - from the original Ambari Server database.</p>
+</li>
+<li><p>Update all Agents - to point to the new Ambari Server.</p>
+</li>
+<li><p>Install the New Ambari Server - on the new host and populate databases with information from the original Server.</p>
+</li>
+</ol>
+<p><em>Note</em> If your Ambari Server is using one of the non-default databases (such as MySQL, Oracle, or an existing PostgreSQL instance) then be sure to follow backup, restore, and stop/start procedures that match that database type.</p>
+<h3 id="Back-up-Current-Data"><a href="#Back-up-Current-Data" class="headerlink" title="Back up Current Data"></a>Back up Current Data</h3><ol>
+<li>On the Ambari Server host, stop the original Ambari Server.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ambari-server stop</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>Create a directory to hold the database backups.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line"></span><br><span class="line">mkdir dbdumps/</span><br><span class="line"></span><br><span class="line">cd dbdumps/</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>Create the database backups.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pg_dump -U &#123;ambari.db.username&#125; -f ambari.sql</span><br><span class="line"></span><br><span class="line">Password: &#123;ambari.db.password&#125;</span><br><span class="line"></span><br><span class="line">where the following:</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:center">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ambari.db.username</td>
+<td style="text-align:left">The database username.</td>
+<td style="text-align:center">ambari</td>
+</tr>
+<tr>
+<td>ambari.db.password</td>
+<td style="text-align:left">The database password.</td>
+<td style="text-align:center">bigdata</td>
+</tr>
+</tbody>
+</table>
+<p>4.Create a backup of the Ambari Server meta info.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ambari-server backup</span><br></pre></td></tr></table></figure>
+<h3 id="Update-all-Agents"><a href="#Update-all-Agents" class="headerlink" title="Update all Agents"></a>Update all Agents</h3><ol>
+<li>On each agent host, stop the agent.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ambari-agent stop</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>Remove old agent certificates (if any exist).</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm /var/lib/ambari-agent/keys/*</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>Using a text editor, edit /etc/ambari-agent/conf/ambari-agent.ini to point to the new host.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[server]</span><br><span class="line"></span><br><span class="line">hostname=&#123;new.ambari.server.fqdn&#125;</span><br><span class="line"></span><br><span class="line">url_port=8440</span><br><span class="line"></span><br><span class="line">secured_url_port=8441</span><br></pre></td></tr></table></figure>
+<h3 id="Install-the-New-Ambari-Server"><a href="#Install-the-New-Ambari-Server" class="headerlink" title="Install the New Ambari Server"></a>Install the New Ambari Server</h3><ol>
+<li>Install the new Ambari Server on the new host.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install ambari-server</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>Run setup the Ambari Server and setup similar to how the original Ambari Server is configured.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ambari-server setup</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>Restart the PostgreSQL instance.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service postgresql restart</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>Open the PostgreSQL interactive terminal.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su - postgres</span><br><span class="line"></span><br><span class="line">psql</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>Using the interactive terminal, drop the “ambari” database created by the new ambari setup and install.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop database ambari;</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>Check to make sure the databases have been dropped. The “ambari” databases should not be listed.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\l</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>Create new “ambari” database to hold the transferred data.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create database ambari;</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>Exit the PostgreSQL interactive terminal.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\q</span><br></pre></td></tr></table></figure>
+<ol start="9">
+<li><p>Copy the saved data (/tmp/dbdumps/ambari.sql) from Back up Current Data to the new Ambari Server host.</p>
+</li>
+<li><p>Load the saved data into the new database.</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -d ambari -f /tmp/dbdumps/ambari.sql</span><br></pre></td></tr></table></figure>
+<ol start="11">
+<li>Start the new Server.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ambari-server start</span><br></pre></td></tr></table></figure>
+<ol start="12">
+<li>On each Agent host, start the Ambari Agent.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ambari-agent start</span><br></pre></td></tr></table></figure>
+<ol start="13">
+<li>Open Ambari Web. Point your browser to:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;new.Ambari.Server&gt;:8080</span><br></pre></td></tr></table></figure>
+<p>The new Ambari Server is ready to use.</p>
+<h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p><em>ambari-agent.log</em> WARNING or ERROR</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">WARNING 2016-12-14 16:17:57,842 NetUtil.py:89 - Failed to connect to https://ambari-test-3:8440/ca due to [Errno -2] Name or service not known</span><br><span class="line">WARNING 2016-12-14 16:17:57,842 NetUtil.py:112 - Server at https://ambari-test-3:8440 is not reachable, sleeping for 10 seconds...</span><br></pre></td></tr></table></figure>
+<p><em>Command line execute</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ambari-agent stop</span><br><span class="line"></span><br><span class="line">ambari-agent reset ambari-test-3</span><br><span class="line"></span><br><span class="line">ambari-agent start</span><br></pre></td></tr></table></figure>
+<p><em>Check /etc/hosts file hostname mapping</em></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/ambari/">ambari</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/12/28/ubuntu ambari development/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">ubuntu ambari development</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/12/04/Hadoop Cluster Benchmark Performance/">
+        <span class="next-text nav-default">Hadoop Cluster Benchmark Performance</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

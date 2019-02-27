@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Parquet-library-fatal-error">
+
+
+
+
+  <meta name="keywords" content="Parquet,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2018/08/26/parquet-library-fatal-error/">
+
+
+<meta name="description" content="parquet-Hadoop 1.9.0 大量close-wait问题。 一个开源基础库引发的严重产品事故，整个事件场内block超过4小时以上。 我们某服务部署上线，界面化的DAG任务，主要跑机器学习全流程作业，运行一段时间，发现后端数据平台查询、预览数据功能全部不可用，导致大量上游业务系统block住。 报错关键信息：  UnknowHostException  1java.net.Unkno">
+<meta name="keywords" content="Parquet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Parquet-library-fatal-error">
+<meta property="og:url" content="http://itweet.github.io/2018/08/26/parquet-library-fatal-error/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="parquet-Hadoop 1.9.0 大量close-wait问题。 一个开源基础库引发的严重产品事故，整个事件场内block超过4小时以上。 我们某服务部署上线，界面化的DAG任务，主要跑机器学习全流程作业，运行一段时间，发现后端数据平台查询、预览数据功能全部不可用，导致大量上游业务系统block住。 报错关键信息：  UnknowHostException  1java.net.Unkno">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/close-wait.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-09-04T00:47:05.196Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Parquet-library-fatal-error">
+<meta name="twitter:description" content="parquet-Hadoop 1.9.0 大量close-wait问题。 一个开源基础库引发的严重产品事故，整个事件场内block超过4小时以上。 我们某服务部署上线，界面化的DAG任务，主要跑机器学习全流程作业，运行一段时间，发现后端数据平台查询、预览数据功能全部不可用，导致大量上游业务系统block住。 报错关键信息：  UnknowHostException  1java.net.Unkno">
+<meta name="twitter:image" content="https://www.itweet.cn/screenshots/close-wait.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Parquet-library-fatal-error - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Parquet-library-fatal-error
+        
+      </h1>
+
+      <time class="post-time">
+          8月 26 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>parquet-Hadoop 1.9.0 大量close-wait问题。</p>
+<p>一个开源基础库引发的严重产品事故，整个事件场内block超过4小时以上。</p>
+<p>我们某服务部署上线，界面化的DAG任务，主要跑机器学习全流程作业，运行一段时间，发现后端数据平台查询、预览数据功能全部不可用，导致大量上游业务系统block住。</p>
+<p>报错关键信息：</p>
+<ol>
+<li>UnknowHostException</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.net.UnknownHostException: node199mm1002</span><br></pre></td></tr></table></figure>
+<p>排查Hadoop集群平台是否正常，如上主机是否可到达，发现均正常，集群无问题。</p>
+<ol start="2">
+<li>Too many open files</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.net.SocketException: Too many open files; Host Details: local host is : &quot;java.net.UnknownHostException: tserver-98989-bmhtk: tserver-98989-bmhtk: System error&quot;: destination host is: &quot;node199mm1002&quot;:25000; </span><br><span class="line">  at org.apache.hadoop.net.NetUtils.wrapException(NetUtils.java:776)</span><br></pre></td></tr></table></figure>
+<p>操作系统，根据ulimit -a查看系统fd配置，主机fd上限为640000，tserver容器的fd上限为65536。通过kubectl进入tserver容器，使用命令“watch ‘ss | grep CLOSE-WAIT | wc -l’”查看，发现65278个close-wait，快崩了。</p>
+<p><img src="https://www.itweet.cn/screenshots/close-wait.png" alt="close wait"></p>
+<p>基本可确定是大量，close-wait连接泄漏问题，对连接泄漏列表进一步分析：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ss | grep CLOSE-WAIT &gt; close_wait.txt</span><br><span class="line">cat close_wait.txt| grep CLOSE_WAIT | grep 50010|wc -l</span><br><span class="line">cat close_wait.txt| grep CLOSE_WAIT | grep http|wc -l</span><br></pre></td></tr></table></figure>
+<p>发现两个特征，一个是属于http相关相关close-wait，占比2%，剩余的全是连接50010端口出现的close-wait，查询Hadoop相关端口，发现50010是DataNode的数据转发端口，初步怀疑是代码连接Hadoop DataNode查询数据没有关闭流导致。</p>
+<ol start="3">
+<li>DataManager Service：listFiles error IOException  </li>
+</ol>
+<p>排查DataManager Service相关代码，发现listFiles函数，主要功能，读取HDFS获取某个目录下的parquet集合，然后进行读取parquet的meta信息，前端进行展示大小，行数，还会读取任意问题进行预览，或者随机预览数据。<br>并未发现有任何异常情况，系统每次调用此接方法导致阻塞，一步步跟进调试，发现已经进入parquet相关的代码。</p>
+<p>经过认证检查每一行代码，发现流相关操作均进行了关闭，并没有任何问题。</p>
+<p>验证思考：缩小问题范围，对listFiles函数，调用的全部方法进行最小化单元测试，最终在开发环境preview方法中，实现了连接HDFS读取parquet文件，使用rest接口，单独调用此方法，每次调用close-wait都会增加2，并且长期存在。</p>
+<p>监控命令“watch ‘ss | grep CLOSE-WAIT | wc -l’”，疯狂访问，一直增加不曾下降。</p>
+<p>猜测是Parquet依赖库，有连接泄漏问题，于是向社区求助，我们引入的parquet 1.9.0上下几个版本的commit以及bugfix全看了一遍，重点关注close stream相关。</p>
+<p>PR <a href="https://github.com/apache/parquet-mr/pull/388" target="_blank" rel="noopener">PARQUET-783</a> 提到相关问题：</p>
+<p>···<br>This PR addresses <a href="https://issues.apache.org/jira/browse/PARQUET-783" target="_blank" rel="noopener">https://issues.apache.org/jira/browse/PARQUET-783</a>.</p>
+<p>ParquetFileReader opens a SeekableInputStream to read a footer. In the process, it opens a new FSDataInputStream and wraps it. However, H2SeekableInputStream does not override the close method. Therefore, when ParquetFileReader closes it, the underlying FSDataInputStream is not closed. As a result, these stale connections can exhaust a clusters’ data nodes’ connection resources and lead to mysterious HDFS read failures in HDFS clients, e.g.</p>
+<p>org.apache.hadoop.hdfs.BlockMissingException: Could not obtain block: BP-905337612-172.16.70.103-1444328960665:blk_1720536852_646811517<br>···</p>
+<p>根据社区，反馈：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">downgrade parquet to 1.8.2 to fix 1.9.0 connection leaks</span><br></pre></td></tr></table></figure>
+<p>降级parquet库版本为1.8.2修复此问题，升级最新版本也是能解决问题，不过部分接口大动，导致不兼容，经过考虑决定降级库，而不该任何代码解决问题。</p>
+<p>修复代码 by <a href="https://github.com/apache/parquet-mr/pull/388/files" target="_blank" rel="noopener">https://github.com/apache/parquet-mr/pull/388/files</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void close() throws IOException &#123;</span><br><span class="line">  stream.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>整个过程，由于全部服务容器化部署，导致排查问题周期比较长，获取日志还是比较原始的命令行方式，门槛较高，由于在现场发现问题，不能及时进行问题的追溯，只能根据只言片语的反馈进行问题追踪。如果不是在开发环境，复现此问题，整个问题排查起来异常困难，开始思考是否有tracking工具，可以快速定位问题。代码的最小化单元测试，只能定位范围，最终一直无法确定是某个函数直接导致的问题，代码编写中函数功能单一性拆分是一门学问。</p>
+<p>期间，重启大发又一次发挥了奇效。在开发环境复现问题，并修复bug，patch修复各个产品线的不同版本。</p>
+<p>如果，你还在用有连接泄漏问题的Parque版本，快快升级吧。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Parquet/">Parquet</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/09/06/tensorflow-on-apache-hadoop-yarn/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Tensorflow-on-apache-hadoop-yarn</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/08/20/automated-feature-engineering-introduction/">
+        <span class="next-text nav-default">Automated feature engineering introduction</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

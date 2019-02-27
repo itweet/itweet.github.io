@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="如何选择满足需求的SQL on Hadoop系统">
+
+
+
+
+  <meta name="keywords" content="SQL,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/05/06/如何选择满足需求的SQL on Hadoop系统/">
+
+
+<meta name="description" content="如何选择满足需求的SQL on Hadoop系统在批处理时代，Hive一枝独秀；在实时交互式查询时代，呈现出的是百花齐放的局面。Hive on Tez, Hive on Spark, Spark SQL,Impala等等，目前看也没有谁干掉谁的趋势。引用今年图灵奖得主MichaelStonebraker的话说，现在的数据库领域已经不是”one size fit all”的时代了。那么面对这么多系统">
+<meta name="keywords" content="SQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何选择满足需求的SQL on Hadoop系统">
+<meta property="og:url" content="http://itweet.github.io/2015/05/06/如何选择满足需求的SQL on Hadoop系统/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="如何选择满足需求的SQL on Hadoop系统在批处理时代，Hive一枝独秀；在实时交互式查询时代，呈现出的是百花齐放的局面。Hive on Tez, Hive on Spark, Spark SQL,Impala等等，目前看也没有谁干掉谁的趋势。引用今年图灵奖得主MichaelStonebraker的话说，现在的数据库领域已经不是”one size fit all”的时代了。那么面对这么多系统">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.480Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何选择满足需求的SQL on Hadoop系统">
+<meta name="twitter:description" content="如何选择满足需求的SQL on Hadoop系统在批处理时代，Hive一枝独秀；在实时交互式查询时代，呈现出的是百花齐放的局面。Hive on Tez, Hive on Spark, Spark SQL,Impala等等，目前看也没有谁干掉谁的趋势。引用今年图灵奖得主MichaelStonebraker的话说，现在的数据库领域已经不是”one size fit all”的时代了。那么面对这么多系统">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 如何选择满足需求的SQL on Hadoop系统 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          如何选择满足需求的SQL on Hadoop系统
+        
+      </h1>
+
+      <time class="post-time">
+          5月 06 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="如何选择满足需求的SQL-on-Hadoop系统"><a href="#如何选择满足需求的SQL-on-Hadoop系统" class="headerlink" title="如何选择满足需求的SQL on Hadoop系统"></a>如何选择满足需求的SQL on Hadoop系统</h1><p>在批处理时代，Hive一枝独秀；在实时交互式查询时代，呈现出的是百花齐放的局面。<br>Hive on Tez, Hive on Spark, Spark SQL,<br>Impala等等，目前看也没有谁干掉谁的趋势。引用今年图灵奖得主Michael<br>Stonebraker的话说，现在的数据库领域已经不是”one size fit all”的时代了。那么面对<br>这么多系统，我们改如何选择呢？这里谈谈这些系统的区别和优缺点。</p>
+<p>Hive/Tez/Stinger目前的主要推动者是hortonworks和Yahoo!。刚刚结束的2015 Hadoop<br>Summit(San Jose)上，Yahoo分享了他们目前生产环境中Hive on<br>Tez的一些情况。显示和Hive 0.10(RCFile)相比，目前的Hive on<br>Tez在1TB的数据量查询的加速比平均为6.2倍。目前的Hive on Tez已经是production-read<br>y。Tez这个执行引擎和Spark比较类似，原来的MR只能执行Map和Reduce两种操作，现在的T<br>ez可以把Job解析成DAG来执行。除此之外还有一些进一步优化Hive执行效率的工作，例如V<br>ectorized<br>Execution和ORCFile等。Dropbox也透露他们的Hive集群下一步的升级目标就是Hive on<br>Tez。</p>
+<p>Hive on Spark目前的主要推动者是Cloudera，可以认为是Hive社区这边搞的”Hive on<br>Spark”。刚刚release了第一个使用版本，目前不能用于生产环境。Hive on Spark既能利<br>用到现在广泛使用的Hive的前端，又能利用到广泛使用的Spark作为后端执行引擎。对于现<br>在既部署了Hive，又部署了Spark的公司来说，节省了运维成本。</p>
+<p>对于上面提到的Hive on Tez和Hive on Spark两种系统都具备的优点是：</p>
+<ul>
+<li><p>1，现存的Hive jobs可以透明、无缝迁移到Hive on ***平台，可以利用Hive现有的ODBC/JDBC，metastore, hiveserver2, UDF，auditing, authorization, monitoring系统，不需要做任何更改和测试，迁移成本低。</p>
+</li>
+<li><p>2，无论后端执行引擎是MapReduce也好，Tez也好，Spark也好，整个Hive SQL解析、生成执行计划、执行计划优化的过程都是非常类似的。而且大部分公司都积累了一定的Hive运维和使用经验，那么对于bug调试、性能调优等环节会比较熟悉，降低了运维成本。</p>
+</li>
+</ul>
+<p>Spark SQL主要的推动者是Databricks。提到Spark<br>SQL不得不提的就是Shark。Shark可以理解为Spark社区这边搞的一个”Hive on Spark”，把<br>Hive的物理执行计划使用Spark计算引擎去执行。这里面会有一些问题，Hive社区那边没有<br>把物理执行计划到执行引擎这个步骤抽象出公共API，所以Spark社区这边要自己维护一个H<br>ive的分支，而且Hive的设计和发展不太会考虑到如何优化Spark的Job。但是前面提到的Hi<br>ve on Spark却是和Hive一起发布的，是由Hive社区控制的。</p>
+<p>所以后来Spark社区就停止了Shark的开发转向Spark<br>SQL（“坑了”一部分当时信任Shark的人）。Spark SQL是把SQL解析成RDD的transformation<br>和action，而且通过catalyst可以自由、灵活的选择最优执行方案。对数据库有深入研究<br>的人就会知道，SQL执行计划的优化是一个非常重要的环节，Spark<br>SQL在这方面的优势非常明显，提供了一个非常灵活、可扩展的架构。但是Spark SQL是基<br>于内存的，元数据放在内存里面，不适合作为数据仓库的一部分来使用。所以有了Spark<br>SQL的HiveContext，就是兼容Hive的Spark SQL。它支持HiveQL, Hive Metastore, Hive<br>SerDes and Hive UDFs以及JDBC<br>driver。这样看起来很完美，但是实际上也有一些缺点：Spark SQL依赖于Hive的一个snap<br>shot，所以它总是比Hive的发布晚一个版本，很多Hive新的feature和bug fix它就无法包<br>括。而且目前看Spark社区在Spark的thriftserver方面的投入不是很大，所以感觉它不是<br>特别想朝着这个方向发展。还有一个重要的缺点就是Spark SQL目前还不能通过分析SQL来<br>预测这个查询需要多少资源从而申请对应的资源，所以在共享集群上无法高效地分配资源<br>和调度任务。</p>
+<p>特别是目前Spark社区把Spark SQL朝向DataFrame发展，目标是提供一个类似R或者Pandas<br>的接口，把这个作为主要的发展方向。DataFrame这个功能使得Spark成为机器学习和数据<br>科学领域不可或缺的一个组件，但是在数据仓库（ETL，交互式分析，BI查询）领域感觉已<br>经不打算作为他们主要的发展目标了。</p>
+<p>Impala主要的推动者是Cloudera，自从推出以来一直不温不火。Impala是一种MPP架构的执<br>行引擎，查询速度非常快，是交互式BI查询最好的选择，即使是在并发性非常高的情况下<br>也能保证查询延迟，所以在multi-tenant, shared clusters上表现比较好。Impala的另外<br>一个重要的优点就是支持的SQL是在以上这些系统中是最标准的，也就是跟SQL99是最像的<br>，所以对于传统企业来说可能是个不错的选择。Impala的主要缺点是社区不活跃，由C++开<br>发，可维护性差，目前系统稳定性还有待提高。</p>
+<p>Presto是Facebook开发的，目前也得到了Teradata的支持。目前Presto的主要使用者还是<br>互联网公司，像Facebook，Netflix等。Presto的代码用了Dependency Injection,<br>比较难理解和debug。另外还有一些系统，像Apache Drill，Apache<br>Tajo等，都是非常小众的系统了。</p>
+<p>总的来说，目前来看Hive依然是批处理/ETL 类应用的首选。Hive on Spark能够降低Hive<br>的延迟，但是还是达不到交互式BI查询的需求。目前交互式BI查询最好的选择是Impala。S<br>park SQL/DataFrame是Spark用户使用SQL或者DataFrame API构建Spark pipeline的一种选<br>择，并不是一个通用的支持交互式查询的引擎，更多的会用在基于Spark的机器学习任务的<br>数据处理和准备的环节。</p>
+<p>原文来自：<a href="http://weibo.com/p/1001603864171165928729" target="_blank" rel="noopener">http://weibo.com/p/1001603864171165928729</a></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/SQL/">SQL</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/07/02/hive各种调优设置/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">hive各种调优设置</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/04/06/程序员必读的书 StackOverflow 创始人推荐/">
+        <span class="next-text nav-default">程序员必读的书 StackOverflow 创始人推荐</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

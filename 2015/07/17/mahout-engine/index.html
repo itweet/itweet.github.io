@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="mahout-engine">
+
+
+
+
+  <meta name="keywords" content="mahout,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/07/17/mahout-engine/">
+
+
+<meta name="description" content="Mahout 是 Apache Software Foundation（ASF） 旗下的一个开源项目，提供一些可扩展   的机器学习领域经典算法的实现，旨在帮助开发人员更加方便快捷地创建智能应用程序。Mahout包含许多实现，包括聚类、分类、推荐过滤、频繁子项挖掘。此外，通过使用  Apache Hadoop 库，Mahout 可以有效地扩展到云中。 一、maven构建mahout开发环境 开发">
+<meta name="keywords" content="mahout">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mahout-engine">
+<meta property="og:url" content="http://itweet.github.io/2015/07/17/mahout-engine/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Mahout 是 Apache Software Foundation（ASF） 旗下的一个开源项目，提供一些可扩展   的机器学习领域经典算法的实现，旨在帮助开发人员更加方便快捷地创建智能应用程序。Mahout包含许多实现，包括聚类、分类、推荐过滤、频繁子项挖掘。此外，通过使用  Apache Hadoop 库，Mahout 可以有效地扩展到云中。 一、maven构建mahout开发环境 开发">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://mahout.apache.org/images/mahout-logo-brudman.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.485Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mahout-engine">
+<meta name="twitter:description" content="Mahout 是 Apache Software Foundation（ASF） 旗下的一个开源项目，提供一些可扩展   的机器学习领域经典算法的实现，旨在帮助开发人员更加方便快捷地创建智能应用程序。Mahout包含许多实现，包括聚类、分类、推荐过滤、频繁子项挖掘。此外，通过使用  Apache Hadoop 库，Mahout 可以有效地扩展到云中。 一、maven构建mahout开发环境 开发">
+<meta name="twitter:image" content="http://mahout.apache.org/images/mahout-logo-brudman.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> mahout-engine - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          mahout-engine
+        
+      </h1>
+
+      <time class="post-time">
+          7月 17 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p><img src="http://mahout.apache.org/images/mahout-logo-brudman.png" alt></p>
+<p>Mahout 是 Apache Software Foundation（ASF） 旗下的一个开源项目，提供一些可扩展   的机器学习领域经典算法的实现，旨在帮助开发人员更加方便快捷地创建智能应用程序。<br>Mahout包含许多实现，包括聚类、分类、推荐过滤、频繁子项挖掘。此外，通过使用  Apache Hadoop 库，Mahout 可以有效地扩展到云中。</p>
+<h1 id="一、maven构建mahout开发环境"><a href="#一、maven构建mahout开发环境" class="headerlink" title="一、maven构建mahout开发环境"></a>一、maven构建mahout开发环境</h1><blockquote>
+<p>开发环境<br>$ mvn -v<br>Apache Maven 3.0.5 (r01de14724cdef164cd33c7c8c2fe155faf9602da; 2013-02-19<br>21:51:<br>28+0800)<br>Maven home: d:\software\apache\apache-maven-3.0.5<br>Java version: 1.7.0_67, vendor: Oracle Corporation<br>Java home: d:\software\Java\jdk1.7.0_67\jre<br>Default locale: zh_CN, platform encoding: GBK<br>OS name: “windows 8.1”, version: “6.3”, arch: “amd64”, family: “windows”  </p>
+</blockquote>
+<h2 id="1、mvn命令生成标准java工程"><a href="#1、mvn命令生成标准java工程" class="headerlink" title="1、mvn命令生成标准java工程"></a>1、mvn命令生成标准java工程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes </span><br><span class="line">-DgroupId=cn.itweet.mymahout -DartifactId=myMahout -DpackageName=cn.itweet.mymahout -Dversion=1.0-SNAPSHOT -DinteractiveMode=false</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls myMahout/</span><br><span class="line">pom.xml  src</span><br></pre></td></tr></table></figure>
+<h2 id="2、把生成的java项目导入eclipse"><a href="#2、把生成的java项目导入eclipse" class="headerlink" title="2、把生成的java项目导入eclipse"></a>2、把生成的java项目导入eclipse</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">选择系统1.7jdk,以及maven插件，还有字符编码为utf-8！</span><br></pre></td></tr></table></figure>
+<h2 id="3、增加mahout依赖，修改pom-xml"><a href="#3、增加mahout依赖，修改pom-xml" class="headerlink" title="3、增加mahout依赖，修改pom.xml"></a>3、增加mahout依赖，修改pom.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;groupId&gt;cn.itweet.mymahout&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;myMahout&lt;/artifactId&gt;</span><br><span class="line">    &lt;packaging&gt;jar&lt;/packaging&gt;</span><br><span class="line">    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;name&gt;myMahout&lt;/name&gt;</span><br><span class="line">    &lt;url&gt;http://maven.apache.org&lt;/url&gt;</span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">    &lt;mahout.version&gt;0.6&lt;/mahout.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.mahout&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mahout-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;$&#123;mahout.version&#125;&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.mahout&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mahout-integration&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;$&#123;mahout.version&#125;&lt;/version&gt;</span><br><span class="line">    &lt;exclusions&gt;</span><br><span class="line">    &lt;exclusion&gt;</span><br><span class="line">    &lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jetty&lt;/artifactId&gt;</span><br><span class="line">    &lt;/exclusion&gt;</span><br><span class="line">    &lt;exclusion&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.cassandra&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;cassandra-all&lt;/artifactId&gt;</span><br><span class="line">    &lt;/exclusion&gt;</span><br><span class="line">    &lt;exclusion&gt;</span><br><span class="line">    &lt;groupId&gt;me.prettyprint&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;hector-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;/exclusion&gt;</span><br><span class="line">    &lt;/exclusions&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">    &lt;/project&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4、下载依赖"><a href="#4、下载依赖" class="headerlink" title="4、下载依赖"></a>4、下载依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd myMahout/</span><br><span class="line">$ mvn clean install</span><br></pre></td></tr></table></figure>
+<h1 id="二、用Mahout实现协同过滤userCF"><a href="#二、用Mahout实现协同过滤userCF" class="headerlink" title="二、用Mahout实现协同过滤userCF"></a>二、用Mahout实现协同过滤userCF</h1><h2 id="1、manhout推荐引擎源码"><a href="#1、manhout推荐引擎源码" class="headerlink" title="1、manhout推荐引擎源码"></a>1、manhout推荐引擎源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Mahout的推荐引擎，要从org.apache.mahout.cf.taste包说起。</span><br><span class="line">– common: 公共类包括，异常，数据刷新接口，权重常量</span><br><span class="line">– eval: 定义构造器接口，类似于工厂模式</span><br><span class="line">– model: 定义数据模型接口</span><br><span class="line">– neighborhood: 定义近邻算法的接口</span><br><span class="line">– recommender: 定义推荐算法的接口</span><br><span class="line">– similarity: 定义相似度算法的接口</span><br><span class="line">– transforms: 定义数据转换的接口</span><br><span class="line">– hadoop: 基于hadoop的分步式算法的实现类</span><br><span class="line">– impl: 单机内存算法实现类</span><br></pre></td></tr></table></figure>
+<h2 id="2、程序开发-Mahout推荐API"><a href="#2、程序开发-Mahout推荐API" class="headerlink" title="2、程序开发: Mahout推荐API"></a>2、程序开发: Mahout推荐API</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   org.apache.mahout.cf.taste.model.DataModel.java</span><br><span class="line"> org.apache.mahout.cf.taste.similarity. UserSimilarity.java</span><br><span class="line"> org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood.java</span><br><span class="line"> org.apache.mahout.cf.taste.recommender.Recommender.java</span><br></pre></td></tr></table></figure>
+<h2 id="3、demo"><a href="#3、demo" class="headerlink" title="3、demo"></a>3、demo</h2><h3 id="3-1-项目结构"><a href="#3-1-项目结构" class="headerlink" title="3.1 项目结构"></a>3.1 项目结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">D:\software\ProjectSource\scala_ws\myMahout&gt;tree</span><br><span class="line">D:.</span><br><span class="line">├─.settings</span><br><span class="line">├─datafile</span><br><span class="line">├─src</span><br><span class="line">│  ├─main</span><br><span class="line">│  │  └─java</span><br><span class="line">│  │      └─cn</span><br><span class="line">│  │          └─itweet</span><br><span class="line">│  │              └─mymahout</span><br><span class="line">│  └─test</span><br><span class="line">│      └─java</span><br><span class="line">│          └─cn</span><br><span class="line">│              └─itweet</span><br><span class="line">│                  └─mymahout</span><br><span class="line">└─target</span><br><span class="line">    ├─classes</span><br><span class="line">    │  └─cn</span><br><span class="line">    │      └─itweet</span><br><span class="line">    │          └─mymahout</span><br><span class="line">    ├─maven-archiver</span><br><span class="line">    ├─surefire</span><br><span class="line">    ├─surefire-reports</span><br><span class="line">    └─test-classes</span><br><span class="line">        └─cn</span><br><span class="line">            └─itweet</span><br><span class="line">                └─mymahout</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-数据"><a href="#3-2-数据" class="headerlink" title="3.2 数据"></a>3.2 数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1,101,5.0</span><br><span class="line">1,102,3.0</span><br><span class="line">1,103,2.5</span><br><span class="line">2,101,2.0</span><br><span class="line">2,102,2.5</span><br><span class="line">2,103,5.0</span><br><span class="line">2,104,2.0</span><br><span class="line">3,101,2.5</span><br><span class="line">3,104,4.0</span><br><span class="line">3,105,4.5</span><br><span class="line">3,107,5.0</span><br><span class="line">4,101,5.0</span><br><span class="line">4,103,3.0</span><br><span class="line">4,104,4.5</span><br><span class="line">4,106,4.0</span><br><span class="line">5,101,4.0</span><br><span class="line">5,102,3.0</span><br><span class="line">5,103,2.0</span><br><span class="line">5,104,4.0</span><br><span class="line">5,105,3.5</span><br><span class="line">5,106,4.0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>据解释：每一行有三列，第一列是用户ID，第二列是物品ID，第三列是用户对物品的打分。</p>
+</blockquote>
+<blockquote>
+<p>运行结果：<br><code>uid:1(104,4.274336)(106,4.000000)  
+uid:2(105,4.055916)  
+uid:3(103,3.360987)(102,2.773169)  
+uid:4(102,3.000000)  
+uid:5</code></p>
+</blockquote>
+<h3 id="3-2-程序"><a href="#3-2-程序" class="headerlink" title="3.2 程序"></a>3.2 程序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">package cn.itweet.mymahout;</span><br><span class="line"></span><br><span class="line">import java.io.File;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.apache.mahout.cf.taste.common.TasteException;</span><br><span class="line">import org.apache.mahout.cf.taste.impl.common.LongPrimitiveIterator;</span><br><span class="line">import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;</span><br><span class="line">import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;</span><br><span class="line">import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;</span><br><span class="line">import org.apache.mahout.cf.taste.impl.similarity.EuclideanDistanceSimilarity;</span><br><span class="line">import org.apache.mahout.cf.taste.model.DataModel;</span><br><span class="line">import org.apache.mahout.cf.taste.recommender.RecommendedItem;</span><br><span class="line">import org.apache.mahout.cf.taste.recommender.Recommender;</span><br><span class="line">import org.apache.mahout.cf.taste.similarity.UserSimilarity;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by root on 2015年7月17日</span><br><span class="line"> */</span><br><span class="line">public class UserCF &#123;</span><br><span class="line"></span><br><span class="line">    final static int NEIGHBORHOOD_NUM = 2;</span><br><span class="line">    final static int RECOMMENDER_NUM = 3;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws IOException, TasteException &#123;</span><br><span class="line">        String file = &quot;datafile/item.csv&quot;;</span><br><span class="line">        DataModel model = new FileDataModel(new File(file));</span><br><span class="line">        UserSimilarity user = new EuclideanDistanceSimilarity(model);</span><br><span class="line">        NearestNUserNeighborhood neighbor = new NearestNUserNeighborhood(NEIGHBORHOOD_NUM, user, model);</span><br><span class="line">        Recommender r = new GenericUserBasedRecommender(model, neighbor, user);</span><br><span class="line">        LongPrimitiveIterator iter = model.getUserIDs();</span><br><span class="line"></span><br><span class="line">        while (iter.hasNext()) &#123;</span><br><span class="line">            long uid = iter.nextLong();</span><br><span class="line">            List&lt;RecommendedItem&gt; list = r.recommend(uid, RECOMMENDER_NUM);</span><br><span class="line">            System.out.printf(&quot;uid:%s&quot;, uid);</span><br><span class="line">            for (RecommendedItem ritem : list) &#123;</span><br><span class="line">                System.out.printf(&quot;(%s,%f)&quot;, ritem.getItemID(), ritem.getValue());</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="三、-用Mahout实现推荐系统"><a href="#三、-用Mahout实现推荐系统" class="headerlink" title="三、 用Mahout实现推荐系统"></a>三、 用Mahout实现推荐系统</h1><h2 id="1、开发前的规划"><a href="#1、开发前的规划" class="headerlink" title="1、开发前的规划"></a>1、开发前的规划</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> BookEvaluator.java, 选出“评估推荐器”验证得分较高的算法</span><br><span class="line"> BookResult.java, 对指定数量的结果人工比较</span><br><span class="line"> BookFilterGenderResult.java，只保留男性用户的图书列表</span><br></pre></td></tr></table></figure>
+<h2 id="2、人工对数据进行分析"><a href="#2、人工对数据进行分析" class="headerlink" title="2、人工对数据进行分析"></a>2、人工对数据进行分析</h2><blockquote>
+<p>根据最后计算结果去核对，推荐结果是否符合要求！或者符合自然现象.<br>推荐是否合理。通过比对找到一些规则去排除数据，让推荐系统更加准确!<br>利用可视化软件帮助完成分析过程！</p>
+</blockquote>
+<h1 id="四、mahout-kmeans聚类测试"><a href="#四、mahout-kmeans聚类测试" class="headerlink" title="四、mahout-kmeans聚类测试"></a>四、mahout-kmeans聚类测试</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">http://mahout.apache.org/users/clustering/k-means-clustering.html</span><br><span class="line"></span><br><span class="line"># wget http://archive.ics.uci.edu/ml/databases/synthetic_control/synthetic_cont</span><br><span class="line">rol.data</span><br><span class="line"></span><br><span class="line"># mahout org.apache.mahout.clustering.syntheticcontrol.kmeans.Job</span><br><span class="line">error:Input path does not exist: hdfs://server1:8020/user/hive/testdata</span><br><span class="line"></span><br><span class="line">$ hadoop fs -mkdir hdfs://server1:8020/user/hive/testdata</span><br><span class="line"></span><br><span class="line"># sudo -u hdfs hadoop fs -put synthetic_control.data /user/hive/testdata</span><br><span class="line"></span><br><span class="line">-- 查看结果</span><br><span class="line">$ hadoop fs -ls hdfs://server1:8020/user/hive/output/data</span><br><span class="line">-rw-r--r--   3 hive hdfs     335470 2015-09-03 01:07 hdfs://server1:8020/user/hive/output/data/part-m-00000</span><br><span class="line"></span><br><span class="line">$ mahout vectordump -i ./output/data/part-m-00000</span><br><span class="line">15/09/03 01:17:00 INFO common.AbstractJob: Command line arguments: &#123;--endPhase=[2147483647], --input=[./output/data/part-m-00000], --startPhase=[0], --tempDir=[temp]&#125;</span><br><span class="line">15/09/03 01:17:03 INFO vectors.VectorDumper: Sort? false</span><br><span class="line"></span><br><span class="line">&#123;0:28.7812,31:26.6311,34:29.1495,4:28.9207,32:35.6541,5:33.7596,8:35.2479,6:25.3969,30:25.0293,24:33.0292,29:34.9424,17:26.5235,51:24.5556,36:26.1927,12:36.0253,23:29.5054,58:25.4652,21:29.27,11:29.2171,10:32.8717,15:32.8717,7:27.7849,28:26.1203,46:28.0721,33:28.4353,55:34.9879,54:34.9318,25:25.04,3:31.2834,49:29.747,41:26.2353,1:34.4632,26:28.9167,44:31.0558,37:33.3182,56:32.4721,42:28.9964,27:24.3437,50:31.4333,16:34.1173,40:35.5344,48:35.4973,39:27.0443,9:27.1159,52:33.7431,13:32.337,43:32.0036,19:26.3693,59:25.8717,2:31.3381,20:25.7744,18:27.6623,22:30.7326,35:28.1584,57:33.3759,45:34.2553,38:30.9772,47:28.9402,14:34.5249,53:25.0466&#125;</span><br><span class="line">&#123;0:24.8923,31:32.5981,34:26.9414,4:27.8789,32:28.3038,5:31.5926,8:27.9516,6:31.4861,30:34.0765,24:31.9874,29:25.0701,17:35.6273,51:31.0205,36:33.1089,12:27.4867,23:30.4719,58:32.1005,21:24.1311,11:31.1887,10:27.5415,15:24.488,7:35.5469,28:33.6472,46:26.3458,33:26.1471,55:26.4244,54:33.6564,25:33.6615,3:32.8217,49:29.4047,41:26.5301,1:25.741,26:25.5511,44:32.8357,37:24.1491,56:28.4661,42:24.8578,27:30.4686,50:32.5577,16:27.5918,40:35.9519,48:28.9861,39:25.7906,9:31.6595,52:26.6418,13:31.391,43:25.9562,19:31.4167,59:26.691,2:27.5532,20:30.7447,18:35.4102,22:35.1422,35:31.5203,57:34.2484,45:28.5322,38:28.5157,47:30.6213,14:27.811,53:28.4331&#125;</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考：<a href="http://blog.fens.me/hadoop-mahout-maven-eclipse/" target="_blank" rel="noopener">http://blog.fens.me/hadoop-mahout-maven-eclipse/</a> <br><br>  <a href="http://blog.fens.me/mahout-recommend-engine/" target="_blank" rel="noopener">http://blog.fens.me/mahout-recommend-engine/</a></p>
+</blockquote>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/mahout/">mahout</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/07/18/drill-use/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">drill-use</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/07/17/alluxio-dev/">
+        <span class="next-text nav-default">alluxio-dev</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

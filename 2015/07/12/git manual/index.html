@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="git manual">
+
+
+
+
+  <meta name="keywords" content="git,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/07/12/git manual/">
+
+
+<meta name="description" content="git使用有段时间了,个人博客也是托管到git上面,经常用到的命令放到这，主要供自己查阅使用，反复查阅能够加深印象，提升技能熟练度。如果你是还不知道 Git 是什么，建议先阅读 廖雪峰的Git教程 1、注册github账号2、install git client windows 系统msysgit注意此客户端不支持带有空格的文件夹名称  3、创建本地ssh生成安全验证1$ ssh-keygen -">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git manual">
+<meta property="og:url" content="http://itweet.github.io/2015/07/12/git manual/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="git使用有段时间了,个人博客也是托管到git上面,经常用到的命令放到这，主要供自己查阅使用，反复查阅能够加深印象，提升技能熟练度。如果你是还不知道 Git 是什么，建议先阅读 廖雪峰的Git教程 1、注册github账号2、install git client windows 系统msysgit注意此客户端不支持带有空格的文件夹名称  3、创建本地ssh生成安全验证1$ ssh-keygen -">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/git_workflow.jpg">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.482Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git manual">
+<meta name="twitter:description" content="git使用有段时间了,个人博客也是托管到git上面,经常用到的命令放到这，主要供自己查阅使用，反复查阅能够加深印象，提升技能熟练度。如果你是还不知道 Git 是什么，建议先阅读 廖雪峰的Git教程 1、注册github账号2、install git client windows 系统msysgit注意此客户端不支持带有空格的文件夹名称  3、创建本地ssh生成安全验证1$ ssh-keygen -">
+<meta name="twitter:image" content="https://jikelab.github.io/tech-labs/screenshots/git_workflow.jpg">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> git manual - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          git manual
+        
+      </h1>
+
+      <time class="post-time">
+          7月 12 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>git使用有段时间了,个人博客也是托管到git上面,经常用到的命令放到这，主要供自己查阅使用，反复查阅能够加深印象，提升技能熟练度。如果你是还不知道 Git 是什么，建议先阅读 <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">廖雪峰的Git教程</a></p>
+<h1 id="1、注册github账号"><a href="#1、注册github账号" class="headerlink" title="1、注册github账号"></a>1、注册github账号</h1><h1 id="2、install-git-client"><a href="#2、install-git-client" class="headerlink" title="2、install git client"></a>2、install git client</h1><blockquote>
+<p>windows 系统<br>msysgit<br>注意此客户端不支持带有空格的文件夹名称</p>
+</blockquote>
+<h1 id="3、创建本地ssh"><a href="#3、创建本地ssh" class="headerlink" title="3、创建本地ssh"></a>3、创建本地ssh</h1><h2 id="生成安全验证"><a href="#生成安全验证" class="headerlink" title="生成安全验证"></a>生成安全验证</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C &quot;xxx@qq.com&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="复制文件内容到github的SSK-keys"><a href="#复制文件内容到github的SSK-keys" class="headerlink" title="复制文件内容到github的SSK  keys"></a>复制文件内容到github的SSK  keys</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /c/Users/$&#123;username&#125;/.ssh/</span><br><span class="line">cat id_rsa.pub</span><br><span class="line">xxxxxxxxxxxxxxxxxxxxxxxxxxx</span><br></pre></td></tr></table></figure>
+<h2 id="验证是否配置成功"><a href="#验证是否配置成功" class="headerlink" title="验证是否配置成功"></a>验证是否配置成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<h2 id="配置本地用户和邮箱"><a href="#配置本地用户和邮箱" class="headerlink" title="配置本地用户和邮箱"></a>配置本地用户和邮箱</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;itweet&quot;</span><br><span class="line">$ git config --global user.email &quot;xxx@qq.com&quot;</span><br></pre></td></tr></table></figure>
+<p>到此Git客户端已安装及GitHub配置完成，现在可以从GitHub传输代码了。</p>
+<h1 id="4、git-clone创建的github项目"><a href="#4、git-clone创建的github项目" class="headerlink" title="4、git clone创建的github项目"></a>4、git clone创建的github项目</h1><p> <a href="https://github.com/itweet/bigtable-sql.git" target="_blank" rel="noopener">https://github.com/itweet/bigtable-sql.git</a></p>
+<p> 注：github仓库对应多种地址，一个是通过http访问的地址，一个是通过ssh访问的地址。举例，<br> HTTP格式地址为：<a href="https://github.com/itweet/bigtable-sql.git" target="_blank" rel="noopener">https://github.com/itweet/bigtable-sql.git</a><br> SSH格式地址为：<a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:itweet/bigtable-sql.git<br> 通过http地址访问时可以不用配置公钥（PublicKey），但每次访问时都需要输入github的用户名和密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git@github.com:itweet/bigtable-sql.git</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在改项目创建README.md文件,提交本文件！</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add README.md</span><br><span class="line">$ git commit -m &quot;README for this project.&quot;</span><br><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
+<p> 这就完成了一个基本的git clone和源文件修改后往github上推送的功能。</p>
+<h1 id="5、常用命令"><a href="#5、常用命令" class="headerlink" title="5、常用命令"></a>5、常用命令</h1><h2 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h2><p>Git 最核心的一个概念就是工作流。工作区(Workspace)是电脑中实际的目录；暂存区(Index)像个缓存区域，临时保存你的改动；最后是版本库(Repository)，分为本地仓库和远程仓库。下图描述的很清楚</p>
+<p><img src="https://jikelab.github.io/tech-labs/screenshots/git_workflow.jpg" alt></p>
+<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><h3 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@server-name:path/repo-name.git  #添加一个远程库</span><br></pre></td></tr></table></figure>
+<h3 id="查看远程仓库"><a href="#查看远程仓库" class="headerlink" title="查看远程仓库"></a>查看远程仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote      #要查看远程库的信息</span><br><span class="line">git remote -v   #显示更详细的信息</span><br></pre></td></tr></table></figure>
+<h3 id="推送分支"><a href="#推送分支" class="headerlink" title="推送分支"></a>推送分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master    #推送到远程master分支</span><br></pre></td></tr></table></figure>
+<h3 id="抓取分支"><a href="#抓取分支" class="headerlink" title="抓取分支"></a>抓取分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone git@server-name:path/repo-name.git   #克隆远程仓库到本地(  能看到master分支)</span><br><span class="line">git checkout -b dev origin/dev  #创建远程origin的dev分支到本地，并命名为dev</span><br><span class="line">git pull origin master          #从远程分支进行更新 </span><br><span class="line">git fetch origin master         #获取远程分支上的数据</span><br></pre></td></tr></table></figure>
+<p><code>$ git branch --set-upstream branch-name origin/branch-name</code>，可以建立起本地分支和远程分支的关联，之后可以直接<code>git pull</code>从远程抓取分支。<br>另外，<code>git pull</code> = <code>git fetch</code> + <code>merge</code> to local</p>
+<h3 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin --delete bugfix</span><br><span class="line">To https://github.com/wuchong/jacman</span><br><span class="line"> - [deleted]         bugfix</span><br></pre></td></tr></table></figure>
+<h2 id="历史管理"><a href="#历史管理" class="headerlink" title="历史管理"></a>历史管理</h2><h3 id="查看历史"><a href="#查看历史" class="headerlink" title="查看历史"></a>查看历史</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git log --pretty=oneline filename #一行显示</span><br><span class="line">git log -p -2      #显示最近2次提交内容的差异</span><br><span class="line">git show cb926e7   #查看某次修改</span><br></pre></td></tr></table></figure>
+<h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^    #回退到上一个版本</span><br><span class="line">git reset --hard cb926e7  #回退到具体某个版</span><br><span class="line">git reflog                #查看命令历史,常用于帮助找回丢失掉的commit</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>用HEAD表示当前版本，上一个版本就是HEAD^，上上一个版本就是HEAD^^，HEAD~100就是上100个版本。</p>
+</blockquote>
+<h3 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a>管理修改</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git status              #查看工作区、暂存区的状态</span><br><span class="line">git checkout -- &lt;file&gt;  #丢弃工作区上某个文件的修改</span><br><span class="line">git reset HEAD &lt;file&gt;   #丢弃暂存区上某个文件的修改，重新放回工作区</span><br></pre></td></tr></table></figure>
+<h3 id="查看差异"><a href="#查看差异" class="headerlink" title="查看差异"></a>查看差异</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git diff              #查看未暂存的文件更新 </span><br><span class="line">git diff --cached     #查看已暂存文件的更新 </span><br><span class="line">git diff HEAD -- readme.txt  #查看工作区和版本库里面最新版本的区别</span><br><span class="line">git diff &lt;source_branch&gt; &lt;target_branch&gt;  #在合并改动之前，预览两个分支的差异</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用内建的图形化git：<code>gitk</code>，可以更方便清晰地查看差异。当然 Github 客户端也不错。</p>
+</blockquote>
+<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git rm &lt;file&gt;           #直接删除文件</span><br><span class="line">git rm --cached &lt;file&gt;  #删除文件暂存状态</span><br></pre></td></tr></table></figure>
+<h3 id="储藏和恢复"><a href="#储藏和恢复" class="headerlink" title="储藏和恢复"></a>储藏和恢复</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git stash           #储藏当前工作</span><br><span class="line">git stash list      #查看储藏的工作现场</span><br><span class="line">git stash apply     #恢复工作现场，stash内容并不删除</span><br><span class="line">git stash pop       #恢复工作现场，并删除stash内容</span><br></pre></td></tr></table></figure>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch develop              #只创建分支</span><br><span class="line">git checkout -b master develop  #创建并切换到 develop 分支</span><br></pre></td></tr></table></figure>
+<h3 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout master         #切换到主分支</span><br><span class="line">git merge --no-ff develop   #把 develop 合并到 master 分支，no-ff  选项的作用是保留原分支记录</span><br><span class="line">git branch -d develop       #删除 develop 分支</span><br></pre></td></tr></table></figure>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><h3 id="显示标签"><a href="#显示标签" class="headerlink" title="显示标签"></a>显示标签</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag         #列出现有标签 </span><br><span class="line">git show &lt;tagname&gt;  #显示标签信息</span><br></pre></td></tr></table></figure>
+<h3 id="创建标签"><a href="#创建标签" class="headerlink" title="创建标签"></a>创建标签</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git tag v0.1    #新建标签，默认位 HEAD</span><br><span class="line">git tag v0.1 cb926e7  #对指定的 commit id 打标签</span><br><span class="line">git tag -a v0.1 -m &apos;version 0.1 released&apos;   #新建带注释标签</span><br></pre></td></tr></table></figure>
+<h3 id="操作标签"><a href="#操作标签" class="headerlink" title="操作标签"></a>操作标签</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;tagname&gt;        #切换到标签</span><br><span class="line"></span><br><span class="line">git push origin &lt;tagname&gt;     #推送分支到源上</span><br><span class="line">git push origin --tags        #一次性推送全部尚未推送到远程的本地标签</span><br><span class="line"></span><br><span class="line">git tag -d &lt;tagname&gt;          #删除标签</span><br><span class="line">git push origin :refs/tags/&lt;tagname&gt;      #删除远程标签</span><br></pre></td></tr></table></figure>
+<h2 id="Git-设置"><a href="#Git-设置" class="headerlink" title="Git 设置"></a>Git 设置</h2><h3 id="设置-commit-的用户和邮箱"><a href="#设置-commit-的用户和邮箱" class="headerlink" title="设置 commit 的用户和邮箱"></a>设置 commit 的用户和邮箱</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config user.name &quot;xx&quot;               #设置 commit 的用户</span><br><span class="line">git config user.email.com &quot;xx@xx.com&quot;   #设置 commit 的邮箱</span><br><span class="line">git config format.pretty oneline            #显示历史记录时，每个提交的信息只显示一行</span><br></pre></td></tr></table></figure>
+<h3 id="获取git配置信息"><a href="#获取git配置信息" class="headerlink" title="获取git配置信息"></a>获取git配置信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">whoami@ubuntu:~$ git config --list</span><br><span class="line">user.name=whoami</span><br><span class="line">user.email=xxx@qq.com</span><br><span class="line"></span><br><span class="line">whoami@ubuntu:~$  git config user.name</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure>
+<h3 id="获取git命令帮助"><a href="#获取git命令帮助" class="headerlink" title="获取git命令帮助"></a>获取git命令帮助</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git –help</span><br><span class="line">man git</span><br><span class="line">git –help</span><br></pre></td></tr></table></figure>
+<h2 id="10-个迅速提升你-Git-水平的提示"><a href="#10-个迅速提升你-Git-水平的提示" class="headerlink" title="10 个迅速提升你 Git 水平的提示"></a>10 个迅速提升你 Git 水平的提示</h2><p><a href="http://www.oschina.net/translate/10-tips-git-next-level" target="_blank" rel="noopener">http://www.oschina.net/translate/10-tips-git-next-level</a></p>
+<h2 id="git-rest-回退-commit"><a href="#git-rest-回退-commit" class="headerlink" title="git rest 回退 commit"></a>git rest 回退 commit</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard commit_id</span><br><span class="line">git push -f origin master</span><br></pre></td></tr></table></figure>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/git/">git</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/07/12/spark manual/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">spark manual</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/07/12/ganglia-centos/">
+        <span class="next-text nav-default">ganglia-centos</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

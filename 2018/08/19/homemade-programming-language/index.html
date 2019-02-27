@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Homemade programming language">
+
+
+
+
+  <meta name="keywords" content="2018,Programming,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2018/08/19/homemade-programming-language/">
+
+
+<meta name="description" content="很长一段时间没更新内容啦，并不是不想写，而是找不到灵感，不知道改写些什么？ 因为，我写了很多大数据相关的内容，很久已经没有玩Hadoop相关的东西啦。 除最近，帮助公司搭建了一套CDH集群，基本也是大家在上面跑一些大数据量的AI算法。 而我，最近在写一些Java后端以及需求整理的工作，没有特别值得和大家分享的，也就一些踩坑底层库踩坑的内容值得写一篇介绍一下。 我最近也进行一些深度思考，我依然关注大">
+<meta name="keywords" content="2018,Programming">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Homemade programming language">
+<meta property="og:url" content="http://itweet.github.io/2018/08/19/homemade-programming-language/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="很长一段时间没更新内容啦，并不是不想写，而是找不到灵感，不知道改写些什么？ 因为，我写了很多大数据相关的内容，很久已经没有玩Hadoop相关的东西啦。 除最近，帮助公司搭建了一套CDH集群，基本也是大家在上面跑一些大数据量的AI算法。 而我，最近在写一些Java后端以及需求整理的工作，没有特别值得和大家分享的，也就一些踩坑底层库踩坑的内容值得写一篇介绍一下。 我最近也进行一些深度思考，我依然关注大">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-08-26T14:49:20.010Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Homemade programming language">
+<meta name="twitter:description" content="很长一段时间没更新内容啦，并不是不想写，而是找不到灵感，不知道改写些什么？ 因为，我写了很多大数据相关的内容，很久已经没有玩Hadoop相关的东西啦。 除最近，帮助公司搭建了一套CDH集群，基本也是大家在上面跑一些大数据量的AI算法。 而我，最近在写一些Java后端以及需求整理的工作，没有特别值得和大家分享的，也就一些踩坑底层库踩坑的内容值得写一篇介绍一下。 我最近也进行一些深度思考，我依然关注大">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Homemade programming language - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Homemade programming language
+        
+      </h1>
+
+      <time class="post-time">
+          8月 19 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>很长一段时间没更新内容啦，并不是不想写，而是找不到灵感，不知道改写些什么？</p>
+<p>因为，我写了很多大数据相关的内容，很久已经没有玩Hadoop相关的东西啦。</p>
+<p>除最近，帮助公司搭建了一套CDH集群，基本也是大家在上面跑一些大数据量的AI算法。</p>
+<p>而我，最近在写一些Java后端以及需求整理的工作，没有特别值得和大家分享的，也就一些踩坑底层库踩坑的内容值得写一篇介绍一下。</p>
+<p>我最近也进行一些深度思考，我依然关注大数据相关动态，包括一些<code>Hadoop 3.0</code>的东西。</p>
+<p>很长一段时间，我写的都是一些零碎的东西，计划系统性的写一些深入的内容。</p>
+<ul>
+<li><a href="https://github.com/jikelab/paper" target="_blank" rel="noopener">Computer Foundations Practices</a></li>
+</ul>
+<p>看完《自制编程语言》一周有余，系统了解了自制一门类似Python、Ruby、Java编程语言都需要那些知识。</p>
+<p>编程语言制作，博大精深，不太敢妄言，编程语言引起的腥风血雨已经太多了。有编程语言的地方就有江湖呀。</p>
+<p>好啦，言归正传，我们看看通过站在巨人的的编程库上，我们如何制作一门编程语言，都需要那些工具。</p>
+<p>一门编程分类：</p>
+<ul>
+<li>解释类</li>
+<li>编译类</li>
+</ul>
+<p>解释类，比如Python就是解释类语言，Java则是编译类语言。解释类语言，在运行时即时翻译，解释型语言运行速度往往比编译的程序慢，但往往更具灵活性，因为它们能够与执行环境互相作用。</p>
+<p>编译型语言，把高级定义的字符串代码整体翻译为机器可执行的代码的过程就称为编译。因此，一个编译型语言，是将人可阅读和编写高级语言作为输入数据，然后输出成目标可执行的文件或二进制代码，由CPU直接运行，效率自然会高很多。</p>
+<p>而在自制编程语言一书中，介绍了两门编程语言，而且有代码实现，都是使用C编写的，基本编程语言基本构成可以了解一番，整本书觉写得一般，大段介绍代码逻辑，其实看书的人大多是想要看到思路以及为什么如此实现，有什么讲究，经验可以介绍，这部分内容很少，整体比较枯燥吧，我大概陆续总共10多个小时，看完此书，了解如何制作一门编程语言可以一看。</p>
+<p>书中列举的，参考Java，Python，C++，Ruby等语言实现的一些功能探讨，值得一看。编程语言最核心的难点应该就是符号处理吧。</p>
+<p>书中介绍的两门编程语言，Crowbar与Diksam都是简历在Lex、Yacc的基础上的，基本上核心的编程语言难题都交给它俩。</p>
+<p>编程语言语法处理过程：</p>
+<ul>
+<li>[1] 词法分析: 将源代码分割为若干个记号（token）的处理。</li>
+<li>[2] 语法分析: 即从记号构建分析树（parse tree）的处理。分析树也叫作语法树（syntax tree）或抽象语法树（abstract syntax tree，AST）。</li>
+<li>[3] 语义分析: 经过语法分析生成的分析树，并不包含数据类型等语义信息。因此在语义分析阶段，会检查程序中是否含有语法正确但是存在逻辑问题的错误。</li>
+<li>[4] 生成代码: 如果是C语言等生成机器码的编译器或Java这样生成字节码的编译器，在分析树构建完毕后会进入代码生成阶段。</li>
+</ul>
+<p>执行词法分析的程序称为词法分析器（lexical analyzer）。lex 的工作就是根据词法规则自动生成词法分析器。</p>
+<p>执行语法分析的程序则称为解析器（parser）。yacc 就是能根据语法规则自动生成解析器的程序。</p>
+<p>一个词法分析器加上一个语法解析器，我们就可以很快的制作一门属于自己的编程语言。</p>
+<p>Yacc、Lex都是比较值得深入研究的，要学习的东西太多啦。</p>
+<p>说实话，看完之后的我还有些懵，不合适进行评论或者写一些心的，编程语言技术有大量参考和先辈经验，借助一些工具，制作来看难度不大，但做出来和做好是两个概念，留待以后有机会去专门研究吧。</p>
+<p>我目前阶段仅限了解，人的精力有限，未来很长一段时间，还会阅读更多经典计算机相关书籍。</p>
+<p>欢迎关注，<a href="https://github.com/jikelab/paper" target="_blank" rel="noopener">Computer Foundations Practices</a></p>
+<p>我会分享一些我自己的心得体会。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/2018/">2018</a>
+		  
+			<a href="/tags/Programming/">Programming</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/08/20/automated-feature-engineering-introduction/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Automated feature engineering introduction</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/08/05/cloudera-enterprise-6/">
+        <span class="next-text nav-default">Cloudera-Enterprise-6</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

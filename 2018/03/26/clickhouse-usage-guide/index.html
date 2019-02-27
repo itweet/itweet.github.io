@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="clickhouse-usage-guide">
+
+
+
+
+  <meta name="keywords" content="MPP,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2018/03/26/clickhouse-usage-guide/">
+
+
+<meta name="description" content="今天，我们来简单测试一下clickhouse性能，通过测试学习clickhouse基本使用。 官方教程中有直接提供相关测试案例数据，跑一些场景，我选择了OnTime数据来做测试。 OnTime性能测试case由Vadim Tkachenko创建，安装官方文档操作。 下载测试数据运行如Shell脚本，下载1987-2017所有On_Time数据。 1234567for s in `seq 1987">
+<meta name="keywords" content="MPP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="clickhouse-usage-guide">
+<meta property="og:url" content="http://itweet.github.io/2018/03/26/clickhouse-usage-guide/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="今天，我们来简单测试一下clickhouse性能，通过测试学习clickhouse基本使用。 官方教程中有直接提供相关测试案例数据，跑一些场景，我选择了OnTime数据来做测试。 OnTime性能测试case由Vadim Tkachenko创建，安装官方文档操作。 下载测试数据运行如Shell脚本，下载1987-2017所有On_Time数据。 1234567for s in `seq 1987">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/JDP/ClickHouse/img/onetime_clickhouse_histogram.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/JDP/ClickHouse/img/Clickhouse-OnTime-table.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/JDP/ClickHouse/img/Dark-horse.jpg">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.534Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="clickhouse-usage-guide">
+<meta name="twitter:description" content="今天，我们来简单测试一下clickhouse性能，通过测试学习clickhouse基本使用。 官方教程中有直接提供相关测试案例数据，跑一些场景，我选择了OnTime数据来做测试。 OnTime性能测试case由Vadim Tkachenko创建，安装官方文档操作。 下载测试数据运行如Shell脚本，下载1987-2017所有On_Time数据。 1234567for s in `seq 1987">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/JDP/ClickHouse/img/onetime_clickhouse_histogram.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> clickhouse-usage-guide - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          clickhouse-usage-guide
+        
+      </h1>
+
+      <time class="post-time">
+          3月 26 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>今天，我们来简单测试一下clickhouse性能，通过测试学习clickhouse基本使用。</p>
+<p>官方教程中有直接提供相关测试案例数据，跑一些场景，我选择了<code>OnTime</code>数据来做测试。</p>
+<p><code>OnTime</code>性能测试case由<code>Vadim Tkachenko</code>创建，安装官方文档操作。</p>
+<h2 id="下载测试数据"><a href="#下载测试数据" class="headerlink" title="下载测试数据"></a>下载测试数据</h2><p>运行如Shell脚本，下载<code>1987-2017</code>所有On_Time数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for s in `seq 1987 2017`</span><br><span class="line">do</span><br><span class="line">for m in `seq 1 12`</span><br><span class="line">do</span><br><span class="line">wget http://transtats.bts.gov/PREZIP/On_Time_On_Time_Performance_$&#123;s&#125;_$&#123;m&#125;.zip</span><br><span class="line">done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><code>Shell</code>地址：<a href="https://github.com/Percona-Lab/ontime-airline-performance/blob/master/download.sh" target="_blank" rel="noopener">download.sh</a></p>
+<h2 id="命令行客户端"><a href="#命令行客户端" class="headerlink" title="命令行客户端"></a>命令行客户端</h2><p>通过<code>clickhouse-client</code>命令，连接clickhouse-server进行相关的数据库操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clickhouse-client -h 127.0.0.1 -d default -m -u admin --password admin</span><br></pre></td></tr></table></figure>
+<p>如上，<code>-h</code>代表数据库IP地址，<code>-d</code>代表模式连接数据库，<code>-u</code>代表用户名，<code>--password</code>代码用户密码，<code>-m</code>允许运行多行查询。</p>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><p>clickhouse建表语言并非标准的SQL，看上去比较奇怪，因为它支持多种引擎，不同的Engine有不同的业务场景使用，其中某些是为了灵活或者临时的解决方案。官方文档<code>Roadmap</code>计划<code>Q3-Q4 2018</code>支持<code>ANSI SQL JOIN</code>语法，建表未来很长时间一直应该都这样吧，这就是Clickhouse最大的侧点。</p>
+<p>学习Clickhouse，最主要的先学各种Engine的区别和联系，用来解决实际问题，在场景中探索。</p>
+<p>由于它的各种设计，导致如果要使用分布式，那么需要使用local表和分布式表结合才能达到一个SQL过来分布式执行Query，请参考早期内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE test.a_local (date Date, ……) ENGINE = MergeTree(date, (date, hour, datetime), 8192);</span><br><span class="line"></span><br><span class="line">CREATE TABLE test.a_cluster (date Date, ……) ENGINE = Distributed(bip_ck_cluster, test ,a_local , rand());</span><br></pre></td></tr></table></figure>
+<p>创建一个test库，在进入库，创建一张<code>ontime_local</code>表，此表拥有<code>100</code>个字段，属于典型的大宽表，适合列式存储。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">create database test;</span><br><span class="line"></span><br><span class="line">use test;</span><br><span class="line"></span><br><span class="line">CREATE TABLE `ontime_local` (</span><br><span class="line">  `Year` UInt16,</span><br><span class="line">  `Quarter` UInt8,</span><br><span class="line">  `Month` UInt8,</span><br><span class="line">  `DayofMonth` UInt8,</span><br><span class="line">  `DayOfWeek` UInt8,</span><br><span class="line">  `FlightDate` Date,</span><br><span class="line">  `UniqueCarrier` FixedString(7),</span><br><span class="line">  `AirlineID` Int32,</span><br><span class="line">  `Carrier` FixedString(2),</span><br><span class="line">  `TailNum` String,</span><br><span class="line">  `FlightNum` String,</span><br><span class="line">  `OriginAirportID` Int32,</span><br><span class="line">  `OriginAirportSeqID` Int32,</span><br><span class="line">  `OriginCityMarketID` Int32,</span><br><span class="line">  `Origin` FixedString(5),</span><br><span class="line">  `OriginCityName` String,</span><br><span class="line">  `OriginState` FixedString(2),</span><br><span class="line">  `OriginStateFips` String,</span><br><span class="line">  `OriginStateName` String,</span><br><span class="line">  `OriginWac` Int32,</span><br><span class="line">  `DestAirportID` Int32,</span><br><span class="line">  `DestAirportSeqID` Int32,</span><br><span class="line">  `DestCityMarketID` Int32,</span><br><span class="line">  `Dest` FixedString(5),</span><br><span class="line">  `DestCityName` String,</span><br><span class="line">  `DestState` FixedString(2),</span><br><span class="line">  `DestStateFips` String,</span><br><span class="line">  `DestStateName` String,</span><br><span class="line">  `DestWac` Int32,</span><br><span class="line">  `CRSDepTime` Int32,</span><br><span class="line">  `DepTime` Int32,</span><br><span class="line">  `DepDelay` Int32,</span><br><span class="line">  `DepDelayMinutes` Int32,</span><br><span class="line">  `DepDel15` Int32,</span><br><span class="line">  `DepartureDelayGroups` String,</span><br><span class="line">  `DepTimeBlk` String,</span><br><span class="line">  `TaxiOut` Int32,</span><br><span class="line">  `WheelsOff` Int32,</span><br><span class="line">  `WheelsOn` Int32,</span><br><span class="line">  `TaxiIn` Int32,</span><br><span class="line">  `CRSArrTime` Int32,</span><br><span class="line">  `ArrTime` Int32,</span><br><span class="line">  `ArrDelay` Int32,</span><br><span class="line">  `ArrDelayMinutes` Int32,</span><br><span class="line">  `ArrDel15` Int32,</span><br><span class="line">  `ArrivalDelayGroups` Int32,</span><br><span class="line">  `ArrTimeBlk` String,</span><br><span class="line">  `Cancelled` UInt8,</span><br><span class="line">  `CancellationCode` FixedString(1),</span><br><span class="line">  `Diverted` UInt8,</span><br><span class="line">  `CRSElapsedTime` Int32,</span><br><span class="line">  `ActualElapsedTime` Int32,</span><br><span class="line">  `AirTime` Int32,</span><br><span class="line">  `Flights` Int32,</span><br><span class="line">  `Distance` Int32,</span><br><span class="line">  `DistanceGroup` UInt8,</span><br><span class="line">  `CarrierDelay` Int32,</span><br><span class="line">  `WeatherDelay` Int32,</span><br><span class="line">  `NASDelay` Int32,</span><br><span class="line">  `SecurityDelay` Int32,</span><br><span class="line">  `LateAircraftDelay` Int32,</span><br><span class="line">  `FirstDepTime` String,</span><br><span class="line">  `TotalAddGTime` String,</span><br><span class="line">  `LongestAddGTime` String,</span><br><span class="line">  `DivAirportLandings` String,</span><br><span class="line">  `DivReachedDest` String,</span><br><span class="line">  `DivActualElapsedTime` String,</span><br><span class="line">  `DivArrDelay` String,</span><br><span class="line">  `DivDistance` String,</span><br><span class="line">  `Div1Airport` String,</span><br><span class="line">  `Div1AirportID` Int32,</span><br><span class="line">  `Div1AirportSeqID` Int32,</span><br><span class="line">  `Div1WheelsOn` String,</span><br><span class="line">  `Div1TotalGTime` String,</span><br><span class="line">  `Div1LongestGTime` String,</span><br><span class="line">  `Div1WheelsOff` String,</span><br><span class="line">  `Div1TailNum` String,</span><br><span class="line">  `Div2Airport` String,</span><br><span class="line">  `Div2AirportID` Int32,</span><br><span class="line">  `Div2AirportSeqID` Int32,</span><br><span class="line">  `Div2WheelsOn` String,</span><br><span class="line">  `Div2TotalGTime` String,</span><br><span class="line">  `Div2LongestGTime` String,</span><br><span class="line">  `Div2WheelsOff` String,</span><br><span class="line">  `Div2TailNum` String,</span><br><span class="line">  `Div3Airport` String,</span><br><span class="line">  `Div3AirportID` Int32,</span><br><span class="line">  `Div3AirportSeqID` Int32,</span><br><span class="line">  `Div3WheelsOn` String,</span><br><span class="line">  `Div3TotalGTime` String,</span><br><span class="line">  `Div3LongestGTime` String,</span><br><span class="line">  `Div3WheelsOff` String,</span><br><span class="line">  `Div3TailNum` String,</span><br><span class="line">  `Div4Airport` String,</span><br><span class="line">  `Div4AirportID` Int32,</span><br><span class="line">  `Div4AirportSeqID` Int32,</span><br><span class="line">  `Div4WheelsOn` String,</span><br><span class="line">  `Div4TotalGTime` String,</span><br><span class="line">  `Div4LongestGTime` String,</span><br><span class="line">  `Div4WheelsOff` String,</span><br><span class="line">  `Div4TailNum` String,</span><br><span class="line">  `Div5Airport` String,</span><br><span class="line">  `Div5AirportID` Int32,</span><br><span class="line">  `Div5AirportSeqID` Int32,</span><br><span class="line">  `Div5WheelsOn` String,</span><br><span class="line">  `Div5TotalGTime` String,</span><br><span class="line">  `Div5LongestGTime` String,</span><br><span class="line">  `Div5WheelsOff` String,</span><br><span class="line">  `Div5TailNum` String</span><br><span class="line">) ENGINE = MergeTree(FlightDate, (Year, FlightDate), 8192);</span><br></pre></td></tr></table></figure>
+<p>创建分布式表结合本地表，使得Query能分布式执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE ontime_all AS ontime_local ENGINE = Distributed(bip_ck_cluster, test, ontime_local, rand());</span><br></pre></td></tr></table></figure>
+<h2 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h2><p>进入到download数据目录，执行如下shell命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for i in *.zip; do echo $i; unzip -cq $i &apos;*.csv&apos; | sed &apos;s/\.00//g&apos; | clickhouse-client -h 127.0.0.1  -d default -m -u default --password admin --query=&quot;INSERT INTO ontime_local FORMAT CSVWithNames&quot;; done</span><br></pre></td></tr></table></figure>
+<h2 id="测试SQL"><a href="#测试SQL" class="headerlink" title="测试SQL"></a>测试SQL</h2><p>我使用VMware虚拟3台服务器，配置如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">CPU</th>
+<th style="text-align:center">Memory</th>
+<th style="text-align:right">Storage</th>
+<th style="text-align:right">Cluster</th>
+<th style="text-align:right">操作系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">2c</td>
+<td style="text-align:center">15g</td>
+<td style="text-align:right">180g</td>
+<td style="text-align:right">3 node</td>
+<td style="text-align:right">7.2.1511 (core)</td>
+</tr>
+</tbody>
+</table>
+<p>一共<code>16</code>个SQL,来自官方的<a href="https://clickhouse.yandex/docs/en/getting_started/example_datasets/ontime/" target="_blank" rel="noopener"><code>ontime</code></a>数据。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">原始数据</th>
+<th style="text-align:center">入库数据</th>
+<th style="text-align:right">字段</th>
+<th style="text-align:right">数据量</th>
+<th style="text-align:right">表引擎</th>
+<th style="text-align:right">默认压缩</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">6.3g</td>
+<td style="text-align:center">15g</td>
+<td style="text-align:right">100</td>
+<td style="text-align:right">177033339</td>
+<td style="text-align:right">MergeTree</td>
+<td style="text-align:right">lz4</td>
+</tr>
+</tbody>
+</table>
+<p>链接:<a href="https://pan.baidu.com/s/1F1vRFtf7rsxH3twhimb7DA" target="_blank" rel="noopener">https://pan.baidu.com/s/1F1vRFtf7rsxH3twhimb7DA</a>  密码:x63k</p>
+<p><img src="https://github.com/itweet/labs/raw/master/JDP/ClickHouse/img/onetime_clickhouse_histogram.png" alt></p>
+<p><img src="https://github.com/itweet/labs/raw/master/JDP/ClickHouse/img/Clickhouse-OnTime-table.png" alt></p>
+<p>如图，测试分三种情况，根据clickhouse自身的特点。</p>
+<p>[1] local表，数据集中在一台机器，所有Query均发生在一体机器。<br>[2] cluster表，数据集中在一台机器，Query分布式执行，多台机器参与执行。<br>[3] all cluster表，数据集中在多台机器，Query分布式执行，多台机器参与执行。</p>
+<p>注意：<code>生产环境，理想状态，数据集均衡分片到所有节点，每个节点local表存储部分数据，轮训写入多个节点的local表。</code></p>
+<p>通过测试我们能直观的看到，分布式表多机并行执行性能远高于<code>local</code>执行。Cluster和All Cluster区别不是很大，因为我的环境是在<code>虚拟机</code>，是一台服务器虚拟出3台搭建Clickhouse集群。</p>
+<p>虽然在逻辑上为三台服务器，其实物理上都是跑在一台服务器和一块磁盘。</p>
+<p>测试目的，熟悉clickhouse一些基本使用和原理，动手研究，深入理解clickhouse系统，不具备参考性；待有物理性能测试结果，在大肆总结一番。</p>
+<p>我们可以看到，结果是clickhouse性能真的是没话说，SQL支持度和特殊语法使得它普及变得困难。如果希望变成一个大众化的<code>RDBMS System</code>，那还需要在SQL语法和兼容性中完成大量工作。</p>
+<blockquote>
+<p>ClickHouse is an open source column-oriented database management system capable of real time generation of analytical data reports using SQL queries.</p>
+</blockquote>
+<p>官方<code>Roadmap</code>2018年计划，我们也能看到他们正在往这个方向靠近，成为一个标准的<code>RDBMS System.</code> 比如：<code>Initial support for UPDATE and DELETE</code>，<code>Store data at multiple disk volumes of a single server</code>，<code>ANSI SQL JOIN syntax</code>，<code>LDAP integration</code>。</p>
+<p>我今天跑了一个100多个字段的大宽表，列式存储，单表各种复杂查询，性能都在秒级，在一些即席查询、聚合分析场景你可以使用clickhouse帮助你解决实际业务问题。</p>
+<p>ClickHouse是OLAP领域，当之无愧的黑马，一骑绝尘.</p>
+<p><img src="https://github.com/itweet/labs/raw/master/JDP/ClickHouse/img/Dark-horse.jpg" alt></p>
+<h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><p>[1] 初识ClickHouse《First Time ClickHouse》</p>
+<p>[2] Clickhouse快速上手</p>
+<p>[3] MPP的进化 - 深入理解Batch和MPP优缺点</p>
+<p>[4] Clickhouse基本使用</p>
+<p><strong><em>参考：</em></strong></p>
+<p>[1] <a href="https://clickhouse.yandex/docs/en/getting_started/example_datasets/ontime/" target="_blank" rel="noopener">https://clickhouse.yandex/docs/en/getting_started/example_datasets/ontime/</a><br>[2] <a href="https://www.percona.com/blog/2017/10/04/clickhouse-mysql-silicon-valley-meetup-oct-25-uber-engineering/" target="_blank" rel="noopener">https://www.percona.com/blog/2017/10/04/clickhouse-mysql-silicon-valley-meetup-oct-25-uber-engineering/</a><br>[3] <a href="https://www.percona.com/blog/author/vadim/" target="_blank" rel="noopener">https://www.percona.com/blog/author/vadim/</a><br>[4] <a href="https://clickhouse.yandex/docs/en/interfaces/cli/" target="_blank" rel="noopener">https://clickhouse.yandex/docs/en/interfaces/cli/</a></p>
+<p>欢迎关注微信公众号[Whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/MPP/">MPP</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/03/27/global-gitignore/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">global .gitignore</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/03/20/Explore-the-MPP-architecture-through-hawq/">
+        <span class="next-text nav-default">Explore-the-MPP-architecture-through-hawq</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

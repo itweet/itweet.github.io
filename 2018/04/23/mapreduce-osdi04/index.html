@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="mapreduce-osdi04">
+
+
+
+
+  <meta name="keywords" content="mapreduce,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2018/04/23/mapreduce-osdi04/">
+
+
+<meta name="description" content="我曾经多次提到过，我涉猎广泛，但是没有有个精通的技能，在大数据领域几年，也没什么成果。  我开始尝试改变，未来很长一段时间注重修炼内功，是什么让我有这样的改变？极客时间购买《朱赟的技术管理课》，安姐聊到很多技术管理经验，介绍算法一节：招式在花哨，敌不过内功深厚。安姐重写了四遍《算法导论》中的习题，让她算法特别厉害，也介绍算法的实际意义和价值。  我未来计划往分布式数据库相关领域研究，制定一系列计划">
+<meta name="keywords" content="mapreduce">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mapreduce-osdi04">
+<meta property="og:url" content="http://itweet.github.io/2018/04/23/mapreduce-osdi04/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="我曾经多次提到过，我涉猎广泛，但是没有有个精通的技能，在大数据领域几年，也没什么成果。  我开始尝试改变，未来很长一段时间注重修炼内功，是什么让我有这样的改变？极客时间购买《朱赟的技术管理课》，安姐聊到很多技术管理经验，介绍算法一节：招式在花哨，敌不过内功深厚。安姐重写了四遍《算法导论》中的习题，让她算法特别厉害，也介绍算法的实际意义和价值。  我未来计划往分布式数据库相关领域研究，制定一系列计划">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jikelab/paper/raw/master/research/img/mapreduce_overview.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.537Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mapreduce-osdi04">
+<meta name="twitter:description" content="我曾经多次提到过，我涉猎广泛，但是没有有个精通的技能，在大数据领域几年，也没什么成果。  我开始尝试改变，未来很长一段时间注重修炼内功，是什么让我有这样的改变？极客时间购买《朱赟的技术管理课》，安姐聊到很多技术管理经验，介绍算法一节：招式在花哨，敌不过内功深厚。安姐重写了四遍《算法导论》中的习题，让她算法特别厉害，也介绍算法的实际意义和价值。  我未来计划往分布式数据库相关领域研究，制定一系列计划">
+<meta name="twitter:image" content="https://github.com/jikelab/paper/raw/master/research/img/mapreduce_overview.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> mapreduce-osdi04 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          mapreduce-osdi04
+        
+      </h1>
+
+      <time class="post-time">
+          4月 23 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>我曾经多次提到过，我涉猎广泛，但是没有有个精通的技能，在大数据领域几年，也没什么成果。</p>
+<blockquote>
+<p>我开始尝试改变，未来很长一段时间注重修炼内功，是什么让我有这样的改变？<code>极客时间</code>购买《朱赟的技术管理课》，<code>安姐</code>聊到很多技术管理经验，介绍算法一节：<code>招式在花哨，敌不过内功深厚</code>。<code>安姐</code>重写了四遍《算法导论》中的习题，让她算法特别厉害，也介绍算法的实际意义和价值。</p>
+</blockquote>
+<p>我未来计划往分布式数据库相关领域研究，制定一系列计划，当然去年底就开始执行，通过相关项目、论文、书籍，深入理解计算机科学技术。</p>
+<blockquote>
+<p>欢迎star:  <a href="https://github.com/jikelab/paper" target="_blank" rel="noopener">https://github.com/jikelab/paper</a></p>
+</blockquote>
+<p>我的开源项目<code>企业级流分析平台</code>，即将上线，辛苦码文档中，已发布预览版，月底和大家见面，稍待。</p>
+<p>废话已然太多，今天我们谈MapReduce的核心原理，我的阅读笔记。</p>
+<p>MapReduce设计初衷:</p>
+<p>[1] x86架构，Linux系统，2-4G内容</p>
+<p>[2] 普通网络硬件设备，百兆/千兆带宽</p>
+<p>[3] 集群规模成百上千台，机器故障是常态</p>
+<p>[4] Schedule -&gt; Job -&gt; n Task</p>
+<p>MapReduce为何如此简单，很快被大规模应用。MapReduce利用限制性编程模式实现了用户的自动并发处理，并且提供了透明的容错处理功能。</p>
+<p><img src="https://github.com/jikelab/paper/raw/master/research/img/mapreduce_overview.png" alt="MapReduce执行流程"></p>
+<center>MapReduce执行流程</center>
+
+<p>Master数据结构，主要调度、监视、Job Metadata信息(存储中间临时数据存储区域、大小与位置)。</p>
+<p>Worker执行任务，Master调度Job Worker执行任务，通过RPC远程过程调用，Worker周期性执行Job状态汇报，通过心跳机制，超时未汇报，标记为故障节点，Master会进行处理。</p>
+<p>容错特性，设计初衷使成百上千台机器组成集群，从而处理大规模数据。</p>
+<h2 id="Worker故障"><a href="#Worker故障" class="headerlink" title="Worker故障"></a>Worker故障</h2><p>情况一：</p>
+<p>master周期性的ping worker节点，如果都能正常反馈，说明无故障。</p>
+<p>情况二：</p>
+<p>如果超时无反馈，master标记worker节点为失效节点。</p>
+<p>故障情况下，master需要重置故障节点任务，重新分配相关worker重新执行一遍故障节点的任务。具体分配策略，根据ping反馈的节点负载情况调度。</p>
+<h2 id="Master故障"><a href="#Master故障" class="headerlink" title="Master故障"></a>Master故障</h2><p>预防master故障，master需要周期性的写checkpoint，并且刷落磁盘。Master故障，可以从checkpoint恢复Job故障时的Job运行状态，继续执行任务。</p>
+<h2 id="确定性函数"><a href="#确定性函数" class="headerlink" title="确定性函数"></a>确定性函数</h2><p>Map和Reduce操作是确定性函数，重复执行，保障顺序，执行输出的结果总是一样的。</p>
+<p>input(确定输入) -&gt; Map(规则函数) -&gt; Reduce(规则函数) -&gt; output(必然确定输出)</p>
+<h2 id="数据本地性"><a href="#数据本地性" class="headerlink" title="数据本地性"></a>数据本地性</h2><p>Master在调度worker执行tasks时，会充分考虑数据本地性，尽量本地读取数据，本地计算，这样可以大大节省网络带宽，Master在调度任务时会传输相关文件位置信息给worker，即使本地性失败，也会选择就近的机架服务器执行计算。</p>
+<h2 id="任务粒度"><a href="#任务粒度" class="headerlink" title="任务粒度"></a>任务粒度</h2><p>MapReduce任务粒度：M=200000 ,R=5000, 使用2000台worker机器。</p>
+<p>通常第一次批量加载数据进MapReduce程序，我们很难控制并行度，默认由文件个数决定。很多时候任务都是又多个MapReduce构成，所以Reduce常常是由用户自己控制，进而控制接下来Map的并行度。</p>
+<h2 id="备用任务"><a href="#备用任务" class="headerlink" title="备用任务"></a>备用任务</h2><p>在一个大的Job中，有大量的任务，有些任务执行缓慢，我们称之为<code>落伍者</code>，它会拖慢整体进度。</p>
+<p>造成<code>落伍者</code>情况有很多，网络问题、硬件故障、系统负载、资源抢占。当大多数任务均执行完毕，通过Worker任务周期性汇报Master，获知<code>落伍者</code>执行的任务情况，这个时候master会启用备用任务，执行相同的task，通常比正常多消耗百分之几的资源，加速任务执行时间。</p>
+<h2 id="分区函数"><a href="#分区函数" class="headerlink" title="分区函数"></a>分区函数</h2><p>[1] 控制Reduce任务 -&gt; 控制任务输出文件数</p>
+<p>[2] 缺省分区函数 -&gt; hash(key) mod R</p>
+<p>[3] hash是平衡分区比较合理的方式</p>
+<p>[4] 用户自定义分区 -&gt; 产生相同key数据输出到同一个文件的效果</p>
+<p>分区中，中间key/value pari数据，保障key增量顺序处理。保障每个文件是有序的默认支持，对于基于key随机存取，排序数据友好，可加速处理。</p>
+<h2 id="combiner函数"><a href="#combiner函数" class="headerlink" title="combiner函数"></a>combiner函数</h2><p>特殊应用场景需要使用combiner处理，比如：单词记数程序，Map出现大量的重复记数据，而在Reduce阶段需要合并，如果在map -&gt; reduce之间加一层combiner操作，无疑可加速reduce处理时间。</p>
+<h2 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h2><p>通过统计task时间发生的次数，master周期性ping worker，在反馈数据包中传输任务执行详细情况。帮助记录和监控各个节点任务执行阶段和评估预计执行时间，通过详细的统计信息，帮助优化MapReduce程序。比如：跳过损坏记录，可把跳过文件路径，文件名，跳过的文件行详细信息反馈到计数器页面，帮助开发人员，定位数据质量或程序错误。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>MR封装，为何能在数据分析领域大规模应用。</p>
+<p>[1] 并行处理 [2] 负载均衡 [3] 容错处理 [4] 易于使用 [5] 数据本地化优化</p>
+<p>除以上MapReduce优势，还得益于一个强大的分布式文件系统GFS，提供超强的高可扩展的文件管理。</p>
+<p>我们也从 MapReduce 开发过程中学到了不少东西。首先，约束编程模式使得并行和分布式计算非常容易，也易于构造容错的计算环境;其次，网络带宽是稀有资源。大量的系统优化是针对减少网络传输量为目的的: 数据本地化优化策略使大量的数据从本地磁盘读取，中间文件写入本地磁盘、并且只写一份中间文件也节约了网络 带宽;第三，多次执行相同的任务可以减少性能缓慢的机器带来的负面影响(alex 注: 即硬件配置不平衡)， 同时解决了由于机器失效导致的数据丢失问题。</p>
+<p><strong>推荐阅读：</strong></p>
+<p>[1] <a href="http://itweet.cn/blog/2018/04/20/distributed-file-system-design" target="_blank" rel="noopener">分布式文件系统设计与实现</a></p>
+<p>[2] <a href="http://itweet.cn/blog/2018/04/23/mapreduce-osdi04" target="_blank" rel="noopener">MapReduce设计与实现</a></p>
+<p>欢迎关注微信公众号[Whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/mapreduce/">mapreduce</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/05/06/bigtable-osdi06/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">A Distributed Storage System for Structured Data</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/04/20/distributed-file-system-design/">
+        <span class="next-text nav-default">distributed-file-system-design</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

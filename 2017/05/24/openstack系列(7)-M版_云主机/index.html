@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="openstack系列(7)-M版_云主机">
+
+
+
+
+  <meta name="keywords" content="openstack,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/05/24/openstack系列(7)-M版_云主机/">
+
+
+<meta name="description" content="openstack M版本之后，可视化程度越来越高，曾经网络配置，用户创建，管理等功能全都是后台命令行操作生成，现在全都是可视化操作，现在开始我们揭开云主机神秘的面纱吧。 官方镜像镜像是云主机最基础的依赖，没有镜像就无法创建云主机。跟没有操作系统安装软件包，就无法安装操作系统是一样的道理。 openstack安装成功后，默认会有一个公共镜像cirros，你可以通过这个镜像轻松的完成云主机的创建，并">
+<meta name="keywords" content="openstack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openstack系列(7)-M版_云主机">
+<meta property="og:url" content="http://itweet.github.io/2017/05/24/openstack系列(7)-M版_云主机/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="openstack M版本之后，可视化程度越来越高，曾经网络配置，用户创建，管理等功能全都是后台命令行操作生成，现在全都是可视化操作，现在开始我们揭开云主机神秘的面纱吧。 官方镜像镜像是云主机最基础的依赖，没有镜像就无法创建云主机。跟没有操作系统安装软件包，就无法安装操作系统是一样的道理。 openstack安装成功后，默认会有一个公共镜像cirros，你可以通过这个镜像轻松的完成云主机的创建，并">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openstack系列(7)-M版_云主机">
+<meta name="twitter:description" content="openstack M版本之后，可视化程度越来越高，曾经网络配置，用户创建，管理等功能全都是后台命令行操作生成，现在全都是可视化操作，现在开始我们揭开云主机神秘的面纱吧。 官方镜像镜像是云主机最基础的依赖，没有镜像就无法创建云主机。跟没有操作系统安装软件包，就无法安装操作系统是一样的道理。 openstack安装成功后，默认会有一个公共镜像cirros，你可以通过这个镜像轻松的完成云主机的创建，并">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> openstack系列(7)-M版_云主机 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          openstack系列(7)-M版_云主机
+        
+      </h1>
+
+      <time class="post-time">
+          5月 24 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>openstack M版本之后，可视化程度越来越高，曾经网络配置，用户创建，管理等功能全都是后台命令行操作生成，现在全都是可视化操作，现在开始我们揭开云主机神秘的面纱吧。</p>
+<h3 id="官方镜像"><a href="#官方镜像" class="headerlink" title="官方镜像"></a>官方镜像</h3><p>镜像是云主机最基础的依赖，没有镜像就无法创建云主机。跟没有操作系统安装软件包，就无法安装操作系统是一样的道理。</p>
+<p>openstack安装成功后，默认会有一个公共镜像<code>cirros</code>，你可以通过这个镜像轻松的完成云主机的创建，并且通过<code>vnc</code>的方式连接到云主机中。</p>
+<p>如果你安装成openstack之后并没有公共镜像<code>cirros</code>生成，那么你可以通过下面的地址到官方网站下载。</p>
+<ul>
+<li>cirros镜像：<a href="http://download.cirros-cloud.net/0.3.4/" target="_blank" rel="noopener">http://download.cirros-cloud.net/0.3.4/</a></li>
+<li>更多镜像：<a href="http://cloud.centos.org/centos/7/images/" target="_blank" rel="noopener">http://cloud.centos.org/centos/7/images/</a></li>
+</ul>
+<p>Openstack的开发，基本都使用这个image来测试，因为他比较小，只有10M。生产环境中基本都是自己制作镜像，或者通过官方提供的镜像镜像定制，然后才开始使用。</p>
+<p>Cirros，是可以使用用户名和密码登陆，也可以使用密钥登陆</p>
+<ul>
+<li>用户名：cirros</li>
+<li>密码：cubswin:)</li>
+</ul>
+<h4 id="glance上传镜像"><a href="#glance上传镜像" class="headerlink" title="glance上传镜像"></a>glance上传镜像</h4><p>这里我们下载<code>cirros-0.3.4</code>版本的镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-x86_64-disk.img</span><br></pre></td></tr></table></figure>
+<p>上传镜像可以选择在<code>dashboard</code>或者命令行</p>
+<ul>
+<li><p><code>dashboard</code>上传，使用openstack-cloud租户登录，项目 &gt; 计算 &gt; 镜像 &gt; 创建镜像</p>
+<ul>
+<li>根据提示填写，注意镜像格式的选择，一般我们都使用<code>QCOW2</code>镜像</li>
+</ul>
+</li>
+<li><p>命令行上传，参考<code>glance</code>命令</p>
+</li>
+</ul>
+<h4 id="查看镜像"><a href="#查看镜像" class="headerlink" title="查看镜像"></a>查看镜像</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># openstack image list              </span><br><span class="line">+--------------------------------------+-------------------------------+--------+</span><br><span class="line">| ID                                   | Name                          | Status |</span><br><span class="line">+--------------------------------------+-------------------------------+--------+</span><br><span class="line">| c9bd8440-d278-4228-a54d-3ff90c3c59b3 | cirros                        | active |</span><br><span class="line">+--------------------------------------+-------------------------------+--------+</span><br></pre></td></tr></table></figure>
+<h4 id="镜像制作和详细介绍"><a href="#镜像制作和详细介绍" class="headerlink" title="镜像制作和详细介绍"></a>镜像制作和详细介绍</h4><p>参考：<a href="http://www.itweet.cn/blog/2016/08/09/openstack%20image%20guide" target="_blank" rel="noopener">openstack image guide</a></p>
+<h3 id="云主机的创建"><a href="#云主机的创建" class="headerlink" title="云主机的创建"></a>云主机的创建</h3><p>openstack中已经存在相关的镜像，如果你看到过之前的&lt;openstack系列(1)-Kvm虚拟化技术&gt;章节，会了解到云主机如果底层是用的<code>kvm</code>技术，那么需要提前通过kvm技术去生成模板虚拟机镜像文件,他可以支持多种格式,常用的<code>QCOW2</code>，通过这个镜像文件生成云主机。</p>
+<p>通过<code>dashboard</code>创建云主机</p>
+<ul>
+<li><p>步骤1  项目 &gt; 计算 &gt; 云主机 &gt; 创建云主机</p>
+<ul>
+<li>Instance Name：test   #云主机名称</li>
+<li>可用区域：nova</li>
+<li>Count : 1   # 云主机个数,可以填写多个</li>
+<li>下一步</li>
+<li>选择，添加<code>cirros</code>选项</li>
+<li>下一步</li>
+<li>选择，添加<code>m1.tiny</code>选项</li>
+<li>下一步</li>
+<li>选择，<code>private</code>选项</li>
+<li>下一步</li>
+<li>下一步</li>
+<li>选择，<code>default</code>选项</li>
+<li>下一步</li>
+<li>选择，<code>coud</code>选项</li>
+<li><p>单机，<code>启动实例</code>    </p>
+<p>至此，云主机已经创建完成，等待初始化，启动完成。</p>
+</li>
+</ul>
+</li>
+<li><p>步骤2  登录后台，检测云主机情况</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># virsh list --all</span><br><span class="line"> Id    Name                           State</span><br><span class="line">----------------------------------------------------</span><br><span class="line"> 1     instance-00000001              running</span><br></pre></td></tr></table></figure>
+<p>如上通过kvm底层命令，查看云主机启动状态。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ openstack server list</span><br><span class="line">+------------------+------+--------+------------------------------------+</span><br><span class="line">| ID               | Name | Status | Networks                           |</span><br><span class="line">+------------------+------+--------+------------------------------------+</span><br><span class="line">| 757ac3bf-f61f-411| test | ACTIVE | private=172.16.12.51, 192.168.0.27 |</span><br><span class="line">+------------------+------+--------+------------------------------------+</span><br></pre></td></tr></table></figure>
+<p>通过openstack查看云主机运行状态。</p>
+<h3 id="云主机的使用"><a href="#云主机的使用" class="headerlink" title="云主机的使用"></a>云主机的使用</h3><p>云主机创建成功之后，我们通过<code>dashboard</code>可以登录云主机，也可以给云主机绑定一个公共的IP地址，通过这个IP地址去访问。</p>
+<ul>
+<li>用户名：cirros</li>
+<li>密码：cubswin:)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ ssh cirros@192.168.0.27</span><br><span class="line">cirros@192.168.0.27&apos;s password:</span><br><span class="line"></span><br><span class="line">$ df -h</span><br><span class="line">Filesystem                Size      Used Available Use% Mounted on</span><br><span class="line">/dev                    242.3M         0    242.3M   0% /dev</span><br><span class="line">/dev/vda1                23.2M     18.0M      4.1M  82% /</span><br><span class="line">tmpfs                   245.8M         0    245.8M   0% /dev/shm</span><br><span class="line">tmpfs                   200.0K     72.0K    128.0K  36% /run</span><br><span class="line"></span><br><span class="line">$ hostname</span><br><span class="line">test</span><br><span class="line"></span><br><span class="line">$ ping www.baidu.com</span><br><span class="line">PING www.baidu.com (220.181.111.188): 56 data bytes</span><br><span class="line">64 bytes from 220.181.111.188: seq=0 ttl=53 time=2.306 ms</span><br><span class="line"></span><br><span class="line">$ ifconfig eth0</span><br><span class="line">eth0      Link encap:Ethernet  HWaddr FA:16:3E:20:E4:12</span><br><span class="line">          inet addr:172.16.12.51  Bcast:172.16.12.255  Mask:255.255.255.0</span><br></pre></td></tr></table></figure>
+<p>通过如上操作，可以看到云主机已经正常工作，并且我们也可以登录到云主机去进行各种操作，云主机也能正常访问公网。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本小节，主要是讲解如何通过可视化界面使用<code>openstack</code>最核心的云主机功能，并且开始正常使用云主机，云主机官方还提供更多版本，我们可以直接下载上传开始应用在我们的不同业务中，镜像文件是可以定制的，制作的时候可以让镜像具备某些功能，就和公有云，阿里云，aws云一样，创建好之后，云主机自带大数据服务能力、自带数据库能力等，底层即使用kvm相关技术进行制作，需要多实践才能深刻体会。下一节我们介绍openstack自动化扩容一个节点，欢迎关注。</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+<p>参考：<a href="http://www.itweet.cn/blog/2016/08/09/openstack%20image%20guide" target="_blank" rel="noopener">http://www.itweet.cn/blog/2016/08/09/openstack%20image%20guide</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/openstack/">openstack</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/05/24/openstack系列(8)-M版_扩容节点/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">openstack系列(8)-M版_扩容节点</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/05/22/openstack系列(6)-M版_网络配置/">
+        <span class="next-text nav-default">openstack系列(6)-M版_网络配置</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

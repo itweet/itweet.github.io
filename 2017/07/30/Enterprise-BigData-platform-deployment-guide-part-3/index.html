@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Enterprise-BigData-platform-deployment-guide-part-3">
+
+
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/07/30/Enterprise-BigData-platform-deployment-guide-part-3/">
+
+
+<meta name="description" content="集群设计主要为了说明几个比较实用的分布式软件安装过程中角色分配问题，不同的角色所在机器磁盘划分的主意事项。 角色分配由于您选择使用Ambari Manager进行集群的自动化部署方式，下面图表显示了在大多数集群的安装时合理化的角色划分方式。  在较大的集群(超过100+个节点)中，可能需要涉及到5个管理节点，比如Namenode HA和ResourceManager HA需要专有节点，此外Amba">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Enterprise-BigData-platform-deployment-guide-part-3">
+<meta property="og:url" content="http://itweet.github.io/2017/07/30/Enterprise-BigData-platform-deployment-guide-part-3/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="集群设计主要为了说明几个比较实用的分布式软件安装过程中角色分配问题，不同的角色所在机器磁盘划分的主意事项。 角色分配由于您选择使用Ambari Manager进行集群的自动化部署方式，下面图表显示了在大多数集群的安装时合理化的角色划分方式。  在较大的集群(超过100+个节点)中，可能需要涉及到5个管理节点，比如Namenode HA和ResourceManager HA需要专有节点，此外Amba">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/ambari_service_layout.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/master_disk_allocation.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/ambari_manager_disk_allocation.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/worker_disk_allocation.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/bigAll_aa.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.523Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Enterprise-BigData-platform-deployment-guide-part-3">
+<meta name="twitter:description" content="集群设计主要为了说明几个比较实用的分布式软件安装过程中角色分配问题，不同的角色所在机器磁盘划分的主意事项。 角色分配由于您选择使用Ambari Manager进行集群的自动化部署方式，下面图表显示了在大多数集群的安装时合理化的角色划分方式。  在较大的集群(超过100+个节点)中，可能需要涉及到5个管理节点，比如Namenode HA和ResourceManager HA需要专有节点，此外Amba">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/BigData/img/ambari_service_layout.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Enterprise-BigData-platform-deployment-guide-part-3 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Enterprise-BigData-platform-deployment-guide-part-3
+        
+      </h1>
+
+      <time class="post-time">
+          7月 30 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>集群设计主要为了说明几个比较实用的分布式软件安装过程中角色分配问题，不同的角色所在机器磁盘划分的主意事项。</p>
+<h3 id="角色分配"><a href="#角色分配" class="headerlink" title="角色分配"></a>角色分配</h3><p>由于您选择使用Ambari Manager进行集群的自动化部署方式，下面图表显示了在大多数集群的安装时合理化的角色划分方式。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/ambari_service_layout.png" alt></p>
+<p>在较大的集群(超过100+个节点)中，可能需要涉及到5个管理节点，比如Namenode HA和ResourceManager HA需要专有节点，此外Ambari Manager也需要专有节点，此节点可以部署Hive Metastore，Hive Server2,Spark Thrift Server等对外提供服务的角色。</p>
+<p>我们建议每个管理节点128G内存，工作节点256-512G。内存相对便宜，并且随着对计算引擎越来越高的要求，引入内存计算充分利用内存，快速响应。</p>
+<p>角色分配原则，有单点的问题的服务集中在一台机器，方便管理，可视化相关对外提供服务的放置和监控管理节点在用一个机器。如果监控节点(Ambari Server)没有HA功能，可以通过定时对监控服务节点进行备份数据和数据库快照，即使在监控服务器损坏的情况下，依然可以通过数据库备份数据在一个全新的服务器上恢复监控服务，而不会影响任何管理组件的正常运行。</p>
+<p>目前Ambari Server是可以支持迁移到新的服务器节点恢复，可以参考我历史文章。</p>
+<p>需要注意，在大集群(50+ 节点)中，一定要提前统计好服务器所属机架，尽量把不同的管理节点在物理上分配到不同的机架。</p>
+<ul>
+<li>Master1/Master2： Namenode、ResourceManager，HMaster，ZKServer，Journalnode</li>
+<li>Ambari Manager：Ambari Server、ZKServer，Journalnode</li>
+</ul>
+<p>ZKServer，Journalnode保证奇数个节点，这里涉及到3个管理节点，物理上对应着3台物理服务器，在物理逻辑上保证他们尽量放置于不同的机架。</p>
+<h3 id="磁盘划分"><a href="#磁盘划分" class="headerlink" title="磁盘划分"></a>磁盘划分</h3><p>下面图标，介绍不同的角色如何合理的划分磁盘。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/master_disk_allocation.png" alt></p>
+<p>如图Master1/Master2管理节点， 针对可以支持HA功能的角色服务，比如Namenode HA,Resource Manager HA，Hbase HMaser HA等。</p>
+<p>此类型的节点只有Namenode用来存储元数据信息占用空间相对大，建议4块2T SAS通过JBDO管理，其中2块盘用来存储Namenode元数据信息，另两块盘存储Zookeeper，Journalnode角色的数据信息。</p>
+<p>有条件情况 -&gt; 生产环境中尽量保证，重要的角色管理的数据目录在物理上区分开，分而治之，方便管理。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/ambari_manager_disk_allocation.png" alt></p>
+<p>我们在部署Ambari Manager数据库中指定使用LVM，但RAID0也是一种选择。    </p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/worker_disk_allocation.png" alt></p>
+<p>所有节点操作系统都是2块盘做RAID1，根据不同的管理节点角色磁盘划分有区别，所有Worker节点磁盘都使用JBOD，每块盘都是裸盘方式直接挂载用于存储HDFS数据。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>参与太多大数据相关项目，还是那句话最合适自己的才是最好，很多企业其实不需要大数据，如果硬上只会导致提供大数据平台的越做越痛苦，客户也很痛苦。不能太盲目，过去几年我接触的很多公司，都被炒概念者的忽悠的近乎狂热，认为大数据技术是万能的，什么都能搞定？真的如此么？</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/bigAll_aa.png" alt></p>
+<p>A君：用100台服务器干一台服务器的事，然后在用30台服务器把他们管理起来。</p>
+<p>B君：服务器跑不满怎么办？拿来搭建测试/实践环境，然后出炉各种技术/架构文章，曰”XX”著名互联网公司XX服务XX端技术架构“。</p>
+<p>C君：装X，钱、钱、钱…</p>
+<p>如上，是微薄上程序员大拿们讨论的一个话题，我盗图来说明一下问题？</p>
+<p>还是那句话，适合自己的是最好的，搞分布式、多机集群，除非业务真的需要，不然会面临尴尬局面。</p>
+<p>扯远了，今天思维跳跃了，我的主要工作还是帮助需要大数据的企业和个人输出经验 ~@^_^@~。</p>
+<p>《企业级大数据平台部署实施参考指南》分多节，有更多细节剖析，不妥之处欢迎指正！</p>
+<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/hadoop/">hadoop</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/08/03/Enterprise-BigData-platform-deployment-guide-part-4/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Enterprise-BigData-platform-deployment-guide-part-4</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/07/28/Enterprise-BigData-platform-deployment-guide-part-2/">
+        <span class="next-text nav-default">Enterprise-BigData-platform-deployment-guide-part-2</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

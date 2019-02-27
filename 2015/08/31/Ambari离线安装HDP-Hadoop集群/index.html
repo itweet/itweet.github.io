@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Ambari离线安装HDP-Hadoop集群">
+
+
+
+
+  <meta name="keywords" content="hortonworks,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/08/31/Ambari离线安装HDP-Hadoop集群/">
+
+
+<meta name="description" content="简介 Hortonworks采用了100%完全开源策略，产品名称为HDP（Hortonworks Data Platform）。所有软件产品开源，用户免费使用，Hortonworks提供商业的技术支持服务。与CDH相比，管理软件使用开源Ambari，数据治理使用Atlas，安全组件使用Ranger而非Sentry，SQL继续紧抱Hive大腿。  Apache Ambari是对Hadoop进行监控、">
+<meta name="keywords" content="hortonworks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ambari离线安装HDP-Hadoop集群">
+<meta property="og:url" content="http://itweet.github.io/2015/08/31/Ambari离线安装HDP-Hadoop集群/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="简介 Hortonworks采用了100%完全开源策略，产品名称为HDP（Hortonworks Data Platform）。所有软件产品开源，用户免费使用，Hortonworks提供商业的技术支持服务。与CDH相比，管理软件使用开源Ambari，数据治理使用Atlas，安全组件使用Ranger而非Sentry，SQL继续紧抱Hive大腿。  Apache Ambari是对Hadoop进行监控、">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/ambari-server.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.489Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ambari离线安装HDP-Hadoop集群">
+<meta name="twitter:description" content="简介 Hortonworks采用了100%完全开源策略，产品名称为HDP（Hortonworks Data Platform）。所有软件产品开源，用户免费使用，Hortonworks提供商业的技术支持服务。与CDH相比，管理软件使用开源Ambari，数据治理使用Atlas，安全组件使用Ranger而非Sentry，SQL继续紧抱Hive大腿。  Apache Ambari是对Hadoop进行监控、">
+<meta name="twitter:image" content="https://jikelab.github.io/tech-labs/screenshots/ambari-server.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Ambari离线安装HDP-Hadoop集群 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Ambari离线安装HDP-Hadoop集群
+        
+      </h1>
+
+      <time class="post-time">
+          8月 31 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p> Hortonworks采用了100%完全开源策略，产品名称为HDP（Hortonworks Data Platform）。所有软件产品开源，用户免费使用，Hortonworks提供商业的技术支持服务。与CDH相比，管理软件使用开源Ambari，数据治理使用Atlas，安全组件使用Ranger而非Sentry，SQL继续紧抱Hive大腿。</p>
+<blockquote>
+<p>Apache Ambari是对Hadoop进行监控、管理和生命周期管理的开源项目。它也是一个为Hor<br>tonworks数据平台选择管理组建的项目。Ambari向Hadoop MapReduce、HDFS、<br>HBase、Pig, Hive、HCatalog以及Zookeeper提供服务。</p>
+</blockquote>
+<p><img src="https://jikelab.github.io/tech-labs/screenshots/ambari-server.png" alt></p>
+<h1 id="Step0-搭建本地yum源"><a href="#Step0-搭建本地yum源" class="headerlink" title="Step0: 搭建本地yum源"></a>Step0: 搭建本地yum源</h1><blockquote>
+<p>我选择的是hdp相关包放到了apache服务器上,yum源下载地址Setp1列出。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"># tree -L 1 www/ </span><br><span class="line">www/</span><br><span class="line">|-- ARTIFACTS</span><br><span class="line">|-- HDP</span><br><span class="line">|-- HDP-UTILS-1.1.0.20</span><br><span class="line">|-- ambari -&gt; ambari-2.1.0</span><br><span class="line">`-- ambari-2.1.0</span><br><span class="line"></span><br><span class="line">5 directories, 0 files</span><br><span class="line"></span><br><span class="line"># tree -L 3 www/ </span><br><span class="line">www/</span><br><span class="line">|-- ARTIFACTS</span><br><span class="line">|-- HDP</span><br><span class="line">|   `-- centos6</span><br><span class="line">|       `-- 2.x</span><br><span class="line">|-- HDP-UTILS-1.1.0.20</span><br><span class="line">|   `-- repos</span><br><span class="line">|       `-- centos6</span><br><span class="line">|-- ambari -&gt; ambari-2.1.0</span><br><span class="line">`-- ambari-2.1.0</span><br><span class="line">    `-- centos6</span><br><span class="line">        |-- RPM-GPG-KEY</span><br><span class="line">        |-- ambari</span><br><span class="line">        |-- build.id</span><br><span class="line">        |-- build_metadata.txt</span><br><span class="line">        |-- changelog.txt</span><br><span class="line">        |-- hdp_mon</span><br><span class="line">        `-- repodata</span><br><span class="line"></span><br><span class="line">14 directories, 3 files</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ssh？<br>echo ‘UseDNS no’ &gt; /etc/ssh/sshd_config &amp;&amp; /etc/init.d/sshd restart</p>
+</blockquote>
+<h1 id="Step1-Download-the-Ambari-repository-on-the-Ambari-Server-host"><a href="#Step1-Download-the-Ambari-repository-on-the-Ambari-Server-host" class="headerlink" title="Step1: Download the Ambari repository on the Ambari Server host"></a>Step1: Download the Ambari repository on the Ambari Server host</h1><p>–hdp url–<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget http://public-repo-1.hortonworks.com/ambari/centos6/2.x/updates/2.1.0/ambari.repo</span><br><span class="line">wget http://public-repo-1.hortonworks.com/ambari/centos6/ambari-2.1.0-centos6.tar.gz</span><br><span class="line"></span><br><span class="line">wget http://public-repo-1.hortonworks.com/HDP/centos6/2.x/updates/2.3.0.0/HDP-2.3.0.0-centos6-rpm.tar.gz</span><br><span class="line">wget http://public-repo-1.hortonworks.com/HDP-UTILS-1.1.0.20/repos/centos6/HDPUTILS-1.1.0.20-centos6.tar.gz</span><br><span class="line"></span><br><span class="line">wget http://public-repo-1.hortonworks.com/HDP/centos6/2.x/updates/2.3.0.0/hdp.repo</span><br></pre></td></tr></table></figure></p>
+<p><code>关于如果搭建apache服务器，制作离线安装源，这里就不做过多介绍...</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">update root passwd</span><br><span class="line">mysqladmin -u root password admin</span><br><span class="line"></span><br><span class="line">--mysql--</span><br><span class="line">create database ambari;</span><br><span class="line">grant all on ambari.* to &apos;root&apos;@&apos;%&apos; identified by &apos;admin&apos;;</span><br><span class="line">grant all on ambari.* to &apos;ambari&apos;@&apos;%&apos; identified by &apos;admin&apos;;</span><br><span class="line">grant all on ambari.* to &apos;root&apos;@&apos;server1&apos; identified by &apos;admin&apos;;</span><br><span class="line">grant all on ambari.* to &apos;ambari&apos;@&apos;server1&apos; identified by &apos;admin&apos;;</span><br><span class="line"></span><br><span class="line">&gt;&gt; or</span><br><span class="line"></span><br><span class="line">grant all on *.*  to &apos;root&apos;@&apos;server1&apos; identified by &apos;123456&apos;;   </span><br><span class="line">grant all on *.*  to &apos;ambari&apos;@&apos;server1&apos; identified by &apos;admin&apos;;   </span><br><span class="line"></span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<p><code>省略mysql安装直接使用</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--local yum resource--</span><br><span class="line">sudo yum clean all</span><br><span class="line">sudo yum repolist</span><br></pre></td></tr></table></figure>
+<h1 id="Step2-install-ambari-server"><a href="#Step2-install-ambari-server" class="headerlink" title="Step2: install ambari-server"></a>Step2: install ambari-server</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install ambari-server</span><br></pre></td></tr></table></figure>
+<h1 id="Step-3-setup-ambari-server"><a href="#Step-3-setup-ambari-server" class="headerlink" title="Step 3: setup ambari-server"></a>Step 3: setup ambari-server</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ambari-server setup</span><br></pre></td></tr></table></figure>
+<p><code>Downloading JDK from http://public-repo-1.hortonworks.com/ARTIFACTS/jdk-7u67-linux-x64.tar.gz to /var/lib/ambari-server/resources/jdk-7u67-linux-x64.tar.gz</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-x64.tar.gz</span><br><span class="line">sudo mv jdk-7u79-linux-x64.tar.gz /var/lib/ambari-server/resources/ </span><br><span class="line">sudo mv jdk-7u79-linux-x64.tar.gz jdk-7u67-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">WARNING: Before starting Ambari Server, you must run the following DDL against the database to create the schema: /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql</span><br><span class="line"></span><br><span class="line">$ sudo yum install mysql-connector-java</span><br><span class="line">$ mysql -uroot -padmin</span><br><span class="line">mysql&gt; use ambari;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; source /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ambari-server setup</span><br><span class="line">Using python  /usr/bin/python2.6</span><br><span class="line">Setup ambari-server</span><br><span class="line">Checking SELinux...</span><br><span class="line">SELinux status is &apos;disabled&apos;</span><br><span class="line">Customize user account for ambari-server daemon [y/n] (n)? y</span><br><span class="line">Enter user account for ambari-server daemon (root):</span><br><span class="line">Adjusting ambari-server permissions and ownership...</span><br><span class="line">Checking firewall status...</span><br><span class="line">Checking JDK...</span><br><span class="line">Do you want to change Oracle JDK [y/n] (n)? n</span><br><span class="line">Completing setup...</span><br><span class="line">Configuring database...</span><br><span class="line">Enter advanced database configuration [y/n] (n)? y</span><br><span class="line">Configuring database...</span><br><span class="line">==============================================================================</span><br><span class="line">Choose one of the following options:</span><br><span class="line">[1] - PostgreSQL (Embedded)</span><br><span class="line">[2] - Oracle</span><br><span class="line">[3] - MySQL</span><br><span class="line">[4] - PostgreSQL</span><br><span class="line">[5] - Microsoft SQL Server (Tech Preview)</span><br><span class="line">==============================================================================</span><br><span class="line">Enter choice (1): 3</span><br><span class="line">Hostname (localhost): </span><br><span class="line">Port (3306): </span><br><span class="line">Database name (ambari): </span><br><span class="line">Username (root): </span><br><span class="line">Enter Database Password (bigdata): </span><br><span class="line">Re-enter password: </span><br><span class="line">Configuring ambari database...</span><br><span class="line">Copying JDBC drivers to server resources...</span><br><span class="line">Configuring remote database connection properties...</span><br><span class="line">WARNING: Before starting Ambari Server, you must run the following DDL against the database to create the schema: /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql</span><br><span class="line">Proceed with configuring remote database connection properties [y/n] (y)? y</span><br><span class="line">Extracting system views...</span><br><span class="line">...ambari-admin-2.1.0.1470.jar</span><br><span class="line">...</span><br><span class="line">Adjusting ambari-server permissions and ownership...</span><br><span class="line">Ambari Server &apos;setup&apos; completed successfully.</span><br></pre></td></tr></table></figure>
+<h1 id="Step-3-start-Ambari"><a href="#Step-3-start-Ambari" class="headerlink" title="Step 3: start Ambari"></a>Step 3: start Ambari</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ambari-server start</span><br><span class="line">Using python  /usr/bin/python2.6</span><br><span class="line">Starting ambari-server</span><br><span class="line">Ambari Server running with administrator privileges.</span><br><span class="line">Organizing resource files at /var/lib/ambari-server/resources...</span><br><span class="line">Server PID at: /var/run/ambari-server/ambari-server.pid</span><br><span class="line">Server out at: /var/log/ambari-server/ambari-server.out</span><br><span class="line">Server log at: /var/log/ambari-server/ambari-server.log</span><br><span class="line">Waiting for server start....................</span><br><span class="line">Ambari Server &apos;start&apos; completed successfully.</span><br></pre></td></tr></table></figure>
+<h1 id="Step-4-Deploy-Cluster-using-Ambari-Web-UI"><a href="#Step-4-Deploy-Cluster-using-Ambari-Web-UI" class="headerlink" title="Step 4: Deploy Cluster using Ambari Web UI"></a>Step 4: Deploy Cluster using Ambari Web UI</h1><p><a href="http://server2:8080/#/login" target="_blank" rel="noopener">http://server2:8080/#/login</a></p>
+<p>用户名：admin<br>密  码：admin</p>
+<h1 id="Step-5-Install-Hadoop-cluster"><a href="#Step-5-Install-Hadoop-cluster" class="headerlink" title="Step 5: Install Hadoop cluster"></a>Step 5: Install Hadoop cluster</h1><pre><code>省略，都是下一步操作...
+</code></pre><p>报错：<a href="http://zh.hortonworks.com/community/forums/topic/ambari-agent-registration-failure-on-rhel-6-5-due-to-openssl-2/" target="_blank" rel="noopener">http://zh.hortonworks.com/community/forums/topic/ambari-agent-registration-failure-on-rhel-6-5-due-to-openssl-2/</a></p>
+<p><code>Error</code>: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">INFO 2015-08-25 23:52:43,898 main.py:287 - Connecting to Ambari server at https://server2:8440 (192.168.2.201)</span><br><span class="line">INFO 2015-08-25 23:52:43,898 NetUtil.py:59 - Connecting to https://server2:8440/ca</span><br><span class="line">ERROR 2015-08-25 23:52:43,968 NetUtil.py:77 - [Errno 1] _ssl.c:492: error:100AE081:elliptic curve routines:EC_GROUP_new_by_curve_name:unknown group</span><br><span class="line">ERROR 2015-08-25 23:52:43,968 NetUtil.py:78 - SSLError: Failed to connect. Please check `openssl` library versions. </span><br><span class="line">Refer to: https://bugzilla.redhat.com/show_bug.cgi?id=1022468 for more details. </span><br><span class="line"></span><br><span class="line">系统为centos 6.5</span><br><span class="line">$ cat /etc/redhat-release </span><br><span class="line">CentOS release 6.5 (Final)</span><br></pre></td></tr></table></figure>
+<p><code>此处为RHEL / CentOS 6.5一个小问题，更新openssl更新版本！即可解决！</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Remedy:</span><br><span class="line"></span><br><span class="line">Check the OpenSSL library version installed on your host(s):</span><br><span class="line">rpm -qa | grep openssl</span><br><span class="line"></span><br><span class="line">openssl-1.0.1e-15.el6.x86_64</span><br><span class="line"></span><br><span class="line">If the output says openssl-1.0.1e-15.x86_64 (1.0.1 build 15) you will need to upgrade the OpenSSL library by running the following command:</span><br><span class="line">yum upgrade openssl</span><br><span class="line"></span><br><span class="line">Verify you have the newer version of OpenSSL (1.0.1 build 16):</span><br><span class="line">rpm -qa | grep openssl</span><br><span class="line"></span><br><span class="line">openssl-1.0.1e-16.el6.x86_64</span><br><span class="line"></span><br><span class="line">Restart Ambari Agent(s) and Click Retry Failed on the Wizard.</span><br></pre></td></tr></table></figure>
+<p><code>升级脚本</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># openssl version</span><br><span class="line">OpenSSL 1.0.1g 7 Apr 2014</span><br><span class="line"></span><br><span class="line"># sudo rpm -e --justdb --nodeps openssl</span><br><span class="line"># sudo rpm -qa|grep openssl  </span><br><span class="line"></span><br><span class="line"># sudo rpm -ivh --force http://mirror.centos.org/centos/6/os/x86_64/Packages/openssl-1.0.1e-42.el6.x86_64.rpm </span><br><span class="line"></span><br><span class="line"># rpm -qa|grep openssl</span><br><span class="line">openssl-1.0.1e-42.el6.x86_64</span><br><span class="line"></span><br><span class="line"># openssl version  </span><br><span class="line">OpenSSL 1.0.1e-fips 11 Feb 2013</span><br><span class="line"></span><br><span class="line">完美解决openssl bug...头疼了一阵...</span><br></pre></td></tr></table></figure></p>
+<p><code>如果出现乱码：echo &#39;LANG=&quot;en_US.UTF-8&quot;&#39; &gt; /etc/sysconfig/i18n,修改字符集即可解决！</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Error: Package: snappy-devel-1.0.5-1.el6.x86_64 (HDP-UTILS-1.1.0.20)</span><br><span class="line">           Requires: snappy(x86-64) = 1.0.5-1.el6</span><br><span class="line">           Installed: snappy-1.1.0-1.el6.x86_64 (@anaconda-CentOS-201311272149.x86_64/6.5)</span><br><span class="line">               snappy(x86-64) = 1.1.0-1.el6</span><br><span class="line">           Available: snappy-1.0.5-1.el6.x86_64 (HDP-UTILS-1.1.0.20)</span><br><span class="line">               snappy(x86-64) = 1.0.5-1.el6</span><br><span class="line"></span><br><span class="line">解决</span><br><span class="line">sudo rpm -e snappy-1.1.0-1.el6.x86_64 or [sudo rpm -e snappy-1.1.0-1.el6.x86_64 --nodeps]</span><br><span class="line">yum -y install snappy*</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">错误1：</span><br><span class="line">File &quot;/usr/lib/python2.6/site-packages/resource_management/core/shell.py&quot;, line 291, in _call</span><br><span class="line">    raise Fail(err_msg)</span><br><span class="line">resource_management.core.exceptions.Fail: Execution of &apos;/usr/bin/yum -d 0 -e 0 -y install ambari-metrics-monitor&apos; returned 1. Error: Package: ambari-metrics-monitor-2.1.0-1470.x86_64 (Updates-ambari-2.1.0)</span><br><span class="line">           Requires: python-devel</span><br><span class="line"> You could try using --skip-broken to work around the problem</span><br><span class="line">** Found 6 pre-existing rpmdb problem(s), &apos;yum check&apos; output follows:</span><br><span class="line">1:libreoffice-core-4.0.4.2-9.el6.x86_64 has missing requires of libjawt.so()(64bit)</span><br><span class="line">1:libreoffice-core-4.0.4.2-9.el6.x86_64 has missing requires of libjawt.so(SUNWprivate_1.1)(64bit)</span><br><span class="line">1:libreoffice-ure-4.0.4.2-9.el6.x86_64 has missing requires of jre &gt;= (&apos;0&apos;, &apos;1.5.0&apos;, None)</span><br><span class="line">2:postfix-2.6.6-2.2.el6_1.x86_64 has missing requires of libmysqlclient.so.16()(64bit)</span><br><span class="line">2:postfix-2.6.6-2.2.el6_1.x86_64 has missing requires of libmysqlclient.so.16(libmysqlclient_16)(64bit)</span><br><span class="line">2:postfix-2.6.6-2.2.el6_1.x86_64 has missing requires of mysql-libs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">错误2：</span><br><span class="line">  File &quot;/usr/lib/python2.6/site-packages/resource_management/core/sudo.py&quot;, line 37, in chown</span><br><span class="line">    return os.chown(path, uid, gid)</span><br><span class="line">OSError: [Errno 1] Operation not permitted: &apos;/data0/www/bbs/uc_server/data/avatar/hadoop/hdfs/namenode&apos;</span><br><span class="line"></span><br><span class="line">yum search python | grep python-devel</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>造成这些错误都是安装linux的时候基础包未选择，缺包可以制作cdrom挂载，来安装即可解决！</code></p>
+</blockquote>
+<ul>
+<li>到此即可一步步安装hadoop集群…</li>
+</ul>
+<h1 id="Step-6-Test-集群使用"><a href="#Step-6-Test-集群使用" class="headerlink" title="Step 6: Test 集群使用"></a>Step 6: Test 集群使用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">[whoami@server1 ~]$ sudo -uhive hive</span><br><span class="line">hive&gt; show tables;</span><br><span class="line">OK</span><br><span class="line">Time taken: 1.36 seconds</span><br><span class="line">hive&gt; create table test(id int);</span><br><span class="line">OK</span><br><span class="line">Time taken: 1.998 seconds</span><br><span class="line">hive&gt;   insert into table test values (1), (2), (3);</span><br><span class="line">Query ID = hive_20150831184109_0c75d1e8-1003-4ade-bacf-03cd7408082f</span><br><span class="line">Total jobs = 1</span><br><span class="line">Launching Job 1 out of 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Status: Running (Executing on YARN cluster with App id application_1441014845188_0002)</span><br><span class="line"></span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">        VERTICES      STATUS  TOTAL  COMPLETED  RUNNING  PENDING  FAILED  KILLED</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Map 1 ..........   SUCCEEDED      1          1        0        0       0       0</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">VERTICES: 01/01  [==========================&gt;&gt;] 100%  ELAPSED TIME: 32.24 s    </span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Loading data to table default.test</span><br><span class="line">Table default.test stats: [numFiles=1, numRows=3, totalSize=6, rawDataSize=3]</span><br><span class="line">OK</span><br><span class="line">Time taken: 41.354 seconds</span><br><span class="line">hive&gt; show tables;</span><br><span class="line">OK</span><br><span class="line">test</span><br><span class="line">values__tmp__table__1</span><br><span class="line">Time taken: 0.112 seconds, Fetched: 2 row(s)</span><br><span class="line">hive&gt; select * from test;</span><br><span class="line">OK</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">Time taken: 0.258 seconds, Fetched: 3 row(s)</span><br><span class="line"></span><br><span class="line">hive&gt; select count(1) from test;</span><br><span class="line">OK</span><br><span class="line">3</span><br><span class="line">Time taken: 1.705 seconds, Fetched: 1 row(s)</span><br></pre></td></tr></table></figure>
+<p><code>相关组件使用一切正常...</code></p>
+<h1 id="小插曲"><a href="#小插曲" class="headerlink" title="小插曲"></a>小插曲</h1><blockquote>
+<p>安装过程中使用了桌面，火狐等安装命令<br>yum install firefox<br>yum groupinstall -y   “Desktop”   “Desktop Platform”   “Desktop Platform<br>Development”　 “Fonts” 　“General Purpose Desktop”　 “Graphical<br>Administration Tools”　 “Graphics Creation Tools” 　“Input Methods” 　“X<br>Window System” 　“Chinese Support [zh]”　“Internet Browser”</p>
+<p>iso yum 源来安装一些基础包</p>
+<p>sudo mount -o loop /home/whoami/rhel-server-6.7-x86_64-dvd.iso /mnt/cdimg/</p>
+<p>$  cat rhel-source.repo<br>[rhel-Server]<br>name=Red Hat Server<br>baseurl=file:///mnt/cdimg<br>enable=1<br>gpgcheck=0</p>
+</blockquote>
+<p><code>总结：如果要安装一切顺利，可在安装操作系统时把linux基础组件一并安装！</code><br>||<br>VV<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum groupinstall &quot;Compatibility libraries&quot; &quot;Base&quot; &quot;Development tools&quot;</span><br><span class="line">yum groupinstall &quot;debugging Tools&quot; &quot;Dial-up Networking Support&quot;</span><br><span class="line"></span><br><span class="line">同时把mysql，postgresql都安装好！</span><br></pre></td></tr></table></figure></p>
+<h1 id="配置Ambari-Metrics为分布式"><a href="#配置Ambari-Metrics为分布式" class="headerlink" title="配置Ambari Metrics为分布式"></a>配置Ambari Metrics为分布式</h1><p>默认安装时Ambari Metrics为embedded模式，这样收集的所有数据是存放在Collector节点的本地的，大量的Metrics数据会挤占大量的本地存储空间，该为分布式模式后Metrics数据会放置到HDFS上，所以通常这是安装Ambari后必备一个操作。具体的操作可以参考：<br><a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.1.0.0/bk_ambari_reference_guide/content/_configuring_ambari_metrics_for_distributed_mode.html" target="_blank" rel="noopener">http://docs.hortonworks.com/HDPDocuments/Ambari-2.1.0.0/bk_ambari_reference_guide/content/_configuring_ambari_metrics_for_distributed_mode.html</a></p>
+<p>配置Metrics数据的生命周期</p>
+<p>大量的Metrics会占用非常大的存储空间，集群经常出现conllector挂掉，所在节点空间满了的情况，设定Metrics数据的保留时间（TTL）是很必要的，控制Metrics数据保留时间的参数位于ams-site.xml中，以下是相关的配置项：<br>配置项                                 默认值           描述<br>timeline.metrics.host.aggregator.ttl  86400 1 minute resolution data purge interval. Default is 1 day.<br>timeline.metrics.host.aggregator.minute.ttl 604800  Host based X minutes resolution data purge interval. Default is 7 days.(X = configurable interval, default interval is 2 minutes)<br>timeline.metrics.host.aggregator.hourly.ttl 2592000 Host based hourly resolution data purge interval. Default is 30 days.<br>timeline.metrics.host.aggregator.daily.ttl  31536000  Host based daily resolution data purge interval. Default is 1 year.<br>timeline.metrics.cluster.aggregator.minute.ttl  2592000 Cluster wide minute resolution data purge interval. Default is 30 days.<br>timeline.metrics.cluster.aggregator.hourly.ttl  31536000  Cluster wide hourly resolution data purge interval. Default is 1 year.<br>timeline.metrics.cluster.aggregator.daily.ttl 63072000  Cluster wide daily resolution data purge interval. Default is 2 years.</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+<p>参考：<a href="https://cwiki.apache.org/confluence/display/AMBARI/Installation+Guide+for+Ambari+2.1.0" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/AMBARI/Installation+Guide+for+Ambari+2.1.0</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/hortonworks/">hortonworks</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/09/15/hdfs-balancer均衡器使用/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">hdfs-balancer均衡器使用</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/08/12/Apache kafka 工作原理介绍/">
+        <span class="next-text nav-default">Apache kafka 工作原理介绍</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

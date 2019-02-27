@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="openstack系列(1)-Kvm虚拟化技术">
+
+
+
+
+  <meta name="keywords" content="openstack,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/05/17/openstack系列(1)-Kvm虚拟化技术/">
+
+
+<meta name="description" content="KVM（Kernel-based Virtual Machine的英文缩写）是内核内建的虚拟机。有点类似于 Xen ，但更追求更简便的运作，比如运行此虚拟机，仅需要加载相应的 kvm 模块即可后台待命。和 Xen 的完整模拟不同的是，KVM 需要芯片支持虚拟化技术（英特尔的 VT 扩展或者 AMD 的 AMD-V 扩展）。 本章节我们主要介绍通过VMware技术虚拟出相关的Linux软件环境，在L">
+<meta name="keywords" content="openstack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openstack系列(1)-Kvm虚拟化技术">
+<meta property="og:url" content="http://itweet.github.io/2017/05/17/openstack系列(1)-Kvm虚拟化技术/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="KVM（Kernel-based Virtual Machine的英文缩写）是内核内建的虚拟机。有点类似于 Xen ，但更追求更简便的运作，比如运行此虚拟机，仅需要加载相应的 kvm 模块即可后台待命。和 Xen 的完整模拟不同的是，KVM 需要芯片支持虚拟化技术（英特尔的 VT 扩展或者 AMD 的 AMD-V 扩展）。 本章节我们主要介绍通过VMware技术虚拟出相关的Linux软件环境，在L">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/Libvirt_support.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openstack系列(1)-Kvm虚拟化技术">
+<meta name="twitter:description" content="KVM（Kernel-based Virtual Machine的英文缩写）是内核内建的虚拟机。有点类似于 Xen ，但更追求更简便的运作，比如运行此虚拟机，仅需要加载相应的 kvm 模块即可后台待命。和 Xen 的完整模拟不同的是，KVM 需要芯片支持虚拟化技术（英特尔的 VT 扩展或者 AMD 的 AMD-V 扩展）。 本章节我们主要介绍通过VMware技术虚拟出相关的Linux软件环境，在L">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/Libvirt_support.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> openstack系列(1)-Kvm虚拟化技术 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          openstack系列(1)-Kvm虚拟化技术
+        
+      </h1>
+
+      <time class="post-time">
+          5月 17 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>KVM（Kernel-based Virtual Machine的英文缩写）是内核内建的虚拟机。有点类似于 Xen ，但更追求更简便的运作，比如运行此虚拟机，仅需要加载相应的 kvm 模块即可后台待命。和 Xen 的完整模拟不同的是，KVM 需要芯片支持虚拟化技术（英特尔的 VT 扩展或者 AMD 的 AMD-V 扩展）。</p>
+<p>本章节我们主要介绍通过VMware技术虚拟出相关的Linux软件环境，在Linux系统中，安装KVM虚拟化软件，实实在在的去实践一下KVM到底是一个什么样的技术？</p>
+<h3 id="VMware虚拟机支持Kvm虚拟化技术？"><a href="#VMware虚拟机支持Kvm虚拟化技术？" class="headerlink" title="VMware虚拟机支持Kvm虚拟化技术？"></a>VMware虚拟机支持Kvm虚拟化技术？</h3><p>在VMware创建的虚拟机中，默认不支持Kvm虚拟化技术，需要芯片级的扩展支持，幸好VMware提供完整的解决方案，可以通过修改虚拟化引擎。</p>
+<p>VMware软件版本信息，<code>VMware® Workstation 11.0.0 build-2305329</code></p>
+<p>首先，你需要启动VMware软件，新建一个<code>CentOS 6.x</code>类型的虚拟机，正常安装完成，这个虚拟机默认的<code>虚拟化引擎</code>，<code>首选模式</code>为”自动”。</p>
+<p>如果想让我们的VMware虚拟化出来的CentOS虚拟机支持KVM虚拟化，我们需要修改它支持的<code>虚拟化引擎</code>,打开新建的虚拟机，虚拟机状态必须处于<code>关闭</code>状态，通过双击<code>编辑虚拟机设置</code> &gt; <code>硬件</code> ，选择<code>处理器</code>菜单，右边会出现<code>虚拟化引擎</code>区域，选择<code>首选模式</code>为 <strong><em>Intel Tv-x/EPT或AMD-V/RVI</em></strong>,接下来勾选<code>虚拟化Intel Tv-x/EPT或AMD-V/RVI(v)</code>，点击<code>确定</code>。</p>
+<p>KVM需要虚拟机宿主（host）的处理器带有虚拟化支持（对于Intel处理器来说是VT-x，对于AMD处理器来说是AMD-V）。你可以通过以下命令来检查你的处理器是否支持虚拟化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep --color -E &apos;(vmx|svm)&apos; /proc/cpuinfo</span><br></pre></td></tr></table></figure></p>
+<p>如果运行后没有显示，那么你的处理器不支持硬件虚拟化，你不能使用KVM。</p>
+<ul>
+<li>注意: 如果是硬件服务器，您可能需要在BIOS中启用虚拟化支持，参考 <a href="http://www.itweet.cn/blog/2016/06/14/Private%20Cloud%20personal%20workstation" target="_blank" rel="noopener">Private Cloud personal workstation</a></li>
+</ul>
+<h3 id="安装Kvm虚拟化软件"><a href="#安装Kvm虚拟化软件" class="headerlink" title="安装Kvm虚拟化软件"></a>安装Kvm虚拟化软件</h3><p>安装kvm虚拟化软件，我们需要一个Linux操作系统环境，这里我们选择的Linux版本为<code>CentOS release 6.8 (Final)</code>，在这个VMware虚拟化出来的虚拟机中安装kvm虚拟化软件，具体步骤如下：</p>
+<ul>
+<li><p>首选安装epel源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -ivh http://mirrors.ustc.edu.cn/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装kvm虚拟化软件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install qemu-kvm qeum-kvm-tools virt-manager libvirt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动kvm虚拟化软件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/libvirtd start</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>启动成功之后你可以通过<code>/etc/init.d/libvirtd status</code>查看启动状态，这个时候，kvm会自动生成一个本地网桥 <code>virbr0</code>，可以通过命令查看他的详细信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># ifconfig virbr0</span><br><span class="line">virbr0    Link encap:Ethernet  HWaddr 52:54:00:D7:23:AD  </span><br><span class="line">          inet addr:192.168.122.1  Bcast:192.168.122.255  Mask:255.255.255.0</span><br><span class="line">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1</span><br><span class="line">          RX packets:0 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:0 </span><br><span class="line">          RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)</span><br></pre></td></tr></table></figure></p>
+<p>KVM默认使用NAT网络模式。虚拟机获取一个私有 IP（例如 192.168.122.0/24 网段的），并通过本地主机的NAT访问外网。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># brctl show</span><br><span class="line">bridge name     bridge id               STP enabled     interfaces</span><br><span class="line">virbr0          8000.525400d723ad       yes             virbr0-nic</span><br></pre></td></tr></table></figure>
+<p>创建一个本地网桥virbr0，包括两个端口：virbr0-nic 为网桥内部端口，vnet0 为虚拟机网关端口（192.168.122.1）。</p>
+<p>虚拟机启动后，配置 192.168.122.1（vnet0）为网关。所有网络操作均由本地主机系统负责。</p>
+<p>DNS/DHCP的实现，本地主机系统启动一个 dnsmasq 来负责管理。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux|grep dnsmasq</span><br></pre></td></tr></table></figure></p>
+<p><code>注意：</code> 启动libvirtd之后自动启动iptables，并且写上一些默认规则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># iptables -nvL -t nat</span><br><span class="line">Chain PREROUTING (policy ACCEPT 304 packets, 38526 bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination         </span><br><span class="line"></span><br><span class="line">Chain POSTROUTING (policy ACCEPT 7 packets, 483 bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination         </span><br><span class="line">    0     0 MASQUERADE  tcp  --  *      *       192.168.122.0/24    !192.168.122.0/24    masq ports: 1024-65535 </span><br><span class="line">    0     0 MASQUERADE  udp  --  *      *       192.168.122.0/24    !192.168.122.0/24    masq ports: 1024-65535 </span><br><span class="line">    0     0 MASQUERADE  all  --  *      *       192.168.122.0/24    !192.168.122.0/24    </span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT 7 packets, 483 bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br></pre></td></tr></table></figure>
+<h3 id="kvm创建虚拟机"><a href="#kvm创建虚拟机" class="headerlink" title="kvm创建虚拟机"></a>kvm创建虚拟机</h3><p>上传一个镜像文件：<code>CentOS-6.6-x86_64-bin-DVD1.iso</code></p>
+<p>通过<code>qemu</code>创建一个raw格式的文件(注：QEMU使用的镜像文件：qcow2与raw，它们都是QEMU(KVM)虚拟机使用的磁盘文件格式)，大小为5G。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f raw /data/Centos-6.6-x68_64.raw 5G</span><br></pre></td></tr></table></figure>
+<p>查看创建的raw磁盘格式文件信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">qemu-img info /data/Centos-6.6-x68_64.raw </span><br><span class="line"></span><br><span class="line">image: /data/Centos-6.6-x68_64.raw</span><br><span class="line">file format: raw</span><br><span class="line">virtual size: 5.0G (5368709120 bytes)</span><br><span class="line">disk size: 0</span><br></pre></td></tr></table></figure></p>
+<p>启动，kvm虚拟机，进行操作系统安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virt-install  --virt-type kvm --name CentOS-6.6-x86_64 --ram 512 --cdrom /data/CentOS-6.6-x86_64-bin-DVD1.iso --disk path=/data/Centos-6.6-x68_64.raw --network network=default --graphics vnc,listen=0.0.0.0 --noautoconsole</span><br></pre></td></tr></table></figure></p>
+<p>启动之后，通过命令查看启动状态，默认会在操作系统开一个<code>5900</code>的端口，可以通过虚拟机远程管理软件<code>vnc</code>客户端连接，然后可视化的方式安装操作系统。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># netstat -ntlp|grep 5900</span><br><span class="line">tcp        0      0 0.0.0.0:5900                0.0.0.0:*                   LISTEN      2504/qemu-kvm</span><br></pre></td></tr></table></figure>
+<p><code>注意</code>：kvm安装的虚拟机，不确定是那一台，在后台就是一个进程，每增加一台端口号+1，第一次创建的为5900！</p>
+<h3 id="虚拟机远程管理软件"><a href="#虚拟机远程管理软件" class="headerlink" title="虚拟机远程管理软件"></a>虚拟机远程管理软件</h3><p>我们可以使用虚拟机远程管理软件VNC进行操作系统的安装，我使用过的两款不错的虚拟机远程管理终端软件，一个是Windows上使用，一个在Mac上为了方便安装一个Google Chrome插件后即可开始使用，软件信息 <code>Tightvnc</code> 或者 <code>VNC@Viewer for Google Chrome</code></p>
+<p>如果你和我一样使用的是<code>Google Chrome</code>提供的VNC插件，使用方式，在<code>Address</code>输入框中输入，宿主机IP:59000,<code>Picture Quality</code>选择框使用默认选项，点击<code>Connect</code>进入到安装操作系统的界面，你可以安装常规的方式进行安装，等待系统安装完成重启，然后就可以正常使用kvm虚拟化出来的操作系统了。</p>
+<p><code>Tightvnc</code>软件的使用，请参考官方手册。</p>
+<ul>
+<li>Tightvnc下载地址：<a href="http://www.tightvnc.com/download.php" target="_blank" rel="noopener">http://www.tightvnc.com/download.php</a></li>
+<li>Tightvnc下载地址：<a href="http://www.tightvnc.com/download/2.7.10/tightvnc-2.7.10-setup-64bit.msi" target="_blank" rel="noopener">http://www.tightvnc.com/download/2.7.10/tightvnc-2.7.10-setup-64bit.msi</a></li>
+<li>Tightvnc下载地址：<a href="http://www.tightvnc.com/download/2.7.10/tightvnc-2.7.10-setup-32bit.msi" target="_blank" rel="noopener">http://www.tightvnc.com/download/2.7.10/tightvnc-2.7.10-setup-32bit.msi</a></li>
+</ul>
+<h3 id="KVM虚拟机管理"><a href="#KVM虚拟机管理" class="headerlink" title="KVM虚拟机管理"></a>KVM虚拟机管理</h3><p>kvm虚拟机是通过virsh命令进行管理的，libvirt是Linux上的虚拟化库，是长期稳定的C语言API，支持KVM/QEMU、Xen、LXC等主流虚拟化方案。链接：<a href="http://libvirt.org/" target="_blank" rel="noopener">http://libvirt.org/</a><br>virsh是Libvirt对应的shell命令。</p>
+<p>查看所有虚拟机状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh list --all</span><br></pre></td></tr></table></figure></p>
+<p>启动虚拟机<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh start [NAME]</span><br></pre></td></tr></table></figure></p>
+<p>列表启动状态的虚拟机<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh list</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>常用命令查看<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh --help|more less</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="libvirt虚拟机配置文件"><a href="#libvirt虚拟机配置文件" class="headerlink" title="libvirt虚拟机配置文件"></a>libvirt虚拟机配置文件</h3><p>虚拟机libvirt配置文件在<code>/etc/libvirt/qemu</code>路径下，生产中我们需要去修改它的网络信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># ll</span><br><span class="line">total 8</span><br><span class="line">-rw-------. 1 root root 3047 Oct 19  2016 Centos-6.6-x68_64.xml</span><br><span class="line">drwx------. 3 root root 4096 Oct 17  2016 networks</span><br></pre></td></tr></table></figure>
+<p><code>注意</code>：不能直接修改xml文件，需要通过提供的命令！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh edit Centos-6.6-x68_64</span><br></pre></td></tr></table></figure>
+<p>kvm三种网络类型,桥接、NAT、仅主机模式，默认NAT模式,其他机器无法登陆，生产中一般选择桥接。</p>
+<h3 id="监控kvm虚拟机"><a href="#监控kvm虚拟机" class="headerlink" title="监控kvm虚拟机"></a>监控kvm虚拟机</h3><ul>
+<li>安装软件监控虚拟机</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install virt-top -y</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看虚拟机资源使用情况</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">virt-top</span><br><span class="line"></span><br><span class="line">virt-top 23:46:39 - x86_64 1/1CPU 3392MHz 3816MB</span><br><span class="line">1 domains, 1 active, 1 running, 0 sleeping, 0 paused, 0 inactive D:0 O:0 X:0</span><br><span class="line">CPU: 5.6%  Mem: 2024 MB (2024 MB by guests)</span><br><span class="line"></span><br><span class="line">   ID S RDRQ WRRQ RXBY TXBY %CPU %MEM    TIME   NAME                                                                                                 </span><br><span class="line">    1 R    0    1   52    0  5.6 53.0   5:16.15 centos-6.8</span><br></pre></td></tr></table></figure>
+<h3 id="KVM修改NAT模式为桥接-案例"><a href="#KVM修改NAT模式为桥接-案例" class="headerlink" title="KVM修改NAT模式为桥接[案例]"></a>KVM修改NAT模式为桥接[案例]</h3><p>在开始案例之前，需要知道的必要信息，宿主机IP是<code>192.168.2.200</code>，操作系统版本<code>Centos-6.6-x68_64</code>。</p>
+<p>启动虚拟网卡<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifup eth0</span><br></pre></td></tr></table></figure></p>
+<p>这里网卡是NAT模式，可以上网，ping通其他机器，但是其他机器无法登陆！</p>
+<p>宿主机查看网卡信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">brctl show</span><br><span class="line"></span><br><span class="line">ifconfig virbr0</span><br><span class="line"></span><br><span class="line">ifconfig vnet0</span><br></pre></td></tr></table></figure></p>
+<p><strong><em> 实现网桥，在kvm宿主机完成 </em></strong></p>
+<ul>
+<li>步骤1，创建一个网桥，新建网桥连接到eth0,删除eth0,让新的网桥拥有eth0的ip</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">brctl addbr br0  #创建一个网桥</span><br><span class="line"></span><br><span class="line">brctl show       #显示网桥信息</span><br><span class="line"></span><br><span class="line">brctl addif br0 eth0 &amp;&amp; ip addr del dev eth0 192.168.2.200/24 &amp;&amp; ifconfig br0 192.168.2.200/24 up</span><br><span class="line"></span><br><span class="line">brctl show      #查看结果</span><br><span class="line">ifconfig br0    #验证br0是否成功取代了eth0的IP</span><br></pre></td></tr></table></figure>
+<p><code>注意</code>: 这里的IP地址为 <em>宿主机ip</em> </p>
+<ul>
+<li>修改虚拟机桥接到br0网卡，在宿主机修改</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">virsh list --all</span><br><span class="line"></span><br><span class="line">ps aux |grep kvm</span><br><span class="line"></span><br><span class="line">virsh stop Centos-6.6-x68_64</span><br><span class="line"></span><br><span class="line">virsh list --all</span><br></pre></td></tr></table></figure>
+<p>修改虚拟机桥接到宿主机，修改52行type为<code>bridge</code>，第54行bridge为<code>br0</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># virsh edit Centos-6.6-x68_64  # 命令</span><br><span class="line"></span><br><span class="line">52     &lt;interface type=&apos;network&apos;&gt;</span><br><span class="line">     53       &lt;mac address=&apos;52:54:00:2a:2d:60&apos;/&gt;</span><br><span class="line">     54       &lt;source network=&apos;default&apos;/&gt;</span><br><span class="line">     55       &lt;address type=&apos;pci&apos; domain=&apos;0x0000&apos; bus=&apos;0x00&apos; slot=&apos;0x03&apos; function=&apos;0x0&apos;/&gt;</span><br><span class="line">     56     &lt;/interface&gt;</span><br><span class="line"></span><br><span class="line">修改为：</span><br><span class="line">52     &lt;interface type=&apos;bridge&apos;&gt;</span><br><span class="line">     53       &lt;mac address=&apos;52:54:00:2a:2d:60&apos;/&gt;</span><br><span class="line">     54       &lt;source bridge=&apos;br0&apos;/&gt;</span><br><span class="line">     55       &lt;address type=&apos;pci&apos; domain=&apos;0x0000&apos; bus=&apos;0x00&apos; slot=&apos;0x03&apos; function=&apos;0x0&apos;/&gt;</span><br><span class="line">     56     &lt;/interface&gt;</span><br></pre></td></tr></table></figure>
+<p>启动虚拟机，看到启动前后，桥接变化，vnet0被桥接到了br0</p>
+<p>启动前：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># brctl show</span><br><span class="line">bridge name     bridge id               STP enabled     interfaces</span><br><span class="line">br0             8000.000c29f824c9       no              eth0</span><br><span class="line">virbr0          8000.525400353d8e       yes             virbr0-nic</span><br></pre></td></tr></table></figure></p>
+<p>启动后：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># virsh start CentOS-6.6-x86_64</span><br><span class="line">Domain CentOS-6.6-x86_64 started</span><br><span class="line"></span><br><span class="line"># brctl show                   </span><br><span class="line">bridge name     bridge id               STP enabled     interfaces</span><br><span class="line">br0             8000.000c29f824c9       no              eth0</span><br><span class="line">                                                        vnet0</span><br><span class="line">virbr0          8000.525400353d8e       yes             virbr0-nic</span><br></pre></td></tr></table></figure></p>
+<p>Vnc登陆后，修改ip地址，看到dhcp可以使用，被桥接到现有的ip段，ip是自动获取,而且是和宿主机在同一个IP段.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ifup eth0</span><br></pre></td></tr></table></figure></p>
+<p>从宿主机登陆此服务器，可以成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ssh 192.168.2.108</span><br><span class="line">root@192.168.2.108&apos;s password: </span><br><span class="line">Last login: Sat Jan 30 12:40:28 2016</span><br></pre></td></tr></table></figure></p>
+<p>从同一网段其他服务器登陆此虚拟机,也可以成功,至此让kvm管理的服务器能够桥接上网就完成了，在生产环境中，桥接上网是非常必要的。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过kvm相关的命令来创建虚拟机，安装和调试是非常必要的，因为现有的很多私有云，公有云产品都使用到了kvm这样的技术，学习基本的kvm使用对维护<code>openstack</code>集群有非常要的作用，其次所有的<code>openstack image</code>制作也得通过kvm这样的底层技术来完成，最后上传到<code>openstack</code>的镜像管理模块，才能开始通过<code>openstack image</code>生成云主机。</p>
+<p>到此，各位应该能够体会到，其实kvm是一个非常底层和核心的虚拟化技术，而openstack就是对<code>kvm</code>这样的技术进行了一个上层封装，可以非常方便，可视化的操作和维护<code>kvm</code>虚拟机，这就是现在<code>牛</code>上天的<code>云计算</code>技术最底层技术栈，具体怎么实现请看下图。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/Libvirt_support.png" alt="Libvirt_support"></p>
+<p>如上图，没有<code>openstack</code>我们依然可以通过，<code>libvirt</code>来对虚拟机进行操作，只不过比较繁琐和难以维护。通过openstack就可以非常方便的进行底层虚拟化技术的管理、维护、使用。</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/openstack/">openstack</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/05/18/openstack系列(2)-架构设计/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">openstack系列(2)-架构设计</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/05/16/怎么备份和灾难复原Apache Solr (part 1)/">
+        <span class="next-text nav-default">怎么备份和灾难复原Apache Solr (part 1)</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

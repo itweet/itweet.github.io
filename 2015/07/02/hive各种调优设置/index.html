@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="hive各种调优设置">
+
+
+
+
+  <meta name="keywords" content="Hive,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/07/02/hive各种调优设置/">
+
+
+<meta name="description" content="Hive的各种调优设置 1、reduce个数 12345.hive.exec.reduces.bytes.per.reducer.mapred.reduce.tasks=-1CDH5:  hive (default)&amp;gt; set mapred.reduce.tasks;  mapred.reduce.tasks=-1 2、权限问题 1234.hive.warehouse.subdir.inhe">
+<meta name="keywords" content="Hive">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hive各种调优设置">
+<meta property="og:url" content="http://itweet.github.io/2015/07/02/hive各种调优设置/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Hive的各种调优设置 1、reduce个数 12345.hive.exec.reduces.bytes.per.reducer.mapred.reduce.tasks=-1CDH5:  hive (default)&amp;gt; set mapred.reduce.tasks;  mapred.reduce.tasks=-1 2、权限问题 1234.hive.warehouse.subdir.inhe">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.481Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hive各种调优设置">
+<meta name="twitter:description" content="Hive的各种调优设置 1、reduce个数 12345.hive.exec.reduces.bytes.per.reducer.mapred.reduce.tasks=-1CDH5:  hive (default)&amp;gt; set mapred.reduce.tasks;  mapred.reduce.tasks=-1 2、权限问题 1234.hive.warehouse.subdir.inhe">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> hive各种调优设置 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          hive各种调优设置
+        
+      </h1>
+
+      <time class="post-time">
+          7月 02 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Hive的各种调优设置</p>
+<p>1、reduce个数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.hive.exec.reduces.bytes.per.reducer</span><br><span class="line">.mapred.reduce.tasks=-1</span><br><span class="line">CDH5:</span><br><span class="line">  hive (default)&gt; set mapred.reduce.tasks;</span><br><span class="line">  mapred.reduce.tasks=-1</span><br></pre></td></tr></table></figure>
+<p>2、权限问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.hive.warehouse.subdir.inherit.perms</span><br><span class="line">CDH5:默认是true</span><br><span class="line">  hive (default)&gt;  set hive.warehouse.subdir.inherit.perms;</span><br><span class="line">  hive.warehouse.subdir.inherit.perms=true</span><br></pre></td></tr></table></figure>
+<p>3、HiveServer2的内存问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.设置-Xmx越大越好</span><br><span class="line">  -Xmx=2048m 甚至-Xmx=4g</span><br></pre></td></tr></table></figure>
+<p>4、关闭推测式执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CDH5 default:</span><br><span class="line">.mapred.map.tasks.speculative.execution=true</span><br><span class="line">.mapred.reduce.tasks.speculative.execution=true</span><br><span class="line">update back:</span><br><span class="line">  hive (default)&gt; set mapred.map.tasks.speculative.execution;</span><br><span class="line">  mapred.map.tasks.speculative.execution=false</span><br><span class="line">  hive (default)&gt; set mapred.reduce.tasks.speculative.execution;</span><br><span class="line">  mapred.reduce.tasks.speculative.execution=false</span><br></pre></td></tr></table></figure></p>
+<p>5、客户端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">. hive.cli.print.current.db</span><br><span class="line">. hive.cli.print.header</span><br></pre></td></tr></table></figure>
+<p>6、并行执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.hive.exec.parallel</span><br><span class="line">.hive.exec.parallel.thread.number</span><br><span class="line">hive (default)&gt;  set hive.exec.parallel;</span><br><span class="line">cdh5:</span><br><span class="line">  hive.exec.parallel=true</span><br><span class="line">  hive (default)&gt; set hive.exec.parallel.thread.number;</span><br><span class="line">  hive.exec.parallel.thread.number=16</span><br></pre></td></tr></table></figure>
+<p>7、MapJoin</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.hive.auto.convert.join</span><br><span class="line">.hive.mapjoin.smalltable.filesize</span><br><span class="line">.hive.ignore.mapjoin.hint                   #忽略MAPJOIN写法，而是自动检查是否转换</span><br><span class="line">CDH5:</span><br><span class="line">  hive (default)&gt; set hive.auto.convert.join;</span><br><span class="line">  hive.auto.convert.join=true</span><br><span class="line">  hive (default)&gt; set hive.mapjoin.smalltable.filesize;</span><br><span class="line">  hive.mapjoin.smalltable.filesize=500000000</span><br><span class="line">  hive (default)&gt; set hive.ignore.mapjoin.hint;</span><br><span class="line">  hive.ignore.mapjoin.hint=false                  </span><br><span class="line"></span><br><span class="line">  例子：</span><br><span class="line">    hive (hsu_tmp)&gt; select /*+MAPJOIN(tableX)*/ tableA.id,tableX.id from tableA join tableX on tableA.id=tableX.id;     </span><br><span class="line">    #tableX自动转换为小表，如果这个表过大，会出现oom问题</span><br></pre></td></tr></table></figure>
+<p>8、LocalModel [全局关闭local执行模式]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.hive.exec.mode.local.auto</span><br><span class="line">.hive.exec.mode.local.auto.input.files.max</span><br><span class="line">.hive.exec.mode.local.auto.inputbytes.max</span><br><span class="line">CDH5：</span><br><span class="line">  hive (hsu_tmp)&gt; set hive.exec.mode.local.auto;</span><br><span class="line">  hive.exec.mode.local.auto=false</span><br><span class="line">  hive (hsu_tmp)&gt; set hive.exec.mode.local.auto.input.files.max;</span><br><span class="line">  hive.exec.mode.local.auto.input.files.max=4</span><br><span class="line">  hive (hsu_tmp)&gt; set hive.exec.mode.local.auto.inputbytes.max;</span><br><span class="line">  hive.exec.mode.local.auto.inputbytes.max=134217728</span><br></pre></td></tr></table></figure>
+<p>9、conf setting</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">推测式执行</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.mapred.reduce.tasks.speculative.execution&lt;/name&gt;</span><br><span class="line">&lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;mapreduce.reduce.speculative&lt;/name&gt;</span><br><span class="line">&lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">小表mapjoin</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.ignore.mapjoin.hint&lt;/name&gt;</span><br><span class="line">&lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.mapjoin.smalltable.filesize&lt;/name&gt;</span><br><span class="line">&lt;value&gt;500000000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">并行执行</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.exec.parallel&lt;/name&gt;</span><br><span class="line">&lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.exec.parallel.thread.number&lt;/name&gt;</span><br><span class="line">&lt;value&gt;16&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">客户端显示</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.cli.print.current.db&lt;/name&gt;</span><br><span class="line">&lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.cli.print.header&lt;/name&gt;</span><br><span class="line">&lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">关闭自动统计</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.stats.autogather&lt;/name&gt;</span><br><span class="line">&lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+<p>10、查询表可以带引号来过滤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">hive (default)&gt; show tables &apos;*sample*&apos;;</span><br><span class="line">OK</span><br><span class="line">tab_name</span><br><span class="line">sample_07</span><br><span class="line">sample_08</span><br><span class="line">Time taken: 0.057 seconds, Fetched: 2 row(s) </span><br><span class="line">hive (default)&gt; show tables &apos;e*&apos;;</span><br><span class="line">OK</span><br><span class="line">tab_name</span><br><span class="line">etl_data_source</span><br><span class="line">Time taken: 0.056 seconds, Fetched: 1 row(s)</span><br></pre></td></tr></table></figure>
+<ol start="11">
+<li>thriftserver并发支持多少个会话session,默认100个<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;hive.server2.thrift.min.worker.threads&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;0&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hive.server2.thrift.max.worker.threads&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;1024&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hive.server2.async.exec.threads&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;100&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Hive/">Hive</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/07/02/HiveServer2-JDBC中文支持/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">HiveServer2-JDBC中文支持</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/05/06/如何选择满足需求的SQL on Hadoop系统/">
+        <span class="next-text nav-default">如何选择满足需求的SQL on Hadoop系统</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

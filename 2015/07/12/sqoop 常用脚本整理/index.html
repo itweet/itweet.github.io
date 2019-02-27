@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="sqoop 常用脚本整理">
+
+
+
+
+  <meta name="keywords" content="sqoop,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/07/12/sqoop 常用脚本整理/">
+
+
+<meta name="description" content="Sqoop是一款开源的工具，主要用于在HADOOP(Hive)与传统的数据库(mysql、postgresql…)间进行数据的传递，可以将一个关系型数据库（例如 ： MySQL ,Oracle ,Postgres等）中的数据导进到Hadoop的HDFS,NOSQL中，也可以将HDFS的数据导进到关系型数据库中。Sqoop项目开始于2009年，最早是作为Hadoop的一个第三方模块存在，后来为了让使">
+<meta name="keywords" content="sqoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqoop 常用脚本整理">
+<meta property="og:url" content="http://itweet.github.io/2015/07/12/sqoop 常用脚本整理/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Sqoop是一款开源的工具，主要用于在HADOOP(Hive)与传统的数据库(mysql、postgresql…)间进行数据的传递，可以将一个关系型数据库（例如 ： MySQL ,Oracle ,Postgres等）中的数据导进到Hadoop的HDFS,NOSQL中，也可以将HDFS的数据导进到关系型数据库中。Sqoop项目开始于2009年，最早是作为Hadoop的一个第三方模块存在，后来为了让使">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/sqoop-rdbms.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.483Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sqoop 常用脚本整理">
+<meta name="twitter:description" content="Sqoop是一款开源的工具，主要用于在HADOOP(Hive)与传统的数据库(mysql、postgresql…)间进行数据的传递，可以将一个关系型数据库（例如 ： MySQL ,Oracle ,Postgres等）中的数据导进到Hadoop的HDFS,NOSQL中，也可以将HDFS的数据导进到关系型数据库中。Sqoop项目开始于2009年，最早是作为Hadoop的一个第三方模块存在，后来为了让使">
+<meta name="twitter:image" content="https://jikelab.github.io/tech-labs/screenshots/sqoop-rdbms.gif">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> sqoop 常用脚本整理 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          sqoop 常用脚本整理
+        
+      </h1>
+
+      <time class="post-time">
+          7月 12 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Sqoop是一款开源的工具，主要用于在HADOOP(Hive)与传统的数据库(mysql、postgresql…)间进行数据的传递，可以将一个关系型数据库（例如 ： MySQL ,Oracle ,Postgres等）中的数据导进到Hadoop的HDFS,NOSQL中，也可以将HDFS的数据导进到关系型数据库中。<br>Sqoop项目开始于2009年，最早是作为Hadoop的一个第三方模块存在，后来为了让使用者能够快速部署，也为了让开发人员能够更快速的迭代开发，Sqoop独立成为一个Apache项目。<br><a href="https://jikelab.github.io/tech-labs/categories/sqoop/" target="_blank" rel="noopener">sqoop文章</a></p>
+<p><img src="https://jikelab.github.io/tech-labs/screenshots/sqoop-rdbms.gif" alt></p>
+<h1 id="1、sqoop-help"><a href="#1、sqoop-help" class="headerlink" title="1、sqoop help"></a>1、sqoop help</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ sqoop help</span><br><span class="line">15/07/10 16:04:23 INFO sqoop.Sqoop: Running Sqoop version: 1.4.5-cdh5.2.0</span><br><span class="line">usage: sqoop COMMAND [ARGS]</span><br><span class="line"></span><br><span class="line">Available commands:</span><br><span class="line">  codegen            Generate code to interact with database records</span><br><span class="line">  create-hive-table  Import a table definition into Hive</span><br><span class="line">  eval               Evaluate a SQL statement and display the results</span><br><span class="line">  export             Export an HDFS directory to a database table</span><br><span class="line">  help               List available commands</span><br><span class="line">  import             Import a table from a database to HDFS</span><br><span class="line">  import-all-tables  Import tables from a database to HDFS</span><br><span class="line">  import-mainframe   Import datasets from a mainframe server to HDFS</span><br><span class="line">  job                Work with saved jobs</span><br><span class="line">  list-databases     List available databases on a server</span><br><span class="line">  list-tables        List available tables in a database</span><br><span class="line">  merge              Merge results of incremental imports</span><br><span class="line">  metastore          Run a standalone Sqoop metastore</span><br><span class="line">  version            Display version information</span><br><span class="line"></span><br><span class="line">See &apos;sqoop help COMMAND&apos; for information on a specific command.</span><br></pre></td></tr></table></figure>
+<h1 id="2、sqoop-command-–help"><a href="#2、sqoop-command-–help" class="headerlink" title="2、sqoop command –help"></a>2、sqoop command –help</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ sqoop export --help</span><br><span class="line">  15/07/10 16:10:15 INFO sqoop.Sqoop: Running Sqoop version: 1.4.5-cdh5.2.0</span><br><span class="line">  usage: sqoop export [GENERIC-ARGS] [TOOL-ARGS]</span><br><span class="line">  </span><br><span class="line">  Common arguments:</span><br><span class="line">     --connect &lt;jdbc-uri&gt;                         Specify JDBC connect</span><br><span class="line">                                                  string</span><br><span class="line">     --connection-manager &lt;class-name&gt;            Specify connection manager</span><br><span class="line">                                                  class name</span><br><span class="line">     --connection-param-file &lt;properties-file&gt;    Specify connection</span><br><span class="line">                                                  parameters file</span><br><span class="line">     --driver &lt;class-name&gt;                        Manually specify JDBC</span><br><span class="line">                                                  driver class to use</span><br><span class="line">     --hadoop-home &lt;hdir&gt;                         Override</span><br><span class="line">                                                  $HADOOP_MAPRED_HOME_ARG</span><br><span class="line">     --hadoop-mapred-home &lt;dir&gt;                   Override</span><br><span class="line">  </span><br><span class="line">.....省略.........</span><br></pre></td></tr></table></figure>
+<h1 id="3、rdbms-data-to-hdfs"><a href="#3、rdbms-data-to-hdfs" class="headerlink" title="3、rdbms data to hdfs"></a>3、rdbms data to hdfs</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqoop export --connect jdbc:oracle:thin:@hostname:orcl --username tmp - -password test --table test --fields-terminated-by &quot;\001&quot; --input- lines-terminated-by &apos;\n&apos; --input-null-string &apos;\\N&apos; --input-null-non-string   &apos;\\N&apos; --verbose --export-dir /user/hive/warehouse/bigdata.db/test</span><br></pre></td></tr></table></figure>
+<p>*报错由于jdk版本1.8：<br>  <code>Error: TMP_GNJSP_4_S : Unsupported major.minor version 52.0</code></p>
+<h2 id="导数据实例"><a href="#导数据实例" class="headerlink" title="导数据实例"></a>导数据实例</h2><h3 id="列表oracle下的所有表"><a href="#列表oracle下的所有表" class="headerlink" title="列表oracle下的所有表"></a>列表oracle下的所有表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sqoop list-tables --connect jdbc:oracle:thin:@hostname:1521:ORCL --username pu_test --password test|grep f_1</span><br></pre></td></tr></table></figure>
+<h3 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hadoop fs -mkdir /user/hadoop/Interface/DATA_MONTH/f_1</span><br></pre></td></tr></table></figure>
+<h3 id="通过oraoop的oracle优化插件导数据-提升效率"><a href="#通过oraoop的oracle优化插件导数据-提升效率" class="headerlink" title="通过oraoop的oracle优化插件导数据,提升效率"></a>通过oraoop的oracle优化插件导数据,提升效率</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sqoop import -D oraoop.jdbc.url.verbatim=true --connect jdbc:oracle:thin:@hostnmae:ORCL --username PU_TEST --password test --table f_1 --delete-target-dir --target-dir /user/hadoop/Interface/DATA_MONTH/f_1 --fetch-size 5000 --fields-terminated-by &apos;\001&apos; --lines-terminated-by &apos;\n&apos; --hive-drop-import-delims --null-string &apos;\\N&apos; --null-non-string &apos;\\N&apos; -m 9</span><br></pre></td></tr></table></figure>
+<h1 id="4、hdfs-data-to-rdbms"><a href="#4、hdfs-data-to-rdbms" class="headerlink" title="4、hdfs data to rdbms"></a>4、hdfs data to rdbms</h1><h2 id="导数据实例-1"><a href="#导数据实例-1" class="headerlink" title="导数据实例"></a>导数据实例</h2><h3 id="list-oracle-all-data-console"><a href="#list-oracle-all-data-console" class="headerlink" title="list oracle all data console:"></a>list oracle all data console:</h3><p>sqoop list-tables –connect jdbc:oracle:thin:@135.33.6.59:1521:fxgk –username pu_wt –password tydic</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ cat sq_test.sh </span><br><span class="line">export LANG=&quot;zh_CN.UTF-8&quot;</span><br><span class="line">CONNECTURL=jdbc:oracle:thin:@hostname:ORCL</span><br><span class="line">ORACLENAME=test</span><br><span class="line">ORACLEPASSWORD=test</span><br><span class="line">oralceTableName=testaction</span><br><span class="line">columns=a_id,a_name,t_type_id,t_type_name</span><br><span class="line">comTerminated=&apos;\t&apos;</span><br><span class="line">hdfsPath=/apps/hive/test.db/tb_dim_action/</span><br><span class="line"></span><br><span class="line">sqoop export --connect $CONNECTURL --username $ORACLENAME --password   $ORACLEPASSWORD --export-dir $hdfsPath  --num-mappers 1 --table   $oralceTableName --columns $columns --input-fields-terminated-by    $&#123;comTerminated&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="hdfs-to-oracle"><a href="#hdfs-to-oracle" class="headerlink" title="hdfs to oracle"></a>hdfs to oracle</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqoop export --connect jdbc:oracle:thin:@hostname:ORCL --username test --password test --table ta_tmp -fields-terminated-by &quot;\001&quot; --input-lines-terminated-by &apos;\n&apos; --input-null-string &apos;\\N&apos; --input-null-non-string &apos;\\N&apos; --export-dir /apps/hive/test.db/ta_tmp</span><br></pre></td></tr></table></figure>
+<h3 id="sqoop-mr-poll"><a href="#sqoop-mr-poll" class="headerlink" title="sqoop mr poll"></a>sqoop mr poll</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dmapreduce.job.queuename=default</span><br></pre></td></tr></table></figure>
+<h3 id="sqoop-to-parquetfile"><a href="#sqoop-to-parquetfile" class="headerlink" title="sqoop to parquetfile"></a>sqoop to parquetfile</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create table test(meid string,phone_type string) ROW FORMAT DELIMITED FIELDS TERMINATED BY &apos;\001&apos; STORED AS parquet LOCATION &apos;hdfs://mycluster/user/etlplat/test&apos;;</span><br><span class="line"></span><br><span class="line">sqoop import --connect jdbc:oracle:thin:@ip:1521:orcl --username web --password abc --table xxx --delete-target-dir --target-dir /user/xxx/test --fetch-size  5000 --fields-terminated-by &apos;\001&apos; --lines-terminated-by &apos;\n&apos; --hive-drop-import-delims --null-string &apos;\\N&apos; --null-non-string &apos;\\N&apos; --as-parquetfile -m  1</span><br></pre></td></tr></table></figure>
+<h3 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h3><p>1、SQOOP java.sql.SQLRecoverableException: IO Error: Connection reset<br> manager.SqlManager: Error executing statement:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 不生效不知道为何</span><br><span class="line">-D mapred.child.java.opts=&quot;\-Djava.security.egd=file:/dev/../dev/urandom&quot; </span><br><span class="line"></span><br><span class="line">＃ $JAVA_HOME/jre/lib/security目录下的java.security文件，修改securerandom.source=file:/dev/../dev/urandom解决</span><br><span class="line"></span><br><span class="line">vi ./usr/java/jdk1.7.0_67-cloudera/jre/lib/security/java.security</span><br><span class="line">securerandom.source=file:/dev/../dev/urandom</span><br></pre></td></tr></table></figure></p>
+<p>2、Sqoop import job is failing with java.lang.OutOfMemoryError: unable to create new native thread<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;* - nofile 32768&apos; &gt;&gt; /etc/security/limits.conf </span><br><span class="line">echo &apos;* - nproc 65536&apos; &gt;&gt; /etc/security/limits.conf</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_installing_manually_book/content/ref-729d1fb0-6d1b-459f-a18a-b5eba4540ab5.1.html" target="_blank" rel="noopener">https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_installing_manually_book/content/ref-729d1fb0-6d1b-459f-a18a-b5eba4540ab5.1.html</a></p>
+<p><a href="http://sqoop.apache.org/docs/1.4.0-incubating/SqoopUserGuide.html" target="_blank" rel="noopener">http://sqoop.apache.org/docs/1.4.0-incubating/SqoopUserGuide.html</a></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/sqoop/">sqoop</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/07/13/ganglia-ubuntu/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">ganglia-ubuntu</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/07/12/sqoop install/">
+        <span class="next-text nav-default">sqoop install</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

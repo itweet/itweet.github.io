@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="github-changes-software-development">
+
+
+
+
+  <meta name="keywords" content="github,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2018/01/13/github-changes-software-development/">
+
+
+<meta name="description" content="Git是分布式代码开发的最佳选择，今天把我常用的一些Git命令给列表一下。 说起Git，就不得不提一下Github，它几乎成为一种全球最大的在线协作社区。 目前几乎最知名的大规模上生成的开源项目，基本都是在GitHub社区通过全球几十万开发者共同协作，开发完成。 比如：Hadoop、Spark、Hive等，几乎都是全世界开发者协作的伟大作品。 在Github上，如何开启一个开源项目。  1、你需要">
+<meta name="keywords" content="github">
+<meta property="og:type" content="article">
+<meta property="og:title" content="github-changes-software-development">
+<meta property="og:url" content="http://itweet.github.io/2018/01/13/github-changes-software-development/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Git是分布式代码开发的最佳选择，今天把我常用的一些Git命令给列表一下。 说起Git，就不得不提一下Github，它几乎成为一种全球最大的在线协作社区。 目前几乎最知名的大规模上生成的开源项目，基本都是在GitHub社区通过全球几十万开发者共同协作，开发完成。 比如：Hadoop、Spark、Hive等，几乎都是全世界开发者协作的伟大作品。 在Github上，如何开启一个开源项目。  1、你需要">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.529Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="github-changes-software-development">
+<meta name="twitter:description" content="Git是分布式代码开发的最佳选择，今天把我常用的一些Git命令给列表一下。 说起Git，就不得不提一下Github，它几乎成为一种全球最大的在线协作社区。 目前几乎最知名的大规模上生成的开源项目，基本都是在GitHub社区通过全球几十万开发者共同协作，开发完成。 比如：Hadoop、Spark、Hive等，几乎都是全世界开发者协作的伟大作品。 在Github上，如何开启一个开源项目。  1、你需要">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> github-changes-software-development - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          github-changes-software-development
+        
+      </h1>
+
+      <time class="post-time">
+          1月 13 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Git是分布式代码开发的最佳选择，今天把我常用的一些Git命令给列表一下。</p>
+<p>说起Git，就不得不提一下Github，它几乎成为一种全球最大的在线协作社区。</p>
+<p>目前几乎最知名的大规模上生成的开源项目，基本都是在GitHub社区通过全球几十万开发者共同协作，开发完成。</p>
+<p>比如：Hadoop、Spark、Hive等，几乎都是全世界开发者协作的伟大作品。</p>
+<p>在Github上，如何开启一个开源项目。</p>
+<ul>
+<li>1、你需要注册一个GitHub账号</li>
+<li>2、你需要建立一个项目，需要填写一些基本信息</li>
+<li>3、开源许可证选择、这块你可以需要认真了解</li>
+<li>4、初始化你的项目到GitHub，附有完整的文档</li>
+<li>5、文档简洁、附有快速启动、有个GIF动画介绍</li>
+<li>6、社区秀一下作品、帮助快速了解</li>
+<li>7、制定计划、新功能、待开发列表，让更多人参与开发</li>
+<li>8、每天按照计划、<code>pull-&gt;add-&gt;commit-&gt;push</code>代码</li>
+</ul>
+<p>GitHub有完整的体系，如何在GitHub启动一个新的project</p>
+<blockquote>
+<p><a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/" target="_blank" rel="noopener">https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/</a></p>
+</blockquote>
+<p>GitHub上，如何贡献一个开源项目。</p>
+<p>由于我的日常工作都是混迹社区，也给很多知名软件提过<code>issues</code>和<code>pull requests</code>，对于如何贡献别人的代码，略有经验。</p>
+<blockquote>
+<p>Pull Requests: <a href="https://help.github.com/articles/about-pull-requests/" target="_blank" rel="noopener">https://help.github.com/articles/about-pull-requests/</a></p>
+</blockquote>
+<p>首先，你需要<code>fork</code>你想贡献的软件项目，并且你需要系统的学习一下关于GitHub上支持的软件开源协议，如果因为公司而基于社区某个开源版本进行深度开发，避免引起不必要的纠纷。</p>
+<p>你需要完整的了解整个软件设计解决什么样的问题，还有那些待开发功能，或者待完善的功能，完整查看开发者手册和规范，很多优秀的开源软件，一开始就拥有严格的代规范，参与共享代码，可以提<code>patch</code>，避免别人和你一样做了重复的功能，可以一起协作完成某项功能。初期如果仅仅是感兴趣，可以试试修复一些BUG，发起<code>pull requests</code>，体验一次贡献源代码。</p>
+<p>如果，你严格按照要求的规范编写代码，发起的<code>pull requests</code>初步检测通过，接下来会有社区负责人和你一起讨论此功能他们是否接受、为什么，或者接受引发那些新的问题，需要继续完成，或者有更多的人参与讨论，因为他们可不想偏离自己软件的设计初衷，如果你贡献的是一个大<code>PR</code>。</p>
+<p>如果<code>Code Review</code>都通过，讨论结束，那么接下来就是合并代码到主干。</p>
+<p>其实流程就是这么简单，你fork别人的代码，然后增加新功能，发起一个pull requests，等待审核，通过你就可以合并你的代码到主干。</p>
+<p>为什么需要fork ？</p>
+<p>因为想要参与主干开发，必须经过严密的审核，从commit-&gt;contribution需要经过考察，并且得到大部分此项目管理员的认可，不是什么人都能把自己的代码贡献、并且运行在全世界的服务器。</p>
+<p>我的意思是，你贡献的如果是一个非常知名和用户群超大的项目。</p>
+<p>比如：Hadoop、MySQL、Linux</p>
+<p>如果你有幸参与全球知名的开源软件项目，很多人都会感到很自豪和不可思议，你写的代码真的运行在全世界的服务器中，那是一种什么样的体验，无法描述。</p>
+<p>所谓<code>代码不朽</code>就是这个意思吧，这是做为程序员，最大的追求了吧。。。</p>
+<p>我记录的Git命令: </p>
+<p>+++++++Git: release branch+++++++<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git tag v1.0</span><br><span class="line"></span><br><span class="line">git push origin v1.0</span><br></pre></td></tr></table></figure></p>
+<p>+++++++Git: 创建新的分支，在分支开发+++++++<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch twts-boot</span><br><span class="line">git checkout twts-boot</span><br></pre></td></tr></table></figure></p>
+<p>+++++++++++Git: 回退版本+++++++++++<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git reset --hard HEAD~3</span><br><span class="line"></span><br><span class="line">git push --force</span><br></pre></td></tr></table></figure></p>
+<p>+++++++++++Git: Delete a branch (local or remote)+++++++++++</p>
+<ul>
+<li><p>1、To delete a local branch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d the_local_branch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2、To remove a remote branch (if you know what you are doing!)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :the_remote_branch</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>or simply use the new syntax (v1.7.0)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete the_remote_branch</span><br></pre></td></tr></table></figure></p>
+<p>+++++++++++Git: 删除本地分支和远程分支+++++++++++<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line"></span><br><span class="line">git branch -d xxx-rdf-1.2.1</span><br><span class="line"></span><br><span class="line">git push origin --delete xxx-rdf-1.2.1</span><br></pre></td></tr></table></figure></p>
+<p>+++++++++++Git: 多个commit信息合并+++++++++++</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i b951229892864f71eaf23bcd7a8e09131da7a615</span><br><span class="line"></span><br><span class="line">git push --force</span><br></pre></td></tr></table></figure>
+<p>目前我每天都在使用Git。Git是一个分布式版本控制软件，最初由林纳斯·托瓦兹创作，于2005年以GPL发布。最初目的是为更好地管理Linux内核开发而设计。应注意的是，这与GNU Interactive Tools有所不同。 Git最初的开发动力来自于BitKeeper和Monotone。</p>
+<p><strong>参考：</strong></p>
+<ul>
+<li>[1] <a href="https://git-scm.com/book/en/v2/Getting-Started-Git-Basics" target="_blank" rel="noopener">https://git-scm.com/book/en/v2/Getting-Started-Git-Basics</a></li>
+<li>[2] <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a></li>
+<li>[3] <a href="http://www.ruanyifeng.com/blog/2015/08/git-use-process.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/08/git-use-process.html</a></li>
+</ul>
+<p>欢迎关注微信公众号[Whoami]，阅读更多内容。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/github/">github</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/01/15/why-do-developers-build-personal-brands/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">why-do-developers-build-personal-brands</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/01/08/Performance-optimizations-in-Apache-Impala/">
+        <span class="next-text nav-default">Performance-optimizations-in-Apache-Impala</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

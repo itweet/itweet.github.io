@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Cloudera-manager-installaction">
+
+
+
+
+  <meta name="keywords" content="cloudera,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/07/10/Cloudera-manager-installaction/">
+
+
+<meta name="description" content="Cloudera提出了Hybrid Open Source的架构：核心组件名称叫CDH（Cloudera’s Distribution including Apache Hadoop），开源免费并与Apache社区同步，用户无限制使用，保证Hadoop基本功能持续可用，不会被厂家绑定；数据治理和系统管理组件闭源且需要商业许可，支持客户可以更好更方便的使用Hadoop技术，如部署安全策略等。Clo">
+<meta name="keywords" content="cloudera">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cloudera-manager-installaction">
+<meta property="og:url" content="http://itweet.github.io/2015/07/10/Cloudera-manager-installaction/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Cloudera提出了Hybrid Open Source的架构：核心组件名称叫CDH（Cloudera’s Distribution including Apache Hadoop），开源免费并与Apache社区同步，用户无限制使用，保证Hadoop基本功能持续可用，不会被厂家绑定；数据治理和系统管理组件闭源且需要商业许可，支持客户可以更好更方便的使用Hadoop技术，如部署安全策略等。Clo">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/yum-local.png">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/cm1.png">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/cm2.png">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/cm3.png">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/cm4.png">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/cm5.png">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/cm6.png">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/cm7.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.481Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cloudera-manager-installaction">
+<meta name="twitter:description" content="Cloudera提出了Hybrid Open Source的架构：核心组件名称叫CDH（Cloudera’s Distribution including Apache Hadoop），开源免费并与Apache社区同步，用户无限制使用，保证Hadoop基本功能持续可用，不会被厂家绑定；数据治理和系统管理组件闭源且需要商业许可，支持客户可以更好更方便的使用Hadoop技术，如部署安全策略等。Clo">
+<meta name="twitter:image" content="https://jikelab.github.io/tech-labs/screenshots/yum-local.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Cloudera-manager-installaction - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Cloudera-manager-installaction
+        
+      </h1>
+
+      <time class="post-time">
+          7月 10 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p> Cloudera提出了Hybrid Open Source的架构：核心组件名称叫CDH（Cloudera’s Distribution including Apache Hadoop），开源免费并与Apache社区同步，用户无限制使用，保证Hadoop基本功能持续可用，不会被厂家绑定；数据治理和系统管理组件闭源且需要商业许可，支持客户可以更好更方便的使用Hadoop技术，如部署安全策略等。Cloudera也在商业组件部分提供在企业生产环境中运行Hadoop所必需的运维功能，而这些功能并不被开源社区所覆盖，如无宕机滚动升级、异步灾备等。</p>
+<ul>
+<li>1: Cloudera-manager-installaction</li>
+</ul>
+<h1 id="1、基本环境准备"><a href="#1、基本环境准备" class="headerlink" title="1、基本环境准备"></a>1、基本环境准备</h1><pre><code>[hadoop@hadoop html]$ sudo chkconfig iptables off   禁用防火墙
+[hadoop@hadoop html]$ vi /etc/selinux/config         禁用selinux,SELINUX=disabled
+
+注：保存重启系统
+</code></pre><h1 id="2、Cloudera-Manager的离线安装包下载-构建CM本地源"><a href="#2、Cloudera-Manager的离线安装包下载-构建CM本地源" class="headerlink" title="2、Cloudera Manager的离线安装包下载,构建CM本地源"></a>2、Cloudera Manager的离线安装包下载,构建CM本地源</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br></pre></td><td class="code"><pre><span class="line">[hsu@apache-server html]$ tree cm5/</span><br><span class="line">cm5/</span><br><span class="line">|-- installer</span><br><span class="line">|   |-- 5.4.7 -&gt; latest</span><br><span class="line">|   `-- latest</span><br><span class="line">|       `-- cloudera-manager-installer.bin</span><br><span class="line">`-- redhat</span><br><span class="line">    `-- 6</span><br><span class="line">        `-- x86_64</span><br><span class="line">            `-- cm</span><br><span class="line">                |-- 5 -&gt; 5.4.7</span><br><span class="line">                |-- 5.2.0</span><br><span class="line">                |   |-- RPMS</span><br><span class="line">                |   |   `-- x86_64</span><br><span class="line">                |   |       |-- cloudera-manager-agent-5.2.0-1.cm520.p0.60.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- cloudera-manager-daemons-5.2.0-1.cm520.p0.60.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- cloudera-manager-server-5.2.0-1.cm520.p0.60.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- cloudera-manager-server-db-2-5.2.0-1.cm520.p0.60.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- enterprise-debuginfo-5.2.0-1.cm520.p0.60.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- jdk-6u31-linux-amd64.rpm</span><br><span class="line">                |   |       |-- oracle-j2sdk1.7-1.7.0+update45-1.x86_64.rpm</span><br><span class="line">                |   |       `-- oracle-j2sdk1.7-1.7.0+update67-1.x86_64.rpm</span><br><span class="line">                |   `-- repodata</span><br><span class="line">                |       |-- filelists.xml.gz</span><br><span class="line">                |       |-- filelists.xml.gz.asc</span><br><span class="line">                |       |-- other.xml.gz</span><br><span class="line">                |       |-- other.xml.gz.asc</span><br><span class="line">                |       |-- primary.xml.asc</span><br><span class="line">                |       |-- primary.xml.gz</span><br><span class="line">                |       |-- repomd.xml</span><br><span class="line">                |       `-- repomd.xml.asc</span><br><span class="line">                |-- 5.4.7</span><br><span class="line">                |   |-- RPMS</span><br><span class="line">                |   |   |-- noarch</span><br><span class="line">                |   |   `-- x86_64</span><br><span class="line">                |   |       |-- cloudera-manager-agent-5.4.7-1.cm547.p0.10.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- cloudera-manager-daemons-5.4.7-1.cm547.p0.10.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- cloudera-manager-server-5.4.7-1.cm547.p0.10.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- cloudera-manager-server-db-2-5.4.7-1.cm547.p0.10.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- enterprise-debuginfo-5.4.7-1.cm547.p0.10.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- jdk-6u31-linux-amd64.rpm</span><br><span class="line">                |   |       `-- oracle-j2sdk1.7-1.7.0+update67-1.x86_64.rpm</span><br><span class="line">                |   |-- mirrors</span><br><span class="line">                |   `-- repodata</span><br><span class="line">                |       |-- filelists.xml.gz</span><br><span class="line">                |       |-- filelists.xml.gz.txt</span><br><span class="line">                |       |-- other.xml.gz</span><br><span class="line">                |       |-- other.xml.gz.txt</span><br><span class="line">                |       |-- primary.xml.gz</span><br><span class="line">                |       |-- primary.xml.gz.txt</span><br><span class="line">                |       |-- repomd.xml</span><br><span class="line">                |       `-- repomd.xml.txt</span><br><span class="line">                |-- RPM-GPG-KEY-cloudera</span><br><span class="line">                `-- cloudera-manager.repo</span><br><span class="line"></span><br><span class="line">17 directories, 35 files</span><br><span class="line"></span><br><span class="line">[hsu@yndx-bigdata-web01 html]$ tree cdh5/</span><br><span class="line">cdh5/</span><br><span class="line">|-- parcels</span><br><span class="line">|   |-- 5 -&gt; 5.4.7</span><br><span class="line">|   |-- 5.2.0.36</span><br><span class="line">|   |   |-- CDH-5.2.0-1.cdh5.2.0.p0.36-el6.parcel</span><br><span class="line">|   |   `-- manifest.json</span><br><span class="line">|   |-- 5.4.7</span><br><span class="line">|   |   |-- CDH-5.4.7-1.cdh5.4.7.p0.3-el5.parcel</span><br><span class="line">|   |   |-- CDH-5.4.7-1.cdh5.4.7.p0.3-el5.parcel.sha1</span><br><span class="line">|   |   |-- CDH-5.4.7-1.cdh5.4.7.p0.3-el6.parcel</span><br><span class="line">|   |   |-- CDH-5.4.7-1.cdh5.4.7.p0.3-el6.parcel.sha1</span><br><span class="line">|   |   |-- CDH-5.4.7-1.cdh5.4.7.p0.3-precise.parcel</span><br><span class="line">|   |   |-- CDH-5.4.7-1.cdh5.4.7.p0.3-precise.parcel.sha1</span><br><span class="line">|   |   |-- CDH-5.4.7-1.cdh5.4.7.p0.3-sles11.parcel</span><br><span class="line">|   |   |-- CDH-5.4.7-1.cdh5.4.7.p0.3-sles11.parcel.sha1</span><br><span class="line">|   |   |-- CDH-5.4.7-1.cdh5.4.7.p0.3-trusty.parcel</span><br><span class="line">|   |   |-- CDH-5.4.7-1.cdh5.4.7.p0.3-trusty.parcel.sha1</span><br><span class="line">|   |   |-- CDH-5.4.7-1.cdh5.4.7.p0.3-wheezy.parcel</span><br><span class="line">|   |   |-- CDH-5.4.7-1.cdh5.4.7.p0.3-wheezy.parcel.sha1</span><br><span class="line">|   |   `-- manifest.json</span><br><span class="line">|   `-- latest -&gt; 5.4.7</span><br><span class="line">`-- redhat</span><br><span class="line">    `-- 6</span><br><span class="line">        `-- x86_64</span><br><span class="line">            `-- cdh</span><br><span class="line">                |-- 5 -&gt; 5.4.7</span><br><span class="line">                |-- 5.4 -&gt; 5.4.7</span><br><span class="line">                |-- 5.4.7</span><br><span class="line">                |   |-- RPMS</span><br><span class="line">                |   |   |-- noarch</span><br><span class="line">                |   |   |   |-- avro-doc-1.7.6+cdh5.4.7+96-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- avro-libs-1.7.6+cdh5.4.7+96-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- avro-tools-1.7.6+cdh5.4.7+96-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- bigtop-tomcat-0.7.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- bigtop-utils-0.7.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- crunch-0.11.0+cdh5.4.7+75-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- crunch-doc-0.11.0+cdh5.4.7+75-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- flume-ng-1.5.0+cdh5.4.7+136-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- flume-ng-agent-1.5.0+cdh5.4.7+136-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- flume-ng-doc-1.5.0+cdh5.4.7+136-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- hbase-solr-1.5+cdh5.4.7+60-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- hbase-solr-doc-1.5+cdh5.4.7+60-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- hbase-solr-indexer-1.5+cdh5.4.7+60-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- hive-1.1.0+cdh5.4.7+233-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- hive-hbase-1.1.0+cdh5.4.7+233-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- hive-hcatalog-1.1.0+cdh5.4.7+233-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- hive-jdbc-1.1.0+cdh5.4.7+233-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- hive-metastore-1.1.0+cdh5.4.7+233-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- hive-server-1.1.0+cdh5.4.7+233-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- hive-server2-1.1.0+cdh5.4.7+233-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- hive-webhcat-1.1.0+cdh5.4.7+233-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- hive-webhcat-server-1.1.0+cdh5.4.7+233-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- kite-1.0.0+cdh5.4.7+39-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- llama-1.0.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- llama-doc-1.0.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- llama-master-1.0.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- mahout-0.9+cdh5.4.7+27-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- mahout-doc-0.9+cdh5.4.7+27-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- oozie-4.1.0+cdh5.4.7+151-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- oozie-client-4.1.0+cdh5.4.7+151-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- parquet-1.5.0+cdh5.4.7+99-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- parquet-format-2.1.0+cdh5.4.7+15-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- pig-0.12.0+cdh5.4.7+67-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- pig-udf-datafu-1.1.0+cdh5.4.7+24-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- search-1.0.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- sentry-1.4.0+cdh5.4.7+179-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- sentry-hdfs-plugin-1.4.0+cdh5.4.7+179-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- sentry-store-1.4.0+cdh5.4.7+179-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- solr-4.10.3+cdh5.4.7+269-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- solr-crunch-1.0.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- solr-doc-4.10.3+cdh5.4.7+269-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- solr-mapreduce-1.0.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- solr-server-4.10.3+cdh5.4.7+269-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- spark-core-1.3.0+cdh5.4.7+50-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- spark-history-server-1.3.0+cdh5.4.7+50-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- spark-master-1.3.0+cdh5.4.7+50-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- spark-python-1.3.0+cdh5.4.7+50-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- spark-worker-1.3.0+cdh5.4.7+50-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- sqoop-1.4.5+cdh5.4.7+116-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- sqoop-metastore-1.4.5+cdh5.4.7+116-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- sqoop2-1.99.5+cdh5.4.7+40-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- sqoop2-client-1.99.5+cdh5.4.7+40-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   |-- sqoop2-server-1.99.5+cdh5.4.7+40-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   |   `-- whirr-0.9.0+cdh5.4.7+20-1.cdh5.4.7.p0.3.el6.noarch.rpm</span><br><span class="line">                |   |   `-- x86_64</span><br><span class="line">                |   |       |-- bigtop-jsvc-0.6.0+cdh5.4.7+680-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- bigtop-jsvc-debuginfo-0.6.0+cdh5.4.7+680-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-0.20-conf-pseudo-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-0.20-mapreduce-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-0.20-mapreduce-jobtracker-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-0.20-mapreduce-jobtrackerha-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-0.20-mapreduce-tasktracker-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-0.20-mapreduce-zkfc-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-client-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-conf-pseudo-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-debuginfo-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-doc-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-hdfs-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-hdfs-datanode-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-hdfs-fuse-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-hdfs-journalnode-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-hdfs-namenode-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-hdfs-nfs3-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-hdfs-secondarynamenode-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-hdfs-zkfc-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-httpfs-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-kms-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-kms-server-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-libhdfs-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-libhdfs-devel-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-mapreduce-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-mapreduce-historyserver-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-yarn-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-yarn-nodemanager-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-yarn-proxyserver-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hadoop-yarn-resourcemanager-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hbase-1.0.0+cdh5.4.7+183-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hbase-doc-1.0.0+cdh5.4.7+183-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hbase-master-1.0.0+cdh5.4.7+183-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hbase-regionserver-1.0.0+cdh5.4.7+183-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hbase-rest-1.0.0+cdh5.4.7+183-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hbase-thrift-1.0.0+cdh5.4.7+183-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-beeswax-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-common-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-doc-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-hbase-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-impala-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-pig-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-plugins-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-rdbms-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-search-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-security-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-server-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-spark-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-sqoop-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- hue-zookeeper-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- impala-2.2.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- impala-catalog-2.2.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- impala-debuginfo-2.2.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- impala-server-2.2.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- impala-shell-2.2.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- impala-state-store-2.2.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- impala-udf-devel-2.2.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- zookeeper-3.4.5+cdh5.4.7+96-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- zookeeper-debuginfo-3.4.5+cdh5.4.7+96-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       |-- zookeeper-native-3.4.5+cdh5.4.7+96-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |       `-- zookeeper-server-3.4.5+cdh5.4.7+96-1.cdh5.4.7.p0.3.el6.x86_64.rpm</span><br><span class="line">                |   |-- SRPMS</span><br><span class="line">                |   |   |-- avro-libs-1.7.6+cdh5.4.7+96-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- bigtop-jsvc-0.6.0+cdh5.4.7+680-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- bigtop-tomcat-0.7.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- bigtop-utils-0.7.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- crunch-0.11.0+cdh5.4.7+75-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- flume-ng-1.5.0+cdh5.4.7+136-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- hadoop-2.6.0+cdh5.4.7+642-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- hbase-1.0.0+cdh5.4.7+183-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- hbase-solr-1.5+cdh5.4.7+60-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- hive-1.1.0+cdh5.4.7+233-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- hue-3.7.0+cdh5.4.7+1298-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- impala-2.2.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- kite-1.0.0+cdh5.4.7+39-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- llama-1.0.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- mahout-0.9+cdh5.4.7+27-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- oozie-4.1.0+cdh5.4.7+151-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- parquet-1.5.0+cdh5.4.7+99-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- parquet-format-2.1.0+cdh5.4.7+15-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- pig-0.12.0+cdh5.4.7+67-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- pig-udf-datafu-1.1.0+cdh5.4.7+24-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- search-1.0.0+cdh5.4.7+0-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- sentry-1.4.0+cdh5.4.7+179-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- solr-4.10.3+cdh5.4.7+269-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- spark-core-1.3.0+cdh5.4.7+50-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- sqoop-1.4.5+cdh5.4.7+116-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- sqoop2-1.99.5+cdh5.4.7+40-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   |-- whirr-0.9.0+cdh5.4.7+20-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |   `-- zookeeper-3.4.5+cdh5.4.7+96-1.cdh5.4.7.p0.3.src.rpm</span><br><span class="line">                |   |-- mirrors</span><br><span class="line">                |   `-- repodata</span><br><span class="line">                |       |-- filelists.xml.gz</span><br><span class="line">                |       |-- filelists.xml.gz.asc</span><br><span class="line">                |       |-- other.xml.gz</span><br><span class="line">                |       |-- other.xml.gz.asc</span><br><span class="line">                |       |-- primary.xml.gz</span><br><span class="line">                |       |-- primary.xml.gz.asc</span><br><span class="line">                |       |-- repomd.xml</span><br><span class="line">                |       `-- repomd.xml.asc</span><br><span class="line">                |-- RPM-GPG-KEY-cloudera</span><br><span class="line">                `-- cloudera-cdh5.repo</span><br><span class="line"></span><br><span class="line">20 directories, 185 files</span><br><span class="line"></span><br><span class="line">#创建软连接</span><br><span class="line">cd /var/www/cdh5/parcels</span><br><span class="line">ln -s 5.4.1 5</span><br><span class="line"></span><br><span class="line">cd /var/www/cm5/redhat/6/x86_64/cm</span><br><span class="line"># ln -s 5.4.1 5 </span><br><span class="line"></span><br><span class="line"># mkdir /var/www/redhat/cdh/ -p</span><br><span class="line"></span><br><span class="line"># cp cm5/redhat/6/x86_64/cm/RPM-GPG-KEY-cloudera redhat/cdh/</span><br><span class="line"></span><br><span class="line">[root@apache-server www]# tree redhat/</span><br><span class="line">redhat/</span><br><span class="line">+-- cdh</span><br><span class="line">    +-- RPM-GPG-KEY-cloudera</span><br><span class="line"></span><br><span class="line">1 directory, 1 file</span><br></pre></td></tr></table></figure>
+<p><img src="https://jikelab.github.io/tech-labs/screenshots/yum-local.png" alt></p>
+<pre><code>说明：要在生产系统部署CDH，先要实现Cloudera Manager的离线安装，安装好Cloudera Manager后，还要通过Cloudera Manager执行CDH的离线安装两个步骤。由于生产环境的封闭性以及国内网络环境，这些离线包很难从Cloudera的官方网站下载，所以需要将Cloudera的官方网站下载地址映射到本地IP。
+</code></pre><h1 id="3、配置一个http服务"><a href="#3、配置一个http服务" class="headerlink" title="3、配置一个http服务"></a>3、配置一个http服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@apache-server html]$ sudo /etc/init.d/httpd start		启动httpd服务</span><br><span class="line">[hadoop@apache-server html]$ chkconfig --list httpd 检查httpd服务开机启动情况</span><br><span class="line">[hadoop@apache-server html]$ ps -ef|grep apache	查看此服务是否启动</span><br></pre></td></tr></table></figure>
+<p><code>注：我们把CM安装需要的包都放到这个服务根目录下面了。</code></p>
+<h1 id="4、配置本地映射ip到这个httpd服务"><a href="#4、配置本地映射ip到这个httpd服务" class="headerlink" title="4、配置本地映射ip到这个httpd服务"></a>4、配置本地映射ip到这个httpd服务</h1><pre><code>[root@apache-server html]$ cat /etc/hosts
+
+192.168.2.200   server1
+192.168.2.201   server2
+192.168.2.202   server3
+192.168.2.203   server4
+
+192.168.2.124     archive.cloudera.com
+192.168.2.124     archive-primary.cloudera.com
+
+http://archive.cloudera.com/cm5/redhat/6/x86_64/cm/  在本地机器输入这个地址能访问到你搭建的这个本地源库
+
+注：注意映射地址是在所有要按照cdh的机器上配置，如果要验证是否大家离线源成功，请在windows本地hosts文件映射安装源地址，浏览器地址即可验证。
+</code></pre><h1 id="5、通过parcel方式安装CDH集群"><a href="#5、通过parcel方式安装CDH集群" class="headerlink" title="5、通过parcel方式安装CDH集群"></a>5、通过parcel方式安装CDH集群</h1><p>  <code>如果选择rpm包安装cdh集群，那么请下载相关rpm包放到相应的apache服务器！</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@apache-server www]# tree cdh5/</span><br><span class="line">cdh5/</span><br><span class="line">`-- parcels</span><br><span class="line">    `-- 5.4.1</span><br><span class="line">        |-- CDH-5.4.1-1.cdh5.4.1.p0.6-el5.parcel</span><br><span class="line">        |-- CDH-5.4.1-1.cdh5.4.1.p0.6-el5.parcel.sha1</span><br><span class="line">        |-- CDH-5.4.1-1.cdh5.4.1.p0.6-el6.parcel</span><br><span class="line">        |-- CDH-5.4.1-1.cdh5.4.1.p0.6-el6.parcel.sha1</span><br><span class="line">        |-- CDH-5.4.1-1.cdh5.4.1.p0.6-precise.parcel</span><br><span class="line">        |-- CDH-5.4.1-1.cdh5.4.1.p0.6-precise.parcel.sha1</span><br><span class="line">        |-- CDH-5.4.1-1.cdh5.4.1.p0.6-sles11.parcel</span><br><span class="line">        |-- CDH-5.4.1-1.cdh5.4.1.p0.6-sles11.parcel.sha1</span><br><span class="line">        |-- CDH-5.4.1-1.cdh5.4.1.p0.6-trusty.parcel</span><br><span class="line">        |-- CDH-5.4.1-1.cdh5.4.1.p0.6-trusty.parcel.sha1</span><br><span class="line">        |-- CDH-5.4.1-1.cdh5.4.1.p0.6-wheezy.parcel</span><br><span class="line">        |-- CDH-5.4.1-1.cdh5.4.1.p0.6-wheezy.parcel.sha1</span><br><span class="line">        `-- manifest.json</span><br><span class="line"></span><br><span class="line">2 directories, 13 files</span><br></pre></td></tr></table></figure></p>
+<h1 id="6、安装要的软件"><a href="#6、安装要的软件" class="headerlink" title="6、安装要的软件"></a>6、安装要的软件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">  rpm -qa | grep mysql 		检查是否安装mysql</span><br><span class="line">  rpm -e mysql-libs-5.1.71-1.el6.x86_64  	卸载</span><br><span class="line">  rpm -e mysql-libs-5.1.71-1.el6.x86_64 --nodeps   强制卸载</span><br><span class="line">  rpm -qa | grep mysql 	检查是否卸载</span><br><span class="line">  rpm -i MySQL-server-5.5.40-1.linux2.6.x86_64.rpm    安装mysql</span><br><span class="line">  mysqld_safe &amp; 	启动mysql服务端</span><br><span class="line">  rpm -i MySQL-client-5.5.40-1.linux2.6.x86_64.rpm  安装客户端</span><br><span class="line">  mysql_secure_installation  修改密码以及初始化信息</span><br><span class="line">  mysql -uroot -padmin 	登录</span><br><span class="line">  sudo yum install mysql-connector-java</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--mysql--</span><br><span class="line">mysqladmin -u root password admin</span><br><span class="line">mysql -uroot -padmin -e &quot;</span><br><span class="line">create database hive;</span><br><span class="line">create database rman;</span><br><span class="line">create database oozie;</span><br><span class="line">grant all on hive.* to &apos;root&apos;@&apos;server1&apos; identified by &apos;admin&apos;;</span><br><span class="line">grant all on rman.* to &apos;root&apos;@&apos;server1&apos; identified by &apos;admin&apos;;</span><br><span class="line">grant all on oozie.* to &apos;root&apos;@&apos;server1&apos; identified by &apos;admin&apos;;</span><br><span class="line">flush privileges;</span><br><span class="line">&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">--install jdk--</span><br><span class="line">  tar -zxvf jdk-7u45-linux-x64.tar.gz -C ../  解压</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">--install cm--</span><br><span class="line">  chmod u+x cloudera-manager-installer.bin    修改权限为可执行</span><br><span class="line">  ./cloudera-manager-installer.bin  			安装CM</span><br><span class="line"></span><br><span class="line">  [root@server1 installpackage]# cat /var/log/cloudera-manager-installer/4.install-cloudera-manager-server-db-2.log</span><br><span class="line"></span><br><span class="line">  安装报错：Error: Package: cloudera-manager-server-db-2-5.0.0-1.cm500.p0.215.el6.x86_64 (cloudera-manager)</span><br><span class="line">           	Requires: postgresql-server &gt;= 8.4</span><br><span class="line"></span><br><span class="line">           	解决方法：手动下载rpm文件并按顺序逐个安装，因为CM依赖于postgresql数据库。</span><br><span class="line">			rpm -ivh postgresql-libs-8.4.20-1.el6_5.x86_64.rpm</span><br><span class="line">			rpm -ivh postgresql-8.4.20-1.el6_5.x86_64.rpm  </span><br><span class="line">			rpm -ivh postgresql-server-8.4.20-1.el6_5.x86_64.rpm</span><br><span class="line"></span><br><span class="line">  [root@server1 installpackage]# ./cloudera-manager-installer.bin  	再次安装，即可成功</span><br><span class="line"></span><br><span class="line">  [root@server1 installpackage]# netstat -an | grep 7180 		查看7180端口是否起来</span><br><span class="line">	tcp        0      0 0.0.0.0:7180                0.0.0.0:*                   LISTEN      </span><br><span class="line">	tcp        0      0 135.32.43.192:7180          135.32.43.209:63901         TIME_WAIT   </span><br><span class="line">	tcp        0      0 135.32.43.192:7180          135.32.43.209:63902         TIME_WAIT   </span><br><span class="line">	tcp        0      0 135.32.43.192:7180          135.32.43.209:63899         TIME_WAIT   </span><br><span class="line">	tcp        0      0 135.32.43.192:7180          135.32.43.209:63895         TIME_WAIT</span><br></pre></td></tr></table></figure>
+<h1 id="7、安装CM过程报错"><a href="#7、安装CM过程报错" class="headerlink" title="7、安装CM过程报错"></a>7、安装CM过程报错</h1><pre><code>--&gt; Finished Dependency Resolution 
+Error: Package: cloudera-manager-agent-5.3.0-1.cm530.p0.166.el6.x86_64 (cloudera-manager) 
+Requires: fuse-libs 
+Error: Package: cloudera-manager-agent-5.3.0-1.cm530.p0.166.el6.x86_64 (cloudera-manager) 
+Requires: redhat-lsb 
+Error: Package: cloudera-manager-agent-5.3.0-1.cm530.p0.166.el6.x86_64 (cloudera-manager) 
+Requires: cyrus-sasl-gssapi 
+Error: Package: cloudera-manager-agent-5.3.0-1.cm530.p0.166.el6.x86_64 (cloudera-manager) 
+Requires: portmap 
+Error: Package: cloudera-manager-agent-5.3.0-1.cm530.p0.166.el6.x86_64 (cloudera-manager) 
+Requires: fuse 
+You could try using --skip-broken to work around the problem 
+You could try running: rpm -Va --nofiles --nodigest 
+END (1) 
+remote package cloudera-manager-agent could not be installed, giving up waiting for rollback request 
+
+换为国内源，安装 sudo yum install redhat-lsb -y， sudo yum install -y cyrus-sasl-gssapi portmap,sudo yum install fuse-libs fuse
+
+$ vi /etc/yum.repos.d/163.repo    #如果没有这个文件，新建一个，切记：$releasever被修改为了6
+[base]
+name=CentOS-$releasever - Base - 163.com
+baseurl=http://mirrors.163.com/centos/6/os/$basearch/
+enabled=1
+gpgcheck=0
+
+[updates]
+name=CentOS-$releasever - Updates - 163.com
+baseurl=http://mirrors.163.com/centos/6/updates/$basearch/
+enabled=1
+gpgcheck=0
+
+[extras]
+name=CentOS-$releasever - Extras - 163.com
+baseurl=http://mirrors.163.com/centos/6/extras/$basearch/
+enabled=1
+gpgcheck=0
+
+[root@server2 yum.repos.d]# yum clean all
+[root@server2 yum.repos.d]# yum makecache    #生成缓存
+
+[root@server2 yum.repos.d]# yum install redhat-lsb cyrus-sasl-gssapi portmap fuse-libs fuse -y
+</code></pre><p><img src="https://jikelab.github.io/tech-labs/screenshots/cm1.png" alt="last 3"></p>
+<p><img src="https://jikelab.github.io/tech-labs/screenshots/cm2.png" alt="last 2"><br><img src="https://jikelab.github.io/tech-labs/screenshots/cm3.png" alt="last 1"></p>
+<pre><code>至此，CM离线安装已完成！
+
+注意：如果你和我一样是用笔记本虚拟机搭建，可能会出现内存不够，导致CM挂掉情况请重启CM服务，/etc/init.d/cloudera-scm-server start，/etc/init.d/cloudera-scm-agent start，不得不赞叹，cloudera的强大，你启动CM服务后，文件继续断点开始分发！而不用重新开始。
+</code></pre><h1 id="8、在CM界面添加各种hadoop组件"><a href="#8、在CM界面添加各种hadoop组件" class="headerlink" title="8、在CM界面添加各种hadoop组件"></a>8、在CM界面添加各种hadoop组件</h1><ul>
+<li><p>通过<a href="http://server1:7180/地址登陆，用户名密码amdin/admin" target="_blank" rel="noopener">http://server1:7180/地址登陆，用户名密码amdin/admin</a></p>
+</li>
+<li><p>Add hosts<br><img src="https://jikelab.github.io/tech-labs/screenshots/cm4.png" alt></p>
+</li>
+<li><p>Parcel install<br><img src="https://jikelab.github.io/tech-labs/screenshots/cm5.png" alt></p>
+</li>
+<li><p>install error</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Error: Package: cloudera-manager-agent-5.4.1-1.cm541.p0.197.el6.x86_64 (cloudera-manager)</span><br><span class="line">Requires: fuse</span><br><span class="line">Error: Package: cloudera-manager-agent-5.4.1-1.cm541.p0.197.el6.x86_64 (cloudera-manager)</span><br><span class="line">Requires: fuse-libs</span><br><span class="line">Error: Package: cloudera-manager-agent-5.4.1-1.cm541.p0.197.el6.x86_64 (cloudera-manager)</span><br><span class="line">Requires: portmap</span><br><span class="line">Error: Package: cloudera-manager-agent-5.4.1-1.cm541.p0.197.el6.x86_64 (cloudera-manager)</span><br><span class="line">Requires: /lib/lsb/init-functions</span><br><span class="line">Error: Package: cloudera-manager-agent-5.4.1-1.cm541.p0.197.el6.x86_64 (cloudera-manager)</span><br><span class="line">Requires: cyrus-sasl-gssapi</span><br><span class="line">You could try using --skip-broken to work around the problem</span><br><span class="line">You could try running: rpm -Va --nofiles --nodigest</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>解决</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># mkdir /mnt/cdimg/ &amp;&amp; sudo mount -o loop /root/rhel-server-6.7-x86_64-dvd.iso /mnt/cdimg/</span><br><span class="line"></span><br><span class="line"># cat /etc/yum.repos.d/local.repo </span><br><span class="line">[rhel-Local]</span><br><span class="line">name=Red Hat Server</span><br><span class="line">baseurl=file:///mnt/cdimg</span><br><span class="line">enable=1</span><br><span class="line">gpgcheck=0</span><br></pre></td></tr></table></figure>
+<p><img src="https://jikelab.github.io/tech-labs/screenshots/cm6.png" alt></p>
+<ul>
+<li><p>分发 Parcel package<br><img src="https://jikelab.github.io/tech-labs/screenshots/cm7.png" alt></p>
+</li>
+<li><p>install success</p>
+</li>
+</ul>
+<p>See the following vendor resources for more information:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MySQL 5.5: http://dev.mysql.com/doc/refman/5.5/en/backup-and-recovery.html</span><br><span class="line">MySQL 5.6: http://dev.mysql.com/doc/refman/5.6/en/backup-and-recovery.html</span><br><span class="line">PostgreSQL 8.4: http://www.postgresql.org/docs/8.4/static/backup.html</span><br><span class="line">PostgreSQL 9.2: http://www.postgresql.org/docs/9.2/static/backup.html</span><br><span class="line">PostgreSQL 9.3: http://www.postgresql.org/docs/9.3/static/backup.html</span><br><span class="line">Oracle 11gR2: http://docs.oracle.com/cd/E11882_01/backup.112/e10642/toc.html</span><br></pre></td></tr></table></figure></p>
+<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><p>问题1：时间需要同步不然会报错，方式， ntpdate time.nist.gov<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum update &amp;&amp; sudo yum install ntp &amp;&amp; sudo service ntpd start</span><br></pre></td></tr></table></figure></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/cloudera/">cloudera</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/07/10/apache-hadoop-自动HA的搭建/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">apache-hadoop-自动HA的搭建</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/07/02/HiveServer2-JDBC中文支持/">
+        <span class="next-text nav-default">HiveServer2-JDBC中文支持</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

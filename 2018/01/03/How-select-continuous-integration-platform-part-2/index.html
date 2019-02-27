@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="How-select-continuous-integration-platform-part-2">
+
+
+
+
+  <meta name="keywords" content="ci,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2018/01/03/How-select-continuous-integration-platform-part-2/">
+
+
+<meta name="description" content="新的一年，开始研发新的产品。由于新团队成员，所以需要构建一套持续集成平台。 我从事的是开源软件事业，所以需要访问互联网上面大量的软件包，每天都有上百个容器的创建和销毁，一切都是为了自动化，更高效率的交付产品。让大家专注工作于正确的方向上，更快的迭代产品，专注coding，而不会被固定的流程化操作的打断工作进度。 说几点需求点 办公网络慢、导致编译效率低？  无本地仓库，构建程序效率低下？ 很多资源">
+<meta name="keywords" content="ci">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How-select-continuous-integration-platform-part-2">
+<meta property="og:url" content="http://itweet.github.io/2018/01/03/How-select-continuous-integration-platform-part-2/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="新的一年，开始研发新的产品。由于新团队成员，所以需要构建一套持续集成平台。 我从事的是开源软件事业，所以需要访问互联网上面大量的软件包，每天都有上百个容器的创建和销毁，一切都是为了自动化，更高效率的交付产品。让大家专注工作于正确的方向上，更快的迭代产品，专注coding，而不会被固定的流程化操作的打断工作进度。 说几点需求点 办公网络慢、导致编译效率低？  无本地仓库，构建程序效率低下？ 很多资源">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/devops/img/devops-2.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/devops/img/nexatrace-pipeline.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.527Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How-select-continuous-integration-platform-part-2">
+<meta name="twitter:description" content="新的一年，开始研发新的产品。由于新团队成员，所以需要构建一套持续集成平台。 我从事的是开源软件事业，所以需要访问互联网上面大量的软件包，每天都有上百个容器的创建和销毁，一切都是为了自动化，更高效率的交付产品。让大家专注工作于正确的方向上，更快的迭代产品，专注coding，而不会被固定的流程化操作的打断工作进度。 说几点需求点 办公网络慢、导致编译效率低？  无本地仓库，构建程序效率低下？ 很多资源">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/devops/img/devops-2.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> How-select-continuous-integration-platform-part-2 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          How-select-continuous-integration-platform-part-2
+        
+      </h1>
+
+      <time class="post-time">
+          1月 03 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>新的一年，开始研发新的产品。由于新团队成员，所以需要构建一套持续集成平台。</p>
+<p>我从事的是开源软件事业，所以需要访问互联网上面大量的软件包，每天都有上百个容器的创建和销毁，一切都是为了自动化，更高效率的交付产品。让大家专注工作于正确的方向上，更快的迭代产品，专注coding，而不会被固定的流程化操作的打断工作进度。</p>
+<h4 id="说几点需求点"><a href="#说几点需求点" class="headerlink" title="说几点需求点"></a>说几点需求点</h4><ul>
+<li>办公网络慢、导致编译效率低？ </li>
+<li>无本地仓库，构建程序效率低下？</li>
+<li>很多资源无法访问？</li>
+<li>通过VPN可以直接访问公司内网？</li>
+<li>灵活的代码版本管理仓库？</li>
+<li>自动化构建、测试、发布？</li>
+<li>开发专注于coding</li>
+</ul>
+<h4 id="如何提速"><a href="#如何提速" class="headerlink" title="如何提速"></a>如何提速</h4><ul>
+<li>升级公司机房网络带宽，提升，比如：50M</li>
+<li>使用本地仓库，提高构建效率</li>
+<li>无法访问国外资源，通过架设VPS</li>
+<li>无时无刻进入工作状态，提供访问公司内网的穿透工具</li>
+<li>选择一个灵活的源码管理工具</li>
+<li>建立一个持续集成平台，自动化完成代码的构建，测试，发布，预览</li>
+<li>优化整体流程，避免重复的劳动，尽量自动化</li>
+<li>让开发专注于coding、review中</li>
+<li>通过容器技术来统一运行环境，减少基础环境重复构建的麻烦</li>
+<li>通过容器技术，持续得发布版本，动态回滚</li>
+<li>统一的源码版本管理机制，每个发布的版本，具备可回溯性</li>
+</ul>
+<p><code>注意：</code> VPS比较敏感，其实就是一句命令的事，只要你有国外的服务器。<code>:&gt; 私我</code></p>
+<h4 id="如何选型"><a href="#如何选型" class="headerlink" title="如何选型"></a>如何选型</h4><p>在构建这些基础环境之前，你需要有一个完整的研发计划，涉及哪些技术栈分析。</p>
+<h5 id="1-技术栈"><a href="#1-技术栈" class="headerlink" title="1 技术栈"></a>1 技术栈</h5><p>语言方面：<code>JAVA</code>，<code>nodejs</code>，<code>JavaScript</code>为主，自动化部分使用<code>Python</code>、<code>Shell</code>、<code>groovy</code>、ruby。</p>
+<p>构建工具：ant、maven、ivy、gradle、sbt、npm、git</p>
+<p>技术框架：Angular、Spring Boot、BootStrap、Jquery</p>
+<p>支持系统：Ubuntu、centos、redhat</p>
+<p><img src="https://github.com/itweet/labs/raw/master/devops/img/devops-2.png" alt></p>
+<h5 id="2-资源列表"><a href="#2-资源列表" class="headerlink" title="2 资源列表"></a>2 资源列表</h5><ul>
+<li>内网私服，提供各种package快速访问</li>
+<li>容器，提供定制的操作系统版本</li>
+<li>持续集成服务器，完成代码的自动化pull、build、test、run、push</li>
+<li>源码服务器，提供源代码托管</li>
+<li>容器镜像服务器，提供本地定制化容器镜像存储服务</li>
+<li>虚拟化测试集群，提供自动化测试所需资源</li>
+</ul>
+<p>需要5台服务器，若干台测试服务器。</p>
+<p>私服，可以通过虚拟化服务器提供，底层最好提供raid容错，防止硬盘损坏数据丢失。</p>
+<p>容器，提供本地容器平台，可以自动去中央仓库同步没有的容器镜像。</p>
+<p>虚拟化，参考：<code>我为什么弃用OpenStack转向VMware vsphere</code>。</p>
+<p>以上服务器都可以使用云主机，针对私服、源码服务器、镜像服务器底层存储使用云硬盘(带有分不知容错的存储软件)，保障数据安全。其他服务器随意使用虚拟机即可。</p>
+<p>使用5台服务器，组成一个集群，初步具备基础硬件资源，可以开始搭建软件资源。</p>
+<h5 id="3-技术选型"><a href="#3-技术选型" class="headerlink" title="3 技术选型"></a>3 技术选型</h5><p>根据技术栈和所需要的资源列表，我们完成技术选型的工作。</p>
+<p>对于持续集成平台，涉及大量的环节，我们需要优化的点很多，下面我们先完成技术的选择。</p>
+<ul>
+<li>持续集成工具，选择Jenkins</li>
+<li>容器技术，选择Docker</li>
+<li>灵活的代码版本管理工具，选择GitLab</li>
+<li>镜像管理工具，选择harbor</li>
+<li>私服，选择Jfrog</li>
+<li>虚拟化，选择vmware vsphere、openstack</li>
+<li>源码二进制管理，选择Apache</li>
+<li>任务追踪管理，选择Jira</li>
+<li>团队协作，Confluence</li>
+<li>自动化运维工具，选择SlatStack、puppet</li>
+</ul>
+<p>由于我们参与的软件是apache项目，所以我们使用<code>Atlassian</code>全家桶。</p>
+<p>同质化的产品也非常的多，我选型的过程中调用过很多软件，目前非常可喜的是大部分软件都提供<code>Docker</code>安装预览，可以体验一下功能，我主要还是选择主流的软件，或者用户体验非常好的产品，可以帮助我节省时间，毕竟我们主要的精力是研发产品。</p>
+<p>经过使用很多软件，大浪淘沙，最后剩下的都是精品。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/devops/img/nexatrace-pipeline.png" alt></p>
+<p>把这些软件很好的串联起来，可以完成企业持续集成平台的构建工作。</p>
+<p>我们内部还有一套自动化构建各种平台的软件包框架，一键构建rpm、deb软件包。还提供通过docker自动化测试软件包的正确性、一键发布软件包到线上，可以很好的把持续集成平台串联起来。</p>
+<p>通过定制Ubuntu、Centos不同版本的Docker镜像，直接自动化传参数启动不同的docker系统版本进行流水线式的自动打包发布，测试。</p>
+<p>通过钩子程序，发现有代码更新自动化的拉取最新合并的代码构建、测试、生成测试报告，邮件反馈给开发此功能的开发人员。</p>
+<p>欢迎关注微信公众号[whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/ci/">ci</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/01/05/production-env-continuous-integration-platform-part-3/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">production-env-continuous-integration-platform-part-3</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/01/02/What-is-continuous-integration-part-1/">
+        <span class="next-text nav-default">What-is-continuous-integration-part-1</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

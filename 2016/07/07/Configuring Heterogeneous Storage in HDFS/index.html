@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Configuring Heterogeneous Storage in HDFS">
+
+
+
+
+  <meta name="keywords" content="storage,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/07/07/Configuring Heterogeneous Storage in HDFS/">
+
+
+<meta name="description" content="Hadoop在2.6.0版本中引入了一个新特性异构存储.异构存储可以根据各个存储介质读写特性的不同发挥各自的优势.一个很适用的场景就是冷热数据的存储.针对冷数据,采用容量大的,读写性能不高的存储介质存储,比如最普通的Disk磁盘.而对于热数据而言,可以采用SSD的方式进行存储,这样就能保证高效的读性能,在速率上甚至能做到十倍于或百倍于普通磁盘读写的速度，甚至可以把数据直接存放内存，懒加载入hdf">
+<meta name="keywords" content="storage">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Configuring Heterogeneous Storage in HDFS">
+<meta property="og:url" content="http://itweet.github.io/2016/07/07/Configuring Heterogeneous Storage in HDFS/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Hadoop在2.6.0版本中引入了一个新特性异构存储.异构存储可以根据各个存储介质读写特性的不同发挥各自的优势.一个很适用的场景就是冷热数据的存储.针对冷数据,采用容量大的,读写性能不高的存储介质存储,比如最普通的Disk磁盘.而对于热数据而言,可以采用SSD的方式进行存储,这样就能保证高效的读性能,在速率上甚至能做到十倍于或百倍于普通磁盘读写的速度，甚至可以把数据直接存放内存，懒加载入hdf">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.504Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Configuring Heterogeneous Storage in HDFS">
+<meta name="twitter:description" content="Hadoop在2.6.0版本中引入了一个新特性异构存储.异构存储可以根据各个存储介质读写特性的不同发挥各自的优势.一个很适用的场景就是冷热数据的存储.针对冷数据,采用容量大的,读写性能不高的存储介质存储,比如最普通的Disk磁盘.而对于热数据而言,可以采用SSD的方式进行存储,这样就能保证高效的读性能,在速率上甚至能做到十倍于或百倍于普通磁盘读写的速度，甚至可以把数据直接存放内存，懒加载入hdf">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Configuring Heterogeneous Storage in HDFS - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Configuring Heterogeneous Storage in HDFS
+        
+      </h1>
+
+      <time class="post-time">
+          7月 07 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p> Hadoop在2.6.0版本中引入了一个新特性异构存储.异构存储可以根据各个存储介质读写特性的不同发挥各自的优势.一个很适用的场景就是冷热数据的存储.针对冷数据,采用容量大的,读写性能不高的存储介质存储,比如最普通的Disk磁盘.而对于热数据而言,可以采用SSD的方式进行存储,这样就能保证高效的读性能,在速率上甚至能做到十倍于或百倍于普通磁盘读写的速度，甚至可以把数据直接存放内存，懒加载入hdfs.HDFS的异构存储特性的出现使得我们不需要搭建两套独立的集群来存放冷热2类数据,在一套集群内就能完成.所以这个功能特性还是有非常大的实用意义的.下面我介绍一下异构存储的类型，以及如果灵活配置异构存储！</p>
+<ul>
+<li>超冷数据存储，非常低廉的硬盘存储 － 银行票据影像系统场景</li>
+<li>默认存储类型 － 大规模部署场景，提供顺序读写IO</li>
+<li>SSD类型存储 － 高效数据查询可视化，对外数据共享，提升性能</li>
+<li>RAM_DISK － 追求极致性能</li>
+<li>混合盘  － 一块ssd/一块hdd + n sata/n sas</li>
+</ul>
+<blockquote>
+<p>Archival Storage, SSD &amp; Memory<br>Memory Storage Support in HDFS</p>
+</blockquote>
+<h1 id="HDFS-Storage-Type"><a href="#HDFS-Storage-Type" class="headerlink" title="HDFS Storage Type"></a>HDFS Storage Type</h1><ul>
+<li><p>storage types:</p>
+<ul>
+<li><p>ARCHIVE - Archival storage is for very dense storage and is useful for rarely accessed data. This storage type is typically cheaper per TB than normal hard disks.</p>
+</li>
+<li><p>DISK - Hard disk drives are relatively inexpensive and provide sequential I/O performance. This is the default storage type.</p>
+</li>
+<li><p>SSD - Solid state drives are useful for storing hot data and I/O-intensive applications.</p>
+</li>
+<li><p>RAM_DISK - This special in-memory storage type is used to accelerate low-durability, single-replica writes.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Storage-Policies"><a href="#Storage-Policies" class="headerlink" title="Storage Policies"></a>Storage Policies</h1><ul>
+<li><p>HDFS has six preconfigured storage policies.</p>
+<ul>
+<li><p>Hot - All replicas are stored on DISK.</p>
+</li>
+<li><p>Cold - All replicas are stored ARCHIVE.</p>
+</li>
+<li><p>Warm - One replica is stored on DISK and the others are stored on ARCHIVE.</p>
+</li>
+<li><p>All_SSD - All replicas are stored on SSD.</p>
+</li>
+<li><p>One_SSD - One replica is stored on SSD and the others are stored on DISK.</p>
+</li>
+<li><p>Lazy_Persist - The replica is written to RAM_DISK and then lazily persisted to DISK.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Setting-a-Storage-Policy-for-HDFS"><a href="#Setting-a-Storage-Policy-for-HDFS" class="headerlink" title="Setting a Storage Policy for HDFS"></a>Setting a Storage Policy for HDFS</h1><ul>
+<li><p>Setting a Storage Policy for HDFS Using Ambari<br>  设置存储策略，每个Datanode 使用存储类型，在目录中声明，配置异构存储步骤：</p>
+<ul>
+<li><p>添加“dfs.storage.policy.enabled”属性，改变默认值为true</p>
+</li>
+<li><p>为每个datanode设置存储目录，声明存储类型，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dfs.storage.policy.enabled = true</span><br><span class="line"></span><br><span class="line">dfs.datanode.data.dir = [DISK]/data01/hadoop/hdfs/data,[DISK]/data03/hadoop/hdfs/data,[DISK]/data04/hadoop/hdfs/data,[DISK]/data05/hadoop/hdfs/data,[DISK]/data06/hadoop/hdfs/data,[DISK]/data07/hadoop/hdfs/data,[DISK]/data08/hadoop/hdfs/data,[DISK]/data09/hadoop/hdfs/data,[DISK]/data10/hadoop/hdfs/data,[DISK]/data11/hadoop/hdfs/data,[DISK]/data12/hadoop/hdfs/data,[DISK]/data02/hadoop/hdfs/data,[SSD]/data13/ssd/hadoop/hdfs/data,[RAM_DISK]/data14/dn-tmpfs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开启一个终端session，登陆到hdfs某个节点，切换到hdfs用户，通过如下命令设置存储策略，让hdfs目录和配置的存储策略对应,默认写即为普通盘。</p>
+<ul>
+<li>HDFS command  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs storagepolicies -setStoragePolicy -path &lt;path&gt; -policy &lt;policy&gt;</span><br><span class="line">path_to_file_or_directory -policy policy_name</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>- HDFS SSD 
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ mount /dev/nvme0n1 /data13/ssd</span><br><span class="line"></span><br><span class="line">$ hadoop fs -mkdir /ssd</span><br><span class="line">         </span><br><span class="line">$ hdfs storagepolicies -setStoragePolicy -path /ssd -policy ALL_SSD</span><br><span class="line">   Set storage policy ALL_SSD on /ssd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ hdfs storagepolicies -getStoragePolicy -path /ssd</span><br><span class="line">The storage policy of /ssd:</span><br><span class="line">BlockStoragePolicy&#123;ALL_SSD:12, storageTypes=[SSD], creationFallbacks=[DISK], replicationFallbacks=[DISK]&#125;</span><br></pre></td></tr></table></figure>
+
+
+- HDFS RAM
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir /data14/dn-tmpfs -p</span><br><span class="line"></span><br><span class="line">$ sudo mount -t tmpfs -o size=70g tmpfs /data14/dn-tmpfs</span><br><span class="line"></span><br><span class="line">$ hadoop fs -mkdir /ram</span><br><span class="line"></span><br><span class="line">$ hdfs storagepolicies -setStoragePolicy -path /ram -policy LAZY_PERSIST</span><br></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>mover存储策略对应目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs mover -p &lt;path&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>restart hadoop</p>
+</li>
+</ul>
+<h1 id="Managing-Storage-Policies"><a href="#Managing-Storage-Policies" class="headerlink" title="Managing Storage Policies"></a>Managing Storage Policies</h1><ul>
+<li>getStoragePolicy<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs storagepolicies -getStoragePolicy -path &lt;path&gt;path_to_policy</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>listPolicies<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs storagepolicies -listPolicies</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h1><ul>
+<li><p>iperf 检测主机间网络带宽 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</span><br><span class="line"></span><br><span class="line">yum install iperf -y</span><br><span class="line"></span><br><span class="line">yum install ifstatus -y</span><br></pre></td></tr></table></figure>
+<p>如下，在第一个机器启动一个监听，去另外一个服务器压测，网络带宽；可以看到网络带宽：10Gbits</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@bigdata-server-1 ~]# iperf -s</span><br><span class="line">------------------------------------------------------------</span><br><span class="line">Server listening on TCP port 5001</span><br><span class="line">TCP window size: 85.3 KByte (default)</span><br><span class="line">------------------------------------------------------------</span><br><span class="line">[  4] local 192.168.0.64 port 5001 connected with 192.168.0.64 port 51085</span><br><span class="line">[ ID] Interval       Transfer     Bandwidth</span><br><span class="line">[  4]  0.0-10.0 sec  24.8 GBytes  21.3 Gbits/sec</span><br><span class="line">[  5] local 192.168.0.64 port 5001 connected with 192.168.0.63 port 48903</span><br><span class="line">[  5]  0.0-10.0 sec  10.9 GBytes  9.38 Gbits/sec</span><br><span class="line"></span><br><span class="line">[root@bigdata-server-2 ~]# iperf -c bigdata-server-1</span><br><span class="line">------------------------------------------------------------</span><br><span class="line">Client connecting to bigdata-server-1, TCP port 5001</span><br><span class="line">TCP window size: 19.3 KByte (default)</span><br><span class="line">------------------------------------------------------------</span><br><span class="line">[  3] local 192.168.0.63 port 48903 connected with 192.168.0.64 port 5001</span><br><span class="line">[ ID] Interval       Transfer     Bandwidth</span><br><span class="line">[  3]  0.0-10.0 sec  10.9 GBytes  9.38 Gbits/sec</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>hdfs NFSGateway<br>把hdfs通过它提供的gateway接口mount到Linux本地，往里面dd压测，看性能表现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@bigdata-server-1 ~]# mkdir /hdfs</span><br><span class="line">[root@bigdata-server-1 ~]# mount -t nfs -o vers=3,proto=tcp,nolock localhost:/ /hdfs</span><br><span class="line"></span><br><span class="line">[hdfs@bigdata-server-1 hdfs]$ dd if=/dev/zero of=/hdfs/test/test004 bs=10M count=1000</span><br><span class="line">记录了1000+0 的读入</span><br><span class="line">记录了1000+0 的写出</span><br><span class="line">10485760000字节(10 GB)已复制，122.15 秒，85.8 MB/秒</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>hdfs fuse</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ yum install hadoop_2_3_4_0_3485-hdfs-fuse.x86_64</span><br><span class="line"></span><br><span class="line">$ mkdir /mnt/hdfs</span><br><span class="line"></span><br><span class="line">[hdfs@bigdata-server-1 bin]$ ./hadoop-fuse-dfs hadoop-fuse-dfs#dfs://bigdata-server-1:8020 /mnt/hdfs fuse allow_other,usetrash,rw 2 0</span><br><span class="line">  ./hadoop-fuse-dfs: line 7: /usr/lib/bigtop-utils/bigtop-detect-javahome: No such file or directory</span><br><span class="line">  ./hadoop-fuse-dfs: line 18: /usr/lib/bigtop-utils/bigtop-detect-javalibs: No such file or directory</span><br><span class="line">  /usr/hdp/2.3.4.0-3485/hadoop/bin/fuse_dfs: error while loading shared libraries: libjvm.so: cannot open shared object file: No such file or directory</span><br><span class="line"></span><br><span class="line">[hdfs@bigdata-server-1 hdfs]$ tail -2 /etc/profile</span><br><span class="line">export LD_LIBRARY_PATH=/usr/hdp/current/hadoop-client/bin/../lib:/usr/hdp/2.3.4.0-3485/usr/lib:/usr/jdk64/jdk1.7.0_67/jre/lib/amd64/server</span><br><span class="line">export PATH=.:/usr/hdp/current/hadoop-client/bin:$PATH</span><br><span class="line"></span><br><span class="line">[hdfs@bigdata-server-1 hdfs]$ hadoop-fuse-dfs hadoop-fuse-dfs#dfs://localhost:8020 /mnt/hdfs</span><br><span class="line"></span><br><span class="line">[hdfs@bigdata-server-1 hdfs]$ df -h|tail -1</span><br><span class="line"> fuse_dfs                          177T  575G  176T   1% /mnt/hdfs</span><br><span class="line"></span><br><span class="line">[hdfs@bigdata-server-1 hdfs]$ dd if=/dev/zero of=/mnt/hdfs/test004 bs=10M count=1000</span><br><span class="line">记录了1000+0 的读入</span><br><span class="line">记录了1000+0 的写出</span><br><span class="line">10485760000字节(10 GB)已复制，64.8231 秒，162 MB/秒</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单盘ssd,sata性能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@bigdata-server-1 ssd]# dd if=/dev/zero of=/data12/test004 bs=1M count=100000</span><br><span class="line"></span><br><span class="line">记录了100000+0 的读入</span><br><span class="line">记录了100000+0 的写出</span><br><span class="line">104857600000字节(105 GB)已复制，458.219 秒，229 MB/秒</span><br><span class="line"></span><br><span class="line">[root@bigdata-server-1 ~]# dd if=/dev/zero of=/data13/ssd/test004 bs=1M count=100000</span><br><span class="line">记录了100000+0 的读入</span><br><span class="line">记录了100000+0 的写出</span><br><span class="line">104857600000字节(105 GB)已复制，78.6155 秒，1.3 GB/秒</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>iostat<br>常见用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iostat -d -k 1 5         查看磁盘吞吐量等信息。</span><br><span class="line">iostat -d -x -k 1 5     查看磁盘使用率、响应时间等信息</span><br><span class="line">iostat –x 1 5            查看cpu信息。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DFSTestIO</p>
+<ul>
+<li><p>SSD</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ time hadoop jar hadoop-mapreduce-client-jobclient-tests.jar TestDFSIO -Dtest.build.data=/ssd -write -nrFiles 4 -fileSize 50000</span><br><span class="line"></span><br><span class="line">$ time hadoop jar hadoop-mapreduce-client-jobclient-tests.jar TestDFSIO -Dtest.build.data=/ssd -read -nrFiles 4 -fileSize 50000</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>SATA</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ time hadoop jar hadoop-mapreduce-client-jobclient-tests.jar TestDFSIO -Dtest.build.data=/sata -write -nrFiles 4 -fileSize 50000</span><br><span class="line"></span><br><span class="line">$ time hadoop jar hadoop-mapreduce-client-jobclient-tests.jar TestDFSIO -Dtest.build.data=/sata -read -nrFiles 4 -fileSize 50000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>RAM</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ time hadoop jar hadoop-mapreduce-client-jobclient-tests.jar TestDFSIO -Dtest.build.data=/ram -write -nrFiles 4 -fileSize 50000</span><br><span class="line"></span><br><span class="line">$ time hadoop jar hadoop-mapreduce-client-jobclient-tests.jar TestDFSIO -Dtest.build.data=/ram -read -nrFiles 4 -fileSize 50000</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="hdfs-fuse-vs-hdfs-put-vs-hdfs-NFSGateway"><a href="#hdfs-fuse-vs-hdfs-put-vs-hdfs-NFSGateway" class="headerlink" title="hdfs-fuse vs hdfs-put vs hdfs-NFSGateway"></a>hdfs-fuse vs hdfs-put vs hdfs-NFSGateway</h1><blockquote>
+<p>单文件上传性能对比</p>
+</blockquote>
+<ul>
+<li><p>文件大小：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hdfs@bigdata-server-1 ~]$ du -sh /data02/test004 </span><br><span class="line">9.8G    /data02/test004</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>hdfs-put:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[hdfs@bigdata-server-1 ~]$ time hadoop fs -put /data02/test004 /tmp/</span><br><span class="line"></span><br><span class="line">real    0m32.639s</span><br><span class="line">user    0m29.273s</span><br><span class="line">sys 0m14.303s</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>hdfs-fuse:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[hdfs@bigdata-server-1 ~]$ time cp /data02/test004 /mnt/hdfs/</span><br><span class="line"></span><br><span class="line">real    1m17.294s</span><br><span class="line">user    0m0.167s</span><br><span class="line">sys 0m16.060s</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>hdfs-nfsgateway</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[hdfs@bigdata-server-1 ~]$ time cp /data02/test004 /hdfs/</span><br><span class="line"></span><br><span class="line">real    1m58.294s</span><br><span class="line">user    0m0.167s</span><br><span class="line">sys 0m16.060s</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="MapReduce-Performance-on-SSDs-SATA-RAM-SSD-SATA"><a href="#MapReduce-Performance-on-SSDs-SATA-RAM-SSD-SATA" class="headerlink" title="MapReduce Performance on SSDs/SATA/RAM/SSD-SATA"></a>MapReduce Performance on SSDs/SATA/RAM/SSD-SATA</h1><p> 测试hdfs异构存储性能结果白皮书，后续内容发布…</p>
+<h1 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h1><ul>
+<li>1、ambari Version 2.2.2.0 和 HDP-2.4.2.0-258 版本，安装后配置多种异构存储类型，［RAM_DISK］方式ambari配置界面验证失败，无法通过！此为一个bug!<ul>
+<li>详情访问：<a href="https://issues.apache.org/jira/browse/AMBARI-14605" target="_blank" rel="noopener">https://issues.apache.org/jira/browse/AMBARI-14605</a></li>
+</ul>
+</li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><p>Configuring Heterogeneous Storage in HDFS: <a href="https://www.cloudera.com/documentation/enterprise/latest/topics/admin_heterogeneous_storage_oview.html#admin_heterogeneous_storage_config" target="_blank" rel="noopener">https://www.cloudera.com/documentation/enterprise/latest/topics/admin_heterogeneous_storage_oview.html#admin_heterogeneous_storage_config</a></p>
+</li>
+<li><p>The Truth About MapReduce Performance on SSDs: <a href="http://blog.cloudera.com/blog/2014/03/the-truth-about-mapreduce-performance-on-ssds/" target="_blank" rel="noopener">http://blog.cloudera.com/blog/2014/03/the-truth-about-mapreduce-performance-on-ssds/</a></p>
+</li>
+<li><p>Memory Storage Support in HDFS: <a href="http://aajisaka.github.io/hadoop-project/hadoop-project-dist/hadoop-hdfs/MemoryStorage.html" target="_blank" rel="noopener">http://aajisaka.github.io/hadoop-project/hadoop-project-dist/hadoop-hdfs/MemoryStorage.html</a></p>
+</li>
+<li><p>Archival Storage, SSD &amp; Memory: <a href="http://aajisaka.github.io/hadoop-project/hadoop-project-dist/hadoop-hdfs/ArchivalStorage.html" target="_blank" rel="noopener">http://aajisaka.github.io/hadoop-project/hadoop-project-dist/hadoop-hdfs/ArchivalStorage.html</a></p>
+</li>
+<li><p>How to configure storage policy in Ambari?: <a href="https://community.hortonworks.com/questions/2288/how-to-configure-storage-policy-in-ambari.html" target="_blank" rel="noopener">https://community.hortonworks.com/questions/2288/how-to-configure-storage-policy-in-ambari.html</a></p>
+</li>
+<li><p>Using NFS with Ambari 2.1 and above: <a href="https://community.hortonworks.com/questions/301/using-nfs-with-ambari-21.html" target="_blank" rel="noopener">https://community.hortonworks.com/questions/301/using-nfs-with-ambari-21.html</a></p>
+</li>
+<li><p>Disaster recovery and Backup best practices in a typical Hadoop Cluster:<a href="https://community.hortonworks.com/articles/43575/disaster-recovery-and-backup-best-practices-in-a-t-1.html" target="_blank" rel="noopener">https://community.hortonworks.com/articles/43575/disaster-recovery-and-backup-best-practices-in-a-t-1.html</a></p>
+</li>
+</ul>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/storage/">storage</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/08/09/openstack image guide /">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">openstack image guide</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/07/06/Running MapReduce Example Programs and Benchmarks/">
+        <span class="next-text nav-default">Running MapReduce Example Programs and Benchmarks</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

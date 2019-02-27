@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="kubernetes-cluster-install">
+
+
+
+
+  <meta name="keywords" content="kubernates,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/08/14/kubernetes-cluster-install/">
+
+
+<meta name="description" content="Install Kubernetes which is the Orchestration System for Docker Containers.For example, Configure Kubernetes Cluster with 1 Admon Node and 3 Container Node like follows. Centos 7.2 Own  kubernetes yum">
+<meta name="keywords" content="kubernates">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kubernetes-cluster-install">
+<meta property="og:url" content="http://itweet.github.io/2016/08/14/kubernetes-cluster-install/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Install Kubernetes which is the Orchestration System for Docker Containers.For example, Configure Kubernetes Cluster with 1 Admon Node and 3 Container Node like follows. Centos 7.2 Own  kubernetes yum">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.506Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kubernetes-cluster-install">
+<meta name="twitter:description" content="Install Kubernetes which is the Orchestration System for Docker Containers.For example, Configure Kubernetes Cluster with 1 Admon Node and 3 Container Node like follows. Centos 7.2 Own  kubernetes yum">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> kubernetes-cluster-install - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          kubernetes-cluster-install
+        
+      </h1>
+
+      <time class="post-time">
+          8月 14 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Install Kubernetes which is the Orchestration System for Docker Containers.<br>For example, Configure Kubernetes Cluster with 1 Admon Node and 3 Container Node like follows.</p>
+<p>Centos 7.2 Own  kubernetes yum source,so yum install kubernetes,docker Because of the dependencies,Automatic installation!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">									192.168.2.120</span><br><span class="line">		                       +---------------------+</span><br><span class="line">		                       | [   Admin Node    ] |</span><br><span class="line">		                       |kubernetes-controller|</span><br><span class="line">		                       |                     |</span><br><span class="line">		                       +----------+----------+</span><br><span class="line">                                  	      |</span><br><span class="line">+----------------------+                  |          	     +----------------------+  </span><br><span class="line">| [ kubernetes-node-1] | 192.168.2.121    |   192.168.2.122  |[ kubernetes-node-2 ] |</span><br><span class="line">|        node-1        +------------------+------------------+         node-2       |</span><br><span class="line">|                      |                  |  		         |                      |</span><br><span class="line">+----------------------+                  |   		         +----------------------+</span><br><span class="line">										  |</span><br><span class="line">							   +----------+-----------+  </span><br><span class="line">							   | [ kubernetes-node-3] |</span><br><span class="line">							   |        node-3        |</span><br><span class="line">							   |                      |</span><br><span class="line">							   +----------------------+ </span><br><span class="line">							   	    192.168.2.123</span><br></pre></td></tr></table></figure>
+<h1 id="Init-all-machine"><a href="#Init-all-machine" class="headerlink" title="Init all machine"></a>Init all machine</h1><p>[1] Master Node<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop firewalld &amp;&amp; sudo systemctl disable firewalld</span><br><span class="line">sudo yum install -y ntp.x86_64</span><br></pre></td></tr></table></figure></p>
+<p>[2] all slave Node<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop firewalld &amp;&amp; sudo systemctl disable firewalld</span><br><span class="line">sudo yum install -y ntp.x86_64</span><br></pre></td></tr></table></figure></p>
+<h1 id="Configure-Admon-Node-on-this-section"><a href="#Configure-Admon-Node-on-this-section" class="headerlink" title="Configure Admon Node on this section."></a>Configure Admon Node on this section.</h1><p>[1]    Install required packages.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-controller ~]# yum -y install kubernetes etcd flannel</span><br></pre></td></tr></table></figure>
+<p>[2]    Configure Kubernetes.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"># generate RSA key</span><br><span class="line">[root@kubernetes-controller ~]# openssl genrsa -out /etc/kubernetes/service.key 2048</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]#  vi /etc/kubernetes/controller-manager</span><br><span class="line"># line 7: add</span><br><span class="line">KUBE_CONTROLLER_MANAGER_ARGS=&quot;--service_account_private_key_file=/etc/kubernetes/service.key&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# vi /etc/kubernetes/apiserver</span><br><span class="line"></span><br><span class="line">#line 8:change</span><br><span class="line">KUBE_API_ADDRESS=&quot;--address=0.0.0.0&quot;</span><br><span class="line"></span><br><span class="line"># line 17: change to Admin Node&apos;s hostname or IP address</span><br><span class="line">KUBE_ETCD_SERVERS=&quot;--etcd-servers=http://kubernetes-controller:2379&quot;</span><br><span class="line"></span><br><span class="line"># line 20: IP range for Kubernetes service (change it if need)</span><br><span class="line">KUBE_SERVICE_ADDRESSES=&quot;--service-cluster-ip-range=10.254.0.0/16&quot;</span><br><span class="line"></span><br><span class="line"># line 26: add</span><br><span class="line">KUBE_API_ARGS=&quot;--service_account_key_file=/etc/kubernetes/service.key&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# vi /etc/etcd/etcd.conf</span><br><span class="line"></span><br><span class="line"># line 8: uncomment</span><br><span class="line">ETCD_LISTEN_PEER_URLS=&quot;http://localhost:2380&quot;</span><br><span class="line"></span><br><span class="line"># line 9: add etcd Host&apos;s hostname or IP address</span><br><span class="line">ETCD_LISTEN_CLIENT_URLS=&quot;http://kubernetes-controller:2379,http://localhost:2379&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]#  vi /etc/kubernetes/config</span><br><span class="line"></span><br><span class="line"># line 22: change to Admin Node&apos;s hostname or IP address</span><br><span class="line">KUBE_MASTER=&quot;--master=http://kubernetes-controller:8080&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# systemctl start etcd kube-apiserver kube-controller-manager kube-scheduler ntpd</span><br><span class="line">[root@kubernetes-controller ~]# systemctl enable etcd kube-apiserver kube-controller-manager kube-scheduler ntpd</span><br></pre></td></tr></table></figure></p>
+<p>[3]    Configure Flannel networking.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># create new file</span><br><span class="line"># specify network range you like which is used inside Container Nodes</span><br><span class="line">[root@kubernetes-controller ~]# vi flannel-config.json</span><br><span class="line"> &#123;</span><br><span class="line">  &quot;Network&quot;:&quot;172.16.0.0/16&quot;,</span><br><span class="line">  &quot;SubnetLen&quot;:24,</span><br><span class="line">  &quot;Backend&quot;:&#123;</span><br><span class="line">    &quot;Type&quot;:&quot;vxlan&quot;,</span><br><span class="line">    &quot;VNI&quot;:1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# vi /etc/sysconfig/flanneld</span><br><span class="line"></span><br><span class="line"># line 4: change to Flannel Host&apos;s hostname or IP address</span><br><span class="line">FLANNEL_ETCD=&quot;http://kubernetes-controller:2379&quot;</span><br><span class="line"></span><br><span class="line"># line 8: confirm the parameter</span><br><span class="line">FLANNEL_ETCD_KEY=&quot;/atomic.io/network&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# etcdctl set atomic.io/network/config &lt; flannel-config.json </span><br><span class="line">[root@kubernetes-controller ~]# etcdctl get atomic.io/network/config</span><br><span class="line"> &#123;</span><br><span class="line">  &quot;Network&quot;:&quot;172.16.0.0/16&quot;,</span><br><span class="line">  &quot;SubnetLen&quot;:24,</span><br><span class="line">  &quot;Backend&quot;:&#123;</span><br><span class="line">    &quot;Type&quot;:&quot;vxlan&quot;,</span><br><span class="line">    &quot;VNI&quot;:1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# systemctl start flanneld ntpd</span><br><span class="line">[root@kubernetes-controller ~]# systemctl enable flanneld  ntpd</span><br></pre></td></tr></table></figure></p>
+<p>[4]    Make sure th settings. It’s OK if following result is displayed.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-controller ~]# kubectl cluster-info </span><br><span class="line">Kubernetes master is running at http://localhost:8080</span><br></pre></td></tr></table></figure></p>
+<h1 id="Configure-Container-Node-on-this-section"><a href="#Configure-Container-Node-on-this-section" class="headerlink" title="Configure Container Node on this section."></a>Configure Container Node on this section.</h1><p>[1]    <a href="https://jikelab.github.io/tech-labs/2016/08/13/docker-install/" target="_blank" rel="noopener">Install and Start Docker service on All Nodes, refer to here.</a></p>
+<p>[2]    Install Kubernetes and Flannel on All Nodes.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-node-1 ~]# yum -y install kubernetes flannel</span><br></pre></td></tr></table></figure></p>
+<p>[3]    Configure Kubernetes on all Nodes like follows.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-node-1 ~]# vi /etc/kubernetes/config</span><br><span class="line"># line 22: change to Admin Node&apos;s hostname or IP address</span><br><span class="line">KUBE_MASTER=&quot;--master=http://kubernetes-controller:8080&quot;</span><br><span class="line"></span><br><span class="line">[root@kubernetes-node-1 ~]# vi /etc/kubernetes/kubelet</span><br><span class="line"># line 5: change</span><br><span class="line">KUBELET_ADDRESS=&quot;--address=0.0.0.0&quot;</span><br><span class="line"></span><br><span class="line"># line 11: change to own hostname</span><br><span class="line">KUBELET_HOSTNAME=&quot;--hostname-override=kubernetes-node-1&quot;</span><br><span class="line"></span><br><span class="line"># line 14: change to Admin Node&apos;s hostname or IP address</span><br><span class="line">KUBELET_API_SERVER=&quot;--api-servers=http://kubernetes-controller:8080&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@kubernetes-node-1 ~]# vi /etc/sysconfig/flanneld</span><br><span class="line"># line 4: change to Admin Node&apos;s hostname or IP address</span><br><span class="line">FLANNEL_ETCD=&quot;http://kubernetes-controller:2379&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># stop docker0 interface</span><br><span class="line">[root@kubernetes-node-1 ~]# nmcli c down docker0 </span><br><span class="line">Connection &apos;docker0&apos; successfully deactivated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/1)</span><br><span class="line"></span><br><span class="line">[root@kubernetes-node-1 ~]# systemctl start flanneld kube-proxy kubelet ntpd</span><br><span class="line">[root@kubernetes-node-1 ~]# systemctl enable flanneld kube-proxy kubelet ntpd</span><br><span class="line">[root@kubernetes-node-1 ~]# systemctl restart docker</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>node-1 node add kubernetes get nodes status</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-controller ~]# kubectl get nodes </span><br><span class="line">NAME                STATUS    AGE</span><br><span class="line">kubernetes-node-1   Ready     1m</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2 nodes add kubernetes get node status</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-controller ~]# kubectl get nodes </span><br><span class="line">NAME                STATUS    AGE</span><br><span class="line">kubernetes-node-1   Ready     8m</span><br><span class="line">kubernetes-node-2   Ready     1m</span><br></pre></td></tr></table></figure>
+<p>[4]    Make sure th settings. It’s OK if the status of each node is Ready like follows.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-controller ~]#  kubectl get nodes</span><br><span class="line">NAME                STATUS    AGE</span><br><span class="line">kubernetes-node-1   Ready     37m</span><br><span class="line">kubernetes-node-2   Ready     30m</span><br><span class="line">kubernetes-node-3   Ready     22m</span><br></pre></td></tr></table></figure></p>
+<p>[5] 时间不同步会导致如下问题,同步主节点时间，重启服务即可解决：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-controller ~]# kubectl get nodes</span><br><span class="line">NAME                STATUS     AGE</span><br><span class="line">kubernetes-node-1   Ready      5h</span><br><span class="line">kubernetes-node-2   NotReady   5h</span><br><span class="line">kubernetes-node-3   NotReady   5h</span><br></pre></td></tr></table></figure></p>
+<p>时间一致性对于分布式应用程序来说，至关重要，稍有不慎导致，整个集群不可用，我就遇到很奇葩的问题，基础镜像源无法下载，待我同步所有节点时间重启所有服务之后居然，下载下来了。真奇怪，得多看看代码实现吧！不然就是一个黑盒子！难看透！后续章节创建pods就遇到时间不同步导致的问题！</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/kubernates/">kubernates</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/08/15/kubernetes-create-pods/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">kubernetes-create-pods</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/08/14/如何在CentOS上安装配置ownCloud/">
+        <span class="next-text nav-default">如何在CentOS上安装配置ownCloud</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

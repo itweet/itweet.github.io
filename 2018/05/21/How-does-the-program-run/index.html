@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="How does the program run">
+
+
+
+
+  <meta name="keywords" content="2018,program,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2018/05/21/How-does-the-program-run/">
+
+
+<meta name="description" content="我曾计划通过阅读论文和经典计算机书籍，来深入理解计算机科学技术。我最近在看的一本《程序是如何跑起来的》，整本书对于刚入门计算机和有经验的工程师，都非常有帮助。 如果你想了解，计算机基本原理，操作系统、程序是如何与硬件结合运行起来，解决实际问题，那么这本书特别合适，而且整本书通俗易懂，作者意在通过最简单的描述，来向普通人描述计算机的本质。 因为，书中使用的很多示例代码是C语言，如果想要Run里面的示">
+<meta name="keywords" content="2018,program">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How does the program run">
+<meta property="og:url" content="http://itweet.github.io/2018/05/21/How-does-the-program-run/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="我曾计划通过阅读论文和经典计算机书籍，来深入理解计算机科学技术。我最近在看的一本《程序是如何跑起来的》，整本书对于刚入门计算机和有经验的工程师，都非常有帮助。 如果你想了解，计算机基本原理，操作系统、程序是如何与硬件结合运行起来，解决实际问题，那么这本书特别合适，而且整本书通俗易懂，作者意在通过最简单的描述，来向普通人描述计算机的本质。 因为，书中使用的很多示例代码是C语言，如果想要Run里面的示">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/run-progrom.png">
+<meta property="og:image" content="https://itweet.cn/screenshots/ai-application.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.538Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How does the program run">
+<meta name="twitter:description" content="我曾计划通过阅读论文和经典计算机书籍，来深入理解计算机科学技术。我最近在看的一本《程序是如何跑起来的》，整本书对于刚入门计算机和有经验的工程师，都非常有帮助。 如果你想了解，计算机基本原理，操作系统、程序是如何与硬件结合运行起来，解决实际问题，那么这本书特别合适，而且整本书通俗易懂，作者意在通过最简单的描述，来向普通人描述计算机的本质。 因为，书中使用的很多示例代码是C语言，如果想要Run里面的示">
+<meta name="twitter:image" content="https://jikelab.github.io/tech-labs/screenshots/run-progrom.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> How does the program run - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          How does the program run
+        
+      </h1>
+
+      <time class="post-time">
+          5月 21 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>我曾计划通过阅读论文和经典计算机书籍，来深入理解计算机科学技术。我最近在看的一本《程序是如何跑起来的》，整本书对于刚入门计算机和有经验的工程师，都非常有帮助。</p>
+<p>如果你想了解，计算机基本原理，操作系统、程序是如何与硬件结合运行起来，解决实际问题，那么这本书特别合适，而且整本书通俗易懂，作者意在通过最简单的描述，来向普通人描述计算机的本质。</p>
+<p>因为，书中使用的很多示例代码是C语言，如果想要Run里面的示例代码，建议简单了解一下C语言。</p>
+<p>整本书介绍CPU、二进制、内存构造、内存与磁盘、压缩数据、程序运行环境、磁盘构造、源文件、可执行文件、操作系统与应用、汇编语言、硬件控制等比较系统的介绍计算机程序的一生，大部分内容虽然属于科普，但是对于理解整个计算机脉络非常有帮助。</p>
+<p>特别是想深入计算机某个领域的人，无疑提供一个全局视角。</p>
+<p>我特别喜欢描述关于程序最终是如何跑在硬件服务器上相关本质的解释，使用了大量的图示接合实例深入的剖析了计算机的本质。细微到数据存储、内存、CPU、GPU如何相互配合工作，宏大到整体设计。</p>
+<p>我认为这是一本很经典的计算机书籍，人类总是对于未知充满好奇和恐惧，很多把计算机某些细节的知识看的很神秘高深的人来说，这是了解全局计算机本质的机会。</p>
+<p>今天推荐《程序是如何跑起来的》。</p>
+<p>读书笔记来一波。</p>
+<p>关于OS</p>
+<blockquote>
+<p>os是一个大型程序，在硬件启动的时候BIOS内置在硬件中的程序负责初始化OS。</p>
+</blockquote>
+<p>关于BIOS</p>
+<blockquote>
+<p>BIOS是英文Basic Input Output System的缩写，翻译过来就是“基本的输入输出系统”。它的作用就是对计算机硬件的设置和管理。BIOS是一个程序，固化于主板的ROM芯片。</p>
+</blockquote>
+<p>关于BIOS作用</p>
+<blockquote>
+<p>基本输入输出程序|系统信息设置、开机上电自检程序、系统启动自举程序。比如：加电自检及初始化、引导程序、程序服务处理、硬件中断处理。计算机的性能和BIOS息息相关。</p>
+</blockquote>
+<p>关于数据压缩</p>
+<blockquote>
+<p>其实就是数据存储的方式，默认存储模式不够满足各种显示需求，而发明出来新的压缩算法，帮助更好的管理和使用数据。比如：摩尔斯编码、哈夫曼算法、RLE压缩算法。(Tree算法)</p>
+</blockquote>
+<p>关于编译</p>
+<blockquote>
+<p>源代码是无法直接运行的，这是因为，CPU能直接解析并运行的不是源代码而是本地代码的程序。本地（native）代码，对于CPU来说，母语就是机器语言，而通过编译转换成机器语言的程序就是本地代码。用任何编程语言写的源代码，最后都要翻译成本地代码，否则CPU就无法理解。也就是说，即使使用不同编程语言编写的代码，转换成本地代码后，也都变成用同一种语言来表示了。</p>
+</blockquote>
+<p>关于编译器</p>
+<blockquote>
+<p>不同编程语言(高级语言) -&gt; 同样的编程语言(native代码) -&gt; CPU解析运行。<br>目前主流编译器：1. C/C++编译器 2. JAVA编译器。<br>C/C++编译器，源代码 -&gt; OS环境 -&gt; native代码 -&gt; CPU解析运行。<br>JAVA编译器，源代码 -&gt; OS环境 -&gt; 字节码 -&gt; 解析器 -&gt; native代码 -&gt; CPU解析运行。</p>
+</blockquote>
+<p>关于全栈程序员</p>
+<blockquote>
+<p>书中有提到全面程序员，1.掌握基本硬件知识 2.操作系统的基本原理 =&gt; 提高编程效率。</p>
+</blockquote>
+<p>关于加载到内存的程序</p>
+<blockquote>
+<p>加载到内存中的程序由4部分组成：内存（用于操作系统的内存、程序使用的内存），程序使用的内存：复制EXE文件[用于变量的空间、用于函数的空间] 程序运行时分配 [用于栈的空间、用于堆的空间]。</p>
+</blockquote>
+<p>关于操作系统</p>
+<blockquote>
+<p>操作系统也称为基础软件，操作系统是计算机运行时不可或缺的控制程序，以及在控制程序下运转的为其他软件运行提供操作系统环境的软件的统称。在操作系统上运行的应用称为“应用程序”<br>在计算机中尚不存在操作系统的年代，完全没有任何程序，因此程序员就需要编写出力相关的所有程序。用机器语言编写程序，然后在使用开关将程序输入，这一过程非常麻烦。于是，有人开发出了仅具有加载和运行功能的<code>监控程序</code>，这就是操作系统的原型。<br>通过事先启动监控程序，程序员就可以根据需要将各种程序加载到内存中运行。虽然依旧比较麻烦，但是比起在没有任何程序的状态下进行开发。工作量得到很大的缓解，用今天的话来说就是动态加载程序liberty，各种开发库可以帮助快速构建应用，解决实际问题。<br>随着liberty的丰富，开发门槛变得越来越低，促成了今天繁荣的程序员职业。</p>
+</blockquote>
+<blockquote>
+<p>随着时代的发展，人们在利用监控程序编写程序的过程中，发现很多程序都有共同的部分。例如：通过键盘输入文字数据、往显示器输出文字数据等。这些处理，在任何程序下都是一样的。而如果每个编写的新程序都要记述相同的处理的话，那真是太浪费时间了。因此，基本的输入输出部分的程序就被追加到了监控程序中。初期的操作系统就这样诞生了。</p>
+</blockquote>
+<blockquote>
+<p>初期的操作系统 = 监控程序 + 基本输入输出程序</p>
+</blockquote>
+<blockquote>
+<p>之后，随着时代的进一步发展，开始有更多的功能被追加到监控程序中，比如，为了方便程序员控制硬件、编程语言处理器(汇编、编译、解析)以及各种实用程序等，结果就形成了和现在相差不大的操作系统。因此，操作系统本身并不是单独的程序，而是多个程序的集合体。</p>
+</blockquote>
+<blockquote>
+<p>操作系统是多个程序的集合体：1.控制程序 (硬件控制、程序运行控制) 2.编程语言处理器 (汇编、编译、解析) 3. 实用程序 (文本编辑器、调试工具、Dump程序)</p>
+</blockquote>
+<p>关于监控程序</p>
+<blockquote>
+<p>早期操作系统的原型，主要由：1.监控程序 （加载程序、运行程序[程序1 -&gt; 加载 -&gt; 运行 &amp; 程序2 -&gt; 加载 -&gt; 运行]） 2.基本的输入输出程序 （通过键盘输入、输出到显示器等）</p>
+</blockquote>
+<p>关于操作系统学习</p>
+<blockquote>
+<p>程序员在开发应用程序的时候，需要意意识到你们是利用操作系统的功能的应用。虽然对于程序员来说，掌握硬件的基本知识是必须的，不过，在操作系统 诞生一回来，就没有必要在去编写直接的控制硬件的程序了。这样一来，制作应用程序的程序员就逐渐和硬件隔离开来，也就是说，程序员是很少关注现实世界（硬件）的。</p>
+</blockquote>
+<blockquote>
+<p>因为操作系统的诞生，程序员无需考虑硬件问题。因此程序员的数量也增加了。哪怕是自称对硬件一窍不通的人，也可能会制作出一个有模有样的应用。不过，要想成为一个全面的程序员，有一点需要清楚的是，掌握基本的硬件知识，并借助操作系统进行抽象化，可以大大提高编程效率。<br>否则，遇到问题时，你就无法找到解决办法。操作系统确实为程序员提供了很多方便。不过享受方便是不行的，还需要了解为什么自己能够这么方便。了解了这一点，就可以尽情地享受方便了。</p>
+</blockquote>
+<blockquote>
+<p>如果要深入理解计算机科学，那么就需要学习计算机历史，通过计算机历史，可以一窥各个技术变化的重大转折点，也能更好的理解一个事物发展的过程和完善的过程，为何这样设计，为了解决那些问题？带来那些新的问题？<br>只有了解前因后果才能更好的使用和掌握技术，帮助现实生活解决更多问题，无论是工作和学习都异常重要。</p>
+</blockquote>
+<p>关于反汇编</p>
+<blockquote>
+<p>用汇编语言编写的源代码，和本地代码是一一对应的。因而，本地代码也可以反过来转化成汇编语言的源代码。持有该功能的逆变换程序成为反汇编程序，逆变换这一处理本身成为反汇编。</p>
+</blockquote>
+<p>关于应用程序 </p>
+<blockquote>
+<p>应用程序经过os间接地控制硬件。应用程序 =&gt; 利用os的功能 =&gt; 有操作系统的基本输入输出程序 =&gt; 控制硬件 =&gt; 1.实时时钟 2.显示器I/O</p>
+</blockquote>
+<p><img src="https://jikelab.github.io/tech-labs/screenshots/run-progrom.png" alt></p>
+<p>关于，程序是怎么跑起来的涉及，操作系统、高级编程语言、汇编语言、本地代码(native code)、内存构造、磁盘构造、CPU硬件、数据压缩、编译器、解析器等概念。深入浅出的解释了计算机基本原理，通过对程序运行示例的剖析和验证，逐步说明计算机的基本原理。</p>
+<p>计算机科学：</p>
+<ul>
+<li><p>I/O端口的输入输出，中断处理 =&gt; 硬件控制方法。</p>
+</li>
+<li><p>用程序表示人类思考的方式 =&gt; AI</p>
+</li>
+</ul>
+<p><img src="https://itweet.cn/screenshots/ai-application.png" alt="AI"></p>
+<p>从全局的角度来看待问题，程序就是一系列的input -&gt; output过程，在整个过程中数据根据不同的策略而发生着改变，被应用于各种生产应用程序中，辅助人们更好的了解自己服务别人。我们都在探索的道路上。</p>
+<p>而今天人工智能AI，就是利用程序表示人类思考的方式，即AI应用，通过AI应用，只需要既定的几个条件和因素，它可以自己学习，是一个auto的过程，特别是需要大量人力参与的工作，可以释放大量繁复的工作，让人们专注于创新和自己热爱的领域，比如：太空探索、星际移民，让普通人也能参与，而不是政府行为，目前人们太忙了，局限一个狭窄的领域，探索未来的人太少，我们需要通过AI赋予机器只能，帮助我们更好的服务我们，我们才有个更多精力探索未知世界。</p>
+<p>欢迎关注微信公众号[Whoami]，阅读更多内容。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/2018/">2018</a>
+		  
+			<a href="/tags/program/">program</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/06/12/create-personal-space/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Macbook打造舒适的个人工作空间？</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/05/10/Macbook-Pro-Development-environment-preparation/">
+        <span class="next-text nav-default">MacBook Pro开发环境配置指南</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

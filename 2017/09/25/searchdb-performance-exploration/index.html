@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="searchdb-performance-exploration">
+
+
+
+
+  <meta name="keywords" content="searchdb,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/09/25/searchdb-performance-exploration/">
+
+
+<meta name="description" content="分布式搜索数据库产品，能满足很多企业高速检索的业务场景，海量的单表数据秒级搜索和全文检索，完全支持SQL语法，支持数据的增删改查，兼容MySQL/PostgreSQL协议，企业级分布式搜索数据库解决海量数据检索问题。 环境准备必须修改如下相关的配置文件，不然会无法正常启动集群。 1234567891011vi /etc/sysctl.confvm.max_map_count=262144sysct">
+<meta name="keywords" content="searchdb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="searchdb-performance-exploration">
+<meta property="og:url" content="http://itweet.github.io/2017/09/25/searchdb-performance-exploration/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="分布式搜索数据库产品，能满足很多企业高速检索的业务场景，海量的单表数据秒级搜索和全文检索，完全支持SQL语法，支持数据的增删改查，兼容MySQL/PostgreSQL协议，企业级分布式搜索数据库解决海量数据检索问题。 环境准备必须修改如下相关的配置文件，不然会无法正常启动集群。 1234567891011vi /etc/sysctl.confvm.max_map_count=262144sysct">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/crate-performance.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.524Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="searchdb-performance-exploration">
+<meta name="twitter:description" content="分布式搜索数据库产品，能满足很多企业高速检索的业务场景，海量的单表数据秒级搜索和全文检索，完全支持SQL语法，支持数据的增删改查，兼容MySQL/PostgreSQL协议，企业级分布式搜索数据库解决海量数据检索问题。 环境准备必须修改如下相关的配置文件，不然会无法正常启动集群。 1234567891011vi /etc/sysctl.confvm.max_map_count=262144sysct">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/BigData/img/crate-performance.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> searchdb-performance-exploration - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          searchdb-performance-exploration
+        
+      </h1>
+
+      <time class="post-time">
+          9月 25 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>分布式搜索数据库产品，能满足很多企业高速检索的业务场景，海量的单表数据秒级搜索和全文检索，完全支持SQL语法，支持数据的增删改查，兼容MySQL/PostgreSQL协议，企业级分布式搜索数据库解决海量数据检索问题。</p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>必须修改如下相关的配置文件，不然会无法正常启动集群。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysctl.conf</span><br><span class="line">vm.max_map_count=262144</span><br><span class="line"></span><br><span class="line">sysctl -p</span><br><span class="line"></span><br><span class="line">vi /etc/security/limits.conf </span><br><span class="line">*   soft nofile 65536</span><br><span class="line">*   hard nofile 65536</span><br><span class="line"></span><br><span class="line">vi /etc/profile</span><br><span class="line">export CRATE_HEAP_SIZE=100g</span><br></pre></td></tr></table></figure>
+<p>创建数据存储目录，创建用户searchdb，cratedb集群安装在searchdb用户下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">wget https://cdn.crate.io/downloads/releases/crate-2.1.5.tar.gz -O /opt/</span><br><span class="line"></span><br><span class="line">tar -zxvf crate-2.1.5.tar.gz</span><br><span class="line"></span><br><span class="line">mkdir /disk0&#123;1..4&#125;/searchdb</span><br><span class="line"></span><br><span class="line">useradd searchdb</span><br><span class="line">chown searchdb:searchdb /disk0&#123;1..4&#125;/searchdb</span><br><span class="line">chown searchdb:searchdb -R /opt/crate-2.1.5</span><br><span class="line"></span><br><span class="line">rm -rf /disk0&#123;1..4&#125;/searchdb/*</span><br></pre></td></tr></table></figure>
+<p>注意：需要提前安装好JDK，配置<code>JAVA_HOME</code>信息，特别注意<code>JDK版本</code>需要<code>jdk1.8.0_45</code>以上。</p>
+<h3 id="集群安装"><a href="#集群安装" class="headerlink" title="集群安装"></a>集群安装</h3><p>三节点集群软件，需要注意的信息<code>network.host</code>为每个节点的主机名,<code>node.name</code>填写为主机名,<code>my_cluster</code>必须是唯一的,编辑<code>crate.yml</code>文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">cluster.name: my_cluster</span><br><span class="line"></span><br><span class="line">node.name: node1</span><br><span class="line"></span><br><span class="line">discovery.zen.ping.unicast.hosts:</span><br><span class="line">  - node1:4300</span><br><span class="line">  - node2:4300</span><br><span class="line">  - node3:4300</span><br><span class="line"></span><br><span class="line">discovery.zen.minimum_master_nodes: 2</span><br><span class="line"></span><br><span class="line">gateway:</span><br><span class="line">  recover_after_nodes: 2</span><br><span class="line">  recover_after_time: 5m</span><br><span class="line">  expected_nodes: 2</span><br><span class="line"></span><br><span class="line">path.data: /disk01/searchdb,/disk02/searchdb,/disk03/searchdb/,/disk04/searchdb</span><br><span class="line"></span><br><span class="line">network.host: node1</span><br><span class="line"></span><br><span class="line">psql.enabled: true</span><br><span class="line">psql.port: 5432</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动集群</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/crate -d</span><br></pre></td></tr></table></figure>
+<ul>
+<li>访问集群</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bin/crash</span><br><span class="line"></span><br><span class="line">cr&gt; \c node1:4200 </span><br><span class="line">+-------------------+-----------+---------+-----------+---------+</span><br><span class="line">| server_url        | node_name | version | connected | message |</span><br><span class="line">+-------------------+-----------+---------+-----------+---------+</span><br><span class="line">| http://node1:4200 | node1     | 2.1.5   | TRUE      | OK      |</span><br><span class="line">+-------------------+-----------+---------+-----------+---------+</span><br></pre></td></tr></table></figure>
+<ul>
+<li>简单测试</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">create table tweets (</span><br><span class="line">   created_at timestamp,</span><br><span class="line">   id string primary key,</span><br><span class="line">   retweeted boolean,</span><br><span class="line">   source string INDEX using fulltext,</span><br><span class="line">   text string INDEX using fulltext,</span><br><span class="line">   user_id string</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">insert into tweets values (1394182937, &apos;1&apos;, true, &apos;web&apos;, &apos;Don&apos;&apos;t panic&apos;, &apos;Douglas&apos;);</span><br><span class="line"></span><br><span class="line">insert into tweets</span><br><span class="line"> values (</span><br><span class="line">     1394182938,</span><br><span class="line">     &apos;2&apos;,</span><br><span class="line">     true,</span><br><span class="line">    &apos;web&apos;,</span><br><span class="line">    &apos;Time is an illusion. Lunchtime doubly so&apos;,</span><br><span class="line">    &apos;Ford&apos;</span><br><span class="line"> );</span><br><span class="line"></span><br><span class="line">insert into tweets values (1394182937, &apos;3&apos;, true, &apos;address&apos;, &apos;中国，北京&apos;, &apos;北京&apos;);</span><br><span class="line"></span><br><span class="line">select * from tweets where id = &apos;2&apos;;</span><br><span class="line"></span><br><span class="line">select user_id, _score from tweets where match(text, &apos;is&apos;) order by _score desc;</span><br><span class="line"></span><br><span class="line">select user_id, _score from tweets where match(text, &apos;北京&apos;) order by _score desc;</span><br><span class="line"></span><br><span class="line">select user_id, _score from tweets where match(text, &apos;京城&apos;) order by _score desc;</span><br><span class="line"></span><br><span class="line">DELETE FROM tweets where id=3;</span><br></pre></td></tr></table></figure>
+<p>使用一些基础SQL语法测试，进行简单测试，包括带有的全文检索、分词能力，支持Update,Delete数据。</p>
+<h3 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h3><p>生成测试数据，生成<code>books</code>表数据，平均<code>6.0K/条</code>，100G大小，通过一个<code>py</code>脚本把文本数据转换为json数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nohup java -cp dbgen-1.0-jar.jar DBGen -p ./data -b 100 &amp;  --Total Time: 2610 seconds</span><br><span class="line"></span><br><span class="line">cat books | python csv2json.py --columns id:integer isbn:string category:string publish_date:string publisher:string price:float &gt; books.json</span><br></pre></td></tr></table></figure>
+<p>数据示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ head data/books/books </span><br><span class="line">0|6-20386-216-4|STUDY-AIDS|1998-05-31|Gakken|166.99</span><br><span class="line">1|0-60558-466-8|JUVENILE-NONFICTION|1975-02-12|Holtzbrinck|128.99</span><br><span class="line">2|3-16551-636-9|POETRY|1988-01-24|Oxford University Press|155.99</span><br><span class="line">3|4-75505-741-2|COMICS-GRAPHIC-NOVELS|1992-02-24|Saraiva|101.99</span><br><span class="line">4|3-32982-589-8|PERFORMING-ARTS|2011-03-09|Cambridge University Press|183.99</span><br></pre></td></tr></table></figure>
+<p>基础命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./crash --help</span><br><span class="line">./crash  --hosts node1 --sysinfo </span><br><span class="line"></span><br><span class="line">./crash  --hosts node1 -c &quot;show tables&quot;</span><br></pre></td></tr></table></figure>
+<p>创建表结构，导入数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE books (</span><br><span class="line">    id integer,</span><br><span class="line">    isbn string,</span><br><span class="line">    category string,</span><br><span class="line">    publish_date string,</span><br><span class="line">    publisher string,</span><br><span class="line">    price float</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">COPY books FROM &apos;/disk01/data/books/books.json&apos;;</span><br></pre></td></tr></table></figure>
+<p>通过如上命令，可以生成不同级别大小的测试数据，根据参数可以生成不同大小的表。</p>
+<p><strong>测试场景1</strong></p>
+<ul>
+<li>表级别：千万级</li>
+<li>效率：15m/s (node)</li>
+<li>JSON大小：6.6 g</li>
+<li>入库CrateDB大小：5.2 g</li>
+<li>数据量：47582950</li>
+<li>分片数量：6</li>
+<li>副本数：2</li>
+<li>memory：16g</li>
+<li>vcpu：24 </li>
+<li>storage：1.4T （4*280g）</li>
+<li>network：千兆</li>
+</ul>
+<p>主要针对单表的查询测试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">select category,count(*) from books group by category limit 100;   -- 3.137 s</span><br><span class="line"></span><br><span class="line">select category,count(*) as num from books group by category order by num limit 100;    --2.929 sec</span><br><span class="line"></span><br><span class="line">select category,count(*) as num from books where category=&apos;SCIENCE&apos; group by category order by num limit 100;   --0.143 sec</span><br><span class="line"></span><br><span class="line">select count(*) from books where category=&apos;SCIENCE&apos; limit 100;  -- 0.022 sec </span><br><span class="line"></span><br><span class="line">select count(distinct category) from books limit 100;  -- 2.990 sec</span><br><span class="line"></span><br><span class="line">select distinct category from books limit 100;  -- 3.032 sec</span><br></pre></td></tr></table></figure>
+<p><strong>修改 number_of_shards 看是否提升性能</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE books SET (number_of_shards = 48)</span><br><span class="line"></span><br><span class="line">OPTIMIZE table books;  -- 这个参数比较有用，可以提升性能</span><br><span class="line"></span><br><span class="line">SELECT count(*) as num_shards, sum(num_docs) as num_docs FROM sys.shards WHERE schema_name = &apos;doc&apos; AND table_name = &apos;books&apos;;</span><br></pre></td></tr></table></figure>
+<p><strong>测试场景2</strong></p>
+<ul>
+<li>表级别：亿级表 </li>
+<li>效率：17285.888 sec</li>
+<li>JSON大小：33g</li>
+<li>入库CrateDB大小：27g</li>
+<li>数据量：235265838</li>
+<li>node_num: 3</li>
+<li>分片数量：1024</li>
+<li>副本数：2</li>
+<li>memory：100g</li>
+<li>vcpu：24 </li>
+<li>storage：1.4T （4*280g）</li>
+<li>每入库秒钟：13610 条/s </li>
+<li>network：千兆</li>
+</ul>
+<p>创建表，导入数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE books_t1 (</span><br><span class="line">    id integer,</span><br><span class="line">    isbn string,</span><br><span class="line">    category string INDEX using fulltext,</span><br><span class="line">    publish_date string,</span><br><span class="line">    publisher string INDEX using fulltext,</span><br><span class="line">    price float</span><br><span class="line">) CLUSTERED BY (category) INTO 1024 SHARDS with (number_of_replicas = 2, refresh_interval=10000);</span><br><span class="line"></span><br><span class="line">COPY books_t1 FROM &apos;/disk01/data/books/books.json&apos;;  -- COPY OK, 235265838 rows affected  (17285.888 sec)</span><br></pre></td></tr></table></figure>
+<p>测试性能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">OPTIMIZE table books_t1;</span><br><span class="line"></span><br><span class="line">select category,count(*) from books_t1 group by category limit 100;   -- 2.556 sec</span><br><span class="line"></span><br><span class="line">select category,count(*) as num from books_t1 group by category order by num limit 100; -- 2.763 sec</span><br><span class="line"></span><br><span class="line">问题：Error! SQLActionException[SQLParseException: Cannot GROUP BY &apos;category&apos;: grouping on analyzed/fulltext columns is not possible]</span><br><span class="line"></span><br><span class="line">select count(*) from books_t1 where match(category, &apos;PERFORMING-ARTS&apos;); -- limit 100; -- 0.256 sec</span><br><span class="line"></span><br><span class="line">select * from books_t1 where match(category, &apos;ARTS&apos;); -- limit 100; -- 0.256 sec; -- 0.928 sec</span><br></pre></td></tr></table></figure>
+<p><code>注意：fulltext字段的都无法做聚合分析操作，不带全文索引，只能做全文搜索match，重新导数据在测试.</code></p>
+<p><strong>测试场景3</strong></p>
+<ul>
+<li>表级别：亿级表 </li>
+<li>效率：5662.132 sec</li>
+<li>JSON大小：33g</li>
+<li>入库CrateDB大小：25.3g</li>
+<li>数据量：235265838</li>
+<li>node_num: 3</li>
+<li>分片数量：1024</li>
+<li>副本数：2</li>
+<li>memory：100g</li>
+<li>vcpu：24 </li>
+<li>storage：1.4T （4*280g）</li>
+<li>每入库秒钟：13610 条/s </li>
+<li>network：千兆 </li>
+</ul>
+<p>创建表，插入数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE books_t2 (</span><br><span class="line">    id integer,</span><br><span class="line">    isbn string,</span><br><span class="line">    category string,</span><br><span class="line">    publish_date string,</span><br><span class="line">    publisher string,</span><br><span class="line">    price float</span><br><span class="line">) CLUSTERED BY (category) INTO 1024 SHARDS;</span><br><span class="line"></span><br><span class="line">COPY books_t2 FROM &apos;/disk01/data/books/books.json&apos;;</span><br><span class="line"></span><br><span class="line">insert into books_t2 select * from books_t1; -- INSERT OK, 235265838 rows affected  (5662.132 sec)</span><br></pre></td></tr></table></figure>
+<p>性能测试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">OPTIMIZE table books_t2;</span><br><span class="line"></span><br><span class="line">select category,count(*) from books_t2 group by category limit 100;   -- 3.994 sec</span><br><span class="line"></span><br><span class="line">select category,count(*) as num from books_t2 group by category order by num limit 100; -- 4.159 sec</span><br><span class="line"></span><br><span class="line">select category,count(*) as num from books_t2 where category=&apos;SCIENCE&apos; group by category order by num limit 100;    -- 1.731 sec</span><br><span class="line"></span><br><span class="line">select count(*) from books_t2 where category=&apos;SCIENCE&apos; limit 100;  -- 0.001 sec</span><br><span class="line"></span><br><span class="line">select count(distinct category) from books_t2 limit 100;  -- 4.677 sec</span><br><span class="line"></span><br><span class="line">select distinct category from books_t2 limit 100;  -- 3.914 sec</span><br><span class="line"></span><br><span class="line">select id,price,publisher from books_t2 where publish_date=&apos;1999-02-02&apos; and category=&apos;SCIENCE&apos; limit 100; -- 0.014 sec</span><br></pre></td></tr></table></figure>
+<p>注意：<code>分片数量过多导致Heap Usage一直居高不下达到57%，表建立全局索引1024个分片，2个索引字段</code></p>
+<p><strong>测试场景4</strong></p>
+<ul>
+<li>表级别：15亿级</li>
+<li>效率：15m/s (node)</li>
+<li>JSON大小：215 G</li>
+<li>入库CrateDB大小： 175.6g</li>
+<li>数据量：1551303191</li>
+<li>分片数量：500</li>
+<li>副本数：2</li>
+<li>memory：100g</li>
+<li>vcpu：24 </li>
+<li>storage：1.4T （4<em>280g） </em> 4节点</li>
+<li>network：千兆</li>
+</ul>
+<p>生成的文本数据，转换为JSON格式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup cat /disk01/searchdb/data/books/books | python csv2json.py --columns id:integer isbn:string category:string publish_date:string publisher:string price:float &gt; /disk02/searchdb/books.json &amp;</span><br></pre></td></tr></table></figure>
+<p>切割一个215g数据文件为22个10g大小的数据文件，并行入库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">split -b 10000m /disk02/searchdb/books.json -d -a 3 split_file</span><br></pre></td></tr></table></figure>
+<p>创建表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE books (</span><br><span class="line">    id integer,</span><br><span class="line">    isbn string,</span><br><span class="line">    category string,</span><br><span class="line">    publish_date string,</span><br><span class="line">    publisher string,</span><br><span class="line">    price float</span><br><span class="line">) CLUSTERED BY (category) INTO 500 SHARDS;</span><br></pre></td></tr></table></figure>
+<p>批量入库数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/crate-2.1.7/bin/crash  --hosts node1 -c &quot;COPY books FROM &apos;/disk01/searchdb/split_file000&apos;&quot;</span><br></pre></td></tr></table></figure>
+<p>主要针对15亿单表的查询 - 性能测试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">OPTIMIZE table books;</span><br><span class="line"></span><br><span class="line">select category,count(*) from books_t2 group by category limit 100;   -- 3.994 sec</span><br><span class="line"></span><br><span class="line">select category,count(*) as num from books_t2 group by category order by num limit 100; -- 4.159 sec</span><br><span class="line"></span><br><span class="line">select category,count(*) as num from books_t2 where category=&apos;SCIENCE&apos; group by category order by num limit 100;    -- 1.731 sec</span><br><span class="line"></span><br><span class="line">select count(*) from books_t2 where category=&apos;SCIENCE&apos; limit 100;  -- 0.001 sec</span><br><span class="line"></span><br><span class="line">select count(distinct category) from books_t2 limit 100;  -- 4.677 sec</span><br><span class="line"></span><br><span class="line">select distinct category from books_t2 limit 100;  -- 3.914 sec</span><br><span class="line"></span><br><span class="line">select id,price,publisher from books_t2 where publish_date=&apos;1999-02-02&apos; and category=&apos;SCIENCE&apos; limit 100; -- 0.014 sec</span><br></pre></td></tr></table></figure>
+<p><strong>测试场景5</strong></p>
+<p>测试SQL如下，主要是针对单表的性能测试，无分区。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">OPTIMIZE table books;</span><br><span class="line"></span><br><span class="line">select category,count(*) from books group by category limit 100;   -- 37.878 sec</span><br><span class="line"></span><br><span class="line">select category,count(*) as num from books group by category order by num limit 100; -- 46.603 sec</span><br><span class="line"></span><br><span class="line">select category,count(*) as num from books where category=&apos;SCIENCE&apos; group by category order by num limit 100;    -- 11.808 sec</span><br><span class="line"></span><br><span class="line">select count(*) from books where category=&apos;SCIENCE&apos; limit 100;  -- 0.002 sec</span><br><span class="line"></span><br><span class="line">select count(distinct category) from books limit 100;  -- 44.924 sec</span><br><span class="line"></span><br><span class="line">select distinct category from books limit 100;  -- 44.335 sec</span><br><span class="line"></span><br><span class="line">select id,price,publisher from books where publish_date=&apos;1999-02-02&apos; and category=&apos;SCIENCE&apos; limit 100; -- 0.347 sec</span><br><span class="line"></span><br><span class="line">select price,count(publisher) from books where publish_date=&apos;1999-02-02&apos; and category=&apos;SCIENCE&apos; group by price order by price desc limit 100; -- 0.981 sec</span><br><span class="line"></span><br><span class="line">select price,category from books where publisher=&apos;Kyowon&apos; group by price,category order by price limit 100;  --</span><br><span class="line">3.602 sec</span><br><span class="line"></span><br><span class="line">select price,category,count(*) from books where publisher=&apos;Kyowon&apos; group by price,category order by price limit 100;  -- 1.406 sec</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>场景1 数据量：496928035  4节点(mem:128g vcore: 24 storage: 4*250g)  大小：56.2g  shards: 500 平均：<code>6.0K/条</code>   网络：千兆</p>
+</li>
+<li><p>场景2 数据量：993106194  4节点(mem:128g vcore: 24 storage: 4*250g)  大小：112g  shards: 500  平均：<code>6.0K/条</code>  网络：千兆</p>
+</li>
+<li><p>场景3 数据量：1551303103  4节点(mem:128g vcore: 24 storage: 4*250g)  大小：174.4g  shards: 500  平均：<code>6.0K/条</code>  网络：千兆</p>
+</li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/crate-performance.png" alt="crate-performance"></p>
+<p>注意：<code>如上测试并没有专业优化并发，除内存外，所有参数使用默认。</code></p>
+<p>在单表15亿+，五分区，4台服务器，千兆网络，表现出来的性能还是非常强劲的，主要针对单表各种统计分析并且还带有全文检索的功能， 此数据库可以把它称为是分布式搜索数据库。底层用到了很多搜索引擎存储的技术，包括倒排索引，数据分片，利用大内存，细粒度索引，如果能支持多实例，目前CPU还没完全使用，磁盘IO和内存都满载。每一个字段都带索引，所以入库比较慢，在单机上入库是瓶颈，可以分开在多台机器入库，这样避免IO堵在一台机器；压力过大容易导致节点奔溃脱离集群；join性能没深入探索，不好评价。</p>
+<ul>
+<li>全文搜索(Fulltext Search)、分词等能力通过特殊SQL语法匹配，搜索结果可以进行复杂的统一分析。</li>
+<li>Geo Search，支持基于地理位置信息的复杂算法分析，响应迅速。</li>
+<li>支持分区表，可以基于分区进行检索分析。</li>
+<li>支持多副本，自带容错，检索分流，提高性能。</li>
+<li>海量数据实时入库，实时检索、复杂统计分析。</li>
+<li>Blob(binary large object)，二进制大对象存储分析。</li>
+<li>仅支持JSON/CSV入库。</li>
+</ul>
+<p>一个分布式搜索数据库，支持标准SQL和JDBC，用来替代ES做一些全文检索并支持复杂统计分析能力，很有实际意义。</p>
+<p>我目前参与过最大的ES集群，也就60节点300亿+doc(3个主节点，6T&amp;2块SATA)，数据量<code>400TB</code>，还有一个小集群20节点70亿+doc(3主节点，4T&amp;2块SSD)，性能基本能满足要求，存储近3年的数据，历史数据HDFS为Backup。</p>
+<p>参考：</p>
+<ul>
+<li>[1]. <a href="https://github.com/baidu/Elasticsearch" target="_blank" rel="noopener">https://github.com/baidu/Elasticsearch</a></li>
+<li>[2]. <a href="http://www.itweet.cn/blog" target="_blank" rel="noopener">http://www.itweet.cn/blog</a></li>
+</ul>
+<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/searchdb/">searchdb</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/11/20/the-road-ahead/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">the-road-ahead</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/09/03/about-ambari-new-feature/">
+        <span class="next-text nav-default">about-ambari-new-feature</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

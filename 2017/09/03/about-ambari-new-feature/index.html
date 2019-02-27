@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="about-ambari-new-feature">
+
+
+
+
+  <meta name="keywords" content="ambari,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/09/03/about-ambari-new-feature/">
+
+
+<meta name="description" content="Ambari 2.5 的新功能Ambari 2.5，我们的专注点是继续提高日常Hadoop集群的运维和管理工作，Ambari整个社区都在努力让Ambari更加智能化易用的提供Hadoop集群的运营。Ambari 2.5 做出的重点改进如下：  Service Management  Log Management  Configuration Management  Monitoring  Secu">
+<meta name="keywords" content="ambari">
+<meta property="og:type" content="article">
+<meta property="og:title" content="about-ambari-new-feature">
+<meta property="og:url" content="http://itweet.github.io/2017/09/03/about-ambari-new-feature/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Ambari 2.5 的新功能Ambari 2.5，我们的专注点是继续提高日常Hadoop集群的运维和管理工作，Ambari整个社区都在努力让Ambari更加智能化易用的提供Hadoop集群的运营。Ambari 2.5 做出的重点改进如下：  Service Management  Log Management  Configuration Management  Monitoring  Secu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/1-ServiceRestart-1024x624.png">
+<meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/2-ManageJournalNodes-1024x623.png">
+<meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/3-AssignJournalNodes-1024x624.png">
+<meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/4-LogRotation-1024x624.png">
+<meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/5-Logsearch-1024x703.png">
+<meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/6-ServiceAdvisor-1024x624.png">
+<meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/7-DownloadClientConfig-1024x624.png">
+<meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/8-DownloadClientConfigFile-1024x331.png">
+<meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/9-topn-1024x623.png">
+<meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/10-topn-1024x652.png">
+<meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/11-AMS-HA.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.523Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about-ambari-new-feature">
+<meta name="twitter:description" content="Ambari 2.5 的新功能Ambari 2.5，我们的专注点是继续提高日常Hadoop集群的运维和管理工作，Ambari整个社区都在努力让Ambari更加智能化易用的提供Hadoop集群的运营。Ambari 2.5 做出的重点改进如下：  Service Management  Log Management  Configuration Management  Monitoring  Secu">
+<meta name="twitter:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/1-ServiceRestart-1024x624.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> about-ambari-new-feature - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          about-ambari-new-feature
+        
+      </h1>
+
+      <time class="post-time">
+          9月 03 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h3 id="Ambari-2-5-的新功能"><a href="#Ambari-2-5-的新功能" class="headerlink" title="Ambari 2.5 的新功能"></a>Ambari 2.5 的新功能</h3><p>Ambari 2.5，我们的专注点是继续提高日常Hadoop集群的运维和管理工作，Ambari整个社区都在努力让Ambari更加智能化易用的提供Hadoop集群的运营。Ambari 2.5 做出的重点改进如下：</p>
+<ul>
+<li><p>Service Management</p>
+</li>
+<li><p>Log Management</p>
+</li>
+<li><p>Configuration Management</p>
+</li>
+<li><p>Monitoring</p>
+</li>
+<li><p>Security</p>
+</li>
+<li><p>Upgrades</p>
+</li>
+</ul>
+<h3 id="Service-Management"><a href="#Service-Management" class="headerlink" title="Service Management"></a>Service Management</h3><p>支持<code>Service Auto Start</code>(AMBARI-2330, <a href="https://docs.hortonworks.com/HDPDocuments/Ambari-2.5.1.0/bk_ambari-operations/content/enable_service_auto_start.html" target="_blank" rel="noopener">文档</a>)能力，集群管理人员可以设置策略，以确保组件在运行失败后能自动重新启动，并确保在服务器重启后组件重启。</p>
+<p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/1-ServiceRestart-1024x624.png" alt></p>
+<p>基于每个主机上的Ambari agent会主动检测托管组件是否异常退出，并且根据管理员设定的策略重启该组件。在启动时Agent会参考相关策略，并根据需要自动启动相关组件。</p>
+<p>对于大型生产集群，我们增加了易于维护的功能特性，可以非常方便的<code>添加</code>或者<code>删除</code>JournalNodes(AMBARI-7748，<a href="https://docs.hortonworks.com/HDPDocuments/Ambari-2.5.1.0/bk_ambari-operations/content/manage_journal_nodes.html" target="_blank" rel="noopener">文档</a>）。此功能可以指导集群管理员通过可视化的方式对JournalNodes节点进行添加、删除和移动，对于大型集群来说启用HA功能保障集群高可靠，那么对<code>JournalNodes</code>节点的管理就显得非常重要。</p>
+<p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/2-ManageJournalNodes-1024x623.png" alt></p>
+<p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/3-AssignJournalNodes-1024x624.png" alt></p>
+<h3 id="Log-Management"><a href="#Log-Management" class="headerlink" title="Log Management"></a>Log Management</h3><p>Hadoop生产环境中往往会产生大量的日志数据，日志的管理通常需要管理员非常熟悉Log4j的工作原理。通过最新的<code>日志轮询</code>(AMBARI-16880，<a href="https://docs.hortonworks.com/HDPDocuments/Ambari-2.5.1.0/bk_ambari-upgrade/content/upgrading_log_rotation_configuration.html" target="_blank" rel="noopener">文档</a>)功能简化配置。目前在最新的版本中管理员可以非常容易的配置应该保留多少个文件，以及在什么时候轮询日志(基于文件大小)。</p>
+<p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/4-LogRotation-1024x624.png" alt></p>
+<p><code>LogSearch</code>（技术预览）目前是最受欢迎的功能之一，在此版本中可以看到漂亮的UI，并可以根据用户操作进行后端刷新。日志的聚合搜索在下一个版本Ambari 3.0中UI将被简化，后端将会有更加强大的日志保留和扩展功能。</p>
+<p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/5-Logsearch-1024x703.png" alt></p>
+<h3 id="Configuration-Management"><a href="#Configuration-Management" class="headerlink" title="Configuration Management"></a>Configuration Management</h3><p>Ambari在进行单一配置更改时，在不同服务中由于有配置依赖共用参数，某些参数修改会导致多个配置更改？Ambari希望在配置发生更改时，Ambari能及时更新相关的从属配置。如果集群某些配置发生改变，而从属配置的修改没有让管理员能可视化的看到这样是非常不正确的。我们做了许多研究，通过配置更改通知功能，以确定目前集群最佳的配置建议。此外，我们还添加了可视化的弹出窗口和对话框通知，以确保管理员能看到配置建议，并根据经验选择保存修改或者修改部分配置。使得集群在修改部分配置的时候，及时出错了，也不会影响其他组件的正常工作。</p>
+<p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/6-ServiceAdvisor-1024x624.png" alt></p>
+<p>一个大型的集群通常分工明确，有架构师、运维、开发、测试、管理，不同的人对集群的关注点不同，对于开发来说需要完整的集群客户端相关的配置信息，这个时候集群组件客户端配置导出功能就显得很重要。现在通过<code>下载所有客户端配置</code>功能，我们可以轻松的导出具有Ambari管理的每个服务的客户端配置gz文件包。</p>
+<p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/7-DownloadClientConfig-1024x624.png" alt></p>
+<p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/8-DownloadClientConfigFile-1024x331.png" alt></p>
+<h3 id="Monitoring"><a href="#Monitoring" class="headerlink" title="Monitoring"></a>Monitoring</h3><p>HDFS集群的监控非常重要，当你尝试找出NameNode为什么压力这么大，可能是那些原因导致的时候，缩小范围，通常直接排查像HDFS发送请求前10名用户，并且随着时间的推移，监控HDFS最常用的10个操作信息。使HDFS TopN用户和常用操作可视化，Grafana现在可以看到这些指标，使得故障排除更容易，并帮助您减少MTTB（mean time to blame），找出相关问题负责人。</p>
+<p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/9-topn-1024x623.png" alt></p>
+<p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/10-topn-1024x652.png" alt></p>
+<p>Ambari相关的监控指标已经通过可以很好的帮助运营一个Hadoop集群，利用好集群资源。而服务于Ambari监控指标存储的相关组件一直以来都有单点问题，如果该数据收集存储节点AMS奔溃将会导致指标完全丢失，对于一个企业级的大数据软件来说是不可承受的灾难，所以在Ambari 2.5中我们引入了<code>AMS Collector High Availability</code>做为技术预览。这意味着此功能可用，但尚未推荐用于生产环境部署。此功能针对大型集群多维度收集数据、写入和聚合指标优化，保障大量监控指标实时入库和快速读取，添加相关监控指标项无需重启集群组件优点。这种高可靠对企业级用户来说，可以最大化保障AMS的价值。</p>
+<p><img src="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/11-AMS-HA.png" alt></p>
+<h3 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h3><p>对于集群安全性一直是我们重点关注的方向，在最新的版本中Hive，Oozie，Ranger和Log Search增加了<code>Password Credential Store Management</code>功能。此功能使得Hadoop集群更加的安全。</p>
+<p>此外还支持自动化的LDAP和Kerberos支持。</p>
+<p>Ambari REST API在未来的版本中会支持基于Kerberos的身份认证能力。</p>
+<h3 id="Upgrades"><a href="#Upgrades" class="headerlink" title="Upgrades"></a>Upgrades</h3><p>没有人想要停机进行集群的升级，甚至为了不想数据丢失风险而进行数据备份升级。Ambari最新的滚动升级功能，可以避免在升级过程中停机时间太长，这里提供一种保守的方法，确保升级过程中不会有数据丢失风险。通过滚动升级总持续时间会比快速升级更长。在Ambari 2.5中，提供了滚动升级期间有能力<code>暂停</code>，以获得重新对集群的操作控制，防止出现的任务状况。一个常见的问题，如果滚动升级需要几天时间，如果我的HiveServer2实例有个问题，需要重启，会发生生么？这就是为什么要添加<code>暂停</code>功能。你只需要点击<code>暂停</code>按钮，最小化升级窗口，然后完全控制集群以重新启动HiveServer2。完成此操作之后，只需要点击<code>Resume</code>即可继续完成升级。</p>
+<h3 id="DID-YOU-KNOW"><a href="#DID-YOU-KNOW" class="headerlink" title="DID YOU KNOW?"></a>DID YOU KNOW?</h3><p>脚本报警：在于客户交流中，我们会经常被问到Ambari如何配置发送报警信息到HipChat或Slack或Pager Duty的问题。Ambari其实是有提供这样的功能的<a href="https://cwiki.apache.org/confluence/display/AMBARI/Creating+a+Script-based+Alert+Dispatcher" target="_blank" rel="noopener">脚本报警</a>。此功能允许您定义在Ambari中触发警报时应调用的脚本，以便您轻松地与外部系统集成。所以下次如果你想发送一个Ambari Alert到你的自定义接收系统，配置一个脚本报警即可。</p>
+<p><strong>下半年是项目季，好忙…研发告一段落，开始奔波各种项目</strong></p>
+<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png" alt="Itweet公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/ambari/">ambari</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/09/25/searchdb-performance-exploration/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">searchdb-performance-exploration</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/08/03/Enterprise-BigData-platform-deployment-guide-part-4/">
+        <span class="next-text nav-default">Enterprise-BigData-platform-deployment-guide-part-4</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

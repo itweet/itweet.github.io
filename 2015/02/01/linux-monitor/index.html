@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="linux-monitor">
+
+
+
+
+  <meta name="keywords" content="monitor,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/02/01/linux-monitor/">
+
+
+<meta name="description" content="cpu.pyt1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#!/usr/bin/env python# coding: utf-8__author__ = &amp;apos;whoami&amp;apos;&amp;quot;&amp;quot;&amp;quot">
+<meta name="keywords" content="monitor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux-monitor">
+<meta property="og:url" content="http://itweet.github.io/2015/02/01/linux-monitor/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="cpu.pyt1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#!/usr/bin/env python# coding: utf-8__author__ = &amp;apos;whoami&amp;apos;&amp;quot;&amp;quot;&amp;quot">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.479Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux-monitor">
+<meta name="twitter:description" content="cpu.pyt1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#!/usr/bin/env python# coding: utf-8__author__ = &amp;apos;whoami&amp;apos;&amp;quot;&amp;quot;&amp;quot">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> linux-monitor - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          linux-monitor
+        
+      </h1>
+
+      <time class="post-time">
+          2月 01 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="cpu-pyt"><a href="#cpu-pyt" class="headerlink" title="cpu.pyt"></a>cpu.pyt</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding: utf-8</span><br><span class="line">__author__ = &apos;whoami&apos;</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">@version: 1.0</span><br><span class="line">@author: whoami</span><br><span class="line">@license: Apache Licence 2.0</span><br><span class="line">@contact: skutil@gmail.com</span><br><span class="line">@site: http://www.itweet.cn</span><br><span class="line">@software: PyCharm Community Edition</span><br><span class="line">@file: cpu.py</span><br><span class="line">@time: 2015-11-28 下午1:51</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">def monitor(frist_invoke=1):</span><br><span class="line"></span><br><span class="line">        interval=2</span><br><span class="line"></span><br><span class="line">        f = open(&apos;/proc/stat&apos;)</span><br><span class="line">        cpu_t1 = f.readline().split()</span><br><span class="line">        f.close()</span><br><span class="line"></span><br><span class="line">        time.sleep(interval)</span><br><span class="line"></span><br><span class="line">        f = open(&apos;/proc/stat&apos;)</span><br><span class="line">        cpu_t2 = f.readline().split()</span><br><span class="line">        f.close()</span><br><span class="line"></span><br><span class="line">        cpu_total_t1 = float(eval((&apos;+&apos;.join(cpu_t1)).split(&apos;cpu+&apos;)[1]))</span><br><span class="line">        cpu_idle_t1 = float(cpu_t1[4])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        cpu_total_t2 = float(eval((&apos;+&apos;.join(cpu_t2)).split(&apos;cpu+&apos;)[1]))</span><br><span class="line">        cpu_idle_t2 = float(cpu_t2[4])</span><br><span class="line"></span><br><span class="line">        cpu_idle = cpu_idle_t2-cpu_idle_t1</span><br><span class="line">        cpu_total = cpu_total_t2-cpu_total_t1</span><br><span class="line"></span><br><span class="line">        cpu_percent = (cpu_total-cpu_idle)/cpu_total</span><br><span class="line"></span><br><span class="line">        value_dic = &#123;</span><br><span class="line">            &apos;cpu.user&apos;: float(cpu_t1[1])/cpu_total_t1*100,</span><br><span class="line">            &apos;cpu.nice&apos;:float(cpu_t1[2])/cpu_total_t1*100,</span><br><span class="line">            &apos;cpu.system&apos;:float(cpu_t1[3])/cpu_total_t1*100,</span><br><span class="line">            &apos;cpu.idle&apos;:float(cpu_t1[4])/cpu_total_t1*100,</span><br><span class="line">            &apos;cpu.iowait&apos;: float(cpu_t1[5])/cpu_total_t1*100,</span><br><span class="line">            &apos;cpu.irq&apos;: float(cpu_t1[6])/cpu_total_t1*100,</span><br><span class="line">            &apos;cpu.softirq&apos;: float(cpu_t1[7])/cpu_total_t1*100,</span><br><span class="line">            &apos;cpu.stealstolen&apos;:float(cpu_t1[8])/cpu_total_t1*100,</span><br><span class="line">            &apos;cpu.guest&apos;: float(cpu_t1[9])/cpu_total_t1*100,</span><br><span class="line">            &apos;cpu.percent&apos;: cpu_percent*100</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return value_dic</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    print monitor()</span><br></pre></td></tr></table></figure>
+<h1 id="disk-py"><a href="#disk-py" class="headerlink" title="disk.py"></a>disk.py</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding: utf-8</span><br><span class="line">__author__ = &apos;whoami&apos;</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">@version: 1.0</span><br><span class="line">@author: whoami</span><br><span class="line">@license: Apache Licence 2.0</span><br><span class="line">@contact: skutil@gmail.com</span><br><span class="line">@site: http://www.itweet.cn</span><br><span class="line">@software: PyCharm Community Edition</span><br><span class="line">@file: disk.py</span><br><span class="line">@time: 2015-11-28 下午1:53</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">def monitor(frist_invoke=1):</span><br><span class="line">    value_dic = &#123;</span><br><span class="line">        &apos;mount&apos;:&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    f = open(&apos;/etc/fstab&apos;)</span><br><span class="line">    lines = f.readlines()</span><br><span class="line">    f.close()</span><br><span class="line"></span><br><span class="line">    for line in lines:</span><br><span class="line">        if &apos;#&apos; not in line and &apos;ext&apos; in line:</span><br><span class="line">            mount_dir = line.split()[1]</span><br><span class="line">            type = line.split()[2]</span><br><span class="line"></span><br><span class="line">            disk = os.statvfs(mount_dir)</span><br><span class="line">            capacity = float(disk.f_bsize * disk.f_blocks/(1024*1024))</span><br><span class="line">            used = capacity-float(disk.f_bsize * disk.f_bfree/(1024*1024))</span><br><span class="line">            available = float(disk.f_bsize * disk.f_bavail/(1024*1024))</span><br><span class="line"></span><br><span class="line">            value_dic[&apos;mount&apos;][mount_dir] = &#123;</span><br><span class="line">                &apos;disk.device&apos;:mount_dir,</span><br><span class="line">                &apos;disk.capacity&apos;:capacity,</span><br><span class="line">                &apos;disk.used&apos;:used,</span><br><span class="line">                &apos;disk.available&apos;:available,</span><br><span class="line">                &apos;disk.percent&apos;: round((float(used/capacity)*100),2),</span><br><span class="line">                &apos;disk.type&apos;:type,</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    return value_dic</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    mount = monitor()</span><br><span class="line">    for m in mount[&apos;mount&apos;].keys():</span><br><span class="line">        print m,mount[&apos;mount&apos;][m]</span><br></pre></td></tr></table></figure>
+<h1 id="iostats-py"><a href="#iostats-py" class="headerlink" title="iostats.py"></a>iostats.py</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding: utf-8</span><br><span class="line">__author__ = &apos;whoami&apos;</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">@version: 1.0</span><br><span class="line">@author: whoami</span><br><span class="line">@license: Apache Licence 2.0</span><br><span class="line">@contact: skutil@gmail.com</span><br><span class="line">@site: http://www.itweet.cn</span><br><span class="line">@software: PyCharm Community Edition</span><br><span class="line">@file: disk.py</span><br><span class="line">@time: 2015-11-28 下午1:53</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import time</span><br><span class="line">import global_settings</span><br><span class="line"></span><br><span class="line">def monitor(frist_invoke=2):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Return (inbytes, outbytes, in_num, out_num, ioms) of disk.</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    f1 = open(&apos;/proc/diskstats&apos;)</span><br><span class="line">    f2 = open(&apos;/proc/diskstats&apos;)</span><br><span class="line">    content1 = f1.read()</span><br><span class="line">    time.sleep(frist_invoke)</span><br><span class="line">    content2 = f2.read()</span><br><span class="line">    f1.close()</span><br><span class="line">    f2.close()</span><br><span class="line">    ds1 = &#123;&#125;</span><br><span class="line">    for l in content1.splitlines():</span><br><span class="line">        d = l.strip().split()</span><br><span class="line">        if d[2].startswith(&apos;loop&apos;) or d[2].startswith(&apos;ram&apos;) or \</span><br><span class="line">           d[2].startswith(&apos;dm-&apos;) or \</span><br><span class="line">           d[2].startswith(&apos;fd&apos;) or d[2].startswith(&apos;sr&apos;):</span><br><span class="line">           continue</span><br><span class="line">        ds1[d[2]] = [d[3], d[7], d[4], d[8], d[12]]</span><br><span class="line">    ds2 = &#123;&#125;</span><br><span class="line">    for l in content2.splitlines():</span><br><span class="line">        d = l.strip().split()</span><br><span class="line">        if d[2].startswith(&apos;loop&apos;) or d[2].startswith(&apos;ram&apos;) or \</span><br><span class="line">           d[2].startswith(&apos;fd&apos;) or d[2].startswith(&apos;sr&apos;):</span><br><span class="line">           continue</span><br><span class="line">        ds2[d[2]] = [d[3], d[7], d[4], d[8], d[12]]</span><br><span class="line">    ds = &#123;&#125;</span><br><span class="line">    for d in ds1.keys():</span><br><span class="line">        rnum = float(int(ds2[d][0]) - int(ds1[d][0])) / frist_invoke</span><br><span class="line">        wnum = float(int(ds2[d][1]) - int(ds1[d][1])) / frist_invoke</span><br><span class="line">        blm_read = float(int(ds2[d][2]) - int(ds1[d][2])) / frist_invoke / 1024</span><br><span class="line">        blm_wrtn = float(int(ds2[d][3]) - int(ds1[d][3])) / frist_invoke / 1024</span><br><span class="line">        util = 100 * (float(int(ds2[d][4]) - int(ds1[d][4]))/(frist_invoke * 1000))</span><br><span class="line"></span><br><span class="line">        ds[d] = [blm_read, blm_wrtn, rnum, wnum, util]</span><br><span class="line"></span><br><span class="line">    for i in ds.keys():</span><br><span class="line">        blm_read += round(ds.get(i)[0],2)</span><br><span class="line">        blm_wrtn += round(ds.get(i)[1],2)</span><br><span class="line">        rnum += round(ds.get(i)[2],2)</span><br><span class="line">        wnum += round(ds.get(i)[3],2)</span><br><span class="line">        util += round(ds.get(i)[4],2)</span><br><span class="line"></span><br><span class="line">    value_dic = &#123;</span><br><span class="line">        &apos;io.mb_read&apos;:blm_read,</span><br><span class="line">        &apos;io.mb_wrtn&apos;:blm_wrtn,</span><br><span class="line">        &apos;io.mb_read_num&apos;: rnum,</span><br><span class="line">        &apos;io.mb_wrtn_num&apos;: wnum,</span><br><span class="line">        &apos;io.ioms&apos;: util</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return value_dic</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    print monitor()</span><br></pre></td></tr></table></figure>
+<h1 id="loadavg-py"><a href="#loadavg-py" class="headerlink" title="loadavg.py"></a>loadavg.py</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding: utf-8</span><br><span class="line">__author__ = &apos;whoami&apos;</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">@version: 1.0</span><br><span class="line">@author: whoami</span><br><span class="line">@license: Apache Licence 2.0</span><br><span class="line">@contact: skutil@gmail.com</span><br><span class="line">@site: http://www.itweet.cn</span><br><span class="line">@software: PyCharm Community Edition</span><br><span class="line">@file: loadavg.py</span><br><span class="line">@time: 2015-11-28 下午1:51</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">def monitor(frist_invoke=1):</span><br><span class="line">    f = open(&apos;/proc/loadavg&apos;)</span><br><span class="line">    load = f.read().split()</span><br><span class="line">    f.close()</span><br><span class="line"></span><br><span class="line">    value_dic = &#123;</span><br><span class="line">        &apos;load.1min&apos;:load[0],</span><br><span class="line">        &apos;load.5min&apos;:load[1],</span><br><span class="line">        &apos;load.15min&apos;:load[2],</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return value_dic</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">   print monitor()</span><br></pre></td></tr></table></figure>
+<h1 id="meminfo-py"><a href="#meminfo-py" class="headerlink" title="meminfo.py"></a>meminfo.py</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding: utf-8</span><br><span class="line">__author__ = &apos;whoami&apos;</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">@version: 1.0</span><br><span class="line">@author: whoami</span><br><span class="line">@license: Apache Licence 2.0</span><br><span class="line">@contact: skutil@gmail.com</span><br><span class="line">@site: http://www.itweet.cn</span><br><span class="line">@software: PyCharm Community Edition</span><br><span class="line">@file: memory.py</span><br><span class="line">@time: 2015-11-28 下午1:51</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">def monitor(frist_invoke=1):</span><br><span class="line">    mem = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    f = open(&quot;/proc/meminfo&quot;)</span><br><span class="line">    lines = f.readlines()</span><br><span class="line">    f.close()</span><br><span class="line">    for line in lines:</span><br><span class="line">        if len(line) &lt; 2: continue</span><br><span class="line">        name = line.split(&apos;:&apos;)[0]</span><br><span class="line">        var = line.split(&apos;:&apos;)[1].split()[0]</span><br><span class="line">        mem[name] = long(var) / (1024.0)</span><br><span class="line"></span><br><span class="line">    mem[&apos;MemUsed&apos;] = mem[&apos;MemTotal&apos;] - mem[&apos;MemFree&apos;] - mem[&apos;Buffers&apos;] - mem[&apos;Cached&apos;]</span><br><span class="line"></span><br><span class="line">    value_dic = &#123;</span><br><span class="line">        &apos;mem.total&apos;:round(mem[&apos;MemTotal&apos;],2),</span><br><span class="line">        &apos;mem.free&apos;:round(mem[&apos;MemFree&apos;],2),</span><br><span class="line">        &apos;mem.buffers&apos;:round(mem[&apos;Buffers&apos;],2),</span><br><span class="line">        &apos;mem.cache&apos;:round(mem[&apos;Cached&apos;],2),</span><br><span class="line">        &apos;mem.used&apos;:round((mem[&apos;MemTotal&apos;] - mem[&apos;MemFree&apos;]),2),</span><br><span class="line">        &apos;mem.percent&apos;: round((mem[&apos;MemUsed&apos;])/(mem[&apos;MemTotal&apos;]),2)*100</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return value_dic</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    print monitor()</span><br></pre></td></tr></table></figure>
+<h1 id="netstat-py"><a href="#netstat-py" class="headerlink" title="netstat.py"></a>netstat.py</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding: utf-8</span><br><span class="line">__author__ = &apos;whoami&apos;</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">@version: 1.0</span><br><span class="line">@author: whoami</span><br><span class="line">@license: Apache Licence 2.0</span><br><span class="line">@contact: skutil@gmail.com</span><br><span class="line">@site: http://www.itweet.cn</span><br><span class="line">@software: PyCharm Community Edition</span><br><span class="line">@file: netstats.py</span><br><span class="line">@time: 2015-11-28 下午2:49</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">def monitor(frist_invoke=2):</span><br><span class="line">    # net rx/tx stat</span><br><span class="line">    f1 = open(&apos;/proc/net/dev&apos;)</span><br><span class="line">    f2 = open(&apos;/proc/net/dev&apos;)</span><br><span class="line">    content1 = f1.read()</span><br><span class="line">    time.sleep(frist_invoke)</span><br><span class="line">    content2 = f2.read()</span><br><span class="line">    f1.close()</span><br><span class="line">    f2.close()</span><br><span class="line"></span><br><span class="line">    sep = &apos;:&apos;</span><br><span class="line">    stats1 = &#123;&#125;</span><br><span class="line">    for line in content1.splitlines():</span><br><span class="line">        if sep in line:</span><br><span class="line">            i = line.split(&apos;:&apos;)[0].strip()</span><br><span class="line">            data = line.split(&apos;:&apos;)[1].split()</span><br><span class="line">            rx_bytes1, tx_bytes1 = (int(data[0]), int(data[8]))</span><br><span class="line">            rx_pack1, tx_pack1 = (int(data[1]), int(data[9]))</span><br><span class="line">            stats1[i] = [rx_bytes1, tx_bytes1, rx_pack1, tx_pack1]</span><br><span class="line"></span><br><span class="line">    stats2 = &#123;&#125;</span><br><span class="line">    for line in content2.splitlines():</span><br><span class="line">        if sep in line:</span><br><span class="line">            i = line.split(&apos;:&apos;)[0].strip()</span><br><span class="line">            data = line.split(&apos;:&apos;)[1].split()</span><br><span class="line">            rx_bytes2, tx_bytes2 = (int(data[0]), int(data[8]))</span><br><span class="line">            rx_pack2, tx_pack2 = (int(data[1]), int(data[9]))</span><br><span class="line">            stats2[i] = [rx_bytes2, tx_bytes2, rx_pack2, tx_pack2]</span><br><span class="line"></span><br><span class="line">    value_dic = &#123;&apos;face&apos;:&#123;&#125;&#125;</span><br><span class="line"></span><br><span class="line">    for i in stats1.keys():</span><br><span class="line">        rx_bytes_ps = (stats2[i][0] - stats1[i][0]) / frist_invoke</span><br><span class="line">        tx_bytes_ps = (stats2[i][1] - stats1[i][1]) / frist_invoke</span><br><span class="line">        rx_pps = (stats2[i][2] - stats1[i][2]) / frist_invoke</span><br><span class="line">        tx_pps = (stats2[i][3] - stats1[i][3]) / frist_invoke</span><br><span class="line"></span><br><span class="line">        if i.strip()!=&apos;lo&apos;:</span><br><span class="line">            value_dic[&apos;face&apos;][i] = &#123;</span><br><span class="line">                &apos;network.nic&apos;:i,</span><br><span class="line">                &apos;network.rx_mb&apos;:rx_bytes_ps/(1024*1024),</span><br><span class="line">                &apos;network.tx_mb&apos;:tx_bytes_ps/(1024*1024),</span><br><span class="line">                &apos;network.rx_pck&apos;:rx_pps,</span><br><span class="line">                &apos;network.tx_pck&apos;:tx_pps,</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    return value_dic</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line"></span><br><span class="line">    m = monitor()</span><br><span class="line">    print m</span><br></pre></td></tr></table></figure>
+<h1 id="swap-py"><a href="#swap-py" class="headerlink" title="swap.py"></a>swap.py</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding: utf-8</span><br><span class="line">__author__ = &apos;whoami&apos;</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">@version: 1.0</span><br><span class="line">@author: whoami</span><br><span class="line">@license: Apache Licence 2.0</span><br><span class="line">@contact: skutil@gmail.com</span><br><span class="line">@site: http://www.itweet.cn</span><br><span class="line">@software: PyCharm Community Edition</span><br><span class="line">@file: swap.py</span><br><span class="line">@time: 2015-12-03 下午3:16</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">def monitor(frist_invoke=1):</span><br><span class="line">    mem = &#123;&#125;</span><br><span class="line">    f = open(&quot;/proc/meminfo&quot;)</span><br><span class="line">    lines = f.readlines()</span><br><span class="line">    f.close()</span><br><span class="line">    for line in lines:</span><br><span class="line">        if len(line) &lt; 2: continue</span><br><span class="line">        name = line.split(&apos;:&apos;)[0]</span><br><span class="line">        var = line.split(&apos;:&apos;)[1].split()[0]</span><br><span class="line">        mem[name] = long(var) / (1024.0)</span><br><span class="line"></span><br><span class="line">    value_dic = &#123;</span><br><span class="line">        &apos;swap.total&apos;:mem[&apos;SwapTotal&apos;],</span><br><span class="line">        &apos;swap.cached&apos;:mem[&apos;SwapCached&apos;],</span><br><span class="line">        &apos;swap.free&apos;:mem[&apos;SwapFree&apos;],</span><br><span class="line">        &apos;swap.used&apos;:mem[&apos;SwapTotal&apos;]-mem[&apos;SwapFree&apos;],</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return value_dic</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    print monitor()</span><br></pre></td></tr></table></figure>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/monitor/">monitor</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/02/03/apache hadoop federation配置/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">apache hadoop federation配置</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/01/01/zookeeper 大量logs解决/">
+        <span class="next-text nav-default">zookeeper 大量logs解决</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

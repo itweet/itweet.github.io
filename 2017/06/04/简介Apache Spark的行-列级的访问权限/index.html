@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="简介Apache Spark的行-列级的访问权限">
+
+
+
+
+  <meta name="keywords" content="spark,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/06/04/简介Apache Spark的行-列级的访问权限/">
+
+
+<meta name="description" content="Hortonworks数据平台(HDP)的最新版本的功能为我们的客户提供了大量重大的改良，例如，现在HDP 2.6.0支持Apache Spark™2.1和Apache Hive™2.1(LLAP™)作为GA。通常客户在Hive里面存储数据，用Hive和SparkSQL分析这些数据。这种方案一个很重要的需求是不管是否是用Hive 和SparkSQL分析数据，都要在Hive数据中应用相同细粒度的访问">
+<meta name="keywords" content="spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简介Apache Spark的行-列级的访问权限">
+<meta property="og:url" content="http://itweet.github.io/2017/06/04/简介Apache Spark的行-列级的访问权限/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Hortonworks数据平台(HDP)的最新版本的功能为我们的客户提供了大量重大的改良，例如，现在HDP 2.6.0支持Apache Spark™2.1和Apache Hive™2.1(LLAP™)作为GA。通常客户在Hive里面存储数据，用Hive和SparkSQL分析这些数据。这种方案一个很重要的需求是不管是否是用Hive 和SparkSQL分析数据，都要在Hive数据中应用相同细粒度的访问">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.02.06-PM.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.06.43-PM.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.07.58-PM.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.13.57-PM.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.20.23-PM.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.518Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简介Apache Spark的行-列级的访问权限">
+<meta name="twitter:description" content="Hortonworks数据平台(HDP)的最新版本的功能为我们的客户提供了大量重大的改良，例如，现在HDP 2.6.0支持Apache Spark™2.1和Apache Hive™2.1(LLAP™)作为GA。通常客户在Hive里面存储数据，用Hive和SparkSQL分析这些数据。这种方案一个很重要的需求是不管是否是用Hive 和SparkSQL分析数据，都要在Hive数据中应用相同细粒度的访问">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.02.06-PM.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 简介Apache Spark的行-列级的访问权限 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          简介Apache Spark的行-列级的访问权限
+        
+      </h1>
+
+      <time class="post-time">
+          6月 04 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Hortonworks数据平台(HDP)的最新版本的功能为我们的客户提供了大量重大的改良，例如，现在HDP 2.6.0支持Apache Spark™2.1和Apache Hive™2.1(LLAP™)作为GA。通常客户在Hive里面存储数据，用Hive和SparkSQL分析这些数据。这种方案一个很重要的需求是不管是否是用Hive 和SparkSQL分析数据，都要在Hive数据中应用相同细粒度的访问权限规则，。这种细粒度访问权限包括的功能有行/列级访问或者屏蔽数据。Spark SQL 2.1的 HDP 2.6.0行/列级安全性是预定了GA并且即将发布的 HDP 2.6.1的技术预览版。</p>
+<p>企业最基本的需求一直是安全性。例如，在一个公司里记账、数据科学、区域销售团队可能都需要访问权限查看客户数据，而敏感的数据，像信用卡卡号仅仅只有财务团队可以访问。此前，Apache Hive™和Apache Ranger™的规则就是针对处理这种情况的。</p>
+<h3 id="使用HDP-2-6之后-SparkSQL的核心价值"><a href="#使用HDP-2-6之后-SparkSQL的核心价值" class="headerlink" title="使用HDP 2.6之后 SparkSQL的核心价值"></a>使用HDP 2.6之后 SparkSQL的核心价值</h3><ul>
+<li><p>共享访问权限规则：同一集群上可以安全的共享数据，还可以通过SparkSQL和 Hive之间通用的访问权限规则持续控制数据。</p>
+</li>
+<li><p>审计：SparkSQL所有的访问通道都可以通过Ranger的集中式接口监控和搜索。</p>
+</li>
+<li><p>资源管理： 每个用户都可以用一个唯一的队列访问安全的共享数据。</p>
+</li>
+<li><p>最低过渡成本：因为这种功能在SQL中提供了行/列级安全性，所以目前 Spark 2.1 apps 、脚本、所有的Spark shells(spark-shell, pyspark, sparkR, spark-sql)无需任何修改都支持这种功能。</p>
+</li>
+</ul>
+<p>使用行/列级安全性不同SQL，用户基于用过的规则，做相同的查询得到的结果不同。换句话说，用户只能基于每个Kerberos主体的身份信息查看数据。细粒度的样式限制了对数据库的访问， 表的访问， 行的访问和列的访问。</p>
+<h3 id="SparkSQL访问模式"><a href="#SparkSQL访问模式" class="headerlink" title="SparkSQL访问模式"></a>SparkSQL访问模式</h3><p>Spark SQL 有多种不同的访问模式—Spark Thrift Server over JDBC/ODBC, Spark shells, 和 Spark 应用程序. 也可以用Spark Thrift Server经由Apache  Zeppelin的JDBC解释器访问SparkSQL，HDP 2.6都支持这些访问模式。</p>
+<h3 id="示例数据和Ranger的访问控制策略"><a href="#示例数据和Ranger的访问控制策略" class="headerlink" title="示例数据和Ranger的访问控制策略"></a>示例数据和Ranger的访问控制策略</h3><p>我们假设一下我们有一个客户表，t_customer’，在数据库’db_spark中包含以下数据`。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.02.06-PM.png" alt></p>
+<p>例如有两个用户，“datascience” 和“billing”。 用访问权限规则定义Apache Ranger限制“datascience” 用户只能访问男性顾客，并且只能访问前四个名称字符。“billing”用户没有这种限制。</p>
+<h3 id="SQL用JDBC-ODBC通过-Spark-Thrift-Server访问Hive表"><a href="#SQL用JDBC-ODBC通过-Spark-Thrift-Server访问Hive表" class="headerlink" title="SQL用JDBC/ODBC通过 Spark Thrift Server访问Hive表"></a>SQL用JDBC/ODBC通过 Spark Thrift Server访问Hive表</h3><p>下方示例中，<code>datascience</code>用户登录 <code>beeline</code> 和 <code>Zeppelin</code> ，仅访问男性用户并屏蔽用户的姓。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.06.43-PM.png" alt></p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.07.58-PM.png" alt></p>
+<h3 id="使用-Scala-Python-R编程访问Hive表格"><a href="#使用-Scala-Python-R编程访问Hive表格" class="headerlink" title="使用 Scala/ Python/ R编程访问Hive表格"></a>使用 Scala/ Python/ R编程访问Hive表格</h3><p>当两个用户运行同样的SQL query从客户表中检索所有的数据 ，结果会有所不同。接下来的环节展示了两种 spark-shell 命令，一个用于‘billing’ 用户， 另一个用于限制更多的“datascience” 用户。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.13.57-PM.png" alt></p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.20.23-PM.png" alt></p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>访问权限是企业的关键需求，现在SparkSQL的行/列级访问权限，屏蔽和密文等提供了企业级细粒度的访问权限。SparkSQL的访问通道遵循的是Hive用户遵循的同样的访问权限规则。此操作可以移除SparkSQL的关键限制， 我们认为还可以采纳更多的SparkSQL功能。</p>
+<p>A demo of this feature can be viewed in this youtube video:</p>
+<p>视频地址：<a href="https://youtu.be/o6M4eljSIOQ" target="_blank" rel="noopener">https://youtu.be/o6M4eljSIOQ</a></p>
+<p>如果您要在您的 HDP 2.6环境重尝试这种功能， 请参阅这篇HCC文章，里面提供了更多的细节说明。</p>
+<p>译文原文：<a href="https://hortonworks.com/blog/row-column-level-control-apache-spark/" target="_blank" rel="noopener">https://hortonworks.com/blog/row-column-level-control-apache-spark/</a></p>
+<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png" alt="Itweet公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/spark/">spark</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/06/09/解密Apache Hadoop YARN Fair Scheduler Queue Basics/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">解密Apache Hadoop YARN Fair Scheduler Queue Basics</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/06/04/openstack系列(11)-平台运维/">
+        <span class="next-text nav-default">openstack系列(11)-平台运维</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

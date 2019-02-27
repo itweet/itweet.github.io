@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Enterprise-BigData-platform-deployment-guide-part-4">
+
+
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/08/03/Enterprise-BigData-platform-deployment-guide-part-4/">
+
+
+<meta name="description" content="集群的安装方式选择Ambari来进行自动化安装，目前Ambari是开源的大数据管理工具，而HDP是不开源。Ambari做为Apache顶级项目支持可插拔的管理各种不同的大数据发行版，每个公司有技术能力都可以做一个大数据版本，让Ambari进行管理，所以说Ambari其实是支持多平台的一款大数据自动化部署和管理软件。 Ambari安装下载相关的repo文件，到需要安装ambari-server的主机">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Enterprise-BigData-platform-deployment-guide-part-4">
+<meta property="og:url" content="http://itweet.github.io/2017/08/03/Enterprise-BigData-platform-deployment-guide-part-4/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="集群的安装方式选择Ambari来进行自动化安装，目前Ambari是开源的大数据管理工具，而HDP是不开源。Ambari做为Apache顶级项目支持可插拔的管理各种不同的大数据发行版，每个公司有技术能力都可以做一个大数据版本，让Ambari进行管理，所以说Ambari其实是支持多平台的一款大数据自动化部署和管理软件。 Ambari安装下载相关的repo文件，到需要安装ambari-server的主机">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/ambari-launch-install-wizard.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step1-Get-Started.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step2-Select-Version.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step2-Select-Version-2.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step3-Install-Options.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step3-Confirm-Hosts.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step4-Choose-Services.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step5-Assign-Masters-1.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step5-Assign-Masters-2.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step6-Assign-Slaves-and-Clients.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step7-Customize-Services.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step8-Review.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step9-Install-Start-and-Test.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step10–Summary.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/ambari–dashboard.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.523Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Enterprise-BigData-platform-deployment-guide-part-4">
+<meta name="twitter:description" content="集群的安装方式选择Ambari来进行自动化安装，目前Ambari是开源的大数据管理工具，而HDP是不开源。Ambari做为Apache顶级项目支持可插拔的管理各种不同的大数据发行版，每个公司有技术能力都可以做一个大数据版本，让Ambari进行管理，所以说Ambari其实是支持多平台的一款大数据自动化部署和管理软件。 Ambari安装下载相关的repo文件，到需要安装ambari-server的主机">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/BigData/img/ambari-launch-install-wizard.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Enterprise-BigData-platform-deployment-guide-part-4 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Enterprise-BigData-platform-deployment-guide-part-4
+        
+      </h1>
+
+      <time class="post-time">
+          8月 03 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>集群的安装方式选择Ambari来进行自动化安装，目前Ambari是开源的大数据管理工具，而HDP是不开源。Ambari做为Apache顶级项目支持可插拔的管理各种不同的大数据发行版，每个公司有技术能力都可以做一个大数据版本，让Ambari进行管理，所以说Ambari其实是支持多平台的一款大数据自动化部署和管理软件。</p>
+<h3 id="Ambari安装"><a href="#Ambari安装" class="headerlink" title="Ambari安装"></a>Ambari安装</h3><p>下载相关的repo文件，到需要安装ambari-server的主机上，命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://you_yum_repo_ip/hdp/ambari.repo &gt; /etc/yum.repos.d/ambari.repo</span><br></pre></td></tr></table></figure>
+<p>安装ambari-server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install ambari-server -y</span><br></pre></td></tr></table></figure>
+<p>配置Ambari-Server的JDK</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http://public-repo-1.hortonworks.com/ARTIFACTS/jdk-7u67-linux-x64.tar.gz -O /var/lib/ambari-server/resources/jdk-7u67-linux-x64.tar.gz</span><br><span class="line">wget http://public-repo-1.hortonworks.com/ARTIFACTS/UnlimitedJCEPolicyJDK7.zip /var/lib/ambari-server/resources/UnlimitedJCEPolicyJDK7.zip</span><br></pre></td></tr></table></figure>
+<p>ambari-server配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">[root@ambari-server resources]# ambari-server setup</span><br><span class="line">Using python  /usr/bin/python</span><br><span class="line">Setup ambari-server</span><br><span class="line">Checking SELinux...</span><br><span class="line">SELinux status is &apos;enabled&apos;</span><br><span class="line">SELinux mode is &apos;permissive&apos;</span><br><span class="line">WARNING: SELinux is set to &apos;permissive&apos; mode and temporarily disabled.</span><br><span class="line">OK to continue [y/n] (y)? </span><br><span class="line">Customize user account for ambari-server daemon [y/n] (n)? </span><br><span class="line">Adjusting ambari-server permissions and ownership...</span><br><span class="line">Checking firewall status...</span><br><span class="line">Checking JDK...</span><br><span class="line">[1] Oracle JDK 1.8 + Java Cryptography Extension (JCE) Policy Files 8</span><br><span class="line">[2] Oracle JDK 1.7 + Java Cryptography Extension (JCE) Policy Files 7</span><br><span class="line">[3] Custom JDK</span><br><span class="line">==============================================================================</span><br><span class="line">Enter choice (1): 2</span><br><span class="line">JDK already exists, using /var/lib/ambari-server/resources/jdk-7u67-linux-x64.tar.gz</span><br><span class="line">Installing JDK to /usr/jdk64/</span><br><span class="line">Successfully installed JDK to /usr/jdk64/</span><br><span class="line">JCE Policy archive already exists, using /var/lib/ambari-server/resources/UnlimitedJCEPolicyJDK7.zip</span><br><span class="line">Installing JCE policy...</span><br><span class="line">Completing setup...</span><br><span class="line">Configuring database...</span><br><span class="line">Enter advanced database configuration [y/n] (n)? </span><br><span class="line">Configuring database...</span><br><span class="line">Default properties detected. Using built-in database.</span><br><span class="line">Configuring ambari database...</span><br><span class="line">Checking PostgreSQL...</span><br><span class="line">Running initdb: This may take up to a minute.</span><br><span class="line">Initializing database ... OK</span><br><span class="line"></span><br><span class="line">About to start PostgreSQL</span><br><span class="line">Configuring local database...</span><br><span class="line">Configuring PostgreSQL...</span><br><span class="line">Restarting PostgreSQL</span><br><span class="line">Creating schema and user...</span><br><span class="line">done.</span><br><span class="line">Creating tables...</span><br><span class="line">done.</span><br><span class="line">Extracting system views...</span><br><span class="line">ambari-admin-2.5.1.0.159.jar</span><br><span class="line">...........</span><br><span class="line">Adjusting ambari-server permissions and ownership...</span><br><span class="line">Ambari Server &apos;setup&apos; completed successfully.</span><br></pre></td></tr></table></figure>
+<p>启动ambari-server，通过提示监听8080端口，接下来就通过浏览器访问此端口进行可视化安装集群操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@ambari-server resources]# ambari-server start</span><br><span class="line">Using python  /usr/bin/python</span><br><span class="line">Starting ambari-server</span><br><span class="line">Ambari Server running with administrator privileges.</span><br><span class="line">Organizing resource files at /var/lib/ambari-server/resources...</span><br><span class="line">Ambari database consistency check started...</span><br><span class="line">Server PID at: /var/run/ambari-server/ambari-server.pid</span><br><span class="line">Server out at: /var/log/ambari-server/ambari-server.out</span><br><span class="line">Server log at: /var/log/ambari-server/ambari-server.log</span><br><span class="line">Waiting for server start...........</span><br><span class="line">Server started listening on 8080</span><br><span class="line"></span><br><span class="line">DB configs consistency check: no errors and warnings were found.</span><br><span class="line">Ambari Server &apos;start&apos; completed successfully.</span><br></pre></td></tr></table></figure>
+<h3 id="HDP安装"><a href="#HDP安装" class="headerlink" title="HDP安装"></a>HDP安装</h3><p>浏览器访问<a href="http://your_ambari-server_ip:8080/#/login" target="_blank" rel="noopener">http://your_ambari-server_ip:8080/#/login</a><br>用户名：admin<br>密    码：admin</p>
+<p>通过登录页面进入集群安装向导，如下所示。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/ambari-launch-install-wizard.png" alt="launch-install-wizard"></p>
+<p>通过鼠标单击”Launch Install Wizard”按钮，通过11个setup引导步骤，进行可视化的集群安装。</p>
+<h4 id="Step1-Get-Started"><a href="#Step1-Get-Started" class="headerlink" title="Step1 - Get Started"></a>Step1 - Get Started</h4><p>步骤1，需要填入一个集群名称Cluster Name，点击下一步。例如：    </p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Step1-Get-Started.png" alt="Step1-Get-Started"></p>
+<h4 id="Step2-Select-Version"><a href="#Step2-Select-Version" class="headerlink" title="Step2 - Select Version"></a>Step2 - Select Version</h4><p>选择使用HDP的版本，默认支持4个HDP版本的安装部署，鼠标点击“Use Local Repository”填入之前制作的本地仓库源地址,点击下一步：</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Step2-Select-Version.png" alt="Step2-Select-Version"></p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Step2-Select-Version-2.png" alt="Step2-Select-Version-2"></p>
+<h4 id="Step3-Install-Options"><a href="#Step3-Install-Options" class="headerlink" title="Step3 - Install Options"></a>Step3 - Install Options</h4><p>填写需要安装的目标主机节点的hosts映射名称，私钥信息填写为ambari-server所在节点，可以免密码登录所有节点的用户私钥信息。例如：一般通过root用户进行集群的安装，如下填写root用户” /root/.ssh/ id_rsa”文件内容。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Step3-Install-Options.png" alt="Step3-Install-Options"></p>
+<p>点击“Register and Confirm”进入下一步。</p>
+<h4 id="Step3-Confirm-Hosts"><a href="#Step3-Confirm-Hosts" class="headerlink" title="Step3 - Confirm Hosts"></a>Step3 - Confirm Hosts</h4><p>在这个步骤ambari-server节点会并行去多台机器执行相关命令。首先scp相关的ambari-agent的setup脚本到多台机器，然后并行执行相关的命令进行ambari-agent的安装，注册ambari-agent节点到ambari-server。这里主要工作是在所有节点安装ambari-agent，并且把ambari-agent注册到ambari-server，让server可以控制所有的agent节点。之后ambari-server就可以控制所有的agent执行命令进行HDP集群的安装。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Step3-Confirm-Hosts.png" alt="Step3-Confirm-Hosts"></p>
+<p>点击“Next”继续安装。</p>
+<h4 id="Step4-Choose-Services"><a href="#Step4-Choose-Services" class="headerlink" title="Step4 - Choose Services"></a>Step4 - Choose Services</h4><p>选择你需要安装的服务，目前HDP提供了30多个组件的自动化安装和部署维护。如下图所示：</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Step4-Choose-Services.png" alt="Step4-Choose-Services"></p>
+<h4 id="Step5-Assign-Masters"><a href="#Step5-Assign-Masters" class="headerlink" title="Step5 - Assign Masters"></a>Step5 - Assign Masters</h4><p>分配主节点所在主机，在分布式软件系统中，大多数都是有中心的结构，有主节点、从节点之分，所以这一步是对分布不是系统，主从架构的主节点角色分配，比如：HDFS NameNode安装在什么机器，Yarn ResourceManager安装在那个机器可以自主选择，当然如果你是第一次安装集群，就让它使用它默认自动选择的方式，避免调整角色分配导致安装失败。如下图：</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Step5-Assign-Masters-1.png" alt="Step5-Assign-Masters-1"></p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Step5-Assign-Masters-2.png" alt="Step5-Assign-Masters-2"></p>
+<h4 id="Step6-Assign-Slaves-and-Clients"><a href="#Step6-Assign-Slaves-and-Clients" class="headerlink" title="Step6 - Assign Slaves and Clients"></a>Step6 - Assign Slaves and Clients</h4><p>选择从节点和客户端所在主机，从节点和客户端是可以有多个的，可以进行自定义，默认会根据硬件做最小化选择从节点和客户端，这里可以根据需要选择从节点的分配。</p>
+<ul>
+<li>从节点 – 有n个，一个节点就代表一台物理主机或者虚拟主机。 </li>
+<li>客户端 – 有n个，一般是客户机上需要安装客户端，让客户机可以提交任务到集群。</li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Step6-Assign-Slaves-and-Clients.png" alt="Step6-Assign-Slaves-and-Clients"></p>
+<h4 id="Step7-Customize-Services"><a href="#Step7-Customize-Services" class="headerlink" title="Step7 - Customize Services"></a>Step7 - Customize Services</h4><p>自定义服务器配置，在这个步骤可以修改一些默认识别的参数，比如：Namenode存储的元数据目录，DataNode存储数据的目录。</p>
+<p>还有些服务，需要自己根据提示输入一些用户密码的内容，请牢记相关服务器输入的用户密码，因为这些会在后台Ambari-server数据库中创建相应的数据库。指不定那天就需要登录后台数据库解决一些问题。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Step7-Customize-Services.png" alt="Step7-Customize-Services"></p>
+<h4 id="Step8-Review"><a href="#Step8-Review" class="headerlink" title="Step8 - Review"></a>Step8 - Review</h4><p>在安装之前预览集群服务分配和节点相关信息是否正确，可以通过<code>Print</code>进行打印下载，查看更加详细的角色分配信息，如果检测没有任何问题，你就可以进行下一步<code>Deploy</code>了。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Step8-Review.png" alt="Step8-Review"></p>
+<h4 id="Step9-Install-Start-and-Test"><a href="#Step9-Install-Start-and-Test" class="headerlink" title="Step9 - Install, Start and Test"></a>Step9 - Install, Start and Test</h4><p>自动化安装、启动集群、自动化Test集群，根据你的硬件环境和网络相关因素，你需要等待一段时间，等集群自动化安装成功，所有主机<code>Status</code>都变成绿色进度条，那就可以点击<code>Next</code>。</p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Step9-Install-Start-and-Test.png" alt="Step9-Install-Start-and-Test"></p>
+<h4 id="Step10-–-Summary"><a href="#Step10-–-Summary" class="headerlink" title="Step10 – Summary"></a>Step10 – Summary</h4><p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Step10–Summary.png" alt="Step10–Summary"></p>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/ambari–dashboard.png" alt="ambari–dashboard"></p>
+<p>至此、集群安装完毕。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>本节内容主要讲解通过Ambari进行集群的自动化安装，在此过程中，一定要事先做好本地源，如果你是内网环境，需要事先具备两种源。</p>
+<ul>
+<li>HDP内网源</li>
+<li>LinuxOS源</li>
+</ul>
+<p>一般通过Apache搭建内网源，搭建之后把相关的<code>os.repo</code>和<code>ambari.repo</code>放到ambari-server服务器<code>/etc/yum.repo.d/</code>,然后执行命令<code>yum search mysql &amp;&amp; yum search ambari-server</code>验证是否具备相关源环境，如此这般，你才能如我文中所述步骤，顺利的一路绿色的成功部署集群。</p>
+<p>实战内容设计的技术有Linux操作系统的安装，Linux网络配置，Linux磁盘分区，Linux基本参数优化，HDP和OS离线源搭建(Apache或者Nginx)，Ambari自动化部署大数据集群等…</p>
+<p>《企业级大数据平台部署实施参考指南》分多节，有更多细节剖析，不妥之处欢迎指正！</p>
+<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/hadoop/">hadoop</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/09/03/about-ambari-new-feature/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">about-ambari-new-feature</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/07/30/Enterprise-BigData-platform-deployment-guide-part-3/">
+        <span class="next-text nav-default">Enterprise-BigData-platform-deployment-guide-part-3</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

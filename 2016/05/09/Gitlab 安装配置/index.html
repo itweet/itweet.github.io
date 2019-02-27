@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Gitlab 安装配置">
+
+
+
+
+  <meta name="keywords" content="git,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/05/09/Gitlab 安装配置/">
+
+
+<meta name="description" content="GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能可以轻松实现代码复用，便于日后">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gitlab 安装配置">
+<meta property="og:url" content="http://itweet.github.io/2016/05/09/Gitlab 安装配置/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能可以轻松实现代码复用，便于日后">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://jikelab.github.io/tech-labs/screenshots/Gitlab.png">
+<meta property="og:image" content="http://realxujiang.github.io/screenshots/git-hadoop.png">
+<meta property="og:image" content="hhttp://realxujiang.github.io/screenshots/git-import-project.png">
+<meta property="og:image" content="http://realxujiang.github.io/screenshots/git-clone-to-gitlab.png">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.497Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gitlab 安装配置">
+<meta name="twitter:description" content="GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能可以轻松实现代码复用，便于日后">
+<meta name="twitter:image" content="https://jikelab.github.io/tech-labs/screenshots/Gitlab.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Gitlab 安装配置 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Gitlab 安装配置
+        
+      </h1>
+
+      <time class="post-time">
+          5月 09 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p><a href="https://about.gitlab.com/downloads/" target="_blank" rel="noopener">GitLab</a>是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。</p>
+<p>官网写的安装已经很全面，后面基本都是web可视化操作，考验Git能力，我这里就照抄下来啦。</p>
+<h1 id="Centos-6-7-Install-Gitlab"><a href="#Centos-6-7-Install-Gitlab" class="headerlink" title="Centos 6.7 Install Gitlab"></a>Centos 6.7 Install Gitlab</h1><h2 id="1-Config-git-info"><a href="#1-Config-git-info" class="headerlink" title="1. Config git info"></a>1. Config git info</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@gitlab-machine ~]# git config --global user.name &quot;whoami&quot;</span><br><span class="line">[root@gitlab-machine ~]# git config --global user.email &quot;whoami@itweet.cn&quot;</span><br><span class="line">[root@gitlab-machine ~]# git config --global color.ui true</span><br><span class="line">[root@gitlab-machine ~]# git config --list</span><br><span class="line">user.name=whoami</span><br><span class="line">user.email=whoami@itweet.cn</span><br><span class="line">color.ui=true</span><br></pre></td></tr></table></figure>
+<h2 id="2-Install-and-configure-the-necessary-dependencies"><a href="#2-Install-and-configure-the-necessary-dependencies" class="headerlink" title="2.Install and configure the necessary dependencies"></a>2.Install and configure the necessary dependencies</h2><p>If you install Postfix to send email please select ‘Internet Site’ during setup. Instead of using Postfix you can also use Sendmail or <a href="https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/smtp.md" target="_blank" rel="noopener">configure a custom SMTP server</a> and <a href="https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/smtp.md#smtp-on-localhost" target="_blank" rel="noopener">configure it as an SMTP server</a>.</p>
+<p>On Centos 6 and 7, the commands below will also open HTTP and SSH access in the system firewall.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@gitlab-machine ~]#  sudo yum install curl openssh-server openssh-clients postfix cronie</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine ~]# sudo service postfix start</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine ~]# sudo chkconfig postfix on</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine ~]# sudo lokkit -s http -s ssh</span><br></pre></td></tr></table></figure>
+<h2 id="3-Add-the-GitLab-package-server-and-install-the-package"><a href="#3-Add-the-GitLab-package-server-and-install-the-package" class="headerlink" title="3. Add the GitLab package server and install the package"></a>3. Add the GitLab package server and install the package</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash</span><br><span class="line">sudo yum install gitlab-ce</span><br></pre></td></tr></table></figure>
+<p>If you are not comfortable installing the repository through a piped script, you can find the <a href="https://packages.gitlab.com/gitlab/gitlab-ce/install" target="_blank" rel="noopener">entire script here</a> and <a href="https://packages.gitlab.com/gitlab/gitlab-ce" target="_blank" rel="noopener">select and download the package manually</a> and install using</p>
+<p>Download RPM Package:<br>    <a href="https://packages.gitlab.com/gitlab/gitlab-ce" target="_blank" rel="noopener">https://packages.gitlab.com/gitlab/gitlab-ce</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -LJO https://packages.gitlab.com/gitlab/gitlab-ce/packages/el/6/gitlab-ce-XXX.rpm/download</span><br><span class="line">rpm -i gitlab-ce-XXX.rpm</span><br></pre></td></tr></table></figure></p>
+<h3 id="For-example"><a href="#For-example" class="headerlink" title="For example"></a>For example</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@gitlab-machine ~]# lsof -i :80|wc -l</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine ~]# netstat -lntp|grep 80|wc -l</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine ~]# ls -l gitlab-ce-8.7.0-ce.0.el6.x86_64.rpm </span><br><span class="line">-rwxr-xr-x 1 root root 261779557 May  2 14:06 gitlab-ce-8.7.0-ce.0.el6.x86_64.rpm</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine ~]# rpm -ivh gitlab-ce-8.7.0-ce.0.el6.x86_64.rpm </span><br><span class="line">Preparing...                ########################################### [100%]</span><br><span class="line">   1:gitlab-ce              ########################################### [100%]</span><br><span class="line">hostname: Host name lookup failure</span><br><span class="line">gitlab: Thank you for installing GitLab!</span><br><span class="line">gitlab: To configure and start GitLab, RUN THE FOLLOWING COMMAND:</span><br><span class="line"></span><br><span class="line">sudo gitlab-ctl reconfigure</span><br><span class="line"></span><br><span class="line">gitlab: GitLab should be reachable at http://gitlab.example.com</span><br><span class="line">gitlab: Otherwise configure GitLab for your system by editing /etc/gitlab/gitlab.rb file</span><br><span class="line">gitlab: And running reconfigure again.</span><br><span class="line">gitlab: </span><br><span class="line">gitlab: For a comprehensive list of configuration options please see the Omnibus GitLab readme</span><br><span class="line">gitlab: https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md</span><br><span class="line">gitlab: </span><br><span class="line">It looks like GitLab has not been configured yet; skipping the upgrade script.</span><br></pre></td></tr></table></figure>
+<h2 id="4-Configure-and-start-GitLab"><a href="#4-Configure-and-start-GitLab" class="headerlink" title="4.Configure and start GitLab"></a>4.Configure and start GitLab</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@gitlab-machine ~]# sudo gitlab-ctl reconfigure</span><br><span class="line">Starting Chef Client, version 12.6.0</span><br><span class="line">...omit...</span><br><span class="line">Running handlers:</span><br><span class="line">Running handlers complete</span><br><span class="line">Chef Client finished, 221/300 resources updated in 01 minutes 24 seconds</span><br><span class="line">gitlab Reconfigured!</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine ~]# lsof -i :80             </span><br><span class="line">COMMAND  PID       USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">nginx   2392       root    6u  IPv4  83966      0t0  TCP *:http (LISTEN)</span><br><span class="line">nginx   2394 gitlab-www    6u  IPv4  83966      0t0  TCP *:http (LISTEN)</span><br><span class="line">[root@gitlab-machine ~]# netstat -lnop|grep 80|wc -l</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<h2 id="修改gitlab仓库地址"><a href="#修改gitlab仓库地址" class="headerlink" title="修改gitlab仓库地址"></a>修改gitlab仓库地址</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@gitlab-server data]# cat /etc/gitlab/gitlab.rb |grep git_data</span><br><span class="line"># git_data_dir &quot;/var/opt/gitlab/git-data&quot;</span><br><span class="line">git_data_dir &quot;/data/gitlab/git-data&quot;</span><br><span class="line"></span><br><span class="line">[root@gitlab-server data]# sudo gitlab-ctl reconfigure</span><br><span class="line"></span><br><span class="line">[root@gitlab-server data]# sudo gitlab-ctl restart</span><br></pre></td></tr></table></figure>
+<h2 id="5、Browse-to-the-hostname-and-login"><a href="#5、Browse-to-the-hostname-and-login" class="headerlink" title="5、Browse to the hostname and login"></a>5、Browse to the hostname and login</h2><p>On your first visit, you’ll be redirected to a password reset screen to provide the password for the initial administrator account. Enter your desired password and you’ll be redirected back to the login screen.</p>
+<p>The default account’s username is root. Provide the password you created earlier and login. After login you can change the username if you wish.</p>
+<blockquote>
+<p>For configuration and troubleshooting options please see the <a href="http://doc.gitlab.com/omnibus/" target="_blank" rel="noopener">Omnibus GitLab documentation</a><br>If you are located in China, try using <a href="https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/" target="_blank" rel="noopener">https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/</a></p>
+</blockquote>
+<p>访问地址<a href="http://gitlab.itweet.cn:80" target="_blank" rel="noopener">http://gitlab.itweet.cn:80</a> (需要提前映射好域名和ip地址到hosts文件),第一次访问，提示’Change your password‘页面，你可以输入密码，此密码即为root密码；然后可用此密码登录root用户，比如我这里设置为root/admin123。<br><img src="https://jikelab.github.io/tech-labs/screenshots/Gitlab.png" alt></p>
+<h2 id="6、入门使用"><a href="#6、入门使用" class="headerlink" title="6、入门使用"></a>6、入门使用</h2><p>基本都是web可视化操作。这里我简单减少几个概念吧。</p>
+<p>6.1 Project 可以发起一个项目，查询当前用户所拥有或者能管理的项目列表</p>
+<p>6.2 Users 用户管理模块，管理员可见。</p>
+<p>6.3 Groups 组织机构，公司管理；比如一个公司可以开启一个groups下面有很多开发人员。</p>
+<p>6.4 Deploy keys 免密码ssh验证，git提交或者拉去代码，可以免密码验证。</p>
+<p>6.5 SSH keys</p>
+<p>当我们从GitHub或者GitLab上clone项目或者参与项目时，我们需要证明我们的身份。一种可能的解决方法是我们在每次访问的时候都带上账户名、密码，另外一种办法是在本地保存一个唯一key，在你的账户中也保存一份该key，在你访问时带上你的key即可。GitHub、GitLab就是采用key来验证你的身份的，并且利用RSA算法来生成这个密钥。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[root@gitlab-machine ~]# git config --list</span><br><span class="line">user.name=whoami</span><br><span class="line">user.email=whoami@itweet.cn</span><br><span class="line">color.ui=true</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine ~]# ssh-keygen -t rsa -C &quot;whoami@itweet.cn&quot;</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/root/.ssh/id_rsa): </span><br><span class="line">Created directory &apos;/root/.ssh&apos;.</span><br><span class="line">Enter passphrase (empty for no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved in /root/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /root/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">05:07:1c:92:ec:ec:79:cd:09:96:a3:8e:a3:13:bf:e2 xujiang@itweet.cn</span><br><span class="line">The key&apos;s randomart image is:</span><br><span class="line">+--[ RSA 2048]----+</span><br><span class="line">|     ..o+o.      |</span><br><span class="line">|      o..o       |</span><br><span class="line">|     o   ..      |</span><br><span class="line">|      o =.       |</span><br><span class="line">|     . +S= .     |</span><br><span class="line">|  .   + . +      |</span><br><span class="line">|   o o .         |</span><br><span class="line">|  o + .          |</span><br><span class="line">| .E+.o           |</span><br><span class="line">+-----------------+</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine ~]# cat .ssh/id_rsa.pub </span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtWly2W39tM88fNrPHDoutQUe/iZZonOs/Qf8ZVxF+Kyivj8PrvlR83MmPoBbGwF/YOn5EHROEBy2EAFCHk+zQZ9uHJlsRF4EU6Aq5yZBfOTA8erdllDIy25BLITAhNe4AXmcGKJMl/TmNBWmN5+GjmTyL5l85+hMTUM3cUT8WVhPDFGlm+3UPh1AwptlDOe+t0XX6dl39BZ3i1CTmh+X38Q1K7RHkIjSSeUZQANGzJlfENQqse/zhENvUftk4EwRXL6+RIPwdk+ijAvnKGIwIfSx75u51E29jvvnP8FidU0HnBsbbedFg6cWlnMj/6AgXxnP22skmEBRAlRb7qO/zQ== xujiang@itweet.cn</span><br></pre></td></tr></table></figure>
+<p>添加，id_rsa.pub到ssh keys 页面，即可完成认证。如下验证：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@gitlab-machine data]# git clone git@gitlab.itweet.cn:xujiang/test.git</span><br><span class="line">Initialized empty Git repository in /data/test/.git/</span><br><span class="line">The authenticity of host &apos;gitlab.itweet.cn (192.168.1.125)&apos; can&apos;t be established.</span><br><span class="line">RSA key fingerprint is d4:2d:bb:87:cf:41:ff:fd:64:b7:66:56:45:f2:d1:64.</span><br><span class="line">Are you sure you want to continue connecting (yes/no)? yes </span><br><span class="line">Warning: Permanently added &apos;gitlab.itweet.cn,192.168.1.125&apos; (RSA) to the list of known hosts.</span><br><span class="line">remote: Counting objects: 6, done.</span><br><span class="line">remote: Compressing objects: 100% (4/4), done.</span><br><span class="line">Receiving objects: 100% (6/6), 4.30 KiB, done.</span><br><span class="line">remote: Total 6 (delta 0), reused 0 (delta 0)</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine data]# pwd</span><br><span class="line">/data</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine data]# tree</span><br><span class="line">.</span><br><span class="line">└── test</span><br><span class="line">    ├── LICENSE</span><br><span class="line">    └── README.md</span><br><span class="line"></span><br><span class="line">2 directories, 2 files</span><br></pre></td></tr></table></figure>
+<p><strong>For Examples</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@gitlab-machine data]# cd test/</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine test]# cat hello.py </span><br><span class="line">#!/usr/bin/python</span><br><span class="line">print(&quot;hello itweet.cn!&quot;)</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine test]# git add hello.py </span><br><span class="line"></span><br><span class="line">[root@gitlab-machine test]# git commit -m &apos;first python script...&apos;</span><br><span class="line">[master 25bddfa] first python script...</span><br><span class="line"> 1 files changed, 2 insertions(+), 0 deletions(-)</span><br><span class="line"> create mode 100644 hello.py</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine test]# git push origin master</span><br><span class="line">Counting objects: 4, done.</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (3/3), 351 bytes, done.</span><br><span class="line">Total 3 (delta 0), reused 0 (delta 0)</span><br><span class="line">To git@gitlab.itweet.cn:whoami/test.git</span><br><span class="line">   f0eb0f6..25bddfa  master -&gt; master</span><br></pre></td></tr></table></figure>
+<p>6.6 导入项目可以支持来自多个主流代码托管地,可以是本地初始化项目。<br><img src="http://realxujiang.github.io/screenshots/git-hadoop.png" alt><br><img src="hhttp://realxujiang.github.io/screenshots/git-import-project.png" alt><br><img src="http://realxujiang.github.io/screenshots/git-clone-to-gitlab.png" alt></p>
+<p>导入成功后，基本上可以看到，所有的github相关的代码，版本都会获取过来。包括社区全部完整的信息。更多功能参考：<a href="https://about.gitlab.com/gitlab-ce-features/" target="_blank" rel="noopener">https://about.gitlab.com/gitlab-ce-features/</a></p>
+<h2 id="Git-GUI"><a href="#Git-GUI" class="headerlink" title="Git GUI"></a>Git GUI</h2><ul>
+<li><p>Git-scm: <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a></p>
+</li>
+<li><p>SourceTree: <a href="https://www.sourcetreeapp.com/" target="_blank" rel="noopener">https://www.sourcetreeapp.com/</a></p>
+<ul>
+<li>SourceTree 是 Windows 和Mac OS X 下免费的 Git 和 Hg 客户端，拥有可视化界面，容易上手操作。同时它也是Mercurial和Subversion版本控制系统工具。支持创建、提交、clone、push、pull 和merge等操作。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Markdown-format-document"><a href="#Markdown-format-document" class="headerlink" title="Markdown format document"></a>Markdown format document</h2><p>For windows:</p>
+<ul>
+<li>MakrdownPad</li>
+<li><a href="http://www.markdownpad.com/" target="_blank" rel="noopener">http://www.markdownpad.com/</a></li>
+</ul>
+<p>For Mac:</p>
+<ul>
+<li>Mou,Mweb</li>
+<li><a href="http://25.io/mou/" target="_blank" rel="noopener">http://25.io/mou/</a></li>
+</ul>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><ul>
+<li><p>I. 如果提示：“You won’t be able to pull or push project code via SSH until you add an SSH key to your profile Don’t show again | Remind later”<br> 解决：需要本地配置.ssh免密码登录，可以通过ssh隧道git clone项目，效率会高得多。</p>
+</li>
+<li><p>II. Gitlab 项目地址不对，希望是自己的域名地址，如：“<a href="mailto:git@gitlab.example.com" target="_blank" rel="noopener">git@gitlab.example.com</a>:itweet.cn/hadoop.git”,希望是：“<a href="mailto:git@gitlab.itweet.cn" target="_blank" rel="noopener">git@gitlab.itweet.cn</a>:itweet.cn/hadoop.git”</p>
+</li>
+</ul>
+<p>解决：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@gitlab-machine ~]# sudo vim /etc/gitlab/gitlab.rb </span><br><span class="line">## external_url &apos;http://gitlab.example.com&apos;</span><br><span class="line">external_url &apos;http://gitlab.itweet.cn&apos;</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine gitlab]# sudo gitlab-ctl reconfigure</span><br><span class="line"></span><br><span class="line">[root@gitlab-machine ~]# sudo gitlab-ctl restart</span><br></pre></td></tr></table></figure>
+<ul>
+<li>III. Email发送邮件失败</li>
+</ul>
+<p>需要发送邮件的用户，比如使用qq发送，需要<a href="https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/smtp.md" target="_blank" rel="noopener">SMTP settings</a>,并且发邮件用户开启smtp/impi功能。</p>
+<p><strong>For examples</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">gitlab_rails[&apos;smtp_enable&apos;] = true</span><br><span class="line">gitlab_rails[&apos;smtp_address&apos;] = &quot;smtp.exmail.qq.com&quot;</span><br><span class="line">gitlab_rails[&apos;smtp_port&apos;] = 465</span><br><span class="line">gitlab_rails[&apos;smtp_user_name&apos;] = &quot;xxxx@xx.com&quot;</span><br><span class="line">gitlab_rails[&apos;smtp_password&apos;] = &quot;password&quot;</span><br><span class="line">gitlab_rails[&apos;smtp_authentication&apos;] = &quot;login&quot;</span><br><span class="line">gitlab_rails[&apos;smtp_ssl&apos;] = true</span><br><span class="line">gitlab_rails[&apos;smtp_enable_starttls_auto&apos;] = true</span><br><span class="line">gitlab_rails[&apos;smtp_tls&apos;] = false</span><br></pre></td></tr></table></figure>
+<p>参考：<a href="https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/configuration.md#configuring-the-external-url-for-gitlab" target="_blank" rel="noopener">https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/configuration.md#configuring-the-external-url-for-gitlab</a><br>    <a href="https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/smtp.md#smtp-on-localhost" target="_blank" rel="noopener">https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/smtp.md#smtp-on-localhost</a><br>    <a href="https://jikelab.github.io/tech-labs/2015/07/12/git-manual/" target="_blank" rel="noopener">https://jikelab.github.io/tech-labs/2015/07/12/git-manual/</a><br>    <a href="https://help.github.com/desktop/guides/getting-started/" target="_blank" rel="noopener">https://help.github.com/desktop/guides/getting-started/</a></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/git/">git</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/05/14/安装并且优化centos 6 系统 Supper Hadoop/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">安装并且优化centos 6 系统 Supper Hadoop</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/05/05/企业级开发平台持续集成自动化架构设计/">
+        <span class="next-text nav-default">企业级开发平台持续集成自动化架构设计</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

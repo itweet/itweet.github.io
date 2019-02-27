@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="memcached_doc">
+
+
+
+
+  <meta name="keywords" content="MemDB,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2014/01/02/memcached_doc/">
+
+
+<meta name="description" content="Memcached 是一个高性能的分布式内存对象缓存系统，用于动态Web应用以减轻数据库负载。它通过在内存中缓存数据和对象来减少读取数据库的次数，从而提高动态、数据库驱动网站的速度。Memcached基于一个存储键/值对的hashmap。其守护进程（daemon ）是用C写的，但是客户端可以用任何语言来编写，并通过memcached协议与守护进程通信。  https://github.com/g">
+<meta name="keywords" content="MemDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="memcached_doc">
+<meta property="og:url" content="http://itweet.github.io/2014/01/02/memcached_doc/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Memcached 是一个高性能的分布式内存对象缓存系统，用于动态Web应用以减轻数据库负载。它通过在内存中缓存数据和对象来减少读取数据库的次数，从而提高动态、数据库驱动网站的速度。Memcached基于一个存储键/值对的hashmap。其守护进程（daemon ）是用C写的，但是客户端可以用任何语言来编写，并通过memcached协议与守护进程通信。  https://github.com/g">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-02T13:09:15.476Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="memcached_doc">
+<meta name="twitter:description" content="Memcached 是一个高性能的分布式内存对象缓存系统，用于动态Web应用以减轻数据库负载。它通过在内存中缓存数据和对象来减少读取数据库的次数，从而提高动态、数据库驱动网站的速度。Memcached基于一个存储键/值对的hashmap。其守护进程（daemon ）是用C写的，但是客户端可以用任何语言来编写，并通过memcached协议与守护进程通信。  https://github.com/g">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> memcached_doc - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          memcached_doc
+        
+      </h1>
+
+      <time class="post-time">
+          1月 02 2014
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <blockquote>
+<p>Memcached 是一个高性能的分布式内存对象缓存系统，用于动态Web应用以减轻数据库负载。它通过在内存中缓存数据和对象来减少读取数据库的次数，从而提高动态、数据库驱动网站的速度。Memcached基于一个存储键/值对的hashmap。其守护进程（daemon ）是用C写的，但是客户端可以用任何语言来编写，并通过memcached协议与守护进程通信。</p>
+</blockquote>
+<p><a href="https://github.com/gwhalin/Memcached-Java-Client" target="_blank" rel="noopener">https://github.com/gwhalin/Memcached-Java-Client</a></p>
+<h1 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h1><h2 id="源码安装"><a href="#源码安装" class="headerlink" title="源码安装"></a>源码安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.danga.com/memcached/dist/memcached-1.2.0.tar.gz</span><br><span class="line">wget http://www.monkey.org/~provos/libevent-1.2.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="yum安装基础依赖"><a href="#yum安装基础依赖" class="headerlink" title="yum安装基础依赖"></a>yum安装基础依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># yum install libevent libevent-devel -y</span><br><span class="line"># find / -name libevent*|grep so</span><br><span class="line">/usr/lib64/libevent_extra-1.4.so.2.1.3</span><br><span class="line">/usr/lib64/libevent-1.4.so.2</span><br><span class="line">/usr/lib64/libevent_core-1.4.so.2.1.3</span><br><span class="line">/usr/lib64/libevent_extra-1.4.so.2</span><br><span class="line">/usr/lib64/samba/libevents.so</span><br><span class="line">/usr/lib64/libevent.so</span><br><span class="line">/usr/lib64/libevent_core.so</span><br><span class="line">/usr/lib64/libevent_extra.so</span><br><span class="line">/usr/lib64/libevent_core-1.4.so.2</span><br><span class="line">/usr/lib64/libevent-1.4.so.2.1.3</span><br><span class="line"></span><br><span class="line"># tar -zxvf memcached-1.2.0.tar.gz </span><br><span class="line"># cd memcached-1.2.0</span><br><span class="line"># yum install gcc -y   ！！error==configure: error: no acceptable C compiler found in $PATH</span><br><span class="line"># ./configure -with-libevent=/usr</span><br><span class="line"># make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h2 id="检测安装是否成功"><a href="#检测安装是否成功" class="headerlink" title="检测安装是否成功"></a>检测安装是否成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@itr-nodetest02 memcached-1.2.0]#  ls -al /usr/local/bin/mem*</span><br><span class="line">-rwxr-xr-x 1 root root 113124 May 23 10:00 /usr/local/bin/memcached</span><br><span class="line">-rwxr-xr-x 1 root root 117479 May 23 10:00 /usr/local/bin/memcached-debug</span><br></pre></td></tr></table></figure>
+<h1 id="2、启动Memcached服务"><a href="#2、启动Memcached服务" class="headerlink" title="2、启动Memcached服务"></a>2、启动Memcached服务</h1><h2 id="2-1-启动Memcache的服务器端："><a href="#2-1-启动Memcache的服务器端：" class="headerlink" title="2.1.启动Memcache的服务器端："></a>2.1.启动Memcache的服务器端：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   #  /usr/local/bin/memcached -d -m 10 -u root -l 192.168.2.203 -p 11211 -c 256 -P /tmp/memcached.pid</span><br><span class="line"></span><br><span class="line">-d选项是启动一个守护进程，</span><br><span class="line">-m是分配给Memcache使用的内存数量，单位是MB，我这里是10MB，</span><br><span class="line">-u是运行Memcache的用户，我这里是root，</span><br><span class="line">-l是监听的服务器IP地址，如果有多个地址的话，我这里指定了服务器的IP地址192.168.0.200，</span><br><span class="line">-p是设置Memcache监听的端口，我这里设置了12000，最好是1024以上的端口，</span><br><span class="line">-c选项是最大运行的并发连接数，默认是1024，我这里设置了256，按照你服务器的负载量来设定，</span><br><span class="line">-P是设置保存Memcache的pid文件，我这里是保存在 /tmp/memcached.pid，</span><br></pre></td></tr></table></figure>
+<h2 id="3、测试Memcached"><a href="#3、测试Memcached" class="headerlink" title="3、测试Memcached:"></a>3、测试Memcached:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   # lsof -i :11211</span><br><span class="line">COMMAND    PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">memcached 4142 root    3u  IPv4  45398      0t0  TCP itr-nodetest02:memcache (LISTEN)</span><br><span class="line">memcached 4142 root    4u  IPv4  45399      0t0  UDP itr-nodetest02:memcache </span><br><span class="line"></span><br><span class="line"># yum install telnet -y</span><br><span class="line"># telnet 192.168.2.203 11211</span><br><span class="line">Trying 192.168.2.203...</span><br><span class="line">Connected to 192.168.2.203.</span><br><span class="line">Escape character is &apos;^]&apos;.</span><br><span class="line">^]</span><br><span class="line">telnet&gt; quit</span><br><span class="line">Connection closed.</span><br><span class="line">[root@itr-nodetest02 memcached-1.2.0]# ps -ef|grep memcached</span><br><span class="line">root      4142     1  0 10:04 ?        00:00:00 /usr/local/bin/memcached -d -m 10 -u root -l 192.168.2.203 -p 11211 -c 256 -P /tmp/memcached.pid</span><br></pre></td></tr></table></figure>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/MemDB/">MemDB</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2014/02/04/HDFS_NFS_Gateway/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">HDFS_NFS_Gateway</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
