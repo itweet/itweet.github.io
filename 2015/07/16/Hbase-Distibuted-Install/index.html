@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="Hbase Distibuted Install">
+  <meta name="description" content="HBase是一个分布式的、面向列的开源数据库，该技术来源于 Fay Chang 所撰写的Google论文“Bigtable：一个结构化数据的分布式存储系统”。">
 
 
 
@@ -35,18 +35,18 @@
 <link rel="canonical" href="http://itweet.github.io/2015/07/16/Hbase-Distibuted-Install/">
 
 
-<meta name="description" content="HBase是一个分布式的、面向列的开源数据库，该技术来源于 Fay Chang 所撰写的Google论文“Bigtable：一个结构化数据的分布式存储系统”。就像Bigtable利用了Google文件系统（File System）所提供的分布式数据存储一样，HBase在Hadoop之上提供了类似于Bigtable的能力。HBase是Apache的Hadoop项目的子项目。HBase不同于一般的关">
+<meta name="description" content="HBase是一个分布式的、面向列的开源数据库，该技术来源于 Fay Chang 所撰写的Google论文“Bigtable：一个结构化数据的分布式存储系统”。">
 <meta name="keywords" content="hbase">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hbase Distibuted Install">
 <meta property="og:url" content="http://itweet.github.io/2015/07/16/Hbase-Distibuted-Install/index.html">
 <meta property="og:site_name" content="WHOAMI">
-<meta property="og:description" content="HBase是一个分布式的、面向列的开源数据库，该技术来源于 Fay Chang 所撰写的Google论文“Bigtable：一个结构化数据的分布式存储系统”。就像Bigtable利用了Google文件系统（File System）所提供的分布式数据存储一样，HBase在Hadoop之上提供了类似于Bigtable的能力。HBase是Apache的Hadoop项目的子项目。HBase不同于一般的关">
+<meta property="og:description" content="HBase是一个分布式的、面向列的开源数据库，该技术来源于 Fay Chang 所撰写的Google论文“Bigtable：一个结构化数据的分布式存储系统”。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.483Z">
+<meta property="og:updated_time" content="2019-03-03T09:14:43.457Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hbase Distibuted Install">
-<meta name="twitter:description" content="HBase是一个分布式的、面向列的开源数据库，该技术来源于 Fay Chang 所撰写的Google论文“Bigtable：一个结构化数据的分布式存储系统”。就像Bigtable利用了Google文件系统（File System）所提供的分布式数据存储一样，HBase在Hadoop之上提供了类似于Bigtable的能力。HBase是Apache的Hadoop项目的子项目。HBase不同于一般的关">
+<meta name="twitter:description" content="HBase是一个分布式的、面向列的开源数据库，该技术来源于 Fay Chang 所撰写的Google论文“Bigtable：一个结构化数据的分布式存储系统”。">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -139,9 +139,7 @@
 
     
             <div class="post-content">
-            <blockquote>
-<p>HBase是一个分布式的、面向列的开源数据库，该技术来源于 Fay Chang 所撰写的Google论文“Bigtable：一个结构化数据的分布式存储系统”。就像Bigtable利用了Google文件系统（File System）所提供的分布式数据存储一样，HBase在Hadoop之上提供了类似于Bigtable的能力。HBase是Apache的Hadoop项目的子项目。HBase不同于一般的关系数据库，它是一个适合于非结构化数据存储的数据库。另一个不同的是HBase基于列的而不是基于行的模式。</p>
-</blockquote>
+            <p>HBase是一个分布式的、面向列的开源数据库，该技术来源于 Fay Chang 所撰写的Google论文“Bigtable：一个结构化数据的分布式存储系统”。就像Bigtable利用了Google文件系统（File System）所提供的分布式数据存储一样，HBase在Hadoop之上提供了类似于Bigtable的能力。HBase是Apache的Hadoop项目的子项目。HBase不同于一般的关系数据库，它是一个适合于非结构化数据存储的数据库。另一个不同的是HBase基于列的而不是基于行的模式。</p>
 <h1 id="1、hbase的分布模式"><a href="#1、hbase的分布模式" class="headerlink" title="1、hbase的分布模式"></a>1、hbase的分布模式</h1><h2 id="1-1-在server1上解压缩"><a href="#1-1-在server1上解压缩" class="headerlink" title="1.1 在server1上解压缩"></a>1.1 在server1上解压缩</h2><pre><code>[root@server1 installpackage]# tar -zxvf hbase-0.98.6.1-hadoop2-bin.tar.gz -C /usr/local/
 [root@server1 local]# mv hbase-0.98.6.1-hadoop2 hbase-0.98.6.1
 </code></pre><h2 id="1-2-编辑文件conf-hbase-env-sh-修改内容"><a href="#1-2-编辑文件conf-hbase-env-sh-修改内容" class="headerlink" title="1.2 编辑文件conf/hbase-env.sh 修改内容"></a>1.2 编辑文件conf/hbase-env.sh 修改内容</h2><pre><code>export JAVA_HOME=/usr/local/jdk1.7.0_45
@@ -220,7 +218,7 @@ server4
     2019
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
     </span>
 </span>
 

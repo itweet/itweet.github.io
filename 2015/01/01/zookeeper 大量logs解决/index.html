@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="zookeeper 大量logs解决">
+  <meta name="description" content="我们经常会遇到有大量zookeeper的日志，我们该如何处理，要么删除，要么禁止输出，这两种该如何实现？">
 
 
 
@@ -35,18 +35,18 @@
 <link rel="canonical" href="http://itweet.github.io/2015/01/01/zookeeper 大量logs解决/">
 
 
-<meta name="description" content="我们经常会遇到有大量zookeeper的日志，我们该如何处理，要么删除，要么禁止输出，这两种该如何实现？我讲两种方法： 方法一：日志清除工具PurgeTxnLog zookeeper运行时间长了以后，日志会成为一个比较大的问题。比如作者压力测试hbase一周以后，zookeeper日志文件达到了10G的规模。由于zookeeper日志文件不能随意删除，因为一个长时间不更新的节点完全有可能存在于几">
+<meta name="description" content="我们经常会遇到有大量zookeeper的日志，我们该如何处理，要么删除，要么禁止输出，这两种该如何实现？">
 <meta name="keywords" content="zookeeper">
 <meta property="og:type" content="article">
 <meta property="og:title" content="zookeeper 大量logs解决">
 <meta property="og:url" content="http://itweet.github.io/2015/01/01/zookeeper 大量logs解决/index.html">
 <meta property="og:site_name" content="WHOAMI">
-<meta property="og:description" content="我们经常会遇到有大量zookeeper的日志，我们该如何处理，要么删除，要么禁止输出，这两种该如何实现？我讲两种方法： 方法一：日志清除工具PurgeTxnLog zookeeper运行时间长了以后，日志会成为一个比较大的问题。比如作者压力测试hbase一周以后，zookeeper日志文件达到了10G的规模。由于zookeeper日志文件不能随意删除，因为一个长时间不更新的节点完全有可能存在于几">
+<meta property="og:description" content="我们经常会遇到有大量zookeeper的日志，我们该如何处理，要么删除，要么禁止输出，这两种该如何实现？">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.479Z">
+<meta property="og:updated_time" content="2019-03-03T08:08:29.425Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zookeeper 大量logs解决">
-<meta name="twitter:description" content="我们经常会遇到有大量zookeeper的日志，我们该如何处理，要么删除，要么禁止输出，这两种该如何实现？我讲两种方法： 方法一：日志清除工具PurgeTxnLog zookeeper运行时间长了以后，日志会成为一个比较大的问题。比如作者压力测试hbase一周以后，zookeeper日志文件达到了10G的规模。由于zookeeper日志文件不能随意删除，因为一个长时间不更新的节点完全有可能存在于几">
+<meta name="twitter:description" content="我们经常会遇到有大量zookeeper的日志，我们该如何处理，要么删除，要么禁止输出，这两种该如何实现？">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -211,7 +211,7 @@
     2019
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
     </span>
 </span>
 

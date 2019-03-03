@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="gitlab-server-move">
+  <meta name="description" content="由于资源紧张，为了完成CI/CD的自动化，所以打算把一台128g、24c、10T存储的一台独立GitLab服务器虚拟化为多台服务器。完成持续集成平台的迁移，减少资源浪费，现在记录一下操作过程。">
 
 
 
@@ -35,19 +35,19 @@
 <link rel="canonical" href="http://itweet.github.io/2017/12/18/gitlab-server-move/">
 
 
-<meta name="description" content="由于资源紧张，为了完成CI/CD的自动化，所以打算把一台128g、24c、10T存储的一台独立GitLab服务器虚拟化为多台服务器。完成持续集成平台的迁移，减少资源浪费，现在记录一下操作过程。  备份原GIT服务器数据  1gitlab-rake gitlab:backup:create RAILS_ENV=production 注：默认备份后文件一般位于/var/opt/gitlab/backu">
+<meta name="description" content="由于资源紧张，为了完成CI/CD的自动化，所以打算把一台128g、24c、10T存储的一台独立GitLab服务器虚拟化为多台服务器。完成持续集成平台的迁移，减少资源浪费，现在记录一下操作过程。">
 <meta name="keywords" content="gitlab">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gitlab-server-move">
 <meta property="og:url" content="http://itweet.github.io/2017/12/18/gitlab-server-move/index.html">
 <meta property="og:site_name" content="WHOAMI">
-<meta property="og:description" content="由于资源紧张，为了完成CI/CD的自动化，所以打算把一台128g、24c、10T存储的一台独立GitLab服务器虚拟化为多台服务器。完成持续集成平台的迁移，减少资源浪费，现在记录一下操作过程。  备份原GIT服务器数据  1gitlab-rake gitlab:backup:create RAILS_ENV=production 注：默认备份后文件一般位于/var/opt/gitlab/backu">
+<meta property="og:description" content="由于资源紧张，为了完成CI/CD的自动化，所以打算把一台128g、24c、10T存储的一台独立GitLab服务器虚拟化为多台服务器。完成持续集成平台的迁移，减少资源浪费，现在记录一下操作过程。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.526Z">
+<meta property="og:updated_time" content="2019-03-03T13:26:17.732Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gitlab-server-move">
-<meta name="twitter:description" content="由于资源紧张，为了完成CI/CD的自动化，所以打算把一台128g、24c、10T存储的一台独立GitLab服务器虚拟化为多台服务器。完成持续集成平台的迁移，减少资源浪费，现在记录一下操作过程。  备份原GIT服务器数据  1gitlab-rake gitlab:backup:create RAILS_ENV=production 注：默认备份后文件一般位于/var/opt/gitlab/backu">
+<meta name="twitter:description" content="由于资源紧张，为了完成CI/CD的自动化，所以打算把一台128g、24c、10T存储的一台独立GitLab服务器虚拟化为多台服务器。完成持续集成平台的迁移，减少资源浪费，现在记录一下操作过程。">
 <meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
 
 
@@ -234,7 +234,7 @@
     2019
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
     </span>
 </span>
 
