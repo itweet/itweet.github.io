@@ -1,6 +1,7 @@
 ---
 title: about-ambari-new-feature
 date: 2017-09-03 23:30:08
+description: Ambari 2.5，我们的专注点是继续提高日常Hadoop集群的运维和管理工作，Ambari整个社区都在努力让Ambari更加智能化易用的提供Hadoop集群的运营。
 category: BigData
 tags: ambari
 ---

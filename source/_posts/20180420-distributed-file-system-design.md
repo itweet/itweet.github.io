@@ -1,9 +1,11 @@
 ---
 title: distributed-file-system-design
 date: 2018-04-20 01:29:03
+description: 忙着开发软件，最近一直没什么时间写作。
 category: BigData
 tags: hdfs
 ---
+
 忙着开发软件，最近一直没什么时间写作。
 
 今天我们谈一下关于分布式文件系统。

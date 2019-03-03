@@ -1,9 +1,11 @@
 ---
 title: Nikola-Tesla-Autobiography
 date: 2018-04-19 09:00:57
+description: 借着出差苏州，在来回来的路上看完《特斯拉自传》，原名：《Nikola Tesla’s Autobiography》
 category: Books
 tags: books
 ---
+
 借着出差苏州，在来回来的路上看完《特斯拉自传》，原名：《Nikola Tesla’s Autobiography》
 
 特斯拉，不只是电动车；特斯拉，更是人类历史上最传奇的科学家之一。

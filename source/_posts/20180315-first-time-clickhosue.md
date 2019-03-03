@@ -1,6 +1,7 @@
 ---
 title: first-time-clickhosue
 date: 2018-03-15 23:16:53
+description: 初识ClickHouse，大概是在去年12月份，Clickhouse受邀来中国开第一次Meetup. 
 category: Database
 tags: Clickhouse
 ---

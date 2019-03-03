@@ -1,6 +1,7 @@
 ---
 title: why-do-developers-build-personal-brands
 date: 2018-01-15 22:35:35
+description: 打造个人品牌并不只是进行自我推销那么简单。
 category: Books
 tags: bytalk
 ---

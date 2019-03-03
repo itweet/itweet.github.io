@@ -1,9 +1,11 @@
 ---
 title: apache-impala-is-now-a-top-level-apache-project
 date: 2017-12-06 11:39:44
+description: 在2017年11月28日，上午，apache宣布Impala晋升为apache顶级项目，这一令人振奋的消息。
 category: BigData
 tags: Impala
 ---
+
 在2017年11月28日，上午，apache宣布Impala晋升为apache顶级项目，这一令人振奋的消息。
 
 ![apache-impala-top-level-project](https://github.com/itweet/labs/raw/master/BigData/img/apache-impala-top-level-project.png)

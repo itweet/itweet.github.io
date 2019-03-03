@@ -1,9 +1,11 @@
 ---
 title: Why-do-abandon-OpenStack-to-VMware-vSphere
 date: 2017-12-21 19:16:23
+description: 我为什么弃用`OpenStack`转向`VMware Vsphere`,一切皆为简单、高效。因为我们在工作过程中涉及到大量的测试工作，每天都有成百个虚拟机的创建和销毁工作。
 category: Cloud
 tags: vmware
 ---
+
 我为什么弃用`OpenStack`转向`VMware Vsphere`,一切皆为简单、高效。因为我们在工作过程中涉及到大量的测试工作，每天都有成百个虚拟机的创建和销毁工作。
 
 工作任务非常繁重，我们的持续集成平台CI/CD也会大量和虚拟化平台进行交互。

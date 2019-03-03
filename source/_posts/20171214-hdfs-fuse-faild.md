@@ -1,9 +1,11 @@
 ---
 title: hdfs-fuse-faild
 date: 2017-12-14 15:09:36
+description: 集群规模几百台，每天有大量的MR任务在并行跑流程。主要业务做图片流数据解密计算生成高清图像。
 category: BigData
 tags: fuse
 ---
+
 ![pWalrus_HDFS](https://github.com/itweet/labs/raw/master/BigData/img/pWalrus_HDFS.jpg)
 
 集群规模几百台，每天有大量的MR任务在并行跑流程。主要业务做图片流数据解密计算生成高清图像。

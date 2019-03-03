@@ -1,9 +1,11 @@
 ---
 title: just-for-fun
 date: 2017-12-24 13:35:37
+description: 除了程序员、`黑客`，大概很少有人知道Linux操作系统。
 category: Books
 tags: Linus
 ---
+
 除了程序员、`黑客`，大概很少有人知道Linux操作系统。
 
 它的发明者`Linus Torvalds`，知道的人就更少了。

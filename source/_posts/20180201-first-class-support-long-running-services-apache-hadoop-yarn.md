@@ -1,6 +1,7 @@
 ---
 title: first-class-support-long-running-services-apache-hadoop-yarn
 date: 2018-02-01 16:04:34
+description: Apache Hadoop Yarn 做为一个大数据领域(Apache Hadoop Yarn)通用的资源管理平台而闻名，它提供复杂的集群资源管理和调度服务，从中高度抽象出通用业务逻辑，从而让更多的计算框架专注于计算本身，通过他提供的高度抽象的接口，轻松的运行任务在YARN中。
 category: BigData
 tags: YARN
 ---

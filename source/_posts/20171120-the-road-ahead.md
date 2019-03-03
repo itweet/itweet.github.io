@@ -1,6 +1,7 @@
 ---
 title: the-road-ahead
 date: 2017-11-20 13:56:48
+description: 关于 *杂谈《编程之路职业指导》* 我们从 *BILL GATES* 写的一本书《The road ahead》来开启话题，该书主要讲述了个人电脑的革命以及信息化对未来的巨大影响。
 category: Books
 tags: ahead
 ---

@@ -1,9 +1,11 @@
 ---
 title: github-changes-software-development
 date: 2018-01-13 18:33:45
+description: Git是分布式代码开发的最佳选择，今天把我常用的一些Git命令给列表一下。
 category: Linux
 tags: github
 ---
+
 Git是分布式代码开发的最佳选择，今天把我常用的一些Git命令给列表一下。
 
 说起Git，就不得不提一下Github，它几乎成为一种全球最大的在线协作社区。

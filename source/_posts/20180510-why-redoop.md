@@ -1,6 +1,7 @@
 ---
 title: Why REDOOP ?
 date: 2018-05-10 09:17:20
+description: 太多不舍，一切来不及道别，千言万语，感恩。
 tags: [life,2018]
 category: Default
 ---

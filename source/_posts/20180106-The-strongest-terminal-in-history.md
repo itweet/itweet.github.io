@@ -1,9 +1,11 @@
 ---
 title: The-strongest-terminal-in-history
 date: 2018-01-06 12:12:30
+description: 捣鼓一下，Mac下的终端主题，最开始我选择的是`on-my-zsh`，非常强大，用起来基本停不下来。
 category: Mac
 tags: on-my-zsh
 ---
+
 ## 简介
 
 捣鼓一下，Mac下的终端主题，最开始我选择的是[`on-my-zsh`](https://github.com/robbyrussell/oh-my-zsh)，非常强大，用起来基本停不下来。

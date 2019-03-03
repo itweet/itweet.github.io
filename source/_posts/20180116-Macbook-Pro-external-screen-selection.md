@@ -1,9 +1,11 @@
 ---
 title: Macbook-Pro-external-screen-selection
 date: 2018-01-16 21:25:41
+description: 每天，盯着一个小屏幕的Macbook Pro，近视有点严重。
 category: Mac
 tags: screen
 ---
+
 每天，盯着一个小屏幕的Macbook Pro，近视有点严重。
 
 我想先弄个外界屏幕，屏幕变大，缓解一下。

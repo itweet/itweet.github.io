@@ -1,9 +1,11 @@
 ---
 title: Minimalism-Live-a-Meaningful-Life
 date: 2018-04-19 09:01:55
+description: 乔舒亚和瑞安正式启动了自己的极简主义网站TheMinimalists.com，与此同时放弃了年薪六位数的工作。
 category: Books
 tags: books
 ---
+
 2010年12月14日，乔舒亚和瑞安正式启动了自己的极简主义网站TheMinimalists.com，与此同时放弃了年薪六位数的工作。
 
 为什么？

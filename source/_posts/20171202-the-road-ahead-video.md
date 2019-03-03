@@ -1,9 +1,11 @@
 ---
 title: the-road-ahead-video
 date: 2017-12-02 22:45:10
+description: 今天以The road ahead为题。The road ahead表达的是“未来之路”。
 category: Default
 tags: coding
 ---
+
 大家好，受学校老师的邀请，给即将毕业的同学们，讲述一下职业发展，对我个人来说也是一次职业总结的好机会。通过online的形式，给大家做个分享。今天以The road ahead为题。The road ahead表达的是“未来之路”。
 
 内容结合作者多年的职业发展之路，介绍职业发展中的各种选择以及最前沿的技术发展路线，希望能对初入职场的同学有所帮助。

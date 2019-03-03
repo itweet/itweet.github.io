@@ -1,9 +1,11 @@
 ---
 title: angular-ngx-admin-run-for-mac
 date: 2018-01-07 21:34:04
+description: 业余时间计划搞搞设计，最近翻阅前端资料，真是千变万化，很多新名词。
 category: Web Design
 tags: angular
 ---
+
 业余时间计划搞搞设计，最近翻阅前端资料，真是千变万化，很多新名词。
 
 三端融合技术、前后端分离、前端也可以搞非常复杂的自动化测试、可以独立开发。

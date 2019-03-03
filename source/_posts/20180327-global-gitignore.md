@@ -1,6 +1,7 @@
 ---
 title: global .gitignore
 date: 2018-03-27 12:39:44
+description: `.gitignore` 在代码提交 repo 中的最佳实践。
 tags: [Git, gitignore]
 category: Git
 ---

@@ -1,6 +1,7 @@
 ---
 title: Data-Warehouses-Past-Present-and-Future
 date: 2017-11-22 11:28:43
+description: 我经常接触数据仓库建设的需求，而现有的大数据系统也希望基于大数据建设数据仓库，然而Hadoop为核心发展起来的软件适用于OLAP的数据分析需求，OLTP这样的分布式数据库系统也如火如荼的发展。
 category: Database
 tags: warehouse
 ---

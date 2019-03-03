@@ -1,9 +1,11 @@
 ---
 title: clickhouse-usage-guide
 date: 2018-03-26 01:08:25
+description: 今天，我们来简单测试一下clickhouse性能，通过测试学习clickhouse基本使用。
 category: Database
 tags: MPP
 ---
+
 今天，我们来简单测试一下clickhouse性能，通过测试学习clickhouse基本使用。
 
 官方教程中有直接提供相关测试案例数据，跑一些场景，我选择了`OnTime`数据来做测试。

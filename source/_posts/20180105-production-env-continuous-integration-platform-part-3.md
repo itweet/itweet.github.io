@@ -1,9 +1,11 @@
 ---
 title: production-env-continuous-integration-platform-part-3
 date: 2018-01-05 00:04:14
+description: 持续集成平台实践，接上如何为持续集成平台选型？
 category: DevOps
 tags: ci
 ---
+
 ## 简介
 
 持续集成平台实践，接上[如何为持续集成平台选型？](http://itweet.cn/blog/2018/01/03/How-to-select-a-continuous-integration-platform-part-2)。

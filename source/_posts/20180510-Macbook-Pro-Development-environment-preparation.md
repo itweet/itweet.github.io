@@ -1,6 +1,7 @@
 ---
 title: MacBook Pro开发环境配置指南
 date: 2018-05-10 18:42:20
+description: 记录新购Mac，需要安装的必备软件，由于有多台Mac，用途不一样。
 category: Mac
 tags: Mac
 ---

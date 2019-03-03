@@ -1,9 +1,11 @@
 ---
 title: BigData-Ecosystem-technology-development-in-2017
 date: 2018-01-23 19:54:18
+description: 回往，我从事大数据行业已经第5年了。
 category: BigData
 tags: 2017
 ---
+
 回往，我从事大数据行业已经第5年了。
 
 可以说，从大数据非常技术，很难商业化，到今天各种各样的大数据创业公司井喷式发展。

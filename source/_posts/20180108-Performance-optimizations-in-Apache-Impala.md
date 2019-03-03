@@ -1,9 +1,11 @@
 ---
 title: Performance-optimizations-in-Apache-Impala
 date: 2018-01-08 21:54:35
+description: 前几天，`ApacheImpala`社区发布了性能优化的一个topics，干货慢慢，我第一次见到的完整Impala整体的侧重优化和架构设计权衡的Slide。
 category: BigData
 tags: Impala
 ---
+
 前几天，`ApacheImpala`社区发布了性能优化的一个topics，干货慢慢，我第一次见到的完整Impala整体的侧重优化和架构设计权衡的Slide。
 
 去年底，`ApacheImpala`已经成为Apache顶级项目，我还写文章介绍过，做为企业级SQL on Hadoop解决方案，已经大规模商业应用，随着CDH的发展，家喻户晓，Hadoop生态圈的贡献不可限量，性能也很优秀，曾经很长一段时间很多朋友咨询过Impala的生产环境问题，它拥有完整的权限、审计、高性能。
