@@ -1,7 +1,8 @@
 ---
 title: mahout-engine
 date: 2015-07-17 17:50:22
-category: Machine Learning
+description: Mahout 是 Apache Software Foundation（ASF） 旗下的一个开源项目，提供一些可扩展   的机器学习领域经典算法的实现，旨在帮助开发人员更加方便快捷地创建智能应用程序。   
+category: Core AI
 tags: mahout
 ---
 ![](http://mahout.apache.org/images/mahout-logo-brudman.png)

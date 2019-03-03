@@ -1,6 +1,7 @@
 ---
 title: spark manual
 date: 2015-07-12 18:37:36
+description: Spark 的安装与使用
 category: BigData
 tags: spark
 ---

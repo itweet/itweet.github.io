@@ -1,6 +1,7 @@
 ---
 title: 程序员必读的书 StackOverflow 创始人推荐
 date: 2015-04-06 18:32:21
+description: 为了开发出更好的软件，你需要理解人是如何工作的，这也是我推荐的这些书所关注的领域。
 category: Books
 tags: Books
 ---

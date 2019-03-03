@@ -1,6 +1,7 @@
 ---
 title: apache hadoop federation配置
 date: 2015-02-03 17:06:17
+description: HDFS Federation的配置和使用，可以让HDFS的访问支持虚拟视图FS。
 category: BigData
 tags: hadoop
 ---

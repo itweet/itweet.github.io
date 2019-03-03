@@ -1,6 +1,7 @@
 ---
 title: sqoop install
 date: 2015-07-12 18:40:13
+description: SQOOP 的安装与使用
 category: BigData
 tags: sqoop
 ---

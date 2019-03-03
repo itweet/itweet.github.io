@@ -1,6 +1,7 @@
 ---
 title: alluxio-dev
 date: 2015-07-17 09:14:07
+description: Tachyon 的编译安装及使用。
 category: BigData
 tags: alluxio
 ---

@@ -1,9 +1,11 @@
 ---
-title: apache-hadoop-自动HA的搭建
+title: Hadoop 的 HA 手动搭建
 date: 2015-07-10 17:05:01
+description: Hadoop 的 HA 手动搭建。
 category: BigData
 tags: hadoop
 ---
+
 - 1、 core-site.xml
 ```
 <configuration>

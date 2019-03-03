@@ -1,9 +1,11 @@
 ---
 title: yarn-resources-manager-allocation
 date: 2015-07-24 18:49:18
+description: Hadoop YARN同时支持内存和CPU两种资源的调度（默认只支持内存，如果想进一步调度CPU，需要自己进行一些配置），本文将介绍YARN是如何对这些资源进行调度和隔离的。
 category: BigData
 tags: YARN
 ---
+
 Hadoop YARN同时支持内存和CPU两种资源的调度（默认只支持内存，如果想进一步调度CPU，需要自己进行一些配置），本文将介绍YARN是如何对这些资源进行调度和隔离的。
 在YARN中，资源管理由ResourceManager和NodeManager共同完成，其中，ResourceManager中的调度器负责资源的分配，而NodeManager则负责资源的供给和隔离。ResourceManager将某个NodeManager上资源分配给任务（这就是所谓的“资源调度”）后，NodeManager需按照要求为任务提供相应的资源，甚至保证这些资源应具有独占性，为任务运行提供基础的保证，这就是所谓的资源隔离。
   YARN会管理集群中所有机器的可用计算资源. 基于这些资源YARN会调度应用

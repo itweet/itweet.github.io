@@ -1,6 +1,7 @@
 ---
 title: hive install
 date: 2015-07-10 17:29:55
+description: Hive 的手动安装记录。
 category: BigData
 tags: Hive
 ---

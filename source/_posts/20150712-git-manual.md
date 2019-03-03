@@ -1,9 +1,11 @@
 ---
 title: git manual
 date: 2015-07-12 17:01:49
+description: Git 使用有段时间了,个人博客也是托管到git上面,经常用到的命令放到这，主要供自己查阅使用
 category: DevOps
 tags: git
 ---
+
 git使用有段时间了,个人博客也是托管到git上面,经常用到的命令放到这，主要供自己查阅使用，反复查阅能够加深印象，提升技能熟练度。如果你是还不知道 Git 是什么，建议先阅读 [廖雪峰的Git教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
 
 # 1、注册github账号

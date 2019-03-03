@@ -1,6 +1,7 @@
 ---
 title: Phoenix-hbase
 date: 2015-07-16 18:28:48
+description: Phoenix，由saleforce.com开源的一个项目，后又捐给了Apache。它相当于一个Java中间件，帮助开发者，像使用jdbc访问关系型数据库一样，访问NoSql数据库HBase。
 category: Database
 tags: hbase
 ---

@@ -1,6 +1,7 @@
 ---
 title: 如何选择满足需求的SQL on Hadoop系统
 date: 2015-05-06 18:39:25
+description: 如何选择满足需求的SQL on Hadoop系统，在批处理时代，Hive一枝独秀；在实时交互式查询时代，呈现出的是百花齐放的局面。
 category: Database
 tags: SQL
 ---

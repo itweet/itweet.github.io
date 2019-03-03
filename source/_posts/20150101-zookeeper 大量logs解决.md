@@ -1,9 +1,11 @@
 ---
 title: zookeeper 大量logs解决
 date: 2015-01-01 18:52:26
+description: 我们经常会遇到有大量zookeeper的日志，我们该如何处理，要么删除，要么禁止输出，这两种该如何实现？
 category: BigData
 tags: zookeeper
 ---
+
 我们经常会遇到有大量zookeeper的日志，我们该如何处理，要么删除，要么禁止输出，这两种该如何实现？我讲两种方法：
 
 # 方法一：日志清除工具PurgeTxnLog 

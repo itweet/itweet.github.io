@@ -1,6 +1,7 @@
 ---
 title: HDFS_NFS_Gateway
 date: 2014-02-04 08:54:31
+description: HDFS NFS Gateway 是一个把HDFS挂载到操作系统本地，然后直接访问本地文件目录就能对HDFS上的数据进行各种Linux上的操作，不过生产中不建议使用，性能比较差。
 category: BigData
 tags: hdfs
 ---

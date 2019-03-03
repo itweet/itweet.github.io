@@ -1,6 +1,7 @@
 ---
 title: Hadoop benchmarks
 date: 2015-03-20 17:07:09
+description: Hadoop 的基准测试，基于 CDH 5.2.0 的版本。
 category: BigData
 tags: Benchmarks
 ---
