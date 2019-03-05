@@ -145,7 +145,7 @@ Kubernetes master is running at http://localhost:8080
 
 # Configure Container Node on this section.
 
-[1]	[Install and Start Docker service on All Nodes, refer to here.](https://jikelab.github.io/tech-labs/2016/08/13/docker-install/)
+[1]	[Install and Start Docker service on All Nodes, refer to here.](https://www.itweet.cn/2016/08/13/docker-install/)
 
 
 [2]	Install Kubernetes and Flannel on All Nodes.

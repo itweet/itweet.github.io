@@ -9,9 +9,9 @@ hadoop Native Shared Libraries 使得Hadoop可以使用多种压缩编码算法�
 我今天介绍，源码编译Hadoop支持多种Native Shared Libraries，编译完成默认支持所有native libraries。
 
 文件压缩主要有两方面的好处：一方面节省文件存储空间；另一方面加速网络数据传输或磁盘读写。当处理大规模的数据时这些效果提升更加明显，因此我们需要仔细斟酌压缩在Hadoop环境下的使用,不同的Hadoop分析引擎对不同的数据压缩和文件格式有不同的性能特点，
-请参考:[Hadoop列式存储引擎Parquet/ORC和snappy压缩](https://jikelab.github.io/tech-labs/2016/03/15/columnar-storage-parquet-and-orc/)
+请参考:[Hadoop列式存储引擎Parquet/ORC和snappy压缩](https://www.itweet.cn/2016/03/15/columnar-storage-parquet-and-orc/)
 
-![](https://jikelab.github.io/tech-labs/screenshots/hadoop-native.png)
+![](https://www.itweet.cn/screenshots/hadoop-native.png)
 
 # Components
 

@@ -6,7 +6,7 @@ tags: ambari
 ---
 *Moving the Ambari Server*
 
-![](https://jikelab.github.io/tech-labs/screenshots/Ambari-Server-Move.png)
+![](https://www.itweet.cn/screenshots/Ambari-Server-Move.png)
 
 To transfer an Ambari Server that uses the default, embedded, PostgreSQL database from one host to a new host, use the following instructions:
 

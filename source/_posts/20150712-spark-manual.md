@@ -6,12 +6,12 @@ category: BigData
 tags: spark
 ---
 # 集群概述
-本文章涉及spark安装部署，spark-sql,spark-shell,streaming等等的应用demo...[saprk文章](https://jikelab.github.io/tech-labs/categories/spark/)
+本文章涉及spark安装部署，spark-sql,spark-shell,streaming等等的应用demo...[saprk文章](https://www.itweet.cn/categories/spark/)
 
 ## 部署过程详解
 
 Spark布置环境中组件构成如下图所示。
-![](https://jikelab.github.io/tech-labs/screenshots/cluster-overview.png)
+![](https://www.itweet.cn/screenshots/cluster-overview.png)
 
 -   `Driver Program` 简要来说在spark-shell中输入的wordcount语句对应于上图的Driver Program。
 -   `Cluster Manager` 就是对应于上面提到的master，主要起到deploy management的作用
@@ -302,7 +302,7 @@ server2利用nc发送数据,这边不断生成数据,streaming不断计算
     # spark/bin/spark-submit --class com.sparkjvm.streaming.yarn.NewHdfsWordCount --master spark://server1:7077 ./spark-yarn-1.0-SNAPSHOT.jar server2 9999 10
 ```
 
-![](https://jikelab.github.io/tech-labs/screenshots/streaming-net.png)
+![](https://www.itweet.cn/screenshots/streaming-net.png)
 
 程序
 ```
@@ -352,7 +352,7 @@ b
 b
 ```
 
-![](https://jikelab.github.io/tech-labs/screenshots/streaming-hdfs.png)
+![](https://www.itweet.cn/screenshots/streaming-hdfs.png)
 
 ```
 $  hadoop fs -put c /data/test
@@ -364,11 +364,11 @@ c
 c
 ```
 
-![](https://jikelab.github.io/tech-labs/screenshots/streaming-hdfs-1.png)
+![](https://www.itweet.cn/screenshots/streaming-hdfs-1.png)
 
 ### 3.3 kafka+sparkstreaming
 
-![](https://jikelab.github.io/tech-labs/screenshots/kafka_streaming.png)
+![](https://www.itweet.cn/screenshots/kafka_streaming.png)
 
 程序
 ```
@@ -424,7 +424,7 @@ kafka发送数据到test topic
     d e f
 ```
 
-![](https://jikelab.github.io/tech-labs/screenshots/kafka_streaming_1.png)
+![](https://www.itweet.cn/screenshots/kafka_streaming_1.png)
 
 ### 3.4 kafka+streaming more[0.13.1+]
 ```

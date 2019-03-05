@@ -9,10 +9,10 @@ Glance——提供虚机镜像（Image）存储和管理，包括了很多与Ama
 Cinder——提供块存储（Block Storage），类似于Amazon的EBS块存储服务，目前仅给虚机挂载使用。
 （Amazon一直是OpenStack设计之初的假象对手和挑战对象，所以基本上关键的功能模块都有对应项目。除了上面提到的三个组件，对于AWS中的重要的EC2服务，OpenStack中是Nova来对应，并且保持和EC2 API的兼容性，有不同的方法可以实现）
 三个组件中，Glance主要是虚机镜像的管理，所以相对简单；Swift作为对象存储已经很成熟，连CloudStack也支持它。Cinder是比较新出现的块存储，设计理念不错，并且和商业存储有结合的机会，所以厂商比较积极。
-![](https://jikelab.github.io/tech-labs/screenshots/openstack-framework.png)
+![](https://www.itweet.cn/screenshots/openstack-framework.png)
 
 # Swift应用
-![](https://jikelab.github.io/tech-labs/screenshots/openstack-swift.png)
+![](https://www.itweet.cn/screenshots/openstack-swift.png)
 
 ## 1.网盘。
 Swift的对称分布式架构和多proxy多节点的设计导致它从基因里就适合于多用户大并发的应用模式，最典型的应用莫过于类似Dropbox的网盘应用，Dropbox去年底已经突破一亿用户数，对于这种规模的访问，良好的架构设计是能够支撑的根本原因。
@@ -33,7 +33,7 @@ RackSpace的主营业务就是数据的备份归档，所以Swift在这个领域
 
 # Glance应用
 Glance比较简单，是一个虚机镜像的存储。向前端nova（或者是安装了Glance-client的其他虚拟管理平台）提供镜像服务，包括存储，查询和检索。这个模块本身不存储大量的数据，需要挂载后台存储（Swift，S3。。。）来存放实际的镜像数据。
-![](https://jikelab.github.io/tech-labs/screenshots/openstack-glance.png)
+![](https://www.itweet.cn/screenshots/openstack-glance.png)
 
 Glance主要包括下面几个部分：
 1.API service： glance-api 主要是用来接受Nova的各种api调用请求，将请求放入RBMQ交由后台处理，。
@@ -50,7 +50,7 @@ Cinder
 OpenStack到F版本有比较大的改变，其中之一就是将之前在Nova中的部分持久性块存储功能（Nova-Volume）分离了出来，独立为新的组件Cinder。它通过整合后端多种存储，用API接口为外界提供块存储服务，主要核心是对卷的管理，允许对卷，卷的类型，卷的快照进行处理。
 
 # cinder 应用
-![](https://jikelab.github.io/tech-labs/screenshots/openstack-cinder.png)
+![](https://www.itweet.cn/screenshots/openstack-cinder.png)
 
 Cinder包含以下三个主要组成部分
 
@@ -288,7 +288,7 @@ $ lvdisplay
 
 ## Dashboard
  登录到可视化页面，点击选择卷，创建云硬盘按钮，即可看到两种云硬盘类型，基于lvm创建iscsi类型和glusterfs的类型。最终效果如下图：
-![](https://jikelab.github.io/tech-labs/screenshots/openstack-cinder-volume.png)
+![](https://www.itweet.cn/screenshots/openstack-cinder-volume.png)
 
 ## NFS and Other Storage driver
   按照相关文档完成安装,最后修改cinder.conf文件，和cinder整合，举列如下:
