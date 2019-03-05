@@ -110,23 +110,23 @@ Impala-tpcds testing:
 # SQL-on-Hadoop性能测试结果
 
  * Textfile
-    ![](https://jikelab.github.io/tech-labs/screenshots/TextFile.png)
+    ![](https://www.itweet.cn/screenshots/TextFile.png)
     执行时间为0s，说明语法不支持,0.1执行失败，有些是框架本身不稳定(Hive on Spark && Presto)
 
  * Parquet
-    ![](https://jikelab.github.io/tech-labs/screenshots/ParquetFile.png)
+    ![](https://www.itweet.cn/screenshots/ParquetFile.png)
     执行时间为0s，说明语法不支持,0.1执行失败，有些是框架本身不稳定(Hive on Spark && Presto)
 
  * ORC
-    ![](https://jikelab.github.io/tech-labs/screenshots/ORCFile.png)
+    ![](https://www.itweet.cn/screenshots/ORCFile.png)
     执行时间为0s，说明语法不支持,0.1执行失败，有些是框架本身不稳定(Hive on Spark && Presto)
 
  * Parqeut(new version)
-    ![](https://jikelab.github.io/tech-labs/screenshots/ParquetFile-new.png)
+    ![](https://www.itweet.cn/screenshots/ParquetFile-new.png)
     执行时间为0s，说明语法不支持,0.1执行失败，有些是框架本身不稳定(Hive on Spark && Presto)
 
 # SQL on NOSQL性能测试结果
-   ![](https://jikelab.github.io/tech-labs/screenshots/SQL-on-NOSQL.png)
+   ![](https://www.itweet.cn/screenshots/SQL-on-NOSQL.png)
    执行时间为0s,表示语法不支持,0.1执行失败;这里测试数据在6000万左右。
 
     ```
@@ -139,10 +139,10 @@ Impala-tpcds testing:
     ```
 
 # 列式存储
-   ![](https://jikelab.github.io/tech-labs/screenshots/table-file-size.png)
+   ![](https://www.itweet.cn/screenshots/table-file-size.png)
 
 # 执行query和测试数据源
-   [Impala - Hive 性能测试和查询优化](https://jikelab.github.io/tech-labs/2016/03/20/Impala-Hive-performance-tuning/)
+   [Impala - Hive 性能测试和查询优化](https://www.itweet.cn/2016/03/20/Impala-Hive-performance-tuning/)
 
 # SQL-on-Hadoop && SQL-on-NOSQL && SQL on Hadoop Join RDBMS/NOSQL
 
