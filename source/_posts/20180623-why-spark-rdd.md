@@ -2,8 +2,8 @@
 title: Why Spark RDD
 date: 2018-06-23 12:45:20
 description: 今天，再回头看看《An Architecture for Fast and General Data Processing on Large Clusters》。
-tags: [Spark,2018]
-category: BigData
+tags: Spark
+category: Paper
 ---
 
 我提出的论文计划，一再被打乱，我也在找机会慢慢调整过来。

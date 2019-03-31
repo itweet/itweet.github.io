@@ -2,8 +2,8 @@
 title: Hortonworks Data Platform 3.0.0平台宣布正式GA
 date: 2018-07-15 16:14:23
 description: Hortonworks Data Platform 3.0.0版本，基本上集成Hadoop社区生态最新版本的强大功能特性，实现真正混合型数据平台。
-tags: [hortonworks,ambari]
 category: BigData
+tags: Ambari
 ---
 
 ## HDP 3.0.0 GA 

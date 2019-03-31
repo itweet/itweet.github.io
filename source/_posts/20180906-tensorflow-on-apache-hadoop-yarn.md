@@ -2,8 +2,8 @@
 title: Tensorflow-on-apache-hadoop-yarn
 date: 2018-09-06 06:15:23
 description: 今天我们介绍 Apache Yarn 是如何融合目前最热门的深度学习框架TensorFlow以及其他框架
-tags: [ML,2018]
-category: Machine Learning
+category: AI
+tags: Tensorflow
 ---
 
 现在人工智能正处于风口浪尖，大数据和人工智能注定要融合，如何融合，以什么方式融合？

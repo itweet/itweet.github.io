@@ -2,8 +2,8 @@
 title: A Distributed Storage System for Structured Data
 date: 2018-05-06 16:49:20
 description: 早期BigTable设计主要解决，海量的网页数据存储。
-tags: [bigtable]
-category: BigData
+category: Paper
+tags: BigTable
 ---
 
 ## 简介

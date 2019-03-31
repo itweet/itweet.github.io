@@ -2,7 +2,7 @@
 title: bigtable-osdi06
 date: 2018-05-07 01:52:12
 description: BigTable是Google提出的一个分布式的海量数据存储系统。Google将其运用在一些数据量较大的应用中。从分布式系统CAP角度理解，BigTable是牺牲高可用性，主要加强数据一致性和可扩展性。
-category: BigData
+category: Paper
 tags: BigTable
 ---
 ## 简介

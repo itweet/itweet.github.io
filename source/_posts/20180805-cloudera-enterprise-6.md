@@ -2,7 +2,7 @@
 title: Cloudera-Enterprise-6
 date: 2018-08-05 12:17:34
 description: 今天，我们聊一聊在中国最受欢迎Cloudera CDH，CDH是世界级的大数据产品，同时也是一家伟大的开源软件公司。
-tags: [cloudera,2018]
+tags: Cloudera,2018
 category: CDH
 ---
 

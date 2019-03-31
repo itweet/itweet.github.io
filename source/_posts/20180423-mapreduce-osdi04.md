@@ -2,8 +2,8 @@
 title: mapreduce-osdi04
 date: 2018-04-23 22:39:16
 description: 我曾经多次提到过，我涉猎广泛，但是没有有个精通的技能，在大数据领域几年，也没什么成果。
-category: BigData
-tags: mapreduce
+category: Paper
+tags: MapReduce
 ---
 
 我曾经多次提到过，我涉猎广泛，但是没有有个精通的技能，在大数据领域几年，也没什么成果。
