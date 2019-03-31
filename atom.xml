@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://itweet.github.io/"/>
-  <updated>2019-03-31T15:32:46.024Z</updated>
+  <updated>2019-03-31T15:40:06.677Z</updated>
   <id>http://itweet.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://itweet.github.io/2018/12/26/release-3.1.0/"/>
     <id>http://itweet.github.io/2018/12/26/release-3.1.0/</id>
     <published>2018-12-26T08:35:36.000Z</published>
-    <updated>2019-03-31T15:32:46.024Z</updated>
+    <updated>2019-03-31T15:40:06.677Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Release-Note"><a href="#Release-Note" class="headerlink" title="Release Note"></a>Release Note</h1><p>JDP 3.1 是 3.x 系列中的第二个版本，经过一段长久时间的研发测试，今天决定发布正式版本。此版本没有任何全新的features，立足于 3.1 版本，我们把 mpack 深度与 Ambari 融合，真正做到一体化的产品体验。Ambari 默认 Stack 是 JDP，支持的版本是3.0.0和3.1.0；Stack 中组件的全新升级，均使用最新的稳定版本。新版本对于资源的使用量进行了优化，目前一台4g、2c的虚拟机可安装和部署，实现在笔记本电脑也能体验 JDP 的完整功能。</p><p>要下载 JDP 3.1，请访问<a href="http://www.fusionlab.cn/zh-cn/docs/intro/quickstart.html" target="_blank" rel="noopener">快速入门</a> 页面，提供云盘压缩包下载，您可以在私有网络的情况下安装使用 JDP。我们在此列出主要的版本变更，按组件进行分组：</p><ul><li>JDP 3.1 <ul><li>ambari-2.7.0.0-0</li><li>clickhouse 3.1.0.0-108-18.14.13</li><li>jdp-select 3.1.0.0-108</li><li>kafka 3.1.0.0-108-1.0.1</li><li>nifi 3.1.0.0-108-1.7.0</li><li>superset 3.1.0.0-108-0.26.3</li><li>zookeeper 3.1.0.0-108-3.4.6</li></ul></li></ul><p>相关 JDP Roadmap 访问<a href="https://github.com/fusionlabcn/jdp" target="_blank" rel="noopener">Github</a></p><p>JDP 核心  </p><ul><li>一体化的流分析平台，在未来 3.3 版本中。</li><li>数据流 Kafka，实时处理引擎</li><li>海量数据即席查询 ClickHouse</li><li>数据可视化 Superset</li><li>分布式协调服务 Zookeeper</li><li>利用 JDP 实现一站式企业级数据仓库平台</li></ul><h1 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h1><p>JDP 未来计划新增一些简单、易用、强大的 Batch &amp; Stream 统一的一体化功能。全新的设计，在混口饭吃的工作中，抽出时间在设计与实现下一代数据流平台，而且 JDP 定位为一款真正企业级可用的一体化数据流平台，需要实现足够简单且强大的数据流处理和管理能力，这是我们设计 JDP 的初衷。</p><p>JDP 设计的组件和相关技术非常驳杂，整个研发过程漫长且耗费硬件资源，开发维护不易，我们已经在尽力的努力克服外部困难，规范化整个 Devops 流程，希望能改善目前效率的问题。</p><p>next JDP 版本中，会新增 Hadoop 3.2.x 版本以及 Spark、Flink 相关组件，一切的原因是为了更好；我们的流分析引擎核心 Runtime 支持 Spark 、Flink，用户无需感知这些 Runtime 技术，一体化的部署、运维、监控均有 JDP 实现，外部接口兼容标准的数据库协议，大大降低用户的成本，我们会有一层自己的数据库 DSL 设计，我们称为 FQL，其实是 SQL++，就这样。</p><p>JDP 3.3 中计划，会启动另外一个 <code>stack</code> 孵化工作，探索 k8s + ai 技术，毕竟行行转 ai，容器我一直比较抵触，体积超大，带状态服务支持弱，但 ai 各种 py 库，真的很适合容器化，升级方便，维护性成本高，难以规模化部署运维，涉及网络、存储、计算、调度、容器、分布式等技术，显然是庞然大物，国内专业玩 k8s 的公司，貌似基本难有做大的，企业级市场，基础设施难挣钱，业务挣钱，难有企业重视，基本都是使用层面，扯远啦；回归正题，JDP 需要去很好的解决这些问题，一切是为了更好，实现一体化流分析平台的价值，容器化 JDP 某些模块，长期看是利好的，可以降低成本。。。</p><h2 id="未来的时间，我会逐渐披露更多细节，敬请期待。。。"><a href="#未来的时间，我会逐渐披露更多细节，敬请期待。。。" class="headerlink" title="未来的时间，我会逐渐披露更多细节，敬请期待。。。"></a>未来的时间，我会逐渐披露更多细节，敬请期待。。。</h2><p>好久没更新啦，扯句闲话，我遇到我偶像 Linus Torvalds 年轻时刚去美国硅谷工作时一样的情况，境遇如此相似；以后尽量产出一些高质量的内容，在分享吧，码子不易，文末附 JDP 3.1 美图一张。</p><p><img src="http://www.fusionlab.cn/zh-cn/docs/intro/img/ambari%E2%80%93dashboard.png" alt></p><p>单机、分布式系统都能一体化的管理。。。</p><p>[1] JDP 官网: <a href="http://www.fusionlab.cn/" target="_blank" rel="noopener">http://www.fusionlab.cn/</a></p><p>[2] JDP 快速启动：<a href="http://www.fusionlab.cn/zh-cn/docs/intro/quickstart.html" target="_blank" rel="noopener">http://www.fusionlab.cn/zh-cn/docs/intro/quickstart.html</a></p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
     
@@ -43,7 +43,7 @@
     <link href="http://itweet.github.io/2018/09/06/tensorflow-on-apache-hadoop-yarn/"/>
     <id>http://itweet.github.io/2018/09/06/tensorflow-on-apache-hadoop-yarn/</id>
     <published>2018-09-05T22:15:23.000Z</published>
-    <updated>2019-03-31T15:32:38.646Z</updated>
+    <updated>2019-03-31T15:39:40.665Z</updated>
     
     <content type="html"><![CDATA[<p>现在人工智能正处于风口浪尖，大数据和人工智能注定要融合，如何融合，以什么方式融合？</p><p>如今大家都在探索阶段，每个技术型的公司，都有自己的人工智能与大数据融合的方案。</p><p>今天，我们就来介绍一下，大数据领域最核心的Apache Hadoop和人工智能技术融合进展。</p><p>今天我们介绍 Apache Yarn 是如何融合目前最热门的深度学习框架TensorFlow以及其他框架。</p><p>Tensorflow on Apache Hadoop YARN.pdf </p><p>云盘：链接:<a href="https://pan.baidu.com/s/1v2loT8O30R4RyomM5wTt-A" target="_blank" rel="noopener">https://pan.baidu.com/s/1v2loT8O30R4RyomM5wTt-A</a>  密码:azc7</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
     
@@ -56,7 +56,7 @@
       <category term="AI" scheme="http://itweet.github.io/categories/AI/"/>
     
     
-      <category term="DL,BigData,2018" scheme="http://itweet.github.io/tags/DL-BigData-2018/"/>
+      <category term="Tensorflow" scheme="http://itweet.github.io/tags/Tensorflow/"/>
     
   </entry>
   
@@ -87,7 +87,7 @@
     <link href="http://itweet.github.io/2018/08/19/homemade-programming-language/"/>
     <id>http://itweet.github.io/2018/08/19/homemade-programming-language/</id>
     <published>2018-08-18T20:39:12.000Z</published>
-    <updated>2019-03-31T15:32:01.438Z</updated>
+    <updated>2019-03-31T15:41:23.921Z</updated>
     
     <content type="html"><![CDATA[<p>很长一段时间没更新内容啦，并不是不想写，而是找不到灵感，不知道改写些什么？</p><p>因为，我写了很多大数据相关的内容，已经很久没有玩Hadoop相关的东西啦。</p><p>除最近，帮助公司搭建了一套CDH集群，基本也是大家在上面跑一些大数据量的AI算法。</p><p>而我，最近在写一些Java后端以及需求整理的工作，没有特别值得和大家分享的，也就一些踩坑底层库踩坑的内容值得写一篇介绍一下。</p><p>我最近也进行一些深度思考，我依然关注大数据相关动态，包括一些<code>Hadoop 3.0</code>的东西。</p><p>很长一段时间，我写的都是一些零碎的东西，计划系统性的写一些深入的内容。</p><ul><li><a href="https://github.com/jikelab/paper" target="_blank" rel="noopener">Computer Foundations Practices</a></li></ul><p>看完《自制编程语言》一周有余，系统了解了自制一门类似Python、Ruby、Java编程语言都需要那些知识。</p><p>编程语言制作，博大精深，不太敢妄言，编程语言引起的腥风血雨已经太多了。有编程语言的地方就有江湖呀。</p><p>好啦，言归正传，我们看看通过站在巨人的的编程库上，我们如何制作一门编程语言，都需要那些工具。</p><p>一门编程分类：</p><ul><li>解释类</li><li>编译类</li></ul><p>解释类，比如Python就是解释类语言，Java则是编译类语言。解释类语言，在运行时即时翻译，解释型语言运行速度往往比编译的程序慢，但往往更具灵活性，因为它们能够与执行环境互相作用。</p><p>编译型语言，把高级定义的字符串代码整体翻译为机器可执行的代码的过程就称为编译。因此，一个编译型语言，是将人可阅读和编写高级语言作为输入数据，然后输出成目标可执行的文件或二进制代码，由CPU直接运行，效率自然会高很多。</p><p>而在自制编程语言一书中，介绍了两门编程语言，而且有代码实现，都是使用C编写的，基本编程语言基本构成可以了解一番，整本书觉写得一般，大段介绍代码逻辑，其实看书的人大多是想要看到思路以及为什么如此实现，有什么讲究，经验可以介绍，这部分内容很少，整体比较枯燥吧，我大概陆续总共10多个小时，看完此书，了解如何制作一门编程语言可以一看。</p><p>书中列举的，参考Java，Python，C++，Ruby等语言实现的一些功能探讨，值得一看。编程语言最核心的难点应该就是符号处理吧。</p><p>书中介绍的两门编程语言，Crowbar与Diksam都是简历在Lex、Yacc的基础上的，基本上核心的编程语言难题都交给它俩。</p><p>编程语言语法处理过程：</p><ul><li>[1] 词法分析: 将源代码分割为若干个记号（token）的处理。</li><li>[2] 语法分析: 即从记号构建分析树（parse tree）的处理。分析树也叫作语法树（syntax tree）或抽象语法树（abstract syntax tree，AST）。</li><li>[3] 语义分析: 经过语法分析生成的分析树，并不包含数据类型等语义信息。因此在语义分析阶段，会检查程序中是否含有语法正确但是存在逻辑问题的错误。</li><li>[4] 生成代码: 如果是C语言等生成机器码的编译器或Java这样生成字节码的编译器，在分析树构建完毕后会进入代码生成阶段。</li></ul><p>执行词法分析的程序称为词法分析器（lexical analyzer）。lex 的工作就是根据词法规则自动生成词法分析器。</p><p>执行语法分析的程序则称为解析器（parser）。yacc 就是能根据语法规则自动生成解析器的程序。</p><p>一个词法分析器加上一个语法解析器，我们就可以很快的制作一门属于自己的编程语言。</p><p>Yacc、Lex都是比较值得深入研究的，要学习的东西太多啦。</p><p>说实话，看完之后的我还有些懵，不合适进行评论或者写一些心的，编程语言技术有大量参考和先辈经验，借助一些工具，制作来看难度不大，但做出来和做好是两个概念，留待以后有机会去专门研究吧。</p><p>我目前阶段仅限了解，人的精力有限，未来很长一段时间，还会阅读更多经典计算机相关书籍。</p><p>欢迎关注，<a href="https://github.com/jikelab/paper" target="_blank" rel="noopener">Computer Foundations Practices</a></p><p>我会分享一些我自己的心得体会。</p><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
     
@@ -97,10 +97,10 @@
     
     </summary>
     
-      <category term="programming,language" scheme="http://itweet.github.io/categories/programming-language/"/>
+      <category term="programming" scheme="http://itweet.github.io/categories/programming/"/>
     
     
-      <category term="Programming,2018" scheme="http://itweet.github.io/tags/Programming-2018/"/>
+      <category term="Programming" scheme="http://itweet.github.io/tags/Programming/"/>
     
   </entry>
   

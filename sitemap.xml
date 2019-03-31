@@ -2,23 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://itweet.github.io/2015/07/17/mahout-engine/</loc>
+    <loc>http://itweet.github.io/2018/08/19/homemade-programming-language/</loc>
     
-    <lastmod>2019-03-31T15:35:15.970Z</lastmod>
+    <lastmod>2019-03-31T15:41:23.921Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://itweet.github.io/2018/12/26/release-3.1.0/</loc>
     
-    <lastmod>2019-03-31T15:32:46.024Z</lastmod>
+    <lastmod>2019-03-31T15:40:06.677Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://itweet.github.io/2018/09/06/tensorflow-on-apache-hadoop-yarn/</loc>
     
-    <lastmod>2019-03-31T15:32:38.646Z</lastmod>
+    <lastmod>2019-03-31T15:39:40.665Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2015/07/17/mahout-engine/</loc>
+    
+    <lastmod>2019-03-31T15:37:24.346Z</lastmod>
     
   </url>
   
@@ -26,13 +33,6 @@
     <loc>http://itweet.github.io/2018/08/26/parquet-library-fatal-error/</loc>
     
     <lastmod>2019-03-31T15:32:11.035Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/08/19/homemade-programming-language/</loc>
-    
-    <lastmod>2019-03-31T15:32:01.438Z</lastmod>
     
   </url>
   
