@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="building hadoop for centos">
+
+
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/07/27/building-hadoop-for-centos/">
+
+
+<meta name="description" content="1、获取hadoop源码1wget http://apache.fayea.com/hadoop/common/hadoop-2.6.0/hadoop-2.6.0-src.tar.gz 2、编译hadoop所需环境# tar -zxvf hadoop-2.6.0-src.tar.gz Build instructions for Hadoop  Requirements:  Unix System">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="building hadoop for centos">
+<meta property="og:url" content="http://itweet.github.io/2015/07/27/building-hadoop-for-centos/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="1、获取hadoop源码1wget http://apache.fayea.com/hadoop/common/hadoop-2.6.0/hadoop-2.6.0-src.tar.gz 2、编译hadoop所需环境# tar -zxvf hadoop-2.6.0-src.tar.gz Build instructions for Hadoop  Requirements:  Unix System">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-05T15:09:47.487Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="building hadoop for centos">
+<meta name="twitter:description" content="1、获取hadoop源码1wget http://apache.fayea.com/hadoop/common/hadoop-2.6.0/hadoop-2.6.0-src.tar.gz 2、编译hadoop所需环境# tar -zxvf hadoop-2.6.0-src.tar.gz Build instructions for Hadoop  Requirements:  Unix System">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> building hadoop for centos - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          building hadoop for centos
+        
+      </h1>
+
+      <time class="post-time">
+          7月 27 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="1、获取hadoop源码"><a href="#1、获取hadoop源码" class="headerlink" title="1、获取hadoop源码"></a>1、获取hadoop源码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://apache.fayea.com/hadoop/common/hadoop-2.6.0/hadoop-2.6.0-src.tar.gz</span><br></pre></td></tr></table></figure>
+<h1 id="2、编译hadoop所需环境"><a href="#2、编译hadoop所需环境" class="headerlink" title="2、编译hadoop所需环境"></a>2、编译hadoop所需环境</h1><p><code># tar -zxvf hadoop-2.6.0-src.tar.gz</code></p>
+<p>Build instructions for Hadoop</p>
+<hr>
+<p>Requirements:</p>
+<ul>
+<li>Unix System</li>
+<li>JDK 1.6+</li>
+<li>Maven 3.0 or later</li>
+<li>Findbugs 1.3.9 (if running findbugs)</li>
+<li>ProtocolBuffer 2.5.0</li>
+<li>CMake 2.6 or newer (if compiling native code), must be 3.0 or newer on Mac</li>
+<li>Zlib devel (if compiling native code)</li>
+<li>openssl devel ( if compiling native hadoop-pipes )</li>
+<li>Internet connection for first build (to fetch all Maven and Hadoop dependencies)</li>
+</ul>
+<p>安装：</p>
+<ul>
+<li>JDK 1.7.0_75和Maven 3.0.5都已经安装好并配置了环境变量，直接开始安装其他依赖。</li>
+<li>Findbugs</li>
+<li>ProtocolBuffer</li>
+<li>CMake、Zlib、openssl<br>  $ sudo yum -y install gcc gcc-c++ autoconf automake cmake libtool ncurses-devel openssl-devel lzo-devel zlib-devel</li>
+<li>Snappy </li>
+</ul>
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p><a href="http://hadoop.apache.org/docs/r2.6.0/hadoop-project-dist/hadoop-common/NativeLibraries.html" target="_blank" rel="noopener">http://hadoop.apache.org/docs/r2.6.0/hadoop-project-dist/hadoop-common/NativeLibraries.html</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">$ export MAVEN_OPTS=&quot;-Xms256m -Xmx512m&quot;</span><br><span class="line">$ mvn package -Pdist,native -DskipTests -Dtar -Drequire.snappy</span><br><span class="line"></span><br><span class="line">main:</span><br><span class="line">     [exec] $ tar cf hadoop-2.6.0.tar hadoop-2.6.0</span><br><span class="line">     [exec] $ gzip -f hadoop-2.6.0.tar</span><br><span class="line">     [exec] </span><br><span class="line">     [exec] Hadoop dist tar available at: /usr/local/git/hadoop-2.6.0-src/hadoop-dist/target/hadoop-2.6.0.tar.gz</span><br><span class="line">     [exec] </span><br><span class="line">[INFO] Executed tasks</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-javadoc-plugin:2.8.1:jar (module-javadocs) @ hadoop-dist ---</span><br><span class="line">[INFO] Building jar: /usr/local/git/hadoop-2.6.0-src/hadoop-dist/target/hadoop-dist-2.6.0-javadoc.jar</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Reactor Summary:</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] Apache Hadoop Main ................................ SUCCESS [2.629s]</span><br><span class="line">[INFO] Apache Hadoop Project POM ......................... SUCCESS [2.143s]</span><br><span class="line">[INFO] Apache Hadoop Annotations ......................... SUCCESS [5.317s]</span><br><span class="line">[INFO] Apache Hadoop Assemblies .......................... SUCCESS [0.523s]</span><br><span class="line">[INFO] Apache Hadoop Project Dist POM .................... SUCCESS [3.057s]</span><br><span class="line">[INFO] Apache Hadoop Maven Plugins ....................... SUCCESS [5.695s]</span><br><span class="line">[INFO] Apache Hadoop MiniKDC ............................. SUCCESS [4.925s]</span><br><span class="line">[INFO] Apache Hadoop Auth ................................ SUCCESS [7.325s]</span><br><span class="line">[INFO] Apache Hadoop Auth Examples ....................... SUCCESS [4.235s]</span><br><span class="line">[INFO] Apache Hadoop Common .............................. SUCCESS [3:01.196s]</span><br><span class="line">[INFO] Apache Hadoop NFS ................................. SUCCESS [21.923s]</span><br><span class="line">[INFO] Apache Hadoop KMS ................................. SUCCESS [27.282s]</span><br><span class="line">[INFO] Apache Hadoop Common Project ...................... SUCCESS [0.035s]</span><br><span class="line">[INFO] Apache Hadoop HDFS ................................ SUCCESS [6:06.008s]</span><br><span class="line">[INFO] Apache Hadoop HttpFS .............................. SUCCESS [1:04.210s]</span><br><span class="line">[INFO] Apache Hadoop HDFS BookKeeper Journal ............. SUCCESS [18.907s]</span><br><span class="line">[INFO] Apache Hadoop HDFS-NFS ............................ SUCCESS [6.766s]</span><br><span class="line">[INFO] Apache Hadoop HDFS Project ........................ SUCCESS [0.032s]</span><br><span class="line">[INFO] hadoop-yarn ....................................... SUCCESS [0.060s]</span><br><span class="line">[INFO] hadoop-yarn-api ................................... SUCCESS [2:03.424s]</span><br><span class="line">[INFO] hadoop-yarn-common ................................ SUCCESS [57.819s]</span><br><span class="line">[INFO] hadoop-yarn-server ................................ SUCCESS [0.180s]</span><br><span class="line">[INFO] hadoop-yarn-server-common ......................... SUCCESS [18.783s]</span><br><span class="line">[INFO] hadoop-yarn-server-nodemanager .................... SUCCESS [34.622s]</span><br><span class="line">[INFO] hadoop-yarn-server-web-proxy ...................... SUCCESS [5.318s]</span><br><span class="line">[INFO] hadoop-yarn-server-applicationhistoryservice ...... SUCCESS [10.880s]</span><br><span class="line">[INFO] hadoop-yarn-server-resourcemanager ................ SUCCESS [33.005s]</span><br><span class="line">[INFO] hadoop-yarn-server-tests .......................... SUCCESS [8.366s]</span><br><span class="line">[INFO] hadoop-yarn-client ................................ SUCCESS [11.520s]</span><br><span class="line">[INFO] hadoop-yarn-applications .......................... SUCCESS [0.162s]</span><br><span class="line">[INFO] hadoop-yarn-applications-distributedshell ......... SUCCESS [4.895s]</span><br><span class="line">[INFO] hadoop-yarn-applications-unmanaged-am-launcher .... SUCCESS [3.499s]</span><br><span class="line">[INFO] hadoop-yarn-site .................................. SUCCESS [0.127s]</span><br><span class="line">[INFO] hadoop-yarn-registry .............................. SUCCESS [10.132s]</span><br><span class="line">[INFO] hadoop-yarn-project ............................... SUCCESS [6.510s]</span><br><span class="line">[INFO] hadoop-mapreduce-client ........................... SUCCESS [0.183s]</span><br><span class="line">[INFO] hadoop-mapreduce-client-core ...................... SUCCESS [41.075s]</span><br><span class="line">[INFO] hadoop-mapreduce-client-common .................... SUCCESS [25.373s]</span><br><span class="line">[INFO] hadoop-mapreduce-client-shuffle ................... SUCCESS [5.812s]</span><br><span class="line">[INFO] hadoop-mapreduce-client-app ....................... SUCCESS [16.379s]</span><br><span class="line">[INFO] hadoop-mapreduce-client-hs ........................ SUCCESS [13.148s]</span><br><span class="line">[INFO] hadoop-mapreduce-client-jobclient ................. SUCCESS [9.226s]</span><br><span class="line">[INFO] hadoop-mapreduce-client-hs-plugins ................ SUCCESS [2.436s]</span><br><span class="line">[INFO] Apache Hadoop MapReduce Examples .................. SUCCESS [9.628s]</span><br><span class="line">[INFO] hadoop-mapreduce .................................. SUCCESS [6.813s]</span><br><span class="line">[INFO] Apache Hadoop MapReduce Streaming ................. SUCCESS [7.435s]</span><br><span class="line">[INFO] Apache Hadoop Distributed Copy .................... SUCCESS [11.833s]</span><br><span class="line">[INFO] Apache Hadoop Archives ............................ SUCCESS [2.964s]</span><br><span class="line">[INFO] Apache Hadoop Rumen ............................... SUCCESS [9.944s]</span><br><span class="line">[INFO] Apache Hadoop Gridmix ............................. SUCCESS [6.646s]</span><br><span class="line">[INFO] Apache Hadoop Data Join ........................... SUCCESS [5.549s]</span><br><span class="line">[INFO] Apache Hadoop Ant Tasks ........................... SUCCESS [3.227s]</span><br><span class="line">[INFO] Apache Hadoop Extras .............................. SUCCESS [4.833s]</span><br><span class="line">[INFO] Apache Hadoop Pipes ............................... SUCCESS [10.372s]</span><br><span class="line">[INFO] Apache Hadoop OpenStack support ................... SUCCESS [7.556s]</span><br><span class="line">[INFO] Apache Hadoop Amazon Web Services support ......... SUCCESS [18.788s]</span><br><span class="line">[INFO] Apache Hadoop Client .............................. SUCCESS [9.438s]</span><br><span class="line">[INFO] Apache Hadoop Mini-Cluster ........................ SUCCESS [0.216s]</span><br><span class="line">[INFO] Apache Hadoop Scheduler Load Simulator ............ SUCCESS [9.126s]</span><br><span class="line">[INFO] Apache Hadoop Tools Dist .......................... SUCCESS [16.608s]</span><br><span class="line">[INFO] Apache Hadoop Tools ............................... SUCCESS [0.026s]</span><br><span class="line">[INFO] Apache Hadoop Distribution ........................ SUCCESS [1:02.537s]</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] BUILD SUCCESS</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total time: 22:54.692s</span><br><span class="line">[INFO] Finished at: Sat Jul 25 08:54:27 CST 2015</span><br><span class="line">[INFO] Final Memory: 140M/458M</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"># cd hadoop-dist/target/</span><br><span class="line"># ls hadoop-2.6.0.tar.gz </span><br><span class="line">hadoop-2.6.0.tar.gz</span><br></pre></td></tr></table></figure>
+<p>参考：源码文件中BUILDING.txt文件！</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/hadoop/">hadoop</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/07/27/kafka-use/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">kafka use</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/07/24/yarn-resources-manager-allocation/">
+        <span class="next-text nav-default">yarn-resources-manager-allocation</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

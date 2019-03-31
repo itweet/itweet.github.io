@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="解密Apache Hadoop YARN Fair Scheduler Queue Basics">
+
+
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2017/06/09/解密Apache-Hadoop-YARN-Fair-Scheduler-Queue-Basics/">
+
+
+<meta name="description" content="在这部分的中， 我们对Fair Scheduler如何运行进行深入了解， 以及其运行原理。 在本系列的第3部分中， 为您提供了关于Fair Scheduler的一个简介， 其一是在Apache Hadoop YARN 选择 scheduler ，（另一个是Cloudera推荐的）在第4部分中，我们将使用一些案例介绍大部分队列属性的使用方法和局限性。 队列属性默认情况下Fair Scheduler默">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解密Apache Hadoop YARN Fair Scheduler Queue Basics">
+<meta property="og:url" content="http://itweet.github.io/2017/06/09/解密Apache-Hadoop-YARN-Fair-Scheduler-Queue-Basics/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="在这部分的中， 我们对Fair Scheduler如何运行进行深入了解， 以及其运行原理。 在本系列的第3部分中， 为您提供了关于Fair Scheduler的一个简介， 其一是在Apache Hadoop YARN 选择 scheduler ，（另一个是Cloudera推荐的）在第4部分中，我们将使用一些案例介绍大部分队列属性的使用方法和局限性。 队列属性默认情况下Fair Scheduler默">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f1.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f2.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f3.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f4.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f5.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f6.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f7.png">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png">
+<meta property="og:updated_time" content="2019-03-05T15:09:47.509Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解密Apache Hadoop YARN Fair Scheduler Queue Basics">
+<meta name="twitter:description" content="在这部分的中， 我们对Fair Scheduler如何运行进行深入了解， 以及其运行原理。 在本系列的第3部分中， 为您提供了关于Fair Scheduler的一个简介， 其一是在Apache Hadoop YARN 选择 scheduler ，（另一个是Cloudera推荐的）在第4部分中，我们将使用一些案例介绍大部分队列属性的使用方法和局限性。 队列属性默认情况下Fair Scheduler默">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f1.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 解密Apache Hadoop YARN Fair Scheduler Queue Basics - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          解密Apache Hadoop YARN Fair Scheduler Queue Basics
+        
+      </h1>
+
+      <time class="post-time">
+          6月 09 2017
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>在这部分的中， 我们对Fair Scheduler如何运行进行深入了解， 以及其运行原理。</p>
+<p>在本系列的第3部分中， 为您提供了关于Fair Scheduler的一个简介， 其一是在Apache Hadoop YARN 选择 scheduler ，（另一个是Cloudera推荐的）在第4部分中，我们将使用一些案例介绍大部分队列属性的使用方法和局限性。</p>
+<h3 id="队列属性"><a href="#队列属性" class="headerlink" title="队列属性"></a>队列属性</h3><p>默认情况下Fair Scheduler默认仅使用一队队列。创建额外的队列，设置适宜的属性可让应用程序在集群上运行更多的细粒度权限。</p>
+<h3 id="FairShare"><a href="#FairShare" class="headerlink" title="FairShare"></a>FairShare</h3><p>FairShare是大量的YARN集群资源。我们将使用&lt;memory: 100GB, vcores: 25&gt;符号表示100GB和25V的FairShare。</p>
+<h3 id="Share-Weights"><a href="#Share-Weights" class="headerlink" title="Share Weights"></a><em>Share Weights</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;weight&gt;Numerical Value 0.0 or greater&lt;/weight&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>请注意：</p>
+<ul>
+<li><p>权重决定了相关兄弟节点队列的资源量，例如， 下面的案例中：</p>
+<ul>
+<li>YARN集群大小是1000GB，200 vcores。</li>
+<li>X队列的权重是0.25。</li>
+<li>其他队列的总权重是0.75</li>
+<li>X队列的FairShair是&lt;内存: 250GB, vcores: 50&gt;</li>
+</ul>
+</li>
+<li><p>如果在队列或者子队列中至少有一个活跃的应用程序，那么这个队列精细分配的公平共享资源会被强制执行。如果集群上的可用资源是等量的，那么这种限制很快就能被满足。否则，这则这些资源就会被当做其他队列完成任务的可用资源。</p>
+</li>
+<li><p>这是推荐的队列分配办法。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="资源限制"><a href="#资源限制" class="headerlink" title="资源限制"></a>资源限制</h3><p>以下是资源限制的两种类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;minResources&gt;20000 mb, 10 vcores&lt;/minResources&gt;</span><br><span class="line">&lt;maxResources&gt;2000000 mb, 1000 vcores&lt;/maxResources&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>请注意：</p>
+<ul>
+<li><p>minResources限制是一种软限制，只有队列总资源需求大于或者等于minResources的需求才会被强制执行，如果以下两点是真的，那么minResources至少能分到规定的量。</p>
+<ul>
+<li>有足够的资源或者从其他队列抢占资源</li>
+<li>minResources总和不大于集群的总资源</li>
+</ul>
+</li>
+<li><p>maxResources 限制是硬性限制， 意味着它会持续强制执行。这种队列属性使用总资源，此外它的子队列和派生队列必须遵守这种属性。</p>
+</li>
+<li><p>不推荐使用minResources/maxResources。 因为以下几大缺点：</p>
+<ul>
+<li>所有的值都是静态值，因此， 一旦集群大小改变他们也需要更新。</li>
+<li>maxResources限制集群的使用， 因此队列不能超出配置的maxResources使用集群上任何可用的资源。</li>
+<li>如果队列的minResources比FairShare大，那么它可能会给其他队列的FairShare带来不利的影响。</li>
+<li>以前， 使用minResources就可以很快抢占一大块资源，但是现在没必要了， 因为FairShare-based 抢占已经有了显著改善。我们会在后面讨论详细细节。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="限制应用程序"><a href="#限制应用程序" class="headerlink" title="限制应用程序"></a>限制应用程序</h3><p>有两种方式可以限制队列的应用程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;maxRunningApps&gt;10&lt;/maxRunningApps&gt;</span><br><span class="line">&lt;maxAMShare&gt;0.3&lt;/maxAMShare&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>请注意：<ul>
+<li>maxRunningApps限制是硬性限制，它的队列使用总资源，此外子队列和其他派生队列都必须遵守这种属性。</li>
+<li>maxAMShare限制是硬性限制，这种分数代表队列总资源分配给ApplicationMasters的百分比。<ul>
+<li>maxAMShare小集群上设置既简便又能运行大量的应用程序。</li>
+<li>默认值是0.5. 这种默认设置可以保证一半的资源可用于运行 non-AM 容器。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="用户和管理员"><a href="#用户和管理员" class="headerlink" title="用户和管理员"></a>用户和管理员</h3><p>这些属性用于控制谁可以提交到队列上， 谁可以管理队列的应用程序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;aclSubmitApps&gt;user1,user2,user3,... group1,group2,...&lt;/aclSubmitApps&gt;</span><br><span class="line">&lt;aclAdministerApps&gt;userA,userB,userC,... groupA,groupB,...&lt;/aclAdministerApps&gt;</span><br></pre></td></tr></table></figure>
+<p>请注意：如果yarn.acl.enable在yarn-site.xml里设置为True。那么yarn.admin.acl 就会被认为是除了aclAdministerApps队列属性以外唯一有效的管理员。</p>
+<h3 id="队列布局策略"><a href="#队列布局策略" class="headerlink" title="队列布局策略"></a>队列布局策略</h3><p>一旦您完成队列的配置，队列布局策略都是为以下目的服务的：</p>
+<ul>
+<li>应用程序提交到集群上，每一个应用程序分配到相应的队列。</li>
+<li>定义什么类型的队列可以创建在“on the fly”。</li>
+</ul>
+<p>队列布局规则阐述了在队列的什么位置放置应用程序， 队列布局规则是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;queuePlacementPolicy&gt;</span><br><span class="line">  &lt;Rule #1&gt;</span><br><span class="line">  &lt;Rule #2&gt;</span><br><span class="line">  &lt;Rule #3&gt;</span><br><span class="line">  .</span><br><span class="line">  .</span><br><span class="line"> &lt;/queuePlacementPolicy&gt;</span><br></pre></td></tr></table></figure>
+<p>首先配对“Rule #1”，如果配对失败，那么就配对“Rule #2”直到与某一个规则配对成功。有一条预设置规则可供选择， 他们的行为可以建模为流程表。最后一条规则必须是终端规则，既不是默认规则也不是拒绝规则。</p>
+<p><strong><em>特殊情况：使用“create”属性在on the fly 上创建队列</em></strong></p>
+<p>所有的队列布局规则规定支持一个称作Create的可以设置为“true”或者“false”的XML属性，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;rule name=”specified” create=”false”&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如果创建属性是TRUE 并且已经不存在了，那么规则支持特殊规则创建名称决定的队列。。如果创建属性是false这种规则就不支持创建队列， 那么队列布局就会移到下一条规则。</p>
+<h3 id="队列布局规则"><a href="#队列布局规则" class="headerlink" title="队列布局规则"></a>队列布局规则</h3><p>这一节为每种类型的队列布局策略给出了一种案例并提供了流程图，如何决定调度程序用在那个应用程序上，那种队列上，（或者应用程序是否创建一个新的队列）</p>
+<h4 id="规则：详细说明"><a href="#规则：详细说明" class="headerlink" title="规则：详细说明"></a>规则：详细说明</h4><ul>
+<li>总结：明确地指定应用程序到哪一队列。</li>
+<li>XML的规则实例：<rule name="specified"></rule></li>
+<li>Hadoop命令指定的队列示例: hadoop jar mymr.jar app1 -Dmapreduce.job.queuename=”root.myqueue”</li>
+<li>流程图：</li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f1.png" alt></p>
+<h4 id="规则：用户"><a href="#规则：用户" class="headerlink" title="规则：用户"></a>规则：用户</h4><ul>
+<li>总结：分配应用程序到队列，那么队列就以提交应用程序的用户命名，例如：如果Fred是启动YARN程序的用户， 那么流程图中的队列就是root.fred。</li>
+<li>XML的规则实例：<rule name="user"></rule></li>
+<li>流程图：</li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f2.png" alt></p>
+<h4 id="规则：-primaryGroup"><a href="#规则：-primaryGroup" class="headerlink" title="规则： primaryGroup"></a>规则： primaryGroup</h4><ul>
+<li>总结： 分配应用程序到队列， 队列以用户属于哪一组primaryGroup命名。例如， 如果启动应用程序的用户属于市场组， 那么队列在流程图中将是root.marketing。</li>
+<li>XML的规则实例：<rule name="primaryGroup">。</rule></li>
+<li>流程图：</li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f3.png" alt></p>
+<h4 id="规则：secondaryGroupExistingQueue"><a href="#规则：secondaryGroupExistingQueue" class="headerlink" title="规则：secondaryGroupExistingQueue"></a>规则：secondaryGroupExistingQueue</h4><ul>
+<li><p>总结：分配程序到队列，队列以属于用户的以第一个有效secondary group（换句话说，不是primary group）命名。例如用户属于secondary组market_eu, market_auto, market_germany, 那么流程表里的队列将重复搜集 root.market_eu, root.market_auto, and root.market_germany.</p>
+</li>
+<li><p>XML的规则实例：<rule name="secondaryGroupExistingQueue"></rule></p>
+</li>
+<li><p>流程图</p>
+</li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f4.png" alt></p>
+<h4 id="规则：nestedUserQueue"><a href="#规则：nestedUserQueue" class="headerlink" title="规则：nestedUserQueue"></a>规则：nestedUserQueue</h4><ul>
+<li><p>总结： 创建一个和<code>root</code>队列不同的<code>user</code>队列。“other queue”是由附在nestedUserQueue规则上的规则决定的。</p>
+</li>
+<li><p>模板</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;rule name=&quot;nestedUserQueue&quot; create=”true”&gt;</span><br><span class="line">        &lt;!-- Put one of the other Queue Placement Policies here. --&gt;</span><br><span class="line">    &lt;/rule&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>XML的规则实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;rule name=&quot;nestedUserQueue&quot; create=”true”&gt;</span><br><span class="line">        &lt;rule name=&quot;primaryGroup&quot; create=&quot;false&quot; /&gt;</span><br><span class="line">    &lt;/rule&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>请注意：这种规则创建的用户队列在队列之下不是<code>root</code>队列。队列布局策略首先在内部计算， 然后在再下面创建用户队列。请注意， 如果nestedUserQueue规则没有设置create=”true” 的属性， 那么除非有一个特殊用户队列已经存在，应用程序才可以提交。</p>
+</li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f5.png" alt></p>
+<h4 id="规则：default"><a href="#规则：default" class="headerlink" title="规则：default"></a>规则：default</h4><ul>
+<li>总结：定义默认队列。</li>
+<li>XML的规则实例：<rule name="default" queue="default"></rule></li>
+<li>流程图：</li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f6.png" alt></p>
+<h4 id="规则：reject"><a href="#规则：reject" class="headerlink" title="规则：reject"></a>规则：reject</h4><ul>
+<li>总结：如果你想避免最后提交应用程序的默认行为，拒绝提交应用程序通常用作最后一条规则。</li>
+<li>XML的规则实例：<rule name="reject"> 。 </rule></li>
+<li>请注意：如果一条标准的Hadoop jar 被这条规则拒绝，该错误信息 java.io.IOException：无法运行作业：应用程序就会出现被 队列布局策略拒绝的情况。</li>
+<li>流程图：</li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/BigData/img/yarn4-f7.png" alt></p>
+<hr>
+<p><strong>工具条：Application Scheduling Status</strong></p>
+<p>正如本系列1讨论过的情况一样，有一个或者多个任务组成的应用程序， 每项任务都在同一个容器里面运行。这篇文章的目的是， 应用程序可能的四分之一状态是：</p>
+<ul>
+<li>待定的应用程序尚未分配任何容器。</li>
+<li>活跃的应用程序有一个或者多个容器在集群上运行。</li>
+<li>饥饿程序是一种很活跃的应用程序， 对资源的需求非常突出。</li>
+<li>结束了的应用程序意味着它已经完成了所有任务。</li>
+</ul>
+<hr>
+<h3 id="案例：运行应用程序的集群"><a href="#案例：运行应用程序的集群" class="headerlink" title="案例：运行应用程序的集群"></a>案例：运行应用程序的集群</h3><p>假如我们有一个YARN集群，总共资源是 &lt;内存: 800GB, vcpu 200V&gt;，有两排队列： root.busy (权重=1.0)和root.sometimes_busy （权重=3.0）。以下是四种有趣的方案：</p>
+<ul>
+<li><p>方案A：繁忙的队列充满了应用程序，sometimes_busy 队列只有少量的程序运行 (比如说 10%, i.e. &lt;内存: 80GB, vcpu: 20&gt;。很快， 大量的应用程序在相对较短的时间窗口添加到 sometimes_busy 队列。所有新的应用程序在sometimes_busy 中待定， 但是会随着繁忙队列完工后很快活跃起来。如果繁忙队列的任务是短期任务， 那么sometimes_busy 队列的应用程序不用等很久就能分配到容器。然而，如果繁忙队列的任务需要很长时间完成， 那么sometimes_busy 队列里的新应用程序就会待定很久。无论哪一种情况下，一旦应用程序在sometimes_busy 队列变得活跃起来，繁忙的队列中很多正运行的应用程序将需要更长的时间才能完成。</p>
+</li>
+<li><p>方案B：busy和sometimes_busy 的队列都满了或者接近满了活跃的待定程序。在这种情况下，集群将维持充分利用的情况。每一队列都会使用公平共享资源， 繁忙队列应用程序总数使用集群资源的25%， sometimes_busy 队列的应用程序总数使用剩余的75%。</p>
+</li>
+</ul>
+<p>因此， 怎么避免情况A呢？</p>
+<p>一种解决方案是在busy队列设置maxResources 。假设设置在busy队列的maxResources等于集群的25%。因为maxResources是硬性限制， busy队列的应用程序就会一直被限制在25%的资源范围内。那么这样就可以100%使用集群资源， 集群利用率接近35%，（10%是sometimes_busy 队列， 25%是busy队列）</p>
+<p>情况A就会显著改善，因为集群上的闲置资源只能用于sometimes_busy 队列的应用程序。 但是集群的平均利用率可能会降低。</p>
+<h4 id="更多的公平共享资源的定义："><a href="#更多的公平共享资源的定义：" class="headerlink" title="更多的公平共享资源的定义："></a>更多的公平共享资源的定义：</h4><ul>
+<li>稳定的公平共享资源：理论上一个队列的公平共享值是基于集群大小和集群上队列的权重。</li>
+<li>即时资源共享： 通过集群上的每个队列的资源调度器计算公平共享值。这种值和稳定的公平共享资源在两方面有所不同：<br>—不分配任何资源到空白队列。<br>—当所有队列达到或者超出容量是，该值等于稳定的公平共享资源。</li>
+<li>分配：等于队列里所有运行中的程序占用的资源总和。</li>
+</ul>
+<p>现在开始， 我们将即时公平共享资源当做普通的公平共享资源。</p>
+<h4 id="抢占资源的案例"><a href="#抢占资源的案例" class="headerlink" title="抢占资源的案例"></a>抢占资源的案例</h4><p>鉴于这些新定义， 之前的情况可以表述如下：</p>
+<ul>
+<li><p>情况A：</p>
+<ul>
+<li>sometimes_busy队列分配到的值是&lt;内存: 80GB, vcpu: 20V&gt; 而公平共享资源值是&lt;内存: 600GB, vcpu: 150V&gt;.</li>
+<li>Busy队列分配到的值是&lt;内存: 720GB, vcpu: 180V&gt; 而公平共享资源值是&lt;内存: 200GB, vcpu: 50V&gt;.</li>
+</ul>
+</li>
+<li><p>情况B：</p>
+<ul>
+<li>两种队列的即时公平共享资源都等于稳定的公平共享资源。</li>
+</ul>
+</li>
+</ul>
+<p>情况A中， 您可以看到在分配和公平共享资源之间两组队列的不平衡。，平衡慢慢恢复随着容器从 busy队列释放然后分配到sometimes_busy 队列。</p>
+<p>通过打开抢占功能， 公平调度器可以在busy队列中杀死容器然后更迅速分配把他们sometimes_busy 队列。</p>
+<h4 id="为抢占功能配置公平调度器"><a href="#为抢占功能配置公平调度器" class="headerlink" title="为抢占功能配置公平调度器"></a>为抢占功能配置公平调度器</h4><p>为了打开抢占功能， 在yarn-site.xml中设置这种属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;yarn.scheduler.fair.preemption&lt;/property&gt;</span><br><span class="line">&lt;value&gt;true&lt;/value&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后， 在您的公平调度器里分配文件， 可以通过fairSharePreemptionThreshold在队列上配置抢占，然后 fairSharePreemptionTimeout就会像下面示例中所示，fairSharePreemptionTimeout是秒的数目，在它尝试从其他队列抢占容器夺取资源之前队列是在fairSharePreemptionThreshold之下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;allocations&gt;</span><br><span class="line">  &lt;queue name=&quot;busy&quot;&gt;</span><br><span class="line">    &lt;weight&gt;1.0&lt;/weight&gt;</span><br><span class="line">  &lt;/queue&gt;</span><br><span class="line">  &lt;queue name=&quot;sometimes_busy&quot;&gt;</span><br><span class="line">    &lt;weight&gt;3.0&lt;/weight&gt;</span><br><span class="line">    &lt;fairSharePreemptionThreshold&gt;0.50&lt;/fairSharePreemptionThreshold&gt;</span><br><span class="line">    &lt;fairSharePreemptionTimeout&gt;60&lt;/fairSharePreemptionTimeout&gt;</span><br><span class="line">  &lt;/queue&gt;</span><br><span class="line"> </span><br><span class="line"> &lt;queuePlacementPolicy&gt;</span><br><span class="line">    &lt;rule name=&quot;specified&quot; /&gt;</span><br><span class="line">    &lt;rule name=”reject” /&gt;</span><br><span class="line"> &lt;/queuePlacementPolicy&gt;</span><br><span class="line">&lt;/allocations&gt;</span><br></pre></td></tr></table></figure>
+<p>还记得sometimes_busy 队列的公平共享资源是 &lt;内存: 600GB, vcpu: 150V&gt;。这两个新属性提示公平调度器，sometimes_busy 队列在开始抢占之前会等待60秒。如果在那段时间， 它没有收到公平共享资源50%的资源， 公平调度器就会开始在busy队列杀容器并分配到sometimes_busy 队列。</p>
+<ul>
+<li>请注意这几件事：<ul>
+<li>fairSharePreemptionThreshold的值比0.0大（设置成0.0类似关闭抢占功能）但是比1.0小（因为1.0会将全部的公平共享资源归还到队列需要的资源）</li>
+<li>这种配置里的抢占将杀死busy队列里的容器然后将他们分配到sometimes_busy队列。<ul>
+<li>对方无法实现抢占功能因为busy队列没有设置抢占属性。</li>
+<li>抢占不会杀sometimes_busy 队列中应用程序A的容器分配到应用程序B中。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>(请注意：我们不会在一个队列中覆盖minResources和minSharePreemptionTimeout。目前推荐公平共享抢占。)</p>
+<h3 id="补充阅读"><a href="#补充阅读" class="headerlink" title="补充阅读"></a>补充阅读</h3><p>如果想要获取更多关于公平调度器的信息， 可以查阅在线文档（<a href="http://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/FairScheduler.html" target="_blank" rel="noopener">Apache Hadoop</a> 和<a href="http://archive.cloudera.com/cdh5/cdh/5/hadoop/hadoop-yarn/hadoop-yarn-site/FairScheduler.html" target="_blank" rel="noopener">CDH</a>版本都可用）</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>队列上可以设置很多队列属性， 包括限制资源， 限制应用程序， 设置用户和管理员， 设置调度策略。</li>
+<li>队列配置文件应当包括队列布局策略，队列布局策略定义了队列上如何分配应用程序。</li>
+<li>在队列上运行的应用程序可以保持应用程序在不同的队列待定或者处于饥饿状态。在公平调度器中配置抢占功能可以更迅速的调节不平衡。</li>
+</ol>
+<h3 id="下一部分"><a href="#下一部分" class="headerlink" title="下一部分"></a>下一部分</h3><p><a href="http://blog.cloudera.com/blog/2017/02/untangling-apache-hadoop-yarn-part-5-using-fairscheduler-queue-properties/" target="_blank" rel="noopener">第五部分</a>将提供更具体的例子， 例如工作优先次序， 如何使用队列，如何利用属性处理这种情况。</p>
+<p>译文原文：<a href="https://blog.cloudera.com/blog/2016/06/untangling-apache-hadoop-yarn-part-4-fair-scheduler-queue-basics/" target="_blank" rel="noopener">https://blog.cloudera.com/blog/2016/06/untangling-apache-hadoop-yarn-part-4-fair-scheduler-queue-basics/</a></p>
+<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png" alt="Itweet公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/hadoop/">hadoop</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/06/09/new_apache-spark-zeppelin-hdp-2-6_enterprise_data/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">new_apache-spark-zeppelin-hdp-2-6_enterprise_data</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/06/04/简介Apache-Spark的行-列级的访问权限/">
+        <span class="next-text nav-default">简介Apache Spark的行-列级的访问权限</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

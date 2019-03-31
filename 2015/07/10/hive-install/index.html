@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Hive 的手动安装记录。">
+
+
+
+
+  <meta name="keywords" content="Hive,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2015/07/10/hive-install/">
+
+
+<meta name="description" content="Hive 的手动安装记录。">
+<meta name="keywords" content="Hive">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hive install">
+<meta property="og:url" content="http://itweet.github.io/2015/07/10/hive-install/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Hive 的手动安装记录。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-05T15:09:47.485Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hive install">
+<meta name="twitter:description" content="Hive 的手动安装记录。">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> hive install - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          hive install
+        
+      </h1>
+
+      <time class="post-time">
+          7月 10 2015
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="1、安装mysql-5-5"><a href="#1、安装mysql-5-5" class="headerlink" title="1、安装mysql-5.5"></a>1、安装mysql-5.5</h1><p>** From server2</p>
+<ul>
+<li>(1)、rpm包安装mysql<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># rpm -qa | grep mysql  [查询是否自带mysql]</span><br><span class="line"># rpm -e mysql-libs-5.1.71-1.el6.x86_64 --nodeps	[不验证依赖卸载]</span><br><span class="line"># rpm -qa | grep mysql   [再次查看卸载是否成功]</span><br><span class="line"># rpm -i MySQL-server-5.5.40-1.linux2.6.x86_64.rpm		[安装服务端]</span><br><span class="line"># mysqld_safe &amp;		[后台启动，jobs查看]</span><br><span class="line">   # rpm -i MySQL-client-5.5.40-1.linux2.6.x86_64.rpm [安装客户端]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>or</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ yum install mysql-server</span><br><span class="line">$ /etc/init.d/mysqld start</span><br><span class="line">$ chkconfig --add mysqld</span><br><span class="line">$ chkconfig mysqld on</span><br><span class="line">$ chkconfig --list|grep mysqld</span><br><span class="line"></span><br><span class="line">$ mysql_secure_installation #设置初始化信息</span><br></pre></td></tr></table></figure>
+<ul>
+<li>(2)、修改数据库配置信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"># mysql_secure_installation</span><br><span class="line">        NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MySQL</span><br><span class="line">        SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!</span><br><span class="line"></span><br><span class="line">        In order to log into MySQL to secure it, we&apos;ll need the current</span><br><span class="line">        password for the root user.  If you&apos;ve just installed MySQL, and</span><br><span class="line">        you haven&apos;t set the root password yet, the password will be blank,</span><br><span class="line">        so you should just press enter here.</span><br><span class="line"></span><br><span class="line">        Enter current password for root (enter for none):   //当前密码,第一次使用为null</span><br><span class="line">            OK, successfully used password, moving on...</span><br><span class="line"></span><br><span class="line">            Setting the root password ensures that nobody can log into the MySQL</span><br><span class="line">            root user without the proper authorisation.</span><br><span class="line"></span><br><span class="line">            Set root password? [Y/n] Y      //设置密码</span><br><span class="line">            New password:                   /admin</span><br><span class="line">            Re-enter new password:          //admin</span><br><span class="line">            Password updated successfully!</span><br><span class="line">            Reloading privilege tables..</span><br><span class="line">            ... Success!</span><br><span class="line"></span><br><span class="line">            By default, a MySQL installation has an anonymous user, allowing anyone</span><br><span class="line">            to log into MySQL without having to have a user account created for</span><br><span class="line">            them.  This is intended only for testing, and to make the installation</span><br><span class="line">            go a bit smoother.  You should remove them before moving into a</span><br><span class="line">            production environment.</span><br><span class="line"></span><br><span class="line">            Remove anonymous users? [Y/n] n     //是否删除匿名用户</span><br><span class="line">            ... skipping.</span><br><span class="line"></span><br><span class="line">            Normally, root should only be allowed to connect from &apos;localhost&apos;.  This</span><br><span class="line">            ensures that someone cannot guess at the root password from the network.</span><br><span class="line"></span><br><span class="line">            Disallow root login remotely? [Y/n] n       //不允许root远程登录</span><br><span class="line">            ... skipping.</span><br><span class="line"></span><br><span class="line">            By default, MySQL comes with a database named &apos;test&apos; that anyone can</span><br><span class="line">            access.  This is also intended only for testing, and should be removed</span><br><span class="line">            before moving into a production environment.</span><br><span class="line"></span><br><span class="line">            Remove test database and access to it? [Y/n] n  //是否删除测试数据库</span><br><span class="line">            ... skipping.</span><br><span class="line"></span><br><span class="line">            Reloading the privilege tables will ensure that all changes made so far</span><br><span class="line">            will take effect immediately.</span><br><span class="line"></span><br><span class="line">            Reload privilege tables now? [Y/n] Y        //重新加载权限表</span><br><span class="line">            ... Success!</span><br><span class="line"></span><br><span class="line">            Cleaning up...</span><br><span class="line"></span><br><span class="line">            All done!  If you&apos;ve completed all of the above steps, your MySQL</span><br><span class="line">            installation should now be secure.</span><br><span class="line"></span><br><span class="line">            Thanks for using MySQL!</span><br></pre></td></tr></table></figure>
+<ul>
+<li>(3)、登录mysql数据库验证</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># mysql -uroot -padmin</span><br></pre></td></tr></table></figure>
+<ul>
+<li>(4)创建数据库并授权<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#  mysql -uroot -padmin</span><br><span class="line">mysql&gt; create database hive;</span><br><span class="line">[授权hive在任何位置(%)远程可以登陆]</span><br><span class="line">mysql&gt; grant all on hive.* to &apos;hive&apos;@&apos;%&apos; identified by &apos;hive&apos;; </span><br><span class="line">mysql&gt; grant all on hive.* to &apos;hive&apos;@&apos;server2&apos; identified by &apos;hive&apos;;</span><br><span class="line">mysql&gt; flush privileges;    [刷新权限]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>(5)使用的是SQLyog数据库可视化软件连接验证</li>
+</ul>
+<h1 id="2、hive-0-13-1的安装"><a href="#2、hive-0-13-1的安装" class="headerlink" title="2、hive-0.13.1的安装"></a>2、hive-0.13.1的安装</h1><ul>
+<li>(1)、解压<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># tar -zxvf apache-hive-0.13.1-bin.tar.gz -C /usr/local/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>(2)、scp hive-0.13.1 [hive安装在server2]<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># scp -rq hive-0.13.1 server2:/usr/local/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>(3)、cp配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># cp hive-exec-log4j.properties.template hive-exec-log4j.properties</span><br><span class="line"># cp hive-log4j.properties.template hive-log4j.properties</span><br><span class="line"># cp hive-env.sh.template hive-env.sh</span><br><span class="line"># cp hive-default.xml.template hive-site.xml</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>(4)、配置hive-config.sh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/hive-0.13.1/bin/hive-config.sh</span><br><span class="line">export JAVA_HOME=/usr/local/jdk1.7.0_45</span><br><span class="line">export HIVE_HOME=/usr/local/hive-0.13.1</span><br><span class="line">export HADOOP_HOME=/usr/local/hadoop-2.4.0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>(5)、配置hive-site.xml [mysql做metastore]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">//连接地址,基本配置</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;</span><br><span class="line">&lt;value&gt;jdbc:mysql://server2:3306/hive?createDatabaseIfNotExist=true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">//mysql驱动</span><br><span class="line">&lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;</span><br><span class="line">&lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">//用户名</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;</span><br><span class="line">&lt;value&gt;hive&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">//用户密码</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;</span><br><span class="line">&lt;value&gt;hive&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">//默认数据库位置</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;hive.metastore.warehouse.dir&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;/user/hive/warehouse&lt;/value&gt;</span><br><span class="line">    &lt;description&gt;location of default database for the warehouse&lt;/description&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">//hive远程metastore的thrift地址        </span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;hive.metastore.uris&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;thrift://server2:9083&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//hiveserver2的配置</span><br><span class="line">&lt;property&gt;  </span><br><span class="line">    &lt;name&gt;hive.support.concurrency&lt;/name&gt;   </span><br><span class="line">    &lt;description&gt;Enable Hive&apos;s Table Lock Manager Service&lt;/description&gt;   </span><br><span class="line">    &lt;value&gt;true&lt;/value&gt;  </span><br><span class="line">&lt;/property&gt; </span><br><span class="line">&lt;property&gt;  </span><br><span class="line">    &lt;name&gt;hive.zookeeper.quorum&lt;/name&gt;  </span><br><span class="line">    &lt;description&gt;Zookeeper quorum used by Hive&apos;s Table Lock Manager&lt;/description&gt;</span><br><span class="line">    &lt;value&gt;server1,server2,server3&lt;/value&gt;</span><br><span class="line">&lt;/property&gt; </span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;hive.zookeeper.client.port&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;2181&lt;/value&gt;</span><br><span class="line">  &lt;description&gt;The port of zookeeper servers to talk to. This is only needed for read/write locks.&lt;/description&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;  </span><br><span class="line">    &lt;name&gt;hive.server2.thrift.bind.host&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;server2&lt;/value&gt;</span><br><span class="line">    &lt;description&gt;Bind host on which to run the HiveServer2 Thrift interface. Can    be overridden by setting $HIVE_SERVER2_THRIFT_BIND_HOST&lt;/description&gt;  </span><br><span class="line">&lt;/property&gt; </span><br><span class="line"></span><br><span class="line">//关闭推测式执行,一些优化项</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;hive.mapred.reduce.tasks.speculative.execution&lt;/name&gt;</span><br><span class="line"> &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;mapreduce.reduce.speculative&lt;/name&gt;</span><br><span class="line"> &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">小表mapjoin</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;hive.ignore.mapjoin.hint&lt;/name&gt;</span><br><span class="line"> &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;hive.mapjoin.smalltable.filesize&lt;/name&gt;</span><br><span class="line"> &lt;value&gt;500000000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">并行执行</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;hive.exec.parallel&lt;/name&gt;</span><br><span class="line"> &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;hive.exec.parallel.thread.number&lt;/name&gt;</span><br><span class="line"> &lt;value&gt;16&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">客户端显示</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;hive.cli.print.current.db&lt;/name&gt;</span><br><span class="line"> &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;hive.cli.print.header&lt;/name&gt;</span><br><span class="line"> &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">关闭自动统计</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;hive.stats.autogather&lt;/name&gt;</span><br><span class="line"> &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>(6)、cp mysql-connector-java-5.1.26-bin.jar 到hive-0.13.1/lib</p>
+</li>
+<li><p>(7)、启动metastore</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># hive-0.13.1/bin/hive --service metastore &amp;       [jobs查看]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>(8)、启动hive<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># hive-0.13.1/bin/hive</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>(9)、启动hiveserver2 [jdbc服务]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># hive-0.13.1/bin/hive --service hiveserver2 --hiveconf hive.server2.thrift.port=14000 start &amp;</span><br><span class="line"></span><br><span class="line">[hsu@server2 ~]$ lsof -i :14000</span><br><span class="line">COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">java    3460  hsu  306u  IPv4  29485      0t0  TCP server2:scotty-ft-&gt;server1:18243 (ESTABLISHED)</span><br><span class="line">java    3460  hsu  313u  IPv4  29484      0t0  TCP server2:scotty-ft (LISTEN)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>(10)、测试hiveserver2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"> 使用beeline控制台连接hiveserver2：</span><br><span class="line"> $ /usr/local/hive-0.13.1/beeline&gt; !connect jdbc:hive2://server2:14000 -uhsu -phsu org.apache.hive.jdbc.HiveDriver</span><br><span class="line"></span><br><span class="line"> $ beeline --help</span><br><span class="line"> Usage: java org.apache.hive.cli.beeline.BeeLine </span><br><span class="line">-u &lt;database url&gt;               the JDBC URL to connect to</span><br><span class="line">-n &lt;username&gt;                   the username to connect as</span><br><span class="line">-p &lt;password&gt;                   the password to connect as</span><br><span class="line">-d &lt;driver class&gt;               the driver class to use</span><br><span class="line"></span><br><span class="line"> # hive1.2.1测试</span><br><span class="line"> </span><br><span class="line"> !connect jdbc:hive2://server2:14000 -udefault -nhsu -phsu -dorg.apache.hive.jdbc.HiveDriver</span><br><span class="line"></span><br><span class="line"> [hsu@server1 ~]$ beeline </span><br><span class="line"> Beeline version 1.2.1 by Apache Hive</span><br><span class="line"> beeline&gt; !connect jdbc:hive2://server2:14000 </span><br><span class="line"> Connecting to jdbc:hive2://server2:14000</span><br><span class="line"> Enter username for jdbc:hive2://server2:14000: </span><br><span class="line"> Enter password for jdbc:hive2://server2:14000: </span><br><span class="line"> Error: Failed to open new session: java.lang.RuntimeException: java.lang.RuntimeException: org.apache.hadoop.security.AccessControlException: Permission denied: user=anonymous, access=EXECUTE, inode=&quot;/tmp&quot;:hsu:supergroup:drwx------</span><br><span class="line">     at org.apache.hadoop.hdfs.server.namenode.FSPermissionChecker.checkFsPermission(FSPermissionChecker.java:271)</span><br><span class="line">     at org.apache.hadoop.hdfs.server.namenode.FSPermissionChecker.check(FSPermissionChecker.java:257)</span><br><span class="line">     at org.apache.hadoop.hdfs.server.namenode.FSPermissionChecker.checkTraverse(FSPermissionChecker.java:208)</span><br><span class="line">     at org.apache.hadoop.hdfs.server.namenode.FSPermissionChecker.checkPermission(FSPermissionChecker.java:171)</span><br><span class="line">     at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.checkPermission(FSNamesystem.java:6512)</span><br><span class="line">     at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.getFileInfo(FSNamesystem.java:4140)</span><br><span class="line">     at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.getFileInfo(NameNodeRpcServer.java:838)</span><br><span class="line">     at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.getFileInfo(ClientNamenodeProtocolServerSideTranslatorPB.java:821)</span><br><span class="line">     at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)</span><br><span class="line">     at org.apache.hadoop.ipc.ProtobufRpcEngine$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine.java:619)</span><br><span class="line">     at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:962)</span><br><span class="line">     at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2039)</span><br><span class="line">     at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2035)</span><br><span class="line">     at java.security.AccessController.doPrivileged(Native Method)</span><br><span class="line">     at javax.security.auth.Subject.doAs(Subject.java:415)</span><br><span class="line">     at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)</span><br><span class="line">     at org.apache.hadoop.ipc.Server$Handler.run(Server.java:2033) (state=,code=0)</span><br><span class="line"></span><br><span class="line"> 解决：</span><br><span class="line"> [hsu@server2 ~]$ hadoop fs -ls /tmp</span><br><span class="line"> Found 2 items</span><br><span class="line"> drwx-wx-wx   - hsu supergroup          0 2015-08-13 14:57 /tmp/hive</span><br><span class="line"> drwx------   - hsu supergroup          0 2015-08-06 13:03 /tmp/hsu</span><br><span class="line"></span><br><span class="line"> [hsu@server2 ~]$ hadoop fs -chmod 777 /tmp</span><br><span class="line"> [hsu@server2 ~]$ hadoop fs -ls /</span><br><span class="line"> drwxrwxrwx   - hsu supergroup          0 2015-08-13 14:57 /tmp</span><br><span class="line"></span><br><span class="line"> 0: jdbc:hive2://server2:14000&gt;   !connect jdbc:hive2://server2:14000 </span><br><span class="line"> Connecting to jdbc:hive2://server2:14000</span><br><span class="line"> Enter username for jdbc:hive2://server2:14000: hsu</span><br><span class="line"> Enter password for jdbc:hive2://server2:14000: ***</span><br><span class="line"> Connected to: Apache Hive (version 1.2.1)</span><br><span class="line"> Driver: Hive JDBC (version 1.2.1)</span><br><span class="line"> Transaction isolation: TRANSACTION_REPEATABLE_READ</span><br><span class="line"> 1: jdbc:hive2://server2:14000&gt; create table test(id int);</span><br><span class="line"> No rows affected (20.356 seconds)</span><br><span class="line"> 1: jdbc:hive2://server2:14000&gt; </span><br><span class="line"> </span><br><span class="line"> 1: jdbc:hive2://server2:14000&gt;  insert into table test values (1), (2), (3);</span><br><span class="line"> INFO  : Number of reduce tasks is set to 0 since there&apos;s no reduce operator</span><br><span class="line"> WARN  : Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.</span><br><span class="line"> INFO  : number of splits:1</span><br><span class="line"> INFO  : Submitting tokens for job: job_1439448136822_0001</span><br><span class="line"> INFO  : The url to track the job: http://server1:23188/proxy/application_1439448136822_0001/</span><br><span class="line"> INFO  : Starting Job = job_1439448136822_0001, Tracking URL = http://server1:23188/proxy/application_1439448136822_0001/</span><br><span class="line"> INFO  : Kill Command = /home/hsu/hadoop/bin/hadoop job  -kill job_1439448136822_0001</span><br><span class="line"> INFO  : Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 0</span><br><span class="line"> INFO  : 2015-08-13 16:00:31,907 Stage-1 map = 0%,  reduce = 0%</span><br><span class="line"> INFO  : 2015-08-13 16:01:22,538 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.56 sec</span><br><span class="line"> INFO  : MapReduce Total cumulative CPU time: 1 seconds 560 msec</span><br><span class="line"> INFO  : Ended Job = job_1439448136822_0001</span><br><span class="line"> INFO  : Stage-3 is selected by condition resolver.</span><br><span class="line"> INFO  : Stage-2 is filtered out by condition resolver.</span><br><span class="line"> INFO  : Stage-4 is filtered out by condition resolver.</span><br><span class="line"> INFO  : Moving data to: hdfs://mycluster/user/hive/warehouse/test/.hive-staging_hive_2015-08-13_15-59-12_208_7322597341621072670-1/-ext-10000 from hdfs://mycluster/user/hive/warehouse/test/.hive-staging_hive_2015-08-13_15-59-12_208_7322597341621072670-1/-ext-10002</span><br><span class="line"> INFO  : Loading data to table default.test from hdfs://mycluster/user/hive/warehouse/test/.hive-staging_hive_2015-08-13_15-59-12_208_7322597341621072670-1/-ext-10000</span><br><span class="line"></span><br><span class="line"> 1: jdbc:hive2://server2:14000&gt; select * from test;</span><br><span class="line"> +----------+--+</span><br><span class="line"> | test.id  |</span><br><span class="line"> +----------+--+</span><br><span class="line"> | 1        |</span><br><span class="line"> | 2        |</span><br><span class="line"> | 3        |</span><br><span class="line"> +----------+--+</span><br><span class="line"> 3 rows selected (0.324 seconds)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>(11)、hive安装目录加入环境变量中</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   # vi /etc/profile</span><br><span class="line"></span><br><span class="line">    附录1：hiveserver1和hiveserver2的区别</span><br><span class="line">    Hiveserver1 和hiveserver2的JDBC区别：</span><br><span class="line">    HiveServer version    Connection URL             Driver Class</span><br><span class="line">    HiveServer2           jdbc:hive2://:              org.apache.hive.jdbc.HiveDriver</span><br><span class="line">    HiveServer1           jdbc:hive://:               org.apache.hadoop.hive.jdbc.HiveDriver</span><br><span class="line"></span><br><span class="line">参考地址：https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Clients</span><br></pre></td></tr></table></figure>
+<h1 id="3、hive的语法介绍"><a href="#3、hive的语法介绍" class="headerlink" title="3、hive的语法介绍"></a>3、hive的语法介绍</h1><ul>
+<li>(1) 创建</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hive (default)&gt; create table t1(int id);     [创建表]</span><br><span class="line">hive (default)&gt; create table t2(id int,name string) row format delimited fields terminated by &apos;\t&apos;;   [指定行分割符]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>(2) 加载数据<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hive (default)&gt; load data local inpath &apos;/usr/local/testdata/id&apos; into table t1;  [linux本地加载数据到hive,copy数据]</span><br><span class="line">hive (default)&gt; load data local inpath &apos;/usr/local/name&apos; into table t2;         [linux本地加载数据到hive,copy数据]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>(3) 删除表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hive (default)&gt; drop table t1;      [受控表managed table,从hdfs删除数据,metastore元数据信息删除]</span><br><span class="line">mysql&gt; select * from TBLS;  [TBL_TYPE字段记录表类型MANAGED_TABLE or other]</span><br></pre></td></tr></table></figure>
+<h1 id="4-受控表-MANAGED-TABLE-包括内部表，分区表，桶表。"><a href="#4-受控表-MANAGED-TABLE-包括内部表，分区表，桶表。" class="headerlink" title="4 受控表(MANAGED_TABLE)包括内部表，分区表，桶表。"></a>4 受控表(MANAGED_TABLE)包括内部表，分区表，桶表。</h1><ul>
+<li>(5) 分区表[数据在不同文件目录中,扫描范围]</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hive (default)&gt; create table t3(id int,name string) partitioned by(grade int) row format delimited fields terminated by &apos;\t&apos;;    [创建分区表]</span><br><span class="line">hive (default)&gt; load data local inpath &apos;/usr/local/name&apos; into table t3 partition(grade=1);  [加载数据]</span><br><span class="line">hive (default)&gt; select * from t3 where grade=1;     [分区字段可以作用过滤条件，是一个文件夹的标识]</span><br><span class="line"></span><br><span class="line">hive (default)&gt; create table enroll(id int,name string) partitioned by(year int,month int) row format delimited fields terminated by &apos;\t&apos;;</span><br><span class="line">load data local inpath &apos;/usr/local/name&apos; into table enroll partition(year=2014,month=11-12);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>(6) 桶表(bucket table)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">表链接中使用，提高效率</span><br><span class="line">hive (default)&gt; create table bucket_test(id int,name string) clustered by(id)  into 3 buckets;   [按照id分为3个桶]</span><br><span class="line">hive (default)&gt; set hive.enforce.bucketing=true;        [启用桶表]</span><br><span class="line"></span><br><span class="line">insert overwrite table buckets select ... from ...      [插入数据]</span><br><span class="line">hive (default)&gt; insert overwrite table bucket_test select id,name from t2;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>(7) 外部表EXTERNAL_TABLE[删除表，只删除表定义，对HDFS的数据不会删除]{外部分区表}<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># hadoop fs -put name /testdata/external_teble</span><br><span class="line">hive (default)&gt; create external table external_test(id int,name string) row format delimited fields terminated by &apos;\t&apos; location &apos;/testdata/external_table&apos;;</span><br><span class="line">hive (default)&gt; select id,name from external_test order by id desc;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="5、命令行工具"><a href="#5、命令行工具" class="headerlink" title="5、命令行工具"></a>5、命令行工具</h1><pre><code>(1) # hive
+(2) # hive -e &quot;select * from t2&quot;;
+(3) # hive -e &quot;select * from t2&quot; &gt;&gt; a
+(4) # hive -S -e &quot;select * from t2&quot; &gt;&gt; a
+(5) # hive --hiveconf hive.querylog.location=/usr/local/hive-0.13.1/logs
+(6) hive (default)&gt; set hive.querylog.location;
+    hive.querylog.location=/tmp/root
+(7) hive -f file
+(8) source file
+(9) /root/.hiverc 和 /root/.hivehistory 
+
+搜狗数据
+    use sougoulibs;
+    create external table sogou(dt string, websession string, word string, s_seq int, c_seq int, website string) 
+    row format delimited fields terminated by &apos;\t&apos; lines terminated by &apos;\n&apos; stored as textfile location &apos;/labs/sogou/&apos;; 
+</code></pre><h1 id="6、hcatlog"><a href="#6、hcatlog" class="headerlink" title="6、hcatlog"></a>6、hcatlog</h1><p>参考：<a href="https://cwiki.apache.org/confluence/display/Hive/HCatalog" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/Hive/HCatalog</a></p>
+<h1 id="7、hive-1-2-1-cli启动报错"><a href="#7、hive-1-2-1-cli启动报错" class="headerlink" title="7、hive-1.2.1 cli启动报错"></a>7、hive-1.2.1 cli启动报错</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from VERSION;</span><br><span class="line">+--------+----------------+------------------------------------+</span><br><span class="line">| VER_ID | SCHEMA_VERSION | VERSION_COMMENT                    |</span><br><span class="line">+--------+----------------+------------------------------------+</span><br><span class="line">|      1 | 1.2.0          | Set by MetaStore hsu@192.168.2.201 |</span><br><span class="line">+--------+----------------+------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[hsu@server2 ~]$ hive</span><br><span class="line">Logging initialized using configuration in file:/home/hsu/apache-hive-1.2.1-bin/conf/hive-log4j.properties</span><br><span class="line">[ERROR] Terminal initialization failed; falling back to unsupported</span><br><span class="line">java.lang.IncompatibleClassChangeError: Found class jline.Terminal, but interface was expected</span><br><span class="line">        at jline.TerminalFactory.create(TerminalFactory.java:101)</span><br></pre></td></tr></table></figure>
+<p>解决：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[hsu@server2 ~]$ ls hadoop/share/hadoop/yarn/lib/jline-0.9.94.jar </span><br><span class="line">hadoop/share/hadoop/yarn/lib/jline-0.9.94.jar</span><br><span class="line">[hsu@server2 ~]$ ls hive/lib/jline-2.12.jar </span><br><span class="line">hive/lib/jline-2.12.jar</span><br><span class="line"></span><br><span class="line">[hsu@server2 ~]$ mv hadoop/share/hadoop/yarn/lib/jline-0.9.94.jar hadoop/share/hadoop/yarn/lib/jline-0.9.94.jar.bak</span><br><span class="line"></span><br><span class="line">[hsu@server2 ~]$ cp hive/lib/jline-2.12.jar hadoop/share/hadoop/yarn/lib/</span><br><span class="line"></span><br><span class="line">[hsu@server2 ~]$ ls hadoop/share/hadoop/yarn/lib/jline-*</span><br><span class="line">hadoop/share/hadoop/yarn/lib/jline-0.9.94.jar.bak  hadoop/share/hadoop/yarn/lib/jline-2.12.jar</span><br><span class="line"></span><br><span class="line">[hsu@server2 ~]$ hive</span><br><span class="line">Logging initialized using configuration in file:/home/hsu/apache-hive-1.2.1-bin/conf/hive-log4j.properties</span><br><span class="line">hive (default)&gt; show tables;</span><br><span class="line">OK</span><br><span class="line">tab_name</span><br><span class="line">Time taken: 2.386 seconds</span><br></pre></td></tr></table></figure></p>
+<p><code>由于使用的jline版本不一致导致问题~!</code></p>
+<h1 id="7-Hive-2-0-1-FAQ"><a href="#7-Hive-2-0-1-FAQ" class="headerlink" title="7. Hive 2.0.1 FAQ"></a>7. Hive 2.0.1 FAQ</h1><p> 启动报错：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> Required table missing : &quot;`VERSION`&quot; in Catalog &quot;&quot; Schema &quot;&quot;. DataNucleus requires this table to perform its persistence operations. Either your MetaData is incorrect, or you need to enable &quot;datanucleus.schema.autoCreateTables&quot;</span><br><span class="line">org.datanucleus.store.rdbms.exceptions.MissingTableException: Required table missing : &quot;`VERSION`&quot; in Catalog &quot;&quot; Schema &quot;&quot;. DataNucleus requires this table to perform its persistence operations. Either your MetaData is incorrect, or you need to enable &quot;datanucleus.schema.autoCreateTables&quot;</span><br><span class="line">        at org.datanucleus.store.rdbms.table.AbstractTable.exists(AbstractTable.java:606)</span><br></pre></td></tr></table></figure></p>
+<p> 解决：<br>    在hive-site.xml文件中加入如下配置解决<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;datanucleus.readOnlyDatastore&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt; </span><br><span class="line">    &lt;name&gt;datanucleus.fixedDatastore&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;false&lt;/value&gt; </span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt; </span><br><span class="line">    &lt;name&gt;datanucleus.autoCreateSchema&lt;/name&gt; </span><br><span class="line">    &lt;value&gt;true&lt;/value&gt; </span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;datanucleus.autoCreateTables&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;datanucleus.autoCreateColumns&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="hive-2-0-1-beeline权限验证问题"><a href="#hive-2-0-1-beeline权限验证问题" class="headerlink" title="hive 2.0.1 beeline权限验证问题"></a>hive 2.0.1 beeline权限验证问题</h1><ul>
+<li><a href="https://community.hortonworks.com/questions/4905/error-while-running-hive-queries-from-zeppelin.html" target="_blank" rel="noopener">https://community.hortonworks.com/questions/4905/error-while-running-hive-queries-from-zeppelin.html</a></li>
+<li><a href="http://stackoverflow.com/questions/25073792/error-e0902-exception-occured-user-root-is-not-allowed-to-impersonate-root" target="_blank" rel="noopener">http://stackoverflow.com/questions/25073792/error-e0902-exception-occured-user-root-is-not-allowed-to-impersonate-root</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># core-site.xml添加，并重启集群hdfs &amp; yarn</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hadoop.proxyuser.hadoop.hosts&lt;/name&gt;&lt;value&gt;*&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hadoop.proxyuser.hadoop.groups&lt;/name&gt;&lt;value&gt;*&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="hive-2-0-1-and-tez-0-7-1-兼容性问题"><a href="#hive-2-0-1-and-tez-0-7-1-兼容性问题" class="headerlink" title="hive 2.0.1 and tez 0.7.1 兼容性问题"></a>hive 2.0.1 and tez 0.7.1 兼容性问题</h1><p> 1、整合hive 2.0.1 and tez 0.7.1发现一些class包没用被加载，提示是没用找到类。<br> 2、通过降低hive版本为 1.2.1发现没用任何问题，可以正常执行tez任务！<br> 3、社区查看hive2.0.1依赖的tez版本是0.8.3，打算重新手动编译在测试是否可行，待验证。<br> 4、这一点可以说明tez这个包各个版本直接接口的兼容性非常差，导致升级代价大，难以维护！</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Hive/">Hive</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2015/07/12/ganglia-centos/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">ganglia-centos</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2015/07/10/apache-hadoop-自动HA的搭建/">
+        <span class="next-text nav-default">Hadoop 的 HA 手动搭建</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

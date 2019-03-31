@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="分布式大数据多维分析（OLAP）引擎Apache Kylin安装体验">
+
+
+
+
+  <meta name="keywords" content="kylin,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/07/03/分布式大数据多维分析-OLAP引擎Apache-Kylin安装体验/">
+
+
+<meta name="description" content="Apache Kylin旨在减少Hadoop在10亿及百亿规模以上数据级别的情况下的查询延迟，目前底层数据存储基于HBase，具有较强的可伸缩性。 环境依赖 hadoop-2.7.1 hbase-1.1.5 apache-hive-2.0.1-bin  配置环境变量下载kylin基于hbase1.x的部署包1wget https://dist.apache.org/repos/dist/relea">
+<meta name="keywords" content="kylin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式大数据多维分析（OLAP）引擎Apache Kylin安装体验">
+<meta property="og:url" content="http://itweet.github.io/2016/07/03/分布式大数据多维分析-OLAP引擎Apache-Kylin安装体验/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="Apache Kylin旨在减少Hadoop在10亿及百亿规模以上数据级别的情况下的查询延迟，目前底层数据存储基于HBase，具有较强的可伸缩性。 环境依赖 hadoop-2.7.1 hbase-1.1.5 apache-hive-2.0.1-bin  配置环境变量下载kylin基于hbase1.x的部署包1wget https://dist.apache.org/repos/dist/relea">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-05T15:09:47.498Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分布式大数据多维分析（OLAP）引擎Apache Kylin安装体验">
+<meta name="twitter:description" content="Apache Kylin旨在减少Hadoop在10亿及百亿规模以上数据级别的情况下的查询延迟，目前底层数据存储基于HBase，具有较强的可伸缩性。 环境依赖 hadoop-2.7.1 hbase-1.1.5 apache-hive-2.0.1-bin  配置环境变量下载kylin基于hbase1.x的部署包1wget https://dist.apache.org/repos/dist/relea">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 分布式大数据多维分析（OLAP）引擎Apache Kylin安装体验 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          分布式大数据多维分析（OLAP）引擎Apache Kylin安装体验
+        
+      </h1>
+
+      <time class="post-time">
+          7月 03 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>Apache Kylin旨在减少Hadoop在10亿及百亿规模以上数据级别的情况下的查询延迟，目前底层数据存储基于HBase，具有较强的可伸缩性。</p>
+<h1 id="环境依赖"><a href="#环境依赖" class="headerlink" title="环境依赖"></a>环境依赖</h1><ul>
+<li>hadoop-2.7.1</li>
+<li>hbase-1.1.5</li>
+<li>apache-hive-2.0.1-bin</li>
+</ul>
+<h1 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h1><p>下载kylin基于hbase1.x的部署包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://dist.apache.org/repos/dist/release/kylin/apache-kylin-1.5.2.1/apache-kylin-1.5.2.1-bin.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>配置kylin环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ cat scripts/hadoop.sh </span><br><span class="line">export HADOOP_HOME=/opt/cloud/hadoop</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br><span class="line"></span><br><span class="line">$ cat scripts/hive.sh </span><br><span class="line">export HIVE_HOME=/opt/cloud/hive</span><br><span class="line">export HCAT_HOME=$HIVE_HOME/hcatalog</span><br><span class="line">export HIVE_CONF=$HIVE_HOME/conf</span><br><span class="line">export PATH=$PATH:$HIVE_HOME/bin:$HIVE_HOME/sbin</span><br><span class="line"></span><br><span class="line">$ cat scripts/hbase.sh </span><br><span class="line">export HBASE_HOME=/opt/cloud/hbase/</span><br><span class="line">export PATH=$PATH:$HBASE_HOME/bin/:$HBASE_HOME/sbin/</span><br><span class="line"></span><br><span class="line">$ cat scripts/kylin.sh </span><br><span class="line">export KYLIN_HOME=/opt/cloud/kylin</span><br><span class="line">export PATH=$PATH:$KYLIN_HOME/bin</span><br><span class="line"></span><br><span class="line">$ ln -s /opt/cloud/scripts/kylin.sh /etc/profile.d/kylin.sh</span><br></pre></td></tr></table></figure></p>
+<h1 id="检查kylin环境"><a href="#检查kylin环境" class="headerlink" title="检查kylin环境"></a>检查kylin环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ /opt/cloud/kylin/bin/check-env.sh </span><br><span class="line">KYLIN_HOME is set to /opt/cloud/kylin</span><br></pre></td></tr></table></figure>
+<p>working space init…<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ WORKING_DIR=`sh $KYLIN_HOME/bin/get-properties.sh kylin.hdfs.working.dir`</span><br><span class="line">$ sudo -uhdfs hadoop fs -mkdir -p $WORKING_DIR</span><br></pre></td></tr></table></figure></p>
+<p>注意下面，hdfs权限，我这里root是超级用户，kylin也安装在root下，所以无权限问题，如果kylin安装在其它非超级用户，需要事先创建目录，赋权此目录给安装启动kylin用户。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hadoop fs -ls /|grep kylin</span><br><span class="line">drwxr-xr-x   - root supergroup          0 2016-07-03 18:26 /kylin</span><br></pre></td></tr></table></figure></p>
+<p>比如：在kylin用户安装启动kylin,hdfs超级用户是hdfs<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ su - hdfs</span><br><span class="line"></span><br><span class="line">sudo -uhdfs hadoop fs -mkdir /kylin</span><br><span class="line">sudo -uhdfs hadoop fs -chown -R kylin:kylin /kylin</span><br></pre></td></tr></table></figure></p>
+<h1 id="启动kylin"><a href="#启动kylin" class="headerlink" title="启动kylin"></a>启动kylin</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kylin.sh start</span><br></pre></td></tr></table></figure>
+<p>遇到如下问题，hdfs权限不够，而无法创建初始化用户目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ hadoop fs -mkdir /user/root</span><br><span class="line">mkdir: Permission denied: user=root, access=WRITE, inode=&quot;/user/</span><br><span class="line">root&quot;:hdfs:hdfs:drwxr-xr-x</span><br><span class="line"></span><br><span class="line">$ sudo -uhdfs hadoop fs -mkdir /user/root    </span><br><span class="line">$ sudo -uhdfs hadoop fs -chown root:hdfs /user/root</span><br><span class="line">$ kylin.sh start</span><br></pre></td></tr></table></figure></p>
+<p>启动kylin信息:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">KYLIN_HOME is set to /opt/cloud/kylin/bin/../</span><br><span class="line">kylin.security.profile is set to testing</span><br><span class="line">Logging initialized using configuration in file:/opt/cloud/apache-hive-2.0.1-bin/conf/hive-log4j2.properties</span><br><span class="line">HIVE_CONF is set to: /opt/cloud/hive/conf, use it to locate hive configurations.</span><br><span class="line">HCAT_HOME is set to: /opt/cloud/hive/hcatalog, use it to find hcatalog path:</span><br><span class="line"></span><br><span class="line">hbase dependency: /opt/cloud/hbase/lib/hbase-common-1.1.5.jar</span><br><span class="line">KYLIN_JVM_SETTINGS is -Xms1024M -Xmx4096M -XX:MaxPermSize=128M -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/opt/cloud/kylin/bin/..//logs/kylin.gc.10205 -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=10 -XX:GCLogFileSize=64M</span><br><span class="line">KYLIN_DEBUG_SETTINGS is not set, will not enable remote debuging</span><br><span class="line">KYLIN_LD_LIBRARY_SETTINGS is not set, Usually it&apos;s okay unless you want to specify your own native path</span><br><span class="line">A new Kylin instance is started by root, stop it using &quot;kylin.sh stop&quot;</span><br><span class="line">Please visit http://&lt;ip&gt;:7070/kylin</span><br><span class="line">You can check the log at /opt/cloud/kylin/bin/../logs/kylin.log</span><br></pre></td></tr></table></figure></p>
+<h1 id="访问kylin-web"><a href="#访问kylin-web" class="headerlink" title="访问kylin web"></a>访问kylin web</h1><ul>
+<li><a href="http://bigdata-server-2:7070/kylin/login" target="_blank" rel="noopener">http://bigdata-server-2:7070/kylin/login</a></li>
+<li>ADMIN/KYLIN</li>
+</ul>
+<p>后台建立好kylin数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">hive&gt; create database kylin;</span><br><span class="line">OK</span><br><span class="line">Time taken: 0.179 seconds</span><br><span class="line"></span><br><span class="line">hive&gt; use kylin;</span><br><span class="line">OK</span><br><span class="line">Time taken: 0.047 seconds</span><br><span class="line"></span><br><span class="line">hive&gt; create table test_kylin(id int,name string);</span><br><span class="line">OK</span><br><span class="line">Time taken: 0.207 seconds</span><br><span class="line"></span><br><span class="line">hive&gt; insert into test_kylin values(1,&quot;kylin&quot;);</span><br><span class="line"></span><br><span class="line">hive&gt; select * from test_kylin;</span><br><span class="line">OK</span><br><span class="line">1       kylin</span><br><span class="line">Time taken: 0.183 seconds, Fetched: 1 row(s)</span><br></pre></td></tr></table></figure></p>
+<h1 id="Impala-Hive-Performance-tuning"><a href="#Impala-Hive-Performance-tuning" class="headerlink" title="Impala-Hive-Performance-tuning"></a>Impala-Hive-Performance-tuning</h1><ul>
+<li>参考本博客另一片文章，自动生成测试数据，然后通过kylin分析<ul>
+<li><a href="https://www.itweet.cn/2016/03/20/Impala-Hive-performance-tuning/" target="_blank" rel="noopener">https://www.itweet.cn/2016/03/20/Impala-Hive-performance-tuning/</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="kylin-by-cube"><a href="#kylin-by-cube" class="headerlink" title="kylin by cube"></a>kylin by cube</h1><p>  参考：<a href="http://kylin.apache.org/cn/docs/tutorial/web.html" target="_blank" rel="noopener">http://kylin.apache.org/cn/docs/tutorial/web.html</a></p>
+<h1 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h1><p><code>Cube error: org.apache.hadoop.hive.ql.metadata.HiveException:</code><br><code>java.lang.RuntimeException: native snappy library not available: this version</code><br><code>of libhadoop was built without snappy support.</code></p>
+<p>日志看到，kylin使用到snappy压缩：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET mapreduce.map.output.compress.codec=org.apache.hadoop.io.compress.SnappyCodec;</span><br><span class="line">SET mapreduce.output.fileoutputformat.compress.codec=org.apache.hadoop.io.compress.SnappyCodec;</span><br></pre></td></tr></table></figure>
+<p>Checknative snappy</p>
+<p>发现，我们编译的时候，没有把各种native库编译进去。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">$ hadoop checknative</span><br><span class="line">16/07/03 20:51:14 INFO zlib.ZlibFactory: Successfully loaded &amp; initialized native-zlib library</span><br><span class="line">Native library checking:</span><br><span class="line">hadoop:  true /opt/cloud/hadoop-2.7.1/lib/native/libhadoop.so</span><br><span class="line">zlib:    true /lib64/libz.so.1</span><br><span class="line">snappy:  false </span><br><span class="line">lz4:     true revision:99</span><br><span class="line">bzip2:   false </span><br><span class="line">openssl: false Cannot load libcrypto.so (libcrypto.so: cannot open shared object file: No such file or directory)!</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ cd /usr/lib64/</span><br><span class="line">$ ln -s libcrypto.so.1.0.1e libcrypto.so</span><br><span class="line"></span><br><span class="line">$ hadoop checknative -a</span><br><span class="line">16/07/03 20:57:16 WARN bzip2.Bzip2Factory: Failed to load/initialize native-bzip2 library system-native, will use pure-Java version</span><br><span class="line">16/07/03 20:57:16 INFO zlib.ZlibFactory: Successfully loaded &amp; initialized native-zlib library</span><br><span class="line">Native library checking:</span><br><span class="line">hadoop:  true /opt/cloud/hadoop-2.7.1/lib/native/libhadoop.so</span><br><span class="line">zlib:    true /lib64/libz.so.1</span><br><span class="line">snappy:  false </span><br><span class="line">lz4:     true revision:99</span><br><span class="line">bzip2:   false </span><br><span class="line">openssl: true libcrypto.so</span><br><span class="line">16/07/03 20:57:16 INFO util.ExitUtil: Exiting with status 1</span><br></pre></td></tr></table></figure>
+<p>libsnappy default path<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ find / -name libsnappy.so</span><br><span class="line">/usr/lib64/libsnappy.so</span><br><span class="line"></span><br><span class="line">ln -sf /usr/lib64/libsnappy.so.1.1.4 /usr/local/lib</span><br><span class="line">ln -sf /usr/lib64/libsnappy.so /usr/local/lib</span><br><span class="line">ln -sf /usr/lib64/libsnappy.so.1 /usr/local/lib</span><br></pre></td></tr></table></figure></p>
+<p>snappy package<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ yum -y install snappy snappy-devel</span><br><span class="line"></span><br><span class="line">$ rpm -qa snappy*</span><br><span class="line">snappy-1.1.0-1.el6.x86_64</span><br><span class="line">snappy-devel-1.1.0-1.el6.x86_64</span><br></pre></td></tr></table></figure></p>
+<p>编译Hadoop默认支撑所有native库</p>
+<blockquote>
+<p>请参考我的另外一篇文章：<a href="https://www.itweet.cn/2016/07/02/Hadoop-Native-Libraries-Guide/" target="_blank" rel="noopener">Hadoop-Native-Libraries-Guide</a></p>
+</blockquote>
+<p>参考：<br>Apache Kylin™: <a href="http://kylin.apache.org/" target="_blank" rel="noopener">http://kylin.apache.org/</a><br>Extreme OLAP Engine for Big Data: <a href="http://kylin.apache.org/blog/" target="_blank" rel="noopener">http://kylin.apache.org/blog/</a><br>Apache Kylin的快速数据立方体算法——概述：<a href="http://www.infoq.com/cn/articles/apache-kylin-algorithm/" target="_blank" rel="noopener">http://www.infoq.com/cn/articles/apache-kylin-algorithm/</a></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/kylin/">kylin</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/07/03/Hive-on-Hbase/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Hive on Hbase 整合测试</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/07/02/Hadoop-Native-Libraries-Guide/">
+        <span class="next-text nav-default">Hadoop Native Libraries Guide</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

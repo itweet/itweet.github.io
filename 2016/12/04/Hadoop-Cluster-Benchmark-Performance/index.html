@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Hadoop Cluster Benchmark Performance">
+
+
+
+
+  <meta name="keywords" content="Benchmark,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2016/12/04/Hadoop-Cluster-Benchmark-Performance/">
+
+
+<meta name="description" content="基础环境云主机 4 台    云主机类型名称    m1.xlarge-max    内存                32GB    VCPU数量            8 VCPU    磁盘                50GB 操作系统版本 CentOS release 6.8 (Final) 12uname -a   Linux bigdata-server-1 2.6.32-642">
+<meta name="keywords" content="Benchmark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop Cluster Benchmark Performance">
+<meta property="og:url" content="http://itweet.github.io/2016/12/04/Hadoop-Cluster-Benchmark-Performance/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="基础环境云主机 4 台    云主机类型名称    m1.xlarge-max    内存                32GB    VCPU数量            8 VCPU    磁盘                50GB 操作系统版本 CentOS release 6.8 (Final) 12uname -a   Linux bigdata-server-1 2.6.32-642">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-05T15:09:47.505Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop Cluster Benchmark Performance">
+<meta name="twitter:description" content="基础环境云主机 4 台    云主机类型名称    m1.xlarge-max    内存                32GB    VCPU数量            8 VCPU    磁盘                50GB 操作系统版本 CentOS release 6.8 (Final) 12uname -a   Linux bigdata-server-1 2.6.32-642">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Hadoop Cluster Benchmark Performance - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Hadoop Cluster Benchmark Performance
+        
+      </h1>
+
+      <time class="post-time">
+          12月 04 2016
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h1 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h1><p><em>云主机 4 台</em><br>    云主机类型名称    m1.xlarge-max<br>    内存                32GB<br>    VCPU数量            8 VCPU<br>    磁盘                50GB</p>
+<p><em>操作系统版本 CentOS release 6.8 (Final)</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br><span class="line">   Linux bigdata-server-1 2.6.32-642.el6.x86_64 #1 SMP Tue May 10 17:27:01 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux</span><br></pre></td></tr></table></figure>
+<h1 id="命令行安装集群管理服务"><a href="#命令行安装集群管理服务" class="headerlink" title="命令行安装集群管理服务"></a>命令行安装集群管理服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://archive.cloudera.com/cm5/installer/5.9.0/cloudera-manager-installer.bin</span><br><span class="line"></span><br><span class="line">chmod u+x cloudera-manager-installer.bin </span><br><span class="line"></span><br><span class="line">sudo ./cloudera-manager-installer.bin</span><br></pre></td></tr></table></figure>
+<h1 id="可视化安装集群"><a href="#可视化安装集群" class="headerlink" title="可视化安装集群"></a>可视化安装集群</h1><p>集群管理服务安装成功后，会提供访问此admin管理页面：<a href="http://192.168.0.46:7180/cmf/login" target="_blank" rel="noopener">http://192.168.0.46:7180/cmf/login</a><br>然后就可以根据提示安装好CDH集群。</p>
+<ul>
+<li>注意：<ol>
+<li>选择存储库，部分可以选择自定义源，这样可以利用离线内部源进行安装集群，效率和安装成功率才能接近99.99%</li>
+<li>集群服务器ntp时间同步，如果不同步，yarn，hbase，zookeeper可能会报错</li>
+</ol>
+</li>
+</ul>
+<h1 id="HDFS-Benchmark-Testing"><a href="#HDFS-Benchmark-Testing" class="headerlink" title="HDFS Benchmark Testing"></a>HDFS Benchmark Testing</h1><p>DFSIO是一个标准的HDFS的Benchmark工具，位于test包中。功能简单明了，测试的是读和写的性能指标。Terasort包含三个工具，分别是teragen：用来生成供排序的随机数据；terasort：用来将随机数据排序；teravalidate：校验terasort的排序结果是否正确。</p>
+<h2 id="TestDFSIO-write"><a href="#TestDFSIO-write" class="headerlink" title="TestDFSIO write"></a>TestDFSIO write</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time hadoop jar ./hadoop-mapreduce-client-jobclient.jar TestDFSIO -write -nrFiles 3 -fileSize 2000</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">16/12/04 16:57:18 INFO fs.TestDFSIO: ----- TestDFSIO ----- : write</span><br><span class="line">16/12/04 16:57:18 INFO fs.TestDFSIO:            Date &amp; time: Sun Dec 04 16:57:18 CST 2016</span><br><span class="line">16/12/04 16:57:18 INFO fs.TestDFSIO:        Number of files: 3</span><br><span class="line">16/12/04 16:57:18 INFO fs.TestDFSIO: Total MBytes processed: 6000.0</span><br><span class="line">16/12/04 16:57:18 INFO fs.TestDFSIO:      Throughput mb/sec: 24.702133440924847</span><br><span class="line">16/12/04 16:57:18 INFO fs.TestDFSIO: Average IO rate mb/sec: 24.771690368652344</span><br><span class="line">16/12/04 16:57:18 INFO fs.TestDFSIO:  IO rate std deviation: 1.28838119507988</span><br><span class="line">16/12/04 16:57:18 INFO fs.TestDFSIO:     Test exec time sec: 114.55</span><br><span class="line">16/12/04 16:57:18 INFO fs.TestDFSIO: </span><br><span class="line"></span><br><span class="line">real    1m57.742s</span><br><span class="line">user    0m6.706s</span><br><span class="line">sys 0m0.323s</span><br></pre></td></tr></table></figure>
+<h2 id="TestDFSIO-read"><a href="#TestDFSIO-read" class="headerlink" title="TestDFSIO read"></a>TestDFSIO read</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time hadoop jar ./hadoop-mapreduce-client-jobclient.jar TestDFSIO -read -nrFiles 3 -fileSize 2000</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">16/12/04 17:00:11 INFO fs.TestDFSIO: ----- TestDFSIO ----- : read</span><br><span class="line">16/12/04 17:00:11 INFO fs.TestDFSIO:            Date &amp; time: Sun Dec 04 17:00:11 CST 2016</span><br><span class="line">16/12/04 17:00:11 INFO fs.TestDFSIO:        Number of files: 3</span><br><span class="line">16/12/04 17:00:11 INFO fs.TestDFSIO: Total MBytes processed: 6000.0</span><br><span class="line">16/12/04 17:00:11 INFO fs.TestDFSIO:      Throughput mb/sec: 905.2504526252263</span><br><span class="line">16/12/04 17:00:11 INFO fs.TestDFSIO: Average IO rate mb/sec: 905.80126953125</span><br><span class="line">16/12/04 17:00:11 INFO fs.TestDFSIO:  IO rate std deviation: 22.144358549657525</span><br><span class="line">16/12/04 17:00:11 INFO fs.TestDFSIO:     Test exec time sec: 25.189</span><br><span class="line">16/12/04 17:00:11 INFO fs.TestDFSIO: </span><br><span class="line"></span><br><span class="line">real    0m28.377s</span><br><span class="line">user    0m6.108s</span><br><span class="line">sys 0m0.315s</span><br></pre></td></tr></table></figure>
+<p>清空测试数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time hadoop jar ./hadoop-mapreduce-client-jobclient.jar TestDFSIO -clean</span><br></pre></td></tr></table></figure></p>
+<h2 id="Namenode-benchmark"><a href="#Namenode-benchmark" class="headerlink" title="Namenode benchmark"></a>Namenode benchmark</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time hadoop jar ./hadoop-mapreduce-client-jobclient.jar nnbench -operation create_write -maps 4 -reduces 4 -blockSize 1 -bytesToWrite 0 -numberOfFiles 100 -replicationFactorPerFile 3 -readFileAfterOpen true -baseDir /benchmarks/NNBench-`hostname -s`</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench: -------------- NNBench -------------- : </span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                                Version: NameNode Benchmark 0.4</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                            Date &amp; time: 2016-12-04 17:07:41,678</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench: </span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                         Test Operation: create_write</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                             Start time: 2016-12-04 17:07:30,458</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                            Maps to run: 4</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                         Reduces to run: 4</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                     Block Size (bytes): 1</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                         Bytes to write: 0</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                     Bytes per checksum: 1</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                        Number of files: 100</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                     Replication factor: 3</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:             Successful file operations: 0</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench: </span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:         # maps that missed the barrier: 0</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                           # exceptions: 0</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench: </span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                TPS: Create/Write/Close: 0</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench: Avg exec time (ms): Create/Write/Close: Infinity</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:             Avg Lat (ms): Create/Write: NaN</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                    Avg Lat (ms): Close: NaN</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench: </span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                  RAW DATA: AL Total #1: 0</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                  RAW DATA: AL Total #2: 0</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:               RAW DATA: TPS Total (ms): 9458</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:        RAW DATA: Longest Map Time (ms): 0.0</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:                    RAW DATA: Late maps: 0</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench:              RAW DATA: # of exceptions: 0</span><br><span class="line">16/12/04 17:07:41 INFO hdfs.NNBench: </span><br><span class="line"></span><br><span class="line">real    2m12.007s</span><br><span class="line">user    0m6.464s</span><br><span class="line">sys 0m0.379s</span><br></pre></td></tr></table></figure>
+<h2 id="MapReduce-benchmark"><a href="#MapReduce-benchmark" class="headerlink" title="MapReduce benchmark"></a>MapReduce benchmark</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time hadoop jar ./hadoop-mapreduce-client-jobclient.jar mrbench -numRuns 50</span><br></pre></td></tr></table></figure>
+<p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DataLines   Maps    Reduces AvgTime (milliseconds)</span><br><span class="line">1       2   1   20059</span><br><span class="line"></span><br><span class="line">real    16m45.947s</span><br><span class="line">user    0m16.096s</span><br><span class="line">sys 0m1.674s</span><br></pre></td></tr></table></figure></p>
+<h2 id="Hadoop-MapReduce-Algorithm-Testing"><a href="#Hadoop-MapReduce-Algorithm-Testing" class="headerlink" title="Hadoop MapReduce Algorithm Testing"></a>Hadoop MapReduce Algorithm Testing</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">TeraGen	time hadoop jar hadoop-mapreduce-examples.jar teragen 500000000 /terasort-input1</span><br><span class="line"></span><br><span class="line">TeraSort	time hadoop jar  hadoop-mapreduce-examples.jar terasort /terasort-input1 /terasort-output1</span><br><span class="line"></span><br><span class="line">TeraValidate	time hadoop jar hadoop-mapreduce-examples.jar teravalidate /terasort-output1 /terasort-validate1</span><br><span class="line"></span><br><span class="line">WordCount	time hadoop jar hadoop-mapreduce-examples.jar wordcount /terasort-input1 /wordcount-output1</span><br><span class="line"></span><br><span class="line">Shuffle	time hadoop jar hadoop-mapreduce-examples.jar randomtextwriter</span><br><span class="line">-D mapred.output.compress=false \</span><br><span class="line">-D mapreduce.randomtextwriter.bytespermap=107374182 \</span><br><span class="line">-D mapreduce.randomtextwriter.mapsperhost=2 \</span><br><span class="line">/randomtextwriter_output&quot;</span><br></pre></td></tr></table></figure>
+<h1 id="Hbase-YCSB-Testing"><a href="#Hbase-YCSB-Testing" class="headerlink" title="Hbase YCSB Testing"></a>Hbase YCSB Testing</h1><p> 英文全称：Yahoo! Cloud Serving Benchmark (YCSB) 。是Yahoo公司的一个用来对云服务进行基础测试的工具。目标是促进新一代云数据服务系统的性能比较。为四个广泛使用的系统：Cassandra,、HBase、PNUTS和一个简单的片式MySQL执行，订了套核心基准测试和结果报告。</p>
+<p>YCSB的特点：可扩展的，除了很容易对新系统进行基准测试，支持新定义的简单工作量。</p>
+<h2 id="Hbase建表"><a href="#Hbase建表" class="headerlink" title="Hbase建表"></a>Hbase建表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hbase(main):005:0&gt; create &apos;usertable&apos;,&apos;family&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="加载数据测试"><a href="#加载数据测试" class="headerlink" title="加载数据测试"></a>加载数据测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ycsb load hbase10 -P ../workloads/workloada -cp /etc/hbase/conf -p table=usertable -p columnfamily=family -p recordcount=100000 -threads 10</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[OVERALL], RunTime(ms), 26717.0</span><br><span class="line">[OVERALL], Throughput(ops/sec), 3742.9352097915184</span><br><span class="line">[TOTAL_GCS_PS_Scavenge], Count, 23.0</span><br><span class="line">[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 99.0</span><br><span class="line">[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.37055058576936034</span><br><span class="line">[TOTAL_GCS_PS_MarkSweep], Count, 0.0</span><br><span class="line">[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0.0</span><br><span class="line">[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0</span><br><span class="line">[TOTAL_GCs], Count, 23.0</span><br><span class="line">[TOTAL_GC_TIME], Time(ms), 99.0</span><br><span class="line">[TOTAL_GC_TIME_%], Time(%), 0.37055058576936034</span><br><span class="line">[CLEANUP], Operations, 20.0</span><br><span class="line">[CLEANUP], AverageLatency(us), 6181.25</span><br><span class="line">[CLEANUP], MinLatency(us), 2.0</span><br><span class="line">[CLEANUP], MaxLatency(us), 123135.0</span><br><span class="line">[CLEANUP], 95thPercentileLatency(us), 420.0</span><br><span class="line">[CLEANUP], 99thPercentileLatency(us), 123135.0</span><br><span class="line">[INSERT], Operations, 100000.0</span><br><span class="line">[INSERT], AverageLatency(us), 2545.76251</span><br><span class="line">[INSERT], MinLatency(us), 1272.0</span><br><span class="line">[INSERT], MaxLatency(us), 286719.0</span><br><span class="line">[INSERT], 95thPercentileLatency(us), 3891.0</span><br><span class="line">[INSERT], 99thPercentileLatency(us), 6143.0</span><br><span class="line">[INSERT], Return=OK, 100000</span><br></pre></td></tr></table></figure>
+<h2 id="执行事物-主要有read-和-update操作"><a href="#执行事物-主要有read-和-update操作" class="headerlink" title="执行事物 主要有read 和 update操作"></a>执行事物 主要有read 和 update操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ycsb run hbase10 -P ../workloads/workloada -cp /etc/hbase/conf  -p measurementtype=timeseries -p columnfamily=family -p timeseries.granularity=2000 -p threads=10</span><br></pre></td></tr></table></figure>
+<p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[OVERALL], RunTime(ms), 4301.0</span><br><span class="line">[OVERALL], Throughput(ops/sec), 232.50406882120438</span><br><span class="line">[TOTAL_GCS_PS_Scavenge], Count, 1.0</span><br><span class="line">[TOTAL_GC_TIME_PS_Scavenge], Time(ms), 17.0</span><br><span class="line">[TOTAL_GC_TIME_%_PS_Scavenge], Time(%), 0.3952569169960474</span><br><span class="line">[TOTAL_GCS_PS_MarkSweep], Count, 0.0</span><br><span class="line">[TOTAL_GC_TIME_PS_MarkSweep], Time(ms), 0.0</span><br><span class="line">[TOTAL_GC_TIME_%_PS_MarkSweep], Time(%), 0.0</span><br><span class="line">[TOTAL_GCs], Count, 1.0</span><br><span class="line">[TOTAL_GC_TIME], Time(ms), 17.0</span><br><span class="line">[TOTAL_GC_TIME_%], Time(%), 0.3952569169960474</span><br><span class="line">[CLEANUP], Operations, 2</span><br><span class="line">[CLEANUP], AverageLatency(us), 58443.5</span><br><span class="line">[CLEANUP], MinLatency(us), 16</span><br><span class="line">[CLEANUP], MaxLatency(us), 116871</span><br><span class="line">[CLEANUP], 0, 58443.5</span><br><span class="line">[READ], Operations, 486</span><br><span class="line">[READ], AverageLatency(us), 2295.1543209876545</span><br><span class="line">[READ], MinLatency(us), 1581</span><br><span class="line">[READ], MaxLatency(us), 21426</span><br><span class="line">[READ], Return=OK, 486</span><br><span class="line">[READ], 0, 2434.181818181818</span><br><span class="line">[READ], 2000, 1968.2</span><br><span class="line">[UPDATE], Operations, 514</span><br><span class="line">[UPDATE], AverageLatency(us), 3591.52140077821</span><br><span class="line">[UPDATE], MinLatency(us), 2473</span><br><span class="line">[UPDATE], MaxLatency(us), 155133</span><br><span class="line">[UPDATE], Return=OK, 514</span><br><span class="line">[UPDATE], 0, 3848.6112759643916</span><br><span class="line">[UPDATE], 2000, 3102.0338983050847</span><br></pre></td></tr></table></figure></p>
+<h1 id="Kafka-Performance-Testing"><a href="#Kafka-Performance-Testing" class="headerlink" title="Kafka Performance Testing"></a>Kafka Performance Testing</h1><p>Kafka的一个核心特性是高吞吐率，因此本文的测试重点是Kafka的吞吐率。本文的测试共使用4台安装CentOS6.7的虚拟机，3台作为Broker.测试的指标主要是每秒多少兆字节数据，每秒多少条消息。</p>
+<ul>
+<li><p>$KAFKA_HOME/bin/kafka-producer-perf-test.sh 该脚本被设计用于测试Kafka Producer的性能，主要输出4项指标，总共发送消息量（以MB为单位），每秒发送消息量（MB/second），发送消息总数，每秒发送消息数（records/second）。除了将测试结果输出到标准输出外，该脚本还提供CSV Reporter，即将结果以CSV文件的形式存储，便于在其它分析工具中使用该测试结果</p>
+</li>
+<li><p>$KAFKA_HOME/bin/kafka-consumer-perf-test.sh 该脚本用于测试Kafka Consumer的性能，测试指标与Producer性能测试脚本一样</p>
+</li>
+</ul>
+<p><em>创建消息队列:</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./kafka-topics.sh --create --zookeeper wxb-1:2181,wxb-2:2181,wxb-3:2181 --replication-factor 3 --partitions 1 --topic itweet</span><br><span class="line">Created topic &quot;itweet&quot;.</span><br></pre></td></tr></table></figure></p>
+<p><em>测试：kafka-producer-perf-test.sh</em></p>
+<p><em>Demo</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./kafka-producer-perf-test.sh --topic test1 --num-records 100 --record-size 500 --throughput -1 --producer-props bootstrap.servers=127.0.0.1:9092 acks=0 buffer.memory=33554432 compression.type=gzip batch.size=10240 linger.ms=10</span><br><span class="line"></span><br><span class="line">./kafka-producer-perf-test.sh --topic test1 --num-records 100 --record-size 5 --throughput -1 --producer-props bootstrap.servers=127.0.0.1:9092</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-producer-perf-test.sh --topic itweet  --num-records 100000 --record-size 300000 --throughput -1  --producer-props bootstrap.servers=127.0.0.1:9092</span><br></pre></td></tr></table></figure>
+<p>产生消息队列，产生了100000条，每条大小为300kB;产生了100000个消息，每秒产生135.132579个消息，每秒产生的消息总大小为38.66 MB，平均延迟时间为827.39 ms，最大延迟时间为827.39 ms!</p>
+<p><em>测试：kafka-consumer-perf-test.sh</em></p>
+<p><em>Demo</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-consumer-perf-test.sh --topic test1 --broker-list wxb-1,wxb-2,wxb-3 --messages 1000 --zookeeper localhost:2181 --threads 10</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-consumer-perf-test.sh --topic itweet --broker-list wxb-1,wxb-2,wxb-3 --messages 100000 --zookeeper wxb-1,wxb-2,wxb-3 --threads 12</span><br></pre></td></tr></table></figure>
+<p>2016-12-21 14:55:54开始，2016-12-21 14:57:32结束，98s的消费时间（计算值）<br>消息队列的大小总数为28610.2295MB，每秒消费的消息大小为293.7637MB<br>消息队列的消息总数为100000条，每秒消费的消息个数为1026.7784个。</p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
+<p>参考：<a href="http://www.itweet.cn/2015/03/20/Hadoop-benchmarks/" target="_blank" rel="noopener">http://www.itweet.cn/2015/03/20/Hadoop-benchmarks/</a><br>     <a href="http://blog.cloudera.com/blog/category/performance/page/2/" target="_blank" rel="noopener">http://blog.cloudera.com/blog/category/performance/page/2/</a><br>     <a href="https://github.com/brianfrankcooper/YCSB/wiki/Getting-Started" target="_blank" rel="noopener">https://github.com/brianfrankcooper/YCSB/wiki/Getting-Started</a><br>     <a href="https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload" target="_blank" rel="noopener">https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload</a><br>     <a href="https://github.com/databricks/spark-sql-perf" target="_blank" rel="noopener">https://github.com/databricks/spark-sql-perf</a><br>     <a href="http://blog.cloudera.com/blog/2015/08/ycsb-the-open-standard-for-nosql-benchmarking-joins-cloudera-labs/" target="_blank" rel="noopener">http://blog.cloudera.com/blog/2015/08/ycsb-the-open-standard-for-nosql-benchmarking-joins-cloudera-labs/</a><br>    <a href="http://blog.cloudera.com/blog/2016/11/ycsb-0-10-0-now-in-cloudera-labs/" target="_blank" rel="noopener">http://blog.cloudera.com/blog/2016/11/ycsb-0-10-0-now-in-cloudera-labs/</a><br>    <a href="https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload" target="_blank" rel="noopener">https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Benchmark/">Benchmark</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2016/12/14/Moving-the-Ambari-Server/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Moving the Ambari Server</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/12/03/SpringBoot-开篇介绍/">
+        <span class="next-text nav-default">SpringBoot 开篇介绍</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

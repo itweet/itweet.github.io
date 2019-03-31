@@ -2,6 +2,377 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://itweet.github.io/2018/12/26/release-3.1.0/</loc>
+    
+    <lastmod>2019-03-31T15:32:46.024Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/09/06/tensorflow-on-apache-hadoop-yarn/</loc>
+    
+    <lastmod>2019-03-31T15:32:38.646Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/08/26/parquet-library-fatal-error/</loc>
+    
+    <lastmod>2019-03-31T15:32:11.035Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/08/19/homemade-programming-language/</loc>
+    
+    <lastmod>2019-03-31T15:32:01.438Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/08/05/cloudera-enterprise-6/</loc>
+    
+    <lastmod>2019-03-31T15:31:47.955Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/07/15/announcing-general-availability-hortonworks-data-platform-3-0-0-ambari-2-7-0/</loc>
+    
+    <lastmod>2019-03-31T15:31:36.944Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/06/23/why-spark-rdd/</loc>
+    
+    <lastmod>2019-03-31T15:31:22.841Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/07/02/micro-service-architecture-based-on-restful/</loc>
+    
+    <lastmod>2019-03-31T15:31:20.351Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/04/23/mapreduce-osdi04/</loc>
+    
+    <lastmod>2019-03-31T15:30:28.466Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/05/06/bigtable-osdi06/</loc>
+    
+    <lastmod>2019-03-31T15:30:20.701Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/05/07/bigtable-osdi06/</loc>
+    
+    <lastmod>2019-03-31T15:30:07.829Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/04/20/distributed-file-system-design/</loc>
+    
+    <lastmod>2019-03-31T15:29:20.641Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2017/07/27/Enterprise-BigData-platform-deployment-guide-part-1/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.510Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2017/06/04/%E7%AE%80%E4%BB%8BApache-Spark%E7%9A%84%E8%A1%8C-%E5%88%97%E7%BA%A7%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.509Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2017/06/09/%E8%A7%A3%E5%AF%86Apache-Hadoop-YARN-Fair-Scheduler-Queue-Basics/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.509Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2017/06/02/%E6%AF%94%E8%BE%83Apache-Hadoop-%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F%E4%B8%AD%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E5%92%8C%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%9A%84%E6%80%A7%E8%83%BD/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.508Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2017/05/30/openstack%E7%B3%BB%E5%88%97(9)-M%E7%89%88_%E4%BA%91%E7%A1%AC%E7%9B%982/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.508Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2017/05/16/%E6%80%8E%E4%B9%88%E5%A4%87%E4%BB%BD%E5%92%8C%E7%81%BE%E9%9A%BE%E5%A4%8D%E5%8E%9FApache-Solr-part-1/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.507Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/12/14/Moving-the-Ambari-Server/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.506Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/12/28/ubuntu-ambari-development/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.506Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/12/04/Hadoop-Cluster-Benchmark-Performance/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.505Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/11/05/Downloadonly-plugin-for-yum/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.504Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/08/16/Kubernetes-Use-Persistent-Storage/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.504Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/08/24/Nexus-Repository-Manager/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.504Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/08/14/kubernetes-cluster-install/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.503Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/08/13/ownCloud-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.502Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/08/13/Docker-Install-for-centos-7/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.501Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/08/12/Docker-Install-Guide/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.500Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/08/09/openstack-image-guide/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.500Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/07/07/Configuring-Heterogeneous-Storage-in-HDFS/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.499Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/07/06/Running-MapReduce-Example-Programs-and-Benchmarks/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.499Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/07/02/Hadoop-Native-Libraries-Guide/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.498Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/07/03/%E5%88%86%E5%B8%83%E5%BC%8F%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%9A%E7%BB%B4%E5%88%86%E6%9E%90-OLAP%E5%BC%95%E6%93%8EApache-Kylin%E5%AE%89%E8%A3%85%E4%BD%93%E9%AA%8C/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.498Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/06/27/Hive-on-Spark-%E6%95%B4%E5%90%88%E6%B5%8B%E8%AF%95/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.497Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/06/12/zeppelin-install/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.497Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/05/16/Coding-List/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.496Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/05/26/OpenStack-Storage-cinder-swift-glance-Part2/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.496Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/04/15/%E6%88%91%E7%9A%84X%E6%A1%A3%E6%A1%88-%E6%96%B0%E7%9A%84%E5%B8%8C%E6%9C%9B/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.494Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/03/20/Impala-Hive-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%92%8C%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.492Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/04/09/SQL-on-Hadoop-TPCDS%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.492Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/01/02/Zabbix-Use/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.491Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2015/11/26/redis-use/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.490Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2015/08/12/Apache-kafka-%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.489Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2015/07/27/building-hadoop-for-centos/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.487Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2015/07/12/spark-manual/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.486Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2015/07/10/hive-install/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.485Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2015/04/06/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E8%AF%BB%E7%9A%84%E4%B9%A6-StackOverflow-%E5%88%9B%E5%A7%8B%E4%BA%BA%E6%8E%A8%E8%8D%90/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.484Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2015/05/06/%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%BB%A1%E8%B6%B3%E9%9C%80%E6%B1%82%E7%9A%84SQL-on-Hadoop%E7%B3%BB%E7%BB%9F/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.484Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2015/03/20/Hadoop-benchmarks/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.483Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2015/02/03/apache-hadoop-federation%E9%85%8D%E7%BD%AE/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.482Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2015/01/01/zookeeper-%E5%A4%A7%E9%87%8Flogs%E8%A7%A3%E5%86%B3/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.481Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2014/07/01/storm-%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.479Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2015/01/01/zookeeper-cluster-deploy/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.479Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://itweet.github.io/about/index.html</loc>
     
     <lastmod>2019-03-03T13:53:14.830Z</lastmod>
@@ -12,20 +383,6 @@
     <loc>http://itweet.github.io/2018/03/27/global-gitignore/</loc>
     
     <lastmod>2019-03-03T13:42:48.786Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/12/26/release-3.1.0/</loc>
-    
-    <lastmod>2019-03-03T13:38:18.506Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/04/15/%E6%88%91%E7%9A%84X%E6%A1%A3%E6%A1%88%20-%20%E6%96%B0%E7%9A%84%E5%B8%8C%E6%9C%9B/</loc>
-    
-    <lastmod>2019-03-03T13:28:31.417Z</lastmod>
     
   </url>
   
@@ -261,34 +618,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2018/04/20/distributed-file-system-design/</loc>
-    
-    <lastmod>2019-03-03T13:18:34.597Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/04/23/mapreduce-osdi04/</loc>
-    
-    <lastmod>2019-03-03T13:18:18.429Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/05/06/bigtable-osdi06/</loc>
-    
-    <lastmod>2019-03-03T13:18:00.135Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/05/07/bigtable-osdi06/</loc>
-    
-    <lastmod>2019-03-03T13:17:35.654Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2018/05/10/Macbook-Pro-Development-environment-preparation/</loc>
     
     <lastmod>2019-03-03T13:17:17.545Z</lastmod>
@@ -387,13 +716,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2015/07/12/spark%20manual/</loc>
-    
-    <lastmod>2019-03-03T08:18:18.643Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2015/07/12/git-manual/</loc>
     
     <lastmod>2019-03-03T08:17:52.643Z</lastmod>
@@ -404,13 +726,6 @@
     <loc>http://itweet.github.io/2015/07/12/ganglia-centos/</loc>
     
     <lastmod>2019-03-03T08:17:16.496Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2015/07/10/hive%20install/</loc>
-    
-    <lastmod>2019-03-03T08:16:45.076Z</lastmod>
     
   </url>
   
@@ -443,27 +758,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2015/05/06/%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%BB%A1%E8%B6%B3%E9%9C%80%E6%B1%82%E7%9A%84SQL%20on%20Hadoop%E7%B3%BB%E7%BB%9F/</loc>
-    
-    <lastmod>2019-03-03T08:11:35.340Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2015/04/06/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E8%AF%BB%E7%9A%84%E4%B9%A6%20StackOverflow%20%E5%88%9B%E5%A7%8B%E4%BA%BA%E6%8E%A8%E8%8D%90/</loc>
-    
-    <lastmod>2019-03-03T08:11:11.380Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2015/03/20/Hadoop%20benchmarks/</loc>
-    
-    <lastmod>2019-03-03T08:10:38.796Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2014/01/02/memcached_doc/</loc>
     
     <lastmod>2019-03-03T08:10:29.865Z</lastmod>
@@ -471,37 +765,9 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2015/02/03/apache%20hadoop%20federation%E9%85%8D%E7%BD%AE/</loc>
-    
-    <lastmod>2019-03-03T08:10:05.673Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2015/02/01/linux-monitor/</loc>
     
     <lastmod>2019-03-03T08:08:53.885Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2015/01/01/zookeeper%20%E5%A4%A7%E9%87%8Flogs%E8%A7%A3%E5%86%B3/</loc>
-    
-    <lastmod>2019-03-03T08:08:29.425Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2015/01/01/zookeeper%20cluster%20deploy/</loc>
-    
-    <lastmod>2019-03-03T08:08:13.052Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2014/07/01/storm%20%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/</loc>
-    
-    <lastmod>2019-03-03T08:07:38.616Z</lastmod>
     
   </url>
   
@@ -576,14 +842,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/05/05/%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</loc>
+    <loc>http://itweet.github.io/2016/03/17/Hadoop-issue-collections/</loc>
     
     <lastmod>2019-02-27T17:45:54.903Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/03/17/Hadoop-issue-collections/</loc>
+    <loc>http://itweet.github.io/2016/05/05/%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</loc>
     
     <lastmod>2019-02-27T17:45:54.903Z</lastmod>
     
@@ -611,14 +877,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/08/14/%E5%A6%82%E4%BD%95%E5%9C%A8CentOS%E4%B8%8A%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEownCloud/</loc>
+    <loc>http://itweet.github.io/2016/08/28/skynet-development-for-mac/</loc>
     
     <lastmod>2019-02-27T17:43:20.116Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/08/28/skynet-development-for-mac/</loc>
+    <loc>http://itweet.github.io/2016/08/14/%E5%A6%82%E4%BD%95%E5%9C%A8CentOS%E4%B8%8A%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEownCloud/</loc>
     
     <lastmod>2019-02-27T17:43:20.116Z</lastmod>
     
@@ -642,13 +908,6 @@
     <loc>http://itweet.github.io/2017/05/30/openstack%E7%B3%BB%E5%88%97(9)-M%E7%89%88_%E4%BA%91%E7%A1%AC%E7%9B%981/</loc>
     
     <lastmod>2019-02-27T17:40:29.202Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/12/14/Moving-the-Ambari-Server/</loc>
-    
-    <lastmod>2019-02-27T17:40:20.346Z</lastmod>
     
   </url>
   
@@ -681,13 +940,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/07/03/%E5%88%86%E5%B8%83%E5%BC%8F%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%9A%E7%BB%B4%E5%88%86%E6%9E%90%EF%BC%88OLAP%EF%BC%89%E5%BC%95%E6%93%8EApache%20Kylin%E5%AE%89%E8%A3%85%E4%BD%93%E9%AA%8C/</loc>
-    
-    <lastmod>2019-02-27T17:36:17.353Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2016/10/27/HDFS-MapReduce%E5%BC%82%E6%9E%84%E5%AD%98%E5%82%A8%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%99%BD%E7%9A%AE%E4%B9%A6/</loc>
     
     <lastmod>2019-02-27T17:35:51.584Z</lastmod>
@@ -705,62 +957,6 @@
     <loc>http://itweet.github.io/2018/06/12/create-personal-space/</loc>
     
     <lastmod>2019-02-27T16:59:02.674Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/06/23/why-spark-rdd/</loc>
-    
-    <lastmod>2019-02-27T16:58:48.230Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/07/02/micro-service-architecture-based-on-restful/</loc>
-    
-    <lastmod>2019-02-27T16:58:19.440Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/07/15/announcing-general-availability-hortonworks-data-platform-3-0-0-ambari-2-7-0/</loc>
-    
-    <lastmod>2019-02-27T16:57:34.174Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/08/05/cloudera-enterprise-6/</loc>
-    
-    <lastmod>2019-02-27T16:57:17.306Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/08/19/homemade-programming-language/</loc>
-    
-    <lastmod>2019-02-27T16:56:57.933Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/08/20/automated-feature-engineering-introduction/</loc>
-    
-    <lastmod>2019-02-27T16:55:45.448Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/08/26/parquet-library-fatal-error/</loc>
-    
-    <lastmod>2019-02-27T16:55:17.397Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/09/06/tensorflow-on-apache-hadoop-yarn/</loc>
-    
-    <lastmod>2019-02-27T16:55:01.045Z</lastmod>
     
   </url>
   
@@ -807,23 +1003,9 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/07/27/%20Enterprise-BigData-platform-deployment-guide-part-1/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.522Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2017/07/28/Enterprise-BigData-platform-deployment-guide-part-2/</loc>
     
     <lastmod>2018-07-02T13:09:15.522Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2017/07/14/apache-solr-memory-tuning-for-production/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.521Z</lastmod>
     
   </url>
   
@@ -835,16 +1017,16 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/07/14/apache-hive1-vs-hive2-llap-performance/</loc>
+    <loc>http://itweet.github.io/2017/07/14/apache-solr-memory-tuning-for-production/</loc>
     
     <lastmod>2018-07-02T13:09:15.521Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/07/03/apache-hbase-medium-object-storage-mob-policies/</loc>
+    <loc>http://itweet.github.io/2017/07/14/apache-hive1-vs-hive2-llap-performance/</loc>
     
-    <lastmod>2018-07-02T13:09:15.520Z</lastmod>
+    <lastmod>2018-07-02T13:09:15.521Z</lastmod>
     
   </url>
   
@@ -863,6 +1045,13 @@
   </url>
   
   <url>
+    <loc>http://itweet.github.io/2017/07/03/apache-hbase-medium-object-storage-mob-policies/</loc>
+    
+    <lastmod>2018-07-02T13:09:15.520Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://itweet.github.io/2017/06/17/openstack%E7%B3%BB%E5%88%97(11)-%E5%90%8E%E8%AE%B0/</loc>
     
     <lastmod>2018-07-02T13:09:15.519Z</lastmod>
@@ -870,21 +1059,7 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/06/09/%E8%A7%A3%E5%AF%86Apache%20Hadoop%20YARN%20Fair%20Scheduler%20Queue%20Basics/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.519Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2017/06/04/openstack%E7%B3%BB%E5%88%97(11)-%E5%B9%B3%E5%8F%B0%E8%BF%90%E7%BB%B4/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.518Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2017/06/04/%E7%AE%80%E4%BB%8BApache%20Spark%E7%9A%84%E8%A1%8C-%E5%88%97%E7%BA%A7%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/</loc>
     
     <lastmod>2018-07-02T13:09:15.518Z</lastmod>
     
@@ -905,20 +1080,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/06/02/%E6%AF%94%E8%BE%83Apache%20Hadoop%20%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F%E4%B8%AD%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E5%92%8C%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%9A%84%E6%80%A7%E8%83%BD/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.517Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2017/05/30/openstack%E7%B3%BB%E5%88%97(9)-M%E7%89%88_%E4%BA%91%E7%A1%AC%E7%9B%982/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.517Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2017/05/26/%E5%AE%A3%E5%B8%83Apache-Hive-2%E6%9F%A5%E8%AF%A2%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%8725%E5%80%8D%E4%BB%A5%E4%B8%8A/</loc>
     
     <lastmod>2018-07-02T13:09:15.516Z</lastmod>
@@ -926,14 +1087,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/26/Apache-Hive-vs-Apache-Impala-Query-Performance-Comparison/</loc>
+    <loc>http://itweet.github.io/2017/05/24/openstack%E7%B3%BB%E5%88%97(8)-M%E7%89%88_%E6%89%A9%E5%AE%B9%E8%8A%82%E7%82%B9/</loc>
     
     <lastmod>2018-07-02T13:09:15.515Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/24/openstack%E7%B3%BB%E5%88%97(8)-M%E7%89%88_%E6%89%A9%E5%AE%B9%E8%8A%82%E7%82%B9/</loc>
+    <loc>http://itweet.github.io/2017/05/26/Apache-Hive-vs-Apache-Impala-Query-Performance-Comparison/</loc>
     
     <lastmod>2018-07-02T13:09:15.515Z</lastmod>
     
@@ -968,6 +1129,13 @@
   </url>
   
   <url>
+    <loc>http://itweet.github.io/2017/05/20/openstack%E7%B3%BB%E5%88%97(4)-%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83/</loc>
+    
+    <lastmod>2018-07-02T13:09:15.513Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://itweet.github.io/2017/05/19/openstack%E7%B3%BB%E5%88%97(3)-%E6%9E%B6%E6%9E%84%E8%A7%84%E5%88%92/</loc>
     
     <lastmod>2018-07-02T13:09:15.513Z</lastmod>
@@ -982,14 +1150,7 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/20/openstack%E7%B3%BB%E5%88%97(4)-%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.513Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2017/05/16/%E6%80%8E%E4%B9%88%E5%A4%87%E4%BB%BD%E5%92%8C%E7%81%BE%E9%9A%BE%E5%A4%8D%E5%8E%9FApache%20Solr%20(part%201)/</loc>
+    <loc>http://itweet.github.io/2017/05/17/openstack%E7%B3%BB%E5%88%97(1)-Kvm%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF/</loc>
     
     <lastmod>2018-07-02T13:09:15.512Z</lastmod>
     
@@ -1003,9 +1164,9 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/17/openstack%E7%B3%BB%E5%88%97(1)-Kvm%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF/</loc>
+    <loc>http://itweet.github.io/2017/05/11/Itweet-boot%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F-%E5%BC%80%E6%BA%90/</loc>
     
-    <lastmod>2018-07-02T13:09:15.512Z</lastmod>
+    <lastmod>2018-07-02T13:09:15.511Z</lastmod>
     
   </url>
   
@@ -1017,51 +1178,9 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/11/Itweet-boot%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F-%E5%BC%80%E6%BA%90/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.511Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/12/28/ubuntu%20ambari%20development/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.510Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2017/05/07/Machine-Learning-7/</loc>
     
     <lastmod>2018-07-02T13:09:15.510Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/12/04/Hadoop%20Cluster%20Benchmark%20Performance/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.509Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/11/05/Downloadonly%20plugin%20for%20yum/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.508Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/08/16/Kubernetes%20Use%20Persistent%20Storage/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.507Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/08/24/Nexus%20Repository%20Manager%20/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.507Z</lastmod>
     
   </url>
   
@@ -1073,70 +1192,7 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/08/14/kubernetes-cluster-install/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.506Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/08/13/Docker%20Install%20for%20centos%207/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.505Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/08/12/Docker%20Install%20Guide/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.505Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/08/13/ownCloud%20%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.505Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/07/07/Configuring%20Heterogeneous%20Storage%20in%20HDFS/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.504Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/08/09/openstack%20image%20guide%20/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.504Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/07/06/Running%20MapReduce%20Example%20Programs%20and%20Benchmarks/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.503Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2016/06/16/openstack-issue/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.502Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/06/27/Hive%20on%20Spark%20%E6%95%B4%E5%90%88%E6%B5%8B%E8%AF%95/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.502Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/07/02/Hadoop%20Native%20Libraries%20Guide/</loc>
     
     <lastmod>2018-07-02T13:09:15.502Z</lastmod>
     
@@ -1146,20 +1202,6 @@
     <loc>http://itweet.github.io/2016/06/03/%E4%B8%AD%E5%9B%BD%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98%E5%9F%B9%E8%AE%AD%E6%98%AF%E4%B8%8D%E6%98%AF%E6%9C%89%E9%97%AE%E9%A2%98/</loc>
     
     <lastmod>2018-07-02T13:09:15.501Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/06/12/zeppelin%20install/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.501Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/05/26/OpenStack-Storage-cinder-swift-glance-Part2/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.500Z</lastmod>
     
   </url>
   
@@ -1185,23 +1227,9 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/05/16/Coding%20List/</loc>
+    <loc>http://itweet.github.io/2016/01/09/Hbase-Region-split-policy/</loc>
     
-    <lastmod>2018-07-02T13:09:15.498Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/03/20/Impala%20-%20Hive%20%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%92%8C%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.495Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/04/09/SQL%20on%20Hadoop%20TPCDS%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.495Z</lastmod>
+    <lastmod>2018-07-02T13:09:15.493Z</lastmod>
     
   </url>
   
@@ -1213,23 +1241,9 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/01/09/Hbase-Region-split-policy/</loc>
+    <loc>http://itweet.github.io/2015/10/21/%E6%81%90%E6%80%96%E7%9A%84%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
     
-    <lastmod>2018-07-02T13:09:15.493Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2016/01/02/Zabbix%20Use/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.492Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2015/11/26/redis%20use/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.492Z</lastmod>
+    <lastmod>2018-07-02T13:09:15.491Z</lastmod>
     
   </url>
   
@@ -1241,9 +1255,9 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2015/10/21/%E6%81%90%E6%80%96%E7%9A%84%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
+    <loc>http://itweet.github.io/2015/09/21/Apache-Cassandra-Cluster/</loc>
     
-    <lastmod>2018-07-02T13:09:15.491Z</lastmod>
+    <lastmod>2018-07-02T13:09:15.490Z</lastmod>
     
   </url>
   
@@ -1262,13 +1276,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2015/09/21/Apache-Cassandra-Cluster/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.490Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2015/09/15/hdfs-balancer%E5%9D%87%E8%A1%A1%E5%99%A8%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2018-07-02T13:09:15.489Z</lastmod>
@@ -1279,20 +1286,6 @@
     <loc>http://itweet.github.io/2015/08/10/%E6%96%B0%E4%B8%80%E4%BB%A3Impala%E7%9A%84%E4%BC%98%E5%8A%BF%E4%BD%A0%E7%AB%9F%E7%84%B6%E8%BF%98%E4%B8%8D%E7%9F%A5%E9%81%93/</loc>
     
     <lastmod>2018-07-02T13:09:15.488Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2015/08/12/Apache%20kafka%20%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.488Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2015/07/27/building%20hadoop%20for%20centos/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.487Z</lastmod>
     
   </url>
   
