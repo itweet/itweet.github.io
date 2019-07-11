@@ -6,7 +6,7 @@ tags: [AI,2019]
 category: FusionDB
 ---
 
-今天，介绍一个快速入门 FusionDB 的一个[GitHub工程](https://github.com/FusionDB/fql-training)，使用 FQL 跨不同的数据源进行联邦查询。现提供 Docker 版的 FusionDB，安装有 Docker 的机器都可以快速体验 FusionDB 的功能。
+今天，介绍一个快速入门 FusionDB 的一个[GitHub工程](https://github.com/FusionDB/fql-training)，使用 FQL 实现跨不同数据源的联邦查询功能。现提供 Docker 版的 FusionDB，安装有 Docker 的机器都可以快速体验 FusionDB 的功能。
 
 - fql-training: https://github.com/FusionDB/fql-training
 - FusionDB Document: http://www.fusionlab.cn/zh-cn/fdb/quickstart.html
