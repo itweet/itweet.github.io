@@ -29,9 +29,10 @@
     "hexo-renderer-ejs": "^0.1.0",
     "hexo-renderer-jade": "^0.4.1",
     "hexo-renderer-marked": "^0.2.6",
-    "hexo-renderer-sass": "^0.3.0",
+    "hexo-renderer-sass": "^0.3.2",
     "hexo-renderer-scss": "^1.2.0",
     "hexo-renderer-stylus": "^0.3.0",
-    "hexo-server": "^0.1.2"
+    "hexo-server": "^0.1.2",
+    "node-sass": "^4.12.0"
   }
 }
