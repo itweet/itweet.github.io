@@ -2,14 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://itweet.github.io/2018/08/19/homemade-programming-language/</loc>
+    <loc>http://itweet.github.io/2019/07/10/fql-training/</loc>
     
-    <lastmod>2019-03-31T15:41:23.921Z</lastmod>
+    <lastmod>2019-07-11T16:08:22.082Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2018/12/26/release-3.1.0/</loc>
+    <loc>http://itweet.github.io/2019/06/04/jdp-release-3.2.0/</loc>
+    
+    <lastmod>2019-06-04T01:42:40.926Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/08/19/homemade-programming-language/</loc>
+    
+    <lastmod>2019-03-31T15:43:30.758Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/12/26/jdp-release-3.1.0/</loc>
     
     <lastmod>2019-03-31T15:40:06.677Z</lastmod>
     
@@ -114,14 +128,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/06/02/%E6%AF%94%E8%BE%83Apache-Hadoop-%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F%E4%B8%AD%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E5%92%8C%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%9A%84%E6%80%A7%E8%83%BD/</loc>
+    <loc>http://itweet.github.io/2017/05/30/openstack%E7%B3%BB%E5%88%97(9)-M%E7%89%88_%E4%BA%91%E7%A1%AC%E7%9B%982/</loc>
     
     <lastmod>2019-03-05T15:09:47.508Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/30/openstack%E7%B3%BB%E5%88%97(9)-M%E7%89%88_%E4%BA%91%E7%A1%AC%E7%9B%982/</loc>
+    <loc>http://itweet.github.io/2017/06/02/%E6%AF%94%E8%BE%83Apache-Hadoop-%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F%E4%B8%AD%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E5%92%8C%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%9A%84%E6%80%A7%E8%83%BD/</loc>
     
     <lastmod>2019-03-05T15:09:47.508Z</lastmod>
     
@@ -156,13 +170,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/11/05/Downloadonly-plugin-for-yum/</loc>
-    
-    <lastmod>2019-03-05T15:09:47.504Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2016/08/24/Nexus-Repository-Manager/</loc>
     
     <lastmod>2019-03-05T15:09:47.504Z</lastmod>
@@ -171,6 +178,13 @@
   
   <url>
     <loc>http://itweet.github.io/2016/08/16/Kubernetes-Use-Persistent-Storage/</loc>
+    
+    <lastmod>2019-03-05T15:09:47.504Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/11/05/Downloadonly-plugin-for-yum/</loc>
     
     <lastmod>2019-03-05T15:09:47.504Z</lastmod>
     
@@ -198,14 +212,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/08/12/Docker-Install-Guide/</loc>
+    <loc>http://itweet.github.io/2016/08/09/openstack-image-guide/</loc>
     
     <lastmod>2019-03-05T15:09:47.500Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/08/09/openstack-image-guide/</loc>
+    <loc>http://itweet.github.io/2016/08/12/Docker-Install-Guide/</loc>
     
     <lastmod>2019-03-05T15:09:47.500Z</lastmod>
     
@@ -226,14 +240,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/07/03/%E5%88%86%E5%B8%83%E5%BC%8F%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%9A%E7%BB%B4%E5%88%86%E6%9E%90-OLAP%E5%BC%95%E6%93%8EApache-Kylin%E5%AE%89%E8%A3%85%E4%BD%93%E9%AA%8C/</loc>
+    <loc>http://itweet.github.io/2016/07/02/Hadoop-Native-Libraries-Guide/</loc>
     
     <lastmod>2019-03-05T15:09:47.498Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/07/02/Hadoop-Native-Libraries-Guide/</loc>
+    <loc>http://itweet.github.io/2016/07/03/%E5%88%86%E5%B8%83%E5%BC%8F%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%9A%E7%BB%B4%E5%88%86%E6%9E%90-OLAP%E5%BC%95%E6%93%8EApache-Kylin%E5%AE%89%E8%A3%85%E4%BD%93%E9%AA%8C/</loc>
     
     <lastmod>2019-03-05T15:09:47.498Z</lastmod>
     
@@ -254,14 +268,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/05/26/OpenStack-Storage-cinder-swift-glance-Part2/</loc>
+    <loc>http://itweet.github.io/2016/05/16/Coding-List/</loc>
     
     <lastmod>2019-03-05T15:09:47.496Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/05/16/Coding-List/</loc>
+    <loc>http://itweet.github.io/2016/05/26/OpenStack-Storage-cinder-swift-glance-Part2/</loc>
     
     <lastmod>2019-03-05T15:09:47.496Z</lastmod>
     
@@ -275,14 +289,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/04/09/SQL-on-Hadoop-TPCDS%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</loc>
+    <loc>http://itweet.github.io/2016/03/20/Impala-Hive-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%92%8C%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/</loc>
     
     <lastmod>2019-03-05T15:09:47.492Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/03/20/Impala-Hive-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%92%8C%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/</loc>
+    <loc>http://itweet.github.io/2016/04/09/SQL-on-Hadoop-TPCDS%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</loc>
     
     <lastmod>2019-03-05T15:09:47.492Z</lastmod>
     
@@ -331,14 +345,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2015/04/06/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E8%AF%BB%E7%9A%84%E4%B9%A6-StackOverflow-%E5%88%9B%E5%A7%8B%E4%BA%BA%E6%8E%A8%E8%8D%90/</loc>
+    <loc>http://itweet.github.io/2015/05/06/%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%BB%A1%E8%B6%B3%E9%9C%80%E6%B1%82%E7%9A%84SQL-on-Hadoop%E7%B3%BB%E7%BB%9F/</loc>
     
     <lastmod>2019-03-05T15:09:47.484Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2015/05/06/%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%BB%A1%E8%B6%B3%E9%9C%80%E6%B1%82%E7%9A%84SQL-on-Hadoop%E7%B3%BB%E7%BB%9F/</loc>
+    <loc>http://itweet.github.io/2015/04/06/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E8%AF%BB%E7%9A%84%E4%B9%A6-StackOverflow-%E5%88%9B%E5%A7%8B%E4%BA%BA%E6%8E%A8%E8%8D%90/</loc>
     
     <lastmod>2019-03-05T15:09:47.484Z</lastmod>
     
@@ -877,14 +891,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/08/28/skynet-development-for-mac/</loc>
+    <loc>http://itweet.github.io/2016/08/14/%E5%A6%82%E4%BD%95%E5%9C%A8CentOS%E4%B8%8A%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEownCloud/</loc>
     
     <lastmod>2019-02-27T17:43:20.116Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/08/14/%E5%A6%82%E4%BD%95%E5%9C%A8CentOS%E4%B8%8A%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEownCloud/</loc>
+    <loc>http://itweet.github.io/2016/08/28/skynet-development-for-mac/</loc>
     
     <lastmod>2019-02-27T17:43:20.116Z</lastmod>
     
@@ -982,6 +996,13 @@
   </url>
   
   <url>
+    <loc>http://itweet.github.io/2017/07/30/Enterprise-BigData-platform-deployment-guide-part-3/</loc>
+    
+    <lastmod>2018-07-02T13:09:15.523Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://itweet.github.io/2017/08/03/Enterprise-BigData-platform-deployment-guide-part-4/</loc>
     
     <lastmod>2018-07-02T13:09:15.523Z</lastmod>
@@ -989,9 +1010,9 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/07/30/Enterprise-BigData-platform-deployment-guide-part-3/</loc>
+    <loc>http://itweet.github.io/2017/07/20/write-data-to-HDFS-via-NFS-gateway-failed/</loc>
     
-    <lastmod>2018-07-02T13:09:15.523Z</lastmod>
+    <lastmod>2018-07-02T13:09:15.522Z</lastmod>
     
   </url>
   
@@ -1003,9 +1024,9 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/07/20/write-data-to-HDFS-via-NFS-gateway-failed/</loc>
+    <loc>http://itweet.github.io/2017/07/04/connect-tableau-druid-hive/</loc>
     
-    <lastmod>2018-07-02T13:09:15.522Z</lastmod>
+    <lastmod>2018-07-02T13:09:15.521Z</lastmod>
     
   </url>
   
@@ -1024,9 +1045,9 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/07/04/connect-tableau-druid-hive/</loc>
+    <loc>http://itweet.github.io/2017/07/03/apache-hbase-medium-object-storage-mob-policies/</loc>
     
-    <lastmod>2018-07-02T13:09:15.521Z</lastmod>
+    <lastmod>2018-07-02T13:09:15.520Z</lastmod>
     
   </url>
   
@@ -1045,13 +1066,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/07/03/apache-hbase-medium-object-storage-mob-policies/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.520Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2017/06/17/openstack%E7%B3%BB%E5%88%97(11)-%E5%90%8E%E8%AE%B0/</loc>
     
     <lastmod>2018-07-02T13:09:15.519Z</lastmod>
@@ -1059,14 +1073,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/06/04/openstack%E7%B3%BB%E5%88%97(11)-%E5%B9%B3%E5%8F%B0%E8%BF%90%E7%BB%B4/</loc>
+    <loc>http://itweet.github.io/2017/06/09/new_apache-spark-zeppelin-hdp-2-6_enterprise_data/</loc>
     
     <lastmod>2018-07-02T13:09:15.518Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/06/09/new_apache-spark-zeppelin-hdp-2-6_enterprise_data/</loc>
+    <loc>http://itweet.github.io/2017/06/04/openstack%E7%B3%BB%E5%88%97(11)-%E5%B9%B3%E5%8F%B0%E8%BF%90%E7%BB%B4/</loc>
     
     <lastmod>2018-07-02T13:09:15.518Z</lastmod>
     
@@ -1087,13 +1101,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/26/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%96%B0%E7%89%88Apache-Hadoop%E4%B8%AD%E4%BD%BF%E7%94%A8HDFSIntra-DataNode%E7%A3%81%E7%9B%98%E5%9D%87%E8%A1%A1%E5%99%A8/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.515Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2017/05/24/openstack%E7%B3%BB%E5%88%97(8)-M%E7%89%88_%E6%89%A9%E5%AE%B9%E8%8A%82%E7%82%B9/</loc>
     
     <lastmod>2018-07-02T13:09:15.515Z</lastmod>
@@ -1104,6 +1111,20 @@
     <loc>http://itweet.github.io/2017/05/26/Apache-Hive-vs-Apache-Impala-Query-Performance-Comparison/</loc>
     
     <lastmod>2018-07-02T13:09:15.515Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2017/05/26/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%96%B0%E7%89%88Apache-Hadoop%E4%B8%AD%E4%BD%BF%E7%94%A8HDFSIntra-DataNode%E7%A3%81%E7%9B%98%E5%9D%87%E8%A1%A1%E5%99%A8/</loc>
+    
+    <lastmod>2018-07-02T13:09:15.515Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2017/05/22/openstack%E7%B3%BB%E5%88%97(5)-M%E7%89%88_%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2/</loc>
+    
+    <lastmod>2018-07-02T13:09:15.514Z</lastmod>
     
   </url>
   
@@ -1122,13 +1143,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/22/openstack%E7%B3%BB%E5%88%97(5)-M%E7%89%88_%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2/</loc>
-    
-    <lastmod>2018-07-02T13:09:15.514Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2017/05/18/openstack%E7%B3%BB%E5%88%97(2)-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</loc>
     
     <lastmod>2018-07-02T13:09:15.513Z</lastmod>
@@ -1136,14 +1150,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/20/openstack%E7%B3%BB%E5%88%97(4)-%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83/</loc>
+    <loc>http://itweet.github.io/2017/05/19/openstack%E7%B3%BB%E5%88%97(3)-%E6%9E%B6%E6%9E%84%E8%A7%84%E5%88%92/</loc>
     
     <lastmod>2018-07-02T13:09:15.513Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/19/openstack%E7%B3%BB%E5%88%97(3)-%E6%9E%B6%E6%9E%84%E8%A7%84%E5%88%92/</loc>
+    <loc>http://itweet.github.io/2017/05/20/openstack%E7%B3%BB%E5%88%97(4)-%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83/</loc>
     
     <lastmod>2018-07-02T13:09:15.513Z</lastmod>
     
@@ -1164,14 +1178,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/11/Itweet-boot%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F-%E5%BC%80%E6%BA%90/</loc>
+    <loc>http://itweet.github.io/2017/05/07/apache-hadoop-insall/</loc>
     
     <lastmod>2018-07-02T13:09:15.511Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/07/apache-hadoop-insall/</loc>
+    <loc>http://itweet.github.io/2017/05/11/Itweet-boot%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F-%E5%BC%80%E6%BA%90/</loc>
     
     <lastmod>2018-07-02T13:09:15.511Z</lastmod>
     
@@ -1227,14 +1241,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/01/25/Hadoop%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%9E%84--%E5%AD%98%E5%82%A8%E7%AF%87/</loc>
+    <loc>http://itweet.github.io/2016/01/09/Hbase-Region-split-policy/</loc>
     
     <lastmod>2018-07-02T13:09:15.493Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/01/09/Hbase-Region-split-policy/</loc>
+    <loc>http://itweet.github.io/2016/01/25/Hadoop%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%9E%84--%E5%AD%98%E5%82%A8%E7%AF%87/</loc>
     
     <lastmod>2018-07-02T13:09:15.493Z</lastmod>
     
