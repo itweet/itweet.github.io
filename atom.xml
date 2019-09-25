@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://itweet.github.io/"/>
-  <updated>2019-09-25T16:18:28.908Z</updated>
+  <updated>2019-09-25T16:55:27.219Z</updated>
   <id>http://itweet.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://itweet.github.io/2019/09/25/Debugging-the-build-process-in-fusiondb-website/"/>
     <id>http://itweet.github.io/2019/09/25/Debugging-the-build-process-in-fusiondb-website/</id>
     <published>2019-09-25T07:46:20.000Z</published>
-    <updated>2019-09-25T16:18:28.908Z</updated>
+    <updated>2019-09-25T16:55:27.219Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
+    <content type="html"><![CDATA[<p>曾经在构建 <code>Core Data &amp; Core AI</code> 统一分析平台 <a href="http://www.fusionlab.cn/zh-cn/" target="_blank" rel="noopener"><code>JDP</code></a> 时，就面临一个编写文档的窘境，系统功能构建太快，而早期由于没有规划和约束导致大量的功能并未编写文档以及遵守良好的编程风格，导致最后查无所依，软件维护成本高昂。与一些公开的公益性质的开源持续集成服务也没用很好的结合，造成大量的工作依赖手工完成，甚至自己组装服务器在家进行各种压测以及持续集成的工作。</p><p>如上一些原因，我就在思考如何才能在软件开发初期较早的版本就开始规避类似的问题呢？</p><p>首先，我们完全遵守国际化的标注进行软件的开发工作，利用 Git 和 Github 提供的相关软件开发流程管理工具，标准化整个 PR 的提交流程，参见: <a href="https://github.com/FusionDB/fusiondb.github.io/pull/2" target="_blank" rel="noopener">Build an official website</a>。</p><ul><li>可信赖、可持续发展的软件系统，文档和代码一定同等重要</li><li>Issues 或 Jira 管理全部的软件 Feature 开发，做到追溯，查有所依</li><li>Pull requet 经过严格的 Review/QA</li><li>每个 Pull requet 做到功能的独立性，不掺杂任何无关的代码提交，清晰的区分 bugfix、feature、hotfix</li><li>模块众多，逻辑划分清晰，做到每个 PR 带有相应模块标识</li><li>每个新功能的开发或者大的变更都应编写相关设计与实现文档进行集体 review</li><li>每个新功能或者已有功能的变更，都需要详细记录在相关的设计文档中</li><li>每增加一个功能，需要相应的编写用户使用文档，进行详细的阐述新功能的使用方法，带有示例代码</li></ul><p>有点跑偏了，我们今天主要讨论，构建一个可信赖的 Open Source 项目的官方网站。需要涉及哪些内容，有哪些可以信赖的开源服务，帮助我们快速达成目标。</p><ul><li></li></ul><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
     
     <summary type="html">
     
@@ -34,9 +34,9 @@
       <category term="Web Design" scheme="http://itweet.github.io/categories/Web-Design/"/>
     
     
-      <category term="Debug" scheme="http://itweet.github.io/tags/Debug/"/>
-    
       <category term="2019" scheme="http://itweet.github.io/tags/2019/"/>
+    
+      <category term="Debug" scheme="http://itweet.github.io/tags/Debug/"/>
     
   </entry>
   
@@ -82,9 +82,9 @@
       <category term="FusionDB" scheme="http://itweet.github.io/categories/FusionDB/"/>
     
     
-      <category term="2019" scheme="http://itweet.github.io/tags/2019/"/>
-    
       <category term="FusionDB®" scheme="http://itweet.github.io/tags/FusionDB%C2%AE/"/>
+    
+      <category term="2019" scheme="http://itweet.github.io/tags/2019/"/>
     
   </entry>
   
