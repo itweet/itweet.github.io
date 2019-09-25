@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://itweet.github.io/"/>
-  <updated>2019-09-25T16:03:55.166Z</updated>
+  <updated>2019-09-25T16:18:28.908Z</updated>
   <id>http://itweet.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://itweet.github.io/2019/09/25/Debugging-the-build-process-in-fusiondb-website/"/>
     <id>http://itweet.github.io/2019/09/25/Debugging-the-build-process-in-fusiondb-website/</id>
     <published>2019-09-25T07:46:20.000Z</published>
-    <updated>2019-09-25T16:03:55.166Z</updated>
+    <updated>2019-09-25T16:18:28.908Z</updated>
     
     <content type="html"><![CDATA[<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p><p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>]]></content>
     
@@ -31,12 +31,12 @@
     
     </summary>
     
-      <category term="FusionDB" scheme="http://itweet.github.io/categories/FusionDB/"/>
+      <category term="Web Design" scheme="http://itweet.github.io/categories/Web-Design/"/>
     
+    
+      <category term="Debug" scheme="http://itweet.github.io/tags/Debug/"/>
     
       <category term="2019" scheme="http://itweet.github.io/tags/2019/"/>
-    
-      <category term="FusionDB" scheme="http://itweet.github.io/tags/FusionDB/"/>
     
   </entry>
   
@@ -82,9 +82,9 @@
       <category term="FusionDB" scheme="http://itweet.github.io/categories/FusionDB/"/>
     
     
-      <category term="FusionDB®" scheme="http://itweet.github.io/tags/FusionDB%C2%AE/"/>
-    
       <category term="2019" scheme="http://itweet.github.io/tags/2019/"/>
+    
+      <category term="FusionDB®" scheme="http://itweet.github.io/tags/FusionDB%C2%AE/"/>
     
   </entry>
   
