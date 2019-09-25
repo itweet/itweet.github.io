@@ -12,10 +12,12 @@
 
 
 
-  <meta name="description" content="技术人的日常.">
+  <meta name="description" content="利用大前端技术构建 FusionDB 纯静态的官方网站，遇到的一些小坑，纯粹记录一下备忘。">
 
 
 
+
+  <meta name="keywords" content="2019,FusionDB,">
 
 
 
@@ -30,20 +32,23 @@
 
 
 
-<link rel="canonical" href="http://itweet.github.io/categories/Database/page/2/">
+<link rel="canonical" href="http://itweet.github.io/2019/09/25/Debugging-the-build-process-in-fusiondb-website/">
 
 
-<meta name="description" content="技术人的日常.">
-<meta name="keywords" content="JDP for ClickHouse Ecosystem Management Platform, DataFlow Platform, NiFi, Clickhouse, Superset, Kafka, Zookeeper">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WHOAMI">
-<meta property="og:url" content="http://itweet.github.io/categories/Database/page/2/index.html">
+<meta name="description" content="利用大前端技术构建 FusionDB 纯静态的官方网站，遇到的一些小坑，纯粹记录一下备忘。">
+<meta name="keywords" content="2019,FusionDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Debugging the build process in fusiondb website">
+<meta property="og:url" content="http://itweet.github.io/2019/09/25/Debugging-the-build-process-in-fusiondb-website/index.html">
 <meta property="og:site_name" content="WHOAMI">
-<meta property="og:description" content="技术人的日常.">
+<meta property="og:description" content="利用大前端技术构建 FusionDB 纯静态的官方网站，遇到的一些小坑，纯粹记录一下备忘。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2019-09-25T16:03:55.166Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WHOAMI">
-<meta name="twitter:description" content="技术人的日常.">
+<meta name="twitter:title" content="Debugging the build process in fusiondb website">
+<meta name="twitter:description" content="利用大前端技术构建 FusionDB 纯静态的官方网站，遇到的一些小坑，纯粹记录一下备忘。">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -68,11 +73,7 @@
 
 
 
-    <title>
-  
-    Database - WHOAMI
-  
-</title>
+    <title> Debugging the build process in fusiondb website - WHOAMI </title>
   </head>
 
   <body>
@@ -121,102 +122,67 @@
       </header>
       <div id="content">
         
-  
-<div id="primary">
-  <section id="archive" class="archive">
-    
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Debugging the build process in fusiondb website
+        
+      </h1>
+
+      <time class="post-time">
+          9月 25 2019
+      </time>
+    </header>
+
+
 
     
-      
+            <div class="post-content">
+            <p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
 
-      <div class="archive-post">
-        <span class="archive-post-time">
+            </div>
           
-            2016-03-20
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2016/03/20/Impala-Hive-性能测试和查询优化/" class="archive-post-link">
-            Impala - Hive 性能测试和查询优化
-          </a>
-        </span>
-      </div>
-    
-      
 
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2015-08-10
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2015/08/10/新一代Impala的优势你竟然还不知道/" class="archive-post-link">
-            新一代Impala的优势你竟然还不知道
-          </a>
-        </span>
-      </div>
     
-      
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/2019/">2019</a>
+		  
+			<a href="/tags/FusionDB/">FusionDB</a>
+		  
+		</div>
+		
 
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2015-07-18
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2015/07/18/drill-use/" class="archive-post-link">
-            drill-use
-          </a>
-        </span>
-      </div>
+        
+        
+  <nav class="post-nav">
     
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2015-07-16
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2015/07/16/Phoenix-hbase/" class="archive-post-link">
-            Phoenix-hbase
-          </a>
-        </span>
-      </div>
     
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2015-05-06
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2015/05/06/如何选择满足需求的SQL-on-Hadoop系统/" class="archive-post-link">
-            如何选择满足需求的SQL on Hadoop系统
-          </a>
-        </span>
-      </div>
-    
-  </section>
- </div>
-
-  
-  <nav class="pagination">
-    
-      <a class="prev" href="/categories/Database/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">Prev</span>
+      <a class="next" href="/2019/07/30/how-to-quickly-deploy-flink-on-jdp-platform/">
+        <span class="next-text nav-default">How to quickly deploy flink on jdp platform</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
       </a>
-    
     
   </nav>
 
+        
+  <div class="comments" id="comments">
+    
+  </div>
 
+
+      </footer>
+    
+  </article>
+
+    </div>
 
       </div>
 

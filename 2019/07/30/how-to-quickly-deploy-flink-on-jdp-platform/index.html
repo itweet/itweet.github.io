@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="如何快速部署 Flink 集群在 JDP 平台上。">
+
+
+
+
+  <meta name="keywords" content="2019,Flink,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2019/07/30/how-to-quickly-deploy-flink-on-jdp-platform/">
+
+
+<meta name="description" content="如何快速部署 Flink 集群在 JDP 平台上。">
+<meta name="keywords" content="2019,Flink">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to quickly deploy flink on jdp platform">
+<meta property="og:url" content="http://itweet.github.io/2019/07/30/how-to-quickly-deploy-flink-on-jdp-platform/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="如何快速部署 Flink 集群在 JDP 平台上。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+<meta property="og:updated_time" content="2019-09-25T16:02:26.599Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to quickly deploy flink on jdp platform">
+<meta name="twitter:description" content="如何快速部署 Flink 集群在 JDP 平台上。">
+<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> How to quickly deploy flink on jdp platform - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          How to quickly deploy flink on jdp platform
+        
+      </h1>
+
+      <time class="post-time">
+          7月 30 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h2 id="环境依赖"><a href="#环境依赖" class="headerlink" title="环境依赖"></a>环境依赖</h2><ul>
+<li><p>JAVA_HOME = /usr/jdk64/jdk1.8.0_112</p>
+</li>
+<li><p>HADOOP_CONF_DIR = /etc/hadoop/conf  # 包括 HDFS_CONF_DIR and YARN_CONF_DIR</p>
+</li>
+</ul>
+<p><code>注意</code>: 安装官方文档安装的 JDP 3.2 集群，自带如上相关依赖，本演示是 Flink on Yarn 模式。</p>
+<h2 id="安装-JDP-安装包中自带的-Flink-软件包"><a href="#安装-JDP-安装包中自带的-Flink-软件包" class="headerlink" title="安装 JDP 安装包中自带的 Flink 软件包"></a>安装 JDP 安装包中自带的 Flink 软件包</h2><p>目前 JDP 仅支持 Redhat 系列 7.x 的操作系统，故我们使用 yum 安装 Flink。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install flink_3_2_0_0_108 -y</span><br></pre></td></tr></table></figure>
+<h2 id="修改-Flink-默认配置文件"><a href="#修改-Flink-默认配置文件" class="headerlink" title="修改 Flink 默认配置文件"></a>修改 Flink 默认配置文件</h2><ol>
+<li>在 JDP 集群中安装 Flink on Yarn 集群，仅需配置 env.java.home </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -rn &quot;env.java.home&quot; /usr/jdp/current/flink/conf/flink-conf.yaml</span><br><span class="line">19:env.java.home: /usr/jdk64/jdk1.8.0_112</span><br></pre></td></tr></table></figure>
+<p>JDP 集群中安装 Flink on Yarn <code>可选配置</code>，因为 JDP HADOOP_CONF_DIR 默认值和 Flink 配置默认值一致，故不需要配置。也可显示的在 config.sh 中 export HADOOP_CONF_DIR=xxx。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -rn &quot;HADOOP_CONF_DIR&quot; config.sh | head -1</span><br><span class="line">19:export HADOOP_CONF_DIR=/etc/hadoop/conf</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>添加 Flink 用户，并授予 hdfs 组权限，方便 Flink 读写 HDFS。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd flink -g hdfs</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>创建 Flink 需要的log、run等目录。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /var/log/flink</span><br><span class="line">mkdir /var/run/flink</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>为新创建的 log、run 目录授予 Flink 读写权限</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown flink:root -R /var/log/flink</span><br><span class="line">chown flink:root -R /var/run/flink</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>初始化 flink 用户在 hdfs 的 home 目录</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su - flink</span><br><span class="line"></span><br><span class="line">hadoop fs -mkdir /user/flink</span><br></pre></td></tr></table></figure>
+<h2 id="启动一个-Flink-集群运行于-YARN-上"><a href="#启动一个-Flink-集群运行于-YARN-上" class="headerlink" title="启动一个 Flink 集群运行于 YARN 上"></a>启动一个 Flink 集群运行于 YARN 上</h2><ol>
+<li>需要切换到 flink，执行启动一个 Flink on Yarn 集群</li>
+</ol>
+<p>1.1 Start a long-running Flink cluster on YARN<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">su - flink</span><br><span class="line"></span><br><span class="line">cd /usr/jdp/current/flink</span><br><span class="line"></span><br><span class="line">./bin/yarn-session.sh -n 2 -tm 2024 -s 3 # 集群资源太小，配置不合理容易无法分配到资源，导致任务hang住。Specify the -s flag for the number of processing slots per Task Manager. We recommend to set the number of slots to the number of processors per machine.</span><br><span class="line"></span><br><span class="line">./bin/yarn-session.sh -n 2 -tm 2024 -s 3 -d # -d 表示后台运行。- The Flink YARN client has been started in detached mode. In order to stop Flink on YARN, use the following command or a YARN web interface to stop it:</span><br><span class="line">yarn application -kill application_1564483050501_0002</span><br></pre></td></tr></table></figure></p>
+<p><code>注意</code>：启动时的提示<code>Setting HADOOP_CONF_DIR=/etc/hadoop/conf because no HADOOP_CONF_DIR was set.</code>，如果未设置 HADOOP_CONF_DIR，默认值 /etc/hadoop/conf；而 JDP 集群的 HADOOP_CONF_DIR 刚好在此处。</p>
+<p>1.2 Run a Flink job on YARN</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/flink run -m yarn-cluster -p 4 -yjm 1024m -ytm 4096m ./examples/batch/WordCount.jar</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>测试 flink on yarn 集群</li>
+</ol>
+<p>3.1 Examples 经典案例：WordCount</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./bin/flink run ./examples/batch/WordCount.jar</span><br><span class="line"></span><br><span class="line">flink list</span><br></pre></td></tr></table></figure>
+<p>3.2 快速启动 flink sql clinet </p>
+<p>进入 SQL Client</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/sql-client.sh embedded</span><br></pre></td></tr></table></figure>
+<p>Running SQL Queries:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Flink SQL&gt; SELECT &apos;Hello World&apos;;</span><br><span class="line"></span><br><span class="line">Flink SQL&gt; SELECT name, COUNT(*) AS cnt FROM (VALUES (&apos;Bob&apos;), (&apos;Alice&apos;), (&apos;Greg&apos;), (&apos;Bob&apos;)) AS NameTable(name) GROUP BY name;</span><br></pre></td></tr></table></figure>
+<p>退出 SQL Client</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Flink SQL&gt; quit;</span><br></pre></td></tr></table></figure>
+<p>提交 <code>Flink WordCount</code> 程序，因为 YARN 容器资源 limit 导致失败，需要调整启动集群的资源配比。</p>
+<p><code>org.apache.hadoop.yarn.exceptions.InvalidResourceRequestException: Invalid resource request, requested resource type=[vcores] &lt; 0 or greater than maximum allowed allocation. Requested resource=&lt;memory:1024, vCores:4&gt;, maximum allowed allocation=&lt;memory:6656, vCores:3&gt;, please note that maximum allowed allocation is calculated by scheduler based on maximum resource of registered NodeManagers, which might be less than configured maximum allocation=&lt;memory:6656, vCores:3&gt;</code></p>
+<ol start="4">
+<li>停止 Flink 集群，Flink 集群 -d 运行模式，需要通过 yarn 命令才能停止，具体如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn application --list</span><br><span class="line"></span><br><span class="line">yarn application -kill application_1556800373836_0018</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>简单演示如果在 JDP 平台快速部署 Flink 集群，JDP 发型包中默认已经自带 Flink rpm 包。yum 直接安装好之后配置一个env.java.home，就可以直接启动 flink on yarn 模式了，flink 本身模式比较多，Yarn Setup 支持 <code>Start a long-running Flink cluster on YARN</code>，<code>Run a Flink job on YARN</code>。今天我们演示的主要是前者，已经在 YARN 启动好一个 long-running 的 Flink 集群，在提交 Flink job 到此集群。主要遇到的问题是资源分配问题，导致任务无法申请到资源或请求资源超限而失败。Flink on Yarn 的 Job Manager 和 Task Manager 均运行在 YARN Container 中，资源请求受限于 YARN 对单个 Contrainer 的限制。由于我是个人环境，资源有限，安装过程我曾故意调整 YARN Container 资源 Limit 上限。如果是生产环境一般不会遇到此类问题，除非乱配置 Flink 提交的资源参数。</p>
+<p>接下来，我会简单介绍一下，Flink sql-training 项目，帮助快速入门 Flink 的具体使用。</p>
+<p>参考：</p>
+<ul>
+<li><a href="https://ci.apache.org/projects/flink/flink-docs-stable/ops/deployment/yarn_setup.html" target="_blank" rel="noopener">flink yarn setup</a></li>
+<li><a href="https://github.com/ververica/sql-training" target="_blank" rel="noopener">flink sql-training</a></li>
+<li><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/sqlClient.html" target="_blank" rel="noopener">flink sql client</a></li>
+</ul>
+<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/2019/">2019</a>
+		  
+			<a href="/tags/Flink/">Flink</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/09/25/Debugging-the-build-process-in-fusiondb-website/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Debugging the build process in fusiondb website</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/07/10/fql-training/">
+        <span class="next-text nav-default">Fql-training</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
