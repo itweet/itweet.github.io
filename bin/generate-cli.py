@@ -38,9 +38,9 @@ def header(title, time):
     content = """---
 title: %s
 date: %s
-description: 主旨思想
-tags: [AI,2019]
-category: AI
+description: FusionDB is a powerful HTAP distributed relational database.
+tags: [FusionDB, 2019]
+category: FusionDB
 ---""" %(title, time)
     return content
 

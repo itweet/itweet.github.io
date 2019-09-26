@@ -2,7 +2,7 @@
 title: How-select-continuous-integration-platform-part-2
 date: 2018-01-03 17:04:45
 description: 新的一年，开始研发新的产品。由于新团队成员，所以需要构建一套持续集成平台。
-category: DevOps
+category: BigData
 tags: ci
 ---
 

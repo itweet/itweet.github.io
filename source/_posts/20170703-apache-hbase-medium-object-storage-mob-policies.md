@@ -1,7 +1,7 @@
 ---
 title: apache-hbase-medium-object-storage-mob-policies
 date: 2017-07-03 21:52:05
-category: English
+category: BigData
 tags: hbase
 ---
 ### 介绍：

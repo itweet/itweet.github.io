@@ -1,7 +1,7 @@
 ---
 title: 怎么备份和灾难复原Apache Solr (part 1)
 date: 2017-05-16 22:29:55
-category: English
+category: BigData
 tags: solr
 ---
 Cloudera Search（是Apache Solr和 Apache Hadoop 生态系统的集成）现在对Solr Connections`支持（作为5.9版本）备份和恢复`。

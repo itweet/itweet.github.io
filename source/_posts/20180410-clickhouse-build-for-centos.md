@@ -2,7 +2,7 @@
 title: clickhouse-build-for-centos
 date: 2018-04-10 23:24:49
 description: ClickHouse源码阅读环境之Centos编译，主要介绍如何在Centos7.x版本成功构建ClickHouse，生成可部署的二进制文件。
-category: Database
+category: BigData
 tags: Clickhouse
 ---
 

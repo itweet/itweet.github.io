@@ -1,7 +1,7 @@
 ---
 title: jenkins-install
 date: 2016-05-29 13:57:10
-category: Linux
+category: BigData
 tags: jenkins
 ---
 Jenkins是基于Java开发的一种持续集成工具，用于监控持续重复的工作，功能包括：

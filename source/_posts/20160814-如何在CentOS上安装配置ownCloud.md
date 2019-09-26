@@ -1,7 +1,7 @@
 ---
 title: 如何在CentOS上安装配置ownCloud
 date: 2016-08-14 16:38:20
-category: Cloud
+category: BigData
 tags: owncloud
 ---
 据其官方网站，ownCloud可以让你通过一个Web界面或者WebDAV访问你的文件。它还提供了一个平台，可以轻松地查看、编辑和同步您所有设备的通讯录、日历和书签。尽管ownCloud与广泛使用Dropbox非常相似，但主要区别在于ownCloud是免费的，开源的，从而可以自己的服务器上建立与Dropbox类似的云存储服务。使用ownCloud你可以完整地访问和控制您的私人数据，而对存储空间（除了硬盘容量）或客户端的连接数量没有限制。

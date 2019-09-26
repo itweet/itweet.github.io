@@ -1,7 +1,7 @@
 ---
 title: apache-solr-memory-tuning-for-production
 date: 2017-07-14 09:21:49
-category: English
+category: BigData
 tags: solr
 ---
 正确配置Apache Solr内存对于生产系统的稳定性和性能至关重要。在相互矛盾的目标之间找到平衡点真的很难。还需要考虑隐含的或明确的多个因素。这篇文章介绍了内存调优的一些常见任务，并指导您完成该过程，以帮助您了解如何为生产系统配置Solr内存。

@@ -1,7 +1,7 @@
 ---
 title: 如何在新版Apache Hadoop中使用HDFSIntra-DataNode磁盘均衡器
 date: 2017-05-26 20:32:04
-category: English
+category: BigData
 tags: hadoop
 ---
 ***目前HDFS包含了(在CDH 5.8.2 及更高版本)一个综合的容量管理存储方法，该方法用于跨节点移动数据。***

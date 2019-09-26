@@ -2,7 +2,7 @@
 title: git manual
 date: 2015-07-12 17:01:49
 description: Git 使用有段时间了,个人博客也是托管到git上面,经常用到的命令放到这，主要供自己查阅使用
-category: DevOps
+category: BigData
 tags: git
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 安装并且优化centos 6 系统 Supper Hadoop
 date: 2016-05-14 13:56:30
-category: Linux
+category: BigData
 tags: centos
 ---
 # 1、系统安装类型选择及自定义额外包组

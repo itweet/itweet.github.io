@@ -1,7 +1,7 @@
 ---
 title: 比较Apache Hadoop 生态系统中不同的文件格式和存储引擎的性能
 date: 2017-06-02 01:22:05
-category: English
+category: BigData
 tags: hadoop
 ---
 ### 主题

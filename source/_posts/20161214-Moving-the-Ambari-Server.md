@@ -1,7 +1,7 @@
 ---
 title: Moving the Ambari Server
 date: 2016-12-14 17:51:43
-category: Monitoring
+category: BigData
 tags: ambari
 ---
 *Moving the Ambari Server*

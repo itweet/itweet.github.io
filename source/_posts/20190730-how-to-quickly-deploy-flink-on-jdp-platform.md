@@ -1,9 +1,9 @@
 ---
-title: How-to-quickly-deploy-flink-on-jdp-platform
+title: How to quickly deploy flink on jdp platform
 date: 2019-07-30 16:20:53
 description: 如何快速部署 Flink 集群在 JDP 平台上。
-tags: [Flink,2019]
-category: StreamSQL
+tags: [Flink, 2019]
+category: BigData
 ---
 
 ## 环境依赖

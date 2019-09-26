@@ -1,7 +1,7 @@
 ---
 title: Ambari离线安装HDP-Hadoop集群
 date: 2015-08-31 17:20:19
-category: Monitoring
+category: BigData
 tags: hortonworks
 ---
 # 简介

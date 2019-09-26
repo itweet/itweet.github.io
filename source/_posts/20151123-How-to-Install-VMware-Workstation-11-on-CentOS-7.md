@@ -1,7 +1,7 @@
 ---
 title: How to Install VMware Workstation 11 on CentOS 7
 date: 2015-11-23 17:23:22
-category: Linux
+category: BigData
 tags: vmware
 ---
 This tutorial will show you how to install VMware Workstation 11 on RHEL 7, CentOS 7, Fedora 21, Debian 7 and Ubuntu 14.10/14.04.

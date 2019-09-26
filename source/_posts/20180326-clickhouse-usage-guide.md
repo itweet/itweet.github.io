@@ -2,7 +2,7 @@
 title: clickhouse-usage-guide
 date: 2018-03-26 01:08:25
 description: 今天，我们来简单测试一下clickhouse性能，通过测试学习clickhouse基本使用。
-category: Database
+category: BigData
 tags: MPP
 ---
 

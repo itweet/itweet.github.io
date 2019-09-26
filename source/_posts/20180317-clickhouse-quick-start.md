@@ -2,7 +2,7 @@
 title: clickhouse-quick-start
 date: 2018-03-17 23:45:37
 description: Clickhouse优雅的设计，超高的性能，让我忍不住想深入研究。边研究边总结，今天，我们介绍一下clickhouse快速上手，全文涉及一些具体配置，内容略多，主要介绍几种主要的安装方式。
-category: Database
+category: BigData
 tags: Clickhouse
 ---
 

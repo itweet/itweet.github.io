@@ -2,7 +2,7 @@
 title: What-is-continuous-integration-part-1
 date: 2018-01-02 11:54:46
 description: 持续集成CI，在一般软件开发中，每个人在完成项目工作后开始完成整合工作。整合一般需要数周或数月时间，整合过程是非常痛苦的。
-category: DevOps
+category: BigData
 tags: ci
 ---
 

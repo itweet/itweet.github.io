@@ -2,7 +2,7 @@
 title: linux-monitor
 date: 2015-02-01 17:25:22
 description: Linux 性能指标监控脚本。
-category: Monitoring
+category: BigData
 tags: monitor
 ---
 # cpu.pyt

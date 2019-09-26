@@ -2,8 +2,8 @@
 title: Parquet-library-fatal-error
 date: 2018-08-26 14:58:41
 description: 一个开源基础库引发的严重产品事故，整个事件场内block超过4小时以上。
-tags: Parquet
 category: BigData
+tags: Parquet
 ---
 
 parquet-Hadoop 1.9.0 大量close-wait问题。

@@ -1,7 +1,7 @@
 ---
 title: Impala - Hive 性能测试和查询优化
 date: 2016-03-20 13:55:00
-category: Database
+category: BigData
 tags: Hive
 ---
 ## 版本信息

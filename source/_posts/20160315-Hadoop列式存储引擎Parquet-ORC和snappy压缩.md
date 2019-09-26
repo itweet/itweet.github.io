@@ -1,7 +1,7 @@
 ---
 title: Hadoop列式存储引擎Parquet-ORC和snappy压缩
 date: 2016-03-15 16:47:44
-category:  Architecture Design
+category:  BigData
 tags: hadoop
 ---
   相对于传统的行式存储格式，列式存储引擎具有更高的压缩比，更少的IO操作而备受

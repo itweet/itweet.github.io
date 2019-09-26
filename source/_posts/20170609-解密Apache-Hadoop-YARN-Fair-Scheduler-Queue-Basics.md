@@ -1,7 +1,7 @@
 ---
 title: 解密Apache Hadoop YARN Fair Scheduler Queue Basics
 date: 2017-06-09 00:22:15
-category: English
+category: BigData
 tags: hadoop
 ---
 在这部分的中， 我们对Fair Scheduler如何运行进行深入了解， 以及其运行原理。

@@ -1,7 +1,7 @@
 ---
 title: Apache kafka 工作原理介绍
 date: 2015-08-12 09:18:53
-category: StreamSQL
+category: BigData
 tags: kafka
 ---
 原文来自：http://blog.cloudera.com/blog/2014/09/apache-kafka-for-beginners/

@@ -1,7 +1,7 @@
 ---
 title: Kafka Storm HDFS Architecture Design
 date: 2016-11-27 14:12:08
-category:  Architecture Design
+category: BigData
 tags: Stream
 ---
 Storm是一个分布式是实时计算系统，它设计了一种对流和计算的抽象，概念比较简单，实际编程开发起来相对容易。下面，简单介绍编程实践过程中需要理解的Storm中的几个概念：

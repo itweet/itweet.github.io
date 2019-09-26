@@ -2,7 +2,7 @@
 title: clickhouse-build-for-ubuntu
 date: 2018-04-09 00:27:25
 description: ClickHouse源码阅读环境之Ubuntu编译，主要介绍如何在Ubuntu 17版本成功构建ClickHouse，生成可部署的二进制文件。
-category: Database
+category: BigData
 tags: Clickhouse
 ---
 

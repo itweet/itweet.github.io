@@ -2,7 +2,7 @@
 title: github-changes-software-development
 date: 2018-01-13 18:33:45
 description: Git是分布式代码开发的最佳选择，今天把我常用的一些Git命令给列表一下。
-category: Linux
+category: BigData
 tags: github
 ---
 

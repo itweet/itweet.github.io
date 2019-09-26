@@ -1,7 +1,7 @@
 ---
 title: 简介Apache Spark的行-列级的访问权限
 date: 2017-06-04 14:16:10
-category: English
+category: BigData
 tags: spark
 ---
 Hortonworks数据平台(HDP)的最新版本的功能为我们的客户提供了大量重大的改良，例如，现在HDP 2.6.0支持Apache Spark™2.1和Apache Hive™2.1(LLAP™)作为GA。通常客户在Hive里面存储数据，用Hive和SparkSQL分析这些数据。这种方案一个很重要的需求是不管是否是用Hive 和SparkSQL分析数据，都要在Hive数据中应用相同细粒度的访问权限规则，。这种细粒度访问权限包括的功能有行/列级访问或者屏蔽数据。Spark SQL 2.1的 HDP 2.6.0行/列级安全性是预定了GA并且即将发布的 HDP 2.6.1的技术预览版。

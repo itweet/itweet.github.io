@@ -1,7 +1,7 @@
 ---
 title: sparksql-ranger-column-level-security-masking
 date: 2017-07-03 20:32:37
-category: English
+category: BigData
 tags: spark
 ---
 Apache Spark引发了在大型数据集上进行数据挖掘的爆炸式增长。Spark在通用分布式计算访问中发挥了巨大的作用。任何在Python，Scala，Java和R中具有一定造诣的人都能大规模地探索数据。Spark提供ML(Machine Learning)作为一系列黑盒子，将数据科学民主化。对于在统计和数学中都没有PHD的我们来说也有可能做到培训人工智能。当下Spark SQL也可直接在商业中用探索数据。与Apache Hive一起使用，Spark用户可以用SQL表达式来探索非常大的数据集。然而，为了使Spark SQL真正可用于ad-hoc访问，商业分析师有必要使用BI工具的细粒度以及资源管理。Spark通过Kerberos提供了强大的身份验证、并通过SSL进行在线加密。 但是，到目前为止，授权只能通过HDFS ACL进行。当Spark用作通用计算框架时，这种工作方法相对较好。也就是说，Java / Scala / Python表达式不能封装在SQL语句中的逻辑。然而，当使用行和列的结构化模式时，细粒度的安全性就成为一种挑战。因为同一表中的数据可能属于两个不同的组，每组都有自己的监管要求。 数据可能有区域限制，时间的可用性限制，部门限制等。 

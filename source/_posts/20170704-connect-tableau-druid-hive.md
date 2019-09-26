@@ -1,7 +1,7 @@
 ---
 title: connect-tableau-druid-hive
 date: 2017-07-04 09:45:22
-category: English
+category: BigData
 tags: Druid
 ---
 ### HIVE / DRUID INTEGRATION MEANS DRUID IS BI-READY FROM YOUR TOOL OF CHOICE

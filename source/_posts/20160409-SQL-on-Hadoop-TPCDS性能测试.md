@@ -1,7 +1,7 @@
 ---
 title: SQL on Hadoop TPCDS性能测试
 date: 2016-04-09 18:38:49
-category: Database
+category: BigData
 tags: tpcds
 ---
 本测试，重点性能测试4个维度，测试对象为主流SQL on Hadoop性能表现，为技术选型做一些参考，由于硬件资源有限，本测试数据集比较小，前提是所有数据保证都能装载到内存.

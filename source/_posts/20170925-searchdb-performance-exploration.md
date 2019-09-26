@@ -2,7 +2,7 @@
 title: searchdb-performance-exploration
 date: 2017-09-25 09:35:55
 description: 分布式搜索数据库产品，能满足很多企业高速检索的业务场景，海量的单表数据秒级搜索和全文检索，完全支持SQL语法，支持数据的增删改查，兼容MySQL/PostgreSQL协议，企业级分布式搜索数据库解决海量数据检索问题。
-category: Database
+category: BigData
 tags: searchdb
 ---
 

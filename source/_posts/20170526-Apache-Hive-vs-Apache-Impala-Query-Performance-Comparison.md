@@ -1,7 +1,7 @@
 ---
 title: Apache Hive vs Apache Impala Query Performance Comparison
 date: 2017-05-26 16:01:43
-category: English
+category: BigData
 tags: Impala
 ---
 ![](https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2016-10-11-at-11.45.03-AM.png)

@@ -1,7 +1,7 @@
 ---
 title: Downloadonly plugin for yum
 date: 2016-11-05 16:55:41
-category: Linux
+category: BigData
 tags: Downloadonly
 ---
 There are two ways to download a package without installing it.

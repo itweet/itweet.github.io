@@ -2,7 +2,7 @@
 title: clickhouse-configuration-analyse
 date: 2018-04-09 00:24:09
 description: ClickHouse是一个分布式面向列的RDBMS系统，可以单机部署也可支持集群。目前支持Centos和Ubuntu系统的部署，并且有方和第三方都发布有RPM/DEB包，可直接安装使用。
-category: Database
+category: BigData
 tags: Clickhouse
 ---
 

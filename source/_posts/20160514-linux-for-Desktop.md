@@ -1,7 +1,7 @@
 ---
 title: linux for Desktop
 date: 2016-05-14 17:22:29
-category: Linux
+category: BigData
 tags: desktop
 ---
 由于集群在安装的时候，选择最小化min安装方式，而且自定义选择安装的libary。而没有选择安装图形化界面，这样在实际生产环境中是推荐的方式。完全基于terminal方式管理Linux服务器。

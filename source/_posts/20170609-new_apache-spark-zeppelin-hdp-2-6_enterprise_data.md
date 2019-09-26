@@ -1,7 +1,7 @@
 ---
 title: new_apache-spark-zeppelin-hdp-2-6_enterprise_data
 date: 2017-06-09 22:49:06
-category: English
+category: BigData
 tags: HDP
 ---
 任何数据值和它内部的派生值都是成正比的。因为[Data Lake Architecture](https://hortonworks.com/blog/enterprise-hadoop-journey-data-lake/)，所有的企业数据提供在一个位置。从数据湖深入驱动的关键是Apache Spark & Apache Zeppelin。两者都是预测分析和机器学习的关键工具。HDP最进发布的版本为 Spark & Zeppelin 提供了几个关键的功能和改进，有助于预测分析和机器学习的进步。

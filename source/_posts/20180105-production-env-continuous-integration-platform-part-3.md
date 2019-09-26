@@ -2,7 +2,7 @@
 title: production-env-continuous-integration-platform-part-3
 date: 2018-01-05 00:04:14
 description: 持续集成平台实践，接上如何为持续集成平台选型？
-category: DevOps
+category: BigData
 tags: ci
 ---
 

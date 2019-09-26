@@ -2,7 +2,7 @@
 title: Explore-the-MPP-architecture-through-hawq
 date: 2018-03-20 00:35:36
 description: 我研究的东西面一直比较广，现在发现有些晚。目前焦距，我对分布式数据库比较感兴趣，借机深入研究，借着Clickhouse研究准备写写分布式数据库内容，加深理解。
-category: Database
+category: BigData
 tags: MPP
 ---
 ## 前言

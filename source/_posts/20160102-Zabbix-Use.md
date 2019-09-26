@@ -1,7 +1,7 @@
 ---
 title: Zabbix Use
 date: 2016-01-02 18:49:58
-category: Monitoring
+category: BigData
 tags: zabbix
 ---
 # 监控概述

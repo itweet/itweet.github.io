@@ -2,7 +2,7 @@
 title: Cloudera-manager-installaction
 date: 2015-07-10 16:44:18
 description: Cloudera提出了Hybrid Open Source的架构：核心组件名称叫CDH（Cloudera's Distribution including Apache Hadoop），开源免费并与Apache社区同步，用户无限制使用，保证Hadoop基本功能持续可用，不会被厂家绑定。
-category: Monitoring
+category: BigData
 tags: cloudera
 ---
  Cloudera提出了Hybrid Open Source的架构：核心组件名称叫CDH（Cloudera's Distribution including Apache Hadoop），开源免费并与Apache社区同步，用户无限制使用，保证Hadoop基本功能持续可用，不会被厂家绑定；数据治理和系统管理组件闭源且需要商业许可，支持客户可以更好更方便的使用Hadoop技术，如部署安全策略等。Cloudera也在商业组件部分提供在企业生产环境中运行Hadoop所必需的运维功能，而这些功能并不被开源社区所覆盖，如无宕机滚动升级、异步灾备等。

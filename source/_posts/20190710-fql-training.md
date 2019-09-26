@@ -1,8 +1,8 @@
 ---
 title: Fql-training
 date: 2019-07-10 11:28:30
-description: FusionDB® FQL Training
-tags: [AI,2019]
+description: FusionDB FQL Training
+tags: [FusionDB®,2019]
 category: FusionDB
 ---
 

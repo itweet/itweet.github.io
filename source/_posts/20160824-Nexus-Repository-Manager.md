@@ -1,7 +1,7 @@
 ---
 title: Nexus Repository Manager 
 date: 2016-08-24 18:06:29
-category: Linux
+category: BigData
 tags: nexus
 ---
 搭建nexus私服，功能我就不一一列举了。好处多多。我这里选择一个openstack云主机来演示，如何通过docker这样的技术，以非常优雅的方式，自动安装好企业内部的私服服务器！

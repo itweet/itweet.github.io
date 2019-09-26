@@ -1,7 +1,7 @@
 ---
 title: ubuntu ambari development
 date: 2016-12-28 18:48:20
-category: Developer
+category: BigData
 tags: ubuntu
 ---
 # ubuntu for sublime-test-3 install

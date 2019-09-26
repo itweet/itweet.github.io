@@ -1,7 +1,7 @@
 ---
 title: spark-hbase-dataframe-based-hbase-connector
 date: 2017-07-03 21:31:33
-category: English
+category: BigData
 tags: hbase
 ---
 我们非常高兴的宣告由Hortonworks和Bloomberg合作开发完成的[Spark-HBase](https://github.com/hortonworks/shc.git) 连接器技术预览版的发行。

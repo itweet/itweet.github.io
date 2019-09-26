@@ -2,7 +2,7 @@
 title: ganglia-ubuntu
 date: 2015-07-13 17:00:54
 description: Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。
-category: Monitoring
+category: BigData
 tags: monitor
 ---
 
