@@ -12,7 +12,7 @@ def create(title):
     fileName = prifx + fileTime + "-" + title.replace(" ","-")+".md"
     touch(fileName)
     writer(fileName, header(title.capitalize(), currentTime))
-    writer(fileName, footer())
+    # writer(fileName, footer())
 
 def writer(path, content):
     with open(path, 'a') as f:

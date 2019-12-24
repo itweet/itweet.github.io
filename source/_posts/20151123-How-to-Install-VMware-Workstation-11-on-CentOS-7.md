@@ -231,9 +231,3 @@ Congratulations everything has done successfully, you should use in-deep the new
   2、VMware-Workstation-Full-11.0.0版本，可以正常在redhat6.7/centos6.7版本运行。
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/
-
-
-参考：
-    http://www.tecmint.com/install-vmware-workstation-11-in-linux/

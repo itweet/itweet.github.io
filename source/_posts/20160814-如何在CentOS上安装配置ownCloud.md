@@ -116,5 +116,3 @@ tmpfs           939M     0  939M   0% /dev/shm
 /dev/vdb        985G  461M  934G   1% /var/www/html/owncloud/data
 ```
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

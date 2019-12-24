@@ -42,8 +42,3 @@ RDM只能有效改善，而无法彻底解决问题，继续研究是否转接�
 - [1]、RDM：https://github.com/avibrazil/RDM
 - [2]、Mac显示器：https://www.apple.com/cn/shop/mac/mac-accessories/displays-mounts
 
-欢迎关注微信公众号[whoami]，阅读更多内容。
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

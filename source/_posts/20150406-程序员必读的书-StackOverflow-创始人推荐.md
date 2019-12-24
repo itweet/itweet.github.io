@@ -99,5 +99,3 @@ Chris Sells 对 Tufte 的书有些有趣的见解，这些见解源于他2004年
   百度云：链接: http://pan.baidu.com/s/1hr9YGj6 密码: uhxd
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

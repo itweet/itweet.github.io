@@ -81,5 +81,3 @@ tags: hadoop
 	hadoop jar hadoop-mapreduce-examples-2.4.0.jar wordcount /testdata /output
 ```
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

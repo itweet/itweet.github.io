@@ -200,5 +200,3 @@ create table default.tb_user_terminal_test as  select sum(mdn),usp,times,start_t
 参考：[yarn的资源调优](https://www.itweet.cn/2015/07/24/yarn-resources-manager-allocation/),配合此文完成合理资源分配! 
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

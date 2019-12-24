@@ -141,5 +141,3 @@ $ solrctl collection --request-status req_0
 
 译文原文：https://blog.cloudera.com/blog/2017/05/how-to-backup-and-disaster-recovery-for-apache-solr-part-i/
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

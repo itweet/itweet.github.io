@@ -206,16 +206,3 @@ NFSGateway的功能相对来说是非常不错的，降低使用HDFS成本的特
 
 写到这里，内容相对浅显，后续我会对多方测试结果进行整理汇总，发布一版更加有力的测试数据对比情况。最近我也在做一些MPP数据库的测试优化，后续会有更多精彩的生产环境经验积累，原创文章发布，敬请关注。
 
-欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。
-![Itweet公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/
-
-**参考：**
-
-- [1]. http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/HdfsNfsGateway.html
-- [2]. https://discuss.pivotal.io/hc/en-us/articles/204185008-Write-data-to-HDFS-via-NFS-gateway-failed-with-Input-output-error-
-- [3]. https://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml
-- [4]. https://hortonworks.com/blog/simplifying-data-management-nfs-access-to-hdfs/
-- [5]. http://apprize.info/php/hadoop_1/6.html

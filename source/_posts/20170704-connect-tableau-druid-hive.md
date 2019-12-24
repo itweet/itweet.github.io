@@ -34,8 +34,3 @@ Druid可用作HDP 2.6技术预览。除了Hive / Druid集成之外，Hortonworks
 
 我们与[AtScale](http://blog.atscale.com/hortonworks-chooses-atscale)密切合作的一部分是定期讨论如何使BI-on-Hadoop为我们的共同客户提供更好的体验。请参阅[AtScale博客](http://blog.atscale.com/hive-druid-atscale)，了解更多有关AtScale + Hive / Druid的信息。
 
-欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。
-![Itweet公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

@@ -113,9 +113,3 @@ category: Books
 
 而今天人工智能AI，就是利用程序表示人类思考的方式，即AI应用，通过AI应用，只需要既定的几个条件和因素，它可以自己学习，是一个auto的过程，特别是需要大量人力参与的工作，可以释放大量繁复的工作，让人们专注于创新和自己热爱的领域，比如：太空探索、星际移民，让普通人也能参与，而不是政府行为，目前人们太忙了，局限一个狭窄的领域，探索未来的人太少，我们需要通过AI赋予机器只能，帮助我们更好的服务我们，我们才有个更多精力探索未知世界。
 
-欢迎关注微信公众号[Whoami]，阅读更多内容。
-
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/archives/

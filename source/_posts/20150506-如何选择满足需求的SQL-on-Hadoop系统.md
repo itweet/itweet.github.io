@@ -81,5 +81,3 @@ park SQL/DataFrame是Spark用户使用SQL或者DataFrame API构建Spark pipeline
 
 原文来自：http://weibo.com/p/1001603864171165928729
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

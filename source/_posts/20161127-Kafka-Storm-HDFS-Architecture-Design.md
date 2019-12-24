@@ -150,12 +150,3 @@ Storm-External: https://github.com/apache/storm/tree/master/external
 如上，给出了简单Storm的示例代码，可以在这个基础上加入业务逻辑内容，就可以完成如下复杂的业务处理，基于非结构化数据(GPS位置应用)，实时流处理的架构。
 ![流计算完整架构](https://www.itweet.cn/screenshots/kafka-storm-hdfs-design-1.png)
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/
-
-参考链接
-  https://github.com/apache/storm/tree/master/external/storm-hdfs
-  http://storm.apache.org/releases/current/Understanding-the-parallelism-of-a-Storm-topology.html
-  http://storm.apache.org/releases/current/Tutorial.html
-  http://shiyanjun.cn/archives/977.html
-  http://storm.apache.org/releases/current/Setting-up-development-environment.html

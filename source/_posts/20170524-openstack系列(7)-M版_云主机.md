@@ -130,8 +130,3 @@ eth0      Link encap:Ethernet  HWaddr FA:16:3E:20:E4:12
 本小节，主要是讲解如何通过可视化界面使用`openstack`最核心的云主机功能，并且开始正常使用云主机，云主机官方还提供更多版本，我们可以直接下载上传开始应用在我们的不同业务中，镜像文件是可以定制的，制作的时候可以让镜像具备某些功能，就和公有云，阿里云，aws云一样，创建好之后，云主机自带大数据服务能力、自带数据库能力等，底层即使用kvm相关技术进行制作，需要多实践才能深刻体会。下一节我们介绍openstack自动化扩容一个节点，欢迎关注。
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/
-
-
-参考：http://www.itweet.cn/blog/2016/08/09/openstack%20image%20guide

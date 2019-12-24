@@ -293,15 +293,3 @@ Created topic "itweet".
 消息队列的大小总数为28610.2295MB，每秒消费的消息大小为293.7637MB
 消息队列的消息总数为100000条，每秒消费的消息个数为1026.7784个。
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/
-
-
-参考：http://www.itweet.cn/2015/03/20/Hadoop-benchmarks/
-     http://blog.cloudera.com/blog/category/performance/page/2/
-     https://github.com/brianfrankcooper/YCSB/wiki/Getting-Started
-     https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload
-     https://github.com/databricks/spark-sql-perf
-     http://blog.cloudera.com/blog/2015/08/ycsb-the-open-standard-for-nosql-benchmarking-joins-cloudera-labs/
-    http://blog.cloudera.com/blog/2016/11/ycsb-0-10-0-now-in-cloudera-labs/
-    https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload

@@ -1,15 +1,15 @@
 {
-  "name": "tech-labs",
+  "name": "itweet-cn",
   "version": "1.0.0",
-  "author": "Xu Jiang <realJiangXu@gmail.com>",
-  "homepage": "https://tech.jikelab.com/tech-labs",
+  "author": "Xu Jiang <realJiangXu[at]gmail.com>",
+  "homepage": "https://www.itweet.cn",
   "license": "CC-BY-NC-SA-3.0",
-  "repository": "jikelab/tech-lsbs",
+  "repository": "itweet/itweet.github.io",
   "engines": {
     "node": ">=5.4.0"
   },
   "hexo": {
-    "version": "3.8.0"
+    "version": "3.9.0"
   },
   "scripts": {
     "build": "hexo generate",
@@ -17,7 +17,7 @@
     "deploy": "hexo d"
   },
   "dependencies": {
-    "hexo": "^3.8.0",
+    "hexo": "^3.9.0",
     "hexo-browsersync": "^0.3.0",
     "hexo-deployer-git": "^0.1.0",
     "hexo-generator-archive": "^0.1.5",

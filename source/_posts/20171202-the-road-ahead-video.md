@@ -26,8 +26,3 @@ tags: coding
 
 生成音频我尝试过百度、科大讯飞的文字转语音，但是效果没那么好，我就找时间重新录制了一下，在线分享过程随意扩展，啰嗦的东西较多，没有准备充足，所以逐字稿修饰，尽可能表达清晰，这是我做事的方式。
 
-欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。
-![Itweet公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

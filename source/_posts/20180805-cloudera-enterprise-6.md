@@ -52,7 +52,3 @@ AI深度学习的支持，Cloudera提供CDSW，面向开发人员的一个开发
 [2] https://www.cloudera.com/products/cloudera-enterprise-6.html
 [3] http://blog.cloudera.com/blog/2018/05/new-in-cloudera-enterprise-6-0-analytic-search/
 
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/archives/

@@ -56,8 +56,3 @@ A demo of this feature can be viewed in this youtube video:
 
 译文原文：https://hortonworks.com/blog/row-column-level-control-apache-spark/
 
-欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。
-![Itweet公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.png)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

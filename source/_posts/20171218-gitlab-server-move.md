@@ -82,8 +82,3 @@ GitLab是一款企业级私有Git服务最佳选择。可以完成企业持续�
 膜拜大神，进一步了解，最近在看《只是为了好玩:Linux之父林纳斯自传》Linux之父`Linu`s`写的一本书，关于开源软件做了很好的阐述。
 
 
-欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。
-![Itweet公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

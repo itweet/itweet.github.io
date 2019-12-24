@@ -388,8 +388,3 @@ timeline.metrics.cluster.aggregator.hourly.ttl  31536000  Cluster wide hourly re
 timeline.metrics.cluster.aggregator.daily.ttl 63072000  Cluster wide daily resolution data purge interval. Default is 2 years.
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/
-
-
-参考：https://cwiki.apache.org/confluence/display/AMBARI/Installation+Guide+for+Ambari+2.1.0

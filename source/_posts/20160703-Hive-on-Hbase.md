@@ -146,5 +146,3 @@ No rows affected (1.395 seconds)
 
 phoenix－hbase文中版本集成，还遇到一个问题，hbase中存在的表，mapping时候报错，`ReadOnlyTableException: ERROR 505 (42000): Table is read only.`，而在很早以我集成的版本中没遇到过这样的问题！一摸一样的SQL!
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

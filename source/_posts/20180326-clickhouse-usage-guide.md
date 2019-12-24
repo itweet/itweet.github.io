@@ -250,8 +250,3 @@ ClickHouse是OLAP领域，当之无愧的黑马，一骑绝尘.
 [3] https://www.percona.com/blog/author/vadim/
 [4] https://clickhouse.yandex/docs/en/interfaces/cli/
 
-欢迎关注微信公众号[Whoami]，阅读更多内容。
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive

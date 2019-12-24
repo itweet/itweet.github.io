@@ -222,5 +222,3 @@ volume-11cb3510-533e-4db4-9999-ff2c7b72695a  volume-3d07bbcd-c648-4bda-a0ee-96b9
 ```
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

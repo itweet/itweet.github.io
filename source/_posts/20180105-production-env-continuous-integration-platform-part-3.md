@@ -213,8 +213,3 @@ Atlassian的销售策略如此成功，与其优秀的产品能力密不可分�
 [3]. https://bitbucket.org/product
 [4]. https://www.jfrog.com/confluence/display/RTF/Installing+with+Docker
 
-欢迎关注微信公众号[whoami]，阅读更多内容。
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

@@ -253,8 +253,3 @@ tags: Linus
 - Just for Fun：https://github.com/sumitbsn/just-for-fun-linus-torvalds
 - 《只是为了好玩》Linux之父林纳斯自传 
 
-欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。
-![Itweet公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

@@ -431,5 +431,3 @@ $ hadoop/bin/hadoop fs -put zookeeper.out  /input
 <div style="text-align:center;"><img src="https://www.itweet.cn/screenshots/version.png" style="vertical-align:middle;"/></div>
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

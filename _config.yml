@@ -72,6 +72,15 @@ pagination_dir: page
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
 theme: polarbear
+theme_config:
+  # Google Analytics
+  google_analytics: UA-154998721-1
+
+  # Baidu Analytics
+  baidu_analytics: b75d841b3068f7782eac9af2c8c866e7
+  
+  # Disqus
+  disqus_shortname: itweet-cn
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
@@ -79,9 +88,6 @@ deploy:
   type: git
   repo: git@github.com:itweet/itweet.github.io.git
   branch: master
-
-# Google Analytics
-ga: UA-82629005-1
 
 #marked setting for markdown
 marked:
@@ -92,10 +98,6 @@ marked:
   breaks: true
   smartLists: true
   smartypants: true
-
-gcs: 
-baidutongji: a066b2b1ed2feea84da1243ba05f3278
-disqus: itweet-tech
 
 location: Bei Jing, China
 email: realJiangXu[at]gmail.com

@@ -107,5 +107,3 @@ drwxr-x---. 2 jenkins jenkins 4096 5月  29 08:01 /var/log/jenkins/
     http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war/1.658/‘
     
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

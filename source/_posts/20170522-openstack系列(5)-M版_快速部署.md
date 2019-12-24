@@ -184,12 +184,3 @@ nova host-list # 查看节点角色信息
 ### 总结
 `openstack系列(5)-M版_快速部署`，也同样适用于其他更高的版本安装，但是由于我在生产环境使用M版本1年多无重大故障，所以我比较推荐使用一个稳定的版本。所以继续用M版本安装方式来编写本系列教程。本系列内容希望搭建从第一篇开始看起，每一篇都是以前一篇我基础来一步步实现集群的安装的，所以这一篇也是建立在之前的内容之上的，本篇其实就手动实践了怎么通过`packstack`工具自动化部署openstack。下一小节我们进入`openstack`网络的配置，欢迎持续关注。
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/
-
-
-参考：https://www.rdoproject.org/install/quickstart/
-    https://repos.fedorapeople.org/repos/openstack/
-    http://cloud.centos.org/centos/7/images/
-    https://pom.nops.cloud/Introduction/read_guide.html
-    https://pom.nops.cloud/deployment_tool/packstack.html

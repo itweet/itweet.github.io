@@ -248,5 +248,3 @@ openstack-cloud租户网络和公共网络打通之后，就如上图所示，�
 ### 总结
 openstack系列，网络配置，其实openstack网络是最复杂的模块，因为能把网络搞懂的人多，包括我自己对网络这块的认知还很肤浅，如果有问题，欢迎反馈。本小节带大家一步步实践了openstack网络相关的配置，下一节我们就可以开始云主机内容，欢迎关注。
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

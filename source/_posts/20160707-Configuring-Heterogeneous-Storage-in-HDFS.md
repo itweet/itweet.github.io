@@ -288,5 +288,3 @@ sys 0m16.060s
 
 - Disaster recovery and Backup best practices in a typical Hadoop Cluster:https://community.hortonworks.com/articles/43575/disaster-recovery-and-backup-best-practices-in-a-t-1.html
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

@@ -95,5 +95,3 @@ Hive LLAP通过引入符合Hive交互性能专门定制仅用于交互式的SQL�
 译文原文: https://hortonworks.com/blog/apache-hive-vs-apache-impala-query-performance-comparison/
 译文发布：2016年10月11日
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

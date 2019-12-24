@@ -207,5 +207,3 @@ Extreme OLAP Engine for Big Data: http://kylin.apache.org/blog/
 Apache Kylin的快速数据立方体算法——概述：http://www.infoq.com/cn/articles/apache-kylin-algorithm/
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

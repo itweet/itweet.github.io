@@ -274,5 +274,3 @@ $ mahout vectordump -i ./output/data/part-m-00000
   http://blog.fens.me/mahout-recommend-engine/
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

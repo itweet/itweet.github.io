@@ -284,8 +284,3 @@ SQL on Hadoop产品五花八门，目前还没有一个相对完整和全面一�
 
 SQL on Hadoop的框架，目前Hive、Spark、Impala都是可选对象，其他框架社区不活跃，用户少很难继续走下去。一直在吃老本的Hive2也憋了个大招，Impala也在不断优化，都在性能这条路上越走越远，我们敬请期待吧。
 
-欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。
-![Itweet公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

@@ -143,7 +143,3 @@ node --inspect-brk --no-lazy node_modules/gatsby/dist/bin/gatsby develop
 * [Debugging with Node.js - Paul Irish talk at Node Summit 2017](https://www.youtube.com/watch?v=Xb_0awoShR8)
 * [debugging-the-build-process](https://github.com/gatsbyjs/gatsby/blob/master/docs/docs/debugging-the-build-process.md)
 
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/archives/

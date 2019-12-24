@@ -89,8 +89,3 @@ tags: fuse
 
 分布式系统复杂。分布式系统，应用程序很难追踪和重现，分布式在多台机器，调试复杂和耗时，一般技术人员很难掌握，无法用好这样的技术，需要企业级的分布式软件产品来保障，全新的集群开发和使用规范指导他们开发出健壮的分布式程序。
 
-欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。
-![Itweet公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

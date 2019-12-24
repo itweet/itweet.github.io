@@ -128,8 +128,3 @@ YARN越来越往专业的资源调度和管理方面发展，将会支持批处�
 
 让我们期待Hadoop更多新功能。
 
-欢迎关注微信公众号[whoami]，阅读更多内容。
-![image.png](http://upload-images.jianshu.io/upload_images/9687832-2ff1ee6f489dcff3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive

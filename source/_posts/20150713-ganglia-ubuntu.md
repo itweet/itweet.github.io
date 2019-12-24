@@ -121,5 +121,3 @@ tags: monitor
 	*(there are too many metrics generated from RegionServer, each region of all of tables generates some metrics... be careful if you turn on the ganglia hadoop metrics2 sink on HBase RegionServer)
 ```
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

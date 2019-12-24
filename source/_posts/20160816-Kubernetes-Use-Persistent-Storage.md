@@ -158,5 +158,3 @@ root@apache-httpd:/usr/local/apache2/conf# ls /usr/local/apache2/htdocs/index.ht
 This is kubernetes persistent storage,Host Machine install Distributed ceph or glusterfs in back-end storage.
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

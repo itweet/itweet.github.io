@@ -64,7 +64,3 @@ Yacc、Lex都是比较值得深入研究的，要学习的东西太多啦。
 
 我会分享一些我自己的心得体会。
 
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/archives/

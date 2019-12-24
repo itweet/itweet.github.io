@@ -425,9 +425,3 @@ Connection: close
 Content-Type: text/html; charset=UTF-8
 ```
 
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/
-
-
-参考：https://www.zabbix.com/documentation/2.4/manual/installation/install_from_packages#red_hat_enterprise_linux_centos

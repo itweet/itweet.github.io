@@ -534,5 +534,3 @@ org.datanucleus.store.rdbms.exceptions.MissingTableException: Required table mis
  3、社区查看hive2.0.1依赖的tez版本是0.8.3，打算重新手动编译在测试是否可行，待验证。
  4、这一点可以说明tez这个包各个版本直接接口的兼容性非常差，导致升级代价大，难以维护！
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

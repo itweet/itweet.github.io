@@ -270,5 +270,3 @@ virt-sysprep --root-password password:123456 -a CentOS-6-x86_64-GenericCloud-160
  最后提醒一下，我安装官网怎么也无法正确让虚拟机获取公钥，可以通过秘钥登录，聪明的你发现博客中细微的差别了吗？哈哈。。。
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

@@ -86,7 +86,3 @@ Kafka 与 Flume 很多功能确实是重复的。以下是评估两个系统的�
 
 综上所述，Kafka 的设计可以帮助我们解决很多架构上的问题。但是想要用好 Kafka 的高性能、低耦合、高可靠性、数据不丢失等特性，我们需要非常了解 Kafka，以及我们自身的应用系统使用场景，并不是任何环境 Kafka 都是最佳选择。
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/
-
-本文引自：http://www.ibm.com/developerworks/cn/opensource/os-cn-kafka/index.html

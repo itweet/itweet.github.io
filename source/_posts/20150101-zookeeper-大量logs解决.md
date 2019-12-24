@@ -32,5 +32,3 @@ tags: zookeeper
 >P.S:上面为Java代码中加入即可。
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

@@ -588,8 +588,3 @@ That will make it easier to extend disk system as well as use different disk sys
 [5] http://jackpgao.github.io/2017/12/13/ClickHouse-Cluster-Beginning-to-End/
 [6] https://clickhouse.yandex/docs/en/roadmap/
 
-欢迎关注微信公众号[Whoami]，阅读更多内容。
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive

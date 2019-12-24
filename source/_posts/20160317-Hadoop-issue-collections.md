@@ -207,5 +207,3 @@ Safe mode is OFF
 4、总结
   造成这样问题的原因，归根结底是因为对集群的监控不到位，比如：服务器监控报警，可以用zabbix／ganglia/nagios来做，未做的原因是因为他是测试环境，不过这个也是不可原谅的错误了。一定要注意监控集群的健康状况，才能避免这样的低级错误。
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

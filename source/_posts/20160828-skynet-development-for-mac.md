@@ -238,5 +238,3 @@ $ tree
 # FAQ
   - gRPC 安装失败，因为Google被墙的问题，访问`googlemock.googlecode.com` timed out,翻墙解决.
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

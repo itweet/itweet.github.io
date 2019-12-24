@@ -43,13 +43,3 @@ Spark核心：
 
 我们，拭目以待吧。
 
-欢迎关注微信公众号[Whoami]，阅读更多内容。
-
-参考：
-
-[1] http://www.eecs.berkeley.edu/Pubs/TechRpts/2014/EECS-2014-12.html
-
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/archives/

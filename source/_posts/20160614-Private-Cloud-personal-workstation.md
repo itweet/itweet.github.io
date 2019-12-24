@@ -26,5 +26,3 @@ DIY个人工作站，终于开始投入使用了，在做虚拟化的时候遇�
     - 24核心、CPU x5650*2、32G内存、240G SSD，2TB硬盘 (old)
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

@@ -712,5 +712,3 @@ CLASSPATH=:/opt/cloud/phoenix/phoenix-4.7.0-HBase-1.1-client.jar,/opt/cloud/phoe
 >https://blogs.apache.org/phoenix/entry/tpc_in_apache_phoenix
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

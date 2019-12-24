@@ -91,5 +91,3 @@ tcp46      0      0  *.3306                 *.*                    LISTEN    #�
 至此，MySQL安装完成，可以在代码中配置一下application.properties文件，pom引入MySQL，`spring-boot-starter-data-jpa`，开始操作数据库吧。
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

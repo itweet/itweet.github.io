@@ -97,7 +97,3 @@ HDFS测试1个map可以获得的并发吞吐率2379MB/s。
 随着海量数据的增长，提供 Hadoop IO 性能的最有效的方法是使用 SSD替代SATA。本白皮书清晰的展示了SSD 极大的提升了 Hadoop 集群的性能，同时减少了节点数量，大幅度降低了TCO。
 对于mapReduce，通过图5，图6，可以看出shuffle算法计算用时最短，我们的测试也表明，固态硬盘的好处取决于所涉及的MapReduce工作，因此，存储介质的选择需要考虑这个生产工作负载聚合性能的影响，精确地改善取决于可压缩数据在所有的数据集、IO和CPU负载的比例工作。
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/
-
-

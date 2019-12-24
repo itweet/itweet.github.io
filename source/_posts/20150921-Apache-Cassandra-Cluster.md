@@ -590,12 +590,3 @@ http://heipark.iteye.com/blog/2004118
 - http://docs.datastax.com/en/landing_page/doc/landing_page/current.html
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/
-
-参考：
-      文档：http://docs.datastax.com/en/cql/3.3/cql/cql_reference/cqlsh.html
-      压缩数据：http://docs.datastax.com/en/cassandra/2.2/cassandra/operations/opsConfigCompress.html
-      CQL: http://docs.datastax.com/en/cql/3.3/cql/cqlIntro.html
-      cassadra细节：http://blog.sina.com.cn/s/blog_502c8cc40100p860.html
-      

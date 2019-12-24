@@ -311,8 +311,3 @@ Last login: Sat Jan 30 12:40:28 2016
 
 如上图，没有`openstack`我们依然可以通过，`libvirt`来对虚拟机进行操作，只不过比较繁琐和难以维护。通过openstack就可以非常方便的进行底层虚拟化技术的管理、维护、使用。
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/
-
-
-

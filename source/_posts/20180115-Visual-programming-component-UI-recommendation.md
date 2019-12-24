@@ -107,8 +107,3 @@ React Native 两年蝉联头名，让我们把 JavaScript 编译成原生的 APP
 我正在「技术人的日常」和朋友们讨论有趣的话题，你一起来吧？
 https://t.zsxq.com/nYNNfAe
 
-欢迎关注微信公众号[whoami]，阅读更多内容。
-![image.png](http://upload-images.jianshu.io/upload_images/9687832-2ff1ee6f489dcff3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive

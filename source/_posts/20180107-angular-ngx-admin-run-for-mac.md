@@ -184,8 +184,3 @@ ngx-admin可用三端都支持的主题，支持大量主流的页面设计模�
 
 [3]. https://akveo.github.io/nebular/#/home
 
-欢迎关注微信公众号[whoami]，阅读更多内容。
-![image.png](http://upload-images.jianshu.io/upload_images/9687832-2ff1ee6f489dcff3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive

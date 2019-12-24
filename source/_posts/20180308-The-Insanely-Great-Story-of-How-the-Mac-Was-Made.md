@@ -68,8 +68,3 @@ tags: mac
 
 > Adam Osborne在电脑展会上藐视Mac，Andy把这件事情告诉了乔布斯。于是乔布斯打电话给Adam的秘书：“你帮我告诉Adam，他是个混蛋！听说他对Mac很好奇。你告诉他，Mac好到会让他的公司关门大吉，而且连他自己都会给他的孩子买上好几台。”——《给Adam的留言》
 
-欢迎关注微信公众号[whoami]，阅读更多内容。
-![image.png](http://upload-images.jianshu.io/upload_images/9687832-2ff1ee6f489dcff3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive

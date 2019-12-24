@@ -55,7 +55,3 @@ JDP 3.3 中计划，会启动另外一个 `stack` 孵化工作，探索 k8s + ai
 
 [2] JDP 快速启动：http://www.fusionlab.cn/zh-cn/docs/intro/quickstart.html
 
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/archives/

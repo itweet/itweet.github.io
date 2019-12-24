@@ -91,7 +91,3 @@ downgrade parquet to 1.8.2 to fix 1.9.0 connection leaks
 
 如果，你还在用有连接泄漏问题的Parque版本，快快升级吧。
 
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/archives/

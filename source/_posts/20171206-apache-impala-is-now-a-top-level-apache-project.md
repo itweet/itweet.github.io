@@ -72,8 +72,3 @@ Impala可以无缝融入现有Hadoop集群，支持直接hive中的数据，完�
 总体看来，impala未来在云端`SQL on Cloud`场景也会非常有前景，底层同时支持OLAP/OLTP，非常值得期待，所以现在更多投资在Impala中吧。
 
 
-欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。
-![Itweet公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

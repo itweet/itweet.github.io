@@ -132,8 +132,3 @@ POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
 
 ![效果图](https://camo.githubusercontent.com/80ec23fda88d2f445906a3502690f22827336736/687474703a2f2f692e696d6775722e636f6d2f777942565a51792e676966)
 
-欢迎关注微信公众号[whoami]，阅读更多内容。
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

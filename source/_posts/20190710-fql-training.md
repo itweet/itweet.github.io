@@ -102,7 +102,3 @@ df.head()
 For more information, please refer to [FusionDB Document](http://www.fusionlab.cn/zh-cn/fdb/quickstart.html)
 
 
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
-
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/archives/

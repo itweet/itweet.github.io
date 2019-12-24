@@ -151,5 +151,3 @@ user_last_live20151230   2.3 T        0.35T         85
 
 参考：http://hbase.apache.org
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

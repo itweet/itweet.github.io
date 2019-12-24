@@ -94,5 +94,3 @@ adding a compute node done. check service normal.
 
 reference：https://www.rdoproject.org/install/adding-a-compute-node/
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

@@ -565,5 +565,3 @@ join(2)		 39.8*2			413.651			525.48		通过  警告阈值(内存)
 ```
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/

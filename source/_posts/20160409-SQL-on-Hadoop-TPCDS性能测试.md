@@ -189,5 +189,3 @@ Execution log at: /tmp/hadoop/hadoop_20160403103939_1ee1a162-fa4b-425a-a0ad-f3aa
 `以上做了一点总结，由于个人水平有限，难免错漏，还望大家多多反馈。以便我不断修正自己的认知。`
 
 
-原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
-`本博客的文章集合:` http://www.itweet.cn/blog/archive/
