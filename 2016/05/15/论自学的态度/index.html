@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang>
-  <head><meta name="generator" content="Hexo 3.8.0">
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.9.0">
     
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,7 +44,7 @@
 <meta property="og:description" content="whoami : 非常喜欢此文中的大部分观点，收藏，值得回顾品味。。。你想当程序员？   Peter Norvig任职于Google，其职位是研究主管（Director of  Research). PeterNorvig是享誉世界的计算机科学家和人工智能专家。他是 AAAI  和  ACM的会员，是业界内经典书籍《Artificial Intelligence: A Modern Approa">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/21-c.png">
-<meta property="og:updated_time" content="2019-09-26T15:59:52.584Z">
+<meta property="og:updated_time" content="2019-12-24T11:46:36.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论自学的态度">
 <meta name="twitter:description" content="whoami : 非常喜欢此文中的大部分观点，收藏，值得回顾品味。。。你想当程序员？   Peter Norvig任职于Google，其职位是研究主管（Director of  Research). PeterNorvig是享誉世界的计算机科学家和人工智能专家。他是 AAAI  和  ACM的会员，是业界内经典书籍《Artificial Intelligence: A Modern Approa">
@@ -69,8 +69,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> 论自学的态度 - WHOAMI </title>
@@ -184,20 +200,25 @@
 <p>●有良好的意识，能尽快适应语言标准化的成果。</p>
 <p>要掌握上面所说的所有内容，光靠看书学习应该是很难做到的。当我的第一个孩子出生的时候，我几乎阅读了市面上所有的《如何…》指南书籍，但是我读完了以后还是觉得自己是个菜鸟。30个月以后，我的第二个孩子快出生时，我难道还要做一个书虫么？不！相反，我此时更依赖我的个人经验，这些经验相比于那些上千页的书籍，则更加有效和让我放心。</p>
 <p>原文来自：<a href="http://mp.weixin.qq.com/s?__biz=MzA3NTM4NDE2Mw==&amp;mid=2649545505&amp;idx=1&amp;sn=3ddd41acadc0ea182bb1411ba094f85e&amp;scene=25&amp;srcid=0515x80MMe6PvsWKPHIl0HMe#wechat_redirect" target="_blank" rel="noopener">董老师在硅谷</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
 
     
       <footer class="post-footer">
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/Live/">Live</a>
-		  
-		</div>
-		
+      
+      <div class="post-content">
+        <p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+        <p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener"> Itweet </a>的博客<br>版权声明：自由转载-保持署名-非商业性-禁止演绎（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank" rel="noopener">创意共享3.0许可证</a>)<br>本博客的文章集合: <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
+      </div>
+
+    
+    <div class="post-tags">
+      
+      <a href="/tags/Live/">Live</a>
+      
+    </div>
+    
 
         
         
@@ -220,6 +241,16 @@
 
         
   <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -252,6 +283,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/05/15/论自学的态度/';
+
+  var disqus_title = "论自学的态度";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

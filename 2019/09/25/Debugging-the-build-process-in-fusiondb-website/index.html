@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang>
-  <head><meta name="generator" content="Hexo 3.8.0">
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.9.0">
     
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,8 +46,7 @@
 <meta property="og:image" content="https://www.itweet.cn/screenshots/vscode-debug.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/chrome-devtools-inspect.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/chrome-devtools-init.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-09-26T15:59:52.596Z">
+<meta property="og:updated_time" content="2019-12-24T11:46:36.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Debugging the build process in fusiondb website">
 <meta name="twitter:description" content="利用大前端技术构建 FusionDB 纯静态的官方网站，遇到的一些小坑，纯粹记录一下备忘。">
@@ -72,8 +71,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Debugging the build process in fusiondb website - WHOAMI </title>
@@ -219,27 +234,37 @@
 <li><a href="https://www.youtube.com/watch?v=Xb_0awoShR8" target="_blank" rel="noopener">Debugging with Node.js - Paul Irish talk at Node Summit 2017</a></li>
 <li><a href="https://github.com/gatsbyjs/gatsby/blob/master/docs/docs/debugging-the-build-process.md" target="_blank" rel="noopener">debugging-the-build-process</a></li>
 </ul>
-<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
 
             </div>
           
 
     
       <footer class="post-footer">
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/2019/">2019</a>
-		  
-			<a href="/tags/Debug/">Debug</a>
-		  
-		</div>
-		
+      
+      <div class="post-content">
+        <p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+        <p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener"> Itweet </a>的博客<br>版权声明：自由转载-保持署名-非商业性-禁止演绎（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank" rel="noopener">创意共享3.0许可证</a>)<br>本博客的文章集合: <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
+      </div>
+
+    
+    <div class="post-tags">
+      
+      <a href="/tags/2019/">2019</a>
+      
+      <a href="/tags/Debug/">Debug</a>
+      
+    </div>
+    
 
         
         
   <nav class="post-nav">
+    
+      <a class="prev" href="/2019/12/24/spark-guava-library-problem/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Spark guava 库引发的系列问题</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
     
     
       <a class="next" href="/2019/07/30/how-to-quickly-deploy-flink-on-jdp-platform/">
@@ -252,6 +277,16 @@
 
         
   <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -284,6 +319,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2019/09/25/Debugging-the-build-process-in-fusiondb-website/';
+
+  var disqus_title = "Debugging the build process in fusiondb website";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

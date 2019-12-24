@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang>
-  <head><meta name="generator" content="Hexo 3.8.0">
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.9.0">
     
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,8 +47,7 @@
 <meta property="og:image" content="https://www.itweet.cn/screenshots/Hortonworks-HDP-3-0-GA.png">
 <meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2018/07/HDP-3.0-Marketecture.png">
 <meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2018/07/asparagus.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-09-26T15:59:52.592Z">
+<meta property="og:updated_time" content="2019-12-24T11:46:36.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hortonworks Data Platform 3.0.0平台宣布正式GA">
 <meta name="twitter:description" content="Hortonworks Data Platform 3.0.0版本，基本上集成Hadoop社区生态最新版本的强大功能特性，实现真正混合型数据平台。">
@@ -73,8 +72,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Hortonworks Data Platform 3.0.0平台宣布正式GA - WHOAMI </title>
@@ -202,22 +217,25 @@
 <p>参考：</p>
 <p>[1] <a href="https://hortonworks.com/blog/announcing-general-availability-hortonworks-data-platform-3-0-0-ambari-2-7-0-smartsense-1-5-0/" target="_blank" rel="noopener">https://hortonworks.com/blog/announcing-general-availability-hortonworks-data-platform-3-0-0-ambari-2-7-0-smartsense-1-5-0/</a></p>
 <p>[2] <a href="http://www.itweet.cn/2018/07/02/micro-service-architecture-based-on-restful/" target="_blank" rel="noopener">http://www.itweet.cn/2018/07/02/micro-service-architecture-based-on-restful/</a></p>
-<p>欢迎关注微信公众号[Whoami]，阅读更多内容。</p>
-<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
 
             </div>
           
 
     
       <footer class="post-footer">
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/Ambari/">Ambari</a>
-		  
-		</div>
-		
+      
+      <div class="post-content">
+        <p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+        <p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener"> Itweet </a>的博客<br>版权声明：自由转载-保持署名-非商业性-禁止演绎（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank" rel="noopener">创意共享3.0许可证</a>)<br>本博客的文章集合: <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
+      </div>
+
+    
+    <div class="post-tags">
+      
+      <a href="/tags/Ambari/">Ambari</a>
+      
+    </div>
+    
 
         
         
@@ -240,6 +258,16 @@
 
         
   <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -272,6 +300,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2018/07/15/announcing-general-availability-hortonworks-data-platform-3-0-0-ambari-2-7-0/';
+
+  var disqus_title = "Hortonworks Data Platform 3.0.0平台宣布正式GA";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

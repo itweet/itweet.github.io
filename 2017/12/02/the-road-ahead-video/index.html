@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang>
-  <head><meta name="generator" content="Hexo 3.8.0">
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.9.0">
     
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,12 +43,10 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="今天以The road ahead为题。The road ahead表达的是“未来之路”。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-09-26T15:59:52.592Z">
+<meta property="og:updated_time" content="2019-12-24T11:46:36.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="the-road-ahead-video">
 <meta name="twitter:description" content="今天以The road ahead为题。The road ahead表达的是“未来之路”。">
-<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -69,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> the-road-ahead-video - WHOAMI </title>
@@ -154,21 +168,25 @@
 </li>
 </ul>
 <p>生成音频我尝试过百度、科大讯飞的文字转语音，但是效果没那么好，我就找时间重新录制了一下，在线分享过程随意扩展，啰嗦的东西较多，没有准备充足，所以逐字稿修饰，尽可能表达清晰，这是我做事的方式。</p>
-<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
 
     
       <footer class="post-footer">
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/coding/">coding</a>
-		  
-		</div>
-		
+      
+      <div class="post-content">
+        <p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
+        <p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener"> Itweet </a>的博客<br>版权声明：自由转载-保持署名-非商业性-禁止演绎（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank" rel="noopener">创意共享3.0许可证</a>)<br>本博客的文章集合: <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
+      </div>
+
+    
+    <div class="post-tags">
+      
+      <a href="/tags/coding/">coding</a>
+      
+    </div>
+    
 
         
         
@@ -191,6 +209,16 @@
 
         
   <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -223,6 +251,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/12/02/the-road-ahead-video/';
+
+  var disqus_title = "the-road-ahead-video";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     
