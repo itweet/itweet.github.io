@@ -12,7 +12,7 @@ def create(title):
     fileName = prifx + fileTime + "-" + title.replace(" ","-")+".md"
     touch(fileName)
     writer(fileName, header(title.capitalize(), currentTime))
-    writer(fileName, footer())
+    #writer(fileName, footer()) 
 
 def writer(path, content):
     with open(path, 'a') as f:
@@ -38,9 +38,9 @@ def header(title, time):
     content = """---
 title: %s
 date: %s
-description: FusionDB is a powerful HTAP distributed relational database.
-tags: [FusionDB, 2019]
-category: FusionDB
+description: MIT 6.824 - Distributed Systems (Spring 2020).
+tags: [spring, 6.824, 2020, mit]
+category: 6.824
 ---""" %(title, time)
     return content
 
