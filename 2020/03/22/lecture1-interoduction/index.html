@@ -43,10 +43,12 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="MIT 6.824 - Distributed Systems (Spring 2020).">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-22T10:10:05.032Z">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/6.824/mapreduce-principle.png">
+<meta property="og:updated_time" content="2020-04-19T16:16:48.651Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lecture1-interoduction">
 <meta name="twitter:description" content="MIT 6.824 - Distributed Systems (Spring 2020).">
+<meta name="twitter:image" content="https://www.itweet.cn/screenshots/6.824/mapreduce-principle.png">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -155,7 +157,87 @@
 
     
             <div class="post-content">
-            
+            <h2 id="Lecture-interoduction"><a href="#Lecture-interoduction" class="headerlink" title="Lecture interoduction"></a>Lecture interoduction</h2><h3 id="Quick-Preview"><a href="#Quick-Preview" class="headerlink" title="Quick Preview"></a>Quick Preview</h3><ul>
+<li>parrlelism</li>
+<li>fault-tolerant</li>
+<li>physical</li>
+<li><p>secvrits / isolated</p>
+</li>
+<li><p>Challenges</p>
+<ul>
+<li>challenges</li>
+<li>partial failure</li>
+<li>performance</li>
+</ul>
+</li>
+<li><p>Course Structure</p>
+<ul>
+<li>lectures</li>
+<li>papers - 每周一篇 paper<ul>
+<li>比如：mapreduce paper</li>
+</ul>
+</li>
+<li>examples</li>
+<li>labs  <ul>
+<li>lab1 - MapReduce</li>
+<li>lab2 - Raft fault-tolerant</li>
+<li>lab3 - k/v server</li>
+<li>lab4 - sharded k/v server</li>
+</ul>
+</li>
+<li>project (optional)</li>
+</ul>
+</li>
+<li><p>Infrastructure abstractions</p>
+<ul>
+<li>Storage</li>
+<li>Comms </li>
+<li>computer</li>
+</ul>
+</li>
+<li><p>Impl</p>
+<ul>
+<li>RPC、Threads、consistency</li>
+</ul>
+</li>
+<li><p>Performance</p>
+<ul>
+<li>scalability - 2X computers -&gt; 2X throughput</li>
+</ul>
+</li>
+<li><p>fault-tolerant</p>
+<ul>
+<li>availability              |   Non-volatile storage</li>
+<li>recoverability            |   Replication</li>
+</ul>
+</li>
+<li><p>Topic - consistency</p>
+<ul>
+<li>Put(k,v)</li>
+<li>Get(K) -&gt; v</li>
+<li>examples</li>
+</ul>
+</li>
+</ul>
+<h3 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h3><p>因为没有必要让工程师花费所有的时间来编写分布式系统软件，也要有大量的面向普通业务的开发工作，因此，这些不是很熟悉分布式系统的普通工程师确实需要某种框架可以让他们轻松大胆地编写他们想进行的任何分析工作，例如：排序算法、Web索引或链接分析器等，并在写这些应用程序时无所畏惧，同时无需担心它是否能在数以千计的计算机上运行的诸多细节，比如：如果将这些工作分散到这些计算机上、如何组织所需任何数据的移动、如果应对不可避免的故障。因此寻找和创造一种框架使得非专业人员也能轻松开发和运行大型分布式计算系统，已处理海量的数据，正是 MapReduce 全部意义所在。</p>
+<p><img src="https://www.itweet.cn/screenshots/6.824/mapreduce-principle.png" alt="mapreduce principle"></p>
+<ul>
+<li>Map(k,v)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">split v into words   # K is filename, ignore</span><br><span class="line"></span><br><span class="line">for each word w</span><br><span class="line">    emit(w, &quot;1&quot;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Reduce(k,v)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emit(len(v))</span><br></pre></td></tr></table></figure>
+<p>reference：<a href="http://www.itweet.cn/2018/04/23/mapreduce-osdi04/" target="_blank" rel="noopener">http://www.itweet.cn/2018/04/23/mapreduce-osdi04/</a></p>
+<h3 id="homework-lab1-mapreduce"><a href="#homework-lab1-mapreduce" class="headerlink" title="homework: lab1 mapreduce"></a>homework: lab1 mapreduce</h3><ul>
+<li>Reference：<ul>
+<li>6.824 - Spring 2020: <a href="https://pdos.csail.mit.edu/6.824/" target="_blank" rel="noopener">https://pdos.csail.mit.edu/6.824/</a></li>
+<li>6.824 Lab 1: MapReduce: <a href="https://pdos.csail.mit.edu/6.824/labs/lab-mr.html" target="_blank" rel="noopener">https://pdos.csail.mit.edu/6.824/labs/lab-mr.html</a></li>
+</ul>
+</li>
+</ul>
+
             </div>
           
 
