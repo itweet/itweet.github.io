@@ -48,7 +48,7 @@ Ozone 由以下关键部分组成。
 
 每个容器都支持一些简单的操作：
 
-!()[https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Screen-Shot-2018-10-11-at-10.04.52-AM.png]
+![](https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Screen-Shot-2018-10-11-at-10.04.52-AM.png)
 
 容器使用 RocksDB 存储在磁盘上，并针对较大的值进行了一些优化。
 
