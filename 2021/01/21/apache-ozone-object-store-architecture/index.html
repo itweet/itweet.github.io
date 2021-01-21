@@ -38,19 +38,20 @@
 <meta name="description" content="Apache Ozone - 一个基于 raft 的分布式对象存储系统。">
 <meta name="keywords" content="ozone,2021,apache">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Apache-ozone-object-store-architecture">
+<meta property="og:title" content="Apache ozone object store architecture">
 <meta property="og:url" content="http://itweet.github.io/2021/01/21/apache-ozone-object-store-architecture/index.html">
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="Apache Ozone - 一个基于 raft 的分布式对象存储系统。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Legos.png">
 <meta property="og:image" content="https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Screen-Shot-2018-10-11-at-10.03.58-AM.png">
+<meta property="og:image" content="https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Screen-Shot-2018-10-11-at-10.04.52-AM.png">
 <meta property="og:image" content="https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Screen-Shot-2018-10-11-at-10.06.53-AM.png">
 <meta property="og:image" content="https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Screen-Shot-2018-10-11-at-10.08.09-AM.png">
 <meta property="og:image" content="https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Screen-Shot-2018-10-11-at-10.11.26-AM.png">
-<meta property="og:updated_time" content="2021-01-21T11:49:36.053Z">
+<meta property="og:updated_time" content="2021-01-21T13:04:17.353Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Apache-ozone-object-store-architecture">
+<meta name="twitter:title" content="Apache ozone object store architecture">
 <meta name="twitter:description" content="Apache Ozone - 一个基于 raft 的分布式对象存储系统。">
 <meta name="twitter:image" content="https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Legos.png">
 
@@ -93,7 +94,7 @@
 </script>
 
 
-    <title> Apache-ozone-object-store-architecture - WHOAMI </title>
+    <title> Apache ozone object store architecture - WHOAMI </title>
   </head>
 
   <body>
@@ -148,7 +149,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          Apache-ozone-object-store-architecture
+          Apache ozone object store architecture
         
       </h1>
 
@@ -192,7 +193,7 @@
 <h3 id="4-1-存储容器"><a href="#4-1-存储容器" class="headerlink" title="4.1 存储容器"></a>4.1 存储容器</h3><p>在最底层，Ozone 将用户数据存储在存储容器中。容器是块名称及其数据的键-值对的集合。键是在容器内唯一的块名称。值是块数据，范围从 0 字节到 256MB。块名称不必是全局唯一的。</p>
 <p><img src="https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Screen-Shot-2018-10-11-at-10.03.58-AM.png" alt></p>
 <p>每个容器都支持一些简单的操作：</p>
-<p>!()[<a href="https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Screen-Shot-2018-10-11-at-10.04.52-AM.png]" target="_blank" rel="noopener">https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Screen-Shot-2018-10-11-at-10.04.52-AM.png]</a></p>
+<p><img src="https://ndu0e1pobsf1dobtvj5nls3q-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Screen-Shot-2018-10-11-at-10.04.52-AM.png" alt></p>
 <p>容器使用 RocksDB 存储在磁盘上，并针对较大的值进行了一些优化。</p>
 <h3 id="4-2-RAFT-复制"><a href="#4-2-RAFT-复制" class="headerlink" title="4.2 RAFT 复制"></a>4.2 RAFT 复制</h3><p>分布式文件系统必须容忍单个磁盘/节点的丢失，因此我们需要一种通过网络复制容器的方法。为此，我们引入了一些容器的其他属性。</p>
 <ul>
@@ -339,7 +340,7 @@
   var disqus_shortname = 'itweet-cn';
   var disqus_identifier = '2021/01/21/apache-ozone-object-store-architecture/';
 
-  var disqus_title = "Apache-ozone-object-store-architecture";
+  var disqus_title = "Apache ozone object store architecture";
 
 
   var disqus = {
