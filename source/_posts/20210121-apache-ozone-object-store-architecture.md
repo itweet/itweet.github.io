@@ -1,5 +1,5 @@
 ---
-title: Apache-ozone-object-store-architecture
+title: Apache ozone object store architecture
 date: 2021-01-21 01:10:39
 description: Apache Ozone - 一个基于 raft 的分布式对象存储系统。
 tags: [ozone, 2021, apache]
