@@ -3,7 +3,7 @@ title: April_reading
 date: 2021-05-18 12:19:18
 description: 4 月阅读《褚时健自传》、《若为自由故：自由软件之父理查德·斯托曼传》
 tags: [reading, 2021]
-category: books
+category: Books
 ---
 
 ## 《若为自由故：自由软件之父理查德·斯托曼传》
