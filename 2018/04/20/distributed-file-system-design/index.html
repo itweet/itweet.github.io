@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -44,8 +44,7 @@
 <meta property="og:description" content="忙着开发软件，最近一直没什么时间写作。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/JDP/dfs/img/gfs_architecture.jpg">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-03-31T15:29:20.641Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="distributed-file-system-design">
 <meta name="twitter:description" content="忙着开发软件，最近一直没什么时间写作。">
@@ -70,8 +69,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> distributed-file-system-design - WHOAMI </title>
@@ -215,8 +230,6 @@
 <p>Master节点负载过高，通过Chunk租约将控制权交给主副本(主Chunk)，将Master压力降到最低。</p>
 <p>目前类似GFS的开源实现，主流选择HDFS，而且HDFS在实现上，弥补很多GFS中的不足。我也没看到有可替代HDFS的系统，因为有HDFS造就今天繁荣的Hadoop生态系统，数据分析引擎、数据存储引擎百花齐放。</p>
 <p>软件系统的设计与实现是为解决现实问题而出现，设计上会有很多权衡，不同的权衡造就不同的系统，各自有擅长的场景。</p>
-<p>欢迎关注微信公众号[Whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>
 
             </div>
           
@@ -253,6 +266,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -270,7 +293,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -284,6 +307,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2018/04/20/distributed-file-system-design/';
+
+  var disqus_title = "distributed-file-system-design";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

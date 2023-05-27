@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -64,8 +64,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> WHOAMI - 技术人的日常.</title>
@@ -124,26 +140,26 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2014/07/01/storm-入门指南/">storm 入门指南</a>
+          <a class="post-link" href="/2015/07/12/ganglia-centos/">ganglia-centos</a>
         
       </h1>
 
       <time class="post-time">
-          7月 01 2014
+          7月 12 2015
       </time>
     </header>
 
 
 
     
-        <div class="post-excerpt">
+        <div class="post-excerpt post-content">
             
             
               
             
 
             
-              Storm 是一个开源的、大数据处理系统，与其他系统不同，它旨在用于分布式实时处理且与语言无关。
+              Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。
         </div>
             
           
@@ -157,26 +173,26 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2014/02/04/HDFS_NFS_Gateway/">HDFS_NFS_Gateway</a>
+          <a class="post-link" href="/2015/07/10/hive-install/">hive install</a>
         
       </h1>
 
       <time class="post-time">
-          2月 04 2014
+          7月 10 2015
       </time>
     </header>
 
 
 
     
-        <div class="post-excerpt">
+        <div class="post-excerpt post-content">
             
             
               
             
 
             
-              HDFS NFS Gateway 是一个把HDFS挂载到操作系统本地，然后直接访问本地文件目录就能对HDFS上的数据进行各种Linux上的操作，不过生产中不建议使用，性能比较差。
+              Hive 的手动安装记录。
         </div>
             
           
@@ -190,26 +206,257 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2014/01/02/memcached_doc/">memcached_doc</a>
+          <a class="post-link" href="/2015/07/10/apache-hadoop-自动HA的搭建/">Hadoop 的 HA 手动搭建</a>
         
       </h1>
 
       <time class="post-time">
-          1月 02 2014
+          7月 10 2015
       </time>
     </header>
 
 
 
     
-        <div class="post-excerpt">
+        <div class="post-excerpt post-content">
             
             
               
             
 
             
-              Memcached 是一个高性能的分布式内存对象缓存系统，用于动态Web应用以减轻数据库负载。
+              Hadoop 的 HA 手动搭建。
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/07/10/Cloudera-manager-installaction/">Cloudera-manager-installaction</a>
+        
+      </h1>
+
+      <time class="post-time">
+          7月 10 2015
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt post-content">
+            
+            
+              
+            
+
+            
+              Cloudera提出了Hybrid Open Source的架构：核心组件名称叫CDH（Cloudera's Distribution including Apache Hadoop），开源免费并与Apache社区同步，用户无限制使用，保证Hadoop基本功能持续可用，不会被厂家绑定。
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/07/02/HiveServer2-JDBC中文支持/">HiveServer2-JDBC中文支持</a>
+        
+      </h1>
+
+      <time class="post-time">
+          7月 02 2015
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt post-content">
+            
+            
+              
+            
+
+            
+              如何配置 Hive JDBC 支持中文，早期Hive版本。
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/07/02/hive各种调优设置/">Hive 各种调优设置</a>
+        
+      </h1>
+
+      <time class="post-time">
+          7月 02 2015
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt post-content">
+            
+            
+              
+            
+
+            
+              Hive 的各种性能调优配置。
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/05/06/如何选择满足需求的SQL-on-Hadoop系统/">如何选择满足需求的SQL on Hadoop系统</a>
+        
+      </h1>
+
+      <time class="post-time">
+          5月 06 2015
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt post-content">
+            
+            
+              
+            
+
+            
+              如何选择满足需求的SQL on Hadoop系统，在批处理时代，Hive一枝独秀；在实时交互式查询时代，呈现出的是百花齐放的局面。
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/04/06/程序员必读的书-StackOverflow-创始人推荐/">程序员必读的书 StackOverflow 创始人推荐</a>
+        
+      </h1>
+
+      <time class="post-time">
+          4月 06 2015
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt post-content">
+            
+            
+              
+            
+
+            
+              为了开发出更好的软件，你需要理解人是如何工作的，这也是我推荐的这些书所关注的领域。
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/03/20/Hadoop-benchmarks/">Hadoop benchmarks</a>
+        
+      </h1>
+
+      <time class="post-time">
+          3月 20 2015
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt post-content">
+            
+            
+              
+            
+
+            
+              Hadoop 的基准测试，基于 CDH 5.2.0 的版本。
+        </div>
+            
+          
+
+    
+  </article>
+
+        
+            
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2015/02/03/apache-hadoop-federation配置/">apache hadoop federation配置</a>
+        
+      </h1>
+
+      <time class="post-time">
+          2月 03 2015
+      </time>
+    </header>
+
+
+
+    
+        <div class="post-excerpt post-content">
+            
+            
+              
+            
+
+            
+              HDFS Federation的配置和使用，可以让HDFS的访问支持虚拟视图FS。
         </div>
             
           
@@ -227,6 +474,11 @@
       </a>
     
     
+      <a class="next" href="/page/20/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
   </nav>
 
     </div>
@@ -241,14 +493,14 @@
     
     <section id="tags" class="widget-area widget_categories">
         <h3 class="widget-title">Categories</h3>
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/BigData/">BigData</a><span class="category-list-count">116</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Books/">Books</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cloud/">Cloud</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Default/">Default</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Developer/">Developer</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FusionDB/">FusionDB</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JDP/">JDP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">6</span></li></ul>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/6-824/">6.824</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/BigData/">BigData</a><span class="category-list-count">116</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Books/">Books</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cloud/">Cloud</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Default/">Default</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Developer/">Developer</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/FusionDB/">FusionDB</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JDP/">JDP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">8</span></li></ul>
     </section>
 
 
     
     <section id="tags" class="widget-area widget_tags">
         <h3 class="widget-title">Tags</h3>
-        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MemDB/">MemDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hdfs/">hdfs</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream/">Stream</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop/">hadoop</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Benchmarks/">Benchmarks</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monitor/">monitor</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/">Hive</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Books/">Books</a><span class="tag-list-count">1</span></li></ul>
+        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MemDB/">MemDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hdfs/">hdfs</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Stream/">Stream</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monitor/">monitor</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop/">hadoop</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Benchmarks/">Benchmarks</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/">Hive</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Books/">Books</a><span class="tag-list-count">1</span></li></ul>
     </section>
 
 
@@ -263,7 +515,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -277,6 +529,31 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = 'page/19/index.html';
+
+  var disqus_title = "";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+
+</script>
 
 
     

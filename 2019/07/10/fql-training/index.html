@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,12 +43,10 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="FusionDB FQL Training">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-09-25T16:01:43.160Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.179Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fql-training">
 <meta name="twitter:description" content="FusionDB FQL Training">
-<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -69,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Fql-training - WHOAMI </title>
@@ -174,8 +188,6 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">import psycopg2</span><br><span class="line">import pandas as pd</span><br><span class="line">connection = psycopg2.connect(&quot;host=localhost port=54322 dbname=default user=fdb sslmode=disable&quot;)</span><br><span class="line">df = pd.read_sql(sql=&quot;SELECT * FROM VALUES (1, 1), (1, 2) AS t(a, b);&quot;, con=connection)</span><br><span class="line">df</span><br><span class="line"></span><br><span class="line">## Load mysql table</span><br><span class="line"></span><br><span class="line">df =pd.read_sql(sql=&quot;load &apos;mysql&apos; options(&apos;url&apos;=&apos;jdbc:mysql://localhost:53306/fdb_test&apos;,&apos;dbtable&apos;=&apos;person&apos;,&apos;user&apos;= &apos;root&apos;,&apos;password&apos;=&apos;root&apos;) AS mysql_t2;&quot;, con=connection)</span><br><span class="line">df =pd.read_sql(sql=&quot;SELECT * FROM mysql_t2;&quot;, con=connection)</span><br><span class="line">df.head()</span><br><span class="line"></span><br><span class="line">## Load Postgres table</span><br><span class="line"></span><br><span class="line">df =pd.read_sql(sql=&quot;load &apos;postgresql&apos; options(&apos;url&apos;=&apos;jdbc:postgresql://localhost:15430/fdb&apos;,&apos;dbtable&apos;=&apos;person&apos;,&apos;user&apos;= &apos;fdb&apos;,&apos;password&apos;=&apos;fdb123&apos;) AS gp_t1;&quot;, con=connection)</span><br><span class="line">df =pd.read_sql(sql=&quot;SELECT * FROM gp_t1;&quot;, con=connection)</span><br><span class="line">df.head()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## MySQL Table Join PostgreSQL Table</span><br><span class="line"></span><br><span class="line">df =pd.read_sql(sql=&quot;CREATE table test as SELECT mysql_t2.* FROM mysql_t2 LEFT JOIN gp_t1 ON mysql_t2.id = gp_t1.id;&quot;, con=connection)</span><br><span class="line">df =pd.read_sql(sql=&quot;SELECT * FROM test;&quot;, con=connection)</span><br><span class="line">df.head()</span><br><span class="line"></span><br><span class="line">## Load oracle table </span><br><span class="line"></span><br><span class="line">df =pd.read_sql(sql=&quot;load oracle options(&apos;url&apos;=&apos;jdbc:oracle:thin:SYSTEM/oracle@//localhost:49161/xe&apos;,&apos;dbtable&apos;=&apos;FDBTEST20&apos;,&apos;user&apos;= &apos;SYSTEM&apos;,&apos;password&apos;=&apos;oracle&apos;) AS ora_t1;&quot;, con=connection)</span><br><span class="line">df =pd.read_sql(sql=&quot;SELECT * FROM ora_t1 limit 10;&quot;, con=connection)</span><br><span class="line">df.head()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Load HDFS parquet</span><br><span class="line"></span><br><span class="line">df =pd.read_sql(sql=&quot;load &apos;hdfs://jdp-1:8020/tmp/spark-tpcds-data/web_site&apos; format parquet AS web_site;&quot;, con=connection)</span><br><span class="line">df =pd.read_sql(sql=&quot;SELECT * FROM web_site limit 10;&quot;, con=connection)</span><br><span class="line">df.head()</span><br><span class="line"></span><br><span class="line">## Save table to hdfs</span><br><span class="line"></span><br><span class="line">df =pd.read_sql(sql=&quot;save overwrite web_site TO &apos;hdfs://jdp-1:8020/tmp/web_site_test&apos; FORMAT parquet;&quot;, con=connection)</span><br><span class="line">df =pd.read_sql(sql=&quot;load &apos;hdfs://jpd-1:8020/tmp/web_site_test&apos; format parquet AS mysql_t2_par;&quot;, con=connection)</span><br><span class="line">df =pd.read_sql(sql=&quot;SELECT * FROM mysql_t2_par limit 10;&quot;, con=connection)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
 <p>For more information, please refer to <a href="http://www.fusionlab.cn/zh-cn/fdb/quickstart.html" target="_blank" rel="noopener">FusionDB Document</a></p>
-<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
 
             </div>
           
@@ -214,6 +226,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -231,7 +253,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -245,6 +267,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2019/07/10/fql-training/';
+
+  var disqus_title = "Fql-training";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

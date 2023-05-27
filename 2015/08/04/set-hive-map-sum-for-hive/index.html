@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -44,7 +44,7 @@
 <meta property="og:description" content="1、增加map数量首先调整上一步reducer生成文件数据，下面可以把reduce设置为160，即生成160个文件set mapred.reduce.tasks=160;create table test asselect * from tempdistribute by rand(123); 2、单纯调整map数量，增加map num===================初步 filenum ：">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/hive-map.png">
-<meta property="og:updated_time" content="2019-02-27T17:45:36.474Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="set hive-map-sum for hive">
 <meta name="twitter:description" content="1、增加map数量首先调整上一步reducer生成文件数据，下面可以把reduce设置为160，即生成160个文件set mapred.reduce.tasks=160;create table test asselect * from tempdistribute by rand(123); 2、单纯调整map数量，增加map num===================初步 filenum ：">
@@ -69,8 +69,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> set hive-map-sum for hive - WHOAMI </title>
@@ -164,7 +180,6 @@
 <p>合理分配map,reduce个数,让某些大任务可以运行集群极限的map,reduce个数，这里怎么确定呢，需要参考<a href="https://www.itweet.cn/2015/07/24/yarn-resources-manager-allocation/" target="_blank" rel="noopener">yarn的资源调优</a>,让任务没有Pending，一起Running，那样就不会有任务拖后腿！提高执行效率！当然这里的优化参数最好针对每个应用内部设置！</p>
 <h1 id="3、FileInputFormat中的getSplits–-gt-plitSize由来"><a href="#3、FileInputFormat中的getSplits–-gt-plitSize由来" class="headerlink" title="3、FileInputFormat中的getSplits–&gt;plitSize由来"></a>3、FileInputFormat中的getSplits–&gt;plitSize由来</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">/** Splits files returned by &#123;@link #listStatus(JobConf)&#125; when</span><br><span class="line">   * they&apos;re too big.*/ </span><br><span class="line">  public InputSplit[] getSplits(JobConf job, int numSplits)</span><br><span class="line">    throws IOException &#123;</span><br><span class="line">    StopWatch sw = new StopWatch().start();</span><br><span class="line">    FileStatus[] files = listStatus(job);</span><br><span class="line">    </span><br><span class="line">    // Save the number of input files for metrics/loadgen</span><br><span class="line">    job.setLong(NUM_INPUT_FILES, files.length);</span><br><span class="line">    long totalSize = 0;                           // compute total size</span><br><span class="line">    for (FileStatus file: files) &#123;                // check we have valid files</span><br><span class="line">      if (file.isDirectory()) &#123;</span><br><span class="line">        throw new IOException(&quot;Not a file: &quot;+ file.getPath());</span><br><span class="line">      &#125;</span><br><span class="line">      totalSize += file.getLen();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    long goalSize = totalSize / (numSplits == 0 ? 1 : numSplits);</span><br><span class="line">    long minSize = Math.max(job.getLong(org.apache.hadoop.mapreduce.lib.input.</span><br><span class="line">      FileInputFormat.SPLIT_MINSIZE, 1), minSplitSize);</span><br><span class="line"></span><br><span class="line">    // generate splits</span><br><span class="line">    ArrayList&lt;FileSplit&gt; splits = new ArrayList&lt;FileSplit&gt;(numSplits);</span><br><span class="line">    NetworkTopology clusterMap = new NetworkTopology();</span><br><span class="line">    for (FileStatus file: files) &#123;</span><br><span class="line">      Path path = file.getPath();</span><br><span class="line">      long length = file.getLen();</span><br><span class="line">      if (length != 0) &#123;</span><br><span class="line">        FileSystem fs = path.getFileSystem(job);</span><br><span class="line">        BlockLocation[] blkLocations;</span><br><span class="line">        if (file instanceof LocatedFileStatus) &#123;</span><br><span class="line">          blkLocations = ((LocatedFileStatus) file).getBlockLocations();</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          blkLocations = fs.getFileBlockLocations(file, 0, length);</span><br><span class="line">        &#125;</span><br><span class="line">        if (isSplitable(fs, path)) &#123;</span><br><span class="line">          long blockSize = file.getBlockSize();</span><br><span class="line">          long splitSize = computeSplitSize(goalSize, minSize, blockSize);</span><br><span class="line"></span><br><span class="line">          long bytesRemaining = length;</span><br><span class="line">          while (((double) bytesRemaining)/splitSize &gt; SPLIT_SLOP) &#123;</span><br><span class="line">            String[][] splitHosts = getSplitHostsAndCachedHosts(blkLocations,</span><br><span class="line">                length-bytesRemaining, splitSize, clusterMap);</span><br><span class="line">            splits.add(makeSplit(path, length-bytesRemaining, splitSize,</span><br><span class="line">                splitHosts[0], splitHosts[1]));</span><br><span class="line">            bytesRemaining -= splitSize;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          if (bytesRemaining != 0) &#123;</span><br><span class="line">            String[][] splitHosts = getSplitHostsAndCachedHosts(blkLocations, length</span><br><span class="line">                - bytesRemaining, bytesRemaining, clusterMap);</span><br><span class="line">            splits.add(makeSplit(path, length - bytesRemaining, bytesRemaining,</span><br><span class="line">                splitHosts[0], splitHosts[1]));</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          String[][] splitHosts = getSplitHostsAndCachedHosts(blkLocations,0,length,clusterMap);</span><br><span class="line">          splits.add(makeSplit(path, 0, length, splitHosts[0], splitHosts[1]));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; else &#123; </span><br><span class="line">        //Create empty hosts array for zero length files</span><br><span class="line">        splits.add(makeSplit(path, 0, length, new String[0]));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sw.stop();</span><br><span class="line">    if (LOG.isDebugEnabled()) &#123;</span><br><span class="line">      LOG.debug(&quot;Total # of splits generated by getSplits: &quot; + splits.size()</span><br><span class="line">          + &quot;, TimeTaken: &quot; + sw.now(TimeUnit.MILLISECONDS));</span><br><span class="line">    &#125;</span><br><span class="line">    return splits.toArray(new FileSplit[splits.size()]);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <p>参考：<a href="https://www.itweet.cn/2015/07/24/yarn-resources-manager-allocation/" target="_blank" rel="noopener">yarn的资源调优</a>,配合此文完成合理资源分配! </p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -201,6 +216,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -218,7 +243,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -232,6 +257,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/08/04/set-hive-map-sum-for-hive/';
+
+  var disqus_title = "set hive-map-sum for hive";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

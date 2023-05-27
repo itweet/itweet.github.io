@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -49,7 +49,7 @@
 <meta property="og:image" content="https://www.itweet.cn/screenshots/TestDFSIO-read-2.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/mapreduce-algorithm-1.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/mapreduce-algorithm-2.png">
-<meta property="og:updated_time" content="2019-02-27T17:35:51.584Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HDFS &amp; MapReduce异构存储性能测试白皮书">
 <meta name="twitter:description" content="title: HDFS &amp;amp; MapReduce异构存储性能测试白皮书author: whoamicategories: Storagetags: HDFSdate: 2016-10-27 description: The Truth About MapReduce Performance on SSD、STAT 摘要  我们已经进入数据时代，很难评估电子存储数据的总量，但是IDC评估201">
@@ -74,8 +74,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> HDFS & MapReduce异构存储性能测试白皮书 - WHOAMI </title>
@@ -191,7 +207,6 @@
 <li>结论</li>
 </ul>
 <p>随着海量数据的增长，提供 Hadoop IO 性能的最有效的方法是使用 SSD替代SATA。本白皮书清晰的展示了SSD 极大的提升了 Hadoop 集群的性能，同时减少了节点数量，大幅度降低了TCO。<br>对于mapReduce，通过图5，图6，可以看出shuffle算法计算用时最短，我们的测试也表明，固态硬盘的好处取决于所涉及的MapReduce工作，因此，存储介质的选择需要考虑这个生产工作负载聚合性能的影响，精确地改善取决于可压缩数据在所有的数据集、IO和CPU负载的比例工作。</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -228,6 +243,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -245,7 +270,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -259,6 +284,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/10/27/HDFS-MapReduce异构存储性能测试白皮书/';
+
+  var disqus_title = "HDFS & MapReduce异构存储性能测试白皮书";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

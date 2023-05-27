@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="根据前一篇文章，安装好kubernetes集群，集群正常在运行，下面开始创建pods吧！ 你可以选择，从github下载kubernetes源码，切换到kubernetes/examples/guestbook参考官网文档搭建一个完整的应用来验证集群的基本功能。 12345[root@kubernetes-controller ~]#  kubectl get nodesNAME">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-25T16:18:23.334Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.136Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kubernetes-create-pods">
 <meta name="twitter:description" content="根据前一篇文章，安装好kubernetes集群，集群正常在运行，下面开始创建pods吧！ 你可以选择，从github下载kubernetes源码，切换到kubernetes/examples/guestbook参考官网文档搭建一个完整的应用来验证集群的基本功能。 12345[root@kubernetes-controller ~]#  kubectl get nodesNAME">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> kubernetes-create-pods - WHOAMI </title>
@@ -162,7 +178,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/kubernetes/kubernetes.git</span><br><span class="line"></span><br><span class="line">$ cd kubernetes</span><br><span class="line"></span><br><span class="line">$ kubectl create -f examples/guestbook/all-in-one/guestbook-all-in-one.yaml</span><br><span class="line">service &quot;redis-master&quot; created</span><br><span class="line">deployment &quot;redis-master&quot; created</span><br><span class="line">service &quot;redis-slave&quot; created</span><br><span class="line">deployment &quot;redis-slave&quot; created</span><br><span class="line">service &quot;frontend&quot; created</span><br><span class="line">deployment &quot;frontend&quot; created</span><br></pre></td></tr></table></figure>
 <p>列表所有的kubernetes services<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-controller kubernetes]# kubectl get services</span><br><span class="line">NAME           CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE</span><br><span class="line">frontend       10.254.210.70    &lt;none&gt;        80/TCP     1m</span><br><span class="line">kubernetes     10.254.0.1       &lt;none&gt;        443/TCP    2h</span><br><span class="line">redis-master   10.254.177.239   &lt;none&gt;        6379/TCP   1m</span><br><span class="line">redis-slave    10.254.234.101   &lt;none&gt;        6379/TCP   1m</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]#  kubectl get pods</span><br><span class="line">NAME                            READY     STATUS    RESTARTS   AGE</span><br><span class="line">frontend-440143558-0iiy1        1/1       Running   0          8m</span><br><span class="line">frontend-440143558-u5uja        1/1       Running   0          8m</span><br><span class="line">frontend-440143558-xtlh3        1/1       Running   0          8m</span><br><span class="line">nginx                           1/1       Running   0          1h</span><br><span class="line">redis-master-2353460263-fqdoc   1/1       Running   0          8m</span><br><span class="line">redis-slave-1691881626-fs9m6    1/1       Running   0          8m</span><br><span class="line">redis-slave-1691881626-xex67    1/1       Running   0          8m</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# curl http://172.16.49.3/</span><br><span class="line">&lt;html ng-app=&quot;redis&quot;&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;Guestbook&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css&quot;&gt;</span><br><span class="line">    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;controllers.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body ng-controller=&quot;RedisCtrl&quot;&gt;</span><br><span class="line">    &lt;div style=&quot;width: 50%; margin-left: 20px&quot;&gt;</span><br><span class="line">      &lt;h2&gt;Guestbook&lt;/h2&gt;</span><br><span class="line">    &lt;form&gt;</span><br><span class="line">    &lt;fieldset&gt;</span><br><span class="line">    &lt;input ng-model=&quot;msg&quot; placeholder=&quot;Messages&quot; class=&quot;form-control&quot; type=&quot;text&quot; name=&quot;input&quot;&gt;&lt;br&gt;</span><br><span class="line">    &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; ng-click=&quot;controller.onRedis()&quot;&gt;Submit&lt;/button&gt;</span><br><span class="line">    &lt;/fieldset&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;div ng-repeat=&quot;msg in messages track by $index&quot;&gt;</span><br><span class="line">        &#123;&#123;msg&#125;&#125;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# kubectl describe pods redis-master-2353460263-fqdoc</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]#  kubectl logs redis-master-2353460263-fqdoc</span><br><span class="line">                _._                                                  </span><br><span class="line">           _.-``__ &apos;&apos;-._                                             </span><br><span class="line">      _.-``    `.  `_.  &apos;&apos;-._           Redis 2.8.19 (00000000/0) 64 bit</span><br><span class="line">  .-`` .-```.  ```\/    _.,_ &apos;&apos;-._                                   </span><br><span class="line"> (    &apos;      ,       .-`  | `,    )     Running in stand alone mode</span><br><span class="line"> |`-._`-...-` __...-.``-._|&apos;` _.-&apos;|     Port: 6379</span><br><span class="line"> |    `-._   `._    /     _.-&apos;    |     PID: 1</span><br><span class="line">  `-._    `-._  `-./  _.-&apos;    _.-&apos;                                   </span><br><span class="line"> |`-._`-._    `-.__.-&apos;    _.-&apos;_.-&apos;|                                  </span><br><span class="line"> |    `-._`-._        _.-&apos;_.-&apos;    |           http://redis.io        </span><br><span class="line">  `-._    `-._`-.__.-&apos;_.-&apos;    _.-&apos;                                   </span><br><span class="line"> |`-._`-._    `-.__.-&apos;    _.-&apos;_.-&apos;|                                  </span><br><span class="line"> |    `-._`-._        _.-&apos;_.-&apos;    |                                  </span><br><span class="line">  `-._    `-._`-.__.-&apos;_.-&apos;    _.-&apos;                                   </span><br><span class="line">      `-._    `-.__.-&apos;    _.-&apos;                                       </span><br><span class="line">          `-._        _.-&apos;                                           </span><br><span class="line">              `-.__.-&apos;                  </span><br><span class="line"></span><br><span class="line">[1] 17 Aug 10:40:38.156 # Server started, Redis version 2.8.19</span><br><span class="line">[1] 17 Aug 10:40:38.157 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command &apos;echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled&apos; as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.</span><br><span class="line">[1] 17 Aug 10:40:38.157 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.</span><br><span class="line">[1] 17 Aug 10:40:38.157 * The server is now ready to accept connections on port 6379</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# kubectl get services</span><br><span class="line">NAME           CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE</span><br><span class="line">frontend       10.254.210.70    &lt;none&gt;        80/TCP     15h</span><br><span class="line">kubernetes     10.254.0.1       &lt;none&gt;        443/TCP    18h</span><br><span class="line">redis-master   10.254.177.239   &lt;none&gt;        6379/TCP   15h</span><br><span class="line">redis-slave    10.254.234.101   &lt;none&gt;        6379/TCP   15h</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# kubectl get deployments</span><br><span class="line">NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">frontend       3         3         3            3           15h</span><br><span class="line">redis-master   1         1         1            1           15h</span><br><span class="line">redis-slave    2         2         2            2           15h</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# kubectl get pods</span><br><span class="line">NAME                            READY     STATUS    RESTARTS   AGE</span><br><span class="line">frontend-440143558-0iiy1        1/1       Running   0          15h</span><br><span class="line">frontend-440143558-u5uja        1/1       Running   0          15h</span><br><span class="line">frontend-440143558-xtlh3        1/1       Running   0          15h</span><br><span class="line">nginx                           1/1       Running   0          17h</span><br><span class="line">redis-master-2353460263-fqdoc   1/1       Running   0          15h</span><br><span class="line">redis-slave-1691881626-fs9m6    1/1       Running   0          15h</span><br><span class="line">redis-slave-1691881626-xex67    1/1       Running   0          15h</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# kubectl get pods -L tier</span><br><span class="line">NAME                            READY     STATUS    RESTARTS   AGE       TIER</span><br><span class="line">frontend-440143558-0iiy1        1/1       Running   0          15h       frontend</span><br><span class="line">frontend-440143558-u5uja        1/1       Running   0          15h       frontend</span><br><span class="line">frontend-440143558-xtlh3        1/1       Running   0          15h       frontend</span><br><span class="line">nginx                           1/1       Running   0          17h       &lt;none&gt;</span><br><span class="line">redis-master-2353460263-fqdoc   1/1       Running   0          15h       backend</span><br><span class="line">redis-slave-1691881626-fs9m6    1/1       Running   0          15h       backend</span><br><span class="line">redis-slave-1691881626-xex67    1/1       Running   0          15h       backend</span><br></pre></td></tr></table></figure></p>
 <p>清理redis相关服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-controller ~]#  kubectl get pods -o wide </span><br><span class="line">NAME                            READY     STATUS    RESTARTS   AGE       NODE</span><br><span class="line">apache-httpd                    1/1       Running   0          41m       kubernetes-node-3</span><br><span class="line">frontend-440143558-0iiy1        1/1       Running   0          4d        kubernetes-node-1</span><br><span class="line">frontend-440143558-u5uja        1/1       Running   1          4d        kubernetes-node-3</span><br><span class="line">frontend-440143558-xtlh3        1/1       Running   1          4d        kubernetes-node-2</span><br><span class="line">nginx                           1/1       Running   0          4d        kubernetes-node-3</span><br><span class="line">redis-master-2353460263-fqdoc   1/1       Running   0          4d        kubernetes-node-2</span><br><span class="line">redis-slave-1691881626-fs9m6    1/1       Running   1          4d        kubernetes-node-3</span><br><span class="line">redis-slave-1691881626-xex67    1/1       Running   0          4d        kubernetes-node-1</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]# kubectl delete deployments,services -l &quot;app in (redis, guestbook)&quot;</span><br><span class="line">deployment &quot;frontend&quot; deleted</span><br><span class="line">deployment &quot;redis-master&quot; deleted</span><br><span class="line">deployment &quot;redis-slave&quot; deleted</span><br><span class="line">service &quot;frontend&quot; deleted</span><br><span class="line">service &quot;redis-master&quot; deleted</span><br><span class="line">service &quot;redis-slave&quot; deleted</span><br><span class="line"></span><br><span class="line">[root@kubernetes-controller ~]#  kubectl get pods -o wide </span><br><span class="line">NAME           READY     STATUS    RESTARTS   AGE       NODE</span><br><span class="line">apache-httpd   1/1       Running   0          42m       kubernetes-node-3</span><br><span class="line">nginx          1/1       Running   0          4d        kubernetes-node-3</span><br></pre></td></tr></table></figure></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -199,6 +214,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -216,7 +241,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -230,6 +255,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/08/15/kubernetes-create-pods/';
+
+  var disqus_title = "kubernetes-create-pods";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -44,8 +44,7 @@
 <meta property="og:description" content="一个开源基础库引发的严重产品事故，整个事件场内block超过4小时以上。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/close-wait.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-09-25T16:01:18.741Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Parquet-library-fatal-error">
 <meta name="twitter:description" content="一个开源基础库引发的严重产品事故，整个事件场内block超过4小时以上。">
@@ -70,8 +69,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Parquet-library-fatal-error - WHOAMI </title>
@@ -180,8 +195,6 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>整个过程，由于全部服务容器化部署，导致排查问题周期比较长，获取日志还是比较原始的命令行方式，门槛较高，由于在现场发现问题，不能及时进行问题的追溯，只能根据只言片语的反馈进行问题追踪。如果不是在开发环境，复现此问题，整个问题排查起来异常困难，开始思考是否有tracking工具，可以快速定位问题。代码的最小化单元测试，只能定位范围，最终一直无法确定是某个函数直接导致的问题，代码编写中函数功能单一性拆分是一门学问。</p>
 <p>期间，重启大发又一次发挥了奇效。在开发环境复现问题，并修复bug，patch修复各个产品线的不同版本。</p>
 <p>如果，你还在用有连接泄漏问题的Parque版本，快快升级吧。</p>
-<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
 
             </div>
           
@@ -218,6 +231,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -235,7 +258,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -249,6 +272,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2018/08/26/parquet-library-fatal-error/';
+
+  var disqus_title = "Parquet-library-fatal-error";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

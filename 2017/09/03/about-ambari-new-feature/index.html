@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -54,8 +54,7 @@
 <meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/9-topn-1024x623.png">
 <meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/10-topn-1024x652.png">
 <meta property="og:image" content="https://2xbbhjxc6wk3v21p62t8n4d4-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/11-AMS-HA.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png">
-<meta property="og:updated_time" content="2019-03-03T13:28:05.143Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.156Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="about-ambari-new-feature">
 <meta name="twitter:description" content="Ambari 2.5，我们的专注点是继续提高日常Hadoop集群的运维和管理工作，Ambari整个社区都在努力让Ambari更加智能化易用的提供Hadoop集群的运营。">
@@ -80,8 +79,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> about-ambari-new-feature - WHOAMI </title>
@@ -193,8 +208,6 @@
 <h3 id="Upgrades"><a href="#Upgrades" class="headerlink" title="Upgrades"></a>Upgrades</h3><p>没有人想要停机进行集群的升级，甚至为了不想数据丢失风险而进行数据备份升级。Ambari最新的滚动升级功能，可以避免在升级过程中停机时间太长，这里提供一种保守的方法，确保升级过程中不会有数据丢失风险。通过滚动升级总持续时间会比快速升级更长。在Ambari 2.5中，提供了滚动升级期间有能力<code>暂停</code>，以获得重新对集群的操作控制，防止出现的任务状况。一个常见的问题，如果滚动升级需要几天时间，如果我的HiveServer2实例有个问题，需要重启，会发生生么？这就是为什么要添加<code>暂停</code>功能。你只需要点击<code>暂停</code>按钮，最小化升级窗口，然后完全控制集群以重新启动HiveServer2。完成此操作之后，只需要点击<code>Resume</code>即可继续完成升级。</p>
 <h3 id="DID-YOU-KNOW"><a href="#DID-YOU-KNOW" class="headerlink" title="DID YOU KNOW?"></a>DID YOU KNOW?</h3><p>脚本报警：在于客户交流中，我们会经常被问到Ambari如何配置发送报警信息到HipChat或Slack或Pager Duty的问题。Ambari其实是有提供这样的功能的<a href="https://cwiki.apache.org/confluence/display/AMBARI/Creating+a+Script-based+Alert+Dispatcher" target="_blank" rel="noopener">脚本报警</a>。此功能允许您定义在Ambari中触发警报时应调用的脚本，以便您轻松地与外部系统集成。所以下次如果你想发送一个Ambari Alert到你的自定义接收系统，配置一个脚本报警即可。</p>
 <p><strong>下半年是项目季，好忙…研发告一段落，开始奔波各种项目</strong></p>
-<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png" alt="Itweet公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -231,6 +244,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -248,7 +271,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -262,6 +285,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/09/03/about-ambari-new-feature/';
+
+  var disqus_title = "about-ambari-new-feature";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

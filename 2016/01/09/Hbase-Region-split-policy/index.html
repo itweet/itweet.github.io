@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="hbase-1.0简介在 HBase 中，Table 被横向划分为 Region，它是一段数据的管理者，Region 被分发到RegionServer 上进行管理，一个 Region 只被一个 RegionServer管理，它的数据存储在 HDFS 上，是可以有多个副本的。 也就是说：管理者 (Region) 只有一个，数据有多个副本。 HBase 的以前实现中，当一台 RegionServer不">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.493Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.111Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hbase-Region-split-policy">
 <meta name="twitter:description" content="hbase-1.0简介在 HBase 中，Table 被横向划分为 Region，它是一段数据的管理者，Region 被分发到RegionServer 上进行管理，一个 Region 只被一个 RegionServer管理，它的数据存储在 HDFS 上，是可以有多个副本的。 也就是说：管理者 (Region) 只有一个，数据有多个副本。 HBase 的以前实现中，当一台 RegionServer不">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Hbase-Region-split-policy - WHOAMI </title>
@@ -232,7 +248,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">scan &apos;hbase:meta&apos;, &#123;COLUMNS =&gt; &apos;info:regioninfo&apos;&#125;</span><br><span class="line">     </span><br><span class="line">hbase(main):017:0&gt; scan &apos;hbase:meta&apos;, &#123;COLUMNS =&gt; &apos;info:regioninfo&apos;, LIMIT =&gt; 1&#125;</span><br><span class="line">ROW                                    COLUMN+CELL                                                                                                     </span><br><span class="line"> cust_info,,1450145518714.ddefa1ac4420 column=info:regioninfo, timestamp=1450145519580, value=&#123;ENCODED =&gt; ddefa1ac442063171ca6ef9f9f0e9e2f, NAME =&gt; &apos;cu</span><br><span class="line"> 63171ca6ef9f9f0e9e2f.                 st_info,,1450145518714.ddefa1ac442063171ca6ef9f9f0e9e2f.&apos;, STARTKEY =&gt; &apos;&apos;, ENDKEY =&gt; &apos;&apos;&#125;&apos;&#125; </span><br><span class="line"></span><br><span class="line">hbase(main):008:0&gt; scan &apos;hbase:namespace&apos;, &#123;COLUMNS =&gt; &apos;info:d&apos;&#125;</span><br><span class="line">ROW                                    COLUMN+CELL                                                                                                     </span><br><span class="line"> default                               column=info:d, timestamp=1446179703117, value=\x0A\x07default                                                   </span><br><span class="line"> hbase                                 column=info:d, timestamp=1446179703143, value=\x0A\x05hbase                                                     </span><br><span class="line">2 row(s) in 0.0150 seconds</span><br></pre></td></tr></table></figure>
 <h1 id="hbase-snappy"><a href="#hbase-snappy" class="headerlink" title="hbase snappy"></a>hbase snappy</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">snappy hbase 结果&gt;&gt;</span><br><span class="line"></span><br><span class="line">表名                    未压缩大小   压缩后大小   压缩比例%</span><br><span class="line">user_last_live20151230   2.3 T        0.35T         85</span><br></pre></td></tr></table></figure>
 <p>参考：<a href="http://hbase.apache.org" target="_blank" rel="noopener">http://hbase.apache.org</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -269,6 +284,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -286,7 +311,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -300,6 +325,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/01/09/Hbase-Region-split-policy/';
+
+  var disqus_title = "Hbase-Region-split-policy";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

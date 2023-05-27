@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,13 +43,14 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="利用大前端技术构建 FusionDB 纯静态的官方网站，遇到的一些小坑，纯粹记录一下备忘。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://github.com/gatsbyjs/gatsby/blob/master/docs/docs/images/vscode-debug.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-09-26T03:23:01.747Z">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/vscode-debug.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/chrome-devtools-inspect.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/chrome-devtools-init.png">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.180Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Debugging the build process in fusiondb website">
 <meta name="twitter:description" content="利用大前端技术构建 FusionDB 纯静态的官方网站，遇到的一些小坑，纯粹记录一下备忘。">
-<meta name="twitter:image" content="https://github.com/gatsbyjs/gatsby/blob/master/docs/docs/images/vscode-debug.png">
+<meta name="twitter:image" content="https://www.itweet.cn/screenshots/vscode-debug.png">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -70,8 +71,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Debugging the build process in fusiondb website - WHOAMI </title>
@@ -195,7 +212,7 @@
 <p>关于 <code>.vscode/launch.json</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;version&quot;: &quot;0.2.0&quot;,</span><br><span class="line">  &quot;configurations&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;name&quot;: &quot;Gatsby develop&quot;,</span><br><span class="line">      &quot;type&quot;: &quot;node&quot;,</span><br><span class="line">      &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">      &quot;protocol&quot;: &quot;inspector&quot;,</span><br><span class="line">      &quot;program&quot;: &quot;$&#123;workspaceRoot&#125;/node_modules/gatsby/dist/bin/gatsby&quot;,</span><br><span class="line">      &quot;args&quot;: [&quot;develop&quot;],</span><br><span class="line">      &quot;stopOnEntry&quot;: false,</span><br><span class="line">      &quot;runtimeArgs&quot;: [&quot;--nolazy&quot;],</span><br><span class="line">      &quot;sourceMaps&quot;: false</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;name&quot;: &quot;Gatsby build&quot;,</span><br><span class="line">      &quot;type&quot;: &quot;node&quot;,</span><br><span class="line">      &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">      &quot;protocol&quot;: &quot;inspector&quot;,</span><br><span class="line">      &quot;program&quot;: &quot;$&#123;workspaceRoot&#125;/node_modules/gatsby/dist/bin/gatsby&quot;,</span><br><span class="line">      &quot;args&quot;: [&quot;build&quot;],</span><br><span class="line">      &quot;stopOnEntry&quot;: false,</span><br><span class="line">      &quot;runtimeArgs&quot;: [&quot;--nolazy&quot;],</span><br><span class="line">      &quot;sourceMaps&quot;: false</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在 gatsby-node.js 中设置断点并使用 VS Code 中的 Start debugging 命令后，您可以看到最终结果：</p>
-<p><img src="https://github.com/gatsbyjs/gatsby/blob/master/docs/docs/images/vscode-debug.png" alt></p>
+<p><img src="https://www.itweet.cn/screenshots/vscode-debug.png" alt></p>
 <blockquote>
 <p>注意: 如果断点没有在 <code>const value = createFilePath({ node, getNode })</code> 生效，你可以运行 <code>gatsby clean</code> 命令删除 <code>.cache</code> 和 <code>public</code> 目录，然后重试。</p>
 </blockquote>
@@ -205,8 +222,18 @@
 <li>–inspect-brk will enable Node’s inspector agent which will allow you to connect a debugger. It will also pause execution until the debugger is connected and then wait for you to resume it.</li>
 <li>–no-lazy - 这将迫使 Node 的 V8 引擎禁用延迟编译，便于设置断点。</li>
 </ul>
-<h3 id="Connecting-DevTools"><a href="#Connecting-DevTools" class="headerlink" title="Connecting DevTools"></a>Connecting DevTools</h3><p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
+<h3 id="Connecting-DevTools"><a href="#Connecting-DevTools" class="headerlink" title="Connecting DevTools"></a>Connecting DevTools</h3><p>在 Chrome 浏览器中键入 <code>chrome://inspect</code>，通过单击 <code>inspect</code> 连接到远程目标。</p>
+<p><img src="https://www.itweet.cn/screenshots/chrome-devtools-inspect.png" alt></p>
+<p>你应该能看到 Chrome DevTools 启动，代码执行在 <code>gatsby.js</code> 入口文件的开始处暂停。</p>
+<p><img src="https://www.itweet.cn/screenshots/chrome-devtools-init.png" alt></p>
+<h3 id="设置-Sources-Code"><a href="#设置-Sources-Code" class="headerlink" title="设置 Sources Code"></a>设置 <code>Sources Code</code></h3><p>在浏览器中可以选择添加一个本地的目录到 <code>Sources</code>。</p>
+<h3 id="Using-DevTools"><a href="#Using-DevTools" class="headerlink" title="Using DevTools"></a>Using DevTools</h3><p>添加本地项目到 <code>Sources</code> 中，就可以在浏览器的代码页面单机代码行号设置断点，进行愉快的调试了。</p>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2><p>总体来看在 IDE 中进行代码调试是非常方便的，而使用 Chrome DevTools 并不是那么的方便。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://nodejs.org/en/docs/guides/debugging-getting-started/" target="_blank" rel="noopener">debugging-getting-started</a></li>
+<li><a href="https://www.youtube.com/watch?v=Xb_0awoShR8" target="_blank" rel="noopener">Debugging with Node.js - Paul Irish talk at Node Summit 2017</a></li>
+<li><a href="https://github.com/gatsbyjs/gatsby/blob/master/docs/docs/debugging-the-build-process.md" target="_blank" rel="noopener">debugging-the-build-process</a></li>
+</ul>
 
             </div>
           
@@ -227,6 +254,12 @@
         
   <nav class="post-nav">
     
+      <a class="prev" href="/2019/12/24/spark-guava-library-problem/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Spark guava 库引发的系列问题</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
     
       <a class="next" href="/2019/07/30/how-to-quickly-deploy-flink-on-jdp-platform/">
         <span class="next-text nav-default">How to quickly deploy flink on jdp platform</span>
@@ -238,6 +271,16 @@
 
         
   <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -256,7 +299,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -270,6 +313,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2019/09/25/Debugging-the-build-process-in-fusiondb-website/';
+
+  var disqus_title = "Debugging the build process in fusiondb website";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

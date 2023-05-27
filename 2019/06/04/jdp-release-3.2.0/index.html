@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -44,8 +44,7 @@
 <meta property="og:description" content="JDP 3.2 是 3.x 系列中的第三个版本，经过一段漫长时间的研发测试，测试已达到我们对软件可用性与稳定性的基准，今天全票通过，决定发布正式版本。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://www.fusionlab.cn/zh-cn/docs/intro/img/ambari%E2%80%93dashboard.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-06-04T01:42:40.926Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JDP Release 3.2.0">
 <meta name="twitter:description" content="JDP 3.2 是 3.x 系列中的第三个版本，经过一段漫长时间的研发测试，测试已达到我们对软件可用性与稳定性的基准，今天全票通过，决定发布正式版本。">
@@ -70,8 +69,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> JDP Release 3.2.0 - WHOAMI </title>
@@ -218,8 +233,6 @@
 <p>单机、分布式系统都能一体化的管理。。。</p>
 <p>[1] JDP 官网: <a href="http://www.fusionlab.cn/" target="_blank" rel="noopener">http://www.fusionlab.cn/</a></p>
 <p>[2] JDP 快速启动：<a href="http://www.fusionlab.cn/zh-cn/docs/intro/quickstart.html" target="_blank" rel="noopener">http://www.fusionlab.cn/zh-cn/docs/intro/quickstart.html</a></p>
-<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
 
             </div>
           
@@ -256,6 +269,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -273,7 +296,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -287,6 +310,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2019/06/04/jdp-release-3.2.0/';
+
+  var disqus_title = "JDP Release 3.2.0";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

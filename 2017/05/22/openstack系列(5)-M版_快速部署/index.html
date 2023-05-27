@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -45,7 +45,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/openstack-nova-hostlist.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/nova-lists.png">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.514Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.146Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openstack系列(5)-M版_快速部署">
 <meta name="twitter:description" content="我们通过Packstack来自动化安装openstack机器，Packstack主要是由Redhat推出的用于概念验证（PoC）环境快速部署的工具。Packstack是一个命令行工具，它使用Python封装了Puppet模块，通过SSH在服务器上部署OpenStack。 必备条件 Centos 7/Redhat7 最小化安装系统。 openstack-mitaka 版本 ssh 免密码登录。 Li">
@@ -70,8 +70,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> openstack系列(5)-M版_快速部署 - WHOAMI </title>
@@ -228,8 +244,6 @@
 <p><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/nova-lists.png" alt></p>
 <p>如上图所示，我们按照预期安装了4个节点的openstack集群，一个控制节点，一个网络节点，4个计算节点，这就是通过<code>packstack</code>一键自动化安装openstack集群。后续章节中，我们会进一步介绍通过这样的配置方式来添加一个新的节点到已存在的openstack集群。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><code>openstack系列(5)-M版_快速部署</code>，也同样适用于其他更高的版本安装，但是由于我在生产环境使用M版本1年多无重大故障，所以我比较推荐使用一个稳定的版本。所以继续用M版本安装方式来编写本系列教程。本系列内容希望搭建从第一篇开始看起，每一篇都是以前一篇我基础来一步步实现集群的安装的，所以这一篇也是建立在之前的内容之上的，本篇其实就手动实践了怎么通过<code>packstack</code>工具自动化部署openstack。下一小节我们进入<code>openstack</code>网络的配置，欢迎持续关注。</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
-<p>参考：<a href="https://www.rdoproject.org/install/quickstart/" target="_blank" rel="noopener">https://www.rdoproject.org/install/quickstart/</a><br>    <a href="https://repos.fedorapeople.org/repos/openstack/" target="_blank" rel="noopener">https://repos.fedorapeople.org/repos/openstack/</a><br>    <a href="http://cloud.centos.org/centos/7/images/" target="_blank" rel="noopener">http://cloud.centos.org/centos/7/images/</a><br>    <a href="https://pom.nops.cloud/Introduction/read_guide.html" target="_blank" rel="noopener">https://pom.nops.cloud/Introduction/read_guide.html</a><br>    <a href="https://pom.nops.cloud/deployment_tool/packstack.html" target="_blank" rel="noopener">https://pom.nops.cloud/deployment_tool/packstack.html</a></p>
 
             </div>
           
@@ -266,6 +280,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -283,7 +307,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -297,6 +321,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/05/22/openstack系列(5)-M版_快速部署/';
+
+  var disqus_title = "openstack系列(5)-M版_快速部署";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

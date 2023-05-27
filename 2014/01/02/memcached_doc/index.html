@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="Memcached 是一个高性能的分布式内存对象缓存系统，用于动态Web应用以减轻数据库负载。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-03T08:10:29.865Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.050Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="memcached_doc">
 <meta name="twitter:description" content="Memcached 是一个高性能的分布式内存对象缓存系统，用于动态Web应用以减轻数据库负载。">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> memcached_doc - WHOAMI </title>
@@ -146,7 +162,6 @@
 <h2 id="检测安装是否成功"><a href="#检测安装是否成功" class="headerlink" title="检测安装是否成功"></a>检测安装是否成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@itr-nodetest02 memcached-1.2.0]#  ls -al /usr/local/bin/mem*</span><br><span class="line">-rwxr-xr-x 1 root root 113124 May 23 10:00 /usr/local/bin/memcached</span><br><span class="line">-rwxr-xr-x 1 root root 117479 May 23 10:00 /usr/local/bin/memcached-debug</span><br></pre></td></tr></table></figure>
 <h1 id="2、启动Memcached服务"><a href="#2、启动Memcached服务" class="headerlink" title="2、启动Memcached服务"></a>2、启动Memcached服务</h1><h2 id="2-1-启动Memcache的服务器端："><a href="#2-1-启动Memcache的服务器端：" class="headerlink" title="2.1.启动Memcache的服务器端："></a>2.1.启动Memcache的服务器端：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   #  /usr/local/bin/memcached -d -m 10 -u root -l 192.168.2.203 -p 11211 -c 256 -P /tmp/memcached.pid</span><br><span class="line"></span><br><span class="line">-d选项是启动一个守护进程，</span><br><span class="line">-m是分配给Memcache使用的内存数量，单位是MB，我这里是10MB，</span><br><span class="line">-u是运行Memcache的用户，我这里是root，</span><br><span class="line">-l是监听的服务器IP地址，如果有多个地址的话，我这里指定了服务器的IP地址192.168.0.200，</span><br><span class="line">-p是设置Memcache监听的端口，我这里设置了12000，最好是1024以上的端口，</span><br><span class="line">-c选项是最大运行的并发连接数，默认是1024，我这里设置了256，按照你服务器的负载量来设定，</span><br><span class="line">-P是设置保存Memcache的pid文件，我这里是保存在 /tmp/memcached.pid，</span><br></pre></td></tr></table></figure>
 <h2 id="3、测试Memcached"><a href="#3、测试Memcached" class="headerlink" title="3、测试Memcached:"></a>3、测试Memcached:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   # lsof -i :11211</span><br><span class="line">COMMAND    PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">memcached 4142 root    3u  IPv4  45398      0t0  TCP itr-nodetest02:memcache (LISTEN)</span><br><span class="line">memcached 4142 root    4u  IPv4  45399      0t0  UDP itr-nodetest02:memcache </span><br><span class="line"></span><br><span class="line"># yum install telnet -y</span><br><span class="line"># telnet 192.168.2.203 11211</span><br><span class="line">Trying 192.168.2.203...</span><br><span class="line">Connected to 192.168.2.203.</span><br><span class="line">Escape character is &apos;^]&apos;.</span><br><span class="line">^]</span><br><span class="line">telnet&gt; quit</span><br><span class="line">Connection closed.</span><br><span class="line">[root@itr-nodetest02 memcached-1.2.0]# ps -ef|grep memcached</span><br><span class="line">root      4142     1  0 10:04 ?        00:00:00 /usr/local/bin/memcached -d -m 10 -u root -l 192.168.2.203 -p 11211 -c 256 -P /tmp/memcached.pid</span><br></pre></td></tr></table></figure>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -177,6 +192,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -194,7 +219,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -208,6 +233,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2014/01/02/memcached_doc/';
+
+  var disqus_title = "memcached_doc";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

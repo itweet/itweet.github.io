@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="CMU 15-445/645 (FALL 2019) 数据库系统">
+
+
+
+
+  <meta name="keywords" content="2021,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2021/01/06/cmu-15-445-2019-fall-lab1/">
+
+
+<meta name="description" content="CMU 15-445/645 (FALL 2019) 数据库系统">
+<meta name="keywords" content="2021">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMU 15-445&#x2F;645 2019 lab1 实现分析">
+<meta property="og:url" content="http://itweet.github.io/2021/01/06/cmu-15-445-2019-fall-lab1/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="CMU 15-445/645 (FALL 2019) 数据库系统">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-05-27T06:59:15.261Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CMU 15-445&#x2F;645 2019 lab1 实现分析">
+<meta name="twitter:description" content="CMU 15-445/645 (FALL 2019) 数据库系统">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154998721-1');
+</script>
+
+
+    <title> CMU 15-445/645 2019 lab1 实现分析 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          CMU 15-445/645 2019 lab1 实现分析
+        
+      </h1>
+
+      <time class="post-time">
+          1月 06 2021
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><a href="https://15445.courses.cs.cmu.edu/fall2019/" target="_blank" rel="noopener">CMU 15-445/645 (FALL 2019)</a> 热门的数据库内核开发入门课程，实验部分几乎涵盖一个单机系统所有核心功能，课程非常注重理论与实践结合，讨论系统设计 trade-off 以及实践中是如何在性能，可靠性，稳定性等因素综合考量。</p>
+<p>课程老师 <a href="https://twitter.com/andy_pavlo" target="_blank" rel="noopener">Andy Pavlo</a> 非常强，实战经验丰富。</p>
+<p>2019 课程一共有 4 个 Lab 实验，今天我们讨论 <a href="https://15445.courses.cs.cmu.edu/fall2019/project1/" target="_blank" rel="noopener">PROJECT #1 - BUFFER POOL</a> 中的核心要点以及实践。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>todo</p>
+<h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><p>todo</p>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>todo</p>
+<p>Clock Replacer test 结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ cd build</span><br><span class="line">$ make clock_replacer_test</span><br><span class="line">$ ./test/clock_replacer_test</span><br><span class="line">Running main() from gmock_main.cc</span><br><span class="line">[==========] Running 5 tests from 1 test suite.</span><br><span class="line">[----------] Global test environment set-up.</span><br><span class="line">[----------] 5 tests from ClockReplacerTest</span><br><span class="line">[ RUN      ] ClockReplacerTest.SampleTest1</span><br><span class="line">[       OK ] ClockReplacerTest.SampleTest1 (0 ms)</span><br><span class="line">[ RUN      ] ClockReplacerTest.SampleTest2</span><br><span class="line">[       OK ] ClockReplacerTest.SampleTest2 (24 ms)</span><br><span class="line">[ RUN      ] ClockReplacerTest.Victim</span><br><span class="line">[       OK ] ClockReplacerTest.Victim (18 ms)</span><br><span class="line">[ RUN      ] ClockReplacerTest.Pin</span><br><span class="line">[       OK ] ClockReplacerTest.Pin (9 ms)</span><br><span class="line">[ RUN      ] ClockReplacerTest.Size</span><br><span class="line">[       OK ] ClockReplacerTest.Size (1572 ms)</span><br><span class="line">[----------] 5 tests from ClockReplacerTest (1624 ms total)</span><br><span class="line"></span><br><span class="line">[----------] Global test environment tear-down</span><br><span class="line">[==========] 5 tests from 1 test suite ran. (1624 ms total)</span><br><span class="line">[  PASSED  ] 5 tests.</span><br></pre></td></tr></table></figure>
+<p>Buffer Pool Manager test 结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ cd build</span><br><span class="line">$ make buffer_pool_manager_test</span><br><span class="line">$ ./test/buffer_pool_manager_test </span><br><span class="line">Running main() from gmock_main.cc</span><br><span class="line">[==========] Running 2 tests from 1 test suite.</span><br><span class="line">[----------] Global test environment set-up.</span><br><span class="line">[----------] 2 tests from BufferPoolManagerTest</span><br><span class="line">[ RUN      ] BufferPoolManagerTest.BinaryDataTest</span><br><span class="line">[       OK ] BufferPoolManagerTest.BinaryDataTest (4 ms)</span><br><span class="line">[ RUN      ] BufferPoolManagerTest.SampleTest</span><br><span class="line">[       OK ] BufferPoolManagerTest.SampleTest (2 ms)</span><br><span class="line">[----------] 2 tests from BufferPoolManagerTest (7 ms total)</span><br><span class="line"></span><br><span class="line">[----------] Global test environment tear-down</span><br><span class="line">[==========] 2 tests from 1 test suite ran. (7 ms total)</span><br><span class="line">[  PASSED  ] 2 tests.</span><br></pre></td></tr></table></figure>
+<h2 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h2><ul>
+<li><a href="https://15445.courses.cs.cmu.edu/fall2019/" target="_blank" rel="noopener">CMU 15-445/645 (FALL 2019)</a></li>
+<li><a href="https://15445.courses.cs.cmu.edu/fall2019/assignments.html" target="_blank" rel="noopener">ASSIGNMENTS</a></li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/2021/">2021</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2021/01/07/cmu-15-445-2019-fall-lab2/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">CMU 15-445/645 2019 lab2 实现分析</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2021/01/05/cmu-15-445-2019-fall-project4/">
+        <span class="next-text nav-default">CMU 15-445/645 2019 PROJECT `#4` - LOGGING & RECOVERY 翻译</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2023
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2021/01/06/cmu-15-445-2019-fall-lab1/';
+
+  var disqus_title = "CMU 15-445/645 2019 lab1 实现分析";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

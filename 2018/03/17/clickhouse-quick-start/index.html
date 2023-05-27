@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,12 +43,10 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="Clickhouse优雅的设计，超高的性能，让我忍不住想深入研究。边研究边总结，今天，我们介绍一下clickhouse快速上手，全文涉及一些具体配置，内容略多，主要介绍几种主要的安装方式。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-09-25T15:58:53.914Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="clickhouse-quick-start">
 <meta name="twitter:description" content="Clickhouse优雅的设计，超高的性能，让我忍不住想深入研究。边研究边总结，今天，我们介绍一下clickhouse快速上手，全文涉及一些具体配置，内容略多，主要介绍几种主要的安装方式。">
-<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -69,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> clickhouse-quick-start - WHOAMI </title>
@@ -319,8 +333,6 @@
 <p>[4] 数据仓库：过去、现在和未来</p>
 <p><strong><em>参考：</em></strong></p>
 <p>[1] <a href="https://clickhouse.yandex/#quick-start" target="_blank" rel="noopener">https://clickhouse.yandex/#quick-start</a><br>[2] <a href="https://hub.docker.com/r/yandex/clickhouse-server" target="_blank" rel="noopener">https://hub.docker.com/r/yandex/clickhouse-server</a><br>[3] <a href="https://clickhouse.yandex/docs/en/development/build.html" target="_blank" rel="noopener">https://clickhouse.yandex/docs/en/development/build.html</a><br>[4] <a href="https://github.com/red-soft-ru/clickhouse-rpm" target="_blank" rel="noopener">https://github.com/red-soft-ru/clickhouse-rpm</a><br>[5] <a href="http://jackpgao.github.io/2017/12/13/ClickHouse-Cluster-Beginning-to-End/" target="_blank" rel="noopener">http://jackpgao.github.io/2017/12/13/ClickHouse-Cluster-Beginning-to-End/</a><br>[6] <a href="https://clickhouse.yandex/docs/en/roadmap/" target="_blank" rel="noopener">https://clickhouse.yandex/docs/en/roadmap/</a></p>
-<p>欢迎关注微信公众号[Whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>
 
             </div>
           
@@ -357,6 +369,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -374,7 +396,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -388,6 +410,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2018/03/17/clickhouse-quick-start/';
+
+  var disqus_title = "clickhouse-quick-start";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

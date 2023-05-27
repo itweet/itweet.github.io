@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="Cloudera Search（是Apache Solr和 Apache Hadoop 生态系统的集成）现在对Solr Connections支持（作为5.9版本）备份和恢复。 在这篇文章中我们将讨论在Cloudera Search 内部备份的基本知识和灾难恢复能力。下一篇文章中我们将讨论Solr快照功能的设计 Hadoop生态系统的集成 和公有平台（例如，亚马逊 AWS） 对于大部分组织和最终用">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-25T15:56:44.226Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.143Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="怎么备份和灾难复原Apache Solr (part 1)">
 <meta name="twitter:description" content="Cloudera Search（是Apache Solr和 Apache Hadoop 生态系统的集成）现在对Solr Connections支持（作为5.9版本）备份和恢复。 在这篇文章中我们将讨论在Cloudera Search 内部备份的基本知识和灾难恢复能力。下一篇文章中我们将讨论Solr快照功能的设计 Hadoop生态系统的集成 和公有平台（例如，亚马逊 AWS） 对于大部分组织和最终用">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> 怎么备份和灾难复原Apache Solr (part 1) - WHOAMI </title>
@@ -192,7 +208,6 @@
 </ul>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在这篇文章中我们讨论了基础的备份和在Cloudera Search上的灾难复原。有关详细信息请参阅Cloudera Search文档。你也可以在SFBay apachelucene/Solr meetup上Search我对于备份和恢复Solr的观点。</p>
 <p>译文原文：<a href="https://blog.cloudera.com/blog/2017/05/how-to-backup-and-disaster-recovery-for-apache-solr-part-i/" target="_blank" rel="noopener">https://blog.cloudera.com/blog/2017/05/how-to-backup-and-disaster-recovery-for-apache-solr-part-i/</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -229,6 +244,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -246,7 +271,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -260,6 +285,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/05/16/怎么备份和灾难复原Apache-Solr-part-1/';
+
+  var disqus_title = "怎么备份和灾难复原Apache Solr (part 1)";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="Install &amp;amp;&amp;amp; Use1234567891011121314151617181920[whoami@server1 ~]$ sudo net-snmp-config --create-snmpv3-user -a &amp;quot;my_password&amp;quot; myuseradding the following line to /var/lib/net-snmp/snmpd">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-25T15:53:11.620Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.105Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="net-snmp">
 <meta name="twitter:description" content="Install &amp;amp;&amp;amp; Use1234567891011121314151617181920[whoami@server1 ~]$ sudo net-snmp-config --create-snmpv3-user -a &amp;quot;my_password&amp;quot; myuseradding the following line to /var/lib/net-snmp/snmpd">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> net-snmp - WHOAMI </title>
@@ -140,8 +156,6 @@
     
             <div class="post-content">
             <h1 id="Install-amp-amp-Use"><a href="#Install-amp-amp-Use" class="headerlink" title="Install &amp;&amp; Use"></a>Install &amp;&amp; Use</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[whoami@server1 ~]$ sudo net-snmp-config --create-snmpv3-user -a &quot;my_password&quot; myuser</span><br><span class="line">adding the following line to /var/lib/net-snmp/snmpd.conf:</span><br><span class="line">   createUser myuser MD5 &quot;my_password&quot; DES</span><br><span class="line">adding the following line to /etc/snmp/snmpd.conf:</span><br><span class="line">   rwuser myuser</span><br><span class="line"></span><br><span class="line">[whoami@server1 ~]$ snmpget -v 3 -u myuser -l authNoPriv -a MD5 -A my_password localhost sysUpTime.0</span><br><span class="line">DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (6064) 0:01:00.64</span><br><span class="line"></span><br><span class="line">[whoami@server1 ~]$ snmpwalk -v 3 -l authNoPriv -a MD5 -u myuser -A my_password localhost sysDescr</span><br><span class="line">SNMPv2-MIB::sysDescr.0 = STRING: Linux server1 2.6.32-573.el6.x86_64 #1 SMP Wed Jul 1 18:23:37 EDT 2015 x86_64</span><br><span class="line"></span><br><span class="line">[whoami@server1 ~]$ snmpwalk -v 3 -l authNoPriv -a MD5 -u myuser -A my_password localhost system</span><br><span class="line">SNMPv2-MIB::sysDescr.0 = STRING: Linux server1 2.6.32-573.el6.x86_64 #1 SMP Wed Jul 1 18:23:37 EDT 2015 x86_64</span><br><span class="line"></span><br><span class="line">[whoami@server1 ~]$ snmpwalk -v 3 -l authNoPriv -a MD5 -u myuser -A my_password server1|wc -l</span><br><span class="line">5326</span><br><span class="line"></span><br><span class="line">[whoami@server1 ~]$ snmpwalk -v 3 -l authNoPriv -a MD5 -u myuser -A my_password server1 sysUpTime</span><br><span class="line">DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (183424) 0:30:34.24</span><br></pre></td></tr></table></figure>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
-<p>参考：<br>    <a href="http://www.net-snmp.org/docs/README.snmpv3.html" target="_blank" rel="noopener">http://www.net-snmp.org/docs/README.snmpv3.html</a><br>    <a href="http://www.net-snmp.org/wiki/index.php/TUT:snmpwalk" target="_blank" rel="noopener">http://www.net-snmp.org/wiki/index.php/TUT:snmpwalk</a><br>    <a href="http://www.net-snmp.org/wiki/index.php/TUT:SNMPv3_Options" target="_blank" rel="noopener">http://www.net-snmp.org/wiki/index.php/TUT:SNMPv3_Options</a></p>
 
             </div>
           
@@ -178,6 +192,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -195,7 +219,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -209,6 +233,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/09/30/net-snmp/';
+
+  var disqus_title = "net-snmp";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

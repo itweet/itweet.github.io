@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -45,7 +45,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/hardware-disk.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/hardware-disk-2.png">
-<meta property="og:updated_time" content="2019-02-27T17:37:24.573Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop平台架构--硬件篇">
 <meta name="twitter:description" content="还记得刚接触Hadoop的时候,还是1.x版本,硬是在自己的4GB内存上面弄了3个虚拟机学习,条件有些艰苦,Hadoop测试集群搭建不需要太多考虑,随着毕业开始进入企业,在企业中实践Hadoop,特别是一定规模的集群,逐渐涉及到硬件资源,网络规划,操作系统,软件栈等一系列问题！对于一个没有经验的小白来说,还是比较复杂的,还好公司有linux大牛配合上我从各种技术网站博客吸收的微薄知识，从0开始">
@@ -70,8 +70,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Hadoop平台架构--硬件篇 - WHOAMI </title>
@@ -212,7 +228,6 @@
 <p><a href="https://www.itweet.cn/2015/07/24/yarn-resources-manager-allocation/" target="_blank" rel="noopener">Yarn资源分配性能调优</a></p>
 <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p> 购买合适的硬件，对于一个Hapdoop群集而言，需要性能测试和细心的计划，从而全面理解工作负荷。然而，Hadoop群集通常是一个形态变化的系统， 而Cloudera建议，在开始的时候，使用负载均衡的技术文档来部署启动的硬件。重要的是，记住，当使用多种体系组件的时候，资源的使用将会是多样的, 而专注与资源管理将会是你成功的关键。</p>
 <p>推荐技术网站：<br>    <a href="http://www.cloudera.com/content/www/en-us/documentation.html" target="_blank" rel="noopener">http://www.cloudera.com/content/www/en-us/documentation.html</a><br>    <a href="http://blog.cloudera.com/" target="_blank" rel="noopener">http://blog.cloudera.com/</a><br>    <a href="http://docs.hortonworks.com/" target="_blank" rel="noopener">http://docs.hortonworks.com/</a><br>    <a href="http://databricks.com/blog" target="_blank" rel="noopener">http://databricks.com/blog</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -249,6 +264,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -266,7 +291,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -280,6 +305,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/01/26/Hadoop-par1/';
+
+  var disqus_title = "Hadoop平台架构--硬件篇";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

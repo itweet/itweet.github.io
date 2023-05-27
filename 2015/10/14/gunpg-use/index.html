@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="GnuPG（GNU Privacy Guard或GPG）是一个以GNU通用公共许可证释出的开放源码用于加密或签名的软件，可用来取代PGP。大多数gpg软件仅支持命令行方式，一般人较难掌握。由于gpg软件开放源代码，很难隐藏后门，因此比pgp等商业软件安全。 install gnupg12whoami@ubuntu:~$ sudo apt-get install gnupg #for ubuntuw">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-25T15:53:14.970Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.106Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gunpg-use">
 <meta name="twitter:description" content="GnuPG（GNU Privacy Guard或GPG）是一个以GNU通用公共许可证释出的开放源码用于加密或签名的软件，可用来取代PGP。大多数gpg软件仅支持命令行方式，一般人较难掌握。由于gpg软件开放源代码，很难隐藏后门，因此比pgp等商业软件安全。 install gnupg12whoami@ubuntu:~$ sudo apt-get install gnupg #for ubuntuw">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> gunpg-use - WHOAMI </title>
@@ -150,7 +166,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">whoami@ubuntu:~$ gpg --keyserver keys.gnupg.net --send-key PID</span><br><span class="line">gpg: 将密钥‘PID’上传到 hkp 服务器 keys.gnupg.net</span><br><span class="line"></span><br><span class="line">注：你要把其中的 PID 替换成你公钥的id。</span><br><span class="line"></span><br><span class="line">其中参数：</span><br><span class="line"></span><br><span class="line">    –keyserver 用于指定公钥服务器，没有特殊需求的话是可以省略这个参数的，不过有些 GnuPG 版本可能需要指定这个参数才能正常工作。</span><br><span class="line">    –send-key 用于指定待发布的公钥的id。</span><br><span class="line"></span><br><span class="line">好了，至此你已经学会生成钥匙对以及发布公钥了。</span><br></pre></td></tr></table></figure>
 <h1 id="use-command-gpg-file"><a href="#use-command-gpg-file" class="headerlink" title="use command gpg file"></a>use command gpg file</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">1、在公钥服务器搜索作者的公钥并导入到本机</span><br><span class="line">whoami@ubuntu:~$ gpg --keyserver keys.gnupg.net --search-key whoami</span><br><span class="line">参数 –search-key 用于指定搜索关键字，可以是uid的名字或者email地址部分。结果大致如下：</span><br><span class="line"></span><br><span class="line">gpg: 搜索“whoami”，在 hkp 服务器 keys.gnupg.net 上</span><br><span class="line">(1) whoami (whoami) &lt;whoami.itweet@qq.com&gt;</span><br><span class="line">      2048 bit RSA key CC5E7372, 创建于：2015-10-14</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">whoami@ubuntu:~$  gpg --keyserver keys.gnupg.net --recv-key 0xCC5E7372</span><br><span class="line">gpg: 下载密钥‘CC5E7372’，从 hkp 服务器 keys.gnupg.net</span><br><span class="line">gpgkeys: key CC5E7372 not found on keyserver</span><br><span class="line">gpg: 找不到有效的 OpenPGP 数据。</span><br><span class="line">gpg: 合计被处理的数量：0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 这里需要时间同步，所以不能立即查询到！</span><br><span class="line"></span><br><span class="line">如果你朋友已经发送给你了 key.public公钥文件，通过下面命令直接导入你朋友的公钥</span><br><span class="line">whoami@ubuntu:~$ gpg --import key.public</span><br><span class="line"></span><br><span class="line">2、核对公钥的指纹值并签收公钥</span><br><span class="line"> 因为公钥有可能出现冒牌货，所以每个公钥里都加入了指纹值，使用下面命令可以查看指纹值</span><br><span class="line"></span><br><span class="line">whoami@ubuntu:~$  gpg --fingerprint</span><br><span class="line">/home/whoami/.gnupg/pubring.gpg</span><br><span class="line">-------------------------------</span><br><span class="line">pub   2048R/CC5E7372 2015-10-14</span><br><span class="line">      密钥指纹 = 96D4 36CC 5871 F7EA 0509  162E 1686 DC44 CC5E 7372</span><br><span class="line">uid                  whoami (whoami) &lt;whoami.itweet@qq.com&gt;</span><br><span class="line">sub   2048R/9F7266CD 2015-10-14</span><br><span class="line"></span><br><span class="line">确定取得的公钥是真货之后，使用如下命令对这个公钥进行签收（sign key）：</span><br><span class="line">whoami@ubuntu:~$ gpg --sign-key whoami</span><br><span class="line"></span><br><span class="line">pub  2048R/CC5E7372  创建于：2015-10-14  有效至：永不过期       可用于：SC  </span><br><span class="line">                     信任度：绝对        有效性：绝对</span><br><span class="line"></span><br><span class="line">运行上面的命令之后它提示你再确认一次指纹值，输入y并按回车确定。</span><br><span class="line"></span><br><span class="line">提示，如果发现获取回来的是冒牌货，可以使用如下的命令删除它：</span><br><span class="line"></span><br><span class="line">whoami@ubuntu:~$ gpg --delete-keys whoami</span><br><span class="line"></span><br><span class="line">3、加密一个文件</span><br><span class="line">whoami@ubuntu:~$ gpg -a --output mm-ciper.cfg -r whoami.itweet@qq.com -e mm.cfg </span><br><span class="line"></span><br><span class="line">中参数：</span><br><span class="line"></span><br><span class="line">    -a 表示输出文本文件格式。</span><br><span class="line">    –output 指定输出（即加密后）的文件名。</span><br><span class="line">    -r 指定信息的接收者（recipient）公钥的uid，可以是名字也可以是email地址。</span><br><span class="line">    -e 表示这次要执行的是加密（encrypt）操作。</span><br><span class="line"></span><br><span class="line">执行完毕之后会在当前文件夹产生文件 mm-ciper.cfg，这个就是被加密之后的文件。</span><br><span class="line"></span><br><span class="line">注：如果你要加密的是一个二进制文件，则可以省略 -a 参数，这样产生的加密文件的体积会小一些</span><br><span class="line"></span><br><span class="line">4、解密一个文件</span><br><span class="line">whoami@ubuntu:~$ gpg --output mm-plain.txt -d mm-ciper.cfg </span><br><span class="line">                #注：第一次这里会提示输入密码，为你刚开始使用gpg设置的秘密</span><br><span class="line"></span><br><span class="line">其中参数：</span><br><span class="line"></span><br><span class="line">    –output 指定输出（即解密后）的文件名。</span><br><span class="line">    -d 表示这次要执行的是解密（decrypt）操作。</span><br><span class="line">    GnuPG程序会自动使用我的私钥来解密信息，最后得到一个跟原始内容一样的文本文件mm-plain.txt。</span><br><span class="line"></span><br><span class="line">至此，你已经学会使用 GnuPG 加密解密文件了。</span><br><span class="line"></span><br><span class="line">提示1：导入公钥、核对公钥的指纹值、签名公钥这些操作你只需做一次，以后就可以重复多次使用该公钥加密信息并发送给对方。</span><br><span class="line"></span><br><span class="line">提示2：如果你想自己体会整个加密和解密过程，可以用自己的公钥加密信息，然后用自己的私钥解密，只需把上面第3步的命令当中的接收者uid（whoami@qq.com）更改为自己的uid即可。</span><br></pre></td></tr></table></figure>
 <h1 id="使用命令行对文件进行数字签名"><a href="#使用命令行对文件进行数字签名" class="headerlink" title="使用命令行对文件进行数字签名"></a>使用命令行对文件进行数字签名</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">1、数字签名一个文件的方法A</span><br><span class="line">whoami@ubuntu:~$ gpg -a -b mm.cfg </span><br><span class="line">其中参数</span><br><span class="line"></span><br><span class="line">    -a 表示输出文本文件格式。</span><br><span class="line">    -b 表示以生成独立的签名文件的方式进行签名。</span><br><span class="line">命令执行完毕之后，会在当前文件夹里产生一个 mm.cfg.asc 的文件，这个文件即签名。现在我应该把原信息文件 mm.cfg 连同签名文件 mm.cfg.asc 一起寄给你，然后你使用如下命令检验：</span><br><span class="line"></span><br><span class="line">whoami@ubuntu:~$ gpg --verify mm.cfg.asc </span><br><span class="line">gpg: 于 2015年10月14日 星期三 17时15分18秒 CST 创建的签名，使用 RSA，钥匙号 CC5E7372</span><br><span class="line">gpg: 完好的签名，来自于“whoami (whoami) &lt;whoami.itweet@qq.com&gt;”</span><br><span class="line"></span><br><span class="line">其中最重要的是 “Good signature” 字样，表示通过检验，否则表示没通过检验（即意味着原信息的内容被篡改或者原信息不是我发出的）。</span><br><span class="line"></span><br><span class="line">提示：如果你有多个私钥，在签名时需要加上参数 -u 指定私钥的 uid。</span><br><span class="line"></span><br><span class="line">2、数字签名一个文件的方法B</span><br><span class="line">如果不想生成一个独立的签名文件，则还可以用如下的命令进行签名：</span><br><span class="line">whoami@ubuntu:~$ gpg -a --clearsign mm.cfg </span><br><span class="line"></span><br><span class="line">跟方法A不同的地方是用参数 –clearsign 替代了参数 -b。参数 clearsign 表示将签名和原信息合并在一起，并生成一个新文件。</span><br><span class="line"></span><br><span class="line">命令运行后同样会生成一个文件 mm.cfg.asc，内容如下：</span><br><span class="line">whoami@ubuntu:~$ cat mm.cfg.asc </span><br><span class="line">-----BEGIN PGP SIGNED MESSAGE-----</span><br><span class="line">Hash: SHA1</span><br><span class="line">xxx</span><br><span class="line">xxx</span><br><span class="line">-----BEGIN PGP SIGNATURE-----</span><br><span class="line">Version: GnuPG v1</span><br><span class="line"></span><br><span class="line">iQEcBAEBAgAGBQJWHh4HAAoJEBaG3ETMXnNyxGAH/0bDL/J3kcLjbgtJdjrncbN6</span><br><span class="line">ARq6W+V+05jnm8Uv7KlT7I2cs4ujerLY89ahfRdU0LQlW36Gs+GhonOM0JwvuyMP</span><br><span class="line">bpwARW7ZBswWfY6HVgoc3taTlVaoIezYVnlryBXn7Kr7/PJfkZpX/Ig7UiH4wd60</span><br><span class="line">UT/3h1cz/qfx2aH4PSggX6ersj/DadVMHSQVb+0OZrAlBwqbglEj2eZRfBiZMfNF</span><br><span class="line">YK6tTKJKtE2blLemtQh8xAcTWq++BZdR8oFbXE26IoUhNWRz5VkNRMaABduX4+K6</span><br><span class="line">qwiR1/j4N0Ureu7WFQuN/6vhOgd1hDkLQhfPxFMpcehqA/Oqq3XIztBs0Ye9LZc=</span><br><span class="line">=xfIv</span><br><span class="line">-----END PGP SIGNATURE-----</span><br><span class="line"></span><br><span class="line">使用如下命令进行检验：</span><br><span class="line">whoami@ubuntu:~$ gpg --verify mm.cfg.asc</span><br><span class="line"></span><br><span class="line">使用如下命令可以把原始信息提取出来：</span><br><span class="line">    whoami@ubuntu:~$ gpg --output mm-original.txt -d mm.cfg.asc</span><br><span class="line"></span><br><span class="line">至此已经讲完 GnuPG 的基本操作了，如果你还想更深入了解它，这里有几篇官方的文档，推荐阅读一下：</span><br><span class="line"></span><br><span class="line">迷你Howto教程：http://www.dewinter.com/gnupg_howto/english/GPGMiniHowto.html</span><br><span class="line">迷你Howto教程（中文版）： http://www.gnupg.org/howtos/zh/index.html</span><br><span class="line">The GNU Privacy Handbook http://www.gnupg.org/gph/en/manual.html</span><br><span class="line">另外 wiki 对 OpenPGP 的讲解也很有值得阅读：</span><br><span class="line"></span><br><span class="line">Pretty Good Privacy http://en.wikipedia.org/wiki/Pretty_Good_Privacy</span><br><span class="line">还有一些本文未提到但会用得上的命令：</span><br><span class="line"></span><br><span class="line">Quick’n easy gpg cheatsheet http://irtfweb.ifa.hawaii.edu/~lockhart/gpg/</span><br></pre></td></tr></table></figure>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -187,6 +202,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -204,7 +229,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -218,6 +243,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/10/14/gunpg-use/';
+
+  var disqus_title = "gunpg-use";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

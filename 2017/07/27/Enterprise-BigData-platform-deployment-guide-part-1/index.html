@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -45,8 +45,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/server_list.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/cluster_network.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-03-05T15:09:47.510Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Enterprise-BigData-platform-deployment-guide-part-1">
 <meta name="twitter:description" content="企业级大数据平台部署实施参考指南，截止目前我设计实现的集群已经几十个了，集群规模从几台到上千台的规模，主要是一些规范和经验吧，记录一下避免遗忘，今天我们聊集群硬件配置。 机架操作系统版本CentOs6.8，用户名root，密码123456.  在集群安装前，需要收集集群的网络信息、规范主机名、所属机架，集群规划设计的时候需要使用。 网络 这篇内容，最核心也是最关键的内容，此图足矣表述。 如图，可容">
@@ -71,8 +70,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Enterprise-BigData-platform-deployment-guide-part-1 - WHOAMI </title>
@@ -182,8 +197,6 @@
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>我们在10GE网络的庞大集群设计中，网络、硬件、大数据软件选型都非常重要，从硬件到软件都需紧密的配合达到最优性能，才能最大化发挥集群的性能。每台计算节点配置SSD盘做集群加速，利用HDFS的多级存储支持，让热数据存储在SSD中加速数据存取分析效率。</p>
 <p>在这样庞大的集群规模下，集群前期POC调优让软硬件达到最佳状态，把服务器上架开始算起少则1-3个月，多则2-4个月，所耗费的人力物力…，对很大多数公司来说如此庞大的集群没有意义，但是对正真需要这样庞大集群的公司来说，意义重大。</p>
 <p>《企业级大数据平台部署实施参考指南》分多节，有更多细节剖析，不妥之处欢迎指正！</p>
-<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -220,6 +233,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -237,7 +260,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -251,6 +274,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/07/27/Enterprise-BigData-platform-deployment-guide-part-1/';
+
+  var disqus_title = "Enterprise-BigData-platform-deployment-guide-part-1";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

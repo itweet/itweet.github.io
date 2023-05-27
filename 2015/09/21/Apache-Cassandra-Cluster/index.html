@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -48,7 +48,7 @@
 <meta property="og:image" content="http://www.itweet.github.io/screenshots/cassandra-home.png">
 <meta property="og:image" content="http://www.itweet.github.io/screenshots/cassandra-home1.png">
 <meta property="og:image" content="http://www.itweet.github.io/screenshots/cassandra-hosts.png">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.490Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.103Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache-Cassandra-Cluster">
 <meta name="twitter:description" content="简介：Cassandra 是一个分布式的存储引擎，用来管理分布在大量普通商用级别服务器上面的海量的结构化数据，可以提供高可用性，不存在单点故障。Cassandra设计目标，是运行在千台规模的服务器节点上面，节点可以跨越IDC.在这个规模上，大小组件都会频繁的发生故障。当故障发生时，Cassandra通过对持久层状态的有效管理，来达成整个系统的可靠性和扩展性。在很多场合，Cassandra作为一个数">
@@ -73,8 +73,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Apache-Cassandra-Cluster - WHOAMI </title>
@@ -177,8 +193,6 @@
 <h1 id="datastax-by-rpm-install-cassandra-cluster"><a href="#datastax-by-rpm-install-cassandra-cluster" class="headerlink" title="datastax by rpm install cassandra cluster"></a>datastax by rpm install cassandra cluster</h1><ul>
 <li><a href="http://docs.datastax.com/en/landing_page/doc/landing_page/current.html" target="_blank" rel="noopener">http://docs.datastax.com/en/landing_page/doc/landing_page/current.html</a></li>
 </ul>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
-<p>参考：<br>      文档：<a href="http://docs.datastax.com/en/cql/3.3/cql/cql_reference/cqlsh.html" target="_blank" rel="noopener">http://docs.datastax.com/en/cql/3.3/cql/cql_reference/cqlsh.html</a><br>      压缩数据：<a href="http://docs.datastax.com/en/cassandra/2.2/cassandra/operations/opsConfigCompress.html" target="_blank" rel="noopener">http://docs.datastax.com/en/cassandra/2.2/cassandra/operations/opsConfigCompress.html</a><br>      CQL: <a href="http://docs.datastax.com/en/cql/3.3/cql/cqlIntro.html" target="_blank" rel="noopener">http://docs.datastax.com/en/cql/3.3/cql/cqlIntro.html</a><br>      cassadra细节：<a href="http://blog.sina.com.cn/s/blog_502c8cc40100p860.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_502c8cc40100p860.html</a></p>
 
             </div>
           
@@ -215,6 +229,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -232,7 +256,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -246,6 +270,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/09/21/Apache-Cassandra-Cluster/';
+
+  var disqus_title = "Apache-Cassandra-Cluster";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

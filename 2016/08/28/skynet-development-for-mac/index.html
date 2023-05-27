@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="大型分布式监控软件-skynet Python Dev 在Mac下面通过BrewHome来安装Python Dev环境，安装完成之后，调整系统环境变量，由于Mac Terminal我试用了(oh my zsh)[https://www.itweet.cn/2016/04/11/macbook-pro-conf/]所以用户环境变量修改`~/.zshrc`文件，在此文件末尾添加如下一行1export">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-27T17:43:20.116Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="skynet development for mac">
 <meta name="twitter:description" content="大型分布式监控软件-skynet Python Dev 在Mac下面通过BrewHome来安装Python Dev环境，安装完成之后，调整系统环境变量，由于Mac Terminal我试用了(oh my zsh)[https://www.itweet.cn/2016/04/11/macbook-pro-conf/]所以用户环境变量修改`~/.zshrc`文件，在此文件末尾添加如下一行1export">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> skynet development for mac - WHOAMI </title>
@@ -200,7 +216,6 @@
 <h1 id="jinja2-or-Mako"><a href="#jinja2-or-Mako" class="headerlink" title="jinja2 or Mako"></a>jinja2 or Mako</h1><h1 id="Atlas"><a href="#Atlas" class="headerlink" title="Atlas"></a>Atlas</h1><h1 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h1><ul>
 <li>gRPC 安装失败，因为Google被墙的问题，访问<code>googlemock.googlecode.com</code> timed out,翻墙解决.</li>
 </ul>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -237,6 +252,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -254,7 +279,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -268,6 +293,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/08/28/skynet-development-for-mac/';
+
+  var disqus_title = "skynet development for mac";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

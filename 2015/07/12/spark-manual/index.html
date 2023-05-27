@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -49,7 +49,7 @@
 <meta property="og:image" content="https://www.itweet.cn/screenshots/streaming-hdfs-1.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/kafka_streaming.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/kafka_streaming_1.png">
-<meta property="og:updated_time" content="2019-03-05T15:09:47.486Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.071Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark manual">
 <meta name="twitter:description" content="Spark 的安装与使用">
@@ -74,8 +74,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> spark manual - WHOAMI </title>
@@ -315,7 +331,6 @@ For now, the mapred.reduce.tasks property is still recognized, and is converted 
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">spark.history.updateInterval </span><br><span class="line">　　默认值：10 </span><br><span class="line">　　以秒为单位，更新日志相关信息的时间间隔</span><br><span class="line"></span><br><span class="line">spark.history.retainedApplications </span><br><span class="line">　　默认值：50 </span><br><span class="line">　　在内存中保存Application历史记录的个数，如果超过这个值，旧的应用程序信息将被删除，当再次访问已被删除的应用信息时需要重新构建页面。</span><br><span class="line"></span><br><span class="line">spark.history.ui.port </span><br><span class="line">　　默认值：18080 </span><br><span class="line">　　HistoryServer的web端口</span><br><span class="line"></span><br><span class="line">spark.history.kerberos.enabled </span><br><span class="line">　　默认值：false </span><br><span class="line">　　是否使用kerberos方式登录访问HistoryServer，对于持久层位于安全集群的HDFS上是有用的，如果设置为true，就要配置下面的两个属性</span><br><span class="line"></span><br><span class="line">spark.history.kerberos.principal </span><br><span class="line">　　默认值：用于HistoryServer的kerberos主体名称</span><br><span class="line"></span><br><span class="line">spark.history.kerberos.keytab </span><br><span class="line">　　用于HistoryServer的kerberos keytab文件位置</span><br><span class="line"></span><br><span class="line">spark.history.ui.acls.enable </span><br><span class="line">　　默认值：false </span><br><span class="line">　　授权用户查看应用程序信息的时候是否检查acl。如果启用，只有应用程序所有者和spark.ui.view.acls指定的用户可以查看应用程序信息;否则，不做任何检查</span><br><span class="line"></span><br><span class="line">spark.eventLog.enabled </span><br><span class="line">　　默认值：false </span><br><span class="line">　　是否记录Spark事件，用于应用程序在完成后重构webUI</span><br><span class="line"></span><br><span class="line">spark.eventLog.dir </span><br><span class="line">　　默认值：file:///tmp/spark-events </span><br><span class="line">　　保存日志相关信息的路径，可以是hdfs://开头的HDFS路径，也可以是file://开头的本地路径，都需要提前创建</span><br><span class="line"></span><br><span class="line">spark.eventLog.compress </span><br><span class="line">　　默认值：false </span><br><span class="line">　　是否压缩记录Spark事件，前提spark.eventLog.enabled为true，默认使用的是snappy</span><br></pre></td></tr></table></figure>
 <p>参考：<a href="https://spark.apache.org/" target="_blank" rel="noopener">https://spark.apache.org/</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -352,6 +367,16 @@ For now, the mapred.reduce.tasks property is still recognized, and is converted 
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -369,7 +394,7 @@ For now, the mapred.reduce.tasks property is still recognized, and is converted 
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -383,6 +408,37 @@ For now, the mapred.reduce.tasks property is still recognized, and is converted 
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/07/12/spark-manual/';
+
+  var disqus_title = "spark manual";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

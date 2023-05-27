@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -44,7 +44,7 @@
 <meta property="og:description" content="Git 使用有段时间了,个人博客也是托管到git上面,经常用到的命令放到这，主要供自己查阅使用">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/git_workflow.jpg">
-<meta property="og:updated_time" content="2019-09-25T15:52:18.114Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git manual">
 <meta name="twitter:description" content="Git 使用有段时间了,个人博客也是托管到git上面,经常用到的命令放到这，主要供自己查阅使用">
@@ -69,8 +69,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> git manual - WHOAMI </title>
@@ -188,7 +204,6 @@
 <h3 id="获取git命令帮助"><a href="#获取git命令帮助" class="headerlink" title="获取git命令帮助"></a>获取git命令帮助</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git –help</span><br><span class="line">man git</span><br><span class="line">git –help</span><br></pre></td></tr></table></figure>
 <h2 id="10-个迅速提升你-Git-水平的提示"><a href="#10-个迅速提升你-Git-水平的提示" class="headerlink" title="10 个迅速提升你 Git 水平的提示"></a>10 个迅速提升你 Git 水平的提示</h2><p><a href="http://www.oschina.net/translate/10-tips-git-next-level" target="_blank" rel="noopener">http://www.oschina.net/translate/10-tips-git-next-level</a></p>
 <h2 id="git-rest-回退-commit"><a href="#git-rest-回退-commit" class="headerlink" title="git rest 回退 commit"></a>git rest 回退 commit</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard commit_id</span><br><span class="line">git push -f origin master</span><br></pre></td></tr></table></figure>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -225,6 +240,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -242,7 +267,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -256,6 +281,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/07/12/git-manual/';
+
+  var disqus_title = "git manual";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

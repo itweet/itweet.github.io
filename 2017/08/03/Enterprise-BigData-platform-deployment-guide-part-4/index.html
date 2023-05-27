@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -58,8 +58,7 @@
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step9-Install-Start-and-Test.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Step10–Summary.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/ambari–dashboard.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.523Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Enterprise-BigData-platform-deployment-guide-part-4">
 <meta name="twitter:description" content="集群的安装方式选择Ambari来进行自动化安装，目前Ambari是开源的大数据管理工具，而HDP是不开源。Ambari做为Apache顶级项目支持可插拔的管理各种不同的大数据发行版，每个公司有技术能力都可以做一个大数据版本，让Ambari进行管理，所以说Ambari其实是支持多平台的一款大数据自动化部署和管理软件。 Ambari安装下载相关的repo文件，到需要安装ambari-server的主机">
@@ -84,8 +83,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Enterprise-BigData-platform-deployment-guide-part-4 - WHOAMI </title>
@@ -211,8 +226,6 @@
 <p>一般通过Apache搭建内网源，搭建之后把相关的<code>os.repo</code>和<code>ambari.repo</code>放到ambari-server服务器<code>/etc/yum.repo.d/</code>,然后执行命令<code>yum search mysql &amp;&amp; yum search ambari-server</code>验证是否具备相关源环境，如此这般，你才能如我文中所述步骤，顺利的一路绿色的成功部署集群。</p>
 <p>实战内容设计的技术有Linux操作系统的安装，Linux网络配置，Linux磁盘分区，Linux基本参数优化，HDP和OS离线源搭建(Apache或者Nginx)，Ambari自动化部署大数据集群等…</p>
 <p>《企业级大数据平台部署实施参考指南》分多节，有更多细节剖析，不妥之处欢迎指正！</p>
-<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -249,6 +262,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -266,7 +289,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -280,6 +303,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/08/03/Enterprise-BigData-platform-deployment-guide-part-4/';
+
+  var disqus_title = "Enterprise-BigData-platform-deployment-guide-part-4";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

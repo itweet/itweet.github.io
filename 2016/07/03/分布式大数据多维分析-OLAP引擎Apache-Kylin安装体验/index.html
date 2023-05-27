@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="Apache Kylin旨在减少Hadoop在10亿及百亿规模以上数据级别的情况下的查询延迟，目前底层数据存储基于HBase，具有较强的可伸缩性。 环境依赖 hadoop-2.7.1 hbase-1.1.5 apache-hive-2.0.1-bin  配置环境变量下载kylin基于hbase1.x的部署包1wget https://dist.apache.org/repos/dist/relea">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-05T15:09:47.498Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式大数据多维分析（OLAP）引擎Apache Kylin安装体验">
 <meta name="twitter:description" content="Apache Kylin旨在减少Hadoop在10亿及百亿规模以上数据级别的情况下的查询延迟，目前底层数据存储基于HBase，具有较强的可伸缩性。 环境依赖 hadoop-2.7.1 hbase-1.1.5 apache-hive-2.0.1-bin  配置环境变量下载kylin基于hbase1.x的部署包1wget https://dist.apache.org/repos/dist/relea">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> 分布式大数据多维分析（OLAP）引擎Apache Kylin安装体验 - WHOAMI </title>
@@ -179,7 +195,6 @@
 <p>请参考我的另外一篇文章：<a href="https://www.itweet.cn/2016/07/02/Hadoop-Native-Libraries-Guide/" target="_blank" rel="noopener">Hadoop-Native-Libraries-Guide</a></p>
 </blockquote>
 <p>参考：<br>Apache Kylin™: <a href="http://kylin.apache.org/" target="_blank" rel="noopener">http://kylin.apache.org/</a><br>Extreme OLAP Engine for Big Data: <a href="http://kylin.apache.org/blog/" target="_blank" rel="noopener">http://kylin.apache.org/blog/</a><br>Apache Kylin的快速数据立方体算法——概述：<a href="http://www.infoq.com/cn/articles/apache-kylin-algorithm/" target="_blank" rel="noopener">http://www.infoq.com/cn/articles/apache-kylin-algorithm/</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -216,6 +231,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -233,7 +258,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -247,6 +272,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/07/03/分布式大数据多维分析-OLAP引擎Apache-Kylin安装体验/';
+
+  var disqus_title = "分布式大数据多维分析（OLAP）引擎Apache Kylin安装体验";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

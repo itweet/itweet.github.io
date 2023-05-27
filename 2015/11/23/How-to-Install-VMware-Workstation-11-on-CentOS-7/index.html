@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -46,7 +46,7 @@
 <meta property="og:image" content="https://www.itweet.cn/screenshots/vm-install-1.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/vm-install-2.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/vm-start.png">
-<meta property="og:updated_time" content="2019-09-25T15:53:24.190Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to Install VMware Workstation 11 on CentOS 7">
 <meta name="twitter:description" content="This tutorial will show you how to install VMware Workstation 11 on RHEL 7, CentOS 7, Fedora 21, Debian 7 and Ubuntu 14.10/14.04. VMware Workstation 11 is a popular software which allows you to run mu">
@@ -71,8 +71,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> How to Install VMware Workstation 11 on CentOS 7 - WHOAMI </title>
@@ -193,8 +209,6 @@
 <p>报错信息类似：<br>          kernel-headers,Kernel-devel没有找到，特定去安装之后，依然无法解决。</p>
 </blockquote>
 <p>  2、VMware-Workstation-Full-11.0.0版本，可以正常在redhat6.7/centos6.7版本运行。</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
-<p>参考：<br>    <a href="http://www.tecmint.com/install-vmware-workstation-11-in-linux/" target="_blank" rel="noopener">http://www.tecmint.com/install-vmware-workstation-11-in-linux/</a></p>
 
             </div>
           
@@ -231,6 +245,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -248,7 +272,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -262,6 +286,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/11/23/How-to-Install-VMware-Workstation-11-on-CentOS-7/';
+
+  var disqus_title = "How to Install VMware Workstation 11 on CentOS 7";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -44,7 +44,7 @@
 <meta property="og:description" content="Storm 是一个开源的、大数据处理系统，与其他系统不同，它旨在用于分布式实时处理且与语言无关。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://storm.apache.org/images/topology.png">
-<meta property="og:updated_time" content="2019-09-25T16:02:15.913Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="storm 入门指南">
 <meta name="twitter:description" content="Storm 是一个开源的、大数据处理系统，与其他系统不同，它旨在用于分布式实时处理且与语言无关。">
@@ -69,8 +69,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> storm 入门指南 - WHOAMI </title>
@@ -174,7 +190,6 @@
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@itr-mastertest01 storm-0.9.2]# bin/storm jar examples/storm-starter/storm-starter-topologies-0.9.2-incubating.jar storm.starter.WordCountTopology test</span><br><span class="line"></span><br><span class="line">[root@itr-mastertest01 storm-0.9.2]# bin/storm list|tail -3</span><br><span class="line">Topology_name        Status     Num_tasks  Num_workers  Uptime_secs</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">test                 ACTIVE     28         3            101  </span><br><span class="line"></span><br><span class="line">[root@itr-mastertest01 storm-0.9.2]# bin/storm kill test</span><br><span class="line">[root@itr-mastertest01 storm-0.9.2]# bin/storm list|tail -3</span><br><span class="line">Topology_name        Status     Num_tasks  Num_workers  Uptime_secs</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">test                 KILLED     28         3            235</span><br></pre></td></tr></table></figure>
 <h1 id="三、Storm配置参数"><a href="#三、Storm配置参数" class="headerlink" title="三、Storm配置参数"></a>三、Storm配置参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">storm.zookeeper.servers ZooKeeper服务器列表</span><br><span class="line"></span><br><span class="line">storm.zookeeper.port ZooKeeper连接端口</span><br><span class="line"></span><br><span class="line">storm.local.dir storm使用的本地文件系统目录(必须存在并且storm进程可读写)</span><br><span class="line"></span><br><span class="line">storm.cluster.mode Storm集群运行模式([distributed|local])</span><br><span class="line"></span><br><span class="line">storm.local.mode.zmq Local模式下是否使用ZeroMQ作消息系统，如果设置为false则使用java消息系统。默认为false</span><br><span class="line"></span><br><span class="line">storm.zookeeper.root ZooKeeper中Storm的根目录位置</span><br><span class="line"></span><br><span class="line">storm.zookeeper.session.timeout 客户端连接ZooKeeper超时时间</span><br><span class="line"></span><br><span class="line">storm.id 运行中拓扑的id,由storm name和一个唯一随机数组成。</span><br><span class="line"></span><br><span class="line">nimbus.host nimbus服务器地址</span><br><span class="line"></span><br><span class="line">nimbus.thrift.port nimbus的thrift监听端口</span><br><span class="line"></span><br><span class="line">nimbus.childopts 通过storm-deploy项目部署时指定给nimbus进程的jvm选项</span><br><span class="line"></span><br><span class="line">nimbus.task.timeout.secs 心跳超时时间，超时后nimbus会认为task死掉并重分配给另一个地址。</span><br><span class="line"></span><br><span class="line">nimbus.monitor.freq.secs nimbus检查心跳和重分配任务的时间间隔.注意如果是机器宕掉nimbus会立即接管并处理。</span><br><span class="line"></span><br><span class="line">nimbus.supervisor.timeout.secs supervisor的心跳超时时间,一旦超过nimbus会认为该supervisor已死并停止为它分发新任务.</span><br><span class="line"></span><br><span class="line">nimbus.task.launch.secs task启动时的一个特殊超时设置.在启动后第一次心跳前会使用该值来临时替代nimbus.task.timeout.secs.</span><br><span class="line"></span><br><span class="line">nimbus.reassign 当发现task失败时nimbus是否重新分配执行。默认为真，不建议修改。</span><br><span class="line"></span><br><span class="line">nimbus.file.copy.expiration.secs nimbus判断上传/下载链接的超时时间，当空闲时间超过该设定时nimbus会认为链接死掉并主动断开</span><br><span class="line"></span><br><span class="line">ui.port Storm UI的服务端口</span><br><span class="line"></span><br><span class="line">drpc.servers DRPC服务器列表，以便DRPCSpout知道和谁通讯</span><br><span class="line"></span><br><span class="line">drpc.port Storm DRPC的服务端口</span><br><span class="line"></span><br><span class="line">supervisor.slots.ports supervisor上能够运行workers的端口列表.每个worker占用一个端口,且每个端口只运行一个worker.通过这项配置可以调整每台机器上运行的worker数.(调整slot数/每机)</span><br><span class="line"></span><br><span class="line">supervisor.childopts 在storm-deploy项目中使用,用来配置supervisor守护进程的jvm选项</span><br><span class="line"></span><br><span class="line">supervisor.worker.timeout.secs supervisor中的worker心跳超时时间,一旦超时supervisor会尝试重启worker进程.</span><br><span class="line"></span><br><span class="line">supervisor.worker.start.timeout.secs supervisor初始启动时，worker的心跳超时时间，当超过该时间supervisor会尝试重启worker。因为JVM初始启动和配置会带来的额外消耗，从而使得第一次心跳会超过supervisor.worker.timeout.secs的设定</span><br><span class="line"></span><br><span class="line">supervisor.enable supervisor是否应当运行分配给他的workers.默认为true,该选项用来进行Storm的单元测试,一般不应修改.</span><br><span class="line"></span><br><span class="line">supervisor.heartbeat.frequency.secs supervisor心跳发送频率(多久发送一次)</span><br><span class="line"></span><br><span class="line">supervisor.monitor.frequency.secs supervisor检查worker心跳的频率</span><br><span class="line"></span><br><span class="line">worker.childopts supervisor启动worker时使用的jvm选项.所有的”%ID%”字串会被替换为对应worker的标识符</span><br><span class="line"></span><br><span class="line">worker.heartbeat.frequency.secs worker的心跳发送时间间隔</span><br><span class="line"></span><br><span class="line">task.heartbeat.frequency.secs task汇报状态心跳时间间隔</span><br><span class="line"></span><br><span class="line">task.refresh.poll.secs task与其他tasks之间链接同步的频率.(如果task被重分配,其他tasks向它发送消息需要刷新连接).一般来讲，重分配发生时其他tasks会理解得到通知。该配置仅仅为了防止未通知的情况。</span><br><span class="line"></span><br><span class="line">topology.debug 如果设置成true，Storm将记录发射的每条信息。</span><br><span class="line"></span><br><span class="line">topology.optimize master是否在合适时机通过在单个线程内运行多个task以达到优化topologies的目的.</span><br><span class="line"></span><br><span class="line">topology.workers 执行该topology集群中应当启动的进程数量.每个进程内部将以线程方式执行一定数目的tasks.topology的组件结合该参数和并行度提示来优化性能</span><br><span class="line"></span><br><span class="line">topology.ackers topology中启动的acker任务数.Acker保存由spout发送的tuples的记录，并探测tuple何时被完全处理.当Acker探测到tuple被处理完毕时会向spout发送确认信息.通常应当根据topology的吞吐量来确定acker的数目，但一般不需要太多.当设置为0时,相当于禁用了消息可靠性,storm会在spout发送tuples后立即进行确认.</span><br><span class="line"></span><br><span class="line">topology.message.timeout.secs topology中spout发送消息的最大处理超时时间.如果一条消息在该时间窗口内未被成功ack,Storm会告知spout这条消息失败。而部分spout实现了失败消息重播功能。</span><br><span class="line"></span><br><span class="line">topology.kryo.register 注册到Kryo(Storm底层的序列化框架)的序列化方案列表.序列化方案可以是一个类名,或者是com.esotericsoftware.kryo.Serializer的实现.</span><br><span class="line"></span><br><span class="line">topology.skip.missing.kryo.registrations Storm是否应该跳过它不能识别的kryo序列化方案.如果设置为否task可能会装载失败或者在运行时抛出错误.</span><br><span class="line"></span><br><span class="line">topology.max.task.parallelism 在一个topology中能够允许的最大组件并行度.该项配置主要用在本地模式中测试线程数限制.</span><br><span class="line"></span><br><span class="line">topology.max.spout.pending 一个spout task中处于pending状态的最大的tuples数量.该配置应用于单个task,而不是整个spouts或topology.</span><br><span class="line"></span><br><span class="line">topology.state.synchronization.timeout.secs 组件同步状态源的最大超时时间(保留选项,暂未使用)</span><br><span class="line"></span><br><span class="line">topology.stats.sample.rate 用来产生task统计信息的tuples抽样百分比</span><br><span class="line"></span><br><span class="line">topology.fall.back.on.java.serialization topology中是否使用java的序列化方案</span><br><span class="line"></span><br><span class="line">zmq.threads 每个worker进程内zeromq通讯用到的线程数</span><br><span class="line"></span><br><span class="line">zmq.linger.millis 当连接关闭时,链接尝试重新发送消息到目标主机的持续时长.这是一个不常用的高级选项,基本上可以忽略.</span><br><span class="line"></span><br><span class="line">java.library.path JVM启动(如Nimbus,Supervisor和workers)时的java.library.path设置.该选项告诉JVM在哪些路径下定位本地库.</span><br></pre></td></tr></table></figure>
 <p>参考链接：<a href="http://www.ibm.com/developerworks/cn/opensource/os-twitterstorm/" target="_blank" rel="noopener">Storm资料</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -211,6 +226,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -228,7 +253,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -242,6 +267,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2014/07/01/storm-入门指南/';
+
+  var disqus_title = "storm 入门指南";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

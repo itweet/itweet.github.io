@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -45,7 +45,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://phoenix.apache.org/images/phoenix-logo-small.png">
 <meta property="og:image" content="http://phoenix.apache.org/images/sqlline.png">
-<meta property="og:updated_time" content="2019-09-25T15:52:34.067Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Phoenix-hbase">
 <meta name="twitter:description" content="Phoenix，由saleforce.com开源的一个项目，后又捐给了Apache。它相当于一个Java中间件，帮助开发者，像使用jdbc访问关系型数据库一样，访问NoSql数据库HBase。">
@@ -70,8 +70,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Phoenix-hbase - WHOAMI </title>
@@ -291,7 +307,6 @@ phoenix客户端查询操作：
 <h1 id="三、有关phoenix，hbase-impala-hive性能测试"><a href="#三、有关phoenix，hbase-impala-hive性能测试" class="headerlink" title="三、有关phoenix，hbase,impala,hive性能测试"></a>三、有关phoenix，hbase,impala,hive性能测试</h1><blockquote>
 <p><a href="https://github.com/forcedotcom/phoenix/wiki/Performance" target="_blank" rel="noopener">https://github.com/forcedotcom/phoenix/wiki/Performance</a><br><a href="https://blogs.apache.org/phoenix/" target="_blank" rel="noopener">https://blogs.apache.org/phoenix/</a><br><a href="https://blogs.apache.org/phoenix/entry/tpc_in_apache_phoenix" target="_blank" rel="noopener">https://blogs.apache.org/phoenix/entry/tpc_in_apache_phoenix</a></p>
 </blockquote>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -328,6 +343,16 @@ phoenix客户端查询操作：
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -345,7 +370,7 @@ phoenix客户端查询操作：
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -359,6 +384,37 @@ phoenix客户端查询操作：
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/07/16/Phoenix-hbase/';
+
+  var disqus_title = "Phoenix-hbase";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

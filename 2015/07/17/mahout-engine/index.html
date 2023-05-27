@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -44,7 +44,7 @@
 <meta property="og:description" content="Mahout 是 Apache Software Foundation（ASF） 旗下的一个开源项目，提供一些可扩展   的机器学习领域经典算法的实现，旨在帮助开发人员更加方便快捷地创建智能应用程序。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://mahout.apache.org/images/mahout-logo-brudman.png">
-<meta property="og:updated_time" content="2019-03-31T15:37:24.346Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.084Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mahout-engine">
 <meta name="twitter:description" content="Mahout 是 Apache Software Foundation（ASF） 旗下的一个开源项目，提供一些可扩展   的机器学习领域经典算法的实现，旨在帮助开发人员更加方便快捷地创建智能应用程序。">
@@ -69,8 +69,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> mahout-engine - WHOAMI </title>
@@ -174,7 +190,6 @@ uid:5</code></p>
 <blockquote>
 <p>参考：<a href="http://blog.fens.me/hadoop-mahout-maven-eclipse/" target="_blank" rel="noopener">http://blog.fens.me/hadoop-mahout-maven-eclipse/</a> <br><br>  <a href="http://blog.fens.me/mahout-recommend-engine/" target="_blank" rel="noopener">http://blog.fens.me/mahout-recommend-engine/</a></p>
 </blockquote>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -211,6 +226,16 @@ uid:5</code></p>
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -228,7 +253,7 @@ uid:5</code></p>
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -242,6 +267,37 @@ uid:5</code></p>
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/07/17/mahout-engine/';
+
+  var disqus_title = "mahout-engine";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

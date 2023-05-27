@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -48,7 +48,7 @@
 <meta property="og:image" content="https://www.itweet.cn/screenshots/new/320-nodes.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/new/640-nodes.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/new/2560-nodes.png">
-<meta property="og:updated_time" content="2019-09-25T15:56:39.460Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.142Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="10GE-Hadoop-Network-Designs">
 <meta name="twitter:description" content="10G 的Hadoop有什么意义呢？你会怎么设计集群呢？我们一起讨论一下适合或者不适合10G Hadoop的案例，然后看看怎么对10G集群进行网络的设计。如果你想快速开启10G Hadoop或升级， 基于Hadoop集群和网络请认真阅读这篇文章然后再回过头来思考。 1G Hadoop集群背后的基本原理Hadoop是被一个网络公司设计的（雅虎）出于必要的有效存储和分析网络扩展应用本身存在的大量数据设">
@@ -73,8 +73,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> 10GE-Hadoop-Network-Designs - WHOAMI </title>
@@ -182,7 +198,6 @@
 <p>对于很大的集群就像这种，或甚至小一点的，都可以很方便的自动部署交换机，有点类似服务器引导本身从网上下载OS，从CMDB中自动检索配置文件，网络交换机也应该可以自动安装。这儿讨论了交换机， 同样你还可以用 Perl和Python 脚本和熟悉的脚本语言自定义操作.</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>对于要建设一个10 GE 的Hadoo集群来说他不是一件容易的事情， 例如密集虚拟服务器和IP存储。对于一些人来说，没有经济意义， 对于其他人来说，10GE Hadoop 具有非常重大的意义。例如支持密集的节点，扩展有限的数据中心，现存的基础设施和围绕10GE的操作，以及强烈的网络作业对集群的压力。</p>
 <p>就像你用1GE的集群你可以创建一些令人映像深刻的小集群，随着不断发展你可以用低成本，低能耗，固定10G 或者40G的互联网交换机，创建一个具有3层交换配置的网络，你不需要一个2层 在机架间，也不需要一个又贵又庞大的机箱交换机来完成工作。</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -219,6 +234,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -236,7 +261,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -250,6 +275,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/05/13/10GE-Hadoop-Network-Designs/';
+
+  var disqus_title = "10GE-Hadoop-Network-Designs";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

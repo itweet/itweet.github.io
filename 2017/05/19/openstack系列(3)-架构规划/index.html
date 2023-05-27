@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/Snap12_thumb.gif">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/openstack-deploy.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/openstack-feature-list.png">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.513Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openstack系列(3)-架构规划">
 <meta name="twitter:description" content="随着虚拟机技术的发展，企业环境云化对于增强企业级应用开发，核心竞争力有非常大的好处。对于内部，每个人都有机会拥有独立的开发调试环境，整个公司开发应用，测试，上线等内容都云化，可以便利开发人员，运维人员，节省成本，长远发展来看，可以帮助企业自动化软件架构，实现自动化系统的构建。节省运营，开发，维护，调试，测试等过程费用，减少成本。 对外部，企业自己的产品，可以通过云app，云web，云主机等环境，网">
@@ -72,8 +72,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> openstack系列(3)-架构规划 - WHOAMI </title>
@@ -244,8 +260,6 @@
 </ul>
 <p>此外，您还可以有多个存储和计算节点。其他非核心 OpenStack 组件（例如 Ironic）还可以位于其各自的节点中。</p>
 <p>由于此灵活性，您可以根据可用资源以及您希望在每个节点中对组件进行分组的方式来设计 OpenStack 基础结构。然后，您可以在每个系统上仅安装需要的 OpenStack 软件包，而不是在所有系统上安装整个 OpenStack 软件包。下一节将进入基础环境准备内容，欢迎关注。</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
-<p>参考：<a href="http://www.infocool.net/OpenStack/index.htm" target="_blank" rel="noopener">http://www.infocool.net/OpenStack/index.htm</a><br>    <a href="http://www.cnblogs.com/sammyliu/p/4204190.html" target="_blank" rel="noopener">http://www.cnblogs.com/sammyliu/p/4204190.html</a></p>
 
             </div>
           
@@ -282,6 +296,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -299,7 +323,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -313,6 +337,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/05/19/openstack系列(3)-架构规划/';
+
+  var disqus_title = "openstack系列(3)-架构规划";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="Install Kubernetes which is the Orchestration System for Docker Containers.For example, Configure Kubernetes Cluster with 1 Admon Node and 3 Container Node like follows. Centos 7.2 Own  kubernetes yum">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-25T16:18:01.976Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.135Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kubernetes-cluster-install">
 <meta name="twitter:description" content="Install Kubernetes which is the Orchestration System for Docker Containers.For example, Configure Kubernetes Cluster with 1 Admon Node and 3 Container Node like follows. Centos 7.2 Own  kubernetes yum">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> kubernetes-cluster-install - WHOAMI </title>
@@ -163,7 +179,6 @@
 <p>[4]    Make sure th settings. It’s OK if the status of each node is Ready like follows.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-controller ~]#  kubectl get nodes</span><br><span class="line">NAME                STATUS    AGE</span><br><span class="line">kubernetes-node-1   Ready     37m</span><br><span class="line">kubernetes-node-2   Ready     30m</span><br><span class="line">kubernetes-node-3   Ready     22m</span><br></pre></td></tr></table></figure></p>
 <p>[5] 时间不同步会导致如下问题,同步主节点时间，重启服务即可解决：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@kubernetes-controller ~]# kubectl get nodes</span><br><span class="line">NAME                STATUS     AGE</span><br><span class="line">kubernetes-node-1   Ready      5h</span><br><span class="line">kubernetes-node-2   NotReady   5h</span><br><span class="line">kubernetes-node-3   NotReady   5h</span><br></pre></td></tr></table></figure></p>
 <p>时间一致性对于分布式应用程序来说，至关重要，稍有不慎导致，整个集群不可用，我就遇到很奇葩的问题，基础镜像源无法下载，待我同步所有节点时间重启所有服务之后居然，下载下来了。真奇怪，得多看看代码实现吧！不然就是一个黑盒子！难看透！后续章节创建pods就遇到时间不同步导致的问题！</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -200,6 +215,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -217,7 +242,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -231,6 +256,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/08/14/kubernetes-cluster-install/';
+
+  var disqus_title = "kubernetes-cluster-install";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

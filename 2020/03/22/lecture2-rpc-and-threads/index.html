@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="MIT 6.824 - Distributed Systems (Spring 2020)">
+
+
+
+
+  <meta name="keywords" content="spring,6.824,2020,mit,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2020/03/22/lecture2-rpc-and-threads/">
+
+
+<meta name="description" content="MIT 6.824 - Distributed Systems (Spring 2020)">
+<meta name="keywords" content="spring,6.824,2020,mit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lecture2-rpc-and-threads">
+<meta property="og:url" content="http://itweet.github.io/2020/03/22/lecture2-rpc-and-threads/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="MIT 6.824 - Distributed Systems (Spring 2020)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-05-27T06:48:46.154Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lecture2-rpc-and-threads">
+<meta name="twitter:description" content="MIT 6.824 - Distributed Systems (Spring 2020)">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154998721-1');
+</script>
+
+
+    <title> Lecture2-rpc-and-threads - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Lecture2-rpc-and-threads
+        
+      </h1>
+
+      <time class="post-time">
+          3月 22 2020
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>golang - 大肆夸赞一番</p>
+<ul>
+<li><p>I/O concurrency</p>
+</li>
+<li><p>CPU Parallelism</p>
+</li>
+<li><p>Thread Challenges</p>
+</li>
+<li><p>多线程爬虫 Demo</p>
+<ul>
+<li>sync.Mutex </li>
+<li>lock</li>
+<li>thread</li>
+<li>Goroutine</li>
+</ul>
+</li>
+<li><p>primary-backup replication</p>
+</li>
+<li><p>state transfer</p>
+<ul>
+<li>memrory: 内存状态的转移到另外机器，实现起来比较简单</li>
+</ul>
+</li>
+<li><p>replication state machine</p>
+<ul>
+<li>OP: 操作状态转移，相对复杂，需要考虑很多种情况</li>
+<li>what state？</li>
+<li>VMware Fault Tolerance (FT) </li>
+</ul>
+</li>
+<li><p>如何解决脑裂？</p>
+<ul>
+<li>网络分区导致脑裂？</li>
+<li>主从副本 primary crash 导致的脑裂？</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>MapReduce: Simplified Data Processing on Large Clusters</li>
+<li>The Google File System</li>
+<li>The Design of a Practical System for Fault-Tolerant Virtual Machines</li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/spring/">spring</a>
+		  
+			<a href="/tags/6-824/">6.824</a>
+		  
+			<a href="/tags/2020/">2020</a>
+		  
+			<a href="/tags/mit/">mit</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2021/01/02/cmu-15-445-2019-fall-project1/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">CMU 15-445/645 2019 PROJECT `#1` - BUFFER POOL 翻译</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/03/22/lecture1-interoduction/">
+        <span class="next-text nav-default">Lecture1-interoduction</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2023
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2020/03/22/lecture2-rpc-and-threads/';
+
+  var disqus_title = "Lecture2-rpc-and-threads";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

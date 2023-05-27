@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="CMU 15-445/645 (FALL 2019) 数据库系统">
+
+
+
+
+  <meta name="keywords" content="2021,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2021/01/02/cmu-15-445-2019-fall-project1/">
+
+
+<meta name="description" content="CMU 15-445/645 (FALL 2019) 数据库系统">
+<meta name="keywords" content="2021">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMU 15-445&#x2F;645 2019 PROJECT `#1` - BUFFER POOL 翻译">
+<meta property="og:url" content="http://itweet.github.io/2021/01/02/cmu-15-445-2019-fall-project1/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="CMU 15-445/645 (FALL 2019) 数据库系统">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-05-27T07:34:57.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CMU 15-445&#x2F;645 2019 PROJECT `#1` - BUFFER POOL 翻译">
+<meta name="twitter:description" content="CMU 15-445/645 (FALL 2019) 数据库系统">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154998721-1');
+</script>
+
+
+    <title> CMU 15-445/645 2019 PROJECT `#1` - BUFFER POOL 翻译 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          CMU 15-445/645 2019 PROJECT `#1` - BUFFER POOL 翻译
+        
+      </h1>
+
+      <time class="post-time">
+          1月 02 2021
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h2 id="OVERVIEW"><a href="#OVERVIEW" class="headerlink" title="OVERVIEW"></a>OVERVIEW</h2><p>概览</p>
+<p>During the semester, you will be building a new disk-oriented storage manager for the BusTub DBMS. Such a storage manager assumes that the primary storage location of the database is on disk.<br>在本学期中，您将构建一个面向磁盘的存储管理器，用于 BusTub 数据库管理系统。这样的存储管理器假设数据库的主要存储位置位于磁盘上。</p>
+<p>The first programming project is to implement a buffer pool in your storage manager. The buffer pool is responsible for moving physical pages back and forth from main memory to disk. It allows a DBMS to support databases that are larger than the amount of memory that is available to the system. The buffer pool’s operations are transparent to other parts in the system. For example, the system asks the buffer pool for a page using its unique identifier (<code>page_id_t</code>) and it does not know whether that page is already in memory or whether the system has to go retrieve it from disk.<br>第一个编程项目是在您的存储管理器中实现一个缓冲池。缓冲池负责在主存储器和磁盘之间移动物理页面。它使得 DBMS 能够支持比系统可用内存更大的数据库。缓冲池的操作对系统中的其他部分是透明的。例如，系统使用唯一标识符（page_id_t）向缓冲池请求页面，并不知道该页面是否已经在内存中，或者系统是否需要从磁盘中检索它。</p>
+<p>Your implementation will need to be thread-safe. Multiple threads will be accessing the internal data structures at the same and thus you need to make sure that their critical sections are protected with latches (these are called “locks” in operating systems).<br>您的实现需要是线程安全的。多个线程将同时访问内部数据结构，因此您需要确保它们的临界区受到锁（在操作系统中称为 “锁”）的保护。</p>
+<p>You will need to implement the following two components in your storage manager:<br>您需要在存储管理器中实现以下两个组件：</p>
+<ul>
+<li><p>Clock Replacement Policy<br>时钟替换策略（Clock Replacement Policy）</p>
+</li>
+<li><p>Buffer Pool Manager<br>缓冲池管理器（Buffer Pool Manager）</p>
+</li>
+</ul>
+<p>All of the code in this programming assignment must be written in C++ (specifically C++17). It is generally sufficient to know C++11. If you have not used C++ before, here is a short tutorial on the language. More detailed documentation of language internals is available on cppreference. A Tour of C++ and Effective Modern C++ are also digitally available from the CMU library.<br>本编程任务中的所有代码必须使用 C++ 编写（具体来说是 C++17）。通常了解 C++11 就足够了。如果您之前没有使用过 C++，这里有一个关于该语言的简短教程。更详细的语言内部文档可以在 cppreference 上找到。《C++ 编程之旅》和《现代 C++ 实用效果》也可以在 CMU 图书馆的数字库中找到。</p>
+<p>There are many tutorials and walkthroughs available to teach you how to use gdb effectively. Here are some that we have found useful:<br>有很多教程和实例可以教您如何有效使用 gdb 进行调试。以下是一些我们认为有用的教程：</p>
+<ul>
+<li><p>Debugging Under Unix: gdb Tutorial<br>在 Unix 下调试：gdb 教程</p>
+</li>
+<li><p>GDB Tutorial: Advanced Debugging Tips For C/C++ Programmers<br>GDB 教程：C/C++ 程序员的高级调试技巧</p>
+</li>
+<li><p>Give me 15 minutes &amp; I’ll change your view of GDB [VIDEO]<br>给我 15 分钟，我将改变您对 GDB 的看法 [视频]</p>
+</li>
+</ul>
+<p>This is a single-person project that will be completed individually (i.e. no groups).<br>这是一个个人项目，将单独完成（即无小组）。</p>
+<p>Release Date: Sep 11, 2019<br>发布日期：2019年9月11日</p>
+<p>Due Date: Sep 27, 2019 @ 11:59pm<br>截止日期：2019年9月27日晚上11:59</p>
+<h2 id="PROJECT-SPECIFICATION"><a href="#PROJECT-SPECIFICATION" class="headerlink" title="PROJECT SPECIFICATION"></a>PROJECT SPECIFICATION</h2><p>For each of the following components, we are providing you with stub classes that contain the API that you need to implement. You should not modify the signatures for the pre-defined functions in these classes. If you modify the signatures, the test code that we use for grading will break and you will get no credit for the project. You also should not add additional classes in the source code for these components. These components should be entirely self-contained.<br>对于以下每个组件，我们提供了包含您需要实现的 API 的存根类。您不应修改这些类中预定义函数的签名。如果您修改了签名，我们用于评分的测试代码将出错，您将无法得分。您也不应在源代码中为这些组件添加额外的类。这些组件应该是完全独立的。</p>
+<p>If a class already contains data members, you should not remove them. For example, the <code>BufferPoolManager</code> contains <code>DiskManager</code> and <code>Replacer</code> objects. These are required to implement the functionality that is needed by the rest of the system. On the other hand, you may need to add data members to these classes in order to correctly implement the required functionality. You can also add additional helper functions to these classes. The choice is yours.<br>如果一个类已经包含数据成员，您不应将它们删除。例如，BufferPoolManager 包含 DiskManager 和 Replacer 对象。这些对象在实现系统的其余功能所需的功能方面是必需的。另一方面，您可能需要向这些类添加数据成员，以正确实现所需的功能。您还可以向这些类添加额外的辅助函数。选择权在您手中。</p>
+<p>You are allowed to use any built-in C++17 containers in your project unless specified otherwise. It is up to you to decide which ones you want to use. Note that these containers are not thread-safe and that you will need to include latches in your implementation to protect them. You may not bring in additional third-party dependencies (e.g. boost).<br>您可以在项目中使用任何内置的 C++17 容器，除非另有规定。您可以自行决定要使用哪些容器。请注意，这些容器不是线程安全的，您需要在实现中加入保护它们的锁。您不得引入额外的第三方依赖项（例如 boost）。</p>
+<h3 id="TASK-1-CLOCK-REPLACEMENT-POLICY"><a href="#TASK-1-CLOCK-REPLACEMENT-POLICY" class="headerlink" title="TASK #1 - CLOCK REPLACEMENT POLICY"></a>TASK #1 - CLOCK REPLACEMENT POLICY</h3><p>任务 #1 - CLOCK REPLACEMENT POLICY</p>
+<p>This component is responsible for tracking page usage in the buffer pool. You will implement a new sub-class called <code>ClockReplacer</code> in <code>src/include/buffer/clock_replacer.h</code> and its corresponding implementation file in <code>src/buffer/clock_replacer.cpp</code>. ClockReplacer extends the abstract Replacer class (<code>src/include/buffer/replacer.h</code>), which contains the function specifications.<br>该组件负责在缓冲池中跟踪页面的使用情况。您需要在 src/include/buffer/clock_replacer.h 中实现一个名为 ClockReplacer 的新子类，并在 src/buffer/clock_replacer.cpp 中编写相应的实现文件。ClockReplacer 继承了抽象类 Replacer（src/include/buffer/replacer.h），其中包含函数规范。</p>
+<p>The size of the <code>ClockReplacer</code> is the same as buffer pool since it contains placeholders for all of the frames in the <code>BufferPoolManager</code>. However, not all the frames are considered as in the <code>ClockReplacer</code>. The <code>ClockReplacer</code> is initialized to have no frame in it. Then, only the newly unpinned ones will be considered in the <code>ClockReplacer</code>. Adding a frame to or removing a frame from a replacer is implemented by changing a reference bit of a frame. The clock hand initially points to the placeholder of frame 0. For each frame, you need to track two things: 1. Is this frame currently in the <code>ClockReplacer</code>? 2. Has this frame recently been unpinned (ref flag)?<br>ClockReplacer 的大小与缓冲池相同，因为它包含了缓冲池中所有帧的占位符。然而，并不是所有的帧都被视为在 ClockReplacer 中。ClockReplacer 初始化时没有帧在其中。然后，只有新取消固定的帧才会被视为在 ClockReplacer 中。向替换器添加帧或从替换器中删除帧是通过改变帧的引用位来实现的。时钟指针最初指向帧0的占位符。对于每个帧，您需要跟踪两个信息：1. 此帧当前是否在 ClockReplacer 中？2. 此帧是否最近取消固定（引用标志）？</p>
+<p>In some scenarios, the two are the same. For example, when you unpin a page, both of the above are true. However, the frame stays in the ClockReplacer until it is pinned or victimized, but its ref flag is modified by the clock hand.<br>在某些情况下，这两个条件是相同的。例如，当您取消固定页面时，上述两个条件都为真。但是，该帧会一直保留在 ClockReplacer 中，直到它被固定或作为牺牲者，但其引用标志会受到时钟指针的修改。</p>
+<p>You will need to implement the clock policy discussed in the class. You will need to implement the following methods:<br>您需要实现在课堂上讨论的时钟置换策略。您需要实现以下方法：</p>
+<ul>
+<li><p>Victim(T<em>) : Starting from the current position of clock hand, find the first frame that is both in the <code>ClockReplacer</code> and with its ref flag set to false. If a frame is in the <code>ClockReplacer</code>, but its ref flag is set to true, change it to false instead. This should be the only method that updates the clock hand.<br>Victim(T</em>)：从时钟指针的当前位置开始，找到第一个既在 ClockReplacer 中且其引用标志设置为 false 的帧。如果帧在 ClockReplacer 中，但其引用标志设置为 true，则将其改为 false。这应该是唯一更新时钟指针的方法。</p>
+</li>
+<li><p>Pin(T) : This method should be called after a page is pinned to a frame in the BufferPoolManager. It should remove the frame containing the pinned page from the ClockReplacer.<br>Pin(T)：在将页面固定到 BufferPoolManager 中的帧后，应调用此方法。它应从 ClockReplacer 中删除包含固定页面的帧。</p>
+</li>
+<li><p>Unpin(T) : This method should be called when the pin_count of a page becomes 0. This method should add the frame containing the unpinned page to the ClockReplacer.<br>Unpin(T)：当页面的 pin_count 变为 0 时，应调用此方法。此方法应将包含取消固定页面的帧添加到 ClockReplacer 中。</p>
+</li>
+<li><p>Size() : This method returns the number of frames that are currently in the ClockReplacer.<br>Size()：该方法返回当前在 ClockReplacer 中的帧数。</p>
+</li>
+</ul>
+<p>The implementation details are up to you. You are allowed to use built-in STL containers. You can assume that you will not run out of memory, but you must make sure that the operations are thread-safe.<br>具体的实现细节由您决定。您可以使用内置的 STL 容器。您可以假设不会耗尽内存，但必须确保操作是线程安全的。</p>
+<h3 id="TASK-2-BUFFER-POOL-MANAGER"><a href="#TASK-2-BUFFER-POOL-MANAGER" class="headerlink" title="TASK #2 - BUFFER POOL MANAGER"></a>TASK #2 - BUFFER POOL MANAGER</h3><p>Next, you need to implement the buffer pool manager in your system (BufferPoolManager). The BufferPoolManager is responsible for fetching database pages from the DiskManager and storing them in memory. The BufferPoolManager can also write dirty pages out to disk when it is either explicitly instructed to do so or when it needs to evict a page to make space for a new page.<br>接下来，您需要在系统中实现缓冲池管理器（BufferPoolManager）。缓冲池管理器负责从磁盘管理器获取数据库页面并将其存储在内存中。当缓冲池管理器被明确指示或需要清除页面以为新页面腾出空间时，它还可以将脏页面写回磁盘。</p>
+<p>To make sure that your implementation works correctly with the rest of the system, we will provide you with some of the functions already filled in. You will also not need to implement the code that actually reads and writes data to disk (this is called the DiskManager in our implementation). We will provide that functionality for you.<br>为确保您的实现与系统的其余部分正确配合，我们将为您提供一些已填充的函数。您也不需要实现实际读写数据到磁盘的代码（在我们的实现中称为磁盘管理器）。我们将为您提供该功能。</p>
+<p>All in-memory pages in the system are represented by Page objects. The <code>BufferPoolManager</code> does not need to understand the contents of these pages. But it is important for you as the system developer to understand that Page objects are just containers for memory in the buffer pool and thus are not specific to a unique page. That is, each Page object contains a block of memory that the <code>DiskManager</code> will use as a location to copy the contents of a physical page that it reads from disk. The <code>BufferPoolManager</code> will reuse the same Page object to store data as it moves back and forth to disk. This means that the same Page object may contain a different physical page throughout the life of the system. The Page object’s identifer (page_id) keeps track of what physical page it contains; if a Page object does not contain a physical page, then its page_id must be set to INVALID_PAGE_ID.<br>系统中的所有内存页面都由Page对象表示。缓冲池管理器不需要了解这些页面的内容。但是，作为系统开发人员，理解Page对象只是缓冲池中内存的容器非常重要，因此不特定于唯一页面。也就是说，每个Page对象都包含一个内存块，磁盘管理器将使用该内存块作为从磁盘读取的物理页面内容的位置。缓冲池管理器将重复使用同一Page对象在内存和磁盘之间存储数据。这意味着同一个Page对象在系统的生命周期内可能包含不同的物理页面。Page对象的标识符（page_id）跟踪其所包含的物理页面；如果一个Page对象不包含物理页面，则其page_id必须设置为INVALID_PAGE_ID。</p>
+<p>Each Page object also maintains a counter for the number of threads that have “pinned” that page. Your <code>BufferPoolManager</code> is not allowed to free a Page that is pinned. Each Page object also keeps track of whether it is dirty or not. It is your job to record whether a page was modified before it is unpinned. Your <code>BufferPoolManager</code> must write the contents of a dirty Page back to disk before that object can be reused.<br>每个Page对象还维护一个计数器，用于统计已“固定”该页面的线程数量。您的缓冲池管理器不允许释放已固定的Page。每个Page对象还会跟踪其是否为脏页。您的任务是在取消固定之前记录页面是否已修改。在可以重用该对象之前，您的缓冲池管理器必须将脏页的内容写回磁盘。</p>
+<p>Your BufferPoolManager implementation will use the ClockReplacer class that you created in the previous steps of this assignment. It will use the ClockReplacer to keep track of when Page objects are accessed so that it can decide which one to evict when it must free a frame to make room for copying a new physical page from disk.<br>您的BufferPoolManager实现将使用您在之前步骤中创建的ClockReplacer类。它将使用ClockReplacer跟踪Page对象的访问情况，以便在必须释放帧以为新的物理页面从磁盘复制时，可以决定要驱逐的页面。</p>
+<p>You will need to implement the following functions defined in the header file (src/include/buffer/buffer_pool_manager.h) in the source file (src/buffer/buffer_pool_manager.cpp):<br>您需要在头文件（src/include/buffer/buffer_pool_manager.h）和源文件（src/buffer/buffer_pool_manager.cpp）中实现以下函数：</p>
+<ul>
+<li><p>FetchPageImpl(page_id)</p>
+</li>
+<li><p>NewPageImpl(page_id)</p>
+</li>
+<li><p>UnpinPageImpl(page_id, is_dirty)</p>
+</li>
+<li><p>FlushPageImpl(page_id)</p>
+</li>
+<li><p>DeletePageImpl(page_id)</p>
+</li>
+<li><p>FlushAllPagesImpl()</p>
+</li>
+</ul>
+<p>For FetchPageImpl,you should return NULL if no page is available in the free list and all other pages are currently pinned. FlushPageImpl should flush a page regardless of its pin status.<br>对于FetchPageImpl，如果在空闲列表中没有可用页面且所有其他页面当前都被固定，您应返回NULL。FlushPageImpl应无论页面的固定状态如何都将其刷新。</p>
+<p>Refer to the function documentation for details on how to implement these functions. Don’t touch the non-impl versions, we need those to grade your code.<br>有关如何实现这些函数的详细信息，请参阅函数文档。不要触碰非impl版本，我们需要这些版本来评估您的代码。</p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><ul>
+<li><a href="https://15445.courses.cs.cmu.edu/fall2019/project1/" target="_blank" rel="noopener">PROJECT #1 - BUFFER POOL</a></li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/2021/">2021</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2021/01/03/cmu-15-445-2019-fall-project2/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">CMU 15-445/645 2019 fall PROJECT `#2` - HASH TABLE 翻译</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/03/22/lecture2-rpc-and-threads/">
+        <span class="next-text nav-default">Lecture2-rpc-and-threads</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2023
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2021/01/02/cmu-15-445-2019-fall-project1/';
+
+  var disqus_title = "CMU 15-445/645 2019 PROJECT `#1` - BUFFER POOL 翻译";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

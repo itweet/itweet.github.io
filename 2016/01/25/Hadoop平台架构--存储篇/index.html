@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="刚刚开始使用Hadoop集群的时候,目录没有有个规范,大家都根据自己的喜好创建各种不同的目录,权限控制也没有开启,随着应用越来越多，使用的人员也多了起来，导致目录混乱,终于在新规划集群的时候,对目录做了规范和权限控制.下面简单介绍一下我们HDFS目录规范和HDFS存储规划,写在Hadoop十周年纪念,希望对初建Hadoop集群的同学能有一些帮助。hadoop ecosystem table">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.493Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop平台架构--存储篇">
 <meta name="twitter:description" content="刚刚开始使用Hadoop集群的时候,目录没有有个规范,大家都根据自己的喜好创建各种不同的目录,权限控制也没有开启,随着应用越来越多，使用的人员也多了起来，导致目录混乱,终于在新规划集群的时候,对目录做了规范和权限控制.下面简单介绍一下我们HDFS目录规范和HDFS存储规划,写在Hadoop十周年纪念,希望对初建Hadoop集群的同学能有一些帮助。hadoop ecosystem table">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Hadoop平台架构--存储篇 - WHOAMI </title>
@@ -200,7 +216,6 @@
 <h2 id="计算框架临时目录"><a href="#计算框架临时目录" class="headerlink" title="计算框架临时目录"></a>计算框架临时目录</h2><p>  由于数据量越来越大，检索数据太大，导致无法所有数据放入内存，很多中间结果数据会写到磁盘，目前规划总存储的20%做为计算磁盘空间！如果低于20%，计算的时候会导致磁盘空间不足的情况，或者很多任务出现警告和运行缓慢等情况！</p>
 <h2 id="存储格式选择和效率如何权衡？"><a href="#存储格式选择和效率如何权衡？" class="headerlink" title="存储格式选择和效率如何权衡？"></a>存储格式选择和效率如何权衡？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">  组件      格式     数据量     压缩大小   原始大小</span><br><span class="line"></span><br><span class="line">  Imapla    Parquet  ?           30.1 G     98.6 G</span><br><span class="line">  Sparksql  Parquet  ?           69.4 G     98.6 G</span><br><span class="line">  Hive      Rcfile   ?           93.4 G     98.6 G</span><br><span class="line">  Presto    Orcfile  ?           16.2 G     98.6 G</span><br><span class="line"></span><br><span class="line">  Hbase     Snappy   ?           0.35T      2.3T    # 每天入hbase数据量</span><br><span class="line">  </span><br><span class="line">  注意：考虑生成压缩文件的效率,时间换空间的操作！</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;Txt格式</span><br><span class="line">      组件                  耗时</span><br><span class="line">      Hive                  342.235s</span><br><span class="line">      Presto                73.4s</span><br><span class="line">      Impala                20.57s</span><br><span class="line">      Sparksql              169.465s</span><br><span class="line">      Sparksql[chache]      95.9s</span><br><span class="line">  </span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;Parquet格式</span><br><span class="line">       组件                  耗时</span><br><span class="line">       Hive                  322.201s</span><br><span class="line">       Presto                37.91s</span><br><span class="line">       Impala                17.57s</span><br><span class="line">       Sparksql              124.9s</span><br><span class="line">       Sparksql[chache]      108s</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;Orc格式</span><br><span class="line">       组件                  耗时</span><br><span class="line">       Hive                  276.179s</span><br><span class="line">       Presto                101.4s</span><br><span class="line">       Impala                0s  #不支持此格式</span><br><span class="line">       Sparksql              46s</span><br><span class="line">       Sparksql[chache]      35s</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;RcFile格式</span><br><span class="line">       组件                  耗时</span><br><span class="line">       Hive                  306.264s</span><br><span class="line">       Presto                36s</span><br><span class="line">       Impala                18.14s</span><br><span class="line">       Sparksql              177.799s</span><br><span class="line">       Sparksql[chache]      176.5s</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;2组join FcFile文件格式</span><br><span class="line">       组件             耗时         其它问题记录</span><br><span class="line">       Hive             1600s </span><br><span class="line">       Presto           700s </span><br><span class="line">       Impala           1175.29s   </span><br><span class="line">       Sparksql         689.047s</span><br><span class="line">       Sparksql[chache]              效率提升不明显,未测试</span><br><span class="line">       </span><br><span class="line">       组件              耗时        其它问题记录</span><br><span class="line">       Hive              300s  </span><br><span class="line">       Presto            60s </span><br><span class="line">       Impala            2.67s</span><br><span class="line">       Sparksql          40 s</span><br><span class="line">       Sparksql[chache]              效率提升不明显,未测试</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;大大表两两关联（亿级+百万级）测试</span><br><span class="line">==&gt;TextFile</span><br><span class="line">       组件         耗时       其它问题记录</span><br><span class="line">       Hive         641.937s     第一次执行</span><br><span class="line">       </span><br><span class="line">       Impala       267.526s     第一次执行</span><br><span class="line">       Impala       262.727s     第二次执行</span><br><span class="line">       Spark-sql    300.355s     第一次执行</span><br><span class="line">       Spark-sql    294.922s     第二次执行</span><br><span class="line"></span><br><span class="line">==&gt;Parquet</span><br><span class="line">       组件        耗时        其它问题记录</span><br><span class="line">       Hive        57.702s      第一次执行</span><br><span class="line">       </span><br><span class="line">       Impala      1.359s       第一次执行</span><br><span class="line">       Impala      1.232s       第二次执行</span><br><span class="line">       Spark-sql   2.977s       第一次执行</span><br><span class="line">       Spark-sql   2.857s       第二次执行</span><br><span class="line"></span><br><span class="line">Hadoop压缩算法选择：</span><br><span class="line">  •mapreduce.map.output.compress.codec </span><br><span class="line">  •mapreduce.output.fileoutputformat.compress.codec </span><br><span class="line">  •mapreduce.output.fileoutputformat.compress.type </span><br><span class="line">    – org.apache.hadoop.io.compress.DefaultCodec </span><br><span class="line">    – org.apache.hadoop.io.compress.SnappyCodec [最佳选择]</span><br><span class="line">    – org.apache.hadoop.io.compress.BZip2Codec /GzipCodec【GzipCodec压缩最高，但是时间上比较耗时】</span><br></pre></td></tr></table></figure>
 <h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><p>  这是我对于Hadoop存储硬件规划的一个小小总结，如有不妥之处欢迎指正,如果想了解非常详细的硬件参数,欢迎参考《Hadoop平台架构–硬件篇》</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -237,6 +252,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -254,7 +279,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -268,6 +293,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/01/25/Hadoop平台架构--存储篇/';
+
+  var disqus_title = "Hadoop平台架构--存储篇";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

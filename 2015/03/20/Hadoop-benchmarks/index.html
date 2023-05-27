@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="Hadoop 的基准测试，基于 CDH 5.2.0 的版本。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-05T15:09:47.483Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop benchmarks">
 <meta name="twitter:description" content="Hadoop 的基准测试，基于 CDH 5.2.0 的版本。">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Hadoop benchmarks - WHOAMI </title>
@@ -186,7 +202,6 @@ https://github.com/intel-hadoop/HiBench
 <h4 id="1-count-操作"><a href="#1-count-操作" class="headerlink" title="(1) count(*)操作"></a>(1) count(*)操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[yndx-bigdata-hadoop02:21000] &gt; select count(*) from event_calling_201410;</span><br><span class="line">Query: select count(*) from event_calling_201410</span><br><span class="line">+-----------+</span><br><span class="line">| count(*)  |</span><br><span class="line">+-----------+</span><br><span class="line">| 425883373 |</span><br><span class="line">+-----------+</span><br><span class="line">Fetched 1 row(s) in 192.75s</span><br><span class="line">hive (i_bil_hb_m)&gt; select count(*) from event_calling_201410;</span><br><span class="line">Total jobs = 1</span><br><span class="line">Launching Job 1 out of 1</span><br><span class="line">OK</span><br><span class="line">_c0</span><br><span class="line">425883373</span><br><span class="line">Time taken: 386.804 seconds, Fetched: 1 row(s)</span><br><span class="line">[yndx-bigdata-hadoop02:21000] &gt; select count(*) from event_sms_201410;</span><br><span class="line">Query: select count(*) from event_sms_201410</span><br><span class="line">+----------+</span><br><span class="line">| count(*) |</span><br><span class="line">+----------+</span><br><span class="line">| 80675409 |</span><br><span class="line">+----------+</span><br><span class="line">Fetched 1 row(s) in 33.52s</span><br></pre></td></tr></table></figure>
 <h4 id="2-两表join操作"><a href="#2-两表join操作" class="headerlink" title="(2) 两表join操作"></a>(2) 两表join操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">hive (i_bil_hb_m)&gt; select count(*) from event_calling_201410 c left outer join event_sms_201410 s on(s.calling_nbr=c.calling_nbr);  </span><br><span class="line">Total jobs = 2</span><br><span class="line">Stage-1 is selected by condition resolver.</span><br><span class="line">Launching Job 1 out of 2</span><br><span class="line">Number of reduce tasks not specified. Estimated from input data size: 279</span><br><span class="line">In order to change the average load for a reducer (in bytes):</span><br><span class="line">  set hive.exec.reducers.bytes.per.reducer=&lt;number&gt;</span><br><span class="line">In order to limit the maximum number of reducers:</span><br><span class="line">  set hive.exec.reducers.max=&lt;number&gt;</span><br><span class="line">In order to set a constant number of reducers:</span><br><span class="line">  set mapreduce.job.reduces=&lt;number&gt;</span><br><span class="line">Starting Job = job_1420542591388_0987, Tracking URL = http://yndx-bigdata-hadoop01:8088/proxy/application_1420542591388_0987/</span><br><span class="line">Kill Command = /opt/cloudera/parcels/CDH-5.2.0-1.cdh5.2.0.p0.36/lib/hadoop/bin/hadoop job  -kill job_1420542591388_0987</span><br><span class="line">Hadoop job information for Stage-1: number of mappers: 1110; number of reducers: 279</span><br><span class="line">2015-01-15 10:44:01,665 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 19731.27 sec</span><br><span class="line">MapReduce Total cumulative CPU time: 0 days 5 hours 28 minutes 51 seconds 270 msec</span><br><span class="line">Ended Job = job_1420542591388_0987</span><br><span class="line">Launching Job 2 out of 2</span><br><span class="line">Number of reduce tasks determined at compile time: 1</span><br><span class="line">In order to change the average load for a reducer (in bytes):</span><br><span class="line">  set hive.exec.reducers.bytes.per.reducer=&lt;number&gt;</span><br><span class="line">In order to limit the maximum number of reducers:</span><br><span class="line">  set hive.exec.reducers.max=&lt;number&gt;</span><br><span class="line">In order to set a constant number of reducers:</span><br><span class="line">  set mapreduce.job.reduces=&lt;number&gt;</span><br><span class="line">2015-01-15 10:44:33,709 Stage-2 map = 100%,  reduce = 100%, Cumulative CPU 15.28 sec</span><br><span class="line">MapReduce Total cumulative CPU time: 15 seconds 280 msec</span><br><span class="line">Ended Job = job_1420542591388_0988</span><br><span class="line">MapReduce Jobs Launched: </span><br><span class="line">Stage-Stage-1: Map: 1110  Reduce: 279   Cumulative CPU: 19731.27 sec   HDFS Read: 298693978456 HDFS Write: 32922 SUCCESS</span><br><span class="line">Stage-Stage-2: Map: 7  Reduce: 1   Cumulative CPU: 15.28 sec   HDFS Read: 97828 HDFS Write: 12 SUCCESS</span><br><span class="line">Total MapReduce CPU Time Spent: 0 days 5 hours 29 minutes 6 seconds 550 msec</span><br><span class="line">OK</span><br><span class="line">_c0</span><br><span class="line">13106534553</span><br><span class="line">Time taken: 413.651 seconds, Fetched: 1 row(s)</span><br><span class="line">[yndx-bigdata-hadoop02:21000] &gt;  select count(*) from event_calling_201410 c left outer join event_sms_201410 s on(s.calling_nbr=c.calling_nbr);</span><br><span class="line">Query: select count(*) from event_calling_201410 c left outer join event_sms_201410 s on(s.calling_nbr=c.calling_nbr)</span><br><span class="line"> +-------------+</span><br><span class="line">| count(*)    |</span><br><span class="line">+-------------+</span><br><span class="line">| 13106534553 |</span><br><span class="line">+-------------+</span><br><span class="line">Fetched 1 row(s) in 525.48s</span><br></pre></td></tr></table></figure>
 <h3 id="3-统计结果"><a href="#3-统计结果" class="headerlink" title="(3) 统计结果"></a>(3) 统计结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Action		数据量(G)	   HiveTime(s)	   ImpalaTime(s) Hive结论 Imapla结论</span><br><span class="line">Count(*)	 39.8			386.804			192.75		通过  警告阈值(内存)</span><br><span class="line">join(2)		 39.8*2			413.651			525.48		通过  警告阈值(内存)</span><br></pre></td></tr></table></figure>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -223,6 +238,16 @@ https://github.com/intel-hadoop/HiBench
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -240,7 +265,7 @@ https://github.com/intel-hadoop/HiBench
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -254,6 +279,37 @@ https://github.com/intel-hadoop/HiBench
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/03/20/Hadoop-benchmarks/';
+
+  var disqus_title = "Hadoop benchmarks";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="CMU 15-445/645 (FALL 2019) project1">
+
+
+
+
+  <meta name="keywords" content="2021,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2021/01/03/cmu-15-445-2019-fall-project2/">
+
+
+<meta name="description" content="CMU 15-445/645 (FALL 2019) project1">
+<meta name="keywords" content="2021">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMU 15-445&#x2F;645 2019 fall PROJECT `#2` - HASH TABLE 翻译">
+<meta property="og:url" content="http://itweet.github.io/2021/01/03/cmu-15-445-2019-fall-project2/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="CMU 15-445/645 (FALL 2019) project1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-05-27T07:34:26.010Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CMU 15-445&#x2F;645 2019 fall PROJECT `#2` - HASH TABLE 翻译">
+<meta name="twitter:description" content="CMU 15-445/645 (FALL 2019) project1">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154998721-1');
+</script>
+
+
+    <title> CMU 15-445/645 2019 fall PROJECT `#2` - HASH TABLE 翻译 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          CMU 15-445/645 2019 fall PROJECT `#2` - HASH TABLE 翻译
+        
+      </h1>
+
+      <time class="post-time">
+          1月 03 2021
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h2 id="OVERVIEW"><a href="#OVERVIEW" class="headerlink" title="OVERVIEW"></a>OVERVIEW</h2><p>概述</p>
+<p>The second programming project is to implement a hash table for the BusTub DBMS that is backed by disk storage. Your hash table is responsible for fast data retrieval without having to search through every record in a database table.<br>第二个编程项目是为BusTub DBMS实现一个支持磁盘存储的哈希表。你的哈希表负责快速检索数据，而无需在数据库表中搜索每条记录。</p>
+<p>You will need to implement a hash table using the linear probing hashing scheme. It is a giant slot array that spans across multiple pages where each block page holds a hash table block. The table will access pages through your buffer pool from Project #1. The table contains a header page to map blocks to pages. Your hash table needs to support growing in size if it runs out of space (i.e., every slot is full).<br>你需要使用线性探测哈希方案实现一个哈希表。它是一个跨越多个页的巨大槽位数组，每个块页都保存一个哈希表块。该表将通过项目#1中的缓冲池从页面访问。该表包含一个头页面来映射块到页面。如果哈希表空间不足（即每个槽位都已满），你的哈希表需要支持扩展大小。</p>
+<p>You will need to complete the following tasks in your hash table implementation:<br>你需要在哈希表实现中完成以下任务：</p>
+<ul>
+<li><p>Page Layouts<br>页面布局</p>
+</li>
+<li><p>Hash Table Implementation<br>哈希表实现</p>
+</li>
+<li><p>Table Resizing<br>表大小调整</p>
+</li>
+<li><p>Concurrency Control<br>并发控制</p>
+</li>
+</ul>
+<p>This is a single-person project that will be completed individually (i.e., no groups).<br>这是一个单人项目，将单独完成（即无小组）。</p>
+<p>Release Date: Sep 30, 2019<br>发布日期：2019年9月30日</p>
+<p>Due Date: Oct 20, 2019 @ 11:59pm<br>截止日期：2019年10月20日 @ 11:59pm</p>
+<h2 id="PROJECT-SPECIFICATION"><a href="#PROJECT-SPECIFICATION" class="headerlink" title="PROJECT SPECIFICATION"></a>PROJECT SPECIFICATION</h2><p>项目规范</p>
+<p>Like the first project, we are providing you with stub classes that contain the API that you need to implement. You should not modify the signatures for the pre-defined functions in these classes. If you do this, then it will break the test code that we will use to grade your assignment you end up getting no credit for the project. If a class already contains certain member variables, you should not remove them. But you may add private helper functions/member variables to these classes in order to correctly realize the functionality.<br>与第一个项目一样，我们为你提供了包含需要实现的API的存根类。你不应修改这些类中预定义函数的签名。如果这样做，将会破坏我们用来评分的测试代码，最终导致你无法获得项目的学分。如果一个类已经包含某些成员变量，你不应该删除它们。但是，你可以在这些类中添加私有辅助functions/member变量以正确实现功能。</p>
+<p>The correctness of the linear probe hash table index depends on the correctness of your buffer pool implementation. We will not provide solutions for the previous programming projects.<br>线性探测哈希表索引的正确性取决于缓冲池实现的正确性。我们不会为之前的编程项目提供解决方案。</p>
+<h3 id="TASK-1-PAGE-LAYOUTS"><a href="#TASK-1-PAGE-LAYOUTS" class="headerlink" title="TASK #1 - PAGE LAYOUTS"></a>TASK #1 - PAGE LAYOUTS</h3><p>任务＃1 - 页面布局</p>
+<p>Your hash table is meant to be accessed through the DBMS’s BufferPoolManager. This means that you cannot allocate memory to store information. Everything must be stored in disk pages so that they can read/written from the DiskManager. If you create a hash table, write its pages to disk, and then restart the DBMS, you should be able to load back the hash table from disk after restarting.<br>你的哈希表是通过DBMS的BufferPoolManager访问的。这意味着你不能分配内存来存储信息。所有内容必须存储在磁盘页中，以便可以通过DiskManager进行读取/写入。如果你创建了一个哈希表，将其页面写入磁盘，然后重新启动DBMS，重新启动后应该能够从磁盘加载回哈希表。</p>
+<p>To support reading/writing hash table blocks on top of pages, you will implement two Page classes to store the data of your hash table. This is meant to teach you how to allocate memory from the BufferPoolManager as pages.<br>为了支持在页面上读取/写入哈希表块，你将实现两个页面类来存储哈希表的数据。这旨在教你如何从BufferPoolManager中分配内存作为页面。</p>
+<ul>
+<li><p>Hash Table Header Page<br>Hash Table Header 页面</p>
+</li>
+<li><p>Hash Table Block Page<br>Hash Table Block 页面</p>
+</li>
+</ul>
+<h4 id="HASH-TABLE-HEADER-PAGE"><a href="#HASH-TABLE-HEADER-PAGE" class="headerlink" title="HASH TABLE HEADER PAGE"></a><code>HASH TABLE HEADER PAGE</code></h4><p><code>HASH TABLE HEADER 页面</code></p>
+<p>This class holds all of the meta-data for the hash table. It is divided into the fields as shown by the table below:<br>这个类保存哈希表的所有元数据。它被划分为下表所示的字段：</p>
+<table>
+<thead>
+<tr>
+<th>变量名称</th>
+<th>大小</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>page_id_</td>
+<td>4字节</td>
+<td>自身页面ID</td>
+</tr>
+<tr>
+<td>size_</td>
+<td>4字节</td>
+<td>哈希表可以容纳的键值对数量</td>
+</tr>
+<tr>
+<td>next_ind_</td>
+<td>4字节</td>
+<td>添加新条目到block_page_ids_的下一个索引</td>
+</tr>
+<tr>
+<td>lsn_</td>
+<td>4字节</td>
+<td>日志序列号（在第四个项目中使用）</td>
+</tr>
+<tr>
+<td>block_page_ids_</td>
+<td>4080字节</td>
+<td>块页面ID的数组</td>
+</tr>
+</tbody>
+</table>
+<p>The block_page_ids_ array maps block ids to page_id_t ids. The ith element in block_page_ids_ is the page_id for the ith block.<br>block_page_ids_数组将块ID映射到page_id_t ID。block_page_ids_中的第i个元素是第i个块的page_id。</p>
+<p>You must implement your Hash Table Header Page in the designated files. You are only allowed to modify the header file (src/include/page/hash_table_header_page.h) and its corresponding source file (src/page/hash_table_header_page.cpp).<br>你必须在指定的文件中实现你的哈希表头页面。你只能修改头文件（src/include/page/hash_table_header_page.h）及其相应的源文件（src/page/hash_table_header_page.cpp）。</p>
+<h4 id="HASH-TABLE-BLOCK-PAGE"><a href="#HASH-TABLE-BLOCK-PAGE" class="headerlink" title="HASH TABLE BLOCK PAGE"></a>HASH TABLE BLOCK PAGE</h4><p>The Hash Table Block Page holds three arrays:<br>哈希表块页面包含三个数组：</p>
+<ul>
+<li>occupied_ : The ith bit of occupied_ is 1 if the ith index of array_ has ever been occupied.</li>
+<li><p>occupied_：如果array_的第i个索引曾经被占用，则occupied_的第i个位为1。</p>
+</li>
+<li><p>readable_ : The ith bit of readable_ is 1 if the ith index of array_ holds a readable value.</p>
+</li>
+<li><p>readable_：如果array_的第i个索引持有可读的值，则readable_的第i个位为1。</p>
+</li>
+<li><p>array_ : The array that holds the key-value pairs.</p>
+</li>
+<li>array_：保存键值对的数组。</li>
+</ul>
+<p>The number of slots available in a Hash Table Block Page depends on the types of the keys and values being stored. You only need to support fixed-length keys and values. The size of keys/values will be the same within a single hash table instance, but you cannot assume that they will be the same for all instances (e.g., hash table #1 can have 32-bit keys and hash table #2 can have 64-bit keys).<br>哈希表块页面中可用的槽位数量取决于存储的键和值的类型。你只需要支持固定长度的键和值。在单个哈希表实例内，键/值的大小将相同，但你不能假设它们对于所有实例都相同（例如，哈希表＃1可以具有32位键，哈希表＃2可以具有64位键）。</p>
+<p>You must implement your Hash Table Block Page in the designated files. You are only allowed to modify the header file (src/include/page/hash_table_block_page.h) and its corresponding source file (src/page/hash_table_block_page.cpp).<br>你必须在指定的文件中实现你的哈希表块页面。你只能修改头文件（src/include/page/hash_table_block_page.h）及其相应的源文件（src/page/hash_table_block_page.cpp）。</p>
+<p>Each Hash Table Header/Block page corresponds to the content (i.e., the byte array data_) of a memory page fetched by buffer pool. Every time you try to read or write a page, you need to first fetch the page from buffer pool using its unique page_id, then reinterpret cast to either a header or a block page, and unpin the page after any writing or reading operations.<br>每个哈希表 Header/Block 页面对应于通过缓冲池获取的内存页面的内容（即字节数组data_）。每当你尝试读取或写入页面时，你需要使用其唯一的page_id</p>
+<h3 id="TASK-2-HASH-TABLE-IMPLEMENTATION"><a href="#TASK-2-HASH-TABLE-IMPLEMENTATION" class="headerlink" title="TASK #2 - HASH TABLE IMPLEMENTATION"></a>TASK #2 - HASH TABLE IMPLEMENTATION</h3><p>任务 #2 - 哈希表实现</p>
+<p>You will implement a hash table that uses the linear probing hashing scheme. It needs to support insertions (Insert), point search (GetValue), and deletions (Remove).<br>你需要实现一个使用线性探测哈希方案的哈希表。它需要支持插入（Insert）、点查询（GetValue）和删除（Remove）操作。</p>
+<p>Your hash table must support both unique and non-unique keys. Duplicate values for the same key are not allowed. This means that (key_0, value_0) and (key_0, value_1) can exist in the same hash table, but not (key_0, value_0) and (key_0, value_0). The Insert method only returns false if it tries to insert an existing key-value pair.<br>你的哈希表必须支持唯一键和非唯一键。同一个键的重复值是不允许的。这意味着在同一个哈希表中可以存在 (key_0, value_0) 和 (key_0, value_1) 这样的键值对，但不能存在 (key_0, value_0) 和 (key_0, value_0) 这样的情况。Insert 方法只有在尝试插入已存在的键值对时才会返回 false。</p>
+<p>Your hash table implementation must hide the details of the key/value type and associated comparator, like this:<br>你的哈希表实现必须隐藏key/value类型和相关比较器的细节，如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> KeyType,</span><br><span class="line">          <span class="keyword">typename</span> ValueType,</span><br><span class="line">          <span class="keyword">typename</span> KeyComparator&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinearProbeHashTable</span> &#123;</span></span><br><span class="line">   <span class="comment">// ---</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>These classes are already implemented for you:<br>以下类已经为你实现：</p>
+<ul>
+<li><p><code>KeyType:</code> The type of each key in the hash table. This will only be GenericKey, the actual size of GenericKey is specified and instantiated with a template argument and depends on the data type of indexed attribute.<br>KeyType：哈希表中每个键的类型。这将只是 GenericKey，GenericKey 的实际大小由模板参数指定并实例化，取决于索引属性的数据类型。</p>
+</li>
+<li><p><code>ValueType:</code> The type of each value in the hash table. This will only be 64-bit RID.<br>ValueType：哈希表中每个值的类型。这将只是 64 位 RID。</p>
+</li>
+<li><p><code>KeyComparator:</code> The class used to compare whether two KeyType instances are less/greater-than each other. These will be included in the KeyType implementation files.<br>Note that, to compare whether two ValueType instances are equal to each other, you can use the == operator.<br>KeyComparator：用于比较两个 KeyType 实例是否小于/大于彼此的类。这些将包含在 KeyType 实现文件中。<br>请注意，要比较两个 ValueType 实例是否相等，可以使用 == 运算符。</p>
+</li>
+</ul>
+<h3 id="TASK-3-TABLE-RESIZING"><a href="#TASK-3-TABLE-RESIZING" class="headerlink" title="TASK #3 - TABLE RESIZING"></a>TASK #3 - TABLE RESIZING</h3><p>任务 #3 - 表格调整大小</p>
+<p>The linear probing hashing scheme uses a fized-size table. When the hash table is full, then any insert operation will get stuck in an infinite loop because the system will walk through the entire slot array and not find a free space. If your hash table detects that it is full, then it must resize itself to be twice the current size (i.e., if currently has n slots, then the new size will be 2×n).<br>线性探测哈希方案使用固定大小的表格。当哈希表已满时，任何插入操作都将陷入无限循环，因为系统将遍历整个槽位数组并找不到空闲空间。如果哈希表检测到已满，那么它必须调整自身的大小为当前大小的两倍（即，如果当前有n个槽位，则新的大小将是2×n）。</p>
+<p>Since any write operation could lead to a change of header_page_id in your hash table, it is your responsibility to update header_page_id in the header page (src/include/page/header_page.h) to ensure that the container is durable on disk.<br>由于任何写操作都可能导致哈希表中 header_page_id 的变化，所以你有责任更新头页（src/include/page/header_page.h）中的 header_page_id，以确保容器在磁盘上是持久的。</p>
+<h3 id="TASK-4-CONCURRENCY-CONTROL"><a href="#TASK-4-CONCURRENCY-CONTROL" class="headerlink" title="TASK #4 - CONCURRENCY CONTROL"></a>TASK #4 - CONCURRENCY CONTROL</h3><p>任务 #4 - 并发控制</p>
+<p>Up to this this point you could assume that your hash table only supported single-threaded execution. In this last task, you will modify your implementation so that it supports multiple threads reading/writing the table at the same time.<br>到目前为止，你可以假设你的哈希表仅支持单线程执行。在最后一个任务中，你将修改你的实现，使其支持多个线程同时读写表格。</p>
+<p>You will need to have latches on each block so that when one thread is writing to a block other threads are not reading or modifying that index as well. You should also allow multiple readers to be reading the same block at the same time.<br>你需要在每个块上设置闩锁，以便当一个线程正在向一个块写入时，其他线程不能同时读取或修改该索引。你还应该允许多个读取器同时读取同一个块。</p>
+<p>You will need to latch the whole hash table when you need to resize. When resize is called, the size that the table was when resize was called is passed in as an argument. This is so that if the table was resized while a thread was waiting for the latch, it can immediately give up the latch and attempt insertion again.<br>当需要调整大小时，你需要给整个哈希表上锁。在调用调整大小时，传入调整大小时表格的大小作为参数。这样，如果在一个线程等待闩锁时表格被调整大小，它可以立即释放闩锁并再次尝试插入操作。</p>
+<h3 id="REQUIREMENTS-AND-HINTS"><a href="#REQUIREMENTS-AND-HINTS" class="headerlink" title="REQUIREMENTS AND HINTS"></a>REQUIREMENTS AND HINTS</h3><p>要求和提示</p>
+<ul>
+<li><p>You are not allowed to use a global scope latch to protect your data structure for each operation. In other words, you may not lock the whole container and only unlock the latch when operations are done.<br>不允许使用全局范围的闩锁来保护你的数据结构。换句话说，你不能锁定整个容器，只有在操作完成时才释放闩锁。</p>
+</li>
+<li><p>We are providing you a ReaderWriterLatch (src/include/common/rwlatch.h) that you can use in your hash table. There are also helper functions in the Page base class to acquire and release latches (src/include/page/page.h).<br>我们提供了一个 ReaderWriterLatch (src/include/common/rwlatch.h) 可以在你的哈希表中使用。在 Page 基类中也有一些辅助函数可以获取和释放闩锁 (src/include/page/page.h)。</p>
+</li>
+<li><p>Sone of your hash table functions will be given a Transaction (src/include/concurrency/transaction.h) object. This object provides methods to store the page on which you have acquired latch while traversing through the Hash Table.<br>你的一些哈希表函数将获得一个 Transaction (src/include/concurrency/transaction.h) 对象。这个对象提供了在遍历哈希表过程中存储已获得闩锁页面的方法。</p>
+</li>
+</ul>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><ul>
+<li><a href="https://15445.courses.cs.cmu.edu/fall2019/project2/" target="_blank" rel="noopener">PROJECT #2 - HASH TABLE</a></li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/2021/">2021</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2021/01/04/cmu-15-445-2019-fall-project3/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">CMU 15-445/645 2019 PROJECT `#3` - QUERY EXECUTION 翻译</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2021/01/02/cmu-15-445-2019-fall-project1/">
+        <span class="next-text nav-default">CMU 15-445/645 2019 PROJECT `#1` - BUFFER POOL 翻译</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2023
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2021/01/03/cmu-15-445-2019-fall-project2/';
+
+  var disqus_title = "CMU 15-445/645 2019 fall PROJECT `#2` - HASH TABLE 翻译";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

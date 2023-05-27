@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -48,7 +48,7 @@
 <meta property="og:image" content="http://drill.apache.org/images/home-any.png">
 <meta property="og:image" content="http://drill.apache.org/docs/img/connect-plugin.png">
 <meta property="og:image" content="http://drill.apache.org/docs/img/plugin-default.png">
-<meta property="og:updated_time" content="2019-09-25T15:52:42.001Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="drill-use">
 <meta name="twitter:description" content="Apache Drill 在基于 SQL 的数据分析和商业智能（BI）上引入了 JSON 文件模型，这使得用户能查询固定架构，演化架构，以及各种格式和数据存储中的模式无关（schema-free）数据。">
@@ -73,8 +73,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> drill-use - WHOAMI </title>
@@ -250,7 +266,6 @@
 </ul>
 <p>参考：<a href="http://www.yankay.com/google-dremel-rationale/" target="_blank" rel="noopener">http://www.yankay.com/google-dremel-rationale/</a></p>
 <p>相关资源：<a href="http://geek.csdn.net/news/detail/32952" target="_blank" rel="noopener">http://geek.csdn.net/news/detail/32952</a><br>          <a href="http://www.quora.com/Apache-Drill" target="_blank" rel="noopener">http://www.quora.com/Apache-Drill</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -287,6 +302,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -304,7 +329,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -318,6 +343,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/07/18/drill-use/';
+
+  var disqus_title = "drill-use";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

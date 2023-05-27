@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="CMU 15-445/645 (FALL 2019) 数据库系统">
+
+
+
+
+  <meta name="keywords" content="2021,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2021/01/04/cmu-15-445-2019-fall-project3/">
+
+
+<meta name="description" content="CMU 15-445/645 (FALL 2019) 数据库系统">
+<meta name="keywords" content="2021">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMU 15-445&#x2F;645 2019 PROJECT `#3` - QUERY EXECUTION 翻译">
+<meta property="og:url" content="http://itweet.github.io/2021/01/04/cmu-15-445-2019-fall-project3/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="CMU 15-445/645 (FALL 2019) 数据库系统">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-05-27T07:46:50.070Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CMU 15-445&#x2F;645 2019 PROJECT `#3` - QUERY EXECUTION 翻译">
+<meta name="twitter:description" content="CMU 15-445/645 (FALL 2019) 数据库系统">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154998721-1');
+</script>
+
+
+    <title> CMU 15-445/645 2019 PROJECT `#3` - QUERY EXECUTION 翻译 - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          CMU 15-445/645 2019 PROJECT `#3` - QUERY EXECUTION 翻译
+        
+      </h1>
+
+      <time class="post-time">
+          1月 04 2021
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h2 id="OVERVIEW"><a href="#OVERVIEW" class="headerlink" title="OVERVIEW"></a>OVERVIEW</h2><p>The third programming project is to add support for executing queries in your database system. You will implement executors that are responsible for taking query plan nodes and executing them. You will create executors that perform sequential scans, inserts, hash joins, and aggregations. Because the DBMS does not support SQL (yet), your implementation will operate directly on hand-written query plans.<br>第三个编程项目是在数据库系统中添加支持执行查询的功能。您将实现执行器，负责接收查询计划节点并执行它们。您将创建执行器来执行顺序扫描、插入、哈希连接和聚合。由于DBMS尚不支持SQL，因此您的实现将直接在手写的查询计划上操作。</p>
+<p>We will use the Iterator query processing model (i.e., the Volcano model). Every query plan executor implements a <code>Next</code> function. When the DBMS invokes an executor’s <code>Next</code> function, the executor either returns a single tuple or indicates that there are no more tuples. This lets the executor implement a loop that just keeps calling <code>Next</code> on its children to get and process their tuples.<br>我们将使用迭代器查询处理模型（即Volcano模型）。每个查询计划执行器都实现了一个Next函数。当DBMS调用执行器的Next函数时，执行器要么返回一个单独的元组，要么指示没有更多的元组。这使得执行器能够实现一个循环，只需不断调用其子节点的Next来获取和处理它们的元组。</p>
+<p>As optional reading, you may be interested in <a href="http://patshaughnessy.net/2014/10/13/following-a-select-statement-through-postgres-internals" target="_blank" rel="noopener">following a select statement through the PostgreSQL internals</a>.<br>作为可选阅读，您可能会对跟踪 PostgreSQL 内部的 select 语句感兴趣。</p>
+<p>The project is comprised of the following tasks:<br>该项目由以下任务组成：</p>
+<ul>
+<li><p>Task #1 - Creating a Catalog Table<br>任务＃1 - 创建目录表</p>
+</li>
+<li><p>Task #2 - Executors<br>任务＃2 - 执行器</p>
+</li>
+<li><p>Task #3 - Linear Probe Hash Table Returns<br>任务＃3 - 线性探测哈希表返回</p>
+</li>
+</ul>
+<p>This is a single-person project that will be completed individually (i.e., no groups).<br>这是一个单人项目，个人完成（即无组）。</p>
+<blockquote>
+<p> Please post all of your questions about this project on Piazza. Do not email the TAs directly with questions. The instructor and TAs will not debug your code. You may verbally describe test cases on Piazza, but do not post an excessive amount of testing code on Piazza either.<br> 请在 Piazza 上发布有关该项目的所有问题。请勿直接通过电子邮件向助教提问。讲师和助教不会调试您的代码。您可以在 Piazza 上口头描述测试用例，但请勿在 Piazza 上发布过多的测试代码。</p>
+</blockquote>
+<p>Release Date: Oct 21, 2019<br>发布日期：2019年10月21日</p>
+<p>Due Date: Nov 17, 2019 @ 11:59pm<br>截止日期：2019年11月17日 @ 11:59pm</p>
+<h2 id="PROJECT-SPECIFICATION"><a href="#PROJECT-SPECIFICATION" class="headerlink" title="PROJECT SPECIFICATION"></a>PROJECT SPECIFICATION</h2><p>项目规范</p>
+<p>Like the previous projects, we are providing you with stub classes that contain the API that you need to implement. You should not modify the signatures for the pre-defined functions in these classes. If you do this, then it will break the test code that we will use to grade your assignment and you will end up getting no credit for the project. If a class already contains certain member variables, you should not remove them. You may however add private helper functions and member variables to these classes.<br>和之前的项目一样，我们提供了包含您需要实现的 API 的存根类。您不应该修改这些类中预定义函数的签名。如果您这样做，将会破坏我们用于评分的测试代码，您将无法得到该项目的任何学分。如果某个类已经包含某些成员变量，您不应该删除它们。但是，您可以向这些类添加私有辅助函数和成员变量。</p>
+<p>The correctness of this project depends on the correctness of your implementation of previous projects, we will not provide solutions or binary files.<br>该项目的正确性取决于您对之前项目的正确实现，我们不会提供解决方案或二进制文件。</p>
+<h3 id="ADVICE-FROM-THE-TAS"><a href="#ADVICE-FROM-THE-TAS" class="headerlink" title="ADVICE FROM THE TAS"></a>ADVICE FROM THE TAS</h3><p>助教建议</p>
+<ul>
+<li><p>Task #1 is much easier than the others. Task #3 is open-ended. Budget your time wisely.<br>任务＃1比其他任务容易得多。任务＃3是开放式的。明智地分配时间。</p>
+</li>
+<li><p>Tasks #1 and #2 do not rely on a working linear probe hash table implementation. Focus on getting those first.<br>任务＃1和＃2不依赖于一个完全工作的线性探测哈希表实现。首先专注于这些任务。</p>
+</li>
+<li><p>Conceptual understanding is important for this project. It will make your life much easier.<br>对于这个项目，概念理解很重要。它将让你的生活变得更容易。</p>
+</li>
+</ul>
+<h3 id="TASK-1-CREATING-A-CATALOG-TABLE"><a href="#TASK-1-CREATING-A-CATALOG-TABLE" class="headerlink" title="TASK #1 - CREATING A CATALOG TABLE"></a>TASK #1 - CREATING A CATALOG TABLE</h3><p>任务＃1 - 创建目录表</p>
+<p>A database maintains an internal catalog to keep track of meta-data about the database. For example, the catalog is used to answer what tables are present and where. For more details, refer back to <a href="https://15445.courses.cs.cmu.edu/fall2019/schedule.html#sep-09-2019" target="_blank" rel="noopener">Lecture #04 - Database Storage (Part II)</a>.<br>数据库维护一个内部目录，用于跟踪关于数据库的元数据。例如，目录用于回答哪些表存在以及它们的位置。有关更多详细信息，请参考Lecture #04 - Database Storage (Part II)。</p>
+<p>In this warm-up task, you will be modifying <code>src/include/catalog/simple_catalog.h</code> to that allow the DBMS to add new tables to the database and retrieve them using either the name or internal object identifier (table_oid_t). You will implement the <code>CreateTable</code>, <code>GetTable(const std::string &amp;table_name)</code>, and <code>GetTable(table_oid_t table_oid)</code> methods. You should find these tasks straightforward, the goal is to familiarize yourself with the catalog and how it interacts with the rest of the system.<br>在这个热身任务中，你将修改src/include/catalog/simple_catalog.h以允许数据库管理系统向数据库添加新表，并使用表名或内部对象标识符（table_oid_t）来检索表。你需要实现CreateTable、GetTable(const std::string &amp;table_name)和GetTable(table_oid_t table_oid)方法。这些任务应该比较简单，目标是让你熟悉目录以及它如何与系统的其他部分交互。</p>
+<h4 id="TESTING"><a href="#TESTING" class="headerlink" title="TESTING"></a>TESTING</h4><p>There is a sample test in <code>test/catalog/catalog_test.cpp</code>.<br>test/catalog/catalog_test.cpp中有一个样例测试。</p>
+<h3 id="TASK-2-EXECUTORS"><a href="#TASK-2-EXECUTORS" class="headerlink" title="TASK #2 - EXECUTORS"></a>TASK #2 - EXECUTORS</h3><p>In the second task, you will implement executors for sequential scans, inserts, hash joins, and aggregations. For each query plan operator type, there is a corresponding executor object that implements the <code>Init</code> and <code>Next</code> methods. The <code>Init</code> method is for setting up internal state about the invocation of the operator (e.g., retrieving the corresponding table to scan). The <code>Next</code> method provides the iterator interface that returns a single tuple on each invocation (or null if there are no more tuples).<br>在第二个任务中，您将实现顺序扫描（sequential scan）、插入（insert）、哈希连接（hash join）和聚合（aggregation）的执行器。对于每个查询计划操作类型，都有相应的执行器对象，实现了Init和Next方法。Init方法用于设置关于操作调用的内部状态（例如，检索要扫描的相应表）。Next方法提供了迭代器接口，每次调用返回一个元组（如果没有更多元组，则返回空）。</p>
+<p>The executors that you will implement are defined in the following header files:<br>您需要实现的执行器定义在以下头文件中：</p>
+<ul>
+<li>src/include/execution/executors/seq_scan_executor.h</li>
+<li>src/include/execution/executors/insert_executor.h</li>
+<li>src/include/execution/executors/hash_join_executor.h</li>
+<li>src/include/execution/executors/aggregation_executor.h</li>
+</ul>
+<p>We assume executors are single-threaded throughout the entire project. You are also free to add private helper functions and class members as you see fit.<br>我们假设执行器在整个项目中都是单线程的。您可以根据需要添加私有辅助函数和类成员。</p>
+<p>To understand how the executors are created at runtime during query execution, refer to the <code>ExecutorFactory</code> (<code>src/include/execution/executor_factory.h</code>) helper class. Moreover, every executor has an <code>ExecutorContext</code> (<code>src/include/execution/executor_context.h</code>) that maintains additional state about the query. Finally, we have provided sample tests for you in <code>test/execution/executor_test.cpp</code>.<br>要了解在查询执行期间如何在运行时创建执行器，请参阅ExecutorFactory（src/include/execution/executor_factory.h）助手类。此外，每个执行器都有一个ExecutorContext（src/include/execution/executor_context.h），用于维护有关查询的其他状态。最后，我们在test/execution/executor_test.cpp中为您提供了示例测试。</p>
+<p>Plan nodes are the input format or blueprint for the executors that you will be implementing. Plan nodes and executors are both tree-like; they accept tuples from their children and give tuples to their parent. They may rely on conventions about the ordering of their children, which we will describe below.<br>查询计划节点是执行器的输入格式或蓝图，您将要实现的执行器和查询计划节点都是树形结构；它们从其子节点接收元组并将元组提供给其父节点。它们可能依赖于关于子节点排序的约定，我们将在下面进行描述。</p>
+<h4 id="SEQUENTIAL-SCANS"><a href="#SEQUENTIAL-SCANS" class="headerlink" title="SEQUENTIAL SCANS"></a>SEQUENTIAL SCANS</h4><p>Sequential scans iterate over a table and return its tuples one-at-a-time. A sequential scan is specified by a <code>SeqScanPlanNode</code>. The plan node specifies which table to iterate over. The plan node may also contain a predicate; if a tuple does not satisfy the predicate, it is skipped over.<br>顺序扫描（Sequential scans）会对表进行迭代，并逐个返回其元组。顺序扫描由SeqScanPlanNode指定。计划节点指定要迭代的表。计划节点还可以包含谓词；如果元组不满足谓词条件，则跳过该元组。</p>
+<p><code>Hint</code>: Be careful when using the <code>TableIterator</code> object. Make sure that you understand the difference between the pre-increment and post-increment operators. You may find yourself getting strange output by switching between <code>++iter</code> and <code>iter++</code>.<br>提示：在使用TableIterator对象时要小心。确保理解前增量运算符和后增量运算符之间的区别。如果在++iter和iter++之间切换，可能会得到奇怪的输出。</p>
+<h4 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h4><p>Inserts add tuples to tables. Inserts are specified by an <code>InsertPlanNode</code>. There are two types of inserts: raw inserts, where the values to be inserted are embedded directly inside the plan node itself, or not-raw inserts, which take the values to be inserted from a child executor. For example, you could have an <code>InsertPlanNode</code> whose child was a <code>SeqScanPlanNode</code> to copy one table into another.<br>插入操作（Inserts）将元组添加到表中。插入操作由InsertPlanNode指定。有两种类型的插入操作：原始插入（raw inserts）和非原始插入（not-raw inserts）。原始插入操作中，要插入的值直接嵌入在计划节点本身中，而非原始插入操作则从子执行器中获取要插入的值。例如，您可以将子执行器设为SeqScanPlanNode，以将一个表复制到另一个表中。</p>
+<h4 id="HASH-JOIN"><a href="#HASH-JOIN" class="headerlink" title="HASH JOIN"></a>HASH JOIN</h4><p>Hash joins are used to combine the results of two child executors together. In this project, you just need to implement a basic hash join. For more details on hash joins, refer to the <a href="https://15445.courses.cs.cmu.edu/fall2019/notes/11-joins.pdf" target="_blank" rel="noopener">Lecture #11 notes</a> on join algorithms. In this project, by convention the left child is used to build the hash table and the right child is used to probe.<br>哈希连接（Hash joins）用于将两个子执行器的结果组合在一起。在这个项目中，您只需要实现一个基本的哈希连接操作。关于哈希连接的更多详细信息，请参考Lecture #11 notes上的连接算法。在这个项目中，按照惯例，左子执行器用于构建哈希表，右子执行器用于探测（probe）。</p>
+<p>We are providing you with a <code>SimpleHashJoinHashTable</code> implementation. We strongly recommend that you use this hash table and obtain full credit for this task before proceeding to Task #3.<br>我们为您提供了一个SimpleHashJoinHashTable的实现。我们强烈建议您使用这个哈希表，并在完成这个任务之前获得满分，然后再继续进行第三个任务。</p>
+<p>We have also provided you with a <code>HashValues</code> function, which may be useful.<br>我们还为您提供了一个HashValues函数，可能会有用。</p>
+<p><code>Hint:</code> You will want to make use of the predicate in the hash join plan node. In particular, take a look at <code>AbstractExpression::EvaluateJoin</code>, which handles the left tuple and right tuple and their respective schemas. Note that this returns a <code>Value</code>, which you can <code>GetAs&lt;bool&gt;</code>.<br>提示：您需要使用哈希连接计划节点中的谓词。特别是，请查看AbstractExpression::EvaluateJoin函数，该函数处理左元组、右元组及其各自的模式。请注意，该函数返回一个Value对象，您可以使用GetAs<bool>方法来获取布尔值。</bool></p>
+<h4 id="AGGREGATION"><a href="#AGGREGATION" class="headerlink" title="AGGREGATION"></a>AGGREGATION</h4><p>Aggregations are used to combine multiple tuple results from a single child executor into a single tuple. In this project, we ask you to implement <code>COUNT, SUM, MIN, and MAX</code>.<br>聚合操作用于将来自单个子执行器的多个元组结果合并为单个元组。在这个项目中，我们要求您实现COUNT、SUM、MIN和MAX聚合函数。</p>
+<p>Note that we provide you with a <code>SimpleAggregationHashTable</code>. We strongly recommend that you use this hash table. We have trimmed down the course project and you do not need to do this, but you may be interested in seeing what it takes to use your <code>LinearProbeHashTable</code> from Project #2 instead.<br>请注意，我们为您提供了一个SimpleAggregationHashTable。我们强烈建议您使用这个哈希表。我们简化了课程项目，您不需要使用Project #2中的LinearProbeHashTable，但您可能会有兴趣看看如何使用它。</p>
+<p><code>Hint</code>: You will want to make use of the having expression in the aggregate plan node. In particular, take a look at <code>AbstractExpression::EvaluateAggregate</code>, which handles the groupbys of the key and the aggregates of the value. Note that this returns a <code>Value</code>, which you can <code>GetAs&lt;bool&gt;`</code>.<br>提示：您需要使用聚合计划节点中的HAVING表达式。特别是，请查看AbstractExpression::EvaluateAggregate函数，该函数处理键的分组和值的聚合。请注意，该函数返回一个Value对象，您可以使用GetAs<bool>方法来获取布尔值。</bool></p>
+<h4 id="TESTING-1"><a href="#TESTING-1" class="headerlink" title="TESTING"></a>TESTING</h4><p>We have provided sample tests in <code>test/execution/executor_test.cpp</code>.<br>我们已经在test/execution/executor_test.cpp中提供了示例测试。</p>
+<h3 id="TASK-3-LINEAR-PROBE-HASH-TABLE-RETURNS"><a href="#TASK-3-LINEAR-PROBE-HASH-TABLE-RETURNS" class="headerlink" title="TASK #3 - LINEAR PROBE HASH TABLE RETURNS"></a>TASK #3 - LINEAR PROBE HASH TABLE RETURNS</h3><p>任务＃3 - 线性探测哈希表返回</p>
+<blockquote>
+<p> Intermission: We strongly recommend submitting to Gradescope at this point. This provides a backup of your submission, and you want to make sure that you get full credit for Tasks #1 and #2 before proceeding further.<br> 中场休息：我们强烈建议在此时提交给Gradescope。这将提供您提交的备份，并确保在继续进行之前获得任务＃1和任务＃2的全部学分。</p>
+</blockquote>
+<p>This task will require you to modify your hash join executor. You will now use your Linear Probe Hash Table from <code>Project #2</code> instead of the simplified hash join hash table, henceforth referred to as <code>JHT</code>.<br>这个任务要求您修改哈希连接执行器。您现在将使用项目＃2中的线性探测哈希表，而不是简化的哈希连接哈希表，以后将称为JHT。</p>
+<p><em>Note</em>: Task #3.1 can be skipped entirely. As long as you receive full credit for Task #3.2, you will also automatically receive full credit for Task #3.1.<br>注意：任务＃3.1可以完全跳过。只要您获得了任务＃3.2的全部学分，您也将自动获得任务＃3.1的全部学分。</p>
+<p>It is likely that you will need to understand <a href="https://en.cppreference.com/w/cpp/language/class_template#Explicit_instantiation" target="_blank" rel="noopener">explicit template instantiation</a>. You have already seen code that used explicit template instantiation in <a href="https://15445.courses.cs.cmu.edu/fall2019/project2" target="_blank" rel="noopener">Project #2</a>.<br>您可能需要理解显式模板实例化。您已经在项目＃2中看到了使用显式模板实例化的代码。</p>
+<h4 id="TASK-3-1-LINEAR-PROBE-HASH-TABLE-TMPTUPLEPAGE"><a href="#TASK-3-1-LINEAR-PROBE-HASH-TABLE-TMPTUPLEPAGE" class="headerlink" title="TASK #3.1 - LINEAR PROBE HASH TABLE, TMPTUPLEPAGE"></a>TASK #3.1 - LINEAR PROBE HASH TABLE, TMPTUPLEPAGE</h4><p>任务＃3.1 - 线性探测哈希表，TmpTuplePage</p>
+<p>This part of the project is intended to be open-ended. Again, receiving full credit for Task #3.2 will automatically give you full credit for Task #3.1.<br>这部分项目旨在开放性。同样，只要您获得了任务＃3.2的全部学分，您将自动获得任务＃3.1的全部学分。</p>
+<p>You are provided, but are not required to use, the following stub classes:<br>我们为您提供了以下存根类，但不要求您使用：</p>
+<ul>
+<li><p>TmpTuplePage at <code>src/include/storage/page/tmp_tuple_page.h</code>. In our implementation, we wanted a simplified version of a TablePage. Although this is not necessary, we found that this will make the development easier.<br>TmpTuplePage位于src/include/storage/page/tmp_tuple_page.h。在我们的实现中，我们需要一个简化版本的TablePage。虽然这不是必需的，但我们发现这将使开发工作更容易。</p>
+</li>
+<li><p>TmpTuple at src/include/storage/table/tmp_tuple.h. In our implementation, this solved certain issues that come from instantiating LinearProbeHashTable. You should think carefully about what those issues are.<br>TmpTuple位于src/include/storage/table/tmp_tuple.h。在我们的实现中，这解决了一些由实例化LinearProbeHashTable引起的问题。您应该仔细考虑这些问题是什么。</p>
+</li>
+</ul>
+<p>To provide more scaffolding to students who prefer a more structured project, implementing missing functionality in <code>TmpTuplePage</code> will earn you full credit for Task #3.1. However, this may constrain you to working towards our solution. You are also free to implement the missing <code>TmpTuplePage</code> functionality and not use any of it.<br>对于希望进行更结构化项目的学生，实现TmpTuplePage中缺失的功能将为您赢得任务＃3.1的全部学分。然而，这可能会限制您朝我们的解决方案发展。您也可以实现缺失的TmpTuplePage功能，但不使用其中的任何部分。</p>
+<h4 id="TASK-3-2-LINEAR-PROBE-HASH-TABLE-HASH-JOIN"><a href="#TASK-3-2-LINEAR-PROBE-HASH-TABLE-HASH-JOIN" class="headerlink" title="TASK #3.2 - LINEAR PROBE HASH TABLE, HASH JOIN"></a>TASK #3.2 - LINEAR PROBE HASH TABLE, HASH JOIN</h4><p>任务＃3.2 - 线性探测哈希表，哈希连接</p>
+<p>Lastly, you will modify your hash join executor in <code>src/include/execution/executors/hash_join_executor.h</code> to use your hash table from <code>Project #2</code>. You may find <code>TmpTuplePage</code> useful, but there are other solutions. As long as the type of your hash table used in the hash join is a <code>LinearProbeHashTable</code>, you will obtain full credit.<br>最后，您将修改src/include/execution/executors/hash_join_executor.h中的哈希连接执行器，以使用您在“项目＃2”中的哈希表。您可能会发现TmpTuplePage有用，但也有其他解决方案。只要在哈希连接中使用的哈希表类型是LinearProbeHashTable，您将获得全部学分。</p>
+<p><em>Note:</em> Depending on how you choose to use the <code>LinearProbeHashTable</code>, you may need to remove the uniqueness constraint from it. Feel free to do so. In our solution involving <code>TmpTuplePage</code> and <code>TmpTuple</code>, we did not need to.<br><em>注意</em>：根据您选择如何使用LinearProbeHashTable，您可能需要从中删除唯一性约束。请随意这样做。在我们涉及TmpTuplePage和TmpTuple的解决方案中，我们不需要这样做。</p>
+<p>You may also add functions to <code>src/include/execution/executor_context.h</code> if you find that helpful.<br>如果发现有用，您还可以将函数添加到src/include/execution/executor_context.h中。</p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><ul>
+<li><a href="https://15445.courses.cs.cmu.edu/fall2019/project3/" target="_blank" rel="noopener">PROJECT #3 - QUERY EXECUTION</a></li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/2021/">2021</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2021/01/05/cmu-15-445-2019-fall-project4/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">CMU 15-445/645 2019 PROJECT `#4` - LOGGING & RECOVERY 翻译</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2021/01/03/cmu-15-445-2019-fall-project2/">
+        <span class="next-text nav-default">CMU 15-445/645 2019 fall PROJECT `#2` - HASH TABLE 翻译</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2023
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2021/01/04/cmu-15-445-2019-fall-project3/';
+
+  var disqus_title = "CMU 15-445/645 2019 PROJECT `#3` - QUERY EXECUTION 翻译";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

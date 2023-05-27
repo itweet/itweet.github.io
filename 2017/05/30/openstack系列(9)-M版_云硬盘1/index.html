@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -49,7 +49,7 @@
 <meta property="og:image" content="https://www.itweet.cn/screenshots/openstack-cinder.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/Swift-architecture.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/Cinder-architecture.png">
-<meta property="og:updated_time" content="2019-02-27T17:40:29.202Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.149Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openstack系列(9)-M版_云硬盘1">
 <meta name="twitter:description" content="Openstack系列-自动化部署完成之后，此篇文章讲解企业级私有云后端云盘存储选型;OpenStack 存储组件cinder，swift，glance的区别和应用场景？ Swift——提供对象存储 （Object Storage），在概念上类似于Amazon S3服务，不过swift具有很强的扩展性、冗余和持久性，也兼容S3 API Glance——提供虚机镜像（Image）存储和管理，包括了很">
@@ -74,8 +74,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> openstack系列(9)-M版_云硬盘1 - WHOAMI </title>
@@ -202,7 +218,6 @@
 <p><img src="https://github.com/itweet/labs/raw/master/openstack-series/img/Cinder-architecture.png" alt="图 1. Cinder architecture"></p>
 <p>与其他 OpenStack 项目类似，Cinder 的功能通过 API 暴露给仪表板和命令行。它能够通过具有具象状态传输 (Representational State Transfer, REST) 的 HTTP API 来访问对象存储，并使用一个名为 Auth Manager 的 Python 类将身份验证纳入 OpenStack Keystone。<br>API 解析所有传入的请求并将它们转发给消息队列，调度程序和卷服务器在该队列中执行实际的工作。在创建新的卷时，调度程序将会决定哪台主机应对该卷负责。默认情况下，它会选择拥有最多可用空间的节点。<br>卷管理程序管理着可动态附加的块存储设备，这些设备也被称为卷。它们可用作虚拟实例的启动设备，或作为辅助存储进行添加。Cinder 还为快照（卷的只读副本）提供了一种设备。然后可以使用这些快照来创建新的卷，以供读写使用。<br>卷通常通过 iSCSI 附加到计算节点。块存储也需要某种形式的后端存储，在默认情况下，该后端存储是本地卷组上的逻辑卷管理，但可以通过驱动程序将它扩展到外部存储阵列或设备。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Cinder模块是openstack比较核心的模块之一，他决定了openstack中云主机的数据存取性能，是非常关键的，OpenStack 提供了一个直观的界面来设置私有云存储，并使其可用于工作负载。这些只是所有可能情况的冰山一角。例如，许多客户使用 Ceph 或 GlusterFS 作为后端存储机制，但即使在这些情况下，最终用户也只需与用户界面进行交互。如您在本系列的前几篇文章中已经了解到的，OpenStack 仅仅是集成一组可插拔组件的抽象层。</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -239,6 +254,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -256,7 +281,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -270,6 +295,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/05/30/openstack系列(9)-M版_云硬盘1/';
+
+  var disqus_title = "openstack系列(9)-M版_云硬盘1";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

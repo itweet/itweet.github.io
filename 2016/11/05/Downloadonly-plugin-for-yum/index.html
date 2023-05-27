@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="There are two ways to download a package without installing it. One is using the “downloadonly” plugin for yum, the other is using “yumdownloader” utility. Downloadonly plugin for yum Install the pack">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-25T15:56:04.742Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Downloadonly plugin for yum">
 <meta name="twitter:description" content="There are two ways to download a package without installing it. One is using the “downloadonly” plugin for yum, the other is using “yumdownloader” utility. Downloadonly plugin for yum Install the pack">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Downloadonly plugin for yum - WHOAMI </title>
@@ -172,7 +188,6 @@
 <pre><code>* The package is saved in the current working directly by default; use the --destdir option to specify an alternate location.
 * Be sure to add --resolve if you need to download dependencies.
 </code></pre><h1 id="Example-by-Centos-6-8"><a href="#Example-by-Centos-6-8" class="headerlink" title="Example by Centos 6.8"></a>Example by Centos 6.8</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># cat /etc/redhat-release </span><br><span class="line">CentOS release 6.8 (Final)</span><br><span class="line"></span><br><span class="line">yumdownloader --resolve --destdir=/root/mysql-server mysql-server</span><br><span class="line"></span><br><span class="line">yumdownloader --resolve --destdir=/root/owncloud owncloud</span><br><span class="line"></span><br><span class="line">/etc/init.d/iptables stop</span><br><span class="line">chkconfig iptables off</span><br><span class="line"></span><br><span class="line">rpm -ivh *.rpm   </span><br><span class="line"></span><br><span class="line">/etc/init.d/httpd start</span><br><span class="line"></span><br><span class="line">netstat -lntop |grep 80</span><br><span class="line"></span><br><span class="line">chkconfig httpd on</span><br><span class="line">chkconfig mysqld on</span><br></pre></td></tr></table></figure>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -209,6 +224,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -226,7 +251,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -240,6 +265,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/11/05/Downloadonly-plugin-for-yum/';
+
+  var disqus_title = "Downloadonly plugin for yum";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -46,7 +46,7 @@
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2016-10-11-at-11.45.03-AM.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/llapblog-1.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/llapblog2-1.png">
-<meta property="og:updated_time" content="2019-09-25T15:56:55.452Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.148Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache Hive vs Apache Impala Query Performance Comparison">
 <meta name="twitter:description" content="Apache Hive 2.0 是100%开源软件，而社区也在不断驱动Apache Hive 2.0的革新，LLAP更是真实地将快速分析提升到一个新的水平。它使得客户在不需要追加基于SQL的分析工具就可以执行次秒级的交互式查询，能够快速迭代分析，还提供了非常重要的价值转换。 今天尝试HIVE  LLAP 阅读关于具有LLAP功能的Hive 如何带来次秒级查询你的大数据湖，请转到此处：http:/">
@@ -71,8 +71,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Apache Hive vs Apache Impala Query Performance Comparison - WHOAMI </title>
@@ -213,7 +229,6 @@
 </ol>
 <p>测试驱动很简单， 因此我们支持你从今天开始并且在<a href="https://community.hortonworks.com/spaces/66/data-processing-track_2.html?topics=Hive&amp;type=question" target="_blank" rel="noopener">Hortonworks Community Connection</a>和我们分享你的经验。</p>
 <p>译文原文: <a href="https://hortonworks.com/blog/apache-hive-vs-apache-impala-query-performance-comparison/" target="_blank" rel="noopener">https://hortonworks.com/blog/apache-hive-vs-apache-impala-query-performance-comparison/</a><br>译文发布：2016年10月11日</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -250,6 +265,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -267,7 +292,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -281,6 +306,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/05/26/Apache-Hive-vs-Apache-Impala-Query-Performance-Comparison/';
+
+  var disqus_title = "Apache Hive vs Apache Impala Query Performance Comparison";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

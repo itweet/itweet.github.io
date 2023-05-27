@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="监控概述 1、主机监控  1.1 硬件 1.2 Cpu 1.3 Memory IO 2.1 Disk IO 2.2 Network IO     2、业务监控  3、故障检测分析 4、应用监控  1234567891011不同业务类型CPU,MEM各种指标不同，IO密集型，CPU密集型，比如数据库服务器(IO,CPU)，大数据集群服务器不同业务类型(IO密集型，CPU密集型)，对监控指标健康评判有">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-25T15:53:35.065Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.109Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix Use">
 <meta name="twitter:description" content="监控概述 1、主机监控  1.1 硬件 1.2 Cpu 1.3 Memory IO 2.1 Disk IO 2.2 Network IO     2、业务监控  3、故障检测分析 4、应用监控  1234567891011不同业务类型CPU,MEM各种指标不同，IO密集型，CPU密集型，比如数据库服务器(IO,CPU)，大数据集群服务器不同业务类型(IO密集型，CPU密集型)，对监控指标健康评判有">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Zabbix Use - WHOAMI </title>
@@ -173,8 +189,6 @@
 <h1 id="zabbix自定义shell命令监控"><a href="#zabbix自定义shell命令监控" class="headerlink" title="zabbix自定义shell命令监控"></a>zabbix自定义shell命令监控</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[whoami@server1 ~]$ sudo ps aux | grep mysql|grep -v grep -c</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">--agent上面实现</span><br><span class="line">[whoami@server1 ~]$ vim /etc/zabbix_agentd.conf </span><br><span class="line">### Option: UserParameter</span><br><span class="line">#       User-defined parameter to monitor. There can be several user-defined parameters.</span><br><span class="line">#       Format: UserParameter=&lt;key&gt;,&lt;shell command&gt;</span><br><span class="line">#       See &apos;zabbix_agentd&apos; directory for examples.</span><br><span class="line">#</span><br><span class="line"># Mandatory: no</span><br><span class="line"># Default:</span><br><span class="line"># UserParameter=</span><br><span class="line">UserParameter = test,ps aux|wc -l</span><br><span class="line">UserParameters=mysql-check,ps aux | grep mysql|grep -v grep -c</span><br><span class="line"></span><br><span class="line">[whoami@server1 ~]$ sudo /etc/init.d/zabbix-agentd restart</span><br><span class="line">Shutting down Zabbix agent:                                [  OK  ]</span><br><span class="line">Starting Zabbix agent:                                     [  OK  ]</span><br><span class="line"></span><br><span class="line">--另外一个节点验证，监控是否可获取值</span><br><span class="line">[whoami@apache-server ~]$ zabbix_get -s server1 -k mysql-check</span><br><span class="line">2</span><br><span class="line">[whoami@apache-server ~]$ zabbix_get -s server1 -k test</span><br><span class="line">133</span><br><span class="line"></span><br><span class="line">--在web页面添加监控项，定义触发器</span><br></pre></td></tr></table></figure>
 <h1 id="zabbix自定义shell脚本监控报警"><a href="#zabbix自定义shell脚本监控报警" class="headerlink" title="zabbix自定义shell脚本监控报警"></a>zabbix自定义shell脚本监控报警</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">--server端实现</span><br><span class="line">[whoami@apache-server etc]$ sudo vim /data/zabbix/zabbix_server/etc/zabbix_server.conf</span><br><span class="line"></span><br><span class="line">420 ### Option: AlertScriptsPath</span><br><span class="line">421 #       Full path to location of custom alert scripts.</span><br><span class="line">422 #       Default depends on compilation options.</span><br><span class="line">423 #</span><br><span class="line">424 # Mandatory: no</span><br><span class="line">425 # Default:</span><br><span class="line">426 # AlertScriptsPath=$&#123;datadir&#125;/zabbix/alertscripts</span><br><span class="line">AlertScriptsPath=/data/zabbix/zabbix_server/alertscripts</span><br><span class="line"></span><br><span class="line">[whoami@apache-server etc]$ mkdir /data/zabbix/zabbix_server/alertscripts</span><br><span class="line"></span><br><span class="line">--kill zabbix_server</span><br><span class="line">[whoami@apache-server alertscripts]$ ps -ef|grep zabbix_server</span><br><span class="line">[whoami@apache-server alertscripts]$ kill 1703</span><br><span class="line"></span><br><span class="line">[whoami@apache-server alertscripts]$ /data/zabbix/zabbix_server/sbin/zabbix_server -c /data/zabbix/zabbix_server/etc/zabbix_server.conf</span><br><span class="line"></span><br><span class="line">--到脚本目录写报警脚本</span><br><span class="line">[whoami@apache-server alertscripts]$ cat sms.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">sms_demo()&#123;</span><br><span class="line">        echo &quot;$1&quot; &quot;$2&quot; &quot;$3&quot; &gt;&gt; /tmp/sms.txt</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main() &#123;</span><br><span class="line">        sms_demo &quot;$1&quot; &quot;$2&quot; &quot;$3&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main &quot;$1&quot; &quot;$2&quot; &quot;$3&quot;</span><br><span class="line"></span><br><span class="line">[whoami@apache-server alertscripts]$ sudo chown zabbix:zabbix sms.sh</span><br><span class="line">[whoami@apache-server alertscripts]$ sudo chmod u+x sms.sh </span><br><span class="line"></span><br><span class="line">[whoami@apache-server alertscripts]$ sh sms.sh 1 2 3</span><br><span class="line">[whoami@apache-server alertscripts]$ cat /tmp/sms.txt </span><br><span class="line">1 2 3</span><br><span class="line"></span><br><span class="line">---web页面做如下操作:</span><br><span class="line">    1、管理--&gt;示警媒介类型的组态--&gt;创建媒体类型，默认有三种sms,email,jabber</span><br><span class="line">    2、管理--&gt;用户--&gt;成员--&gt;示例媒介--&gt;添加报警方式</span><br><span class="line">    3、组态--&gt;动作--&gt;操作--&gt;编辑--&gt;修改发送方式</span><br><span class="line">    4、报警声音开启,基本资料--&gt;信息中--&gt;选择开启</span><br><span class="line"></span><br><span class="line">---测试报警</span><br><span class="line">[whoami@apache-server alertscripts]$ tail -f /tmp/sms.txt </span><br><span class="line"></span><br><span class="line">[whoami@server1 ~]$ sudo /etc/init.d/mysqld stop </span><br><span class="line">Stopping mysqld:                                           [  OK  ]</span><br><span class="line">[whoami@server1 ~]$ sudo /etc/init.d/mysqld start</span><br><span class="line">Starting mysqld:                                           [  OK  ]</span><br><span class="line"></span><br><span class="line">[whoami@apache-server alertscripts]$ cat /tmp/sms.txt </span><br><span class="line">whoami@itweet.cn PROBLEM: mysql is down Trigger: mysql is down</span><br><span class="line">Trigger status: PROBLEM</span><br><span class="line">Trigger severity: Disaster</span><br><span class="line">Trigger URL: </span><br><span class="line"></span><br><span class="line">Item values:</span><br><span class="line"></span><br><span class="line">1. mysql-check (linux-server1:mysql-check): 0</span><br><span class="line">2. *UNKNOWN* (*UNKNOWN*:*UNKNOWN*): *UNKNOWN*</span><br><span class="line">3. *UNKNOWN* (*UNKNOWN*:*UNKNOWN*): *UNKNOWN*</span><br><span class="line"></span><br><span class="line">Original event ID: 157</span><br><span class="line"></span><br><span class="line">whoami@itweet.cn OK: mysql is down Trigger: mysql is down</span><br><span class="line">Trigger status: OK</span><br><span class="line">Trigger severity: Disaster</span><br><span class="line">Trigger URL: </span><br><span class="line"></span><br><span class="line">Item values:</span><br><span class="line"></span><br><span class="line">1. mysql-check (linux-server1:mysql-check): 2</span><br><span class="line">2. *UNKNOWN* (*UNKNOWN*:*UNKNOWN*): *UNKNOWN*</span><br><span class="line">3. *UNKNOWN* (*UNKNOWN*:*UNKNOWN*): *UNKNOWN*</span><br><span class="line"></span><br><span class="line">Original event ID: 157</span><br><span class="line"></span><br><span class="line">--自定义报警信息值</span><br><span class="line">1、组态--&gt;动作--&gt;动作</span><br><span class="line">2、&lt;默认信息&gt;修改如下：</span><br><span class="line">    &#123;TRIGGER.NAME&#125;</span><br><span class="line">    &#123;ITEM.NAME1&#125; (&#123;HOST.NAME1&#125;:&#123;ITEM.KEY1&#125;): &#123;ITEM.VALUE1&#125;</span><br><span class="line">3、恢复信息</span><br><span class="line">    &#123;TRIGGER.NAME&#125;</span><br><span class="line">    &#123;ITEM.NAME1&#125; (&#123;HOST.NAME1&#125;:&#123;ITEM.KEY1&#125;): &#123;ITEM.VALUE1&#125;</span><br><span class="line"></span><br><span class="line">4、测试</span><br><span class="line">[whoami@apache-server alertscripts]$ tail -f /tmp/sms.txt </span><br><span class="line">whoami@itweet.cn PROBLEM: mysql is down mysql is down</span><br><span class="line">mysql-check (linux-server1:mysql-check): 0</span><br><span class="line"></span><br><span class="line">whoami@itweet.cn OK: mysql is down mysql is down</span><br><span class="line">mysql-check (linux-server1:mysql-check): 2</span><br></pre></td></tr></table></figure>
 <h1 id="web监控"><a href="#web监控" class="headerlink" title="web监控"></a>web监控</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[whoami@apache-server alertscripts]$ curl --head http://apache-server/zabbix/dashboard.php</span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Tue, 05 Jan 2016 00:37:20 GMT</span><br><span class="line">Server: Apache/2.2.15 (CentOS)</span><br><span class="line">X-Powered-By: PHP/5.3.3</span><br><span class="line">Set-Cookie: zbx_sessionid=9f0df7e514697a36becde98e2538c56c</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: text/html; charset=UTF-8</span><br></pre></td></tr></table></figure>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
-<p>参考：<a href="https://www.zabbix.com/documentation/2.4/manual/installation/install_from_packages#red_hat_enterprise_linux_centos" target="_blank" rel="noopener">https://www.zabbix.com/documentation/2.4/manual/installation/install_from_packages#red_hat_enterprise_linux_centos</a></p>
 
             </div>
           
@@ -211,6 +225,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -228,7 +252,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -242,6 +266,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/01/02/Zabbix-Use/';
+
+  var disqus_title = "Zabbix Use";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

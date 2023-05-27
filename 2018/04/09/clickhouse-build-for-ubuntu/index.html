@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,12 +43,10 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="ClickHouse源码阅读环境之Ubuntu编译，主要介绍如何在Ubuntu 17版本成功构建ClickHouse，生成可部署的二进制文件。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-09-25T15:59:33.321Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="clickhouse-build-for-ubuntu">
 <meta name="twitter:description" content="ClickHouse源码阅读环境之Ubuntu编译，主要介绍如何在Ubuntu 17版本成功构建ClickHouse，生成可部署的二进制文件。">
-<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -69,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> clickhouse-build-for-ubuntu - WHOAMI </title>
@@ -188,8 +202,6 @@
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>介绍clickhouse在Ubuntu中进行源码编译和涉及到的Docker容器相关技术，对于想深入源码研究clickhouse的人来说，此步骤后就可以愉快的阅读代码，调试和改代码啦，简单看了一下clickhouse的代码量还是相当惊人的，相当于2个大型的C++项目，不得不佩服开发者，是在短短几年内完成的工作，而且还能保证测试覆盖率和高性能，那是相当厉害。</p>
 <p>参考：</p>
 <p>[1] <a href="https://docs.docker.com/engine/reference/commandline/push/#examples" target="_blank" rel="noopener">https://docs.docker.com/engine/reference/commandline/push/#examples</a><br>[2] <a href="https://clickhouse.yandex/docs/en/development/build/" target="_blank" rel="noopener">https://clickhouse.yandex/docs/en/development/build/</a></p>
-<p>欢迎关注微信公众号[Whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>
 
             </div>
           
@@ -226,6 +238,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -243,7 +265,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -257,6 +279,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2018/04/09/clickhouse-build-for-ubuntu/';
+
+  var disqus_title = "clickhouse-build-for-ubuntu";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

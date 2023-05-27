@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="如何选择满足需求的SQL on Hadoop系统，在批处理时代，Hive一枝独秀；在实时交互式查询时代，呈现出的是百花齐放的局面。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-25T15:51:59.886Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何选择满足需求的SQL on Hadoop系统">
 <meta name="twitter:description" content="如何选择满足需求的SQL on Hadoop系统，在批处理时代，Hive一枝独秀；在实时交互式查询时代，呈现出的是百花齐放的局面。">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> 如何选择满足需求的SQL on Hadoop系统 - WHOAMI </title>
@@ -156,7 +172,6 @@
 <p>Presto是Facebook开发的，目前也得到了Teradata的支持。目前Presto的主要使用者还是<br>互联网公司，像Facebook，Netflix等。Presto的代码用了Dependency Injection,<br>比较难理解和debug。另外还有一些系统，像Apache Drill，Apache<br>Tajo等，都是非常小众的系统了。</p>
 <p>总的来说，目前来看Hive依然是批处理/ETL 类应用的首选。Hive on Spark能够降低Hive<br>的延迟，但是还是达不到交互式BI查询的需求。目前交互式BI查询最好的选择是Impala。S<br>park SQL/DataFrame是Spark用户使用SQL或者DataFrame API构建Spark pipeline的一种选<br>择，并不是一个通用的支持交互式查询的引擎，更多的会用在基于Spark的机器学习任务的<br>数据处理和准备的环节。</p>
 <p>原文来自：<a href="http://weibo.com/p/1001603864171165928729" target="_blank" rel="noopener">http://weibo.com/p/1001603864171165928729</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -193,6 +208,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -210,7 +235,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -224,6 +249,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/05/06/如何选择满足需求的SQL-on-Hadoop系统/';
+
+  var disqus_title = "如何选择满足需求的SQL on Hadoop系统";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -44,8 +44,7 @@
 <meta property="og:description" content="Apache Hadoop Yarn 做为一个大数据领域(Apache Hadoop Yarn)通用的资源管理平台而闻名，它提供复杂的集群资源管理和调度服务，从中高度抽象出通用业务逻辑，从而让更多的计算框架专注于计算本身，通过他提供的高度抽象的接口，轻松的运行任务在YARN中。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://itweet.github.io/2018/02/01/first-class-support-long-running-services-apache-hadoop-yarn/full-flesged-YARN-cluster-illustration.jpg">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/9687832-2ff1ee6f489dcff3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-03T13:22:31.704Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.164Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="first-class-support-long-running-services-apache-hadoop-yarn">
 <meta name="twitter:description" content="Apache Hadoop Yarn 做为一个大数据领域(Apache Hadoop Yarn)通用的资源管理平台而闻名，它提供复杂的集群资源管理和调度服务，从中高度抽象出通用业务逻辑，从而让更多的计算框架专注于计算本身，通过他提供的高度抽象的接口，轻松的运行任务在YARN中。">
@@ -70,8 +69,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> first-class-support-long-running-services-apache-hadoop-yarn - WHOAMI </title>
@@ -181,8 +196,6 @@
 <p>4、除了Docker集装箱化的应用程序，它还支持标准的tar包应用程序，</p>
 <p>YARN越来越往专业的资源调度和管理方面发展，将会支持批处理、长任务作业运行。让集群资源利用率更高，同一集群实现更多工作负载类型作业成为可能。</p>
 <p>让我们期待Hadoop更多新功能。</p>
-<p>欢迎关注微信公众号[whoami]，阅读更多内容。<br><img src="http://upload-images.jianshu.io/upload_images/9687832-2ff1ee6f489dcff3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>
 
             </div>
           
@@ -219,6 +232,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -236,7 +259,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -250,6 +273,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2018/02/01/first-class-support-long-running-services-apache-hadoop-yarn/';
+
+  var disqus_title = "first-class-support-long-running-services-apache-hadoop-yarn";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

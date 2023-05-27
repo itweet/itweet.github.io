@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -44,8 +44,7 @@
 <meta property="og:description" content="Apache Spark引发了在大型数据集上进行数据挖掘的爆炸式增长。Spark在通用分布式计算访问中发挥了巨大的作用。任何在Python，Scala，Java和R中具有一定造诣的人都能大规模地探索数据。Spark提供ML(Machine Learning)作为一系列黑盒子，将数据科学民主化。对于在统计和数学中都没有PHD的我们来说也有可能做到培训人工智能。当下Spark SQL也可直接在商业中用">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/HCC-1024x659.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-09-25T15:57:29.588Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.153Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sparksql-ranger-column-level-security-masking">
 <meta name="twitter:description" content="Apache Spark引发了在大型数据集上进行数据挖掘的爆炸式增长。Spark在通用分布式计算访问中发挥了巨大的作用。任何在Python，Scala，Java和R中具有一定造诣的人都能大规模地探索数据。Spark提供ML(Machine Learning)作为一系列黑盒子，将数据科学民主化。对于在统计和数学中都没有PHD的我们来说也有可能做到培训人工智能。当下Spark SQL也可直接在商业中用">
@@ -70,8 +69,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> sparksql-ranger-column-level-security-masking - WHOAMI </title>
@@ -168,8 +183,6 @@
 <p>请注意，关于这些数据无需创建任何类型的抽象视图。执行细粒度安全唯一需要操作的是在Ranger中配置安全策略，并启用LLAP。Ranger还提供列屏蔽和行过滤功能，屏蔽策略类似列策略。主要区别是所有列返回后，受限列仅包含星号或原始值的Hash值。</p>
 <p>Ranger还提供了应用行级安全性的能力。使用行级安全策略，用户可以看到表格中所有不受策略限制的行，并防止用户看到表中的某些限制行。比如这种情况，只有财务经理才能看到分配给他们的客户的情况。Ranger的行级策略指示Hive返回包含谓词的查询计划。该谓词过滤掉财务经理尝试访问但是并未分配给他所有的客户数据。Spark接收调整后的查询计划就启动处理，通过LLAP读取数据。LLAP确保谓词的应用以及不返回被限制的行。因为这一系列细粒度安全功能设置，Spark现在可以通过Thrift服务器直接使用BI工具。现在商业分析师就能使用Apache Spark的强大功能。</p>
 <p>总体来说，LLAP集成有从性能和安全角度大大增强Spark的潜力。细粒度的安全有助于将Spark的优点应用到商业中。这种发展有助于推动更多地投资，集合和数据探索。如果您想亲自测试这些功能，请查看以下教程：<br><a href="https://community.hortonworks.com/content/kbentry/72454/apache-spark-fine-grain-security-with-llap-test-dr.html" target="_blank" rel="noopener">https://community.hortonworks.com/content/kbentry/72454/apache-spark-fine-grain-security-with-llap-test-dr.html</a></p>
-<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -206,6 +219,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -223,7 +246,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -237,6 +260,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/07/03/sparksql-ranger-column-level-security-masking/';
+
+  var disqus_title = "sparksql-ranger-column-level-security-masking";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

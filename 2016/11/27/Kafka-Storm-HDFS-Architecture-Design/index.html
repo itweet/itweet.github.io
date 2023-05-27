@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -46,7 +46,7 @@
 <meta property="og:image" content="http://storm.apache.org/images/storm-flow.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/kafka-storm-hdfs-design.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/kafka-storm-hdfs-design-1.png">
-<meta property="og:updated_time" content="2019-09-25T15:56:10.879Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka Storm HDFS Architecture Design">
 <meta name="twitter:description" content="Storm是一个分布式是实时计算系统，它设计了一种对流和计算的抽象，概念比较简单，实际编程开发起来相对容易。下面，简单介绍编程实践过程中需要理解的Storm中的几个概念：  TopologyStorm中Topology的概念类似Hadoop中的MapReduce Job，是用来编排容纳一组计算逻辑组件(Spout,Bolt)的对象(Hadoop MapReduce中一个Job包含一组Map Tas">
@@ -71,8 +71,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Kafka Storm HDFS Architecture Design - WHOAMI </title>
@@ -191,8 +207,6 @@
 <p>实时处理，开发满足业务需要的Topology，通过代码大家可以看到，Storm大道至简的设计理念，通过实现不同的Bolt处理数据，让数据在流动的过程中完成数据处理；简洁、灵活、定制化，提供丰富的数据源，甚至StormSQL,更多内容请参考官方文档。</p>
 <p>Storm-External: <a href="https://github.com/apache/storm/tree/master/external" target="_blank" rel="noopener">https://github.com/apache/storm/tree/master/external</a></p>
 <p>如上，给出了简单Storm的示例代码，可以在这个基础上加入业务逻辑内容，就可以完成如下复杂的业务处理，基于非结构化数据(GPS位置应用)，实时流处理的架构。<br><img src="https://www.itweet.cn/screenshots/kafka-storm-hdfs-design-1.png" alt="流计算完整架构"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
-<p>参考链接<br>  <a href="https://github.com/apache/storm/tree/master/external/storm-hdfs" target="_blank" rel="noopener">https://github.com/apache/storm/tree/master/external/storm-hdfs</a><br>  <a href="http://storm.apache.org/releases/current/Understanding-the-parallelism-of-a-Storm-topology.html" target="_blank" rel="noopener">http://storm.apache.org/releases/current/Understanding-the-parallelism-of-a-Storm-topology.html</a><br>  <a href="http://storm.apache.org/releases/current/Tutorial.html" target="_blank" rel="noopener">http://storm.apache.org/releases/current/Tutorial.html</a><br>  <a href="http://shiyanjun.cn/archives/977.html" target="_blank" rel="noopener">http://shiyanjun.cn/archives/977.html</a><br>  <a href="http://storm.apache.org/releases/current/Setting-up-development-environment.html" target="_blank" rel="noopener">http://storm.apache.org/releases/current/Setting-up-development-environment.html</a></p>
 
             </div>
           
@@ -229,6 +243,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -246,7 +270,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -260,6 +284,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/11/27/Kafka-Storm-HDFS-Architecture-Design/';
+
+  var disqus_title = "Kafka Storm HDFS Architecture Design";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

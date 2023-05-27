@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-25T15:52:25.998Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ganglia-ubuntu">
 <meta name="twitter:description" content="Ganglia是UC Berkeley发起的一个开源集群监视项目，设计用于测量数以千计的节点。">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> ganglia-ubuntu - WHOAMI </title>
@@ -147,7 +163,6 @@ data_source &quot;CDH5&quot; xxx.xxx.xxx.1 xxx.xxx.xxx.2 xxx.xxx.xxx.3 ...
 </code></pre><h3 id="Other-nodes"><a href="#Other-nodes" class="headerlink" title="Other nodes"></a>Other nodes</h3><h3 id="1-install-ganglia-monitor"><a href="#1-install-ganglia-monitor" class="headerlink" title="1. install ganglia monitor"></a>1. install ganglia monitor</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ganglia-monitor</span><br></pre></td></tr></table></figure>
 <h3 id="2-copy-gmond-conf-from-server-node-to-etc-ganglia"><a href="#2-copy-gmond-conf-from-server-node-to-etc-ganglia" class="headerlink" title="2. copy gmond.conf from server node to /etc/ganglia"></a>2. copy gmond.conf from server node to /etc/ganglia</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv gmond.conf /etc/ganglia/</span><br></pre></td></tr></table></figure>
 <h3 id="3-restart-ganglia-monitor-service"><a href="#3-restart-ganglia-monitor-service" class="headerlink" title="3. restart ganglia monitor service"></a>3. restart ganglia monitor service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">sudo service ganglia-monitor restart</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Config: CDH5 components Hadoop Metrics2 setting</span><br><span class="line">hadoop-metrics2.properties</span><br><span class="line"></span><br><span class="line">HDFS</span><br><span class="line">NameNode</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.period=10</span><br><span class="line">namenode.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">DataNode</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.period=10</span><br><span class="line">datanode.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">SecondaryNameNode</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.period=10</span><br><span class="line">secondarynamenode.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">YARN</span><br><span class="line">ResourceManager</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.period=10</span><br><span class="line">resourcemanager.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line">maptask.sink.ganglia.servers=10.10.114.120:8649 </span><br><span class="line">reducetask.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">NodeManager</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.period=10</span><br><span class="line">nodemanager.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line">maptask.sink.ganglia.servers=10.10.114.120:8649 </span><br><span class="line">reducetask.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">HBase</span><br><span class="line">Master Server</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.sink.ganglia.period=10</span><br><span class="line">hbase.sink.ganglia.period=10</span><br><span class="line">hbase.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">Region Server</span><br><span class="line">*.sink.ganglia.class=org.apache.hadoop.metrics2.sink.ganglia.GangliaSink31</span><br><span class="line">*.sink.ganglia.period=10</span><br><span class="line">hbase.sink.ganglia.period=10</span><br><span class="line">hbase.sink.ganglia.servers=10.10.114.120:8649</span><br><span class="line"></span><br><span class="line">*(there are too many metrics generated from RegionServer, each region of all of tables generates some metrics... be careful if you turn on the ganglia hadoop metrics2 sink on HBase RegionServer)</span><br></pre></td></tr></table></figure>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -184,6 +199,16 @@ data_source &quot;CDH5&quot; xxx.xxx.xxx.1 xxx.xxx.xxx.2 xxx.xxx.xxx.3 ...
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -201,7 +226,7 @@ data_source &quot;CDH5&quot; xxx.xxx.xxx.1 xxx.xxx.xxx.2 xxx.xxx.xxx.3 ...
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -215,6 +240,37 @@ data_source &quot;CDH5&quot; xxx.xxx.xxx.1 xxx.xxx.xxx.2 xxx.xxx.xxx.3 ...
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/07/13/ganglia-ubuntu/';
+
+  var disqus_title = "ganglia-ubuntu";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -46,7 +46,7 @@
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/openstack-hardware-configuration-list.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/openstack-network.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/openstack-series/img/openstack-role-list.png">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.513Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.146Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openstack系列(4)-基础环境">
 <meta name="twitter:description" content="主要介绍openstack需要依赖的环境和网络配置信息,使用静态IP地址，vmware桥接模式。 一台服务器虚拟4个虚拟机，服务器配置信息如下：  24核心、CPU x5650*2、32G内存、240G SSD，2TB硬盘.  openstack主机配置信息 openstack网络规划配置 openstack主机功能分类:  Linux系统安装及基础优化安装Linux CentOS 7.2系统时，">
@@ -71,8 +71,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> openstack系列(4)-基础环境 - WHOAMI </title>
@@ -189,7 +205,6 @@
 <p>在 “openstack-compute-1” 节点执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br><span class="line"></span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub openstack-compute-1</span><br><span class="line"></span><br><span class="line">scp -r ~/.ssh/authorized_keys openstack-compute-2:~/.ssh/</span><br><span class="line">scp -r ~/.ssh/authorized_keys openstack-compute-3:~/.ssh/</span><br><span class="line">scp -r ~/.ssh/authorized_keys openstack-controller:~/.ssh/</span><br></pre></td></tr></table></figure></p>
 <p><code>注意：</code>如果，在安装完openstack集群之后，还需要进行扩容添加节点，那么就不能删除免密码互信登录。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>openstack系列4，重点内容是在安装openstack集群之前的基础环境的准备，如何环境没有准备好，很可能导致安装失败，我们将会在下一节介绍一键部署openstack集群的方法。openstack部署方式多样，我们介绍的是最简单的一种，小白式安装，当然在后续我也会逐一展开说明，帮助大家进一步理解，更容易维护集群。</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -226,6 +241,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -243,7 +268,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -257,6 +282,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/05/20/openstack系列(4)-基础环境/';
+
+  var disqus_title = "openstack系列(4)-基础环境";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

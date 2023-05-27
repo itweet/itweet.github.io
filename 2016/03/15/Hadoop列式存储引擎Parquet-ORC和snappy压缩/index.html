@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://www.itweet.cn/screenshots/file_format.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/generate_file_format.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/hbase-snappy.png">
-<meta property="og:updated_time" content="2019-09-25T16:10:47.629Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.115Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop列式存储引擎Parquet-ORC和snappy压缩">
 <meta name="twitter:description" content="相对于传统的行式存储格式，列式存储引擎具有更高的压缩比，更少的IO操作而备受青睐。列式存储缺点：在column数很多，每次操作大部分列的时候，cpu压力突增，而且增加处理时长。优点：在cloumn数很多，每次操作若干列的场景，列式存储的性价比，性能更高。   在很多大数据的应用场景下面，数据量很大、单列数据字段很多；比如电信行业，具有一定规则的数据，字段很多，但是每次查询仅仅针对其中少数的几个">
@@ -72,8 +72,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Hadoop列式存储引擎Parquet-ORC和snappy压缩 - WHOAMI </title>
@@ -172,7 +188,6 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  随着Hadoop技术在各行各业深入使用，而且Hadoop在数据仓库，大规模数据分析型场景<br>的应用，选择一个合理的列式存储格式和高效的压缩算法尤为重要。列式存储目前也逐渐被应用于各种产品线，比如twitter,facebook已经将大部分数据格式转换为parquet，ORC<br>等列式存储格式，所占用空间和查询时间减少约35%。Parquet &amp;&amp; ORC文件格式的压缩功能<br>显著降低了使用的磁盘空间，以及执行查询和其他操作所花的时间。</p>
 <p>参考：<br> <a href="https://code.facebook.com/posts/229861827208629/scaling-the-facebook-data-warehouse-to-300-pb/" target="_blank" rel="noopener">https://code.facebook.com/posts/229861827208629/scaling-the-facebook-data-warehouse-to-300-pb/</a><br> <a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+ORC" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/Hive/LanguageManual+ORC</a><br> <a href="https://github.com/Parquet" target="_blank" rel="noopener">https://github.com/Parquet</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -209,6 +224,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -226,7 +251,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -240,6 +265,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/03/15/Hadoop列式存储引擎Parquet-ORC和snappy压缩/';
+
+  var disqus_title = "Hadoop列式存储引擎Parquet-ORC和snappy压缩";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

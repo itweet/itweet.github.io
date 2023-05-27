@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -44,7 +44,7 @@
 <meta property="og:description" content="简介 Hortonworks采用了100%完全开源策略，产品名称为HDP（Hortonworks Data Platform）。所有软件产品开源，用户免费使用，Hortonworks提供商业的技术支持服务。与CDH相比，管理软件使用开源Ambari，数据治理使用Atlas，安全组件使用Ranger而非Sentry，SQL继续紧抱Hive大腿。  Apache Ambari是对Hadoop进行监控、">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/ambari-server.png">
-<meta property="og:updated_time" content="2019-09-25T15:53:03.419Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ambari离线安装HDP-Hadoop集群">
 <meta name="twitter:description" content="简介 Hortonworks采用了100%完全开源策略，产品名称为HDP（Hortonworks Data Platform）。所有软件产品开源，用户免费使用，Hortonworks提供商业的技术支持服务。与CDH相比，管理软件使用开源Ambari，数据治理使用Atlas，安全组件使用Ranger而非Sentry，SQL继续紧抱Hive大腿。  Apache Ambari是对Hadoop进行监控、">
@@ -69,8 +69,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Ambari离线安装HDP-Hadoop集群 - WHOAMI </title>
@@ -195,8 +211,6 @@
 <h1 id="配置Ambari-Metrics为分布式"><a href="#配置Ambari-Metrics为分布式" class="headerlink" title="配置Ambari Metrics为分布式"></a>配置Ambari Metrics为分布式</h1><p>默认安装时Ambari Metrics为embedded模式，这样收集的所有数据是存放在Collector节点的本地的，大量的Metrics数据会挤占大量的本地存储空间，该为分布式模式后Metrics数据会放置到HDFS上，所以通常这是安装Ambari后必备一个操作。具体的操作可以参考：<br><a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.1.0.0/bk_ambari_reference_guide/content/_configuring_ambari_metrics_for_distributed_mode.html" target="_blank" rel="noopener">http://docs.hortonworks.com/HDPDocuments/Ambari-2.1.0.0/bk_ambari_reference_guide/content/_configuring_ambari_metrics_for_distributed_mode.html</a></p>
 <p>配置Metrics数据的生命周期</p>
 <p>大量的Metrics会占用非常大的存储空间，集群经常出现conllector挂掉，所在节点空间满了的情况，设定Metrics数据的保留时间（TTL）是很必要的，控制Metrics数据保留时间的参数位于ams-site.xml中，以下是相关的配置项：<br>配置项                                 默认值           描述<br>timeline.metrics.host.aggregator.ttl  86400 1 minute resolution data purge interval. Default is 1 day.<br>timeline.metrics.host.aggregator.minute.ttl 604800  Host based X minutes resolution data purge interval. Default is 7 days.(X = configurable interval, default interval is 2 minutes)<br>timeline.metrics.host.aggregator.hourly.ttl 2592000 Host based hourly resolution data purge interval. Default is 30 days.<br>timeline.metrics.host.aggregator.daily.ttl  31536000  Host based daily resolution data purge interval. Default is 1 year.<br>timeline.metrics.cluster.aggregator.minute.ttl  2592000 Cluster wide minute resolution data purge interval. Default is 30 days.<br>timeline.metrics.cluster.aggregator.hourly.ttl  31536000  Cluster wide hourly resolution data purge interval. Default is 1 year.<br>timeline.metrics.cluster.aggregator.daily.ttl 63072000  Cluster wide daily resolution data purge interval. Default is 2 years.</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
-<p>参考：<a href="https://cwiki.apache.org/confluence/display/AMBARI/Installation+Guide+for+Ambari+2.1.0" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/AMBARI/Installation+Guide+for+Ambari+2.1.0</a></p>
 
             </div>
           
@@ -233,6 +247,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -250,7 +274,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -264,6 +288,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2015/08/31/Ambari离线安装HDP-Hadoop集群/';
+
+  var disqus_title = "Ambari离线安装HDP-Hadoop集群";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -45,8 +45,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/pWalrus_HDFS.jpg">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/fuse-hdfs.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-03-03T13:26:42.157Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.158Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hdfs-fuse-faild">
 <meta name="twitter:description" content="集群规模几百台，每天有大量的MR任务在并行跑流程。主要业务做图片流数据解密计算生成高清图像。">
@@ -71,8 +70,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> hdfs-fuse-faild - WHOAMI </title>
@@ -218,8 +233,6 @@
 <p>资源管理和安全。通过多集群整体的资源分配、安全管控提高了集群的运营和整体资源利用率。</p>
 <p>统一资源管理。很多程序都是单机运行，没有利用YARN进行统一调度和资源分配，导致集群资源利用率不均衡，一些机器压力很大，一些机器长时间空闲，可以利用Docker，CGroup技术融合到YARN中进行资源隔离，统一集群资源管理，提升集群资源利用率，更快的完成计算任务。</p>
 <p>分布式系统复杂。分布式系统，应用程序很难追踪和重现，分布式在多台机器，调试复杂和耗时，一般技术人员很难掌握，无法用好这样的技术，需要企业级的分布式软件产品来保障，全新的集群开发和使用规范指导他们开发出健壮的分布式程序。</p>
-<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Itweet公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -256,6 +269,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -273,7 +296,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -287,6 +310,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/12/14/hdfs-fuse-faild/';
+
+  var disqus_title = "hdfs-fuse-faild";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

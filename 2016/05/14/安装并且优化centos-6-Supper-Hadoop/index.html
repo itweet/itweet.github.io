@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -48,7 +48,7 @@
 <meta property="og:image" content="https://www.itweet.cn/screenshots/base-developments.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/chkconfig-list.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/chkconfig-list-2.png">
-<meta property="og:updated_time" content="2019-09-25T16:03:34.048Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装并且优化centos 6 系统 Supper Hadoop">
 <meta name="twitter:description" content="1、系统安装类型选择及自定义额外包组  进入如图 1-1 所示界面。 上半部分是系统定制的不同的系统安装类型选择项，默认是“ Desktop”，这里我们选择“ Minimal”，即最小化安装，下半部分是在上面系统安装类型确定后， 额外想添加的软件包组选择项，我们选择“ Customize now”即立即自定义。        图 1-1 系统安装包类型选择及自定义额外包组  在下图 1-2 的自定">
@@ -73,8 +73,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> 安装并且优化centos 6 系统 Supper Hadoop - WHOAMI </title>
@@ -177,7 +193,6 @@
 <p>3.8 swappiness &amp;&amp; transparent_hugepage<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#sudo echo &apos;0&apos; &gt; /proc/sys/vm/swappiness</span><br><span class="line">#sudo sysctl vm.swappiness=0</span><br><span class="line"></span><br><span class="line">#sudo echo &apos;#by whoami 2015-10-30&apos;&gt;&gt; /etc/sysctl.conf</span><br><span class="line">#sudo echo &apos;vm.swappiness=0&apos;&gt;&gt; /etc/sysctl.conf</span><br><span class="line"></span><br><span class="line"># cat /sys/kernel/mm/redhat_transparent_hugepage/defrag </span><br><span class="line">[always] never</span><br><span class="line"># echo never &gt; /sys/kernel/mm/redhat_transparent_hugepage/defrag</span><br><span class="line"># cat /sys/kernel/mm/redhat_transparent_hugepage/defrag</span><br><span class="line">always [never]</span><br><span class="line"></span><br><span class="line"># echo &apos;#by whoami 2015-10-30&apos;&gt;&gt; /etc/rc.local</span><br><span class="line"># echo &apos;echo never &gt; /sys/kernel/mm/redhat_transparent_hugepage/defrag &apos; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure></p>
 <h1 id="4、克隆虚拟机"><a href="#4、克隆虚拟机" class="headerlink" title="4、克隆虚拟机"></a>4、克隆虚拟机</h1><p>虚拟机eth0无法启动解决：<br>    其实是因为克隆后Mac地址一致，导致冲突，而无法启动。<br>    报错信息如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bring up interface eth0: Device eth0 does not seem to be present,delaying initialization.</span><br></pre></td></tr></table></figure></p>
 <p>删除两项ifcfg-eth0的配置，重启系统即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rm -f /etc/udev/rules.d/70-persistent-net.rules</span><br><span class="line"></span><br><span class="line">删除／etc/sysconfig/network-scripts/ifcfg-eth0中：</span><br><span class="line">    HWADDR,UUID两项内容，重启网卡即可解决。</span><br><span class="line"></span><br><span class="line">／etc/init.d/network restart</span><br></pre></td></tr></table></figure></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -214,6 +229,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -231,7 +256,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -245,6 +270,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/05/14/安装并且优化centos-6-Supper-Hadoop/';
+
+  var disqus_title = "安装并且优化centos 6 系统 Supper Hadoop";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,12 +43,10 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="openstack的运维方式，相对传统单机软件运维差别比较大，需要那种对大规模服务器运维的经验，自动化程度需要比较高的要求，监控报警平台也不可或缺。大型分布式系统最难的就是运维和问题的重现，这个时候日志就是最好的排除问题的方法，大部分问题只要有详细的日志记录，都能解决问题。还有一些问题就是软件自身的故障或者bug，需要源代码去进行调试解决。 我在使用openstack的过程中，也遇到很多问题，大部">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.518Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openstack系列(11)-平台运维">
 <meta name="twitter:description" content="openstack的运维方式，相对传统单机软件运维差别比较大，需要那种对大规模服务器运维的经验，自动化程度需要比较高的要求，监控报警平台也不可或缺。大型分布式系统最难的就是运维和问题的重现，这个时候日志就是最好的排除问题的方法，大部分问题只要有详细的日志记录，都能解决问题。还有一些问题就是软件自身的故障或者bug，需要源代码去进行调试解决。 我在使用openstack的过程中，也遇到很多问题，大部">
-<meta name="twitter:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -69,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> openstack系列(11)-平台运维 - WHOAMI </title>
@@ -187,9 +201,6 @@
 <li><p>信息安全问题要重视，这个是老生常谈的问题了，每个平台都有相同问题，但还是要重视再重视，一旦出现安全漏洞，所有虚拟机都面临严重威胁。</p>
 </li>
 </ul>
-<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png" alt="Itweet公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
-<p>参考： <a href="https://www.ibm.com/developerworks/cn/cloud/library/1408_zhangxl_openstack/" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/cloud/library/1408_zhangxl_openstack/</a></p>
 
             </div>
           
@@ -226,6 +237,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -243,7 +264,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -257,6 +278,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/06/04/openstack系列(11)-平台运维/';
+
+  var disqus_title = "openstack系列(11)-平台运维";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

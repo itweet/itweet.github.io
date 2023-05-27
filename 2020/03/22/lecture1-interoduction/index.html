@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="MIT 6.824 - Distributed Systems (Spring 2020).">
+
+
+
+
+  <meta name="keywords" content="spring,6.824,2020,mit,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="WHOAMI">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/itweet/itweet.github.io/master/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://itweet.github.io/2020/03/22/lecture1-interoduction/">
+
+
+<meta name="description" content="MIT 6.824 - Distributed Systems (Spring 2020).">
+<meta name="keywords" content="spring,6.824,2020,mit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lecture1-interoduction">
+<meta property="og:url" content="http://itweet.github.io/2020/03/22/lecture1-interoduction/index.html">
+<meta property="og:site_name" content="WHOAMI">
+<meta property="og:description" content="MIT 6.824 - Distributed Systems (Spring 2020).">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/6.824/dist-kv.png">
+<meta property="og:image" content="https://www.itweet.cn/screenshots/6.824/mapreduce-principle.png">
+<meta property="og:updated_time" content="2020-05-05T15:31:58.314Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lecture1-interoduction">
+<meta name="twitter:description" content="MIT 6.824 - Distributed Systems (Spring 2020).">
+<meta name="twitter:image" content="https://www.itweet.cn/screenshots/6.824/dist-kv.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154998721-1');
+</script>
+
+
+    <title> Lecture1-interoduction - WHOAMI </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">WHOAMI</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/atom.xml">
+                            
+                            
+                                RSS
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Lecture1-interoduction
+        
+      </h1>
+
+      <time class="post-time">
+          3月 22 2020
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>MIT 6.824: Distributed Systems Spring，涉及到分布式系统相关知识，能学到不少干货，我个人之前看过设计数据密集型应用一书，很多内容和思想较为全面，课程中涉及到的基本都是核心知识点，课程中的 4 个 labs 是真的值得花时间设计和实现一下，对学习分布式一定会有很大收获。我会慢慢跟进，把过程中有意思的部分整理成文​发到博客中。</p>
+<p>What is 6.824 about?</p>
+<p>6.824 is a core 12-unit graduate subject with lectures, readings, programming labs, an optional project, a mid-term exam, and a final exam. It will present abstractions and implementation techniques for engineering distributed systems. Major topics include fault tolerance, replication, and consistency. Much of the class consists of studying and discussing case studies of distributed systems.</p>
+<p>Prerequisites: 6.004 and one of 6.033 or 6.828, or equivalent. Substantial programming experience will be helpful for the lab assignments. </p>
+<h2 id="Lecture-interoduction"><a href="#Lecture-interoduction" class="headerlink" title="Lecture interoduction"></a>Lecture interoduction</h2><h3 id="Quick-Preview"><a href="#Quick-Preview" class="headerlink" title="Quick Preview"></a>Quick Preview</h3><ul>
+<li>parrlelism</li>
+<li>fault-tolerant</li>
+<li>physical</li>
+<li><p>secvrits / isolated</p>
+</li>
+<li><p>Challenges</p>
+<ul>
+<li>challenges</li>
+<li>partial failure</li>
+<li>performance</li>
+</ul>
+</li>
+<li><p>Course Structure</p>
+<ul>
+<li>lectures</li>
+<li>papers - 每周一篇 paper<ul>
+<li>比如：mapreduce paper</li>
+</ul>
+</li>
+<li>examples</li>
+<li>labs  <ul>
+<li>lab1 - MapReduce</li>
+<li>lab2 - Raft fault-tolerant</li>
+<li>lab3 - k/v server</li>
+<li>lab4 - sharded k/v server</li>
+</ul>
+</li>
+<li>project (optional)</li>
+</ul>
+</li>
+<li><p>Infrastructure abstractions</p>
+<ul>
+<li>Storage</li>
+<li>Comms </li>
+<li>computer</li>
+</ul>
+</li>
+<li><p>Impl</p>
+<ul>
+<li>RPC、Threads、consistency</li>
+</ul>
+</li>
+<li><p>Performance</p>
+<ul>
+<li>scalability - 2X computers -&gt; 2X throughput</li>
+</ul>
+</li>
+<li><p>fault-tolerant</p>
+<ul>
+<li>availability              |   Non-volatile storage</li>
+<li>recoverability            |   Replication</li>
+</ul>
+</li>
+<li><p>Topic - consistency</p>
+<ul>
+<li>Put(k,v)</li>
+<li>Get(K) -&gt; v</li>
+<li>examples</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://www.itweet.cn/screenshots/6.824/dist-kv.png" alt="dist kv"><br>图，分布式 kv 一致性，思考如何在分布式加多数据副本情况下，变更数据保障不同 client 读取到的数据是一致的，有什么成熟的算法？</p>
+<h3 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h3><p>因为没有必要让工程师花费所有的时间来编写分布式系统软件，也要有大量的面向普通业务的开发工作，因此，这些不是很熟悉分布式系统的普通工程师确实需要某种框架可以让他们轻松大胆地编写他们想进行的任何分析工作，例如：排序算法、Web索引或链接分析器等，并在写这些应用程序时无所畏惧，同时无需担心它是否能在数以千计的计算机上运行的诸多细节，比如：如果将这些工作分散到这些计算机上、如何组织所需任何数据的移动、如果应对不可避免的故障。因此寻找和创造一种框架使得非专业人员也能轻松开发和运行大型分布式计算系统，已处理海量的数据，正是 MapReduce 全部意义所在。</p>
+<p><img src="https://www.itweet.cn/screenshots/6.824/mapreduce-principle.png" alt="mapreduce principle"></p>
+<ul>
+<li>Map(k,v)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">split v into words   # K is filename, ignore</span><br><span class="line"></span><br><span class="line">for each word w</span><br><span class="line">    emit(w, &quot;1&quot;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Reduce(k,v)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emit(len(v))</span><br></pre></td></tr></table></figure>
+<p>reference：<a href="http://www.itweet.cn/2018/04/23/mapreduce-osdi04/" target="_blank" rel="noopener">http://www.itweet.cn/2018/04/23/mapreduce-osdi04/</a></p>
+<h3 id="homework-lab1-mapreduce"><a href="#homework-lab1-mapreduce" class="headerlink" title="homework: lab1 mapreduce"></a>homework: lab1 mapreduce</h3><ul>
+<li>Reference：<ul>
+<li>6.824 - Spring 2020: <a href="https://pdos.csail.mit.edu/6.824/" target="_blank" rel="noopener">https://pdos.csail.mit.edu/6.824/</a></li>
+<li>6.824 Lab 1: MapReduce: <a href="https://pdos.csail.mit.edu/6.824/labs/lab-mr.html" target="_blank" rel="noopener">https://pdos.csail.mit.edu/6.824/labs/lab-mr.html</a></li>
+<li>MapReduce: Simplified Data Processing on Large Clusters</li>
+<li>video：<a href="https://www.youtube.com/watch?v=cQP8WApzIQQ" target="_blank" rel="noopener">https://www.youtube.com/watch?v=cQP8WApzIQQ</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/spring/">spring</a>
+		  
+			<a href="/tags/6-824/">6.824</a>
+		  
+			<a href="/tags/2020/">2020</a>
+		  
+			<a href="/tags/mit/">mit</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/03/22/lecture2-rpc-and-threads/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Lecture2-rpc-and-threads</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/12/24/spark-guava-library-problem/">
+        <span class="next-text nav-default">Spark guava 库引发的系列问题</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2023
+    <span class="footer-author">Xu Jiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2020/03/22/lecture1-interoduction/';
+
+  var disqus_title = "Lecture1-interoduction";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

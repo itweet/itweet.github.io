@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -44,7 +44,7 @@
 <meta property="og:description" content="hadoop Native Shared Libraries 使得Hadoop可以使用多种压缩编码算法，来提高数据的io处理性能。不同的压缩库需要依赖到很多Linux本地共享库文件，社区提供的二进制安装包，默认没有支持snappy这样在生产中最常用的压缩格式。而且社区没有提供64位的二进制安装包，在生产环境中一般都是x86 64位服务器，所以需要自己编译部署包。根据公司情况有一些修改的分支基础构建">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/hadoop-native.png">
-<meta property="og:updated_time" content="2019-03-05T15:09:47.498Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop Native Libraries Guide">
 <meta name="twitter:description" content="hadoop Native Shared Libraries 使得Hadoop可以使用多种压缩编码算法，来提高数据的io处理性能。不同的压缩库需要依赖到很多Linux本地共享库文件，社区提供的二进制安装包，默认没有支持snappy这样在生产中最常用的压缩格式。而且社区没有提供64位的二进制安装包，在生产环境中一般都是x86 64位服务器，所以需要自己编译部署包。根据公司情况有一些修改的分支基础构建">
@@ -69,8 +69,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Hadoop Native Libraries Guide - WHOAMI </title>
@@ -189,7 +205,6 @@
 <h1 id="Hadoop-Native-checknative"><a href="#Hadoop-Native-checknative" class="headerlink" title="Hadoop Native checknative"></a>Hadoop Native checknative</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># hadoop checknative -a</span><br><span class="line"></span><br><span class="line">16/07/10 00:37:01 INFO bzip2.Bzip2Factory: Successfully loaded &amp; initialized native-bzip2 library system-native</span><br><span class="line">16/07/10 00:37:01 INFO zlib.ZlibFactory: Successfully loaded &amp; initialized native-zlib library</span><br><span class="line">Native library checking:</span><br><span class="line">hadoop:  true /opt/hadoop-2.7.2/lib/native/libhadoop.so.1.0.0</span><br><span class="line">zlib:    true /lib64/libz.so.1</span><br><span class="line">snappy:  true /opt/hadoop-2.7.2/lib/native/libsnappy.so.1</span><br><span class="line">lz4:     true revision:99</span><br><span class="line">bzip2:   true /lib64/libbz2.so.1</span><br><span class="line">openssl: true /usr/lib64/libcrypto.so</span><br></pre></td></tr></table></figure>
 <h1 id="Deploy-hadoop-2-7-2"><a href="#Deploy-hadoop-2-7-2" class="headerlink" title="Deploy hadoop 2.7.2"></a>Deploy hadoop 2.7.2</h1><p> 参考Hadoop部署安装文档。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@bigdata-server-1 cloud]# hadoop checknative -a</span><br><span class="line">16/07/10 18:39:48 INFO bzip2.Bzip2Factory: Successfully loaded &amp; initialized native-bzip2 library system-native</span><br><span class="line">16/07/10 18:39:48 INFO zlib.ZlibFactory: Successfully loaded &amp; initialized native-zlib library</span><br><span class="line">Native library checking:</span><br><span class="line">hadoop:  true /opt/cloud/hadoop-2.7.2/lib/native/libhadoop.so.1.0.0</span><br><span class="line">zlib:    true /lib64/libz.so.1</span><br><span class="line">snappy:  true /opt/cloud/hadoop-2.7.2/lib/native/libsnappy.so.1</span><br><span class="line">lz4:     true revision:99</span><br><span class="line">bzip2:   true /lib64/libbz2.so.1</span><br><span class="line">openssl: true /usr/lib64/libcrypto.so</span><br></pre></td></tr></table></figure></p>
 <p>参考：<br>    ＊ building hadoop: <a href="https://github.com/apache/hadoop/blob/trunk/BUILDING.txt" target="_blank" rel="noopener">https://github.com/apache/hadoop/blob/trunk/BUILDING.txt</a><br>    ＊ NativeLibraries: <a href="http://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/NativeLibraries.html" target="_blank" rel="noopener">http://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/NativeLibraries.html</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -226,6 +241,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -243,7 +268,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -257,6 +282,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/07/02/Hadoop-Native-Libraries-Guide/';
+
+  var disqus_title = "Hadoop Native Libraries Guide";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

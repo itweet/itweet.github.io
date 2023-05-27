@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="Zeppelin是一个Web笔记形式的交互式数据查询分析工具，可以在线用scala和SQL对数据进行查询分析并生成报表。Zeppelin的后台数据引擎可以是Spark（目前只有Spark），开发者可以通过实现更多的解释器来为Zeppelin添加数据引擎。  本文，介绍zeppelin 编译安装,入门使用介绍。 Requirements Git Java 1.7 Tested on Mac OSX,">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-05T15:09:47.497Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.127Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zeppelin install">
 <meta name="twitter:description" content="Zeppelin是一个Web笔记形式的交互式数据查询分析工具，可以在线用scala和SQL对数据进行查询分析并生成报表。Zeppelin的后台数据引擎可以是Spark（目前只有Spark），开发者可以通过实现更多的解释器来为Zeppelin添加数据引擎。  本文，介绍zeppelin 编译安装,入门使用介绍。 Requirements Git Java 1.7 Tested on Mac OSX,">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> zeppelin install - WHOAMI </title>
@@ -162,7 +178,6 @@
 <h2 id="Address-already-in-use"><a href="#Address-already-in-use" class="headerlink" title="Address already in use"></a>Address already in use</h2><p> 需要注意的是，Zeppelin默认是在8080端口上启动相关的web服务的，在你服务器上，如果这个端口已经被占用了，那么会导致Zeppelin启动失败，并在日志里面抛出以下的异常；ps:我的这个报错就因为我在主机上部署了gitlab导致端口被占用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR [2016-06-14 11:05:35,848] (&#123;main&#125; ZeppelinServer.java[main]:112) - Error while running jettyServer</span><br><span class="line">java.net.BindException: Address already in use</span><br><span class="line">        at sun.nio.ch.Net.bind0(Native Method)</span><br></pre></td></tr></table></figure></p>
 <h2 id="Installing-Zeppelin-on-an-Ambari-Managed-Cluster"><a href="#Installing-Zeppelin-on-an-Ambari-Managed-Cluster" class="headerlink" title="Installing Zeppelin on an Ambari-Managed Cluster"></a>Installing Zeppelin on an Ambari-Managed Cluster</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">参考：http://hortonworks.com/hadoop-tutorial/apache-zeppelin-hdp-2-4/</span><br></pre></td></tr></table></figure>
 <p>参考地址：<a href="https://github.com/apache/zeppelin/" target="_blank" rel="noopener">https://github.com/apache/zeppelin/</a><br>        <a href="http://zeppelin.apache.org/docs/0.5.6-incubating/install/install.html" target="_blank" rel="noopener">http://zeppelin.apache.org/docs/0.5.6-incubating/install/install.html</a><br>        <a href="http://zeppelin.apache.org/docs/0.5.6-incubating/manual/interpreters.html" target="_blank" rel="noopener">http://zeppelin.apache.org/docs/0.5.6-incubating/manual/interpreters.html</a><br>        <a href="https://www.tutorialspoint.com/zookeeper/zookeeper_cli.htm" target="_blank" rel="noopener">https://www.tutorialspoint.com/zookeeper/zookeeper_cli.htm</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -199,6 +214,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -216,7 +241,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -230,6 +255,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/06/12/zeppelin-install/';
+
+  var disqus_title = "zeppelin install";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

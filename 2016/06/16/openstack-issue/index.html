@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="openstack 生产环境问题纪录。 1、horizon “router_gateway  DOWN”horizon 页面路由显示信息 “router_gateway   DOWN”，路由－》接口－》外部网关－》状态：停止 ｜ 默认：创建  初步认定是openstack的bug，虽然是down状态但是不影响使用  排查过程  1.1 页面看到外部网关“停止状态”的固定IP地址，通过如下命令过滤出">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-25T16:03:06.059Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openstack-issue">
 <meta name="twitter:description" content="openstack 生产环境问题纪录。 1、horizon “router_gateway  DOWN”horizon 页面路由显示信息 “router_gateway   DOWN”，路由－》接口－》外部网关－》状态：停止 ｜ 默认：创建  初步认定是openstack的bug，虽然是down状态但是不影响使用  排查过程  1.1 页面看到外部网关“停止状态”的固定IP地址，通过如下命令过滤出">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> openstack-issue - WHOAMI </title>
@@ -196,7 +212,6 @@
 <p>最后，删除对应的glusterfs目录下的volume信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@openstack-controller (keystone_openstack-cloud)]# ls /var/lib/cinder/glusterfs/c44e08da624e18a5d328451413fd4c27</span><br><span class="line">volume-11cb3510-533e-4db4-9999-ff2c7b72695a  volume-3d07bbcd-c648-4bda-a0ee-96b9877b7a4b  volume-751b6804-ce57-48d1-bbce-c0b9d4d10a97</span><br><span class="line"></span><br><span class="line">[root@openstack-controller (keystone_openstack-cloud)]# du -s -h /var/lib/cinder/glusterfs/c44e08da624e18a5d328451413fd4c27/volume-751b6804-ce57-48d1-bbce-c0b9d4d10a97 </span><br><span class="line">527M  volume-751b6804-ce57-48d1-bbce-c0b9d4d10a97</span><br><span class="line"></span><br><span class="line">[root@openstack-controller (keystone_openstack-cloud)]# rm -f /lib/cinder/glusterfs/c44e08da624e18a5d328451413fd4c27/volume-751b6804-ce57-48d1-bbce-c0b9d4d10a97</span><br></pre></td></tr></table></figure></p>
 <p>如此这般，才算解决问题呀！复杂。。。</p>
 <h1 id="4-openstack-cinder-volume-error"><a href="#4-openstack-cinder-volume-error" class="headerlink" title="4.openstack cinder volume error"></a>4.openstack cinder volume error</h1><p>事情是这样发生的，我们机房需要断电安装空调，我们关闭openstack所有云主机后，关闭操作系统，重启之后发现，云硬盘都处于error状态，但是不影响正常使用，就是dashboard看着不舒服.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># cinder list|grep error</span><br><span class="line">| 11cb3510-533e-4db4-9999-ff2c7b72695a | error  |   x86-build-glusterfs-1   | 100  |  GlusterFS  |   true   | cbc4f7ab-c167-4478-9982-64909f55e52e |</span><br><span class="line">| 3d07bbcd-c648-4bda-a0ee-96b9877b7a4b | error  | gitlib-server-glusterfs-1 | 1000 |  GlusterFS  |  false   | b232560d-af7a-47f0-80c6-f708b9bda45e |</span><br></pre></td></tr></table></figure></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -233,6 +248,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -250,7 +275,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -264,6 +289,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/06/16/openstack-issue/';
+
+  var disqus_title = "openstack-issue";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

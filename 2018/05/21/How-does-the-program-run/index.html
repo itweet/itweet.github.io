@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -45,8 +45,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/run-progrom.png">
 <meta property="og:image" content="https://itweet.cn/screenshots/ai-application.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-09-25T16:00:01.104Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How does the program run">
 <meta name="twitter:description" content="我最近在看的一本《程序是如何跑起来的》，整本书对于刚入门计算机和有经验的工程师，都非常有帮助，推荐~">
@@ -71,8 +70,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> How does the program run - WHOAMI </title>
@@ -234,9 +249,6 @@
 <p><img src="https://itweet.cn/screenshots/ai-application.png" alt="AI"></p>
 <p>从全局的角度来看待问题，程序就是一系列的input -&gt; output过程，在整个过程中数据根据不同的策略而发生着改变，被应用于各种生产应用程序中，辅助人们更好的了解自己服务别人。我们都在探索的道路上。</p>
 <p>而今天人工智能AI，就是利用程序表示人类思考的方式，即AI应用，通过AI应用，只需要既定的几个条件和因素，它可以自己学习，是一个auto的过程，特别是需要大量人力参与的工作，可以释放大量繁复的工作，让人们专注于创新和自己热爱的领域，比如：太空探索、星际移民，让普通人也能参与，而不是政府行为，目前人们太忙了，局限一个狭窄的领域，探索未来的人太少，我们需要通过AI赋予机器只能，帮助我们更好的服务我们，我们才有个更多精力探索未知世界。</p>
-<p>欢迎关注微信公众号[Whoami]，阅读更多内容。</p>
-<p><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/archives/" target="_blank" rel="noopener">http://www.itweet.cn/archives/</a></p>
 
             </div>
           
@@ -275,6 +287,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -292,7 +314,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -306,6 +328,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2018/05/21/How-does-the-program-run/';
+
+  var disqus_title = "How does the program run";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

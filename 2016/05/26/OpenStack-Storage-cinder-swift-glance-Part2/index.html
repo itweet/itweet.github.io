@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -48,7 +48,7 @@
 <meta property="og:image" content="https://www.itweet.cn/screenshots/openstack-glance.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/openstack-cinder.png">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/openstack-cinder-volume.png">
-<meta property="og:updated_time" content="2019-09-25T16:03:24.394Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.125Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenStack Storage cinder-swift-glance Part2">
 <meta name="twitter:description" content="Swift——提供对象存储 （Object Storage），在概念上类似于Amazon S3服务，不过swift具有很强的扩展性、冗余和持久性，也兼容S3 APIGlance——提供虚机镜像（Image）存储和管理，包括了很多与Amazon AMI catalog相似的功能。（Glance的后台数据从最初的实践来看是存放在Swift的）。Cinder——提供块存储（Block Storage），">
@@ -73,8 +73,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> OpenStack Storage cinder-swift-glance Part2 - WHOAMI </title>
@@ -190,7 +206,6 @@
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p> openstack多种后端存储，也是由于商业案例越来越多，导致需要多种存储系统满足不同的业务需求，从这一点看前途光明，的确解决很多现实问题。cinder发展为支持多后端存储方式是必然趋势，因为有很多企业级存储系统需要整合；而很多大厂对openstack不予余力的投入社区开发也促使他更快的成熟。swift，glance组件用来存储其他类型数据,解决块存储，对象存储,镜像存储问题，也是分而治之的道理。在玩openstack的时候就会发现，各种各样的组件，无意是增加了学习的复杂度，使用维护上面也非常复杂，进而导致安装非常复杂。安装根本就是不安，就只剩下装，装完这个装那个，这组件安装失败，另外组件起不来，说多了都是泪啊。不过redhat做了一个基于puppet自动化安装脚本，相对来说方便了不少；这样一键安装的缺点也显而易见，都不知道有多少组件，出问题怎么排查，所以还得对各个组件的功能和配置非常熟悉，才能对症下药解决问题。我写openstack实际使用系列文章，也是为了让想学习openstack的人更容易入门，后续openstack系列完结后，我会开源一个基于saltstack自动化部署openstack的软件开源到我的<a href="https://github.com/itweet" target="_blank" rel="noopener">Github</a>上面。欢迎关注。</p>
 <h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><p> Centos6.x –&gt; Centos7.x 多了些变化，慢慢熟悉<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">systemctl is-enabled iptables.service</span><br><span class="line">systemctl is-enabled servicename.service #查询服务是否开机启动</span><br><span class="line">systemctl enable *.service #开机运行服务</span><br><span class="line">systemctl disable *.service #取消开机运行</span><br><span class="line">systemctl start *.service #启动服务</span><br><span class="line">systemctl stop *.service #停止服务</span><br><span class="line">systemctl restart *.service #重启服务</span><br><span class="line">systemctl reload *.service #重新加载服务配置文件</span><br><span class="line">systemctl status *.service #查询服务运行状态</span><br><span class="line">systemctl --failed #显示启动失败的服务</span><br></pre></td></tr></table></figure></p>
 <p>参考：<a href="http://gluster.readthedocs.io/en/latest/Quick-Start-Guide/Quickstart/" target="_blank" rel="noopener">http://gluster.readthedocs.io/en/latest/Quick-Start-Guide/Quickstart/</a><br>     <a href="http://www.gluster.org/community/documentation/index.php/GlusterFS_Cinder" target="_blank" rel="noopener">http://www.gluster.org/community/documentation/index.php/GlusterFS_Cinder</a><br>     <a href="https://www.gluster.org/" target="_blank" rel="noopener">https://www.gluster.org/</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -227,6 +242,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -244,7 +269,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -258,6 +283,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/05/26/OpenStack-Storage-cinder-swift-glance-Part2/';
+
+  var disqus_title = "OpenStack Storage cinder-swift-glance Part2";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

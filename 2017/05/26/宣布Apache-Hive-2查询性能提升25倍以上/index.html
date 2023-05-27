@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -49,7 +49,7 @@
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Hive-2.1-blog-Hive-Tez-vs-LLAP.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Hive-2.1-blog-LLAP-config.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Hive-2.1-blog-LLAP-in-HDP-AWS.png">
-<meta property="og:updated_time" content="2019-09-25T15:57:02.264Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.149Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="宣布Apache Hive 2查询性能提升25倍以上">
 <meta name="twitter:description" content="Apache Hive 2.1发布于一个月以前， 这是一个回顾Hive2如何彻底改变Hadoop 上的SQL 引擎的机会。 Hive 有很多新的改变，很难说具体的亮点， 但是以下有几个：  Hive LLAP的交互式查询，Hive 2.0就介绍了LLAP，LLAP 在Hive 2.1得到了改善，传输速度比 Hive 1加快了25X， (以下详细介绍).  Robust SQL ACID 支持超过6">
@@ -74,8 +74,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> 宣布Apache Hive 2查询性能提升25倍以上 - WHOAMI </title>
@@ -224,7 +240,6 @@
 <p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Hive-2.1-blog-LLAP-in-HDP-AWS.png" alt="图表5：LLAP in HDP-AWS"></p>
 <p>译文原文：<a href="https://hortonworks.com/blog/announcing-apache-hive-2-1-25x-faster-queries-much/" target="_blank" rel="noopener">https://hortonworks.com/blog/announcing-apache-hive-2-1-25x-faster-queries-much/</a></p>
 <p>译文发表：2016年7月20日</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -261,6 +276,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -278,7 +303,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -292,6 +317,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/05/26/宣布Apache-Hive-2查询性能提升25倍以上/';
+
+  var disqus_title = "宣布Apache Hive 2查询性能提升25倍以上";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

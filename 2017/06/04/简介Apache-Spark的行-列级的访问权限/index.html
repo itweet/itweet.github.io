@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -48,8 +48,7 @@
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.07.58-PM.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.13.57-PM.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Screen-Shot-2017-05-16-at-10.20.23-PM.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png">
-<meta property="og:updated_time" content="2019-09-25T15:57:12.522Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简介Apache Spark的行-列级的访问权限">
 <meta name="twitter:description" content="Hortonworks数据平台(HDP)的最新版本的功能为我们的客户提供了大量重大的改良，例如，现在HDP 2.6.0支持Apache Spark™2.1和Apache Hive™2.1(LLAP™)作为GA。通常客户在Hive里面存储数据，用Hive和SparkSQL分析这些数据。这种方案一个很重要的需求是不管是否是用Hive 和SparkSQL分析数据，都要在Hive数据中应用相同细粒度的访问">
@@ -74,8 +73,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> 简介Apache Spark的行-列级的访问权限 - WHOAMI </title>
@@ -174,8 +189,6 @@
 <p>视频地址：<a href="https://youtu.be/o6M4eljSIOQ" target="_blank" rel="noopener">https://youtu.be/o6M4eljSIOQ</a></p>
 <p>如果您要在您的 HDP 2.6环境重尝试这种功能， 请参阅这篇HCC文章，里面提供了更多的细节说明。</p>
 <p>译文原文：<a href="https://hortonworks.com/blog/row-column-level-control-apache-spark/" target="_blank" rel="noopener">https://hortonworks.com/blog/row-column-level-control-apache-spark/</a></p>
-<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png" alt="Itweet公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -212,6 +225,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -229,7 +252,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -243,6 +266,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/06/04/简介Apache-Spark的行-列级的访问权限/';
+
+  var disqus_title = "简介Apache Spark的行-列级的访问权限";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

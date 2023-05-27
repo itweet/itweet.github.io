@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -51,7 +51,7 @@
 <meta property="og:image" content="https://www.itweet.cn/screenshots/Aaron-Swartz-2.jpg">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/Citizenfour.jpeg">
 <meta property="og:image" content="https://www.itweet.cn/screenshots/Julian-Assange.jpg">
-<meta property="og:updated_time" content="2019-02-27T17:36:40.155Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.139Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论读书之艰">
 <meta name="twitter:description" content="从此放下了书本。犹记得在校的时候天天手捧纸质书看个浑天暗地的生活，今天，再回首，往事回眸。 生活在一线，每天忙碌，手机，电脑，各式各样的屏幕，快阅读，各种各样的互联网知识冲击，让人很难静下心来好好的看一本书。 曾经想看遍一整个图书馆的豪气，随着时间的流逝，随着我看世界而消失在风雨里。 时间流逝，一滴不剩，很多事情仿佛还在昨日。 往事不可追，未来才可期。 持续学习能力的培养，从事IT行业的人都需要具">
@@ -76,8 +76,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> 论读书之艰 - WHOAMI </title>
@@ -162,7 +178,6 @@
 <pre><code>明明能靠脸吃饭的，干嘛这么拼...
 </code></pre><p>我喜欢，宁愿当诗人也不愿意当银行家的那种情怀。在这些人和作品中，能有片刻的觉得自己真的存在过.</p>
 <p>I dream of painting and then I paint my dream.<br>我梦想著绘画，我画著我的梦想.</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -199,6 +214,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -216,7 +241,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -230,6 +255,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/11/22/论读书之艰/';
+
+  var disqus_title = "论读书之艰";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

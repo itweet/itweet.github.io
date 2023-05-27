@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -44,8 +44,7 @@
 <meta property="og:description" content="初识ClickHouse，大概是在去年12月份，Clickhouse受邀来中国开第一次Meetup.">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/JDP/ClickHouse/img/analytical-DBMS.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif">
-<meta property="og:updated_time" content="2019-09-25T15:58:51.355Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.164Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="first-time-clickhosue">
 <meta name="twitter:description" content="初识ClickHouse，大概是在去年12月份，Clickhouse受邀来中国开第一次Meetup.">
@@ -70,8 +69,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> first-time-clickhosue - WHOAMI </title>
@@ -289,8 +304,6 @@
 <p>英语能力有限，有些官网看到的资料内容，白话后不准确，还望海涵，如有不准确或错漏，欢迎指正。</p>
 <p><strong><em>参考：</em></strong></p>
 <p>[1] <a href="http://itweet.cn/blog/2017/11/22/Data-Warehouses-Past-Present-and-Future" target="_blank" rel="noopener">http://itweet.cn/blog/2017/11/22/Data-Warehouses-Past-Present-and-Future</a><br>[2] <a href="https://clickhouse.yandex/" target="_blank" rel="noopener">https://clickhouse.yandex/</a><br>[3] <a href="https://clickhouse.yandex/benchmark.html" target="_blank" rel="noopener">https://clickhouse.yandex/benchmark.html</a><br>[4] <a href="https://www.altinity.com/blog/2017/7/3/clickhouse-vs-redshift-2" target="_blank" rel="noopener">https://www.altinity.com/blog/2017/7/3/clickhouse-vs-redshift-2</a><br>[5] <a href="https://www.altinity.com/blog/2017/6/5/clickhouse-data-distribution" target="_blank" rel="noopener">https://www.altinity.com/blog/2017/6/5/clickhouse-data-distribution</a></p>
-<p>欢迎关注微信公众号[Whoami]，阅读更多内容。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif" alt="Whoami公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive</a></p>
 
             </div>
           
@@ -327,6 +340,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -344,7 +367,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -358,6 +381,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2018/03/15/first-time-clickhosue/';
+
+  var disqus_title = "first-time-clickhosue";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

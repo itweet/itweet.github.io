@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="版本信息Hadoop 2.6.0-cdh5.4.7impalad version 2.2.0-cdh5.4.7hive 1.1.0-cdh5.4.7 Impala SQL 方言编写的表创建语句CREATE EXTERNAL TABLE books(  id BIGINT,  isbn STRING,  category STRING,  publish_date date,  publisher">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-25T15:53:44.276Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.117Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Impala - Hive 性能测试和查询优化">
 <meta name="twitter:description" content="版本信息Hadoop 2.6.0-cdh5.4.7impalad version 2.2.0-cdh5.4.7hive 1.1.0-cdh5.4.7 Impala SQL 方言编写的表创建语句CREATE EXTERNAL TABLE books(  id BIGINT,  isbn STRING,  category STRING,  publish_date date,  publisher">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> Impala - Hive 性能测试和查询优化 - WHOAMI </title>
@@ -215,7 +231,6 @@
 <p>根据文件类型和压缩，您可能需要使用 Hive 加载数据或创建表。</p>
 <h2 id="Llama-on-yarn"><a href="#Llama-on-yarn" class="headerlink" title="Llama on yarn"></a>Llama on yarn</h2><p>LLama是impala运行在yarn上面的一个解决方案，但是通过使用下来看，impala-2.2版本的llama依然无法很好的运行在yarn上面，虽然已经去掉beta标签，同样的SQL在独立模式下面运行飞快，而放到llama模式下，运行效率低下，数据量太大还会出现卡住的现象，资源一直无法释放，进度也永远不会变化。所以llama还无法用于生产。因为我们集群硬件配置比较特殊的原因，所以可能判断不太准确，如果是配置高度一致，硬件配置高内存，也许能解决问题。这也从侧面说明impala对硬件的要求很高。配置太低无法很好的运行。</p>
 <p>参考：<br><a href="https://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/impala-optimization.html" target="_blank" rel="noopener">https://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/impala-optimization.html</a></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -252,6 +267,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -269,7 +294,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -283,6 +308,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2016/03/20/Impala-Hive-性能测试和查询优化/';
+
+  var disqus_title = "Impala - Hive 性能测试和查询优化";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

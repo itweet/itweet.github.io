@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 <meta property="og:site_name" content="WHOAMI">
 <meta property="og:description" content="openstack M版本之后，可视化程度越来越高，曾经网络配置，用户创建，管理等功能全都是后台命令行操作生成，现在全都是可视化操作，现在开始我们揭开云主机神秘的面纱吧。 官方镜像镜像是云主机最基础的依赖，没有镜像就无法创建云主机。跟没有操作系统安装软件包，就无法安装操作系统是一样的道理。 openstack安装成功后，默认会有一个公共镜像cirros，你可以通过这个镜像轻松的完成云主机的创建，并">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-02T13:09:15.514Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.147Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openstack系列(7)-M版_云主机">
 <meta name="twitter:description" content="openstack M版本之后，可视化程度越来越高，曾经网络配置，用户创建，管理等功能全都是后台命令行操作生成，现在全都是可视化操作，现在开始我们揭开云主机神秘的面纱吧。 官方镜像镜像是云主机最基础的依赖，没有镜像就无法创建云主机。跟没有操作系统安装软件包，就无法安装操作系统是一样的道理。 openstack安装成功后，默认会有一个公共镜像cirros，你可以通过这个镜像轻松的完成云主机的创建，并">
@@ -67,8 +67,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> openstack系列(7)-M版_云主机 - WHOAMI </title>
@@ -206,8 +222,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ ssh cirros@192.168.0.27</span><br><span class="line">cirros@192.168.0.27&apos;s password:</span><br><span class="line"></span><br><span class="line">$ df -h</span><br><span class="line">Filesystem                Size      Used Available Use% Mounted on</span><br><span class="line">/dev                    242.3M         0    242.3M   0% /dev</span><br><span class="line">/dev/vda1                23.2M     18.0M      4.1M  82% /</span><br><span class="line">tmpfs                   245.8M         0    245.8M   0% /dev/shm</span><br><span class="line">tmpfs                   200.0K     72.0K    128.0K  36% /run</span><br><span class="line"></span><br><span class="line">$ hostname</span><br><span class="line">test</span><br><span class="line"></span><br><span class="line">$ ping www.baidu.com</span><br><span class="line">PING www.baidu.com (220.181.111.188): 56 data bytes</span><br><span class="line">64 bytes from 220.181.111.188: seq=0 ttl=53 time=2.306 ms</span><br><span class="line"></span><br><span class="line">$ ifconfig eth0</span><br><span class="line">eth0      Link encap:Ethernet  HWaddr FA:16:3E:20:E4:12</span><br><span class="line">          inet addr:172.16.12.51  Bcast:172.16.12.255  Mask:255.255.255.0</span><br></pre></td></tr></table></figure>
 <p>通过如上操作，可以看到云主机已经正常工作，并且我们也可以登录到云主机去进行各种操作，云主机也能正常访问公网。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本小节，主要是讲解如何通过可视化界面使用<code>openstack</code>最核心的云主机功能，并且开始正常使用云主机，云主机官方还提供更多版本，我们可以直接下载上传开始应用在我们的不同业务中，镜像文件是可以定制的，制作的时候可以让镜像具备某些功能，就和公有云，阿里云，aws云一样，创建好之后，云主机自带大数据服务能力、自带数据库能力等，底层即使用kvm相关技术进行制作，需要多实践才能深刻体会。下一节我们介绍openstack自动化扩容一个节点，欢迎关注。</p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
-<p>参考：<a href="http://www.itweet.cn/blog/2016/08/09/openstack%20image%20guide" target="_blank" rel="noopener">http://www.itweet.cn/blog/2016/08/09/openstack%20image%20guide</a></p>
 
             </div>
           
@@ -244,6 +258,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -261,7 +285,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -275,6 +299,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/05/24/openstack系列(7)-M版_云主机/';
+
+  var disqus_title = "openstack系列(7)-M版_云主机";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     

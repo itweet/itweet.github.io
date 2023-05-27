@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="zh-CN">
   <head><meta name="generator" content="Hexo 3.8.0">
     
 <meta charset="UTF-8">
@@ -48,8 +48,7 @@
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Random-data-lookup-latency-per-format.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/DATA-SCAN-RATE-PER-FORMAT.png">
 <meta property="og:image" content="https://github.com/itweet/labs/raw/master/BigData/img/Throughput-for-Analytics.png">
-<meta property="og:image" content="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png">
-<meta property="og:updated_time" content="2019-09-25T15:57:07.364Z">
+<meta property="og:updated_time" content="2019-12-25T14:39:06.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="比较Apache Hadoop 生态系统中不同的文件格式和存储引擎的性能">
 <meta name="twitter:description" content="主题这篇文章提出了在Apache Hadoop 生态系统中对比一些当前流行的数据格式和可用的存储引擎的性能：Apache Avro, Apache Parquet, Apache HBase 和 Apache Kudu 空间效率， 提取性能， 分析扫描以及随机数据查找等领域。这有助于理解它们中的每一个如何(何时)改善你的大数据工作负载的处理能力。 引言最初把hadoop文件格式和存储引擎做比较的想">
@@ -74,8 +73,24 @@
 
 
 
-  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b75d841b3068f7782eac9af2c8c866e7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154998721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-154998721-1');
+</script>
 
 
     <title> 比较Apache Hadoop 生态系统中不同的文件格式和存储引擎的性能 - WHOAMI </title>
@@ -255,8 +270,6 @@
 <p>不同于单一存储技术的实施，混合系统被认为是由批量处理的原始存储技术以及随机访问的索引层技术组成的。这完全得益于特定访问路径提供的最佳性能对技术专业化/优化。值得注意的是， 这种方法是以数据重复，整体系统的复杂性和更贵的维护成本为代价。因此如果简化的系统是非常重要的因素那么Apache Kudu显然是一个不错的选择。</p>
 <p><img src="https://github.com/itweet/labs/raw/master/BigData/img/Throughput-for-Analytics.png" alt><br>快速随机访问（在线交易的优势）</p>
 <p>译文原文：<a href="https://blog.cloudera.com/blog/2017/02/performance-comparing-of-different-file-formats-and-storage-engines-in-hadoop-file-system/" target="_blank" rel="noopener">https://blog.cloudera.com/blog/2017/02/performance-comparing-of-different-file-formats-and-storage-engines-in-hadoop-file-system/</a></p>
-<p>欢迎关注微信公众号，第一时间，阅读更多有关云计算、大数据文章。<br><img src="https://github.com/itweet/labs/raw/master/common/img/weixin_public.png" alt="Itweet公众号"></p>
-<p>原创文章，转载请注明： 转载自<a href="http://www.itweet.cn" target="_blank" rel="noopener">Itweet</a>的博客<br><code>本博客的文章集合:</code> <a href="http://www.itweet.cn/blog/archive/" target="_blank" rel="noopener">http://www.itweet.cn/blog/archive/</a></p>
 
             </div>
           
@@ -293,6 +306,16 @@
         
   <div class="comments" id="comments">
     
+    <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+    </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -310,7 +333,7 @@
     
         2014 -
     
-    2019
+    2023
     <span class="footer-author">Xu Jiang.</span>
     <span class="power-by">
         Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/realXuJiang/hexo-theme-polarbear">Polar Bear</a>
@@ -324,6 +347,37 @@
       </div>
     </div>
     
+
+<script type="text/javascript">
+  var disqus_shortname = 'itweet-cn';
+  var disqus_identifier = '2017/06/02/比较Apache-Hadoop-生态系统中不同的文件格式和存储引擎的性能/';
+
+  var disqus_title = "比较Apache Hadoop 生态系统中不同的文件格式和存储引擎的性能";
+
+
+  var disqus = {
+    load : function disqus(){
+        if(typeof DISQUS !== 'object') {
+          (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+          }());
+          $('#load-disqus').remove(); ///加载后移除按钮
+        }
+    }
+  }
+
+  
+    var disqus_config = function () {
+        this.page.url = disqus_url;
+        this.page.identifier = disqus_identifier;
+        this.page.title = disqus_title;
+    };
+  
+
+</script>
 
 
     
