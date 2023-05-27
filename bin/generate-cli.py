@@ -38,16 +38,16 @@ def header(title, time):
     content = """---
 title: %s
 date: %s
-description: MIT 6.824 - Distributed Systems (Spring 2020).
-tags: [spring, 6.824, 2020, mit]
-category: 6.824
+description: Distributed Systems (Spring 2021).
+tags: [fusiondb, 2021]
+category: fusiondb
 ---""" %(title, time)
     return content
 
 def footer():
     content="""
 
-![Whoami公众号](https://github.com/itweet/labs/raw/master/common/img/weixin_public.gif)
+![Whoami公众号](https://github.com/realXuJiang/labs/raw/master/common/img/weixin_public.gif)
 
 原创文章，转载请注明： 转载自[Itweet](http://www.itweet.cn)的博客
 版权声明：自由转载-保持署名-非商业性-禁止演绎（[创意共享3.0许可证](https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh))
