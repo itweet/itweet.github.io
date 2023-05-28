@@ -4,7 +4,7 @@
   <url>
     <loc>http://itweet.github.io/2021/01/05/cmu-15-445-2019-fall-project4/</loc>
     
-    <lastmod>2023-05-27T07:46:57.427Z</lastmod>
+    <lastmod>2023-05-28T08:29:28.344Z</lastmod>
     
   </url>
   
@@ -156,14 +156,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2018/08/05/cloudera-enterprise-6/</loc>
+    <loc>http://itweet.github.io/2018/07/15/announcing-general-availability-hortonworks-data-platform-3-0-0-ambari-2-7-0/</loc>
     
     <lastmod>2019-12-25T14:39:06.175Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2018/07/15/announcing-general-availability-hortonworks-data-platform-3-0-0-ambari-2-7-0/</loc>
+    <loc>http://itweet.github.io/2018/08/05/cloudera-enterprise-6/</loc>
     
     <lastmod>2019-12-25T14:39:06.175Z</lastmod>
     
@@ -240,14 +240,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2018/04/19/Minimalism-Live-a-Meaningful-Life/</loc>
+    <loc>http://itweet.github.io/2018/04/19/Nikola-Tesla-Autobiography/</loc>
     
     <lastmod>2019-12-25T14:39:06.168Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2018/04/19/Nikola-Tesla-Autobiography/</loc>
+    <loc>http://itweet.github.io/2018/04/19/Minimalism-Live-a-Meaningful-Life/</loc>
     
     <lastmod>2019-12-25T14:39:06.168Z</lastmod>
     
@@ -261,14 +261,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2018/04/09/clickhouse-build-for-ubuntu/</loc>
+    <loc>http://itweet.github.io/2018/04/09/clickhouse-configuration-analyse/</loc>
     
     <lastmod>2019-12-25T14:39:06.167Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2018/04/09/clickhouse-configuration-analyse/</loc>
+    <loc>http://itweet.github.io/2018/04/09/clickhouse-build-for-ubuntu/</loc>
     
     <lastmod>2019-12-25T14:39:06.167Z</lastmod>
     
@@ -317,6 +317,13 @@
   </url>
   
   <url>
+    <loc>http://itweet.github.io/2018/01/15/why-do-developers-build-personal-brands/</loc>
+    
+    <lastmod>2019-12-25T14:39:06.163Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://itweet.github.io/2018/01/16/Macbook-Pro-external-screen-selection/</loc>
     
     <lastmod>2019-12-25T14:39:06.163Z</lastmod>
@@ -331,21 +338,7 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2018/01/15/why-do-developers-build-personal-brands/</loc>
-    
-    <lastmod>2019-12-25T14:39:06.163Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2018/01/08/Performance-optimizations-in-Apache-Impala/</loc>
-    
-    <lastmod>2019-12-25T14:39:06.162Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2018/01/13/github-changes-software-development/</loc>
     
     <lastmod>2019-12-25T14:39:06.162Z</lastmod>
     
@@ -359,9 +352,9 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2018/01/06/The-strongest-terminal-in-history/</loc>
+    <loc>http://itweet.github.io/2018/01/13/github-changes-software-development/</loc>
     
-    <lastmod>2019-12-25T14:39:06.161Z</lastmod>
+    <lastmod>2019-12-25T14:39:06.162Z</lastmod>
     
   </url>
   
@@ -380,14 +373,21 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/12/24/just-for-fun/</loc>
+    <loc>http://itweet.github.io/2018/01/06/The-strongest-terminal-in-history/</loc>
+    
+    <lastmod>2019-12-25T14:39:06.161Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2018/01/02/What-is-continuous-integration-part-1/</loc>
     
     <lastmod>2019-12-25T14:39:06.160Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2018/01/02/What-is-continuous-integration-part-1/</loc>
+    <loc>http://itweet.github.io/2017/12/24/just-for-fun/</loc>
     
     <lastmod>2019-12-25T14:39:06.160Z</lastmod>
     
@@ -408,13 +408,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/12/14/hdfs-fuse-faild/</loc>
-    
-    <lastmod>2019-12-25T14:39:06.158Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2017/12/18/gitlab-server-move/</loc>
     
     <lastmod>2019-12-25T14:39:06.158Z</lastmod>
@@ -422,7 +415,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/12/02/the-road-ahead-video/</loc>
+    <loc>http://itweet.github.io/2017/12/14/hdfs-fuse-faild/</loc>
+    
+    <lastmod>2019-12-25T14:39:06.158Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2017/11/22/Data-Warehouses-Past-Present-and-Future/</loc>
     
     <lastmod>2019-12-25T14:39:06.157Z</lastmod>
     
@@ -436,7 +436,7 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/11/22/Data-Warehouses-Past-Present-and-Future/</loc>
+    <loc>http://itweet.github.io/2017/12/02/the-road-ahead-video/</loc>
     
     <lastmod>2019-12-25T14:39:06.157Z</lastmod>
     
@@ -464,20 +464,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/07/28/Enterprise-BigData-platform-deployment-guide-part-2/</loc>
-    
-    <lastmod>2019-12-25T14:39:06.155Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2017/07/27/Enterprise-BigData-platform-deployment-guide-part-1/</loc>
-    
-    <lastmod>2019-12-25T14:39:06.155Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2017/07/30/Enterprise-BigData-platform-deployment-guide-part-3/</loc>
     
     <lastmod>2019-12-25T14:39:06.155Z</lastmod>
@@ -492,9 +478,16 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/07/20/write-data-to-HDFS-via-NFS-gateway-failed/</loc>
+    <loc>http://itweet.github.io/2017/07/27/Enterprise-BigData-platform-deployment-guide-part-1/</loc>
     
-    <lastmod>2019-12-25T14:39:06.154Z</lastmod>
+    <lastmod>2019-12-25T14:39:06.155Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2017/07/28/Enterprise-BigData-platform-deployment-guide-part-2/</loc>
+    
+    <lastmod>2019-12-25T14:39:06.155Z</lastmod>
     
   </url>
   
@@ -502,6 +495,20 @@
     <loc>http://itweet.github.io/2017/07/14/apache-solr-memory-tuning-for-production/</loc>
     
     <lastmod>2019-12-25T14:39:06.154Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2017/07/20/write-data-to-HDFS-via-NFS-gateway-failed/</loc>
+    
+    <lastmod>2019-12-25T14:39:06.154Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2017/07/04/connect-tableau-druid-hive/</loc>
+    
+    <lastmod>2019-12-25T14:39:06.153Z</lastmod>
     
   </url>
   
@@ -514,13 +521,6 @@
   
   <url>
     <loc>http://itweet.github.io/2017/07/03/sparksql-ranger-column-level-security-masking/</loc>
-    
-    <lastmod>2019-12-25T14:39:06.153Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://itweet.github.io/2017/07/04/connect-tableau-druid-hive/</loc>
     
     <lastmod>2019-12-25T14:39:06.153Z</lastmod>
     
@@ -562,14 +562,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/06/09/new_apache-spark-zeppelin-hdp-2-6_enterprise_data/</loc>
+    <loc>http://itweet.github.io/2017/06/04/%E7%AE%80%E4%BB%8BApache-Spark%E7%9A%84%E8%A1%8C-%E5%88%97%E7%BA%A7%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/</loc>
     
     <lastmod>2019-12-25T14:39:06.151Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/06/04/%E7%AE%80%E4%BB%8BApache-Spark%E7%9A%84%E8%A1%8C-%E5%88%97%E7%BA%A7%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/</loc>
+    <loc>http://itweet.github.io/2017/06/09/new_apache-spark-zeppelin-hdp-2-6_enterprise_data/</loc>
     
     <lastmod>2019-12-25T14:39:06.151Z</lastmod>
     
@@ -597,14 +597,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/26/%E5%AE%A3%E5%B8%83Apache-Hive-2%E6%9F%A5%E8%AF%A2%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%8725%E5%80%8D%E4%BB%A5%E4%B8%8A/</loc>
+    <loc>http://itweet.github.io/2017/05/30/openstack%E7%B3%BB%E5%88%97(9)-M%E7%89%88_%E4%BA%91%E7%A1%AC%E7%9B%981/</loc>
     
     <lastmod>2019-12-25T14:39:06.149Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/30/openstack%E7%B3%BB%E5%88%97(9)-M%E7%89%88_%E4%BA%91%E7%A1%AC%E7%9B%981/</loc>
+    <loc>http://itweet.github.io/2017/05/26/%E5%AE%A3%E5%B8%83Apache-Hive-2%E6%9F%A5%E8%AF%A2%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%8725%E5%80%8D%E4%BB%A5%E4%B8%8A/</loc>
     
     <lastmod>2019-12-25T14:39:06.149Z</lastmod>
     
@@ -625,14 +625,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/22/openstack%E7%B3%BB%E5%88%97(6)-M%E7%89%88_%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</loc>
+    <loc>http://itweet.github.io/2017/05/24/openstack%E7%B3%BB%E5%88%97(7)-M%E7%89%88_%E4%BA%91%E4%B8%BB%E6%9C%BA/</loc>
     
     <lastmod>2019-12-25T14:39:06.147Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/24/openstack%E7%B3%BB%E5%88%97(7)-M%E7%89%88_%E4%BA%91%E4%B8%BB%E6%9C%BA/</loc>
+    <loc>http://itweet.github.io/2017/05/22/openstack%E7%B3%BB%E5%88%97(6)-M%E7%89%88_%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2019-12-25T14:39:06.147Z</lastmod>
     
@@ -646,14 +646,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/22/openstack%E7%B3%BB%E5%88%97(5)-M%E7%89%88_%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2/</loc>
+    <loc>http://itweet.github.io/2017/05/20/openstack%E7%B3%BB%E5%88%97(4)-%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83/</loc>
     
     <lastmod>2019-12-25T14:39:06.146Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/20/openstack%E7%B3%BB%E5%88%97(4)-%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83/</loc>
+    <loc>http://itweet.github.io/2017/05/22/openstack%E7%B3%BB%E5%88%97(5)-M%E7%89%88_%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2/</loc>
     
     <lastmod>2019-12-25T14:39:06.146Z</lastmod>
     
@@ -695,14 +695,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/13/10GE-Hadoop-Network-Designs/</loc>
+    <loc>http://itweet.github.io/2017/05/11/Itweet-boot%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F-%E5%BC%80%E6%BA%90/</loc>
     
     <lastmod>2019-12-25T14:39:06.142Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/11/Itweet-boot%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F-%E5%BC%80%E6%BA%90/</loc>
+    <loc>http://itweet.github.io/2017/05/13/10GE-Hadoop-Network-Designs/</loc>
     
     <lastmod>2019-12-25T14:39:06.142Z</lastmod>
     
@@ -716,13 +716,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2017/05/07/Machine-Learning-7/</loc>
-    
-    <lastmod>2019-12-25T14:39:06.141Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2016/12/28/ubuntu-ambari-development/</loc>
     
     <lastmod>2019-12-25T14:39:06.141Z</lastmod>
@@ -730,7 +723,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/11/27/Kafka-Storm-HDFS-Architecture-Design/</loc>
+    <loc>http://itweet.github.io/2017/05/07/Machine-Learning-7/</loc>
+    
+    <lastmod>2019-12-25T14:39:06.141Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/12/04/Hadoop-Cluster-Benchmark-Performance/</loc>
     
     <lastmod>2019-12-25T14:39:06.140Z</lastmod>
     
@@ -744,14 +744,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/12/14/Moving-the-Ambari-Server/</loc>
+    <loc>http://itweet.github.io/2016/11/27/Kafka-Storm-HDFS-Architecture-Design/</loc>
     
     <lastmod>2019-12-25T14:39:06.140Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/12/04/Hadoop-Cluster-Benchmark-Performance/</loc>
+    <loc>http://itweet.github.io/2016/12/14/Moving-the-Ambari-Server/</loc>
     
     <lastmod>2019-12-25T14:39:06.140Z</lastmod>
     
@@ -765,14 +765,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/08/28/skynet-development-for-mac/</loc>
+    <loc>http://itweet.github.io/2016/10/27/HDFS-MapReduce%E5%BC%82%E6%9E%84%E5%AD%98%E5%82%A8%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%99%BD%E7%9A%AE%E4%B9%A6/</loc>
     
     <lastmod>2019-12-25T14:39:06.138Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/10/27/HDFS-MapReduce%E5%BC%82%E6%9E%84%E5%AD%98%E5%82%A8%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%99%BD%E7%9A%AE%E4%B9%A6/</loc>
+    <loc>http://itweet.github.io/2016/08/28/skynet-development-for-mac/</loc>
     
     <lastmod>2019-12-25T14:39:06.138Z</lastmod>
     
@@ -793,14 +793,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/08/15/kubernetes-create-pods/</loc>
+    <loc>http://itweet.github.io/2016/08/16/Kubernetes-Use-Persistent-Storage/</loc>
     
     <lastmod>2019-12-25T14:39:06.136Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/08/16/Kubernetes-Use-Persistent-Storage/</loc>
+    <loc>http://itweet.github.io/2016/08/15/kubernetes-create-pods/</loc>
     
     <lastmod>2019-12-25T14:39:06.136Z</lastmod>
     
@@ -856,13 +856,6 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/07/07/Configuring-Heterogeneous-Storage-in-HDFS/</loc>
-    
-    <lastmod>2019-12-25T14:39:06.131Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://itweet.github.io/2016/07/06/Running-MapReduce-Example-Programs-and-Benchmarks/</loc>
     
     <lastmod>2019-12-25T14:39:06.131Z</lastmod>
@@ -870,14 +863,21 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/07/03/Hive-on-Hbase/</loc>
+    <loc>http://itweet.github.io/2016/07/07/Configuring-Heterogeneous-Storage-in-HDFS/</loc>
+    
+    <lastmod>2019-12-25T14:39:06.131Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://itweet.github.io/2016/07/02/Hadoop-Native-Libraries-Guide/</loc>
     
     <lastmod>2019-12-25T14:39:06.130Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/07/02/Hadoop-Native-Libraries-Guide/</loc>
+    <loc>http://itweet.github.io/2016/07/03/Hive-on-Hbase/</loc>
     
     <lastmod>2019-12-25T14:39:06.130Z</lastmod>
     
@@ -926,14 +926,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/05/29/jenkins-install/</loc>
+    <loc>http://itweet.github.io/2016/05/26/OpenStack-Storage-cinder-swift-glance-Part2/</loc>
     
     <lastmod>2019-12-25T14:39:06.125Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/05/26/OpenStack-Storage-cinder-swift-glance-Part2/</loc>
+    <loc>http://itweet.github.io/2016/05/29/jenkins-install/</loc>
     
     <lastmod>2019-12-25T14:39:06.125Z</lastmod>
     
@@ -961,14 +961,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/05/14/%E5%AE%89%E8%A3%85%E5%B9%B6%E4%B8%94%E4%BC%98%E5%8C%96centos-6-Supper-Hadoop/</loc>
+    <loc>http://itweet.github.io/2016/05/15/%E8%AE%BA%E8%87%AA%E5%AD%A6%E7%9A%84%E6%80%81%E5%BA%A6/</loc>
     
     <lastmod>2019-12-25T14:39:06.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/05/15/%E8%AE%BA%E8%87%AA%E5%AD%A6%E7%9A%84%E6%80%81%E5%BA%A6/</loc>
+    <loc>http://itweet.github.io/2016/05/14/%E5%AE%89%E8%A3%85%E5%B9%B6%E4%B8%94%E4%BC%98%E5%8C%96centos-6-Supper-Hadoop/</loc>
     
     <lastmod>2019-12-25T14:39:06.121Z</lastmod>
     
@@ -996,14 +996,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/04/15/%E6%88%91%E7%9A%84X%E6%A1%A3%E6%A1%88-%E6%96%B0%E7%9A%84%E5%B8%8C%E6%9C%9B/</loc>
+    <loc>http://itweet.github.io/2016/04/11/macbook-pro/</loc>
     
     <lastmod>2019-12-25T14:39:06.118Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/04/11/macbook-pro/</loc>
+    <loc>http://itweet.github.io/2016/04/15/%E6%88%91%E7%9A%84X%E6%A1%A3%E6%A1%88-%E6%96%B0%E7%9A%84%E5%B8%8C%E6%9C%9B/</loc>
     
     <lastmod>2019-12-25T14:39:06.118Z</lastmod>
     
@@ -1038,14 +1038,14 @@
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/01/26/Hadoop-par1/</loc>
+    <loc>http://itweet.github.io/2016/03/10/sqoop-%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/</loc>
     
     <lastmod>2019-12-25T14:39:06.114Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://itweet.github.io/2016/03/10/sqoop-%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/</loc>
+    <loc>http://itweet.github.io/2016/01/26/Hadoop-par1/</loc>
     
     <lastmod>2019-12-25T14:39:06.114Z</lastmod>
     
